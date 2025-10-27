@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517c65709b47b684bbdd65a65e76febe, type: 3}
+  m_Name: SlowPhysicalDebuff
+  m_EditorClassIdentifier: 
+  _id: 
+  _displayName: Slow
+  _icon: {fileID: 0}
+  _statusTags: 02000000030000000a000000
+  _baseDuration: 2
+  _maxStacks: 1
+  _statusEffectStackingPolicy: 2
+  _basePotency: 1
+  _scaleWithSource: 0
+  _tickSchedule: 0
+  _tickInterval: 1
+  _tickMode: 0
+  _tickAmount: 1
+  _appliesSilence: 0
+  _appliesFatigue: 0
+  _appliesStun: 0
+  _modifiers:
+  - _targetStat: 11
+    _formula: 2
+    _value: -0.3
+    _modifierStackingPolicy: 1
+  _dispelClass: 1
+  _isBeneficial: 0
+  _undispellable: 0

@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Enemy
+  - Ally
+  - NPC
+  - Projectile
+  - HitboxMelee
+  - Hurtbox
+  - Interactable
+  - Hazard
+  - Brazier
+  - LightBlocker
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - Obstacle
+  - Player
+  - Enemy
+  - Ally
+  - MeleeHitboxPlayer
+  - MeleeHitboxEnemy
+  - MeleeHitboxAlly
+  - ProjectilePlayer
+  - ProjectileEnemy
+  - ProjectileAlly
+  - Trigger
+  - Interactable
+  - LightBlocker
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1984793777
+    locked: 0
+  - name: Ground
+    uniqueID: 2873062685
+    locked: 0
+  - name: PropBack
+    uniqueID: 2649554911
+    locked: 0
+  - name: PropFront
+    uniqueID: 4130218697
+    locked: 0
+  - name: Character
+    uniqueID: 2215249303
+    locked: 0
+  - name: FX
+    uniqueID: 4023862981
+    locked: 0
+  - name: Projectile
+    uniqueID: 3305682223
+    locked: 0
+  - name: UI
+    uniqueID: 860091621
+    locked: 0
+  m_RenderingLayers:
+  - Default

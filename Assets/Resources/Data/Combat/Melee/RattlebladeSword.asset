@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eeb6cb9a4bda7b459e00356af12f849, type: 3}
+  m_Name: RattlebladeSword
+  m_EditorClassIdentifier: 
+  _weaponId: 
+  _displayName: 
+  _description: 
+  _icon: {fileID: 0}
+  _leftNormalSkill: {fileID: 11400000, guid: 21090bb8894affe4a9d387a9b92433fe, type: 2}
+  _rightNormalSkill: {fileID: 11400000, guid: 21090bb8894affe4a9d387a9b92433fe, type: 2}
+  _leftSpecialSkills: []
+  _rightSpecialSkills: []
