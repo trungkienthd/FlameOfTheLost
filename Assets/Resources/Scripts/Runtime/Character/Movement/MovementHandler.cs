@@ -6,10 +6,10 @@ namespace FlameOfTheLost
     public class MovementHandler : MonoBehaviour
     {
         [Header("Tuning")]
-        [SerializeField] private float _moveSpeed = 6f;
+        [SerializeField] private float _movementSpeed = 6f;
         [SerializeField] private float _accel = 60f;
         [SerializeField] private float _decel = 80f;
-        private float MoveSpeed => _moveSpeed;
+        private float MovementSpeed => _movementSpeed;
         private float Accel => _accel;
         private float Decel => _decel;
 
@@ -65,7 +65,7 @@ namespace FlameOfTheLost
 
         public void SetMoveInput(Vector2 input)
         {
-            this.Desired = Vector2.ClampMagnitude(input, 1f) * this.MoveSpeed;
+            this.Desired = Vector2.ClampMagnitude(input, 1f) * this.MovementSpeed;
         }
     }
 }

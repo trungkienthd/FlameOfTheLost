@@ -7,14 +7,14 @@ namespace FlameOfTheLost
     {
         [Header("Identity")]
         [Tooltip("Unique, stable identifier.")]
-        [SerializeField] private string _weaponId;
+        [SerializeField] private int _id;
         [Tooltip("Shown in UI.")]
         [SerializeField] private string _displayName;
         [TextArea(2, 5)]
         [SerializeField] private string _description;
         [Tooltip("Main icon for inventory/slots.")]
         [SerializeField] private Sprite _icon;
-        public string WeaponId => _weaponId;
+        public int ID => _id;
         public string DisplayName => _displayName;
         public string Description => _description;
         public Sprite Icon => _icon;
@@ -29,25 +29,25 @@ namespace FlameOfTheLost
         protected List<TSkill> LeftSpecialSkills => _leftSpecialSkills;
         protected List<TSkill> RightSpecialSkills => _rightSpecialSkills;
 
-        public TSkill GetNormalSkill(AttackSlot slot) => slot == AttackSlot.Left ? this.LeftNormalSkill : this.RightNormalSkill;
-        public List<TSkill> GetSpecialSkillList(AttackSlot slot)
+        public TSkill GetNormalSkill(AttackSlotType slot) => slot == AttackSlotType.Left ? this.LeftNormalSkill : this.RightNormalSkill;
+        public List<TSkill> GetSpecialSkillList(AttackSlotType slot)
         {
-            var list = (slot == AttackSlot.Left) ? this.LeftSpecialSkills : this.RightSpecialSkills;
+            var list = (slot == AttackSlotType.Left) ? this.LeftSpecialSkills : this.RightSpecialSkills;
             if (list != null && list.Count > 0) return list;       // new per-slot
 
             return null;
         }
 
-        public int SpecialSkillCount(AttackSlot slot)
+        public int SpecialSkillCount(AttackSlotType slot)
         {
             var skillList = this.GetSpecialSkillList(slot);
             return skillList?.Count ?? 0;
         }
 
-        public bool TryGetSkillById(AttackSlot slot, int id, out TSkill result)
+        public bool TryGetSkillById(AttackSlotType slot, int id, out TSkill result)
         {
             var p = this.GetNormalSkill(slot);
-            if (p && p.Id == id) 
+            if (p && p.ID == id) 
             {
                 result = p; 
                 return true; 
@@ -59,7 +59,7 @@ namespace FlameOfTheLost
                 for (int i = 0; i < list.Count; i++)
                 {
                     var s = list[i];
-                    if (s && s.Id == id)
+                    if (s && s.ID == id)
                     {
                         result = s; 
                         return true; 
@@ -71,7 +71,7 @@ namespace FlameOfTheLost
             return false;
         }
 
-        public TSkill GetFirstSpecialOrPrimarySkill(AttackSlot slot)
+        public TSkill GetFirstSpecialOrPrimarySkill(AttackSlotType slot)
         {
             var list = this.GetSpecialSkillList(slot);
             if (list != null && list.Count > 0) return list[0];

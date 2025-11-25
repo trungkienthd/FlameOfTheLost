@@ -6,7 +6,7 @@ namespace FlameOfTheLost
     {
         public void TakeDamage(int damageAmount, Vector2 hitDir, float knockbackForce);
 
-        public CharacterFaction CharacterFaction 
+        public CharacterFactionType CharacterFaction 
         { 
             get; 
         }

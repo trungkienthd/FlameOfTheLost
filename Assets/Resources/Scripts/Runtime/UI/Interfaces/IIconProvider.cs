@@ -4,7 +4,7 @@ namespace FlameOfTheLost
 {
     public interface IIconProvider
     {
-        public Sprite Icon
+        public int ID
         {
             get;
         }
@@ -15,6 +15,11 @@ namespace FlameOfTheLost
         }
 
         public string Description
+        {
+            get;
+        }
+
+        public Sprite Icon
         {
             get;
         }

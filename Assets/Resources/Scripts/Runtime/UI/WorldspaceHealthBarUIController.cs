@@ -196,7 +196,7 @@ namespace FlameOfTheLost
             if (this.TargetHealthController == null) return;
 
             // Your exact event names/signatures:
-            this.TargetHealthController.OnHealthChanged += this.OnHealthChanged;
+            this.TargetHealthController.OnHPChanged += this.OnHealthChanged;
             this.TargetHealthController.OnDamageTaken += this.OnDamageTaken;
             this.TargetHealthController.OnHealed += this.OnHealedInternal;
             this.TargetHealthController.OnDeath += this.OnDeathInternal;
@@ -206,7 +206,7 @@ namespace FlameOfTheLost
         {
             if (this.TargetHealthController == null) return;
 
-            this.TargetHealthController.OnHealthChanged -= this.OnHealthChanged;
+            this.TargetHealthController.OnHPChanged -= this.OnHealthChanged;
             this.TargetHealthController.OnDamageTaken -= this.OnDamageTaken;
             this.TargetHealthController.OnHealed -= this.OnHealedInternal;
             this.TargetHealthController.OnDeath -= this.OnDeathInternal;

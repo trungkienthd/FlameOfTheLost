@@ -9,7 +9,7 @@ namespace FlameOfTheLost
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Animator _animator;
         [SerializeField] private Transform _flipGroup;
-        [SerializeField] private CombatLoadoutController _combatLoadoutController;
+        [SerializeField] private CharacterCombatLoadoutController _combatLoadoutController;
         public SpriteRenderer SpriteRenderer
         {
             get => _spriteRenderer;
@@ -25,7 +25,7 @@ namespace FlameOfTheLost
             get => _flipGroup;
             private set => _flipGroup = value;
         }
-        public CombatLoadoutController CombatLoadoutController
+        public CharacterCombatLoadoutController CombatLoadoutController
         {
             get => _combatLoadoutController;
             private set => _combatLoadoutController = value;
@@ -94,7 +94,7 @@ namespace FlameOfTheLost
             if (!this.Animator) this.Animator = this.GetComponent<Animator>();
             if (!this.FlipGroup) this.FlipGroup = this.transform.parent;
 
-            this.CombatLoadoutController = this.GetComponentInParent<CombatLoadoutController>();
+            this.CombatLoadoutController = this.GetComponentInParent<CharacterCombatLoadoutController>();
         }
 
         public void SetFacing(int facing)

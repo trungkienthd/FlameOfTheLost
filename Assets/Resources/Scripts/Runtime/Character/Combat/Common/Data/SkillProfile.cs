@@ -22,7 +22,7 @@ namespace FlameOfTheLost
         [Tooltip("Main icon for inventory/slots.")]
         [SerializeField] private Sprite _icon;
 
-        public int Id
+        public int ID
         {
             get => _id;
             private set => _id = value;
@@ -47,7 +47,7 @@ namespace FlameOfTheLost
             FP = 0,
             StaminaPercentOfMax = 0f,
             FPPercentOfMax = 0f,
-            CostMode = ResourceCostMode.OnStart,
+            CostMode = ResourceCostType.OnStart,
             RequiresFP = false,
             PerSecondStamina = 0f,
             PerSecondFP = 0f
@@ -62,10 +62,10 @@ namespace FlameOfTheLost
         //private void OnValidate()
         //{
         //    // Uniqueness check across project (Editor only)
-        //    var dup = SkillProfile.FindDuplicateId(this, this.Id);
+        //    var dup = SkillProfile.FindDuplicateId(this, this.ID);
         //    if (dup != null && dup != this)
         //    {
-        //        Debug.LogError($"[SkillProfile] Duplicate Id={this.Id} detected between '{this.name}' and '{dup.name}'. " +
+        //        Debug.LogError($"[SkillProfile] Duplicate Id={this.ID} detected between '{this.name}' and '{dup.name}'. " +
         //                       $"Please assign a different Id to one of them.", this);
         //    }
         //}
@@ -81,7 +81,7 @@ namespace FlameOfTheLost
                     int next = 0;
                     while (used.Contains(next)) next++;
                     Undo.RecordObject(sp, "Assign Next Free Skill Id");
-                    sp.Id = next;
+                    sp.ID = next;
                     EditorUtility.SetDirty(sp);
                     Debug.Log($"Assigned Id={next} to Skill '{sp.name}'");
                 }
@@ -96,7 +96,7 @@ namespace FlameOfTheLost
                 var path = AssetDatabase.GUIDToAssetPath(g);
                 var asset = AssetDatabase.LoadAssetAtPath<SkillProfile>(path);
                 if (!asset || asset == me) continue;
-                if (asset.Id == id) return asset;
+                if (asset.ID == id) return asset;
             }
             return null;
         }
@@ -109,7 +109,7 @@ namespace FlameOfTheLost
             {
                 var path = AssetDatabase.GUIDToAssetPath(g);
                 var asset = AssetDatabase.LoadAssetAtPath<SkillProfile>(path);
-                if (asset) set.Add(asset.Id);
+                if (asset) set.Add(asset.ID);
             }
             return set;
         }

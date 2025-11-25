@@ -25,7 +25,7 @@ namespace FlameOfTheLost
         MaxHealthFlat,                              // +N (points)
 
         // --- Movement / Combat
-        MoveSpeedMultiplier,                        // x%
+        MovementSpeedMultiplier,                        // x%
 
         AttackSpeedMultiplier,                      // x%
 

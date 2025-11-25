@@ -34,8 +34,8 @@ namespace FlameOfTheLost
             set => _fpPercentOfMax = value;
         }
 
-        [SerializeField] private ResourceCostMode _costMode;
-        public ResourceCostMode CostMode
+        [SerializeField] private ResourceCostType _costMode;
+        public ResourceCostType CostMode
         {
             get => _costMode;
             set => _costMode = value;

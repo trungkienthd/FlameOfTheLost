@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "MeleeSkillProfile", menuName = "FlameOfTheLost/Combat/Melee/MeleeSkillProfile")]
+    [CreateAssetMenu(fileName = "MeleeSkillProfile", menuName = "Data/FlameOfTheLost/Combat/Melee/MeleeSkillProfile")]
     public class MeleeSkillProfile : SkillProfile
     {
         [Header("Hitbox Shapes")]

@@ -3,14 +3,14 @@ namespace FlameOfTheLost
     public struct GateResult
     {
         private bool _allowed;
-        private GateRejectReason _reason;
+        private GateRejectStatus _reason;
 
         public bool Allowed
         {
             get => _allowed; 
             private set => _allowed = value;
         }
-        public GateRejectReason Reason
+        public GateRejectStatus Reason
         {
             get => _reason;
             private set => _reason = value;
@@ -21,11 +21,11 @@ namespace FlameOfTheLost
             return new GateResult
             {
                 Allowed = true,
-                Reason = GateRejectReason.None,
+                Reason = GateRejectStatus.None,
             };
         }
 
-        public static GateResult GetRejectedGateResult(GateRejectReason r)
+        public static GateResult GetRejectedGateResult(GateRejectStatus r)
         {
             return new GateResult
             {

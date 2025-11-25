@@ -880,6 +880,7 @@ GameObject:
   - component: {fileID: 371916286}
   - component: {fileID: 371916285}
   - component: {fileID: 371916283}
+  - component: {fileID: 371916287}
   - component: {fileID: 371916282}
   - component: {fileID: 371916284}
   - component: {fileID: 371916281}
@@ -999,8 +1000,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27e787e5e24bf747afc3dd178f92481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
-  _currentHealth: 0
+  _baseMaxHP: 100
+  _maxHP: 100
+  _currentHP: 0
   _dead: 0
   _characterFaction: 2
   _incomingDamageMultiplier: 1
@@ -1019,13 +1021,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e336937be7126d4c9c84c130f8c77b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _aimConfig: {fileID: 0}
+  _aimProviderBehaviour: {fileID: 0}
+  _requireEndBeforeNext: 1
+  _cooldownAfterEnd: 0.5
   _animationHandler: {fileID: 0}
   _combatLoadoutController: {fileID: 0}
   _characterResourcesController: {fileID: 0}
   _audioHandler: {fileID: 0}
-  _inputConfig: {fileID: 0}
-  _requireEndBeforeNext: 1
-  _cooldownAfterEnd: 0.5
   _meleeHitboxController: {fileID: 0}
   _damageConfiguratorSource: {fileID: 0}
   _attackOriginOverride: {fileID: 0}
@@ -1064,10 +1067,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 371916276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe19809b85bf054aacdbdf9fba7a8ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 7923366f865bed049afe59470bced360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _styleLoadout: {fileID: 11400000, guid: 1fdbe0bc098357042ab6dee2cef1a184, type: 2}
+  _combatLoadout: {fileID: 0}
   _meleeCombatController: {fileID: 0}
   _rangedCombatController: {fileID: 0}
   _currentAttackStyle: 0
@@ -1089,11 +1092,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1998d8867a8952e4b8cbdb709e0d855c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 6
+  _movementSpeed: 6
   _accel: 60
   _decel: 80
   _animationHandler: {fileID: 0}
   _rigidbody2D: {fileID: 0}
+--- !u!114 &371916287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371916276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aababe3952f09684eab6a1e2197e51c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetTransform: {fileID: 1202819576}
 --- !u!1 &439888969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,7 +1814,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 701775291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e03bf8f129d82934298baa7799948c7b, type: 3}
+  m_Script: {fileID: 11500000, guid: d745ff87e27b3bb439c08b6529d177fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 0}
@@ -2531,7 +2547,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1160973845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e03bf8f129d82934298baa7799948c7b, type: 3}
+  m_Script: {fileID: 11500000, guid: d745ff87e27b3bb439c08b6529d177fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 0}
@@ -2569,11 +2585,9 @@ GameObject:
   - component: {fileID: 1202819577}
   - component: {fileID: 1202819568}
   - component: {fileID: 1202819567}
+  - component: {fileID: 1202819579}
   - component: {fileID: 1202819565}
   - component: {fileID: 1202819578}
-  - component: {fileID: 1202819581}
-  - component: {fileID: 1202819580}
-  - component: {fileID: 1202819579}
   - component: {fileID: 1202819566}
   - component: {fileID: 1202819562}
   - component: {fileID: 1202819564}
@@ -2620,8 +2634,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27e787e5e24bf747afc3dd178f92481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
-  _currentHealth: 0
+  _baseMaxHP: 100
+  _maxHP: 100
+  _currentHP: 0
   _dead: 0
   _characterFaction: 1
   _incomingDamageMultiplier: 1
@@ -2655,13 +2670,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6cd48d8415ffc4bb10a21ed420e0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _aimConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
+  _aimProviderBehaviour: {fileID: 0}
+  _requireEndBeforeNext: 1
+  _cooldownAfterEnd: 0.5
   _animationHandler: {fileID: 0}
   _combatLoadoutController: {fileID: 0}
   _characterResourcesController: {fileID: 0}
   _audioHandler: {fileID: 0}
-  _inputConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
-  _requireEndBeforeNext: 1
-  _cooldownAfterEnd: 0.5
   _rangedAnchor: {fileID: 286932897}
 --- !u!114 &1202819568
 MonoBehaviour:
@@ -2675,13 +2691,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e336937be7126d4c9c84c130f8c77b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _aimConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
+  _aimProviderBehaviour: {fileID: 0}
+  _requireEndBeforeNext: 1
+  _cooldownAfterEnd: 0.5
   _animationHandler: {fileID: 0}
   _combatLoadoutController: {fileID: 0}
   _characterResourcesController: {fileID: 0}
   _audioHandler: {fileID: 0}
-  _inputConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
-  _requireEndBeforeNext: 1
-  _cooldownAfterEnd: 0.5
   _meleeHitboxController: {fileID: 0}
   _damageConfiguratorSource: {fileID: 0}
   _attackOriginOverride: {fileID: 0}
@@ -2697,7 +2714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1998d8867a8952e4b8cbdb709e0d855c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 6
+  _movementSpeed: 6
   _accel: 60
   _decel: 80
   _animationHandler: {fileID: 0}
@@ -3022,10 +3039,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1202819561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe19809b85bf054aacdbdf9fba7a8ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 7923366f865bed049afe59470bced360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _styleLoadout: {fileID: 11400000, guid: 869793409e095a84c9202b72296863b6, type: 2}
+  _combatLoadout: {fileID: 11400000, guid: 869793409e095a84c9202b72296863b6, type: 2}
   _meleeCombatController: {fileID: 0}
   _rangedCombatController: {fileID: 0}
   _currentAttackStyle: 0
@@ -3070,55 +3087,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1202819561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c674fe83e6ae294d8f7615ce8614781, type: 3}
+  m_Script: {fileID: 11500000, guid: aaf43de2b2632e1418dab6af1d9bcb3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resources: {fileID: 0}
---- !u!114 &1202819580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202819561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2c03ffc0b6267e40a232697bd431788, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: {fileID: 0}
-  _knockback: {fileID: 0}
---- !u!114 &1202819581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202819561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5019d277b4bb745913dde22bb8aad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _useUnscaledTime: 0
-  _onStatusEffectApplied:
-    m_PersistentCalls:
-      m_Calls: []
-  _onStatusEffectUpdated:
-    m_PersistentCalls:
-      m_Calls: []
-  _onStatusEffectRemoved:
-    m_PersistentCalls:
-      m_Calls: []
-  _onAggregatesChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  _onDoTTick:
-    m_PersistentCalls:
-      m_Calls: []
-  _onHoTTick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1204335269
 GameObject:
   m_ObjectHideFlags: 0

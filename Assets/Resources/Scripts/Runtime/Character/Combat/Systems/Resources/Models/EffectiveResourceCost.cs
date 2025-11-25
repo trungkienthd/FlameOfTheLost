@@ -17,8 +17,8 @@ namespace FlameOfTheLost
             set => _fp = Mathf.Max(0, value);
         }
 
-        private ResourceCostMode _costMode;
-        public ResourceCostMode CostMode
+        private ResourceCostType _costMode;
+        public ResourceCostType CostMode
         {
             get => _costMode;
             set => _costMode = value;

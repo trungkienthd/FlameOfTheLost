@@ -101,8 +101,8 @@ namespace FlameOfTheLost
             {
                 try
                 {
-                    this.PlayerHealthController.OnHealthChanged -= this.HandleHealthChanged;
-                    this.PlayerHealthController.OnHealthChanged += this.HandleHealthChanged;
+                    this.PlayerHealthController.OnHPChanged -= this.HandleHealthChanged;
+                    this.PlayerHealthController.OnHPChanged += this.HandleHealthChanged;
                 }
                 catch { /* Ignore if already subscribed */ }
             }
@@ -131,7 +131,7 @@ namespace FlameOfTheLost
             {
                 try
                 {
-                    this.PlayerHealthController.OnHealthChanged -= this.HandleHealthChanged;
+                    this.PlayerHealthController.OnHPChanged -= this.HandleHealthChanged;
                 }
                 catch { /* Ignore if not subscribed */ }
             }
@@ -189,8 +189,8 @@ namespace FlameOfTheLost
         private void ReadHealth(out int currentValue, out int maxValue)
         {
             // Adjust to your HealthController API
-            currentValue = this.PlayerHealthController.CurrentHealth;
-            maxValue = this.PlayerHealthController.MaxHealth;
+            currentValue = this.PlayerHealthController.CurrentHP;
+            maxValue = this.PlayerHealthController.MaxHP;
         }
         private void ReadFP(out int currentValue, out int maxValue)
         {

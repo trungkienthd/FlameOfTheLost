@@ -6,8 +6,8 @@ namespace FlameOfTheLost
     public class CombatHUDController : MonoBehaviour
     {
         [Header("Refs")]
-        [SerializeField] private CombatLoadoutController _loadout;
-        private CombatLoadoutController PlayerCombatLoadoutController
+        [SerializeField] private CharacterCombatLoadoutController _loadout;
+        private CharacterCombatLoadoutController PlayerCombatLoadoutController
         {
             get => _loadout;
             set => _loadout = value;
@@ -141,13 +141,13 @@ namespace FlameOfTheLost
             // Skills
             if (this.LeftSpecialSkillIcon)
             {
-                var l = this.PlayerCombatLoadoutController.GetSpecialSkillIcon(AttackSlot.Left);
+                var l = this.PlayerCombatLoadoutController.GetSpecialSkillIcon(AttackSlotType.Left);
                 this.LeftSpecialSkillIcon.enabled = l != null;
                 this.LeftSpecialSkillIcon.sprite = l;
             }
             if (this.RightSpecialSkillIcon)
             {
-                var r = this.PlayerCombatLoadoutController.GetSpecialSkillIcon(AttackSlot.Right);
+                var r = this.PlayerCombatLoadoutController.GetSpecialSkillIcon(AttackSlotType.Right);
                 this.RightSpecialSkillIcon.enabled = r != null;
                 this.RightSpecialSkillIcon.sprite = r;
             }
@@ -155,10 +155,10 @@ namespace FlameOfTheLost
             // Next previews
             switch (this.PlayerCombatLoadoutController.CurrentAttackStyle)
             {
-                case AttackStyle.Melee:
+                case AttackStyleType.Melee:
                     this.SetBothNextSpecialSkillPreviews(this.NextLeftSpecialSkillIcon, this.PlayerCombatLoadoutController.CurrentMeleeWeapon);
                     break;
-                case AttackStyle.Ranged:
+                case AttackStyleType.Ranged:
                     this.SetBothNextSpecialSkillPreviews(this.NextLeftSpecialSkillIcon, this.PlayerCombatLoadoutController.CurrentRangedWeapon);
                     break;
                 default:
@@ -178,7 +178,7 @@ namespace FlameOfTheLost
         }
 
         /// Look ahead without changing the loadout: what would the next icon be if we cycled forward?
-        private Sprite PeekNextSkillIcon<TSkill>(AttackSlot slot, int direction, WeaponProfile<TSkill> weapon) where TSkill : SkillProfile
+        private Sprite PeekNextSkillIcon<TSkill>(AttackSlotType slot, int direction, WeaponProfile<TSkill> weapon) where TSkill : SkillProfile
         {
             direction = direction == 0 ? 1 : (direction > 0 ? 1 : -1);
 
@@ -187,16 +187,16 @@ namespace FlameOfTheLost
             var skillList = weapon.GetSpecialSkillList(slot);
             if (skillList == null || skillList.Count == 0) return null;
 
-            var currentSpecialSkill = ((slot == AttackSlot.Left) ? this.PlayerCombatLoadoutController.CurrentLeftSpecialSkillSlot : this.PlayerCombatLoadoutController.CurrentRightSpecialSkillSlot) as TSkill;
+            var currentSpecialSkill = ((slot == AttackSlotType.Left) ? this.PlayerCombatLoadoutController.CurrentLeftSpecialSkillSlot : this.PlayerCombatLoadoutController.CurrentRightSpecialSkillSlot) as TSkill;
             int idx = Mathf.Max(0, skillList.IndexOf(currentSpecialSkill));
             int nextSpecialSkillIdx = CombatStatics.WrapIndex(idx + direction, skillList.Count);
             return skillList[nextSpecialSkillIdx] ? skillList[nextSpecialSkillIdx].Icon : null;
         }
-        private bool HasOnlyOneSpecialSkillInCurrentWeapon<TSkill>(AttackSlot slot, WeaponProfile<TSkill> weapon) where TSkill : SkillProfile
+        private bool HasOnlyOneSpecialSkillInCurrentWeapon<TSkill>(AttackSlotType slot, WeaponProfile<TSkill> weapon) where TSkill : SkillProfile
         {
             return weapon != null && weapon.SpecialSkillCount(slot) <= 1;
         }
-        private void SetNextSpecialSkillPreview<TSkill>(Image target, AttackSlot slot, WeaponProfile<TSkill> weapon) where TSkill : SkillProfile
+        private void SetNextSpecialSkillPreview<TSkill>(Image target, AttackSlotType slot, WeaponProfile<TSkill> weapon) where TSkill : SkillProfile
         {
             Sprite next = this.PeekNextSkillIcon(slot, +1, weapon);
             var hasOnlyOne = this.HasOnlyOneSpecialSkillInCurrentWeapon(slot, weapon);
@@ -214,8 +214,8 @@ namespace FlameOfTheLost
         }
         private void SetBothNextSpecialSkillPreviews<TSkill>(Image target, WeaponProfile<TSkill> weapon) where TSkill : SkillProfile
         {
-            if (this.NextLeftSpecialSkillIcon) this.SetNextSpecialSkillPreview(target, AttackSlot.Left, weapon);
-            if (this.NextRightSpecialSkillIcon) this.SetNextSpecialSkillPreview(target, AttackSlot.Right, weapon);
+            if (this.NextLeftSpecialSkillIcon) this.SetNextSpecialSkillPreview(target, AttackSlotType.Left, weapon);
+            if (this.NextRightSpecialSkillIcon) this.SetNextSpecialSkillPreview(target, AttackSlotType.Right, weapon);
         }
 
         private void RefreshQuickItem()
