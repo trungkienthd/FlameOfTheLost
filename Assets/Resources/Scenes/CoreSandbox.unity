@@ -880,10 +880,17 @@ GameObject:
   - component: {fileID: 371916286}
   - component: {fileID: 371916285}
   - component: {fileID: 371916283}
-  - component: {fileID: 371916287}
   - component: {fileID: 371916282}
+  - component: {fileID: 371916295}
+  - component: {fileID: 371916287}
   - component: {fileID: 371916284}
-  - component: {fileID: 371916281}
+  - component: {fileID: 371916290}
+  - component: {fileID: 371916289}
+  - component: {fileID: 371916288}
+  - component: {fileID: 371916291}
+  - component: {fileID: 371916294}
+  - component: {fileID: 371916293}
+  - component: {fileID: 371916292}
   m_Layer: 9
   m_Name: Rattleblade
   m_TagString: Enemy
@@ -973,21 +980,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.12}
   m_Size: {x: 0.6, y: 1.1}
   m_Direction: 0
---- !u!114 &371916281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371916276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c64d0d6442beb8f4db6cb3582001107d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _massScale: 1
-  _incomingKnockbackMultiplier: 1
-  _rb: {fileID: 0}
 --- !u!114 &371916282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,18 +989,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 371916276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d27e787e5e24bf747afc3dd178f92481, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d15acfc029cbb74e99f995d8d755ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseMaxHP: 100
-  _maxHP: 100
-  _currentHP: 0
-  _dead: 0
-  _characterFaction: 2
-  _incomingDamageMultiplier: 1
-  _animationHandler: {fileID: 0}
-  _knockbackHandler: {fileID: 0}
-  _rigidbody2D: {fileID: 0}
+  _resourcesController: {fileID: 371916284}
 --- !u!114 &371916283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,20 +1002,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 371916276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e336937be7126d4c9c84c130f8c77b5, type: 3}
+  m_Script: {fileID: 11500000, guid: a7c0d74169e1c2041abe696648a98db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimConfig: {fileID: 0}
-  _aimProviderBehaviour: {fileID: 0}
-  _requireEndBeforeNext: 1
-  _cooldownAfterEnd: 0.5
-  _animationHandler: {fileID: 0}
   _combatLoadoutController: {fileID: 0}
-  _characterResourcesController: {fileID: 0}
-  _audioHandler: {fileID: 0}
+  _combatResourcesHandler: {fileID: 0}
+  _combatAimingHandler: {fileID: 0}
+  _combatSkillStatusEffectHandler: {fileID: 0}
+  _animationHandler: {fileID: 0}
   _meleeHitboxController: {fileID: 0}
-  _damageConfiguratorSource: {fileID: 0}
-  _attackOriginOverride: {fileID: 0}
+  _rangedAnchor: {fileID: 0}
+  _isInAttackWindow: 0
+  _cannotAttack: 0
+  _cannotCastSpecialSkill: 0
+  _ignoreAttackLock: 0
 --- !u!114 &371916284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,20 +1028,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f16d8fbe85dc14facfe9596e3a9e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentStamina: 0
-  _maxStamina: 100
-  _staminaRegenPerSec: 10
-  _staminaRegenDelay: 1
-  _minStaminaReserve: 0
-  _currentFP: 0
-  _maxFP: 100
-  _fpRegenPerSec: 5
-  _fpRegenDelay: 1.25
-  _staminaCostScale: 1
-  _fpCostScale: 1
-  _exhaustedThresholdRatio: 0.1
-  _isSilenced: 0
-  _isFatigued: 0
+  _hp: {fileID: 371916290}
+  _fp: {fileID: 371916289}
+  _stamina: {fileID: 371916288}
 --- !u!114 &371916285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,16 +1043,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7923366f865bed049afe59470bced360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _combatLoadout: {fileID: 0}
-  _meleeCombatController: {fileID: 0}
-  _rangedCombatController: {fileID: 0}
-  _currentAttackStyle: 0
-  _currentMeleeWeapon: {fileID: 0}
-  _currentRangedWeapon: {fileID: 0}
-  _meleeLeftSpecialSkillSlot: {fileID: 0}
-  _meleeRightSpecialSkillSlot: {fileID: 0}
-  _rangedLeftSpecialSkillSlot: {fileID: 0}
-  _rangedRightSpecialSkillSlot: {fileID: 0}
+  _combatAttackController: {fileID: 0}
+  _characterTag: 0
+  _maxEquippedWeapons: 2
+  _equippedWeapons: []
+  _activeEquippedWeapon: {fileID: 0}
+  _cannotSwapWeapon: 0
+  _ignoreSwapLock: 0
 --- !u!114 &371916286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,11 +1062,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1998d8867a8952e4b8cbdb709e0d855c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animationHandler: {fileID: 1160973849}
+  _rigidbody2D: {fileID: 371916278}
   _movementSpeed: 6
   _accel: 60
   _decel: 80
-  _animationHandler: {fileID: 0}
-  _rigidbody2D: {fileID: 0}
+  _cannotMove: 0
+  _ignoreMovementLock: 0
+  _movementSpeedScale: 1
 --- !u!114 &371916287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1106,10 +1079,150 @@ MonoBehaviour:
   m_GameObject: {fileID: 371916276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aababe3952f09684eab6a1e2197e51c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c037b53ade72324885b81e82a003e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTransform: {fileID: 1202819576}
+  _animationHandler: {fileID: 1160973849}
+  _aimingHandler: {fileID: 0}
+  _aimingConfig: {fileID: 0}
+--- !u!114 &371916288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371916276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ffcbe0c7ea03aa47b17e3b29e59e57a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentValue: 0
+  _maxValue: 0
+  _costMultiplier: 1
+  _costAdditiveFlat: 0
+  _activePeriodicStreams: []
+  _staminaRegenRate: 5
+  _staminaRegenDelay: 1
+  _minStaminaReserve: 0
+  _exhaustedThresholdRatio: 0.1
+  _isFatigued: 0
+  _staminaRegenRateAdditiveFlat: 1
+  _staminaRegenDelayAdditiveFlat: 1
+--- !u!114 &371916289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371916276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f739629e628eda04fb6abe156f8bd0d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentValue: 0
+  _maxValue: 0
+  _costMultiplier: 1
+  _costAdditiveFlat: 0
+  _activePeriodicStreams: []
+  _isSilenced: 0
+--- !u!114 &371916290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371916276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eaf33970510987489772aa2f6f8a3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentValue: 0
+  _maxValue: 0
+  _costMultiplier: 1
+  _costAdditiveFlat: 0
+  _activePeriodicStreams: []
+  _animationHandler: {fileID: 1160973849}
+  _rigidbody2D: {fileID: 371916278}
+  _damageReceivedMultiplier: 1
+  _damageReceivedAdditiveFlat: 0
+  _currentVirtualHP: 0
+  _maxVirtualHP: 0
+  _characterFaction: 2
+  _isDead: 0
+--- !u!114 &371916291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371916276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c83575119cac444f9feb63169496edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guardConfig: {fileID: 0}
+  _flagHandler: {fileID: 0}
+  _statModifierHandler: {fileID: 0}
+  _statPeriodicHandler: {fileID: 0}
+--- !u!114 &371916292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371916276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10687779d0ed13d40909a4918af9ae12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statusEffectController: {fileID: 0}
+--- !u!114 &371916293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371916276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b788ad3d3335f9c45af726061e9dc18b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statusEffectController: {fileID: 0}
+  _aggregateMap:
+    _keys: 
+    _values: []
+--- !u!114 &371916294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371916276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3856fe2f0cbb174ba7e9ca16f14e016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statusEffectController: {fileID: 0}
+--- !u!114 &371916295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371916276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7046a20b78ffdeb429e8f07e53329316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statusEffectController: {fileID: 0}
 --- !u!1 &439888969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,7 +1376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d8ea1dd77f9a642a75d8c85d205d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 1202819565}
   _resources: {fileID: 1202819578}
   _hpBar: {fileID: 3610885581159101102}
   _fpBar: {fileID: 1400320571}
@@ -1794,7 +1906,7 @@ SpriteRenderer:
   m_SortingLayerID: -2079717993
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1209683134, guid: d64fdee322d99594386840d1d5369625, type: 3}
+  m_Sprite: {fileID: -930787914, guid: d64fdee322d99594386840d1d5369625, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1817,12 +1929,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d745ff87e27b3bb439c08b6529d177fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 0}
-  _animator: {fileID: 0}
-  _flipGroup: {fileID: 0}
-  _combatLoadoutController: {fileID: 0}
+  _spriteRenderer: {fileID: 701775294}
+  _animator: {fileID: 701775293}
+  _flipGroup: {fileID: 5265806}
+  _combatAttackController: {fileID: 1202819568}
   _speedForOne: 10
   _speedDampTime: 0.05
+  _placeholderAttackDown: {fileID: 7400000, guid: 4eef5e0d2c7d11c48be2ec23915732af, type: 2}
+  _placeholderAttackSide: {fileID: 7400000, guid: d1e69b879d4623c4696a7395626101df, type: 2}
+  _placeholderAttackUp: {fileID: 7400000, guid: 9e999f4bbb498904ab0fe76071334040, type: 2}
 --- !u!210 &701775296
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -1953,16 +2068,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 779596835}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae885240fda59443897f47e9b5cc66e, type: 3}
+  m_Script: {fileID: 11500000, guid: f666612ca95027c44ab011d72111c4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targets:
-    serializedVersion: 2
-    m_Bits: 0
-  _polygonCollider2D: {fileID: 0}
-  _ownerTransform: {fileID: 0}
+  _damageConfiguratorSource: {fileID: 0}
+  _attackerCombatAttackController: {fileID: 0}
+  _activeRuntimeSkill:
+    _profile: {fileID: 0}
+    _provisionType: 0
   _isActive: 1
-  _defaultMeleeHitboxProfile:
+  _hasConfirmedHit: 0
+  _hasDisabledWithoutHit: 0
+  _polygonCollider2D: {fileID: 779596840}
+  _defaultMeleeHitbox:
     _facingDownShape:
       _points: []
       _offset: {x: 0, y: 0}
@@ -1973,7 +2091,7 @@ MonoBehaviour:
       _points: []
       _offset: {x: 0, y: 0}
     _mirrorSideOffsetX: 0
-  _overrideHitboxProfile:
+  _overrideHitbox:
     _facingDownShape:
       _points: []
       _offset: {x: 0, y: 0}
@@ -1984,9 +2102,8 @@ MonoBehaviour:
       _points: []
       _offset: {x: 0, y: 0}
     _mirrorSideOffsetX: 0
-  _hasOverrideMeleeHitboxProfile: 0
+  _hasOverrideMeleeHitboxShape: 1
   _autoSyncFromFacingProvider: 1
-  _activeStatusEffects: []
 --- !u!114 &779596839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1999,10 +2116,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d5bda84988be749b0a7cc28c1537b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _baseDamageAmount: 0
+  _baseKnockbackForce: 0
   _damageAmount: 0
   _knockbackForce: 0
+  _damageDealtMultiplier: 1
+  _damageDealtAddFlat: 0
+  _knockbackDealtMultiplier: 1
+  _knockbackDealtAddFlat: 0
   _sourceCharacterFaction: 1
-  _originTransform: {fileID: 0}
+  _originTransform: {fileID: 1202819576}
   _destroyOnHit: 0
   _ignoresSameFaction: 1
 --- !u!60 &779596840
@@ -2012,7 +2135,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779596835}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -2051,9 +2174,22 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.15, y: 0.9}
-      - {x: 0.45, y: -0.1}
-      - {x: 0.9, y: 0.35}
+    - - {x: 0.9, y: 0.25}
+      - {x: 0.9, y: 0.4}
+      - {x: 0.8, y: 0.45}
+      - {x: 0.3, y: 0.7}
+      - {x: 0.2, y: 0.7}
+      - {x: 0.2, y: 0.75}
+      - {x: 0.1, y: 0.8}
+      - {x: -0.1, y: 0.95}
+      - {x: -0.2, y: 0.95}
+      - {x: -0.2, y: 0.85}
+      - {x: 0.15, y: 0.3}
+      - {x: 0.35, y: -0.15}
+      - {x: 0.5, y: -0.15}
+      - {x: 0.6, y: 0.1}
+      - {x: 0.75, y: 0.2}
+      - {x: 0.75, y: 0.25}
   m_UseDelaunayMesh: 0
 --- !u!1 &781862598
 GameObject:
@@ -2414,9 +2550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0963051e27d2e424ea11dfcaefcb4466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadout: {fileID: 1202819577}
+  _combatLoadoutController: {fileID: 1202819577}
   _weaponIcon: {fileID: 742048670}
-  _weaponCooldownFill: {fileID: 1394026588}
   _leftSpecialSkillIcon: {fileID: 1527044590}
   _rightSpecialSkillIcon: {fileID: 1083243124}
   _nextLeftSpecialSkillIcon: {fileID: 2001795796}
@@ -2550,12 +2685,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d745ff87e27b3bb439c08b6529d177fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 0}
-  _animator: {fileID: 0}
-  _flipGroup: {fileID: 0}
-  _combatLoadoutController: {fileID: 0}
+  _spriteRenderer: {fileID: 1160973847}
+  _animator: {fileID: 1160973848}
+  _flipGroup: {fileID: 1281443002}
+  _combatAttackController: {fileID: 371916283}
   _speedForOne: 10
   _speedDampTime: 0.05
+  _placeholderAttackDown: {fileID: 0}
+  _placeholderAttackSide: {fileID: 0}
+  _placeholderAttackUp: {fileID: 0}
 --- !u!210 &1160973850
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -2584,13 +2722,17 @@ GameObject:
   - component: {fileID: 1202819570}
   - component: {fileID: 1202819577}
   - component: {fileID: 1202819568}
-  - component: {fileID: 1202819567}
-  - component: {fileID: 1202819579}
   - component: {fileID: 1202819565}
+  - component: {fileID: 1202819587}
+  - component: {fileID: 1202819567}
   - component: {fileID: 1202819578}
-  - component: {fileID: 1202819566}
-  - component: {fileID: 1202819562}
-  - component: {fileID: 1202819564}
+  - component: {fileID: 1202819584}
+  - component: {fileID: 1202819586}
+  - component: {fileID: 1202819585}
+  - component: {fileID: 1202819581}
+  - component: {fileID: 1202819588}
+  - component: {fileID: 1202819580}
+  - component: {fileID: 1202819582}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -2598,30 +2740,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1202819562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202819561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94c53ac2e2751449bd62151110c4f34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1202819564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202819561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18e8291f87c5fc94fb17a5b13d979890, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1202819565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2631,33 +2749,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1202819561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d27e787e5e24bf747afc3dd178f92481, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d15acfc029cbb74e99f995d8d755ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseMaxHP: 100
-  _maxHP: 100
-  _currentHP: 0
-  _dead: 0
-  _characterFaction: 1
-  _incomingDamageMultiplier: 1
-  _animationHandler: {fileID: 0}
-  _knockbackHandler: {fileID: 0}
-  _rigidbody2D: {fileID: 0}
---- !u!114 &1202819566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202819561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c64d0d6442beb8f4db6cb3582001107d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _massScale: 1
-  _incomingKnockbackMultiplier: 1
-  _rb: {fileID: 0}
+  _resourcesController: {fileID: 1202819578}
 --- !u!114 &1202819567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2667,18 +2762,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1202819561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c6cd48d8415ffc4bb10a21ed420e0ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c037b53ade72324885b81e82a003e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
-  _aimProviderBehaviour: {fileID: 0}
-  _requireEndBeforeNext: 1
-  _cooldownAfterEnd: 0.5
-  _animationHandler: {fileID: 0}
-  _combatLoadoutController: {fileID: 0}
-  _characterResourcesController: {fileID: 0}
-  _audioHandler: {fileID: 0}
-  _rangedAnchor: {fileID: 286932897}
+  _animationHandler: {fileID: 701775295}
+  _aimingHandler: {fileID: 11400000, guid: 11064b053fa11cb45b6d4bd16d128433, type: 2}
+  _aimingConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
 --- !u!114 &1202819568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2688,20 +2777,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1202819561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e336937be7126d4c9c84c130f8c77b5, type: 3}
+  m_Script: {fileID: 11500000, guid: a7c0d74169e1c2041abe696648a98db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
-  _aimProviderBehaviour: {fileID: 0}
-  _requireEndBeforeNext: 1
-  _cooldownAfterEnd: 0.5
-  _animationHandler: {fileID: 0}
-  _combatLoadoutController: {fileID: 0}
-  _characterResourcesController: {fileID: 0}
-  _audioHandler: {fileID: 0}
-  _meleeHitboxController: {fileID: 0}
-  _damageConfiguratorSource: {fileID: 0}
-  _attackOriginOverride: {fileID: 0}
+  _combatLoadoutController: {fileID: 1202819577}
+  _combatResourcesHandler: {fileID: 1202819565}
+  _combatAimingHandler: {fileID: 1202819567}
+  _combatSkillStatusEffectHandler: {fileID: 0}
+  _animationHandler: {fileID: 701775295}
+  _meleeHitboxController: {fileID: 779596838}
+  _rangedAnchor: {fileID: 286932897}
+  _isInAttackWindow: 0
+  _cannotAttack: 0
+  _cannotCastSpecialSkill: 0
+  _ignoreAttackLock: 0
 --- !u!114 &1202819570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2714,11 +2803,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1998d8867a8952e4b8cbdb709e0d855c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animationHandler: {fileID: 701775295}
+  _rigidbody2D: {fileID: 1202819575}
   _movementSpeed: 6
   _accel: 60
   _decel: 80
-  _animationHandler: {fileID: 0}
-  _rigidbody2D: {fileID: 0}
+  _cannotMove: 0
+  _ignoreMovementLock: 0
+  _movementSpeedScale: 1
 --- !u!114 &1202819571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2731,8 +2823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5924dd7a60eb1424f8dadf45182fd588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movement: {fileID: 0}
-  _loadout: {fileID: 0}
+  _movement: {fileID: 1202819570}
+  _combatLoadoutController: {fileID: 1202819577}
+  _combatAttackController: {fileID: 1202819568}
 --- !u!114 &1202819572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2842,42 +2935,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f8a4374e-fbbe-49de-bea2-1d1a2bd1c758
     m_ActionName: 'Player/MeleeAttack1[/Mouse/rightButton,/Keyboard/k]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1202819571}
-        m_TargetAssemblyTypeName: FlameOfTheLost.InputController, Assembly-CSharp
-        m_MethodName: OnSwitchLeftSpecialSkillSlot
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 5f0d7335-41d7-44aa-89a4-73c2a4d75e31
-    m_ActionName: 'Player/SwitchSlot0[/Keyboard/q]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1202819571}
-        m_TargetAssemblyTypeName: FlameOfTheLost.InputController, Assembly-CSharp
-        m_MethodName: OnSwitchRightSpecialSkillSlot
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: e7cf3b47-ec21-4f03-b8f5-23aa41decc5c
-    m_ActionName: 'Player/SwitchSlot1[/Keyboard/e]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e965f975-8f78-4ac6-a548-09ad2433146b
-    m_ActionName: 'Player/SwitchStyle[/Keyboard/l]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1202819571}
@@ -3042,16 +3099,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7923366f865bed049afe59470bced360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _combatLoadout: {fileID: 11400000, guid: 869793409e095a84c9202b72296863b6, type: 2}
-  _meleeCombatController: {fileID: 0}
-  _rangedCombatController: {fileID: 0}
-  _currentAttackStyle: 0
-  _currentMeleeWeapon: {fileID: 0}
-  _currentRangedWeapon: {fileID: 0}
-  _meleeLeftSpecialSkillSlot: {fileID: 0}
-  _meleeRightSpecialSkillSlot: {fileID: 0}
-  _rangedLeftSpecialSkillSlot: {fileID: 0}
-  _rangedRightSpecialSkillSlot: {fileID: 0}
+  _combatAttackController: {fileID: 1202819568}
+  _characterTag: 1
+  _maxEquippedWeapons: 2
+  _equippedWeapons: []
+  _activeEquippedWeapon: {fileID: 0}
+  _cannotSwapWeapon: 0
+  _ignoreSwapLock: 0
 --- !u!114 &1202819578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3064,21 +3118,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f16d8fbe85dc14facfe9596e3a9e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentStamina: 0
-  _maxStamina: 100
-  _staminaRegenPerSec: 10
-  _staminaRegenDelay: 1
-  _minStaminaReserve: 0
-  _currentFP: 0
-  _maxFP: 100
-  _fpRegenPerSec: 0
-  _fpRegenDelay: 1.25
-  _staminaCostScale: 1
-  _fpCostScale: 1
-  _exhaustedThresholdRatio: 0.15
-  _isSilenced: 0
-  _isFatigued: 0
---- !u!114 &1202819579
+  _hp: {fileID: 1202819584}
+  _fp: {fileID: 1202819586}
+  _stamina: {fileID: 1202819585}
+--- !u!114 &1202819580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3087,9 +3130,135 @@ MonoBehaviour:
   m_GameObject: {fileID: 1202819561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf43de2b2632e1418dab6af1d9bcb3b, type: 3}
+  m_Script: {fileID: 11500000, guid: b788ad3d3335f9c45af726061e9dc18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _statusEffectController: {fileID: 1202819581}
+  _aggregateMap:
+    _keys: 
+    _values: []
+--- !u!114 &1202819581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202819561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c83575119cac444f9feb63169496edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guardConfig: {fileID: 11400000, guid: e258a45908c1df341bb1a6d2734929bb, type: 2}
+  _flagHandler: {fileID: 0}
+  _statModifierHandler: {fileID: 1202819580}
+  _statPeriodicHandler: {fileID: 1202819582}
+--- !u!114 &1202819582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202819561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10687779d0ed13d40909a4918af9ae12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statusEffectController: {fileID: 1202819581}
+--- !u!114 &1202819584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202819561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eaf33970510987489772aa2f6f8a3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentValue: 0
+  _maxValue: 0
+  _costMultiplier: 1
+  _costAdditiveFlat: 0
+  _activePeriodicStreams: []
+  _animationHandler: {fileID: 701775295}
+  _rigidbody2D: {fileID: 1202819575}
+  _damageReceivedMultiplier: 1
+  _damageReceivedAdditiveFlat: 0
+  _currentVirtualHP: 0
+  _maxVirtualHP: 0
+  _characterFaction: 1
+  _isDead: 0
+--- !u!114 &1202819585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202819561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ffcbe0c7ea03aa47b17e3b29e59e57a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentValue: 0
+  _maxValue: 0
+  _costMultiplier: 1
+  _costAdditiveFlat: 0
+  _activePeriodicStreams: []
+  _staminaRegenRate: 5
+  _staminaRegenDelay: 1
+  _minStaminaReserve: 0
+  _exhaustedThresholdRatio: 0.1
+  _isFatigued: 0
+  _staminaRegenRateAdditiveFlat: 1
+  _staminaRegenDelayAdditiveFlat: 1
+--- !u!114 &1202819586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202819561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f739629e628eda04fb6abe156f8bd0d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentValue: 0
+  _maxValue: 0
+  _costMultiplier: 1
+  _costAdditiveFlat: 0
+  _activePeriodicStreams: []
+  _isSilenced: 0
+--- !u!114 &1202819587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202819561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7046a20b78ffdeb429e8f07e53329316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statusEffectController: {fileID: 1202819581}
+--- !u!114 &1202819588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202819561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3856fe2f0cbb174ba7e9ca16f14e016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statusEffectController: {fileID: 1202819581}
 --- !u!1 &1204335269
 GameObject:
   m_ObjectHideFlags: 0
@@ -3996,6 +4165,7 @@ GameObject:
   - component: {fileID: 1517274078}
   - component: {fileID: 1517274080}
   - component: {fileID: 1517274079}
+  - component: {fileID: 1517274081}
   m_Layer: 8
   m_Name: Hurtbox
   m_TagString: Player
@@ -4030,7 +4200,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3987b8e9da6e478a0f1ca7ff8f508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthController: {fileID: 0}
+  _hp: {fileID: 1202819584}
+  _knockback: {fileID: 1517274081}
+  _ignoreDamageReceived: 0
+  _ignoreKnockbackReceived: 0
 --- !u!70 &1517274080
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4068,6 +4241,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.12}
   m_Size: {x: 0.7, y: 1.15}
   m_Direction: 0
+--- !u!114 &1517274081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517274077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c64d0d6442beb8f4db6cb3582001107d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody2D: {fileID: 1202819575}
+  _massScale: 1
+  _knockbackTakenMultiplier: 1
+  _knockbackTakenAdditiveFlat: 0
 --- !u!1 &1517601742
 GameObject:
   m_ObjectHideFlags: 0
@@ -8482,6 +8671,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1202819576}
     m_Modifications:
+    - target: {fileID: -7152042478450708639, guid: a589d4845b0dfe44ba11457a5b9e7eb5, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 587576704767736389, guid: a589d4845b0dfe44ba11457a5b9e7eb5, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -8619,6 +8812,7 @@ GameObject:
   - component: {fileID: 1663384560}
   - component: {fileID: 1663384561}
   - component: {fileID: 1663384562}
+  - component: {fileID: 1663384563}
   m_Layer: 9
   m_Name: Hurtbox
   m_TagString: Untagged
@@ -8690,7 +8884,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3987b8e9da6e478a0f1ca7ff8f508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthController: {fileID: 0}
+  _hp: {fileID: 371916290}
+  _knockback: {fileID: 1663384563}
+  _ignoreDamageReceived: 0
+  _ignoreKnockbackReceived: 0
+--- !u!114 &1663384563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663384559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c64d0d6442beb8f4db6cb3582001107d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody2D: {fileID: 0}
+  _massScale: 1
+  _knockbackTakenMultiplier: 1
+  _knockbackTakenAdditiveFlat: 0
 --- !u!1 &1823098480
 GameObject:
   m_ObjectHideFlags: 0
@@ -8942,7 +9155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1832258225
 Transform:
   m_ObjectHideFlags: 0
@@ -9155,10 +9368,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d5bda84988be749b0a7cc28c1537b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _baseDamageAmount: 0
+  _baseKnockbackForce: 0
   _damageAmount: 10
   _knockbackForce: 5
+  _damageDealtMultiplier: 1
+  _damageDealtAddFlat: 0
+  _knockbackDealtMultiplier: 1
+  _knockbackDealtAddFlat: 0
   _sourceCharacterFaction: 2
-  _originTransform: {fileID: 0}
+  _originTransform: {fileID: 371916277}
   _destroyOnHit: 0
   _ignoresSameFaction: 1
 --- !u!114 &2100081578
@@ -9170,16 +9389,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2100081574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae885240fda59443897f47e9b5cc66e, type: 3}
+  m_Script: {fileID: 11500000, guid: f666612ca95027c44ab011d72111c4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targets:
-    serializedVersion: 2
-    m_Bits: 0
-  _polygonCollider2D: {fileID: 0}
-  _ownerTransform: {fileID: 0}
+  _damageConfiguratorSource: {fileID: 0}
+  _attackerCombatAttackController: {fileID: 0}
+  _activeRuntimeSkill:
+    _profile: {fileID: 0}
+    _provisionType: 0
   _isActive: 1
-  _defaultMeleeHitboxProfile:
+  _hasConfirmedHit: 0
+  _hasDisabledWithoutHit: 0
+  _polygonCollider2D: {fileID: 0}
+  _defaultMeleeHitbox:
     _facingDownShape:
       _points: []
       _offset: {x: 0, y: 0}
@@ -9190,7 +9412,7 @@ MonoBehaviour:
       _points: []
       _offset: {x: 0, y: 0}
     _mirrorSideOffsetX: 0
-  _overrideHitboxProfile:
+  _overrideHitbox:
     _facingDownShape:
       _points: []
       _offset: {x: 0, y: 0}
@@ -9201,9 +9423,8 @@ MonoBehaviour:
       _points: []
       _offset: {x: 0, y: 0}
     _mirrorSideOffsetX: 0
-  _hasOverrideMeleeHitboxProfile: 0
+  _hasOverrideMeleeHitboxShape: 1
   _autoSyncFromFacingProvider: 1
-  _activeStatusEffects: []
 --- !u!60 &2100081579
 PolygonCollider2D:
   m_ObjectHideFlags: 0

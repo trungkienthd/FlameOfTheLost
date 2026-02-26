@@ -33,7 +33,7 @@ namespace FlameOfTheLost
             EditorGUILayout.PropertyField(durationRefreshTypeProperty);
 
             // MaxStacks only meaningful when we actually stack (StackAll)
-            bool isStackAll = (StatusEffectCombinationType)combinationTypeProperty.enumValueIndex == StatusEffectCombinationType.StackAll;
+            bool isStackAll = (StatusEffectStatModifierCombinationType)combinationTypeProperty.enumValueIndex == StatusEffectStatModifierCombinationType.AddStacks;
             using (new EditorGUI.DisabledScope(!isStackAll))
             {
                 EditorGUILayout.PropertyField(this.serializedObject.FindProperty("_maxStacks"));

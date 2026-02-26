@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.9">
+  <diagram name="Page-1" id="-FaWIA_E81L3qK4DEj4b">
+    <mxGraphModel dx="1226" dy="715" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="0geGZahayE_91U1qulH0-1" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=41;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&amp;lt;&amp;lt; MonoBehaviour &amp;gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;StatusEffectPeriodicHandler" vertex="1">
+          <mxGeometry height="101" width="520" x="260" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="0geGZahayE_91U1qulH0-2" parent="0geGZahayE_91U1qulH0-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="- _statusEffectController:&amp;nbsp;StatusEffectController" vertex="1">
+          <mxGeometry height="26" width="520" y="41" as="geometry" />
+        </mxCell>
+        <mxCell id="0geGZahayE_91U1qulH0-4" parent="0geGZahayE_91U1qulH0-1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&amp;nbsp;" vertex="1">
+          <mxGeometry height="26" width="520" y="67" as="geometry" />
+        </mxCell>
+        <mxCell id="0geGZahayE_91U1qulH0-9" parent="0geGZahayE_91U1qulH0-1" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="520" y="93" as="geometry" />
+        </mxCell>
+        <mxCell id="0geGZahayE_91U1qulH0-61" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&amp;lt;&amp;lt; MonoBehaviour &amp;gt;&amp;gt;&lt;b&gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;StatusEffectController&lt;/b&gt;" vertex="1">
+          <mxGeometry height="92" width="398.64" x="961.36" y="291" as="geometry" />
+        </mxCell>
+        <mxCell id="0geGZahayE_91U1qulH0-62" parent="0geGZahayE_91U1qulH0-61" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ GuardConfig: StatusEffectGuardConfig &amp;lt;&amp;lt; readonly property &amp;gt;&amp;gt;" vertex="1">
+          <mxGeometry height="26" width="398.64" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0geGZahayE_91U1qulH0-63" parent="0geGZahayE_91U1qulH0-61" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ RuntimeStatusEffects: List&amp;lt;RuntimeStatusEffect&amp;gt; &amp;lt;&amp;lt; property &amp;gt;&amp;gt;" vertex="1">
+          <mxGeometry height="26" width="398.64" y="66" as="geometry" />
+        </mxCell>
+        <mxCell id="0geGZahayE_91U1qulH0-64" edge="1" parent="1" source="0geGZahayE_91U1qulH0-2" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;" target="0geGZahayE_91U1qulH0-61" value="Use">
+          <mxGeometry relative="1" width="160" as="geometry">
+            <Array as="points">
+              <mxPoint x="1160" y="254" />
+            </Array>
+            <mxPoint x="660.0048598130842" y="100" as="sourcePoint" />
+            <mxPoint x="901.36" y="301" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

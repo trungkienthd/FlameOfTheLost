@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace FlameOfTheLost
+{
+    [Serializable]
+    public class RuntimeSkill
+    {
+        // --- Base Skill
+        [Header("Base Skill")]
+        [SerializeField] private SkillProfile _profile;
+        [SerializeField] private SkillProvisionType _provisionType;
+        public SkillProfile Profile
+        {
+            get => _profile;
+            private set => _profile = value;
+        }
+        public SkillProvisionType ProvisionType
+        {
+            get => _provisionType;
+            private set => _provisionType = value;
+        }
+
+        // --- Non-serialized runtime data
+        [NonSerialized] private GameObject _owner;
+        [NonSerialized] private CharacterTagType _characterTag;
+        [NonSerialized] private SkillCharacterAnimationProfile _animationProfile;
+        public GameObject Owner
+        {
+            get => _owner;
+            private set => _owner = value;
+        }
+        public CharacterTagType CharacterTag
+        {
+            get => _characterTag;
+            private set => _characterTag = value;
+        }
+        public SkillCharacterAnimationProfile AnimationProfile
+        {
+            get => _animationProfile;
+            private set => _animationProfile = value;
+        }
+
+        public int SkillID => this.Profile != null ? this.Profile.ID : -1;
+
+        public RuntimeSkill(SkillProfile profile, SkillProvisionType provisionType, GameObject owner, CharacterTagType characterTag)
+        {
+            this.Profile = profile;
+            this.ProvisionType = provisionType;
+            this.Owner = owner;
+            this.CharacterTag = characterTag;
+            this.AnimationProfile = SkillCharacterAnimationProfileUtility.GetOrNull(skill: profile, tag: characterTag);
+        }
+
+        // Gameplay passthroughs
+        public SkillStyleType Style => this.Profile != null ? this.Profile.Style : SkillStyleType.Default;
+        public int DamageAmount => this.Profile != null ? this.Profile.DamageAmount : 0;
+        public float KnockbackForce => this.Profile != null ? this.Profile.KnockbackForce : 0f;
+        public ResourceCost ResourceCost => this.Profile != null ? this.Profile.ResourceCost : default;
+        public IReadOnlyList<SkillStatusEffectApplication> StatusEffectApplications => this.Profile != null ? this.Profile.StatusEffectApplications : Array.Empty<SkillStatusEffectApplication>();
+        public IEnumerable<SkillStatusEffectApplication> EnumerateStatusEffectApplications(SkillStatusEffectTriggerType trigger, SkillStatusEffectReceiverType receiver)
+        {
+            if (this.StatusEffectApplications == null) yield break;
+
+            for (int i = 0; i < this.StatusEffectApplications.Count; i++)
+            {
+                var application = this.StatusEffectApplications[i];
+                if (application == null) continue;
+                if (!application.IsValid) continue;
+                if (application.Trigger != trigger) continue;
+                if (application.Receiver != receiver) continue;
+                yield return application;
+            }
+        }
+    }
+}

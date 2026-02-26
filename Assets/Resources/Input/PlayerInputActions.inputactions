@@ -34,7 +34,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SpecialSkillAttackLeft",
+                    "name": "SpecialAttackLeft",
                     "type": "Button",
                     "id": "e42c4b9c-0148-45c4-bbc4-0b809de02ef9",
                     "expectedControlType": "",
@@ -43,36 +43,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SpecialSkillAttackRight",
+                    "name": "SpecialAttackRight",
                     "type": "Button",
                     "id": "077cbed8-5274-43f4-a147-23cb67017eef",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SwitchLeftSpecialSkillSlot",
-                    "type": "Button",
-                    "id": "5f0d7335-41d7-44aa-89a4-73c2a4d75e31",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SwitchRightSpecialSkillSlot",
-                    "type": "Button",
-                    "id": "e7cf3b47-ec21-4f03-b8f5-23aa41decc5c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SwitchStyle",
-                    "type": "Button",
-                    "id": "e965f975-8f78-4ac6-a548-09ad2433146b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press",
@@ -169,50 +142,6 @@
                 },
                 {
                     "name": "",
-                    "id": "53903c36-2a35-46fa-ba10-cbd0f2b6b04f",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwitchLeftSpecialSkillSlot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "818b3003-ecaa-4cf8-b1aa-be987f15bd23",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwitchLeftSpecialSkillSlot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7dcdd17f-4207-4d5c-a3aa-7f04db40d937",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwitchRightSpecialSkillSlot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8f58b4f4-e96c-4322-ae24-c11cd74ae5ef",
-                    "path": "<Gamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwitchRightSpecialSkillSlot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0bf9ba63-3f45-4f88-b386-086e866e4b0b",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -251,7 +180,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialSkillAttackRight",
+                    "action": "SpecialAttackRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -262,7 +191,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialSkillAttackRight",
+                    "action": "SpecialAttackRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -273,7 +202,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialSkillAttackLeft",
+                    "action": "SpecialAttackLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -284,7 +213,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialSkillAttackLeft",
+                    "action": "SpecialAttackLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
