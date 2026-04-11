@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "StatusEffectProfile", menuName = "Data/FlameOfTheLost/Combat/Systems/StatusEffect/StatusEffectProfile")]
+    [CreateAssetMenu(fileName = "StatusEffectProfile", menuName = "Data/FlameOfTheLost/Combat/StatusEffects/StatusEffect")]
     public class StatusEffectProfile : ScriptableObject, IIdentityProvider, IIconProvider
     {
         // --- Identity
@@ -56,5 +56,11 @@ namespace FlameOfTheLost
         [Header("Stat Periodic")]
         [SerializeField] private List<StatusEffectStatPeriodicContribution> _statPeriodics = new();
         public IReadOnlyList<StatusEffectStatPeriodicContribution> StatPeriodics => _statPeriodics;
+
+        [Header("VFX")]
+        [SerializeField] private AnimationClip _vfxClip;
+        [SerializeField] private int _vfxSortingOrderOffset = 5;
+        public AnimationClip VFXClip => _vfxClip;
+        public int VFXSortingOrderOffset => _vfxSortingOrderOffset;
     }
 }

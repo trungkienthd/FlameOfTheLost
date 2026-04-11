@@ -54,9 +54,9 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs
-        public override void EnableHitbox(HitboxDamagePayload payload)
+        public override void EnableHitbox(HitboxDamagePayload payload, AttackSideType attackSideType)
         {
-            base.EnableHitbox(payload);
+            base.EnableHitbox(payload, attackSideType);
 
             // Reset states
             this.TimeAlive = 0f;

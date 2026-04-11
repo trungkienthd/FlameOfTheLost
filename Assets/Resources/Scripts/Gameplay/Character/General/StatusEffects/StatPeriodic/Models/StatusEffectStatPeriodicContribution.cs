@@ -6,7 +6,8 @@ namespace FlameOfTheLost
     [Serializable]
     public sealed class StatusEffectStatPeriodicContribution
     {
-        // --- General
+        // --- States
+        //  1. General
         [Header("General")]
         [SerializeField] private bool _isEnabled = false;
         public bool IsEnabled
@@ -15,7 +16,7 @@ namespace FlameOfTheLost
             set => _isEnabled = value;
         }
 
-        // --- Periodic Specific
+        //  2. Periodic Specific
         [Header("Specific")]
         [SerializeField] private StatusEffectStatPeriodicTargetType _target;
         [SerializeField] private StatusEffectStatPeriodicMethodType _method;
@@ -30,7 +31,7 @@ namespace FlameOfTheLost
             set => _method = value;
         }
 
-        // --- Tick (value) Settings
+        //  3. Tick (value) Settings
         [Header("Tick settings")]
         [SerializeField, Min(0f)] private float _amountPerSecond = 1f;
         [SerializeField, Min(0.01f)] private float _tickInterval = 1f;
@@ -45,7 +46,7 @@ namespace FlameOfTheLost
             set => _tickInterval = Mathf.Max(0.01f, value);
         }
 
-        // --- HP Application Policies
+        //  4. HP Application Policies
         [SerializeField] private bool _treatHPDamageAsTrueDamage = true;            // If true, this will call TakeDamage instead of HP Cost
         [SerializeField] private bool _trueDamageBypassVirtualHP = false;           // If true, this will ignore Virtual HP when applying damage. This is only relevant if TreatHPDamageAsTrueDamage is true.
         public bool TreatHPDamageAsTrueDamage
@@ -59,7 +60,7 @@ namespace FlameOfTheLost
             set => _trueDamageBypassVirtualHP = value;
         }
 
-        // --- Stamina Application Policy
+        //  5. Stamina Application Policy
         [SerializeField] private bool _staminaDrainTriggersRegenDelay = true; // If true, draining stamina will trigger the stamina regen delay (in StaminaController)
         public bool StaminaDrainTriggersRegenDelay
         {
@@ -69,7 +70,7 @@ namespace FlameOfTheLost
 
         public bool IsDamageOrDrain => this.Method == StatusEffectStatPeriodicMethodType.Damage || this.Method == StatusEffectStatPeriodicMethodType.Drain;
 
-        // --- Public APIs
+        // --- Public APIs ---
         public StatusEffectStatPeriodicContribution Clone()
         {
             return new StatusEffectStatPeriodicContribution

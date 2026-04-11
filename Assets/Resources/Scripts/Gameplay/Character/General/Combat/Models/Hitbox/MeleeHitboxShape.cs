@@ -15,8 +15,11 @@ namespace FlameOfTheLost
         public PolygonColliderShape FacingSideShape => _facingSideShape;
         public PolygonColliderShape FacingUpShape => _facingUpShape;
 
-        [Header("Mirror Side Facing Shape")]
-        [SerializeField] private bool _mirrorSideOffsetX;
-        public bool MirrorSideOffsetX => _mirrorSideOffsetX;
+        public MeleeHitboxShape(PolygonColliderShape facingDownShape, PolygonColliderShape facingSideShape, PolygonColliderShape facingUpShape)
+        {
+            _facingDownShape = facingDownShape;
+            _facingSideShape = facingSideShape;
+            _facingUpShape = facingUpShape;
+        }
     }
 }

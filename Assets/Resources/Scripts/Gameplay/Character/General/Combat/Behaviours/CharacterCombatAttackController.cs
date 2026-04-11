@@ -1,63 +1,42 @@
+using System.Collections;
 using UnityEngine;
 
 namespace FlameOfTheLost
 {
     [RequireComponent(typeof(CharacterCombatLoadoutController))]
     [RequireComponent(typeof(CharacterCombatResourcesHandler))]
-    [RequireComponent(typeof(CharacterCombatSkillStatusEffectHandler))]
+    [RequireComponent(typeof(CharacterCombatStatusEffectHandler))]
     [RequireComponent(typeof(CharacterCombatAimingHandler))]
     public class CharacterCombatAttackController : MonoBehaviour, IStatusEffectFlagConsumer
     {
-        // --- References
+        // --- States ---
+        //  1. References
         [Header("Combat References")]
         [SerializeField] private CharacterCombatLoadoutController _combatLoadoutController;
         [SerializeField] private CharacterCombatResourcesHandler _combatResourcesHandler;
         [SerializeField] private CharacterCombatAimingHandler _combatAimingHandler;
-        [SerializeField] private CharacterCombatSkillStatusEffectHandler _combatSkillStatusEffectHandler;
-        private CharacterCombatLoadoutController CombatLoadoutController
-        {
-            get => _combatLoadoutController;
-            set => _combatLoadoutController = value;
-        }
-        private CharacterCombatResourcesHandler CombatResourcesHandler
-        {
-            get => _combatResourcesHandler;
-            set => _combatResourcesHandler = value;
-        }
-        private CharacterCombatAimingHandler CombatAimingHandler
-        {
-            get => _combatAimingHandler;
-            set => _combatAimingHandler = value;
-        }
-        public CharacterCombatSkillStatusEffectHandler CombatSkillStatusEffectHandler
-        {
-            get => _combatSkillStatusEffectHandler;
-            private set => _combatSkillStatusEffectHandler = value;
-        }
+        [SerializeField] private CharacterCombatStatusEffectHandler _combatStatusEffectHandler;
+        private CharacterCombatLoadoutController CombatLoadoutController => _combatLoadoutController;
+        private CharacterCombatResourcesHandler CombatResourcesHandler => _combatResourcesHandler;
+        private CharacterCombatAimingHandler CombatAimingHandler => _combatAimingHandler;
+        public CharacterCombatStatusEffectHandler CombatStatusEffectHandler => _combatStatusEffectHandler;
 
         [Header("Animation References")]
         [SerializeField] private CharacterAnimationHandler _animationHandler;
-        private CharacterAnimationHandler AnimationHandler
-        {
-            get => _animationHandler;
-            set => _animationHandler = value;
-        }
+        private CharacterAnimationHandler AnimationHandler => _animationHandler;
 
         [Header("Other References")]
         [SerializeField] private MeleeHitboxController _meleeHitboxController;
         [SerializeField] private Transform _rangedAnchor;
-        public MeleeHitboxController MeleeHitboxController
-        {
-            get => _meleeHitboxController;
-            private set => _meleeHitboxController = value;
-        }
-        private Transform RangedAnchor
-        {
-            get => _rangedAnchor;
-            set => _rangedAnchor = value;
-        }
+        public MeleeHitboxController MeleeHitboxController => _meleeHitboxController;
+        private Transform RangedAnchor => _rangedAnchor;
 
-        // --- Attack State
+        //  2. Character Tag
+        [Header("Character Tag")]
+        [SerializeField] private CharacterTagType _characterTag = CharacterTagType.Default;
+        public CharacterTagType CharacterTag => _characterTag;
+
+        //  3. Attack State
         [Header("Runtime State (Read Only)")]
         [SerializeField] private bool _isInAttackWindow = false;
         public bool IsInAttackWindow
@@ -73,7 +52,7 @@ namespace FlameOfTheLost
             set => _activeRuntimeSkill = value;
         }
 
-        // --- Status Effects states
+        //  4. Status Effects states
         [Header("Status Effects Flags (Runtime)")]
         [SerializeField] private bool _cannotAttack;
         [SerializeField] private bool _cannotCastSpecialSkill;
@@ -96,64 +75,74 @@ namespace FlameOfTheLost
         public bool IsAttackLocked => this.CannotAttack && !this.IgnoreAttackLock;
         public bool IsSpecialAttackLocked => (this.CannotAttack || this.CannotCastSpecialSkill) && !this.IgnoreAttackLock;
 
+        //  5. Last states
+        private AttackSideType _lastAttackSide;
+        public AttackSideType LastAttackSide
+        {
+            get => _lastAttackSide;
+            private set => _lastAttackSide = value;
+        }
+
+        //  6. Attack Coroutine
+        private Coroutine _attackRoutine;
+        private Coroutine AttackRoutine
+        {
+            get => _attackRoutine;
+            set => _attackRoutine = value;
+        }
+
         // --- Unity Methods --- 
         private void Awake()
         {
-            if (this.CombatLoadoutController == null)           this.CombatLoadoutController        = this.GetComponent<CharacterCombatLoadoutController>();
-            if (this.CombatResourcesHandler == null)            this.CombatResourcesHandler         = this.GetComponent<CharacterCombatResourcesHandler>();
-            if (this.CombatAimingHandler == null)               this.CombatAimingHandler            = this.GetComponent<CharacterCombatAimingHandler>();
-            if (this.CombatSkillStatusEffectHandler == null)    this.CombatSkillStatusEffectHandler = this.GetComponent<CharacterCombatSkillStatusEffectHandler>();
+            if (this.CombatLoadoutController == null)   _combatLoadoutController    = this.GetComponent<CharacterCombatLoadoutController>();
+            if (this.CombatResourcesHandler == null)    _combatResourcesHandler     = this.GetComponent<CharacterCombatResourcesHandler>();
+            if (this.CombatAimingHandler == null)       _combatAimingHandler        = this.GetComponent<CharacterCombatAimingHandler>();
+            if (this.CombatStatusEffectHandler == null) _combatStatusEffectHandler  = this.GetComponent<CharacterCombatStatusEffectHandler>();
 
-            if (this.AnimationHandler == null) this.AnimationHandler = this.GetComponentInChildren<CharacterAnimationHandler>();
+            if (this.AnimationHandler == null) _animationHandler = this.GetComponentInChildren<CharacterAnimationHandler>();
 
-            if (this.MeleeHitboxController == null) this.MeleeHitboxController = this.GetComponentInChildren<MeleeHitboxController>(true);
-            if (this.RangedAnchor == null) this.RangedAnchor = this.transform.Find("RangedAnchor");
+            if (this.MeleeHitboxController == null) _meleeHitboxController = this.GetComponentInChildren<MeleeHitboxController>(true);
+            if (this.RangedAnchor == null) _rangedAnchor = this.transform.Find("RangedAnchor");
             if (this.RangedAnchor == null)
             {
                 Debug.LogWarning($"[{this.gameObject.name}.CharacterCombatAttackController] RangedAnchor is not found. Default to {this.gameObject.name}.transform");
-                this.RangedAnchor = this.transform;
+                _rangedAnchor = this.transform;
             }
-        }
-        private void Start()
-        {
-            SkillCharacterAnimationProfileUtility.WarmUp();
         }
 
         // --- Public APIs ---
         //      1.1. Try to perform a normal attack with the given side. Returns true if the attack was initiated.
-        public bool TryDoNormalAttack(AttackSideType attackSide)
+        public bool TryDoNormalAttack(AttackSideType attackSideType = AttackSideType.Left)
         {
             if (this.IsAttackLocked) return false;
 
             if (this.CombatLoadoutController == null) return false;
             if (this.IsInAttackWindow) return false;
 
-            var weapon = this.CombatLoadoutController.ActiveEquippedWeapon;
-            if (weapon == null) return false;
+            var runtimeWeapon = this.CombatLoadoutController.ActiveEquippedRuntimeWeapon;
+            if (runtimeWeapon == null || runtimeWeapon.Profile == null) return false;
 
-            var skill = this.CombatLoadoutController.ActiveEquippedWeapon.GetNormalSkill(attackSide);
+            var skill = runtimeWeapon.NormalSkill;
             if (skill == null) return false;
             
-            return this.DoAttack(attackSide, skill);
+            return this.DoAttack(skill, attackSideType);
         }
 
         //      1.2. Try to perform a special attack with the given side. Returns true if the attack was initiated.
-        public bool TryDoSpecialAttack(AttackSideType attackSide)
+        public bool TryDoSpecialAttack(AttackSideType attackSideType = AttackSideType.Left)
         {
             if (this.IsSpecialAttackLocked) return false;
 
             if (this.CombatLoadoutController == null) return false;
             if (this.IsInAttackWindow) return false;
 
-            var weapon = this.CombatLoadoutController.ActiveEquippedWeapon;
-            if (weapon == null) return false;
+            var runtimeWeapon = this.CombatLoadoutController.ActiveEquippedRuntimeWeapon;
+            if (runtimeWeapon == null || runtimeWeapon.Profile == null) return false;
 
-            var skill = (attackSide == AttackSideType.Left)
-                ? this.CombatLoadoutController.ActiveEquippedRuntimeWeapon.ActiveLeftSpecialSkill
-                : this.CombatLoadoutController.ActiveEquippedRuntimeWeapon.ActiveRightSpecialSkill;
+            var skill = runtimeWeapon.ActiveSpecialSkill;
 
             if (skill == null) return false;
-            return this.DoAttack(attackSide, skill);
+            return this.DoAttack(skill, attackSideType);
         }
 
         //  2. Attack window
@@ -164,7 +153,7 @@ namespace FlameOfTheLost
             if (this.ActiveRuntimeSkill == null)
             {
                 this.IsInAttackWindow = false;
-                this.CombatAimingHandler?.UnlockFacing();
+                this.CombatAimingHandler?.ResolveOnAttackWindowEnd();
                 return;
             }
 
@@ -172,7 +161,7 @@ namespace FlameOfTheLost
             this.IsInAttackWindow = true;
 
             // Lock facing direction during attack
-            this.CombatAimingHandler?.LockFacing();
+            this.CombatAimingHandler?.ResolveOnAttackWindowStart();
 
             // MELEE: enable hitbox for the whole animation window
             switch (this.ActiveRuntimeSkill.Style)
@@ -198,7 +187,7 @@ namespace FlameOfTheLost
                             AttackOrigin = this.transform,
                             SourceFaction = this.CombatResourcesHandler.ResourcesController.HP.CharacterFaction,
                         };
-                        this.MeleeHitboxController.EnableHitbox(meleeHitboxDamagePayload);          // Enable the melee hitbox
+                        this.MeleeHitboxController.EnableHitbox(meleeHitboxDamagePayload, this.LastAttackSide);          // Enable the melee hitbox
                     }
                     break;
                 case SkillStyleType.Ranged:
@@ -210,7 +199,7 @@ namespace FlameOfTheLost
             }
 
             // Self-applied status effects (if needed) at attack start
-            this.CombatSkillStatusEffectHandler.ApplySkillStatusEffectsToSelf(this.ActiveRuntimeSkill, SkillStatusEffectTriggerType.OnAttackStart);
+            this.CombatStatusEffectHandler.ApplySkillStatusEffectsToSelf(this.ActiveRuntimeSkill, SkillStatusEffectTriggerType.OnAttackStart);
         }
 
         //      2.2. Attack window end
@@ -223,7 +212,7 @@ namespace FlameOfTheLost
             RuntimeSkill runtimeSkill = this.ActiveRuntimeSkill;
             if (runtimeSkill == null)
             {
-                this.CombatAimingHandler?.UnlockFacing();
+                this.CombatAimingHandler?.ResolveOnAttackWindowEnd();
                 return;
             }
 
@@ -246,10 +235,12 @@ namespace FlameOfTheLost
             this.CombatResourcesHandler?.ResolveOnAttackWindowEnd(skillStyle: activeSkillStyle);
 
             // Self-applied status effects at attack end
-            this.CombatSkillStatusEffectHandler.ApplySkillStatusEffectsToSelf(runtimeSkill, SkillStatusEffectTriggerType.OnAttackEnd);
+            this.CombatStatusEffectHandler.ApplySkillStatusEffectsToSelf(runtimeSkill, SkillStatusEffectTriggerType.OnAttackEnd);
 
-            // Unlock facing direction at the end of attack
-            this.CombatAimingHandler?.UnlockFacing();
+            // Resolve aiming state at attack window end
+            this.CombatAimingHandler?.ResolveOnAttackWindowEnd();
+
+            this.ActiveRuntimeSkill = null;
         }
 
         //      2.3. Attack window interruption
@@ -257,20 +248,28 @@ namespace FlameOfTheLost
         //          Ends the attack window immediately (hitbox off) and triggers refund flow.
         public void OnAttackWindowInterrupt()
         {
-            if (!this.IsInAttackWindow) return;
             if (this.ActiveRuntimeSkill == null) return;
+
+            if (this.AttackRoutine != null)
+            {
+                this.StopCoroutine(this.AttackRoutine);
+                this.AttackRoutine = null;
+            }
+
+            bool wasInAttackWindow = this.IsInAttackWindow;
 
             // End window now
             this.IsInAttackWindow = false;
-
-            // Unlock facing direction at the interruption of attack
-            this.CombatAimingHandler?.UnlockFacing();
-
-            // If melee hitbox is active, disable immediately
-            this.MeleeHitboxController?.DisableHitbox();
+            this.MeleeHitboxController?.DisableHitbox();    // If melee hitbox is active, disable immediately
+            this.CombatAimingHandler?.ResolveOnAttackWindowEnd();
 
             // Resolve reserved costs (interruption/cancel path)
-            this.CombatResourcesHandler?.ResolveOnAttackWindowInterrupt(skillStyle: this.ActiveRuntimeSkill.Style);
+            if (wasInAttackWindow)
+            {
+                this.CombatResourcesHandler?.ResolveOnAttackWindowInterrupt(skillStyle: this.ActiveRuntimeSkill.Style);
+            }
+
+            this.ActiveRuntimeSkill = null;
         }
 
         //  3. Hitbox Events
@@ -282,7 +281,7 @@ namespace FlameOfTheLost
             this.CombatResourcesHandler?.ResolveOnHitConfirmed(skillStyle: runtimeSkill.Style);
 
             // b) Apply skill status effects on hit (self + target), respecting limits
-            this.CombatSkillStatusEffectHandler.ApplySkillStatusEffectsOnHitConfirmed(runtimeSkill, targetGameObject, hitboxGameObject);
+            this.CombatStatusEffectHandler.ApplySkillStatusEffectsOnHitConfirmed(runtimeSkill, targetGameObject, hitboxGameObject);
         }
 
         public void OnHitboxDisabledWithoutHit(RuntimeSkill runtimeSkill)
@@ -316,16 +315,27 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        private bool DoAttack(AttackSideType attackSide, SkillProfile skill)
+        private bool DoAttack(SkillProfile skill, AttackSideType attackSideType)
         {
             this.ActiveRuntimeSkill = null;
 
-            // Build runtime skill and resolve the corresponding SkillCharacterAnimationProfile via the static map.
-            RuntimeSkill runtimeSkill = new RuntimeSkill(profile: skill, provisionType: skill.DefaultProvisionType, owner: this.gameObject, characterTag: this.CombatLoadoutController.CharacterTag);
+            WeaponProfile weapon = this.CombatLoadoutController.ActiveEquippedRuntimeWeapon?.Profile;
 
-            if (runtimeSkill.AnimationProfile == null)
+            // Build runtime skill
+            RuntimeSkill runtimeSkill = new RuntimeSkill
+            (
+                profile: skill, 
+                weapon: weapon,
+                provisionType: skill.DefaultProvisionType, 
+                owner: this.gameObject, 
+                characterTag: this.CharacterTag,
+                animationProfile: this.AnimationHandler.CharacterCombatAnimationProfile.GetOrNull(skill, weapon)
+            );
+
+            if (runtimeSkill.CombatAnimationClipHitboxSetProfile == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.CharacterCombatAttackController] Missing SkillCharacterAnimationProfile for SkillID={runtimeSkill.SkillID} ('{skill.name}'), Tag={this.CombatLoadoutController.CharacterTag}.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.CharacterCombatAttackController] Missing CombatAnimationClipHitboxSetProfile for SkillID={runtimeSkill.SkillID} ('{skill.name}'), Tag={this.CharacterTag}.", this);
+                return false;
             }
 
             // Resource gate (pay/reserve). You already have reserve/refund logic in handler.
@@ -340,12 +350,46 @@ namespace FlameOfTheLost
             // Aim + face BEFORE animation starts
             this.CombatAimingHandler?.PrepareAimingForAttack();
 
-            // Drive attack animation
-            if (this.AnimationHandler != null) this.AnimationHandler.TriggerAttack(runtimeSkill);
+            // Cache last attack side for animation & hitbox use
+            this.LastAttackSide = attackSideType;
+
+            // Trigger attack animation
+            if (this.AnimationHandler != null) this.AnimationHandler.TriggerAttack(runtimeSkill, this.LastAttackSide);
+
+            if (this.AttackRoutine != null)
+            {
+                this.StopCoroutine(this.AttackRoutine);
+                this.AttackRoutine = null;
+            }
+
+            this.AttackRoutine = this.StartCoroutine(this.CoHandleAttack(runtimeSkill));
 
             return true;
         }
-        
+
+        private IEnumerator CoHandleAttack(RuntimeSkill runtimeSkill)
+        {
+            if (runtimeSkill == null || runtimeSkill.CombatAnimationClipHitboxSetProfile == null)
+            {
+                this.AttackRoutine = null;
+                yield break;
+            }
+
+            this.OnAttackWindowStart();
+
+            float attackLength = runtimeSkill.CombatAnimationClipHitboxSetProfile.AttackWindowDuration;
+            if (attackLength > 0f) yield return new WaitForSeconds(attackLength);
+
+            if (this.ActiveRuntimeSkill != runtimeSkill)
+            {
+                this.AttackRoutine = null;
+                yield break;
+            }
+
+            this.OnAttackWindowEnd();
+            this.AttackRoutine = null;
+        }
+
         private void FireRangedProjectile(RuntimeSkill runtimeSkill)
         {
             if (runtimeSkill == null) return;
@@ -353,13 +397,52 @@ namespace FlameOfTheLost
             if (!rangedSkill.ArrowPrefab) return;
             if (!this.RangedAnchor) return;
 
-            var projectileObj = UnityEngine.Object.Instantiate(rangedSkill.ArrowPrefab, this.RangedAnchor.position, Quaternion.identity);
+            // Baseline direction
+            Vector2 baselineDirection = this.CombatAimingHandler != null
+                ? this.CombatAimingHandler.GetCurrentAttackDirection()
+                : (Vector2)this.RangedAnchor.right;
+
+            if (baselineDirection.sqrMagnitude < 0.0001f) baselineDirection = Vector2.right;
+            baselineDirection.Normalize();
+
+            int projectileCount = rangedSkill.ProjectileCount;
+            float angleStep = rangedSkill.ProjectileAngleStep;
+
+            // Symmetric fan around base direction
+            float startAngleOffset = -0.5f * angleStep * (projectileCount - 1);
+
+            for (int i = 0; i < projectileCount; i++)
+            {
+                float angleOffset = startAngleOffset + (i * angleStep);
+                Vector2 projectileDirection = baselineDirection.Rotate(angleOffset);
+
+                this.SpawnSingleProjectile(runtimeSkill, rangedSkill, projectileDirection);
+            }
+        }
+
+        private void SpawnSingleProjectile(RuntimeSkill runtimeSkill, RangedSkillProfile rangedSkill, Vector2 direction)
+        {
+            if (runtimeSkill == null || rangedSkill == null) return;
+            if (!rangedSkill.ArrowPrefab) return;
+            if (!this.RangedAnchor) return;
+
+            direction.Normalize();
+
+            var projectileObj = UnityEngine.Object.Instantiate
+            (
+                rangedSkill.ArrowPrefab,
+                this.RangedAnchor.position,
+                Quaternion.identity
+            );
+
+            // Rotation assignment
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            projectileObj.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
             // Bind projectile hitbox to the shooter
             var projectileHitbox = projectileObj.GetComponentInChildren<ProjectileHitboxController>(true);
             if (projectileHitbox != null)
             {
-                // Bind combat context
                 projectileHitbox.BindHitContext(this, runtimeSkill);
 
                 HitboxDamagePayload projectileHitboxDamagePayload = new HitboxDamagePayload()
@@ -369,18 +452,16 @@ namespace FlameOfTheLost
                     AttackOrigin = this.transform,
                     SourceFaction = this.CombatResourcesHandler.ResourcesController.HP.CharacterFaction,
                 };
-                projectileHitbox.EnableHitbox(projectileHitboxDamagePayload);    // Enable the projectile hitbox
+
+                projectileHitbox.EnableHitbox(projectileHitboxDamagePayload, this.LastAttackSide);
             }
 
-            // Baseline direction
-            Vector2 direction = this.CombatAimingHandler != null
-                ? this.CombatAimingHandler.GetCurrentAttackDirection()
-                : (Vector2)this.RangedAnchor.right;
-            if (direction.sqrMagnitude < 0.0001f) direction = Vector2.right;
-            direction.Normalize();
-
+            // Velocity assignment
             var rigidbody2D = projectileObj.GetComponent<Rigidbody2D>();
-            if (rigidbody2D != null) rigidbody2D.linearVelocity = direction * rangedSkill.ArrowSpeed;
+            if (rigidbody2D != null)
+            {
+                rigidbody2D.linearVelocity = direction * rangedSkill.ArrowSpeed;
+            }
         }
     }
 }

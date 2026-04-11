@@ -304,6 +304,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -351,7 +352,6 @@ GameObject:
   - component: {fileID: -2572729265044514792}
   - component: {fileID: 7470144004606436843}
   - component: {fileID: 559251228358160871}
-  - component: {fileID: 8424146284699640053}
   m_Layer: 5
   m_Name: WorldspaceHealthBar
   m_TagString: Untagged
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d675e0789760984ebde96d19bc6c371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
+  _targetHP: {fileID: 0}
   _bar: {fileID: 8887506863022530858}
   _healthText: {fileID: 5708543559124545790}
   _canvasGroup: {fileID: 7470144004606436843}
@@ -476,19 +476,6 @@ MonoBehaviour:
   _fadeDuration: 0.15
   _usePollingFallback: 1
   _mutateFromDeltaEvents: 0
---- !u!114 &8424146284699640053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7100242309572832733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dff9dca324b178e4ba459a3bed010325, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
 --- !u!1 &8397148716779953726
 GameObject:
   m_ObjectHideFlags: 0

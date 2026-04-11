@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d3b9023c5dfeb499619f54ab1144a8, type: 3}
+  m_Name: CAClipHb_Player_WP_Dagger_SKM_HemorrhageSlash
+  m_EditorClassIdentifier: 
+  _skills:
+  - {fileID: 11400000, guid: 66919592101b263459fd59976fa24506, type: 2}
+  _weapon: {fileID: 11400000, guid: 6000f6500a611c742a83c08327182149, type: 2}
+  _characterTag: 1
+  _left:
+    _down:
+      _animationClip: {fileID: 7400000, guid: 5439e3a02a30f73499aa8847e5f11c73, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 1, y: 0}
+        - {x: 0, y: -0.75}
+        - {x: -1, y: 0}
+        - {x: -0.8, y: -0.75}
+        - {x: 0, y: -1}
+        - {x: 0.8, y: -0.75}
+        _offset: {x: 0, y: 0}
+    _side:
+      _animationClip: {fileID: 7400000, guid: 8ea8317b6192db6428334455f343ebd4, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0.25, y: -0.9}
+        - {x: -0.75, y: -0.7}
+        - {x: 0.55, y: -0.5}
+        - {x: 0.85, y: 0.1}
+        - {x: 1, y: -0.45}
+        _offset: {x: 0, y: 0}
+    _up:
+      _animationClip: {fileID: 7400000, guid: 99663c764c1d51148a5eddfe71ae92c6, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0, y: 0.7}
+        - {x: -0.8, y: 0.5}
+        - {x: -1, y: -0.25}
+        - {x: 0, y: 0.45}
+        - {x: 1, y: -0.25}
+        - {x: 0.8, y: 0.5}
+        _offset: {x: 0, y: 0}
+  _right:
+    _down:
+      _animationClip: {fileID: 7400000, guid: 3f0a74b399259b84ba845d7748632723, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 1, y: 0}
+        - {x: 0, y: -0.75}
+        - {x: -1, y: 0}
+        - {x: -0.8, y: -0.75}
+        - {x: 0, y: -1}
+        - {x: 0.8, y: -0.75}
+        _offset: {x: 0, y: 0}
+    _side:
+      _animationClip: {fileID: 7400000, guid: de4833f7bbb58e943900b0a75d55581a, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0.6, y: 0.25}
+        - {x: 0.6, y: -0.45}
+        - {x: -0.75, y: -0.65}
+        - {x: 0.4, y: -0.9}
+        - {x: 1, y: -0.25}
+        _offset: {x: 0, y: 0}
+    _up:
+      _animationClip: {fileID: 7400000, guid: e856a2c695919d64281e18de3194a97f, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0, y: 0.7}
+        - {x: -0.8, y: 0.5}
+        - {x: -1, y: -0.25}
+        - {x: 0, y: 0.45}
+        - {x: 1, y: -0.25}
+        - {x: 0.8, y: 0.5}
+        _offset: {x: 0, y: 0}
+  _attackWindowDuration: 0.5

@@ -85,12 +85,15 @@ namespace FlameOfTheLost
 
         // --- Public APIs
         //      1.1. Enable the hitbox
-        public override void EnableHitbox(HitboxDamagePayload payload)
+        public override void EnableHitbox(HitboxDamagePayload payload, AttackSideType attackSideType)
         {
-            base.EnableHitbox(payload);
+            base.EnableHitbox(payload, attackSideType);
 
             if (this.PolygonCollider2D) this.PolygonCollider2D.enabled = true;
-            if (this.ActiveRuntimeSkill.Profile is MeleeSkillProfile meleeSkillProfile) this.SetOverrideMeleeHitboxShape(meleeSkillProfile.MeleeHitboxShape);   // Apply the melee hitbox shape
+            if ((this.ActiveRuntimeSkill.Profile is MeleeSkillProfile meleeSkillProfile) && (this.ActiveRuntimeSkill.TryGetMeleeHitboxShape(attackSideType, out var meleeHitboxShape)))
+            {
+                this.SetOverrideMeleeHitboxShape(meleeHitboxShape);   // Apply the melee hitbox shape
+            }
         }
 
         //      1.2. Disable the hitbox
@@ -135,22 +138,8 @@ namespace FlameOfTheLost
             var pts = shape.Points != null ? new List<Vector2>(shape.Points) : new List<Vector2>();
             var offset = shape.Offset;
 
-            // Detect transform-based mirroring (FlipGroup scale.x = -1)
-            bool mirroredByTransform = transform.lossyScale.x < 0f;
-
-            if ((facing == FacingStatusType.Side) && (this.ActiveMeleeHitbox.MirrorSideOffsetX) && (!isFacingRight) && (!mirroredByTransform))
-            {
-                // Mirror the silhouette
-                for (int i = 0; i < pts.Count; i++)
-                {
-                    var p = pts[i];     // copy the struct
-                    p.x = -p.x;         // mutate the copy
-                    pts[i] = p;         // assign back
-                }
-
-                // Mirror the forward push
-                offset.x = -offset.x;
-            }
+            // NOTE:
+            // Left/right (during side-facing) mirroring is handled entirely by FlipGroup transform scaling, since this hitbox is a child of FlipGroup.
 
             this.PolygonCollider2D.pathCount = 1;
             this.PolygonCollider2D.SetPath(0, pts.ToArray());

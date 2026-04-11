@@ -9,36 +9,38 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(StatusEffectStatPeriodicHandler))]
     public class StatusEffectController : MonoBehaviour
     {
-        // --- Guard Configuration
+        // --- States ---
+        //  1. Guard Configuration
         [Header("Configuration")]
         [SerializeField] private StatusEffectGuardConfig _guardConfig;
         public StatusEffectGuardConfig GuardConfig => _guardConfig;
 
-        // --- Handler References
+        //  2. Handler References
         [Header("Handler References")]
         [SerializeField] private StatusEffectFlagHandler _flagHandler;
         [SerializeField] private StatusEffectStatModifierHandler _statModifierHandler;
         [SerializeField] private StatusEffectStatPeriodicHandler _statPeriodicHandler;
-        private StatusEffectFlagHandler FlagHandler
-        {
-            get => _flagHandler;
-            set => _flagHandler = value;
-        }
-        private StatusEffectStatModifierHandler StatModifierHandler
-        {
-            get => _statModifierHandler;
-            set => _statModifierHandler = value;
-        }
-        private StatusEffectStatPeriodicHandler StatPeriodicHandler
-        {
-            get => _statPeriodicHandler;
-            set => _statPeriodicHandler = value;
-        }
+        private StatusEffectFlagHandler FlagHandler => _flagHandler;
+        private StatusEffectStatModifierHandler StatModifierHandler => _statModifierHandler;
+        private StatusEffectStatPeriodicHandler StatPeriodicHandler => _statPeriodicHandler;
 
-        // --- Runtime state
+        //  3. VFX References
+        [Header("VFX References")]
+        [SerializeField] private Transform _statusEffectVFXHolder;
+        [SerializeField] private GameObject _statusEffectVFXInstancePrefab;
+        [SerializeField] private SpriteRenderer _ownerVisualSpriteRenderer;
+        private Transform StatusEffectVFXHolder => _statusEffectVFXHolder;
+
+        private GameObject StatusEffectVFXInstancePrefab => _statusEffectVFXInstancePrefab;
+        private SpriteRenderer OwnerVisualSpriteRenderer => _ownerVisualSpriteRenderer;
+
+        private readonly Dictionary<uint, StatusEffectVFXHandler> _runtimeVFXMap = new();
+        private IReadOnlyDictionary<uint, StatusEffectVFXHandler> RuntimeVFXMap => _runtimeVFXMap;
+
+        //  4. Runtime state
         [Header("Runtime")]
-        [SerializeField] private readonly List<RuntimeStatusEffect> _runtimeStatusEffects = new();
-        public List<RuntimeStatusEffect> RuntimeStatusEffects => _runtimeStatusEffects;
+        [SerializeField] private List<RuntimeStatusEffect> _runtimeStatusEffects = new();
+        public IReadOnlyList<RuntimeStatusEffect> RuntimeStatusEffects => _runtimeStatusEffects;
 
         private uint _nextRuntimeID = 1;
         private uint NextRuntimeID
@@ -47,46 +49,84 @@ namespace FlameOfTheLost
             set => _nextRuntimeID = value;
         }
 
-        // --- Events
+        //  5. Events
         public event Action OnRuntimeListChanged;     // add/remove/clear/expire
         public event Action OnRuntimeValuesChanged;   // stacks/potency/duration refresh without list size change
 
-        // --- Unity methods
+        // --- Unity methods ---
         private void Awake()
         {
-            if (!this.FlagHandler)          this.FlagHandler            = this.GetComponent<StatusEffectFlagHandler>();
-            if (!this.StatModifierHandler)  this.StatModifierHandler    = this.GetComponent<StatusEffectStatModifierHandler>();
-            if (!this.StatPeriodicHandler)  this.StatPeriodicHandler    = this.GetComponent<StatusEffectStatPeriodicHandler>();
+            if (!this.FlagHandler)          _flagHandler            = this.GetComponent<StatusEffectFlagHandler>();
+            if (!this.StatModifierHandler)  _statModifierHandler    = this.GetComponent<StatusEffectStatModifierHandler>();
+            if (!this.StatPeriodicHandler)  _statPeriodicHandler    = this.GetComponent<StatusEffectStatPeriodicHandler>();
+
+            // CharacteRoot/FlipGroup/Visual/StatusEffectVFXHolder
+            if (!this.StatusEffectVFXHolder || !this.OwnerVisualSpriteRenderer)
+            {
+                Transform flipGroup = this.transform.Find("FlipGroup");
+                Transform visual = flipGroup != null ? flipGroup.Find("Visual") : null;
+                if (!this.StatusEffectVFXHolder) _statusEffectVFXHolder = visual != null ? visual.Find("StatusEffectVFXHolder") : null;
+                if (!this.OwnerVisualSpriteRenderer) _ownerVisualSpriteRenderer = visual.GetComponent<SpriteRenderer>();
+            }
+            if (!this.StatusEffectVFXInstancePrefab) _statusEffectVFXInstancePrefab = UnityEngine.Resources.Load<GameObject>("Prefabs/StatusEffectVFXInstance");
 
             this.FlagHandler?.Bind(this);
             this.StatModifierHandler?.Bind(this);
             this.StatPeriodicHandler?.Bind(this);
+        }
+        private void Start()
+        {
+            this.SyncNextRuntimeID();
 
-            // Enforce immunity rules once on startup (in case pre-seeded runtime list exists)
-            this.EnforceImmunityRulesAndPurge();
+            // In case the runtime list was pre-seeded in editor/debug
+            bool listChanged = this.EnforceImmunityRulesAndPurge();
+
+            // Ensure VFX exists for any surviving pre-seeded runtime status effects
+            for (int i = 0; i < this.RuntimeStatusEffects.Count; i++)
+            {
+                this.EnsureStatusEffectVFX(this.RuntimeStatusEffects[i]);
+            }
+
             this.ForceRecomputeAll();
+
+            if (listChanged)
+            {
+                this.OnRuntimeListChanged?.Invoke();
+            }
         }
         private void Update()
         {
             float dt = Time.deltaTime;
+            bool listIsChanged = false;
 
             // Tick duration & remove expired status effects
-            bool listIsChanged = false;
             for (int i = this.RuntimeStatusEffects.Count - 1; i >= 0; i--)
             {
                 var runtimeStatusEffect = this.RuntimeStatusEffects[i];
+                if (runtimeStatusEffect == null)
+                {
+                    if (this.RemoveRuntimeStatusEffectAt(i))
+                    {
+                        listIsChanged = true;
+                    }
+                    continue;
+                }
+
                 runtimeStatusEffect.RemainingDuration = Mathf.Max(0f, runtimeStatusEffect.RemainingDuration - dt);
                 if (runtimeStatusEffect.RemainingDuration <= 0f)
                 {
-                    this.RuntimeStatusEffects.RemoveAt(i);
-                    listIsChanged = true;
+                    if (this.RemoveRuntimeStatusEffectAt(i))
+                    {
+                        listIsChanged = true;
+                    }
                 }
             }
 
-            // If immunity is active, purge anything that should not exist under it.
-            // This matters when an immunity exists and something was added externally,
-            // or you later change affinity classification, etc.
-            if (this.EnforceImmunityRulesAndPurge()) listIsChanged = true;
+            // If immunity is active, purge anything that should not exist under it
+            if (this.EnforceImmunityRulesAndPurge())
+            {
+                listIsChanged = true;
+            }
 
             if (listIsChanged)
             {
@@ -95,20 +135,33 @@ namespace FlameOfTheLost
             }
         }
 
-        // --- Public API ---
+        // --- Public APIs ---
         //  1. Apply or refresh a status effect; returns runtime id
         public uint ApplyStatusEffect(StatusEffectProfile profile, GameObject source, float potency = 1f)
         {
-            if (profile == null) return 0;
+            if (profile == null)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.StatusEffectController] Attempted to apply NULL profile.");
+                return 0;
+            }
 
             // Block if cannot apply (immunity flags etc.)
-            if (!this.CanApply(profile)) return 0;
+            if (!this.CanApply(profile))
+            {
+                Debug.Log($"[{this.gameObject.name}.StatusEffectController] BLOCKED - Cannot apply '{profile.name}' due to immunity or rules.");
+                return 0;
+            }
 
             // Find similar existing status effect(s)
-            int idx = this.RuntimeStatusEffects.FindIndex(se => se.Profile.ID == profile.ID && se.Source == source);
+            int idx = _runtimeStatusEffects.FindIndex(se => se != null && se.Profile != null && se.Profile.ID == profile.ID && se.Source == source);
             if (idx >= 0)
             {
                 var runtimeStatusEffect = this.RuntimeStatusEffects[idx];
+                if (runtimeStatusEffect == null)
+                {
+                    Debug.LogWarning($"[{this.gameObject.name}.StatusEffectController] Found index but runtimeStatusEffect is NULL.");
+                    return 0;
+                }
 
                 switch (profile.DurationRefreshType)
                 {
@@ -120,16 +173,25 @@ namespace FlameOfTheLost
                         float maxDuration = profile.Duration * Mathf.Max(1, profile.MaxStacks);
                         runtimeStatusEffect.RemainingDuration = Mathf.Clamp(runtimeStatusEffect.RemainingDuration + profile.Duration, 0f, maxDuration);
 
+                        Debug.Log($"[{this.gameObject.name}.StatusEffectController] -> EXTEND applied | NewStacks={runtimeStatusEffect.CurrentStacks}, NewDuration={runtimeStatusEffect.RemainingDuration:F2}");
                         break;
 
                     case StatusEffectDurationRefreshType.Refresh:
                         runtimeStatusEffect.RemainingDuration = profile.Duration;
+
+                        Debug.Log($"[{this.gameObject.name}.StatusEffectController] -> REFRESH applied | Duration reset to {profile.Duration:F2}");
                         break;
                     case StatusEffectDurationRefreshType.Remain:
                         if (potency > runtimeStatusEffect.Potency)
                         {
                             runtimeStatusEffect.Potency = potency;
                             runtimeStatusEffect.RemainingDuration = profile.Duration;
+
+                            Debug.Log($"[{this.gameObject.name}.StatusEffectController] -> REMAIN (override) | NewPotency={potency:F2}, Duration reset");
+                        }
+                        else
+                        {
+                            Debug.Log($"[{this.gameObject.name}.StatusEffectController] -> REMAIN (ignored) | Incoming potency {potency:F2} <= Current {runtimeStatusEffect.Potency:F2}");
                         }
                         break;
                 }
@@ -138,14 +200,36 @@ namespace FlameOfTheLost
 
                 // If the refreshed effect grants immunity, it may need to purge others.
                 bool purged = this.EnforceImmunityRulesAndPurge();
-                if (purged) this.OnRuntimeListChanged?.Invoke();
+                if (purged)
+                {
+                    Debug.Log($"[{this.gameObject.name}.StatusEffectController] Immunity purge triggered after update.");
+                    this.OnRuntimeListChanged?.Invoke();
+                }
 
                 this.ForceRecomputeAll();
+
+                bool stillExists = _runtimeStatusEffects.Exists(se => se != null && se.RuntimeID == runtimeStatusEffect.RuntimeID);
+                if (!stillExists)
+                {
+                    Debug.Log($"[{this.gameObject.name}.StatusEffectController] REMOVED after recompute (RuntimeID={runtimeStatusEffect.RuntimeID})");
+                    return 0;
+                }
+
+                this.EnsureStatusEffectVFX(runtimeStatusEffect);
+
+                Debug.Log
+                (
+                    $"[{this.gameObject.name}.StatusEffectController] FINAL (Updated EXISTING) '{profile.name}' | " +
+                    $"Stacks={runtimeStatusEffect.CurrentStacks} | " +
+                    $"Duration={runtimeStatusEffect.RemainingDuration:F2} | " +
+                    $"Potency={runtimeStatusEffect.Potency:F2}"
+                );
+
                 return runtimeStatusEffect.RuntimeID;
             }
 
             // No existing status effect found; create new one
-            var newStatusEffect = new RuntimeStatusEffect()
+            RuntimeStatusEffect newStatusEffect = new RuntimeStatusEffect()
             {
                 RuntimeID = this.NextRuntimeID++,
                 Profile = profile,
@@ -154,54 +238,42 @@ namespace FlameOfTheLost
                 CurrentStacks = 1,
                 RemainingDuration = profile.Duration
             };
-
-            this.RuntimeStatusEffects.Add(newStatusEffect);
+            _runtimeStatusEffects.Add(newStatusEffect);
 
             // New effect may be immunity => purge
-            this.EnforceImmunityRulesAndPurge();
+            // New effect may be immunity => purge
+            bool purgedNew = this.EnforceImmunityRulesAndPurge();
+            if (purgedNew)
+            {
+                Debug.Log($"[{this.gameObject.name}.StatusEffectController] Immunity purge triggered after NEW apply.");
+            }
 
             this.OnRuntimeListChanged?.Invoke();
             this.ForceRecomputeAll();
 
-            bool stillExists = this.RuntimeStatusEffects.Exists(se => se.RuntimeID == newStatusEffect.RuntimeID);
-            return stillExists ? newStatusEffect.RuntimeID : 0;
-        }
+            bool newStatusEffectStillExists = _runtimeStatusEffects.Exists(se => se != null && se.RuntimeID == newStatusEffect.RuntimeID);
+            if (!newStatusEffectStillExists)
+            {
+                Debug.Log($"[{this.gameObject.name}.StatusEffectController] NEW effect immediately removed (RuntimeID={newStatusEffect.RuntimeID})");
+                this.RemoveStatusEffectVFX(newStatusEffect.RuntimeID);
+                return 0;
+            }
 
-        public bool RemoveByRuntimeID(uint runtimeID)
-        {
-            int idx = this.RuntimeStatusEffects.FindIndex(se => se.RuntimeID == runtimeID);
-            if (idx < 0) return false;
+            this.EnsureStatusEffectVFX(newStatusEffect);
 
-            this.RuntimeStatusEffects.RemoveAt(idx);
-            this.OnRuntimeListChanged?.Invoke();
-            this.ForceRecomputeAll();
-            return true;
-        }
+            Debug.Log
+            (
+                $"[{this.gameObject.name}.StatusEffectController] FINAL (NEW applied) '{profile.name}' | " +
+                $"(RuntimeID={newStatusEffect.RuntimeID}) | " +
+                $"Stacks=1 | Duration={profile.Duration:F2} | Potency={newStatusEffect.Potency:F2}"
+            );
 
-        public bool RemoveAllFromSource(GameObject source)
-        {
-            int initialCount = this.RuntimeStatusEffects.Count;
-            this.RuntimeStatusEffects.RemoveAll(se => se.Source == source);
-            if (this.RuntimeStatusEffects.Count >= initialCount) return false;
-
-            this.OnRuntimeListChanged?.Invoke();
-            this.ForceRecomputeAll();
-            return true;
-        }
-
-        public bool RemoveAll()
-        {
-            if (this.RuntimeStatusEffects.Count <= 0) return false;
-
-            this.RuntimeStatusEffects.Clear();
-            this.OnRuntimeListChanged?.Invoke();
-            this.ForceRecomputeAll();
-            return true;
+            return newStatusEffect.RuntimeID;
         }
 
         public bool HasStatusEffect(int statusEffectID)
         {
-            return this.RuntimeStatusEffects.Exists(se => se.Profile.ID == statusEffectID);
+            return _runtimeStatusEffects.Exists(se => se != null && se.Profile != null && se.Profile.ID == statusEffectID);
         }
 
         public bool CanApply(StatusEffectProfile profile)
@@ -232,14 +304,100 @@ namespace FlameOfTheLost
         }
 
 
-        // --- Internal mechanics ---
-        public void ForceRecomputeAll()
+        // --- Helpers ---
+        //  0. Runtime ID Sync (Start)
+        private void SyncNextRuntimeID()
+        {
+            uint maxRuntimeID = 0;
+
+            for (int i = 0; i < this.RuntimeStatusEffects.Count; i++)
+            {
+                RuntimeStatusEffect runtimeStatusEffect = this.RuntimeStatusEffects[i];
+                if (runtimeStatusEffect == null) continue;
+
+                if (runtimeStatusEffect.RuntimeID > maxRuntimeID)
+                {
+                    maxRuntimeID = runtimeStatusEffect.RuntimeID;
+                }
+            }
+
+            this.NextRuntimeID = maxRuntimeID + 1;
+        }
+
+        //  1. Runtime SEs Removal
+        private bool RemoveRuntimeStatusEffectAt(int index)
+        {
+            if (index < 0 || index >= this.RuntimeStatusEffects.Count) return false;
+
+            RuntimeStatusEffect runtimeStatusEffect = this.RuntimeStatusEffects[index];
+            uint runtimeID = runtimeStatusEffect != null ? runtimeStatusEffect.RuntimeID : 0;
+
+            _runtimeStatusEffects.RemoveAt(index);
+
+            if (runtimeID != 0)
+            {
+                this.RemoveStatusEffectVFX(runtimeID);
+            }
+
+            return true;
+        }
+
+        private bool RemoveByRuntimeID(uint runtimeID)
+        {
+            int idx = _runtimeStatusEffects.FindIndex(se => se.RuntimeID == runtimeID);
+            if (idx < 0) return false;
+
+            if (!this.RemoveRuntimeStatusEffectAt(idx)) return false;
+
+            this.OnRuntimeListChanged?.Invoke();
+            this.ForceRecomputeAll();
+            return true;
+        }
+
+        private bool RemoveAllFromSource(GameObject source)
+        {
+            bool removedAny = false;
+
+            for (int i = this.RuntimeStatusEffects.Count - 1; i >= 0; i--)
+            {
+                RuntimeStatusEffect runtimeStatusEffect = this.RuntimeStatusEffects[i];
+                if (runtimeStatusEffect == null || runtimeStatusEffect.Source != source) continue;
+
+                if (this.RemoveRuntimeStatusEffectAt(i))
+                {
+                    removedAny = true;
+                }
+            }
+
+            if (!removedAny) return false;
+
+            this.OnRuntimeListChanged?.Invoke();
+            this.ForceRecomputeAll();
+            return true;
+        }
+
+        private bool RemoveAll()
+        {
+            if (this.RuntimeStatusEffects.Count <= 0) return false;
+
+            for (int i = this.RuntimeStatusEffects.Count - 1; i >= 0; i--)
+            {
+                this.RemoveRuntimeStatusEffectAt(i);
+            }
+
+            this.OnRuntimeListChanged?.Invoke();
+            this.ForceRecomputeAll();
+            return true;
+        }
+        //  2. Recompute
+        private void ForceRecomputeAll()
         {
             this.FlagHandler?.Recompute();
             this.StatModifierHandler?.Recompute();
             this.StatPeriodicHandler?.Recompute();
         }
 
+        //  3. SE Flag Immunity Rules
         private bool EnforceImmunityRulesAndPurge()
         {
             bool ignoreAll      = this.HasActiveFlag(StatusEffectFlagType.IgnoreAllStatusEffects);
@@ -251,12 +409,14 @@ namespace FlameOfTheLost
             bool removedAny = false;
             for (int i = this.RuntimeStatusEffects.Count - 1; i >= 0; i--)
             {
-                var runtimeStatusEffect = this.RuntimeStatusEffects[i];
-                var profile = runtimeStatusEffect?.Profile;
+                RuntimeStatusEffect runtimeStatusEffect = this.RuntimeStatusEffects[i];
+                StatusEffectProfile profile = runtimeStatusEffect?.Profile;
                 if (profile == null)
                 {
-                    this.RuntimeStatusEffects.RemoveAt(i);
-                    removedAny = true;
+                    if (this.RemoveRuntimeStatusEffectAt(i))
+                    {
+                        removedAny = true;
+                    }
                     continue;
                 }
 
@@ -266,34 +426,40 @@ namespace FlameOfTheLost
                     this.ProfileHasFlag(profile, StatusEffectFlagType.IgnoreDebuffStatusEffects)   ||
                     this.ProfileHasFlag(profile, StatusEffectFlagType.IgnoreBuffStatusEffects);
 
+                // Never purge the immunity providers themselves
                 if (isImmunityProvider) continue;
 
                 if (ignoreAll)
                 {
-                    this.RuntimeStatusEffects.RemoveAt(i);
-                    removedAny = true;
+                    if (this.RemoveRuntimeStatusEffectAt(i))
+                    {
+                        removedAny = true;
+                    }
                     continue;
                 }
 
                 // Mixed is treated as both => purged by either side immunity.
                 if (ignoreDebuff && (profile.Affinity == StatusEffectAffinityType.Debuff || profile.Affinity == StatusEffectAffinityType.Mixed))
                 {
-                    this.RuntimeStatusEffects.RemoveAt(i);
-                    removedAny = true;
+                    if (this.RemoveRuntimeStatusEffectAt(i))
+                    {
+                        removedAny = true;
+                    }
                     continue;
                 }
 
                 if (ignoreBuff && (profile.Affinity == StatusEffectAffinityType.Buff || profile.Affinity == StatusEffectAffinityType.Mixed))
                 {
-                    this.RuntimeStatusEffects.RemoveAt(i);
-                    removedAny = true;
+                    if (this.RemoveRuntimeStatusEffectAt(i))
+                    {
+                        removedAny = true;
+                    }
                     continue;
                 }
             }    
 
             return removedAny;
         }
-
 
         private bool HasActiveFlag(StatusEffectFlagType flagType)
         {
@@ -321,11 +487,55 @@ namespace FlameOfTheLost
                 if (f == null) continue;
 
                 // If your contribution field name differs, rename here.
-                if (f.Flag == flagType)
-                    return true;
+                if (f.Flag == flagType) return true;
             }
 
             return false;
+        }
+
+        //  4. SE VFX
+        private void EnsureStatusEffectVFX(RuntimeStatusEffect runtimeStatusEffect)
+        {
+            if (runtimeStatusEffect == null || runtimeStatusEffect.Profile == null) return;
+            if (this.StatusEffectVFXHolder == null || this.StatusEffectVFXInstancePrefab == null || this.OwnerVisualSpriteRenderer == null) return;
+
+            if (this.RuntimeVFXMap.TryGetValue(runtimeStatusEffect.RuntimeID, out StatusEffectVFXHandler existingHandler))
+            {
+                if (existingHandler != null) return;
+                _runtimeVFXMap.Remove(runtimeStatusEffect.RuntimeID);
+            }
+
+            GameObject instance = UnityEngine.Object.Instantiate(this.StatusEffectVFXInstancePrefab, this.StatusEffectVFXHolder);
+            instance.name = $"StatusEffectVFX_{runtimeStatusEffect.Profile.name}_{runtimeStatusEffect.RuntimeID}";
+
+            StatusEffectVFXHandler handler = instance.GetComponent<StatusEffectVFXHandler>();
+            if (handler == null)
+            {
+                UnityEngine.Object.Destroy(instance);
+                return;
+            }
+
+            handler.Initialize
+            (
+                runtimeStatusEffect.RuntimeID,
+                runtimeStatusEffect.Profile,
+                this.gameObject,
+                this.OwnerVisualSpriteRenderer.sortingOrder
+            );
+
+            _runtimeVFXMap[runtimeStatusEffect.RuntimeID] = handler;
+        }
+
+        private void RemoveStatusEffectVFX(uint runtimeID)
+        {
+            if (!this.RuntimeVFXMap.TryGetValue(runtimeID, out StatusEffectVFXHandler handler)) return;
+
+            if (handler != null)
+            {
+                UnityEngine.Object.Destroy(handler.gameObject);
+            }
+
+            _runtimeVFXMap.Remove(runtimeID);
         }
     }
 }

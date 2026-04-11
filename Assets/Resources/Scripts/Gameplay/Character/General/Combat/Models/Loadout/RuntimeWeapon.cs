@@ -6,7 +6,8 @@ namespace FlameOfTheLost
     [Serializable]
     public class RuntimeWeapon
     {
-        // --- Base Weapon
+        // --- States ---
+        //  1. Base Weapon
         [Header("Base Weapon)")]
         [SerializeField] private WeaponProfile _profile;
         public WeaponProfile Profile
@@ -15,22 +16,18 @@ namespace FlameOfTheLost
             private set => _profile = value;
         }
 
-        // --- Active Skills
+        //  2. Active Skills
         [Header("Active Skills (Runtime)")]
-        [SerializeField] private SkillProfile _activeLeftSpecialSkill;
-        [SerializeField] private SkillProfile _activeRightSpecialSkill;
-        public SkillProfile ActiveLeftSpecialSkill
+        [SerializeField] private SkillProfile _normalSkill;
+        [SerializeField] private SkillProfile _activeSpecialSkill;
+        public SkillProfile NormalSkill => this.Profile.NormalSkill;
+        public SkillProfile ActiveSpecialSkill
         {
-            get => _activeLeftSpecialSkill;
-            set => _activeLeftSpecialSkill = value;
-        }
-        public SkillProfile ActiveRightSpecialSkill
-        {
-            get => _activeRightSpecialSkill;
-            set => _activeRightSpecialSkill = value;
+            get => _activeSpecialSkill;
+            set => _activeSpecialSkill = value;
         }
 
-        // --- Non-serialized runtime data
+        //  3. Non-serialized runtime data
         [NonSerialized] private GameObject _owner;
         public GameObject Owner
         {
@@ -38,12 +35,11 @@ namespace FlameOfTheLost
             private set => _owner = value;
         }
 
-        // --- Constructors
+        // --- Constructors ---
         public RuntimeWeapon(WeaponProfile profile, GameObject owner)
         {
             this.Profile = profile;
-            this.ActiveLeftSpecialSkill = this.Profile.LeftInnateSpecialSkill;
-            this.ActiveRightSpecialSkill = this.Profile.RightInnateSpecialSkill;
+            this.ActiveSpecialSkill = this.Profile.InnateSpecialSkill;
 
             this.Owner = owner;
         }

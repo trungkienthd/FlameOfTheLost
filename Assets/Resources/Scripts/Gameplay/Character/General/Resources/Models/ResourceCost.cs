@@ -60,21 +60,12 @@ namespace FlameOfTheLost
         }
 
         [Header("Silence Gate")]
-        [Tooltip("If true, this skill is blocked by 'Silenced'. Prefer using this field going forward.")]
+        [Tooltip("If true, this skill is blocked by 'Silenced'. Normally, this skill is a Normal one.")]
         [SerializeField] private bool _blockedBySilence;
-        public bool BlockedBySilence
+        public bool IsSilenceBlocked
         {
             get => _blockedBySilence;
             set => _blockedBySilence = value;
-        }
-
-        [Header("Resource Requirements")]  
-        [Tooltip("If true, this skill is blocked by 'Silenced'.")] 
-        [SerializeField] private bool _requiresFP;
-        public bool RequiresFP
-        {
-            get => _requiresFP;
-            set => _requiresFP = value;
         }
 
         [Header("HP Sacrifice Safety")]
@@ -91,11 +82,6 @@ namespace FlameOfTheLost
             {
                 return (_hp > 0 || _fp > 0 || _stamina > 0 || _hpPercentOfMax > 0f || _fpPercentOfMax > 0f || _staminaPercentOfMax > 0f);
             }
-        }
-
-        public bool IsSilenceBlocked
-        {
-            get => (this.BlockedBySilence || this.RequiresFP);
         }
     }
 }

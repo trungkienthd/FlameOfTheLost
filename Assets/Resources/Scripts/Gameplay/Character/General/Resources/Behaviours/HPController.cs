@@ -263,12 +263,12 @@ namespace FlameOfTheLost
                 if (this.Rigidbody2D != null) this.Rigidbody2D.linearVelocity = Vector2.zero;
 
                 this.OnDeath?.Invoke();
-                Debug.Log($"[{this.gameObject}.HPController] Entity is dead.");
+                Debug.Log($"[{this.gameObject.name}.HPController] Entity is dead.");
                 return;
             }
 
             this.AnimationHandler?.TriggerHit();
-            Debug.Log($"[{this.gameObject}.HPController] Current HP: {this.CurrentValue}");
+            Debug.Log($"[{this.gameObject.name}.HPController] Current HP: {this.CurrentValue}");
         }
 
         //  4. Apply periodic damage according to policies

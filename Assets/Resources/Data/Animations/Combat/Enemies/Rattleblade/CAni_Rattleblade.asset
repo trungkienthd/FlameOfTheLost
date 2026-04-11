@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b8e2d592e9e394f87118510a16e5f8, type: 3}
+  m_Name: CAni_Rattleblade
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAnimationProfile
+  _characterTag: 2
+  _elements:
+  - {fileID: 11400000, guid: 9afae9f22888d44419259f6588f64158, type: 2}
+  _hitAnimationClipSet:
+    _down: {fileID: 7400000, guid: edc9151a27e3e9340a2273bb747af8c1, type: 2}
+    _side: {fileID: 7400000, guid: a80219d1de238f148a61c15dfb152379, type: 2}
+    _up: {fileID: 7400000, guid: 9fbb3fab6ffb0944eaf4f19e4784a31d, type: 2}
+  _dieAnimationClipSet:
+    _down: {fileID: 7400000, guid: bc9c99128fccd7843a4dad3800cde029, type: 2}
+    _side: {fileID: 7400000, guid: bc9c99128fccd7843a4dad3800cde029, type: 2}
+    _up: {fileID: 7400000, guid: bc9c99128fccd7843a4dad3800cde029, type: 2}

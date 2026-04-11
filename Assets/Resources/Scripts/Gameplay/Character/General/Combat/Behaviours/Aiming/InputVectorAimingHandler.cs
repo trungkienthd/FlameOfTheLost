@@ -2,8 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "InputVectorAimingHandler", menuName = "Data/FlameOfTheLost/Combat/Aiming/InputVectorAimingHandler")]
-    public class InputVectorAimingHandler : AimingHandler
+    public class InputVectorAimingHandler : CombatAimingHandler
     {
         [SerializeField] private Vector2 _rawInputVector;
         public Vector2 RawInputVector

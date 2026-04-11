@@ -2,8 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "FixedDirectionAimingHandler", menuName = "Data/FlameOfTheLost/Combat/Aiming/FixedDirectionAimingHandler")]
-    public class FixedDirectionAimingHandler : AimingHandler
+    public class FixedDirectionAimingHandler : CombatAimingHandler
     {
         [SerializeField] private Vector2 _fixedAimDirection = Vector2.right;
         public Vector2 FixedAimDirection

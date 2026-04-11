@@ -20,5 +20,7 @@ namespace FlameOfTheLost
             get => _offset;
             set => _offset = value;
         }
+
+        public bool IsValid => this.Points != null && this.Points.Count > 0;    
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "StatusEffectGuardConfig", menuName = "Data/FlameOfTheLost/StatusEffect/Configs/StatusEffectGuardConfig")]
+    [CreateAssetMenu(fileName = "StatusEffectGuardConfig", menuName = "Data/FlameOfTheLost/Combat/StatusEffects/StatusEffectGuardConfig")]
     public class StatusEffectGuardConfig : ScriptableObject
     {
         [Header("Global Floors & Ceilings (Multipliers)")]

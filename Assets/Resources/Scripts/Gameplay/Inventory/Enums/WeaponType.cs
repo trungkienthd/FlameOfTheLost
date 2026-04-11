@@ -3,7 +3,7 @@ namespace FlameOfTheLost
     public enum WeaponType
     {
         // Melee
-        Dagger, Sword,
+        Sword, Axe, Dagger,
 
         // Ranged
         Bow, Crossbow, Staff

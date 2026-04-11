@@ -5,7 +5,8 @@ namespace FlameOfTheLost
 {
     public class FPController : CharacterResourcePoolController
     {
-        // --- States
+        // --- States ---
+        //  1. General
         [Header("States")]
         [SerializeField] private bool _isSilenced = false;
         public bool IsSilenced
@@ -20,19 +21,19 @@ namespace FlameOfTheLost
             }
         }
 
-        // Status Effect Stat Periodic
+        //  2. Status Effect Stat Periodic
         public override StatusEffectStatPeriodicTargetType PeriodicTarget => StatusEffectStatPeriodicTargetType.FP;
 
-        // --- Events
+        //  3. Events
         public event Action<bool> OnSilenceStateChanged; // (isSilenced)
 
-        // --- Unity methods
+        // --- Unity methods ---
         protected override void Awake()
         {
             base.Awake();
         }
 
-        // --- Public APIs
+        // --- Public APIs ---
         //  1. Silence State Setter
         public void SetSilenced(bool isSilenced)
         {
@@ -55,7 +56,7 @@ namespace FlameOfTheLost
             }
         }
 
-        // --- Protected Helpers
+        // --- Helpers ---
         protected override void ApplyStatPeriodicTick(StatusEffectStatPeriodicContribution periodic, int tickAmount, RuntimeStatusEffect source)
         {
             if (periodic == null) return;

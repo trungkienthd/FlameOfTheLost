@@ -9,14 +9,14 @@ namespace FlameOfTheLost
         CannotMove              = 10,
         CannotAttack            = 11,           // Including both normal and special attacks
         CannotCastSpecialSkill  = 12,           // Including special attacks only
-        CannotSwapWeapon        = 13,
+        CannotSwapLoadout       = 13,
 
         // --- Immunities
         IgnoreDamageReceived    = 30,           // "damage receiving immune"
         IgnoreKnockbackReceived = 31,
         IgnoreMovementLock      = 32,
         IgnoreAttackLock        = 33,
-        IgnoreSwapLock          = 34,
+        IgnoreSwapLoadoutLock   = 34,
 
         IgnoreAllStatusEffects      = 40,       // Remove the existing status effects, and immune to new status effects being applied
         IgnoreDebuffStatusEffects   = 41,       // Immune to debuffs being applied

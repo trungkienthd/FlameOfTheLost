@@ -117,7 +117,7 @@ namespace FlameOfTheLost
 
         //  3. Hitbox
         //      3.3. Enable the Hitbox
-        public virtual void EnableHitbox(HitboxDamagePayload payload)
+        public virtual void EnableHitbox(HitboxDamagePayload payload, AttackSideType attackSideType)
         {
             this.IsActive = true;
             this.HasConfirmedHit = false; 
@@ -141,7 +141,7 @@ namespace FlameOfTheLost
 
             // IMPORTANT: must notify BEFORE IsActive becomes false
             this.NotifyHitboxDisabledWithoutHit();
-            this.AttackerCombatAttackController?.CombatSkillStatusEffectHandler.ClearTrackingForHitbox(this.gameObject);
+            this.AttackerCombatAttackController?.CombatStatusEffectHandler.ClearTrackingForHitbox(this.gameObject);
 
             this.IsActive = false;
 

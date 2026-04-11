@@ -1,0 +1,177 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace FlameOfTheLost
+{
+    [CreateAssetMenu(fileName = "CharacterCombatAnimationClipHitboxSetProfile", menuName = "Data/FlameOfTheLost/Animations/Combat/CharacterCombatAnimationClipHitboxSetProfile")]
+    public class CharacterCombatAnimationClipHitboxSetProfile : ScriptableObject
+    {
+        // --- States ---
+        //  1. Match Keys
+        [Header("Match Keys")]
+        [SerializeField] private List<SkillProfile> _skills = new();
+        [SerializeField] private WeaponProfile _weapon;
+        [SerializeField] private CharacterTagType _characterTag;
+        public IReadOnlyList<SkillProfile> Skills => _skills;
+        public WeaponProfile Weapon => _weapon;
+        public CharacterTagType CharacterTag => _characterTag;
+
+        //  2. Left / Right attack data
+        [Header("Attack Animation + Hitbox Sets")]
+        [SerializeField] private CombatAnimationClipHitboxSet _left;
+        [SerializeField] private CombatAnimationClipHitboxSet _right;
+
+        public CombatAnimationClipHitboxSet LeftSet => _left;
+        public CombatAnimationClipHitboxSet RightSet => _right;
+
+        //  3. Attack Window
+        [Header("Attack Window")]
+        [SerializeField, Min(0f)] private float _attackWindowDuration = 0.5f;
+        public float AttackWindowDuration => _attackWindowDuration;
+
+        // --- Unity Methods ---
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (this.Skills == null || this.Skills.Count == 0)
+            {
+                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Missing Skills list.", this);
+                return;
+            }
+
+            if (this.Weapon == null)
+            {
+                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Missing Weapon reference.", this);
+            }
+            else if (this.Weapon.ID <= 0)
+            {
+                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Weapon '{this.Weapon.name}' has invalid ID.", this);
+            }
+
+            bool hasValidSkill = false;
+            HashSet<int> ids = new();
+
+            for (int i = 0; i < this.Skills.Count; i++)
+            {
+                SkillProfile skill = this.Skills[i];
+                if (skill == null)
+                {
+                    Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Null Skill reference found in Skills list.", this);
+                    continue;
+                }
+
+                if (skill.ID <= 0)
+                {
+                    Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Skill '{skill.name}' has invalid ID.", this);
+                    continue;
+                }
+
+                hasValidSkill = true;
+
+                if (!ids.Add(skill.ID))
+                {
+                    Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Duplicate Skill '{skill.name}' (ID: {skill.ID}) found in Skills list.", this);
+                }
+            }
+
+            if (!hasValidSkill)
+            {
+                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Skills list contains no valid Skill references.", this);
+            }
+
+            this.ValidateEntryPair(this.LeftSet.Down,   this.RightSet.Down, "Down");
+            this.ValidateEntryPair(this.LeftSet.Side,   this.RightSet.Side, "Side");
+            this.ValidateEntryPair(this.LeftSet.Up,     this.RightSet.Up,   "Up");
+        }
+#endif
+
+        // --- Public APIs ---
+        //  1. Get this Animation Clip Set (Facing) for the given side
+        public FacingAnimationClipSet GetFacingAnimationClipSet(AttackSideType attackSideType)
+        {
+            CombatAnimationClipHitboxSet set = this.GetAnimationClipHitboxSet(attackSideType);
+
+            FacingAnimationClipSet result = new FacingAnimationClipSet
+            (
+                set.Down.AnimationClip,
+                set.Side.AnimationClip,
+                set.Up.AnimationClip
+            );
+
+            return result;
+        }
+
+        //  2. Gets the MeleeHitboxShape for the given side.
+        public MeleeHitboxShape GetMeleeHitboxShape(AttackSideType attackSideType)
+        {
+            CombatAnimationClipHitboxSet set = this.GetAnimationClipHitboxSet(attackSideType);
+
+            MeleeHitboxShape result = new MeleeHitboxShape
+            (
+                set.Down.HitboxShape,
+                set.Side.HitboxShape,
+                set.Up.HitboxShape
+            );
+
+            return result;
+        }
+
+        //  3. Checks if this entry matches the given skill and weapon.
+        public bool Matches(SkillProfile skill, WeaponProfile weapon)
+        {
+            if (skill == null || weapon == null) return false;
+            if (this.Weapon == null) return false;
+
+            bool weaponMatch = UnityEngine.Object.ReferenceEquals(this.Weapon, weapon) || (this.Weapon.ID > 0 && weapon.ID > 0 && this.Weapon.ID == weapon.ID);
+
+            if (!weaponMatch) return false;
+
+            if (this.Skills == null || this.Skills.Count == 0) return false;
+
+            for (int i = 0; i < this.Skills.Count; i++)
+            {
+                SkillProfile current = _skills[i];
+                if (current == null) continue;
+
+                if (UnityEngine.Object.ReferenceEquals(current, skill)) return true;
+                if (current.ID > 0 && skill.ID > 0 && current.ID == skill.ID) return true;
+            }
+
+            return false;
+        }
+
+        // --- Helpers ---
+        //  1. Validation for Left/Right entry pairs (Down, Side, Up)
+        private void ValidateEntryPair(CombatAnimationClipHitboxEntry leftEntry, CombatAnimationClipHitboxEntry rightEntry, string facingName)
+        {
+            this.ValidateClipPair(leftEntry.AnimationClip, rightEntry.AnimationClip, $"{facingName} AnimationClip");
+
+            this.ValidatePolygonShapePair(leftEntry.HitboxShape, rightEntry.HitboxShape, $"{facingName} PolygonColliderShape");
+        }
+        private void ValidateClipPair(AnimationClip leftClip, AnimationClip rightClip, string label)
+        {
+            if (leftClip == null && rightClip == null)
+            {
+                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Both Left and Right '{label}' are null. At least one must be assigned.", this);
+            }
+        }
+        private void ValidatePolygonShapePair(PolygonColliderShape leftShape, PolygonColliderShape rightShape, string label)
+        {
+            if (!leftShape.IsValid && !rightShape.IsValid)
+            {
+                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Both Left and Right '{label}' are null. At least one must be assigned.", this);
+            }
+        }
+
+        //  2. Get the AttackAnimationHitboxSet for the given side, with fallback to the opposite side if needed.
+        private CombatAnimationClipHitboxSet GetAnimationClipHitboxSet(AttackSideType attackSideType)
+        {
+            if (attackSideType == AttackSideType.Right)
+            {
+                return this.RightSet.GetResolvedWithFallback(this.LeftSet);
+            }
+
+            return this.LeftSet.GetResolvedWithFallback(this.RightSet);
+        }
+    }
+}

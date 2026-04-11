@@ -108,7 +108,7 @@ namespace FlameOfTheLost
             this.Rigidbody2D.linearVelocity = this.Velocity;
 
             // Feed animator (Speed uses world velocity magnitude)
-            this.AnimationHandler?.FeedMovement(this.Rigidbody2D.linearVelocity);
+            this.AnimationHandler?.FeedMovement(this.RawMovementInput);
         }
 
         // --- Public APIs ---

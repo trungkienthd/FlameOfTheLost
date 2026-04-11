@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: trungkienthd.developer
   productName: FlameOfTheLost
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -697,7 +697,7 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 6
   captureStartupLogs: {}
-  activeInputHandler: 2
+  activeInputHandler: 1
   windowsGamepadBackendHint: 0
   cloudProjectId: 9476269c-e78a-4301-921b-eecb933a2269
   framebufferDepthMemorylessMode: 0

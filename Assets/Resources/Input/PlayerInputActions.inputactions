@@ -52,9 +52,54 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ConsumeConsumableItem",
+                    "type": "Button",
+                    "id": "35695876-2a6b-47bc-a67f-af4c97f3688c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "QuickEquipWeapon",
+                    "type": "Button",
+                    "id": "d9eb3fd0-6e9d-4385-b7ae-65ca000f2582",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "SwitchWeapon",
                     "type": "Button",
                     "id": "3a00ae87-2c9a-4443-b460-34b24aab6998",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchConsumableItem",
+                    "type": "Button",
+                    "id": "b14594a2-cbbe-4539-8a5b-5082e34d378f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CarryInteractableItem",
+                    "type": "Button",
+                    "id": "b1aead89-051f-4fb1-b87a-0440613de6ae",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Test",
+                    "type": "Button",
+                    "id": "c1191d5d-0401-426e-aa5c-9205eadedab5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press",
@@ -82,6 +127,42 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "d9c56c8a-d1de-4e4c-a7e0-1605296c2900",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenInventoryPanel",
+                    "type": "Button",
+                    "id": "d45f9559-2b5c-4535-b541-ff3bc0e6d25f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenLoadoutPanel",
+                    "type": "Button",
+                    "id": "bd676ac7-8325-4ced-a832-b0fa14a520f9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenQuestPanel",
+                    "type": "Button",
+                    "id": "423db49f-c834-4b9a-9639-e24fdbba91f8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenMapPanel",
+                    "type": "Button",
+                    "id": "5dadef23-5360-4b7b-923c-3e34e779ce3e",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press",
@@ -120,17 +201,6 @@
                 },
                 {
                     "name": "",
-                    "id": "977ff2d0-21e1-4e74-8dd8-a0496ee388ac",
-                    "path": "<Keyboard>/j",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "NormalAttackLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c599d331-7766-405d-aa41-643278e3a8e6",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
@@ -153,17 +223,6 @@
                 },
                 {
                     "name": "",
-                    "id": "afa57d7d-8bc9-4bcb-a0c8-82095396fb2b",
-                    "path": "<Keyboard>/k",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "NormalAttackRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "10b3e07a-f181-4984-b552-d38280c11dfd",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
@@ -176,7 +235,7 @@
                 {
                     "name": "",
                     "id": "4eb54f22-15cf-4f5a-b7f3-a1ff1446093d",
-                    "path": "<Keyboard>/i",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -198,7 +257,7 @@
                 {
                     "name": "",
                     "id": "ed238329-8ec0-4572-9d25-0991f7408872",
-                    "path": "<Keyboard>/u",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -242,7 +301,7 @@
                 {
                     "name": "",
                     "id": "f31df2e2-410e-44fd-821b-1af993628e47",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/i",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -265,7 +324,18 @@
                     "name": "",
                     "id": "f1b6a4d4-66a6-4a71-8eb0-0ad86f530faf",
                     "path": "<Keyboard>/escape",
-                    "interactions": "Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "754b69ed-8e83-4875-997f-3370f88ba792",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
@@ -280,6 +350,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a332e0b-6b3d-462c-9679-3e35c442d05a",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenInventoryPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e39e410-81ef-46ba-9236-6b1f8ee48197",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenInventoryPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bc1f0393-8c53-4ae9-bc41-a8860d839f28",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenLoadoutPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6ff1526-f3da-4d34-a67a-178c55471b76",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenQuestPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7c8cea46-9438-4bb9-b7df-254cb1e9c5e4",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenMapPanel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -308,7 +433,7 @@
                 {
                     "name": "",
                     "id": "665868ed-4bf5-4f64-9d67-446eaa6f3c57",
-                    "path": "<Keyboard>/r",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -324,6 +449,83 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b0ba4e17-0935-43a0-af4f-db9862ea48ce",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchConsumableItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71f69887-d37b-465f-8d28-fd8b9885cbb7",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchConsumableItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab0174ab-3e90-4733-a528-f03654746318",
+                    "path": "<Keyboard>/u",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuickEquipWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f84ccb4-68d1-4e03-bfe3-f0ed5c4f22c8",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuickEquipWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e372824-615d-44db-98d9-109e147fb58f",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Test",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a5deab6-0785-4db4-a230-0517daf2374a",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConsumeConsumableItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8c0b8ce-d24b-409c-8dc3-cbda25ab2ed0",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConsumeConsumableItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -447,22 +649,35 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "446acf53-7f81-4147-aab2-16a4896b5e30",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CarryInteractableItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b882bed-df6c-442b-8a70-4d0c0ce8cc13",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CarryInteractableItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "UI",
+            "name": "PlayerMenu",
             "id": "ca4707b6-b15a-4127-a8bf-abf3cf67e1c3",
             "actions": [
-                {
-                    "name": "Navigate",
-                    "type": "Value",
-                    "id": "f740c07a-685d-4b69-b8c2-b8e6b9ade6cf",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
                 {
                     "name": "Submit",
                     "type": "Button",
@@ -482,36 +697,63 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Point",
-                    "type": "PassThrough",
-                    "id": "6a3b3ab0-ad50-4bf8-8718-807de3e03b7f",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Click",
+                    "name": "SwitchWeapon",
                     "type": "Button",
-                    "id": "c780751b-101a-4607-a6f3-b130e1abc673",
+                    "id": "ee587474-702c-4d75-9df8-5a4c2b2bcf0c",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RightClick",
+                    "name": "SwitchConsumableItem",
                     "type": "Button",
-                    "id": "a48eb0ce-8bdc-4950-98de-5fe1f1fabf54",
+                    "id": "df5dec53-34d4-4776-9aa0-1f41cd927910",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MiddleClick",
+                    "name": "OpenSettingPanel",
                     "type": "Button",
-                    "id": "9f2f6681-455e-4d2c-91be-2436c59ac5a1",
+                    "id": "491d1eeb-cd9d-4c64-9146-26421c866c44",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenInventoryPanel",
+                    "type": "Button",
+                    "id": "aa03f384-9a43-491d-850a-739a9c2ec646",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenLoadoutPanel",
+                    "type": "Button",
+                    "id": "f5b44309-86e4-4c3f-b2fe-128b22f601a6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenQuestPanel",
+                    "type": "Button",
+                    "id": "946a3ad8-b130-4b86-80df-b223049b9d88",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenMapPanel",
+                    "type": "Button",
+                    "id": "5ce2026c-fb1f-4a83-b8f4-0defc62d536b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press",
@@ -528,138 +770,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "2D Vector",
-                    "id": "ca5f9822-8543-470c-8853-bd2c9bee9e83",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "afcb5f1a-b5ed-4592-97cb-e298c21ab32c",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "3e7fbef5-2d21-4b6a-bdd5-9708e451e74b",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "4bd8e75c-8895-431b-ad3c-6d8e73b2dd4c",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "a4e48e29-58fa-45ba-ac71-60fd56bfcef2",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "2D Vector",
-                    "id": "f836b274-7f80-49ff-8cd6-efb81dda0cd9",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "ce59ac00-35af-471f-aea8-d36f55e9f349",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "57122c47-4635-406f-9cb5-d17521a1988f",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "2469a98b-ec0c-414c-ab56-c75281f0d259",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "5ef219f4-c606-421d-9b86-bfc132209a02",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "84b07092-1371-406e-9047-8b1d65209668",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5d0556c0-46cc-40c5-830f-133b3c9336b1",
-                    "path": "<Gamepad>/dpad",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Navigate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "03c18cf9-606a-4ffc-9841-8bf54321d454",
@@ -717,45 +827,100 @@
                 },
                 {
                     "name": "",
-                    "id": "9635cde7-f997-4fe5-afe3-a4c65a4eaf0b",
-                    "path": "<Pointer>/position",
+                    "id": "547f69cb-acb2-4dea-a837-9c94aac76e72",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Point",
+                    "action": "SwitchWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "d9a8a7c9-6a0d-4e4e-af4a-93dec7b63f86",
-                    "path": "<Pointer>/press",
+                    "id": "3b57dcf9-ec09-44fb-92e3-1f0ddf009d7d",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Click",
+                    "action": "SwitchWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "9b7ef744-de15-4c4c-b762-75730cf1615c",
-                    "path": "<Mouse>/rightButton",
+                    "id": "30df72ab-5b90-4868-a7f8-99df0d4fa904",
+                    "path": "<Keyboard>/o",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightClick",
+                    "action": "SwitchConsumableItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "4c3b8293-5fd2-4bf4-99eb-c48a6aea3000",
-                    "path": "<Mouse>/middleButton",
+                    "id": "e44b3509-4f63-4f18-a526-d5fb9827a5aa",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MiddleClick",
+                    "action": "SwitchConsumableItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3aca32c3-81bc-43d1-bf65-835e56cd0d5f",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenSettingPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb0144a2-6911-4e79-a9eb-a6ef8f64ad49",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenInventoryPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be4223b5-4403-4b4d-9082-b7646fcef701",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenLoadoutPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aa008752-0190-4098-a2ea-e273414f7ff6",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenQuestPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be1b9354-3175-4099-b7f8-70b065ba61d3",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenMapPanel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

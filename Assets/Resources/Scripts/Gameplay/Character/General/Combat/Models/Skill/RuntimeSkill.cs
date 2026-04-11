@@ -7,7 +7,8 @@ namespace FlameOfTheLost
     [Serializable]
     public class RuntimeSkill
     {
-        // --- Base Skill
+        // --- States ---
+        //  1. Base Skill
         [Header("Base Skill")]
         [SerializeField] private SkillProfile _profile;
         [SerializeField] private SkillProvisionType _provisionType;
@@ -22,10 +23,10 @@ namespace FlameOfTheLost
             private set => _provisionType = value;
         }
 
-        // --- Non-serialized runtime data
+        //  2. Non-serialized runtime data
         [NonSerialized] private GameObject _owner;
         [NonSerialized] private CharacterTagType _characterTag;
-        [NonSerialized] private SkillCharacterAnimationProfile _animationProfile;
+        [NonSerialized] private CharacterCombatAnimationClipHitboxSetProfile _animationProfile;
         public GameObject Owner
         {
             get => _owner;
@@ -36,7 +37,7 @@ namespace FlameOfTheLost
             get => _characterTag;
             private set => _characterTag = value;
         }
-        public SkillCharacterAnimationProfile AnimationProfile
+        public CharacterCombatAnimationClipHitboxSetProfile CombatAnimationClipHitboxSetProfile
         {
             get => _animationProfile;
             private set => _animationProfile = value;
@@ -44,16 +45,17 @@ namespace FlameOfTheLost
 
         public int SkillID => this.Profile != null ? this.Profile.ID : -1;
 
-        public RuntimeSkill(SkillProfile profile, SkillProvisionType provisionType, GameObject owner, CharacterTagType characterTag)
+        // --- Constructors ---
+        public RuntimeSkill(SkillProfile profile, WeaponProfile weapon, SkillProvisionType provisionType, GameObject owner, CharacterTagType characterTag, CharacterCombatAnimationClipHitboxSetProfile animationProfile)
         {
             this.Profile = profile;
             this.ProvisionType = provisionType;
             this.Owner = owner;
             this.CharacterTag = characterTag;
-            this.AnimationProfile = SkillCharacterAnimationProfileUtility.GetOrNull(skill: profile, tag: characterTag);
+            this.CombatAnimationClipHitboxSetProfile = animationProfile;
         }
 
-        // Gameplay passthroughs
+        // --- Public APIs ---
         public SkillStyleType Style => this.Profile != null ? this.Profile.Style : SkillStyleType.Default;
         public int DamageAmount => this.Profile != null ? this.Profile.DamageAmount : 0;
         public float KnockbackForce => this.Profile != null ? this.Profile.KnockbackForce : 0f;
@@ -72,6 +74,24 @@ namespace FlameOfTheLost
                 if (application.Receiver != receiver) continue;
                 yield return application;
             }
+        }
+        public bool TryGetMeleeHitboxShape(AttackSideType attackSideType, out MeleeHitboxShape hitboxShape)
+        {
+            hitboxShape = default;
+
+            // 1) Must be a melee skill profile (ranged / others return false)
+            if (this.Profile is not MeleeSkillProfile) return false;
+
+            // 2) Must have an animation profile for (skill + character)
+            if (this.CombatAnimationClipHitboxSetProfile == null) return false;
+
+            // 3) Fetch per-side hitbox shape from the animation profile
+            // (Assumes you added left/right MeleeHitboxShape to SkillCharacterAnimationProfile)
+            hitboxShape = this.CombatAnimationClipHitboxSetProfile.GetMeleeHitboxShape(attackSideType);
+
+            // Optional: if you have an "empty" shape concept, validate here.
+            // e.g. return hitboxShape.HasAnyShape;
+            return true;
         }
     }
 }

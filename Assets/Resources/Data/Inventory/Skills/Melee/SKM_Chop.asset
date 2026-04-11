@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066661c177f42b944b17c8871d1f7693, type: 3}
+  m_Name: SKM_Chop
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MeleeSkillProfile
+  _id: 16
+  _displayName: Chop
+  _description: 
+  _icon: {fileID: 21300000, guid: f29630b8c2b6a6c4281812419df67feb, type: 3}
+  _defaultProvisionType: 1
+  _attachableWeaponTypes: 01000000
+  _damageAmount: 20
+  _knockbackForce: 3
+  _resourceCost:
+    _hp: 0
+    _fp: 0
+    _stamina: 24
+    _hpPercentOfMax: 0
+    _fpPercentOfMax: 0
+    _staminaPercentOfMax: 0
+    _costType: 0
+    _blockedBySilence: 1
+    _allowSelfKillWithHPCost: 0
+  _statusEffectApplications: []

@@ -9,7 +9,7 @@ namespace FlameOfTheLost
         // --- Resource Pool
         [Header("Resource Pool Settings")]
         [SerializeField, Min(0)] private int _currentValue;
-        [SerializeField, Min(1)] private int _maxValue;
+        [SerializeField, Min(1)] private int _maxValue = 100;
         public int CurrentValue
         {
             get => _currentValue;

@@ -25,6 +25,27 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs
+        //  0. Pay Cost Immediately
+        public bool TryPayImmediateCost(ResourceCost resourceCost)
+        {
+            if (this.ResourcesController == null) return false;
+            if (!resourceCost.HasAnyCost) return true;
+
+            GateResult payResult = this.ResourcesController.TryPayCost(resourceCost, out int reservationId);
+            if (!payResult.IsAccepted)
+            {
+                Debug.Log($"[{this.gameObject.name}.CharacterCombatResourcesHandler] Immediate cost is rejected: {payResult.RejectType}");
+                return false;
+            }
+
+            if (reservationId >= 1)
+            {
+                this.ResourcesController.ConsumeReservedCost(reservationId);
+            }
+
+            return true;
+        }
+
         //  1. Runs the resource gate and pays up-front according to CostTriggerType:
         //      OnAttackStart: pay immediately
         //      OnAttackEnd/OnHitConfirmed: strict reserve model => reserve now, allow refund if cast fails/cancels

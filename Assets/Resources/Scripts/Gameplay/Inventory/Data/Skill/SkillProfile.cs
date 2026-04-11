@@ -73,8 +73,7 @@ namespace FlameOfTheLost
             FPPercentOfMaxCost = 0f,
             StaminaPercentOfMaxCost = 0f,
             CostTriggerType = ResourceCostTriggerType.OnAttackStart,
-            BlockedBySilence = true,
-            RequiresFP = false,
+            IsSilenceBlocked = true,
             AllowSelfKillWithHPCost = false
         };
         public ResourceCost ResourceCost => _resourceCost;
