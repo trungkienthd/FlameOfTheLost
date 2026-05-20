@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,16 +9,19 @@ namespace FlameOfTheLost
     {
         [SerializeField] private Button _buttonPrevious;
         [SerializeField] private Button _buttonNext;
-        [SerializeField] private Image _pageCurrentImage;
-        [SerializeField] private Image _pageMaxImage;
-        [SerializeField] private int _slotsPerPage = 16;
-        [SerializeField] private int _maxSupportedPages = 9;
+
+        [SerializeField] private TMP_Text _textPageCurrent;
+        [SerializeField] private TMP_Text _textPageMax;
+
+        [SerializeField] private int _slotsPerPage = 12;
+        [SerializeField] private int _maxSupportedPages = 99;
         [SerializeField] private int _columnCount = 4;
+
         private Button ButtonPrevious => _buttonPrevious;
         private Button ButtonNext => _buttonNext;
-        private Image PageCurrentImage => _pageCurrentImage;
-        private Image PageMaxImage => _pageMaxImage;
-        public int SlotsPerPage => _slotsPerPage;
+        private TMP_Text TextPageCurrent => _textPageCurrent;
+        private TMP_Text TextPageMax => _textPageMax;
+        public int SlotsPerPage => _slotsPerPage;   
         public int MaxSupportedPages => _maxSupportedPages;
         public int ColumnCount => _columnCount;
 
@@ -48,15 +52,15 @@ namespace FlameOfTheLost
                 this.ButtonNext.onClick.AddListener(this.HandleNextClicked);
             }
 
-            if (this.PageCurrentImage == null)
+            if (this.TextPageCurrent == null)
             {
-                Transform pageCurrent = this.transform.Find("PageCurrent");
-                _pageCurrentImage = pageCurrent.GetComponent<Image>();
+                Transform pageCurrent = this.transform.Find("TextPageCurrent");
+                _textPageCurrent = pageCurrent.GetComponent<TMP_Text>();
             }
-            if (this.PageMaxImage == null)
+            if (this.TextPageMax == null)
             {
-                Transform pageMax = this.transform.Find("PageMax");
-                _pageMaxImage = pageMax.GetComponent<Image>();
+                Transform pageMax = this.transform.Find("TextPageMax");
+                _textPageMax = pageMax.GetComponent<TMP_Text>();
             }
 
             this.RefreshVisuals();
@@ -127,16 +131,14 @@ namespace FlameOfTheLost
 
         private void RefreshVisuals()
         {
-            if (this.PageCurrentImage != null)
+            if (this.TextPageCurrent != null)
             {
-                this.PageCurrentImage.sprite = SharedSpritesUIUtility.GetDigitSprite(this.CurrentPageNumber);
-                this.PageCurrentImage.enabled = this.PageCurrentImage.sprite != null;
+                this.TextPageCurrent.text = this.CurrentPageNumber.ToString();
             }
 
-            if (this.PageMaxImage != null)
+            if (this.TextPageMax != null)
             {
-                this.PageMaxImage.sprite = SharedSpritesUIUtility.GetDigitSprite(this.MaxPageNumber);
-                this.PageMaxImage.enabled = this.PageMaxImage.sprite != null;
+                this.TextPageMax.text = this.MaxPageNumber.ToString();
             }
 
             if (this.ButtonPrevious != null)

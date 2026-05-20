@@ -51,7 +51,7 @@ namespace FlameOfTheLost
             if (this.PlayerInventoryController == null)
             {
                 GameObject player = GameObject.Find("Player");
-                if (player != null) _inventoryController = player.GetComponent<InventoryController>();  
+                if (player != null) _inventoryController = player.GetComponentInChildren<InventoryController>();  
             }
             if (this.NavigationSubPanelController == null)
             {

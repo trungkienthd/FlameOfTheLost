@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe320981f246e994ab0cebc1b14323e1, type: 3}
+  m_Name: SE_DazeLightning
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
+  _id: 5202
+  _displayName: Daze Lightning
+  _description: 
+  _icon: {fileID: 21300000, guid: 8dfa163736ecc364b807cd5d535e81d3, type: 3}
+  _affinity: 1
+  _duration: 1.5
+  _maxStacks: 1
+  _durationRefreshType: 1
+  _flags:
+  - _flag: 10
+    _isEnabled: 1
+  - _flag: 11
+    _isEnabled: 1
+  - _flag: 13
+    _isEnabled: 1
+  _statModifiers: []
+  _combinationType: 0
+  _statPeriodics: []
+  _vfxClip: {fileID: 7400000, guid: 6b0560086eeab5f458831db888886e4b, type: 2}
+  _vfxSortingOrderOffset: 5

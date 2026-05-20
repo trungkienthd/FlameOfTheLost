@@ -51,17 +51,17 @@ TagManager:
   - name: Background
     uniqueID: 1984793777
     locked: 0
-  - name: Ground
+  - name: Terrain
     uniqueID: 2873062685
     locked: 0
   - name: PropBack
     uniqueID: 2649554911
     locked: 0
-  - name: PropFront
-    uniqueID: 4130218697
-    locked: 0
   - name: Character
     uniqueID: 2215249303
+    locked: 0
+  - name: PropFront
+    uniqueID: 4130218697
     locked: 0
   - name: FX
     uniqueID: 4023862981

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace FlameOfTheLost
 {
@@ -8,34 +9,28 @@ namespace FlameOfTheLost
     {
         // --- States ---
         //  1. References
-        //      1.1. Refs - Weapons Section
-        [Header("References (Weapons Section)")]
-        [SerializeField] private List<EquippedLoadoutSlotUIController> _weaponSlots = new List<EquippedLoadoutSlotUIController>(4);
-        private IReadOnlyList<EquippedLoadoutSlotUIController> WeaponSlots => _weaponSlots;
-
-        //      1.2. Refs - Consumables Section
-        [Header("References (Consumables Section)")]
-        [SerializeField] private List<EquippedLoadoutSlotUIController> _consumableSlots = new List<EquippedLoadoutSlotUIController>(8);
-        private IReadOnlyList<EquippedLoadoutSlotUIController> ConsumableItemSlots => _consumableSlots;
-
-        //      1.3. Refs - Interactable Section
-        [Header("References (Interactable Section)")]
-        [SerializeField] private EquippedLoadoutSlotUIController _interactableSlot;
-        private EquippedLoadoutSlotUIController InteractableItemSlot => _interactableSlot;
-
-        //      1.4. Refs - Player
+        //      1.1. Refs - Player
         [Header("References (Player)")]
         [SerializeField] private CharacterCombatLoadoutController _playerCombatLoadoutController;
-        [SerializeField] private PlayerInteractionLoadoutController _playerInteractionLoadoutController;
+        [SerializeField] private PlayerCarryLoadoutController _playerInteractionLoadoutController;
         private CharacterCombatLoadoutController PlayerCombatLoadoutController => _playerCombatLoadoutController;
-        private PlayerInteractionLoadoutController PlayerInteractionLoadoutController => _playerInteractionLoadoutController;
+        private PlayerCarryLoadoutController PlayerInteractionLoadoutController => _playerInteractionLoadoutController;
 
-        //      1.5. Refs - Candidate Loadout Sub-Panel
+        //      1.2. Refs - Other Sub-Panels
         [Header("References (Candidate Loadout Sub-Panel)")]
         [SerializeField] private CandidateLoadoutSubPanelController _candidateLoadoutSubPanelController;
         private CandidateLoadoutSubPanelController CandidateLoadoutSubPanelController => _candidateLoadoutSubPanelController;
 
-        //      1.6. Refs - Tooltip
+        //      1.3. Refs - Child Section Controllers
+        [Header("References (Child Sections)")]
+        [SerializeField] private EquippedLoadoutSubPanelWeaponListSectionController _weaponListSection;
+        [SerializeField] private EquippedLoadoutSubPanelConsumableItemListSectionController _consumableItemListSection;
+        [SerializeField] private EquippedLoadoutSubPanelCarriableItemSectionController _carriableItemSection;
+        private EquippedLoadoutSubPanelWeaponListSectionController WeaponListSection => _weaponListSection;
+        private EquippedLoadoutSubPanelConsumableItemListSectionController ConsumableItemListSection => _consumableItemListSection;
+        private EquippedLoadoutSubPanelCarriableItemSectionController CarriableItemSection => _carriableItemSection;
+
+        //      1.4. Refs - Tooltip
         [Header("References (Tooltip)")]
         [SerializeField] private EquippedLoadoutSlotActionTooltipController _slotActionTooltip;
         [SerializeField] private RectTransform _tooltipParent;
@@ -44,7 +39,8 @@ namespace FlameOfTheLost
         private RectTransform TooltipParent => _tooltipParent;
         private Vector2 TooltipOffset => _tooltipOffset;
 
-        //  2. Selected Slot State
+        //  2. Runtime State
+        //      2.1. Selected Slot
         private EquippedLoadoutSlotUIController _selectedSlot;
         public EquippedLoadoutSlotUIController SelectedSlot
         {
@@ -52,32 +48,40 @@ namespace FlameOfTheLost
             private set => _selectedSlot = value;
         }
 
+        //      2.2. Cached Pointer Position (for tooltip positioning)
+        private Vector2 _lastPointerScreenPosition;
+        private Vector2 LastPointerScreenPosition
+        {
+            get => _lastPointerScreenPosition;
+            set => _lastPointerScreenPosition = value;
+        }
+
+        // --- Unity Callbacks ---
         private void Awake()
         {
-            GameObject player = GameObject.Find("Player");
-            if (player != null)
-            {
-                if (this.PlayerCombatLoadoutController == null) _playerCombatLoadoutController = player.GetComponent<CharacterCombatLoadoutController>();
-                if (this.PlayerInteractionLoadoutController == null) _playerInteractionLoadoutController = player.GetComponent<PlayerInteractionLoadoutController>();
-            }
-
-            if (this.CandidateLoadoutSubPanelController == null) _candidateLoadoutSubPanelController = this.transform.parent.GetComponentInChildren<CandidateLoadoutSubPanelController>();
-
-            this.BindSlotEvents();
+            this.CacheReferences();
+            this.InitializeSections();
+            this.BindSectionEvents();
             this.BindTooltipEvents();
 
-            this.RefreshAll();
-            this.HideTooltip();
+            this.ClearSelection();
         }
         private void OnEnable()
         {
-            this.RefreshAll();
-            this.HideTooltip();
+            this.ClearSelection();
         }
         private void OnDestroy()
         {
-            this.UnbindSlotEvents();
+            this.UnbindSectionEvents();
             this.UnbindTooltipEvents();
+        }
+
+        // --- Public APIs ---
+        public void RefreshAll()
+        {
+            this.WeaponListSection?.Refresh(this.SelectedSlot);
+            this.ConsumableItemListSection?.Refresh(this.SelectedSlot);
+            this.CarriableItemSection?.Refresh(this.SelectedSlot);
         }
 
         public void ClearSelection()
@@ -88,54 +92,76 @@ namespace FlameOfTheLost
             this.RefreshAll();
         }
 
-        private void BindSlotEvents()
+        // --- Helpers ---
+        private void CacheReferences()
         {
-            foreach (EquippedLoadoutSlotUIController slot in this.WeaponSlots)
+            GameObject player = GameObject.Find("Player");
+            if (player != null)
             {
-                if (slot == null) continue;
-
-                slot.OnClicked -= this.HandleSlotClicked;
-                slot.OnClicked += this.HandleSlotClicked;
-
-                slot.OnSubSlotClicked -= this.HandleWeaponSubSlotClicked;
-                slot.OnSubSlotClicked += this.HandleWeaponSubSlotClicked;
+                if (this.PlayerCombatLoadoutController == null) _playerCombatLoadoutController = player.GetComponent<CharacterCombatLoadoutController>();
+                if (this.PlayerInteractionLoadoutController == null) _playerInteractionLoadoutController = player.GetComponent<PlayerCarryLoadoutController>();
             }
 
-            foreach (EquippedLoadoutSlotUIController slot in this.ConsumableItemSlots)
-            {
-                if (slot == null) continue;
+            if (this.WeaponListSection == null)         _weaponListSection          = this.GetComponentInChildren<EquippedLoadoutSubPanelWeaponListSectionController>(true);
+            if (this.ConsumableItemListSection == null) _consumableItemListSection  = this.GetComponentInChildren<EquippedLoadoutSubPanelConsumableItemListSectionController>(true);
+            if (this.CarriableItemSection == null)   _carriableItemSection    = this.GetComponentInChildren<EquippedLoadoutSubPanelCarriableItemSectionController>(true);
 
-                slot.OnClicked -= this.HandleSlotClicked;
-                slot.OnClicked += this.HandleSlotClicked;
+            if (this.SlotActionTooltip == null)
+            {
+                _slotActionTooltip = this.GetComponentInChildren<EquippedLoadoutSlotActionTooltipController>(true);
             }
 
-            if (this.InteractableItemSlot != null)
+            if (this.CandidateLoadoutSubPanelController == null && this.transform.parent != null)
             {
-                this.InteractableItemSlot.OnClicked -= this.HandleSlotClicked;
-                this.InteractableItemSlot.OnClicked += this.HandleSlotClicked;
+                _candidateLoadoutSubPanelController = this.transform.parent.GetComponentInChildren<CandidateLoadoutSubPanelController>(true);
             }
         }
-
-        private void UnbindSlotEvents()
+        private void InitializeSections()
         {
-            foreach (EquippedLoadoutSlotUIController slot in this.WeaponSlots)
-            {
-                if (slot == null) continue;
+            this.WeaponListSection?.Initialize(this.PlayerCombatLoadoutController);
+            this.ConsumableItemListSection?.Initialize(this.PlayerCombatLoadoutController);
+            this.CarriableItemSection?.Initialize(this.PlayerInteractionLoadoutController);
+        }
 
-                slot.OnClicked -= this.HandleSlotClicked;
-                slot.OnSubSlotClicked -= this.HandleWeaponSubSlotClicked;
+        private void BindSectionEvents()
+        {
+            if (this.WeaponListSection != null)
+            {
+                this.WeaponListSection.OnSlotClicked -= this.HandleSlotClicked;
+                this.WeaponListSection.OnSlotClicked += this.HandleSlotClicked;
+
+                this.WeaponListSection.OnSubSlotClicked -= this.HandleWeaponSubSlotClicked;
+                this.WeaponListSection.OnSubSlotClicked += this.HandleWeaponSubSlotClicked;
             }
 
-            foreach (EquippedLoadoutSlotUIController slot in this.ConsumableItemSlots)
+            if (this.ConsumableItemListSection != null)
             {
-                if (slot == null) continue;
-
-                slot.OnClicked -= this.HandleSlotClicked;
+                this.ConsumableItemListSection.OnSlotClicked -= this.HandleSlotClicked;
+                this.ConsumableItemListSection.OnSlotClicked += this.HandleSlotClicked;
             }
 
-            if (this.InteractableItemSlot != null)
+            if (this.CarriableItemSection != null)
             {
-                this.InteractableItemSlot.OnClicked -= this.HandleSlotClicked;
+                this.CarriableItemSection.OnSlotClicked -= this.HandleSlotClicked;
+                this.CarriableItemSection.OnSlotClicked += this.HandleSlotClicked;
+            }
+        }
+        private void UnbindSectionEvents()
+        {
+            if (this.WeaponListSection != null)
+            {
+                this.WeaponListSection.OnSlotClicked -= this.HandleSlotClicked;
+                this.WeaponListSection.OnSubSlotClicked -= this.HandleWeaponSubSlotClicked;
+            }
+
+            if (this.ConsumableItemListSection != null)
+            {
+                this.ConsumableItemListSection.OnSlotClicked -= this.HandleSlotClicked;
+            }
+
+            if (this.CarriableItemSection != null)
+            {
+                this.CarriableItemSection.OnSlotClicked -= this.HandleSlotClicked;
             }
         }
 
@@ -152,7 +178,6 @@ namespace FlameOfTheLost
             this.SlotActionTooltip.OnChangeSkillClicked -= this.HandleTooltipChangeSkillClicked;
             this.SlotActionTooltip.OnChangeSkillClicked += this.HandleTooltipChangeSkillClicked;
         }
-
         private void UnbindTooltipEvents()
         {
             if (this.SlotActionTooltip == null) return;
@@ -160,6 +185,181 @@ namespace FlameOfTheLost
             this.SlotActionTooltip.OnUnequipClicked -= this.HandleTooltipUnequipClicked;
             this.SlotActionTooltip.OnReplaceClicked -= this.HandleTooltipReplaceClicked;
             this.SlotActionTooltip.OnChangeSkillClicked -= this.HandleTooltipChangeSkillClicked;
+        }
+
+        private void HandleSlotClicked(EquippedLoadoutSlotUIController slot)
+        {
+            if (slot == null) return;
+
+            this.LastPointerScreenPosition = this.GetCurrentPointerScreenPosition();
+
+            if (this.SelectedSlot == slot)
+            {
+                this.SelectedSlot = null;
+                this.HideTooltip();
+                this.HideCandidatePanel();
+                this.RefreshAll();
+                return;
+            }
+
+            this.SelectedSlot = slot;
+            this.HideCandidatePanel();
+
+            // Refresh first so selection visuals are up to date before the tooltip is positioned/shown.
+            this.RefreshAll();
+
+            this.ShowTooltipForSelectedSlot();
+        }
+
+        private void HandleWeaponSubSlotClicked(EquippedLoadoutSlotUIController slot)
+        {
+            if (slot == null || slot.BoundWeaponEntry == null)
+            {
+                this.HideCandidatePanel();
+                return;
+            }
+
+            this.LastPointerScreenPosition = this.GetCurrentPointerScreenPosition();
+
+            this.SelectedSlot = slot;
+            this.HideTooltip();
+            this.RefreshAll();
+
+            this.CandidateLoadoutSubPanelController?.ShowSpecialSkillCandidates(slot);
+        }
+
+
+        private void ShowTooltipForSelectedSlot()
+        {
+            if (this.SlotActionTooltip == null) return;
+
+            if (this.SelectedSlot == null)
+            {
+                this.HideTooltip();
+                return;
+            }
+
+            RectTransform parentRect = this.TooltipParent != null
+                ? this.TooltipParent
+                : this.transform.parent as RectTransform;
+
+            if (parentRect == null)
+            {
+                this.HideTooltip();
+                return;
+            }
+
+            bool canChangeSkill =
+                this.SelectedSlot.SlotType == LoadoutPanelSlotType.Weapon &&
+                this.SelectedSlot.BoundWeaponEntry != null &&
+                this.SelectedSlot.BoundWeaponEntry.Item != null;
+            this.SlotActionTooltip.ShowForSlotAtScreenPosition
+            (
+                slot: this.SelectedSlot,
+                tooltipParent: parentRect,
+                screenPosition: this.LastPointerScreenPosition,
+                offset: this.TooltipOffset,
+                changeSkillBtnIsActive: canChangeSkill
+            );
+        }
+
+        private void HideTooltip()
+        {
+            if (this.SlotActionTooltip == null) return;
+            this.SlotActionTooltip.Hide();
+        }
+
+        private void HideCandidatePanel()
+        {
+            if (this.CandidateLoadoutSubPanelController == null) return;
+            this.CandidateLoadoutSubPanelController.HidePanel();
+        }
+
+        private Vector2 GetCurrentPointerScreenPosition()
+        {
+            if (Mouse.current != null)
+            {
+                return Mouse.current.position.ReadValue();
+            }
+
+            return Input.mousePosition;
+        }
+
+        private void HandleTooltipUnequipClicked(EquippedLoadoutSlotUIController slot)
+        {
+            if (slot == null) return;
+
+            bool success = slot.SlotType switch
+            {
+                LoadoutPanelSlotType.Weapon => this.TryUnequipWeapon(slot),
+                LoadoutPanelSlotType.Consumable => this.TryUnequipConsumable(slot),
+                LoadoutPanelSlotType.CarriableItem => this.TryUnequipCarriable(slot),
+                _ => false
+            };
+
+            if (!success) return;
+
+            this.ClearSelection();
+            this.HideCandidatePanel();
+        }
+
+        private bool TryUnequipWeapon(EquippedLoadoutSlotUIController slot)
+        {
+            if (slot == null || this.PlayerCombatLoadoutController == null) return false;
+
+            // Replace this with your real API name if needed.
+            return this.PlayerCombatLoadoutController.TryUnequipWeaponEntry(slot.BoundWeaponEntry);
+        }
+
+        private bool TryUnequipConsumable(EquippedLoadoutSlotUIController slot)
+        {
+            if (slot == null || this.PlayerCombatLoadoutController == null) return false;
+
+            // Replace this with your real API name if needed.
+            return this.PlayerCombatLoadoutController.TryUnequipEquippedConsumableItemEntry(slot.BoundConsumableEntry);
+        }
+
+        private bool TryUnequipCarriable(EquippedLoadoutSlotUIController slot)
+        {
+            if (slot == null || this.PlayerInteractionLoadoutController == null) return false;
+
+            // Replace this with your real API name if needed.
+            return this.PlayerInteractionLoadoutController.TryUnequipCarriableEntry();
+        }
+
+        private void HandleTooltipReplaceClicked(EquippedLoadoutSlotUIController slot)
+        {
+            if (slot == null || this.CandidateLoadoutSubPanelController == null) return;
+
+            this.SelectedSlot = slot;
+            this.HideTooltip();
+            this.RefreshAll();
+
+            switch (slot.SlotType)
+            {
+                case LoadoutPanelSlotType.Weapon:
+                    this.CandidateLoadoutSubPanelController.ShowWeaponCandidates(slot);
+                    break;
+
+                case LoadoutPanelSlotType.Consumable:
+                    this.CandidateLoadoutSubPanelController.ShowConsumableCandidates(slot);
+                    break;
+
+                case LoadoutPanelSlotType.CarriableItem:
+                    this.CandidateLoadoutSubPanelController.ShowCarriableCandidates(slot);
+                    break;
+            }
+        }
+
+        private void HandleTooltipChangeSkillClicked(EquippedLoadoutSlotUIController slot)
+        {
+            if (slot == null || slot.BoundWeaponEntry == null) return;
+
+            this.SelectedSlot = slot;
+            this.HideTooltip();
+            this.RefreshAll();
+
+            this.CandidateLoadoutSubPanelController?.ShowSpecialSkillCandidates(slot);
         }
     }
 }

@@ -26,68 +26,56 @@ namespace FlameOfTheLost
         private RectTransform SubSlotIconRectTransform => _subSlotIconRect;
         private RectTransform SubSlotIconBackupRectTransform => _subSlotIconBackupRect;
 
+        //  2. Runtime States
+        //      2.1. Slot Type 
         public LoadoutPanelSlotType SlotType { get; private set; }
 
+        //      2.2. Bound Content
         public InventoryItemEntry BoundWeaponEntry { get; private set; }
         public InventoryItemEntry BoundConsumableEntry { get; private set; }
-        public InventoryItemEntry BoundInteractableItem { get; private set; }
+        public InventoryItemEntry BoundCarriableItem { get; private set; }
         public SkillProfile BoundSpecialSkill { get; private set; }
 
-        //  2. Events
+        //  3. Events
         public event Action<CandidateLoadoutSlotUIController> OnClicked;
 
         // --- Unity Callbacks ---
         private void Awake()
         {
-            if (this.MainIcon == null)
+            this.CacheReferences();
+
+            if (this.Button != null)
             {
-                Transform mainIconTransform = this.transform.Find("MainIcon");
-                if (mainIconTransform != null) _icon = mainIconTransform.GetComponent<Image>();
+                this.Button.onClick.AddListener(this.HandleClick);
             }
 
-            if (this.Button == null) _button = this.GetComponent<Button>();
-            if (this.Button != null) this.Button.onClick.AddListener(this.HandleClick);
-
-            if (this.SubSlotRoot == null)
-            {
-                Transform subSlotTransform = this.transform.Find("SubSlot");
-                if (subSlotTransform != null) _subSlotRoot = subSlotTransform.gameObject;
-            }
-            if (this.SubSlotIcon == null && this.SubSlotRoot != null)
-            {
-                Transform iconTransform = this.SubSlotRoot.transform.Find("Icon");
-                if (iconTransform != null) _subSlotIcon = iconTransform.GetComponent<Image>();
-            }
-            if (this.SubSlotIconBackup == null && this.SubSlotRoot != null)
-            {
-                Transform iconBackupTransform = this.SubSlotRoot.transform.Find("Icon_Backup");
-                if (iconBackupTransform != null) _subSlotIconBackup = iconBackupTransform.GetComponent<Image>();
-            }
-
-            if (this.SubSlotIconRectTransform == null) _subSlotIconRect = this.SubSlotIcon.rectTransform;
-            if (this.SubSlotIconBackupRectTransform == null) _subSlotIconBackupRect = this.SubSlotIconBackup.rectTransform;
+            this.Clear();
         }
 
         private void OnDestroy()
         {
-            if (this.Button != null) this.Button.onClick.RemoveListener(this.HandleClick);
+            if (this.Button != null)
+            {
+                this.Button.onClick.RemoveListener(this.HandleClick);
+            }
         }
 
         // --- Public APIs ---
         public void BindWeapon(InventoryItemEntry weaponEntry)
         {
-            this.ResetBindings();
+            this.Clear();
 
             this.SlotType = LoadoutPanelSlotType.Weapon;
             this.BoundWeaponEntry = weaponEntry;
 
-            this.SetMainIcon(weaponEntry != null ? weaponEntry.Item.Icon : null, weaponEntry != null);
+            bool hasContent = weaponEntry != null && weaponEntry.Item != null;
+            this.SetMainIcon(hasContent ? weaponEntry.Item.Icon : null, hasContent);
             this.SetSubSlotVisible(false);
         }
 
         public void BindConsumableItem(InventoryItemEntry consumableEntry)
         {
-            this.ResetBindings();
+            this.Clear();
 
             this.SlotType = LoadoutPanelSlotType.Consumable;
             this.BoundConsumableEntry = consumableEntry;
@@ -98,57 +86,48 @@ namespace FlameOfTheLost
             this.ConfigureConsumableQuantitySubSlot(hasContent ? Mathf.Clamp(consumableEntry.Quantity, 0, 99) : 0, hasContent);
         }
 
-        public void BindInteractableItem(InventoryItemEntry interactableEntry)
+        public void BindCarriableItem(InventoryItemEntry carriableEntry)
         {
-            this.ResetBindings();
+            this.Clear();
 
-            this.SlotType = LoadoutPanelSlotType.InteractableItem;
-            this.BoundInteractableItem = interactableEntry;
+            this.SlotType = LoadoutPanelSlotType.CarriableItem;
+            this.BoundCarriableItem = carriableEntry;
 
-            this.SetMainIcon(interactableEntry != null ? interactableEntry.Icon : null, interactableEntry != null);
+            bool hasContent = carriableEntry != null;
+            this.SetMainIcon(hasContent ? carriableEntry.Icon : null, hasContent);
             this.SetSubSlotVisible(false);
         }
 
         public void BindSpecialSkill(SkillProfile skill)
         {
-            this.ResetBindings();
+            this.Clear();
 
             this.SlotType = LoadoutPanelSlotType.SpecialSkillCandidate;
             this.BoundSpecialSkill = skill;
 
-            this.SetMainIcon(skill != null ? skill.Icon : null, skill != null);
+            bool hasContent = skill != null;
+            this.SetMainIcon(hasContent ? skill.Icon : null, hasContent);
             this.SetSubSlotVisible(false);
+        }
+
+        public void Clear()
+        {
+            this.SlotType = LoadoutPanelSlotType.None;
+
+            this.BoundWeaponEntry = null;
+            this.BoundConsumableEntry = null;
+            this.BoundCarriableItem = null;
+            this.BoundSpecialSkill = null;
+
+            this.SetMainIcon(null, false);
+            this.SetSubSlotVisible(false);
+            this.ClearSubSlotIcons();
         }
 
         // --- Helpers ---
         private void HandleClick()
         {
             this.OnClicked?.Invoke(this);
-        }
-
-        private void ResetBindings()
-        {
-            this.SlotType = LoadoutPanelSlotType.None;
-
-            this.BoundWeaponEntry = null;
-            this.BoundConsumableEntry = null;
-            this.BoundInteractableItem = null;
-            this.BoundSpecialSkill = null;
-
-            this.SetMainIcon(null, false);
-            this.SetSubSlotVisible(false);
-
-            if (this.SubSlotIcon != null)
-            {
-                this.SubSlotIcon.sprite = null;
-                this.SubSlotIcon.enabled = false;
-            }
-
-            if (this.SubSlotIconBackup != null)
-            {
-                this.SubSlotIconBackup.sprite = null;
-                this.SubSlotIconBackup.enabled = false;
-            }
         }
 
         private void SetMainIcon(Sprite sprite, bool enabled)
@@ -164,6 +143,20 @@ namespace FlameOfTheLost
             if (this.SubSlotRoot != null)
             {
                 this.SubSlotRoot.SetActive(visible);
+            }
+        }
+        private void ClearSubSlotIcons()
+        {
+            if (this.SubSlotIcon != null)
+            {
+                this.SubSlotIcon.sprite = null;
+                this.SubSlotIcon.enabled = false;
+            }
+
+            if (this.SubSlotIconBackup != null)
+            {
+                this.SubSlotIconBackup.sprite = null;
+                this.SubSlotIconBackup.enabled = false;
             }
         }
 
@@ -229,6 +222,48 @@ namespace FlameOfTheLost
             {
                 this.SubSlotIconBackup.sprite = SharedSpritesUIUtility.GetDigitSprite(secondDigit);
                 this.SubSlotIconBackup.enabled = true;
+            }
+        }
+
+        private void CacheReferences()
+        {
+            if (this.Button == null)
+            {
+                _button = this.GetComponent<Button>();
+            }
+
+            if (this.MainIcon == null)
+            {
+                Transform found = this.transform.Find("MainIcon");
+                if (found != null) _icon = found.GetComponent<Image>();
+            }
+
+            if (this.SubSlotRoot == null)
+            {
+                Transform found = this.transform.Find("SubSlot");
+                if (found != null) _subSlotRoot = found.gameObject;
+            }
+
+            if (this.SubSlotIcon == null && this.SubSlotRoot != null)
+            {
+                Transform found = this.SubSlotRoot.transform.Find("Icon");
+                if (found != null) _subSlotIcon = found.GetComponent<Image>();
+            }
+
+            if (this.SubSlotIconBackup == null && this.SubSlotRoot != null)
+            {
+                Transform found = this.SubSlotRoot.transform.Find("Icon_Backup");
+                if (found != null) _subSlotIconBackup = found.GetComponent<Image>();
+            }
+
+            if (this.SubSlotIconRectTransform == null && this.SubSlotIcon != null)
+            {
+                _subSlotIconRect = this.SubSlotIcon.rectTransform;
+            }
+
+            if (this.SubSlotIconBackupRectTransform == null && this.SubSlotIconBackup != null)
+            {
+                _subSlotIconBackupRect = this.SubSlotIconBackup.rectTransform;
             }
         }
     }

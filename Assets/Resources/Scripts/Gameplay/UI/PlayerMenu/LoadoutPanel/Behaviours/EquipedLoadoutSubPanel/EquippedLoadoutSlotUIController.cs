@@ -41,7 +41,7 @@ namespace FlameOfTheLost
 
         public InventoryItemEntry BoundWeaponEntry { get; private set; }
         public InventoryItemEntry BoundConsumableEntry { get; private set; }
-        public InventoryItemEntry BoundInteractableItemEntry { get; private set; }
+        public InventoryItemEntry BoundCarriableItemEntry { get; private set; }
         public SkillProfile BoundWeaponSpecialSkill { get; private set; }
 
         public bool IsSelected { get; private set; }
@@ -79,8 +79,14 @@ namespace FlameOfTheLost
                 if (iconBackupTransform != null) _subSlotIconBackup = iconBackupTransform.GetComponent<Image>();
             }
 
-            if (this.SubSlotIconRectTransform == null) _subSlotIconRect = this.SubSlotIcon.rectTransform;
-            if (this.SubSlotIconBackupRectTransform == null) _subSlotIconBackupRect = this.SubSlotIconBackup.rectTransform;
+            if (this.SubSlotIconRectTransform == null && this.SubSlotIcon != null)
+            {
+                _subSlotIconRect = this.SubSlotIcon.rectTransform;
+            }
+            if (this.SubSlotIconBackupRectTransform == null && this.SubSlotIconBackup != null)
+            {
+                _subSlotIconBackupRect = this.SubSlotIconBackup.rectTransform;
+            }
         }
 
         private void OnDestroy()
@@ -136,19 +142,19 @@ namespace FlameOfTheLost
             this.RefreshSlotColor();
         }
 
-        public void BindInteractableItem(InventoryItemEntry interactableEntry, bool isSelected, bool isMainButtonInteractable)
+        public void BindCarriableItem(InventoryItemEntry carriableEntry, bool isSelected, bool isMainButtonInteractable)
         {
             this.ResetBindings();
 
-            this.SlotType = LoadoutPanelSlotType.InteractableItem;
+            this.SlotType = LoadoutPanelSlotType.CarriableItem;
             this.SlotIndex = 0;
-            this.BoundInteractableItemEntry = interactableEntry;
+            this.BoundCarriableItemEntry = carriableEntry;
 
             this.IsActive = false;
             this.IsSelected = isSelected;
 
-            bool hasContent = interactableEntry != null && interactableEntry.Item != null;
-            this.SetMainIcon(hasContent ? interactableEntry.Icon : null, hasContent);
+            bool hasContent = carriableEntry != null && carriableEntry.Item != null;
+            this.SetMainIcon(hasContent ? carriableEntry.Icon : null, hasContent);
 
             this.SetSubSlotVisible(false);
 
@@ -159,9 +165,23 @@ namespace FlameOfTheLost
 
         public bool HasContent()
         {
-            return this.BoundWeaponEntry != null ||
-                   this.BoundConsumableEntry != null ||
-                   (this.BoundInteractableItemEntry != null && this.BoundInteractableItemEntry.Item != null);
+            return this.SlotType switch
+            {
+                LoadoutPanelSlotType.Weapon =>
+                    this.BoundWeaponEntry != null &&
+                    this.BoundWeaponEntry.Item != null,
+
+                LoadoutPanelSlotType.Consumable =>
+                    this.BoundConsumableEntry != null &&
+                    this.BoundConsumableEntry.Item != null &&
+                    this.BoundConsumableEntry.Quantity > 0,
+
+                LoadoutPanelSlotType.CarriableItem =>
+                    this.BoundCarriableItemEntry != null &&
+                    this.BoundCarriableItemEntry.Item != null,
+
+                _ => false
+            };
         }
 
         private void HandleClick()
@@ -184,7 +204,7 @@ namespace FlameOfTheLost
 
             this.BoundWeaponEntry = null;
             this.BoundConsumableEntry = null;
-            this.BoundInteractableItemEntry = null;
+            this.BoundCarriableItemEntry = null;
             this.BoundWeaponSpecialSkill = null;
 
             this.IsSelected = false;

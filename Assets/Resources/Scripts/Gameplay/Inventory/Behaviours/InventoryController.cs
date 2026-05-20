@@ -44,15 +44,15 @@ namespace FlameOfTheLost
         public IReadOnlyList<InventoryItemEntry> AllConsumableItemEntries => this.GetEntriesOfType<ConsumableItemProfile>();
         public IReadOnlyList<InventoryItemEntry> AvailableConsumableItemEntries => this.GetEntriesOfType<ConsumableItemProfile>(availableOnly: true);
 
-        public IReadOnlyList<InventoryItemEntry> AllInteractableItemEntries => this.GetEntriesOfType<InteractableItemProfile>();
-        public IReadOnlyList<InventoryItemEntry> AvailableInteractableItemEntries => this.GetEntriesOfType<InteractableItemProfile>(availableOnly: true);
+        public IReadOnlyList<InventoryItemEntry> AllInteractableItemEntries => this.GetEntriesOfType<CarriableItemProfile>();
+        public IReadOnlyList<InventoryItemEntry> AvailableCarriableItemEntries => this.GetEntriesOfType<CarriableItemProfile>(availableOnly: true);
 
         public IReadOnlyList<InventoryItemEntry> AllLightSourceEntries => this.GetEntriesOfType<LightSourceProfile>();
         public IReadOnlyList<InventoryItemEntry> AllKeyItemEntries => this.GetEntriesOfType<KeyItemProfile>();
 
         public bool TryGetWeaponFromEntry(InventoryItemEntry weaponEntry, out WeaponProfile weapon) => this.TryGetItemFromEntry(weaponEntry, out weapon);
         public bool TryGetConsumableItemFromEntry(InventoryItemEntry consumableEntry, out ConsumableItemProfile consumable) => this.TryGetItemFromEntry(consumableEntry, out consumable);
-        public bool TryGetInteractableItemFromEntry(InventoryItemEntry interactableEntry, out InteractableItemProfile interactable) => this.TryGetItemFromEntry(interactableEntry, out interactable);
+        public bool TryGetCarriableItemFromEntry(InventoryItemEntry interactableEntry, out CarriableItemProfile interactable) => this.TryGetItemFromEntry(interactableEntry, out interactable);
 
         //  2. (Learned) Special Skills
         [Header("Learned Special Skills")]

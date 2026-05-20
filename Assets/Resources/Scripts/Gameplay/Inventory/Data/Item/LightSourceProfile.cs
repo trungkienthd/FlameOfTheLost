@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [CreateAssetMenu(fileName = "LightSourceProfile", menuName = "Data/FlameOfTheLost/Items/LightSource")]
-    public class LightSourceProfile : InteractableItemProfile
+    public class LightSourceProfile : CarriableItemProfile
     {
         public override bool IsStackable => false;
         public override int MaxStackSize => 1;

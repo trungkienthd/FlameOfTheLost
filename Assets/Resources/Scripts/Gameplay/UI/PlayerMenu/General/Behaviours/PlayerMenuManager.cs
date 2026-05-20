@@ -21,7 +21,6 @@ namespace FlameOfTheLost
         private PlayerMenuPanelController QuestPanelController => _questPanel;
         private PlayerMenuPanelController MapPanelController => _mapPanel;
 
-
         private const string PLAYER_ACTION_MAP = "Player";
         private const string UI_ACTION_MAP = "PlayerMenu";
 

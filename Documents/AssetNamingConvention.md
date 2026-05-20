@@ -96,6 +96,21 @@ SFUI_Panel_Dialogue.png
 
 ---
 
+### 3.5 2D Pixel Quest Vol.3 - The UI/GUI
+**Publisher:** 7Soul
+
+**Prefix:**  BAPQ3UI_
+
+**Usage Scope:**
+- UI icons
+- GUI elements
+- Buttons
+- Panels
+- HUD elements
+- Pixel-art interface decorations
+
+---
+
 ## 4. Custom Project Assets
 
 All internally created assets must use a dedicated project prefix: FTL_

@@ -36,10 +36,10 @@ namespace FlameOfTheLost
             }
             if (this.UnequipButton == null || this.ReplaceButton == null || this.ChangeSkillButton == null)
             {
-                GameObject buttonsRoot = this.transform.Find("ButtonsRoot")?.gameObject;
-                GameObject unequipButton        = buttonsRoot?.transform.Find("UnequipButton")?.gameObject;
-                GameObject replaceButton        = buttonsRoot?.transform.Find("ReplaceButton")?.gameObject;
-                GameObject changeSkillButton    = buttonsRoot?.transform.Find("ChangeSkillButton")?.gameObject;
+                GameObject buttonListRoot = this.transform.Find("ButtonListRoot")?.gameObject;
+                GameObject unequipButton        = buttonListRoot?.transform.Find("UnequipButton")?.gameObject;
+                GameObject replaceButton        = buttonListRoot?.transform.Find("ReplaceButton")?.gameObject;
+                GameObject changeSkillButton    = buttonListRoot?.transform.Find("ChangeSkillButton")?.gameObject;
                 if (unequipButton != null)      _unequipButton      = unequipButton.GetComponent<Button>();
                 if (replaceButton != null)      _replaceButton      = replaceButton.GetComponent<Button>();
                 if (changeSkillButton != null)  _changeSkillButton  = changeSkillButton.GetComponent<Button>();
@@ -67,8 +67,8 @@ namespace FlameOfTheLost
         }
         private void OnDestroy()
         {
-            if (this.UnequipButton != null) this.UnequipButton.onClick.RemoveListener(this.HandleUnequipClicked);
-            if (this.ReplaceButton != null) this.ReplaceButton.onClick.RemoveListener(this.HandleReplaceClicked);
+            if (this.UnequipButton != null)     this.UnequipButton.onClick.RemoveListener(this.HandleUnequipClicked);
+            if (this.ReplaceButton != null)     this.ReplaceButton.onClick.RemoveListener(this.HandleReplaceClicked);
             if (this.ChangeSkillButton != null) this.ChangeSkillButton.onClick.RemoveListener(this.HandleChangeSkillClicked);
         }
 
@@ -96,9 +96,10 @@ namespace FlameOfTheLost
                 this.RectTransform.SetParent(tooltipParent, worldPositionStays: false);
             }
 
-            while (this.gameObject.activeInHierarchy == false)
+            this.gameObject.SetActive(true);
+            if (!this.gameObject.activeInHierarchy)
             {
-                // Wait until the GameObject is active in the hierarchy before proceeding
+                Debug.LogWarning($"{nameof(EquippedLoadoutSlotActionTooltipController)} could not be shown because one of its parent GameObjects is inactive. Try again...");
                 this.gameObject.SetActive(true);
             }
 
@@ -160,13 +161,13 @@ namespace FlameOfTheLost
                 case LoadoutPanelSlotType.Consumable:
                     return slot.BoundConsumableEntry != null && slot.BoundConsumableEntry.Item != null
                         ? $"{slot.BoundConsumableEntry.Item.DisplayName} ({slot.BoundConsumableEntry.Quantity})"
-                        : "Empty Consumable Slot";
+                        : "Empty Consumable Item Slot";
 
 
-                case LoadoutPanelSlotType.InteractableItem:
-                    return slot.BoundInteractableItemEntry != null && slot.BoundInteractableItemEntry.Item != null
-                        ? slot.BoundInteractableItemEntry.Item.DisplayName
-                        : "Empty Interactable Slot";
+                case LoadoutPanelSlotType.CarriableItem:
+                    return slot.BoundCarriableItemEntry != null && slot.BoundCarriableItemEntry.Item != null
+                        ? slot.BoundCarriableItemEntry.Item.DisplayName
+                        : "Empty Carriable Item Slot";
 
                 default:
                     return string.Empty;

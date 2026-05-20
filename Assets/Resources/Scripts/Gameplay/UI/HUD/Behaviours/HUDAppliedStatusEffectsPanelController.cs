@@ -5,12 +5,15 @@ namespace FlameOfTheLost
 {
     public class HUDAppliedStatusEffectsPanelController : MonoBehaviour
     {
+        // --- States ---
+        //  1. References
         [Header("References")]
         [SerializeField] private StatusEffectController _playerStatusEffectController;
         [SerializeField] private AppliedStatusEffectSlotUIController _slotPrefabCtrl;
         private StatusEffectController PlayerStatusEffectController => _playerStatusEffectController;
         private AppliedStatusEffectSlotUIController SlotPrefabController => _slotPrefabCtrl;
 
+        //  2. Layout Configuration
         [Header("Layout")]
         [SerializeField] private float _startX = 20f;
         [SerializeField] private float _stepX = 80f;
@@ -19,72 +22,111 @@ namespace FlameOfTheLost
         private float StepX => _stepX;
         private int MaxSlots => _maxSlots;
 
+        //  3. Runtime
         private readonly List<AppliedStatusEffectSlotUIController> _spawnedSlots = new();
         private IReadOnlyList<AppliedStatusEffectSlotUIController> SpawnedSlots => _spawnedSlots;
 
+        // --- Unity Callbacks ---
         private void Awake()
         {
-            if (this.PlayerStatusEffectController == null) _playerStatusEffectController = UnityEngine.Object.FindFirstObjectByType<StatusEffectController>();
+            if (this.PlayerStatusEffectController == null)
+            {
+                GameObject player = GameObject.Find("Player");
+                if (player != null) _playerStatusEffectController = player.GetComponentInChildren<StatusEffectController>();
+            }
         }
         private void OnEnable()
         {
             if (this.PlayerStatusEffectController != null)
             {
-                this.PlayerStatusEffectController.OnRuntimeListChanged += this.RefreshUI;
-                this.PlayerStatusEffectController.OnRuntimeValuesChanged += this.RefreshUI;
+                this.PlayerStatusEffectController.OnRuntimeListChanged += this.RebuildSlots;
+                this.PlayerStatusEffectController.OnRuntimeValuesChanged += this.RefreshSlotValues;
             }
 
-            this.RefreshUI();
+            this.RebuildSlots();
         }
+
         private void OnDisable()
         {
             if (this.PlayerStatusEffectController != null)
             {
-                this.PlayerStatusEffectController.OnRuntimeListChanged -= this.RefreshUI;
-                this.PlayerStatusEffectController.OnRuntimeValuesChanged -= this.RefreshUI;
+                this.PlayerStatusEffectController.OnRuntimeListChanged -= this.RebuildSlots;
+                this.PlayerStatusEffectController.OnRuntimeValuesChanged -= this.RefreshSlotValues;
             }
         }
 
 
-        private void RefreshUI()
+        private void RebuildSlots()
         {
             this.ClearSlots();
 
-            if (this.PlayerStatusEffectController == null || this.SlotPrefabController == null) return;
+            if (this.PlayerStatusEffectController == null) return;
+            if (this.SlotPrefabController == null) return;
+            if (this.MaxSlots <= 0) return;
 
             IReadOnlyList<RuntimeStatusEffect> runtimeStatusEffects = this.PlayerStatusEffectController.RuntimeStatusEffects;
             if (runtimeStatusEffects == null || runtimeStatusEffects.Count == 0) return;
 
-            int startIndex = Mathf.Max(0, runtimeStatusEffects.Count - this.MaxSlots);
-            int slotIndex = 0;
-
-            for (int i = startIndex; i < runtimeStatusEffects.Count; i++)
+            // RuntimeStatusEffects order is oldest -> newest.
+            // Therefore, we loop backwards so the newest one appears first / farthest left.
+            int createdSlotCount = 0;
+            for (int i = runtimeStatusEffects.Count - 1; i >= 0; i--)
             {
+                if (createdSlotCount >= this.MaxSlots) break; 
+
                 RuntimeStatusEffect runtimeStatusEffect = runtimeStatusEffects[i];
                 if (runtimeStatusEffect == null || runtimeStatusEffect.Profile == null) continue;
 
                 AppliedStatusEffectSlotUIController newSlot = UnityEngine.Object.Instantiate(this.SlotPrefabController, this.transform);
-                newSlot.name = $"AppliedStatusEffectSlot_{slotIndex}_{runtimeStatusEffect.Profile.name}";
-                newSlot.SetIcon(runtimeStatusEffect.Profile.Icon);
+                newSlot.name = $"AppliedStatusEffectSlot_{createdSlotCount}_{runtimeStatusEffect.Profile.name}";
+                newSlot.Bind(runtimeStatusEffect);
 
-                RectTransform rectTransform = newSlot.transform as RectTransform;
-                if (rectTransform != null)
-                {
-                    Vector2 anchoredPosition = rectTransform.anchoredPosition;
-                    anchoredPosition.x = this.StartX + (slotIndex * this.StepX);
-                    rectTransform.anchoredPosition = anchoredPosition;
-                }
-                else
-                {
-                    Vector3 localPosition = newSlot.transform.localPosition;
-                    localPosition.x = this.StartX + (slotIndex * this.StepX);
-                    newSlot.transform.localPosition = localPosition;
-                }
+                this.SetSlotPosition(newSlot, createdSlotCount);
 
                 _spawnedSlots.Add(newSlot);
-                slotIndex++;
+
+                createdSlotCount++;
             }
         }
+
+        private void RefreshSlotValues()
+        {
+            for (int i = this.SpawnedSlots.Count - 1; i >= 0; i--)
+            {
+                AppliedStatusEffectSlotUIController slot = this.SpawnedSlots[i];
+
+                if (slot == null)
+                {
+                    _spawnedSlots.RemoveAt(i);
+                    continue;
+                }
+
+                slot.Refresh();
+            }
+        }
+
+        private void SetSlotPosition(AppliedStatusEffectSlotUIController slot, int slotIndex)
+        {
+            if (slot == null) return;
+
+            RectTransform rectTransform = slot.transform as RectTransform;
+
+            float x = this.StartX + slotIndex * this.StepX;
+
+            if (rectTransform != null)
+            {
+                Vector2 anchoredPosition = rectTransform.anchoredPosition;
+                anchoredPosition.x = x;
+                rectTransform.anchoredPosition = anchoredPosition;
+            }
+            else
+            {
+                Vector3 localPosition = slot.transform.localPosition;
+                localPosition.x = x;
+                slot.transform.localPosition = localPosition;
+            }
+        }
+
 
         private void ClearSlots()
         {

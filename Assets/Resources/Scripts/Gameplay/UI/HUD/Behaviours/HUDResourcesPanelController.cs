@@ -34,7 +34,7 @@ namespace FlameOfTheLost
             if (this.PlayerResourcesController == null)
             {
                 GameObject player = GameObject.Find("Player");
-                if (player != null) _resources = player.GetComponent<CharacterResourcesController>();
+                if (player != null) _resources = player.GetComponentInChildren<CharacterResourcesController>();
                 if (this.PlayerResourcesController == null) Debug.LogWarning($"[{this.gameObject.name}.TopLeftResourcesPanelUIController] Player's CharacterResourcesController is not found.");
             }
 

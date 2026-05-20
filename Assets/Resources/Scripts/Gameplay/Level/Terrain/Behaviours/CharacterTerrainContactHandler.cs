@@ -1,0 +1,140 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace FlameOfTheLost
+{
+    public class CharacterTerrainContactHandler : MonoBehaviour
+    {
+        // --- States ---
+        //  1. Traversal type
+        [Header("Traversal")]
+        [SerializeField] private CharacterTraversalType _traversalType = CharacterTraversalType.Humanoid;
+        public CharacterTraversalType TraversalType => _traversalType;
+
+        //  2. References 
+        [Header("References")]
+        [SerializeField] private StatusEffectController _statusEffectController;
+        [SerializeField] private CharacterCombatStatusEffectApplicationHandler _statusEffectApplicationHandler;
+        private StatusEffectController StatusEffectController => _statusEffectController;
+        private CharacterCombatStatusEffectApplicationHandler StatusEffectApplicationHandler => _statusEffectApplicationHandler;
+
+        [Header("Refresh")]
+        [SerializeField, Min(0.02f)] private float _terrainStatusEffectRefreshInterval = 0.15f;
+        public float TerrainStatusEffectRefreshInterval => _terrainStatusEffectRefreshInterval;
+
+        //  4. Runtime
+        private readonly HashSet<TilemapTerrainController> _touchingTerrains = new();
+
+        private TilemapTerrainController _currentTerrainCtrl;
+        private TilemapTerrainController CurrentTerrainCtrl => _currentTerrainCtrl;
+
+        private float _nextTerrainStatusEffectRefreshTime;
+        private float NextTerrainStatusEffectRefreshTime => _nextTerrainStatusEffectRefreshTime;
+
+        // --- Unity Callbacks ---
+        private void Awake()
+        {
+            if (this.StatusEffectController == null) _statusEffectController = this.GetComponentInChildren<StatusEffectController>();
+            if (this.StatusEffectApplicationHandler == null) _statusEffectApplicationHandler = this.GetComponentInChildren<CharacterCombatStatusEffectApplicationHandler>();
+        }
+        private void Update()
+        {
+            if (this.CurrentTerrainCtrl == null) return;
+            if (Time.time < this.NextTerrainStatusEffectRefreshTime) return;
+
+            _nextTerrainStatusEffectRefreshTime = Time.time + this.TerrainStatusEffectRefreshInterval;
+
+            this.ApplyCurrentTerrainStatusEffects();
+        }
+
+        // --- Public APIs ---
+        public void RegisterTerrain(TilemapTerrainController terrainCtrl)
+        {
+            if (terrainCtrl == null) return;
+            if (terrainCtrl.TerrainProfile == null) return;
+
+            _touchingTerrains.Add(terrainCtrl);
+            this.RefreshCurrentTerrain();
+        }
+
+        public void UnregisterTerrain(TilemapTerrainController terrainCtrl)
+        {
+            if (terrainCtrl == null) return;
+
+            _touchingTerrains.Remove(terrainCtrl);
+
+            if (this.CurrentTerrainCtrl == terrainCtrl)
+            {
+                this.ClearCurrentTerrainStatusEffects();
+                _currentTerrainCtrl = null;
+            }
+
+            this.RefreshCurrentTerrain();
+        }
+
+        // --- Helpers ---
+        private void RefreshCurrentTerrain()
+        {
+            TilemapTerrainController bestTerrainCtrl = this.GetHighestPriorityTerrainController();
+
+            if (bestTerrainCtrl == this.CurrentTerrainCtrl) return;
+
+            this.ClearCurrentTerrainStatusEffects();
+
+            _currentTerrainCtrl = bestTerrainCtrl;
+
+            _nextTerrainStatusEffectRefreshTime = 0f;
+
+            this.ApplyCurrentTerrainStatusEffects();
+        }
+
+        private TilemapTerrainController GetHighestPriorityTerrainController()
+        {
+            TilemapTerrainController bestTerrainCtrl = null;
+            int bestPriority = int.MinValue;
+
+            foreach (TilemapTerrainController terrainCtrl in _touchingTerrains)
+            {
+                if (terrainCtrl == null) continue;
+                if (terrainCtrl.TerrainProfile == null) continue;
+
+                int priority = terrainCtrl.Priority;
+
+                if (bestTerrainCtrl == null || priority > bestPriority)
+                {
+                    bestTerrainCtrl = terrainCtrl;
+                    bestPriority = priority;
+                }
+            }
+
+            return bestTerrainCtrl;
+        }
+
+        private void ApplyCurrentTerrainStatusEffects()
+        {
+            if (this.CurrentTerrainCtrl == null) return;
+            if (this.CurrentTerrainCtrl.TerrainProfile == null) return;
+            if (this.StatusEffectApplicationHandler == null) return;
+
+            TerrainProfile terrainProfile = this.CurrentTerrainCtrl.TerrainProfile;
+
+            if (!terrainProfile.TryGetRule(_traversalType, out TerrainStatusEffectRule rule)) return;
+            if (rule == null) return;
+            if (!rule.CanEnter) return;
+
+            this.StatusEffectApplicationHandler.TryApplyStatusEffectApplicationsToSelf
+            (
+                rule.Applications,
+                this.CurrentTerrainCtrl.gameObject
+            );
+        }
+
+        private void ClearCurrentTerrainStatusEffects()
+        {
+            if (this.CurrentTerrainCtrl == null) return;
+            if (this.StatusEffectController == null) return;
+
+            this.StatusEffectController.RemoveStatusEffectsFromSource(this.CurrentTerrainCtrl.gameObject);
+        }
+    }
+}

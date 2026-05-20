@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,8 +50,8 @@ namespace FlameOfTheLost
             if (this.PlayerCombatLoadoutController == null)
             {
                 GameObject player = GameObject.Find("Player");
-                _playerCombatLoadoutController = player.GetComponent<CharacterCombatLoadoutController>();
-                if (this.PlayerCombatLoadoutController == null) Debug.LogWarning($"[{this.gameObject.name}.BottomLeftCombatHUDController] Player's CharacterCombatLoadoutController is not found.");
+                _playerCombatLoadoutController = player.GetComponentInChildren<CharacterCombatLoadoutController>();
+                if (this.PlayerCombatLoadoutController == null) Debug.LogWarning($"[{this.gameObject.name}.HUDCombatLoadoutPanelController] Player's CharacterCombatLoadoutController is not found.");
             }
         }
         private void Start()
