@@ -4,33 +4,33 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public partial class InventoryItemEntrySubPanelController : MonoBehaviour
+    public class InventoryPanelItemEntryListSubPanelController : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private InventoryController _inventoryController;
         [SerializeField] private InventoryNavigationSubPanelController _navigationSubPanelController;
         [SerializeField] private InventoryItemEntrySubPanelSearchBarHandler _searchBarHandler;
-        [SerializeField] private InventoryItemEntrySubPanelPaginationHandler _paginationHandler;
-        [SerializeField] private SelectedInventoryItemEntryDisplayHandler _selectedDisplayHandler;
+        [SerializeField] private ItemEntryListPaginationHandler _paginationHandler;
+        [SerializeField] private InventoryPanelSelectedItemEntryDisplayHandler _selectedDisplayHandler;
         private InventoryController PlayerInventoryController => _inventoryController;
         private InventoryNavigationSubPanelController NavigationSubPanelController => _navigationSubPanelController;
         private InventoryItemEntrySubPanelSearchBarHandler SearchBarHandler => _searchBarHandler;
-        private InventoryItemEntrySubPanelPaginationHandler PaginationHandler => _paginationHandler;
-        private SelectedInventoryItemEntryDisplayHandler SelectedDisplayHandler => _selectedDisplayHandler;
+        private ItemEntryListPaginationHandler PaginationHandler => _paginationHandler;
+        private InventoryPanelSelectedItemEntryDisplayHandler SelectedDisplayHandler => _selectedDisplayHandler;
 
         [Header("Entries")]
-        [SerializeField] private RectTransform _itemEntriesParent;
+        [SerializeField] private RectTransform _itemEntryListRoot;
         [SerializeField] private GameObject _slotPrefab;
         [SerializeField] private Vector2 _startPosition = new(-450f, 200f);
         [SerializeField] private Vector2 _step = new(150f, 150f);
-        private RectTransform ItemEntriesParent => _itemEntriesParent;
+        private RectTransform ItemEntryListRoot => _itemEntryListRoot;
         private GameObject SlotPrefab => _slotPrefab;
         private Vector2 StartPosition => _startPosition;
         private Vector2 Step => _step;
 
-        private readonly List<InventoryItemEntrySlotUIController> _slotControllers = new();
+        private readonly List<ItemEntrySlotController> _slotControllers = new();
         private readonly List<InventoryItemEntry> _filteredItemEntries = new();
-        private IReadOnlyList<InventoryItemEntrySlotUIController> SlotControllers => _slotControllers;
+        private IReadOnlyList<ItemEntrySlotController> SlotControllers => _slotControllers;
         private IReadOnlyList<InventoryItemEntry> FilteredItemEntries => _filteredItemEntries;
 
         private ItemType _currentItemType = ItemType.Weapon;
@@ -66,18 +66,18 @@ namespace FlameOfTheLost
             if (this.PaginationHandler == null)
             {
                 Transform pagination = this.transform.Find("Pagination");
-                if (pagination != null) _paginationHandler = pagination.GetComponent<InventoryItemEntrySubPanelPaginationHandler>();
+                if (pagination != null) _paginationHandler = pagination.GetComponent<ItemEntryListPaginationHandler>();
             }
             if (this.SelectedDisplayHandler == null)
             {
                 Transform selectedItemEntryDisplay = this.transform.Find("SelectedItemEntryDisplay");
-                if (selectedItemEntryDisplay != null) _selectedDisplayHandler = selectedItemEntryDisplay.GetComponent<SelectedInventoryItemEntryDisplayHandler>();
+                if (selectedItemEntryDisplay != null) _selectedDisplayHandler = selectedItemEntryDisplay.GetComponent<InventoryPanelSelectedItemEntryDisplayHandler>();
             }
 
-            if (this.ItemEntriesParent == null)
+            if (this.ItemEntryListRoot == null)
             {
-                Transform itemEntriesParent = this.transform.Find("ItemEntries");
-                if (itemEntriesParent != null) _itemEntriesParent = itemEntriesParent.GetComponent<RectTransform>();
+                Transform itemEntriesParent = this.transform.Find("ItemEntryList");
+                if (itemEntriesParent != null) _itemEntryListRoot = itemEntriesParent.GetComponent<RectTransform>();
             }
             if (this.SlotPrefab == null) _slotPrefab = Resources.Load<GameObject>("Prefabs/UI/InventoryItemEntrySubPanelSlot");
 
@@ -101,7 +101,7 @@ namespace FlameOfTheLost
             
             for (int i = 0; i < this.SlotControllers.Count; i++)
             {
-                InventoryItemEntrySlotUIController slot = this.SlotControllers[i];
+                ItemEntrySlotController slot = this.SlotControllers[i];
                 if (slot == null) continue;
 
                 slot.OnClicked -= this.HandleSlotClicked;
@@ -126,7 +126,7 @@ namespace FlameOfTheLost
             this.RefreshVisibleSlots();
         }
 
-        private void HandleSlotClicked(InventoryItemEntrySlotUIController clickedSlot)
+        private void HandleSlotClicked(ItemEntrySlotController clickedSlot)
         {
             if (clickedSlot == null) return;
             if (this.SelectedDisplayHandler == null) return;
@@ -200,18 +200,18 @@ namespace FlameOfTheLost
 
         private void CreateSlots()
         {
-            if (this.SlotPrefab == null || this.ItemEntriesParent == null) return;
+            if (this.SlotPrefab == null || this.ItemEntryListRoot == null) return;
             if (this.SlotControllers.Count > 0) return;
             if (this.PaginationHandler == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.InventoryItemEntrySubPanelController] PaginationHandler is required", this);
+                Debug.LogError($"[{this.gameObject.name}.InventoryPanelItemEntryListSubPanelController] PaginationHandler is required", this);
                 return;
             }
 
             for (int i = 0; i < this.PaginationHandler.SlotsPerPage; i++)
             {
-                GameObject slot = UnityEngine.Object.Instantiate(this.SlotPrefab, this.ItemEntriesParent);
-                InventoryItemEntrySlotUIController slotController = slot.GetComponent<InventoryItemEntrySlotUIController>();
+                GameObject slot = UnityEngine.Object.Instantiate(this.SlotPrefab, this.ItemEntryListRoot);
+                ItemEntrySlotController slotController = slot.GetComponent<ItemEntrySlotController>();
                 RectTransform rectTransform = slot.transform as RectTransform;
 
                 int column = i % Mathf.Max(1, this.PaginationHandler.ColumnCount);
@@ -242,7 +242,7 @@ namespace FlameOfTheLost
 
             for (int i = 0; i < this.SlotControllers.Count; i++)
             {
-                InventoryItemEntrySlotUIController slot = this.SlotControllers[i];
+                ItemEntrySlotController slot = this.SlotControllers[i];
                 if (slot == null) continue;
 
                 int entryIndex = startIndex + i;

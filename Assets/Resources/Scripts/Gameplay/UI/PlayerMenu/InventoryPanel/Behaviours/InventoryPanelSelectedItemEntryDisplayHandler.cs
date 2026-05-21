@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class SelectedInventoryItemEntryDisplayHandler : MonoBehaviour
+    public class InventoryPanelSelectedItemEntryDisplayHandler : MonoBehaviour
     {
         [SerializeField] private Image _iconImage;
         [SerializeField] private TMP_Text _displayNameText;

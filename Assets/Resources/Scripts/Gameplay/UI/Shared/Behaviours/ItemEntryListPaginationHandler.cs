@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class InventoryItemEntrySubPanelPaginationHandler : MonoBehaviour
+    public class ItemEntryListPaginationHandler : MonoBehaviour
     {
         [SerializeField] private Button _buttonPrevious;
         [SerializeField] private Button _buttonNext;

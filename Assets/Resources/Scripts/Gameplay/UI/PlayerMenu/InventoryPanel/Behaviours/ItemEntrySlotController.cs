@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class InventoryItemEntrySlotUIController : MonoBehaviour
+    public class ItemEntrySlotController : MonoBehaviour
     {
         [Header("References (Main)")]
         [SerializeField] private Button _button;
@@ -31,7 +31,7 @@ namespace FlameOfTheLost
         private Color NormalColor => _normalColor;
         private Color SelectedColor => _selectedColor;
 
-        public event Action<InventoryItemEntrySlotUIController> OnClicked;
+        public event Action<ItemEntrySlotController> OnClicked;
 
         public InventoryItemEntry BoundEntry { get; private set; }
 

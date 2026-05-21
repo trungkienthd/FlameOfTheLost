@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class HUDActiveCarriableItemSlotController : MonoBehaviour
+    public class UICanvasHUDActiveCarriableItemSlotController : MonoBehaviour
     {
         // --- States ---
         //  1. References

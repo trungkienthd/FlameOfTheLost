@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class HUDResourcesPanelController : MonoBehaviour
+    public class UICanvasHUDResourcesPanelController : MonoBehaviour
     {
         [Header("Gameplay Resources (Player)")]
         [SerializeField] private CharacterResourcesController _resources;
@@ -114,26 +114,26 @@ namespace FlameOfTheLost
             if (this.HPBar != null && this.PlayerResourcesController != null)
             {
                 this.ReadHealth(out int currentHP, out int maxHP);
-                HUDResourcesPanelController.PushToBar(this.HPBar, currentHP, maxHP);
+                UICanvasHUDResourcesPanelController.PushToBar(this.HPBar, currentHP, maxHP);
             }
 
             if (this.FPBar != null && this.PlayerResourcesController != null)
             {
                 this.ReadFP(out int currentFP, out int maxFP);
-                HUDResourcesPanelController.PushToBar(this.FPBar, currentFP, maxFP);
+                UICanvasHUDResourcesPanelController.PushToBar(this.FPBar, currentFP, maxFP);
             }
 
             if (this.StaminaBar != null && this.PlayerResourcesController != null)
             {
                 this.ReadStamina(out int currentStamina, out int maxStamina);
-                HUDResourcesPanelController.PushToBar(this.StaminaBar, currentStamina, maxStamina);
+                UICanvasHUDResourcesPanelController.PushToBar(this.StaminaBar, currentStamina, maxStamina);
             }
         }
 
         // --- Event handlers (C# event path) ---
-        private void HandleHealthChanged(int currentValue, int maxValue) => HUDResourcesPanelController.PushToBar(this.HPBar, currentValue, maxValue);
-        private void HandleFPChanged(int currentValue, int maxValue) => HUDResourcesPanelController.PushToBar(this.FPBar, currentValue, maxValue);
-        private void HandleStaminaChanged(int currentValue, int maxValue) => HUDResourcesPanelController.PushToBar(this.StaminaBar, currentValue, maxValue);
+        private void HandleHealthChanged(int currentValue, int maxValue) => UICanvasHUDResourcesPanelController.PushToBar(this.HPBar, currentValue, maxValue);
+        private void HandleFPChanged(int currentValue, int maxValue) => UICanvasHUDResourcesPanelController.PushToBar(this.FPBar, currentValue, maxValue);
+        private void HandleStaminaChanged(int currentValue, int maxValue) => UICanvasHUDResourcesPanelController.PushToBar(this.StaminaBar, currentValue, maxValue);
 
         // --- Public hooks (for UnityEvent path) ---
         public void OnHealthChanged(int currentValue, int maxValue) => this.HandleHealthChanged(currentValue, maxValue);

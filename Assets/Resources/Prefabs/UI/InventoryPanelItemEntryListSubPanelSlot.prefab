@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 4088121702938411886}
   - component: {fileID: 3507419798229136009}
   m_Layer: 5
-  m_Name: InventoryItemEntrySubPanelSlot
+  m_Name: InventoryPanelItemEntryListSubPanelSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,7 +479,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8645785651915983321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b26b54bbeb9a1054eb4c3da6da6d6176, type: 3}
+  m_Script: {fileID: 11500000, guid: 63af13ad6e38fdc43a050591e29ecde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.InventoryItemEntrySlotUIController
   _button: {fileID: 4088121702938411886}
