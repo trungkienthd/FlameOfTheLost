@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class HUDAppliedStatusEffectsPanelController : MonoBehaviour
+    public class UICanvasHUDAppliedStatusEffectsPanelController : MonoBehaviour
     {
         // --- States ---
         //  1. References

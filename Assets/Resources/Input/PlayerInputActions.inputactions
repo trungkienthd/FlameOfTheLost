@@ -333,17 +333,6 @@
                 },
                 {
                     "name": "",
-                    "id": "754b69ed-8e83-4875-997f-3370f88ba792",
-                    "path": "<Keyboard>/z",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "1c23a592-fc9d-4388-9b5b-1181af050402",
                     "path": "<Gamepad>/start",
                     "interactions": "",
@@ -433,7 +422,7 @@
                 {
                     "name": "",
                     "id": "665868ed-4bf5-4f64-9d67-446eaa6f3c57",
-                    "path": "<Keyboard>/i",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -455,7 +444,7 @@
                 {
                     "name": "",
                     "id": "b0ba4e17-0935-43a0-af4f-db9862ea48ce",
-                    "path": "<Keyboard>/o",
+                    "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -477,7 +466,7 @@
                 {
                     "name": "",
                     "id": "ab0174ab-3e90-4733-a528-f03654746318",
-                    "path": "<Keyboard>/u",
+                    "path": "<Keyboard>/h",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -932,6 +921,45 @@
                     "processors": "",
                     "groups": "",
                     "action": "ScrollWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerInteractionPanel",
+            "id": "4260579d-3e31-4172-8fa3-cf37d421f309",
+            "actions": [
+                {
+                    "name": "CloseInteractionPanel",
+                    "type": "Button",
+                    "id": "cfb6cb3b-c9a0-40d6-b6ad-baa07b1687cc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9b88952c-f982-46a9-8601-33c82bbf057c",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseInteractionPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c869ee65-ec73-4d90-86f3-cefa7495aea9",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseInteractionPanel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

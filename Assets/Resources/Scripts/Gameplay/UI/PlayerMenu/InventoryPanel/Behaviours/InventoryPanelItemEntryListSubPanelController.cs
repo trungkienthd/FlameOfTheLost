@@ -186,6 +186,7 @@ namespace FlameOfTheLost
                     break;
             }
 
+            Debug.Log($"[{this.gameObject.name}.InventoryPanelItemEntryListSubPanelController] Retrieved {result.Count} entries for item type {itemType}", this);
             return result;
         }
 

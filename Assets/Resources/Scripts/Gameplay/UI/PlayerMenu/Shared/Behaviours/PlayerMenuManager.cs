@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace FlameOfTheLost
 {
-    public class PlayerMenuManager : MonoBehaviour
+    public class PlayerMenuManager : MonoBehaviour, IPlayerInteractionPromptBlocker
     {
         [Header("References (Player Input)")]
         [SerializeField] private PlayerInput _playerInput;
@@ -32,54 +33,42 @@ namespace FlameOfTheLost
         }
         public bool IsAnyPanelOpen => this.CurrentPanelType != PlayerMenuPanelType.None;
 
+        public bool IsBlockingPlayerInteractionPrompt => this.IsAnyPanelOpen;
+        public event Action<IPlayerInteractionPromptBlocker> PromptBlockStarted;
+        public event Action<IPlayerInteractionPromptBlocker> PromptBlockEnded;
 
         private void Awake()
         {
             if (this.PlayerInput == null)
             {
                 GameObject player = GameObject.Find("Player");
-                _playerInput = player.GetComponent<PlayerInput>();
+                if (player != null) _playerInput = player.GetComponent<PlayerInput>();
             }
 
             if (this.SettingPanelController == null)
             {
                 Transform settingPanelTransform = this.transform.Find("SettingPanel");
-                if (settingPanelTransform != null)
-                {
-                    _settingPanel = settingPanelTransform.GetComponent<PlayerMenuPanelController>();
-                }
+                if (settingPanelTransform != null) _settingPanel = settingPanelTransform.GetComponent<PlayerMenuPanelController>();
             }
             if (this.InventoryPanelController == null)
             {
                 Transform inventoryPanelTransform = this.transform.Find("InventoryPanel");
-                if (inventoryPanelTransform != null)
-                {
-                    _inventoryPanel = inventoryPanelTransform.GetComponent<PlayerMenuPanelController>();
-                }
+                if (inventoryPanelTransform != null) _inventoryPanel = inventoryPanelTransform.GetComponent<PlayerMenuPanelController>();
             }
             if (this.LoadoutPanelController == null)
             {
                 Transform loadoutPanelTransform = this.transform.Find("LoadoutPanel");
-                if (loadoutPanelTransform != null)
-                {
-                    _loadoutPanel = loadoutPanelTransform.GetComponent<PlayerMenuPanelController>();
-                }
+                if (loadoutPanelTransform != null) _loadoutPanel = loadoutPanelTransform.GetComponent<PlayerMenuPanelController>();
             }
             if (this.QuestPanelController == null)
             {
                 Transform questPanelTransform = this.transform.Find("QuestPanel");
-                if (questPanelTransform != null)
-                {
-                    _questPanel = questPanelTransform.GetComponent<PlayerMenuPanelController>();
-                }
+                if (questPanelTransform != null) _questPanel = questPanelTransform.GetComponent<PlayerMenuPanelController>();
             }
             if (this.MapPanelController == null)
             {
                 Transform mapPanelTransform = this.transform.Find("MapPanel");
-                if (mapPanelTransform != null)
-                {
-                    _mapPanel = mapPanelTransform.GetComponent<PlayerMenuPanelController>();
-                }
+                if (mapPanelTransform != null) _mapPanel = mapPanelTransform.GetComponent<PlayerMenuPanelController>();
             }
         }
         private void Start()
@@ -115,8 +104,15 @@ namespace FlameOfTheLost
         {
             if (!this.IsAnyPanelOpen) return;
 
+            bool wasBlocking = this.IsBlockingPlayerInteractionPrompt;
+
             this.HideAllPanelsImmediate();
             this.CurrentPanelType = PlayerMenuPanelType.None;
+
+            if (wasBlocking && !this.IsBlockingPlayerInteractionPrompt)
+            {
+                this.PromptBlockEnded?.Invoke(this);
+            }
 
             this.ResumeGameplay();
             this.SwitchToPlayerActionMap();
@@ -130,6 +126,8 @@ namespace FlameOfTheLost
         // --- Helpers ---
         private void OpenPanel(PlayerMenuPanelType panelType)
         {
+            bool wasBlocking = this.IsBlockingPlayerInteractionPrompt;
+
             if (panelType == PlayerMenuPanelType.None)
             {
                 this.CloseCurrentPanel();
@@ -177,6 +175,11 @@ namespace FlameOfTheLost
             }
 
             this.CurrentPanelType = panelType;
+
+            if (!wasBlocking && this.IsBlockingPlayerInteractionPrompt)
+            {
+                this.PromptBlockStarted?.Invoke(this);
+            }
 
             this.PauseGameplay();
             this.SwitchToUIActionMap();

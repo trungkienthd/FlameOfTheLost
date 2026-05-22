@@ -419,17 +419,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""754b69ed-8e83-4875-997f-3370f88ba792"",
-                    ""path"": ""<Keyboard>/z"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""1c23a592-fc9d-4388-9b5b-1181af050402"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
@@ -519,7 +508,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""665868ed-4bf5-4f64-9d67-446eaa6f3c57"",
-                    ""path"": ""<Keyboard>/i"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -541,7 +530,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b0ba4e17-0935-43a0-af4f-db9862ea48ce"",
-                    ""path"": ""<Keyboard>/o"",
+                    ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -563,7 +552,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ab0174ab-3e90-4733-a528-f03654746318"",
-                    ""path"": ""<Keyboard>/u"",
+                    ""path"": ""<Keyboard>/h"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1022,6 +1011,45 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerInteractionPanel"",
+            ""id"": ""4260579d-3e31-4172-8fa3-cf37d421f309"",
+            ""actions"": [
+                {
+                    ""name"": ""CloseInteractionPanel"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfb6cb3b-c9a0-40d6-b6ad-baa07b1687cc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9b88952c-f982-46a9-8601-33c82bbf057c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseInteractionPanel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c869ee65-ec73-4d90-86f3-cefa7495aea9"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseInteractionPanel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -1060,12 +1088,16 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_PlayerMenu_OpenQuestPanel = m_PlayerMenu.FindAction("OpenQuestPanel", throwIfNotFound: true);
         m_PlayerMenu_OpenMapPanel = m_PlayerMenu.FindAction("OpenMapPanel", throwIfNotFound: true);
         m_PlayerMenu_ScrollWheel = m_PlayerMenu.FindAction("ScrollWheel", throwIfNotFound: true);
+        // PlayerInteractionPanel
+        m_PlayerInteractionPanel = asset.FindActionMap("PlayerInteractionPanel", throwIfNotFound: true);
+        m_PlayerInteractionPanel_CloseInteractionPanel = m_PlayerInteractionPanel.FindAction("CloseInteractionPanel", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerInputActions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_PlayerMenu.enabled, "This will cause a leak and performance issues, PlayerInputActions.PlayerMenu.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_PlayerInteractionPanel.enabled, "This will cause a leak and performance issues, PlayerInputActions.PlayerInteractionPanel.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1637,6 +1669,102 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="PlayerMenuActions" /> instance referencing this action map.
     /// </summary>
     public PlayerMenuActions @PlayerMenu => new PlayerMenuActions(this);
+
+    // PlayerInteractionPanel
+    private readonly InputActionMap m_PlayerInteractionPanel;
+    private List<IPlayerInteractionPanelActions> m_PlayerInteractionPanelActionsCallbackInterfaces = new List<IPlayerInteractionPanelActions>();
+    private readonly InputAction m_PlayerInteractionPanel_CloseInteractionPanel;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "PlayerInteractionPanel".
+    /// </summary>
+    public struct PlayerInteractionPanelActions
+    {
+        private @PlayerInputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public PlayerInteractionPanelActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerInteractionPanel/CloseInteractionPanel".
+        /// </summary>
+        public InputAction @CloseInteractionPanel => m_Wrapper.m_PlayerInteractionPanel_CloseInteractionPanel;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_PlayerInteractionPanel; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="PlayerInteractionPanelActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(PlayerInteractionPanelActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="PlayerInteractionPanelActions" />
+        public void AddCallbacks(IPlayerInteractionPanelActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerInteractionPanelActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerInteractionPanelActionsCallbackInterfaces.Add(instance);
+            @CloseInteractionPanel.started += instance.OnCloseInteractionPanel;
+            @CloseInteractionPanel.performed += instance.OnCloseInteractionPanel;
+            @CloseInteractionPanel.canceled += instance.OnCloseInteractionPanel;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="PlayerInteractionPanelActions" />
+        private void UnregisterCallbacks(IPlayerInteractionPanelActions instance)
+        {
+            @CloseInteractionPanel.started -= instance.OnCloseInteractionPanel;
+            @CloseInteractionPanel.performed -= instance.OnCloseInteractionPanel;
+            @CloseInteractionPanel.canceled -= instance.OnCloseInteractionPanel;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayerInteractionPanelActions.UnregisterCallbacks(IPlayerInteractionPanelActions)" />.
+        /// </summary>
+        /// <seealso cref="PlayerInteractionPanelActions.UnregisterCallbacks(IPlayerInteractionPanelActions)" />
+        public void RemoveCallbacks(IPlayerInteractionPanelActions instance)
+        {
+            if (m_Wrapper.m_PlayerInteractionPanelActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="PlayerInteractionPanelActions.AddCallbacks(IPlayerInteractionPanelActions)" />
+        /// <seealso cref="PlayerInteractionPanelActions.RemoveCallbacks(IPlayerInteractionPanelActions)" />
+        /// <seealso cref="PlayerInteractionPanelActions.UnregisterCallbacks(IPlayerInteractionPanelActions)" />
+        public void SetCallbacks(IPlayerInteractionPanelActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerInteractionPanelActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerInteractionPanelActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="PlayerInteractionPanelActions" /> instance referencing this action map.
+    /// </summary>
+    public PlayerInteractionPanelActions @PlayerInteractionPanel => new PlayerInteractionPanelActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
@@ -1862,5 +1990,20 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnScrollWheel(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "PlayerInteractionPanel" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="PlayerInteractionPanelActions.AddCallbacks(IPlayerInteractionPanelActions)" />
+    /// <seealso cref="PlayerInteractionPanelActions.RemoveCallbacks(IPlayerInteractionPanelActions)" />
+    public interface IPlayerInteractionPanelActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "CloseInteractionPanel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCloseInteractionPanel(InputAction.CallbackContext context);
     }
 }

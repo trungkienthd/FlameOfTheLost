@@ -35,12 +35,12 @@ namespace FlameOfTheLost
             if (this.ButtonPrevious == null)
             {
                 Transform buttonPrevious = this.transform.Find("ButtonPrevious");
-                _buttonPrevious = buttonPrevious.GetComponent<Button>();
+                if (buttonPrevious != null) _buttonPrevious = buttonPrevious.GetComponent<Button>();
             }
             if (this.ButtonNext == null)
             {
                 Transform buttonNext = this.transform.Find("ButtonNext");
-                _buttonNext = buttonNext.GetComponent<Button>();
+                if (buttonNext != null) _buttonNext = buttonNext.GetComponent<Button>();
             }
             if (this.ButtonPrevious != null)
             {
@@ -54,13 +54,13 @@ namespace FlameOfTheLost
 
             if (this.TextPageCurrent == null)
             {
-                Transform pageCurrent = this.transform.Find("TextPageCurrent");
-                _textPageCurrent = pageCurrent.GetComponent<TMP_Text>();
+                Transform textPageCurrent = this.transform.Find("TextPageCurrent");
+                if (textPageCurrent != null) _textPageCurrent = textPageCurrent.GetComponent<TMP_Text>();
             }
             if (this.TextPageMax == null)
             {
-                Transform pageMax = this.transform.Find("TextPageMax");
-                _textPageMax = pageMax.GetComponent<TMP_Text>();
+                Transform textPageMax = this.transform.Find("TextPageMax");
+                if (textPageMax != null) _textPageMax = textPageMax.GetComponent<TMP_Text>();
             }
 
             this.RefreshVisuals();
@@ -88,7 +88,7 @@ namespace FlameOfTheLost
 
             if (pageCount > this.MaxSupportedPages)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.InventoryItemEntrySubPanelPaginationHandler] Inventory pages exceeded supported limit ({this.MaxSupportedPages}). Some entries will not be visible.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.ItemEntryListPaginationHandler] Inventory pages exceeded supported limit ({this.MaxSupportedPages}). Some entries will not be visible.", this);
             }
 
             this.MaxPageNumber = Mathf.Clamp(pageCount, 1, this.MaxSupportedPages);

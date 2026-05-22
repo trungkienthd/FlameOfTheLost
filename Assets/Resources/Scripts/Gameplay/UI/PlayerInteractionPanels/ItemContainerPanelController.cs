@@ -2,13 +2,13 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class ItemContainerPanelController : MonoBehaviour
+    public class ItemContainerPanelController : PlayerInteractionBasePanelController
     {
         [Header("References")]
         [SerializeField] private ItemContainerPanelItemEntryListSubPanelController _entryListSubPanelController;
         private ItemContainerPanelItemEntryListSubPanelController EntryListSubPanelController => _entryListSubPanelController;
 
-        public ItemContainerController CurrentContainer { get; private set; }
+        public ItemContainerController CurrentContainerCtrl { get; private set; }
         public InventoryController SourceInventoryController { get; private set; }
         public InventoryController PlayerInventoryController { get; private set; }
 
@@ -16,20 +16,20 @@ namespace FlameOfTheLost
         {
             this.CacheReferences();
 
-            this.Close();
+            // this.gameObject.SetActive(false);
         }
 
         public void Open(ItemContainerController sourceContainer, InventoryController sourceInventoryController, InventoryController playerInventoryController)
         {
+            base.Open();
+
             if (sourceContainer == null) return;
             if (sourceInventoryController == null) return;
             if (playerInventoryController == null) return;
 
-            this.CurrentContainer = sourceContainer;
+            this.CurrentContainerCtrl = sourceContainer;
             this.SourceInventoryController = sourceInventoryController;
             this.PlayerInventoryController = playerInventoryController;
-
-            this.gameObject.SetActive(true);
 
             if (this.EntryListSubPanelController != null)
             {
@@ -37,9 +37,9 @@ namespace FlameOfTheLost
             }
         }
 
-        public void Close()
+        public override void Close()
         {
-            this.CurrentContainer = null;
+            this.CurrentContainerCtrl = null;
             this.SourceInventoryController = null;
             this.PlayerInventoryController = null;
 
@@ -48,11 +48,13 @@ namespace FlameOfTheLost
                 this.EntryListSubPanelController.Clear();
             }
 
-            this.gameObject.SetActive(false);
+            base.Close();
         }
 
-        private void CacheReferences()
+        protected override void CacheReferences()
         {
+            base.CacheReferences();
+
             if (this.EntryListSubPanelController == null) _entryListSubPanelController = this.GetComponentInChildren<ItemContainerPanelItemEntryListSubPanelController>(true);
         }
     }

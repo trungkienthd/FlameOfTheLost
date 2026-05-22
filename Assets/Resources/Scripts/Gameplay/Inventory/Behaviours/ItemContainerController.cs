@@ -61,9 +61,12 @@ namespace FlameOfTheLost
         private void CacheReferences()
         {
             if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>();
-            
-            GameObject canvas = GameObject.Find("Canvas");
-            if (this.ItemContainerPanelController == null) _itemContainerPanelController = canvas.GetComponentInChildren<ItemContainerPanelController>(true);
+
+            if (this.ItemContainerPanelController == null)
+            {
+                GameObject canvas = GameObject.Find("Canvas");
+                if (canvas != null) _itemContainerPanelController = canvas.GetComponentInChildren<ItemContainerPanelController>(true);
+            }
         }
     }
 }

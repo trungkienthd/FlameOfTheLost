@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class HUDCombatLoadoutPanelController : MonoBehaviour
+    public class UICanvasHUDCombatLoadoutPanelController : MonoBehaviour
     {
         // --- States ---
         //  1. References

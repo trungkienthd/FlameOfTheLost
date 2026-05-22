@@ -8,15 +8,25 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(PlayerCarryLoadoutController))]
     public class PlayerInputHandler : CharacterInputHandler
     {
-        [Header("References (UI - Player Menu")]
+        [Header("References (UI")]
         [SerializeField] private PlayerMenuManager _playerMenuManager;
+        [SerializeField] private PlayerInteractionPanelListManager _playerInteractionPanelListManager;
         private PlayerMenuManager PlayerMenuManager => _playerMenuManager;
+        private PlayerInteractionPanelListManager PlayerInteractionPanelListManager => _playerInteractionPanelListManager;
         private PlayerCarryLoadoutController PlayerCarryLoadoutController
         {
             get 
             {
                 var playerComponentController = this.CharacterComponentController as PlayerComponentController;
                 return playerComponentController != null ? playerComponentController.PlayerCarryLoadoutController : null;
+            }
+        }
+        private PlayerInteractionHandler PlayerInteractionHandler
+        {
+            get
+            {
+                var playerComponentController = this.CharacterComponentController as PlayerComponentController;
+                return playerComponentController != null ? playerComponentController.PlayerInteractionHandler : null;
             }
         }
 
@@ -108,7 +118,16 @@ namespace FlameOfTheLost
             }
         }
 
-        //      1.5. Player-only Menu Actions
+        //      1.5. Interaction
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            if (this.PlayerInteractionHandler == null) return;
+
+            this.PlayerInteractionHandler.TryInteractNearest();
+        }
+
+        //      1.6. Player-only Menu Actions
         public void OnPause(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
@@ -163,6 +182,16 @@ namespace FlameOfTheLost
             if (this.PlayerMenuManager == null) return;
 
             this.PlayerMenuManager.HandleCancel();
+        }
+
+        public void OnCloseInteractionPanel(InputAction.CallbackContext context)
+        {
+            if (!context.performed) return;
+            if (this.PlayerInteractionPanelListManager == null) return;
+
+            this.PlayerInteractionPanelListManager.CloseCurrentPanel();
+
+            this.PlayerInput.SwitchCurrentActionMap("Player");
         }
 
         //  2. Called by other Player scripts to block/unblock inputs when needed
@@ -240,8 +269,17 @@ namespace FlameOfTheLost
         {
             base.CacheReferences();
 
-            GameObject playerMenu = GameObject.Find("PlayerMenu");
-            if (this.PlayerMenuManager == null && playerMenu != null) _playerMenuManager = playerMenu.GetComponent<PlayerMenuManager>();
+            if (this.PlayerMenuManager == null)
+            {
+                GameObject playerMenu = GameObject.Find("PlayerMenu");
+                if (playerMenu != null) _playerMenuManager = playerMenu.GetComponent<PlayerMenuManager>();
+            }
+
+            if (this.PlayerInteractionPanelListManager == null)
+            {
+                GameObject playerInteractionPanelList = GameObject.Find("PlayerInteractionPanelList");
+                if (playerInteractionPanelList != null) _playerInteractionPanelListManager = playerInteractionPanelList.GetComponent<PlayerInteractionPanelListManager>();
+            }
 
             if (this.PlayerInput == null) _playerInput = this.GetComponent<PlayerInput>();
         }

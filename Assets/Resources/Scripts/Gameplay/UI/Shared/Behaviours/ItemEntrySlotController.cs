@@ -37,6 +37,8 @@ namespace FlameOfTheLost
 
         private void Awake()
         {
+            if (this.BackgroundImage == null)_backgroundImage = this.GetComponent<Image>();
+            
             if (this.MainIcon == null)
             {
                 Transform mainIconTransform = this.transform.Find("MainIcon");

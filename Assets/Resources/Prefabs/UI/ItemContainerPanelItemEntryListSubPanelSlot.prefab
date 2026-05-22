@@ -202,7 +202,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6867832253614110584}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -215,8 +215,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 9209235157181949950}
   - component: {fileID: 4088121702938411886}
   - component: {fileID: 3507419798229136009}
+  - component: {fileID: 8196367676299288272}
   m_Layer: 5
   m_Name: ItemContainerPanelItemEntryListSubPanelSlot
   m_TagString: Untagged
@@ -492,3 +493,21 @@ MonoBehaviour:
   _subSlotIconBackupRect: {fileID: 3883806310915034600}
   _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _selectedColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &8196367676299288272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8645785651915983321}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4baf096fd148844b146c4c279c4ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.UIRoundedImageHandler
+  _targetImage: {fileID: 6512876903020910600}
+  _useRoundedBorder: 1
+  _roundedImageType: 0
+  _roundedSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  _borderRadius: 5
+  _roundedImageMaterial: {fileID: 0}
