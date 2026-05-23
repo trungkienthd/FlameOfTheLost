@@ -31,6 +31,12 @@ namespace FlameOfTheLost
             this.CacheReferences();
         }
 
+        private void Start()
+        {
+            PlayerDefaultSpawnPointController firstDefaultSpawnPoint = this.PlayerSpawnerController.GetFirstDefaultSpawnPoint();
+            if (firstDefaultSpawnPoint != null) this.RegisterVisitedSpawnPoint(firstDefaultSpawnPoint);
+        }
+
         // --- Public APIs ---
         public void RegisterVisitedSpawnPoint(PlayerDefaultSpawnPointController spawnPoint)
         {

@@ -10,7 +10,7 @@ namespace FlameOfTheLost
         [Header("Identity")]
         [SerializeField] private int _id;
         [SerializeField] private string _displayName = "Chest";
-        [SerializeField, TextArea(2, 5)] private string _description;
+        [SerializeField, TextArea(5, 5)] private string _description;
         public int ID => _id;
         public string DisplayName => _displayName;
         public string Description => _description;

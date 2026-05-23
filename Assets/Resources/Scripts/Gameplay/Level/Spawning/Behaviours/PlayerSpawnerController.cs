@@ -42,6 +42,10 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs ---
+        public PlayerDefaultSpawnPointController GetFirstDefaultSpawnPoint()
+        {
+            return this.DefaultSpawnPointCtrls.FirstOrDefault(spawnPoint => spawnPoint != null);
+        }
         public void SpawnPlayer()
         {
             if (this.Player == null)
