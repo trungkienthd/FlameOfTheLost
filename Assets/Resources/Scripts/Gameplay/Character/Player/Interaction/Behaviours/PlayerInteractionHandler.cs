@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -35,7 +34,11 @@ namespace FlameOfTheLost
         private readonly List<MonoBehaviour> _nearbyInteractableBehaviours = new();
         private IReadOnlyList<MonoBehaviour> NearbyInteractableBehaviours => _nearbyInteractableBehaviours;
 
-        //  4. Runtime: Prompt blockers
+        //  4. Runtime: Nearby Prompt Source state
+        private readonly List<MonoBehaviour> _nearbyPromptSourceBehaviours = new();
+        private IReadOnlyList<MonoBehaviour> NearbyPromptSourceBehaviours => _nearbyPromptSourceBehaviours;
+
+        //  5. Runtime: Prompt blockers
         private readonly HashSet<IPlayerInteractionPromptBlocker> _activePromptBlockers = new();
         public IReadOnlyCollection<IPlayerInteractionPromptBlocker> ActivePromptBlockers => _activePromptBlockers;
         private bool IsPromptBlocked => this.ActivePromptBlockers.Count > 0;
@@ -60,28 +63,18 @@ namespace FlameOfTheLost
         {
             if (!other.isTrigger) return;
 
-            IPlayerInteractable interactable = other.GetComponentInParent<IPlayerInteractable>();
-            if (interactable == null) return;
-            if (interactable is not MonoBehaviour behaviour) return;
-            if (_nearbyInteractableBehaviours.Contains(behaviour)) return;
+            this.TryRegisterNearbyInteractable(other);
+            this.TryRegisterNearbyPromptSource(other);
 
-            GameObject interactor = this.ResolveInteractor();
-            if (!interactable.CanInteract(interactor)) return;
-
-            Debug.Log($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Detected nearby interactable: {behaviour.gameObject.name}", behaviour);
-
-            _nearbyInteractableBehaviours.Add(behaviour);
             this.RefreshPrompt();
         }
         private void OnTriggerExit2D(Collider2D other)
         {
             if (!other.isTrigger) return;
 
-            IPlayerInteractable interactable = other.GetComponentInParent<IPlayerInteractable>();
-            if (interactable == null) return;
-            if (interactable is not MonoBehaviour behaviour) return;
+            this.TryUnregisterNearbyInteractable(other);
+            this.TryUnregisterNearbyPromptSource(other);
 
-            _nearbyInteractableBehaviours.Remove(behaviour);
             this.RefreshPrompt();
         }
 
@@ -111,6 +104,129 @@ namespace FlameOfTheLost
             return result;
         }
 
+        // --- Helpers ---
+        //  1. Prompt Blocker (UI) Registration
+        public void RegisterPromptBlocker(IPlayerInteractionPromptBlocker blocker)
+        {
+            if (blocker == null) return;
+
+            blocker.PromptBlockStarted += this.HandlePromptBlockStarted;
+            blocker.PromptBlockEnded += this.HandlePromptBlockEnded;
+
+            if (blocker.IsBlockingPlayerInteractionPrompt)
+            {
+                this.HandlePromptBlockStarted(blocker);
+            }
+        }
+        public void UnregisterPromptBlocker(IPlayerInteractionPromptBlocker blocker)
+        {
+            if (blocker == null) return;
+
+            blocker.PromptBlockStarted -= this.HandlePromptBlockStarted;
+            blocker.PromptBlockEnded -= this.HandlePromptBlockEnded;
+
+            if (_activePromptBlockers.Remove(blocker))
+            {
+                this.RefreshPrompt();
+            }
+        }
+
+        //  2. Nearby Interactable Registration
+        private void TryRegisterNearbyInteractable(Collider2D other)
+        {
+            IPlayerInteractable interactable = other.GetComponentInParent<IPlayerInteractable>();
+            if (interactable == null) return;
+            if (interactable is not MonoBehaviour behaviour) return;
+            if (_nearbyInteractableBehaviours.Contains(behaviour)) return;
+
+            GameObject interactor = this.ResolveInteractor();
+            if (!interactable.CanInteract(interactor)) return;
+
+            Debug.Log($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Detected nearby interactable: {behaviour.gameObject.name}", behaviour);
+
+            _nearbyInteractableBehaviours.Add(behaviour);
+        }
+        private void TryUnregisterNearbyInteractable(Collider2D other)
+        {
+            IPlayerInteractable interactable = other.GetComponentInParent<IPlayerInteractable>();
+            if (interactable == null) return;
+            if (interactable is not MonoBehaviour behaviour) return;
+
+            _nearbyInteractableBehaviours.Remove(behaviour);
+        }
+        //  3. Nearby Prompt Source Registration
+        private void TryRegisterNearbyPromptSource(Collider2D other)
+        {
+            IPlayerInteractionPromptSource promptSource = other.GetComponentInParent<IPlayerInteractionPromptSource>();
+            if (promptSource == null) return;
+            if (promptSource is not MonoBehaviour behaviour) return;
+            if (_nearbyPromptSourceBehaviours.Contains(behaviour)) return;
+
+            GameObject interactor = this.ResolveInteractor();
+            if (!promptSource.CanShowInteractionPrompt(interactor)) return;
+
+            Debug.Log($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Detected nearby prompt source: {behaviour.gameObject.name}", behaviour);
+
+            _nearbyPromptSourceBehaviours.Add(behaviour);
+        }
+        private void TryUnregisterNearbyPromptSource(Collider2D other)
+        {
+            IPlayerInteractionPromptSource promptSource = other.GetComponentInParent<IPlayerInteractionPromptSource>();
+            if (promptSource == null) return;
+            if (promptSource is not MonoBehaviour behaviour) return;
+
+            _nearbyPromptSourceBehaviours.Remove(behaviour);
+        }
+
+        //  4. Refresh Prompt
+        private void RefreshPrompt()
+        {
+            if (this.IsPromptBlocked)
+            {
+                this.HidePrompt();
+                return;
+            }
+
+            this.RemoveInvalidInteractables();
+            this.RemoveInvalidPromptSources();
+
+            IPlayerInteractable nearestInteractable = this.FindNearestInteractable();
+            if (nearestInteractable != null)
+            {
+                this.ShowInteractablePrompt(nearestInteractable);
+                return;
+            }
+
+            IPlayerInteractionPromptSource nearestPromptSource = this.FindNearestPromptSource();
+            if (nearestPromptSource != null)
+            {
+                this.ShowPromptSourcePrompt(nearestPromptSource);
+                return;
+            }
+
+            this.HidePrompt();
+        }
+
+        //  5. Show Prompt 
+        private void ShowInteractablePrompt(IPlayerInteractable interactable)
+        {
+            string promptText = "Interact";
+
+            if (interactable is IPlayerInteractionPromptSource promptSource)
+            {
+                promptText = promptSource.GetInteractionPromptText(this.ResolveInteractor());
+            }
+
+            this.ShowPrompt($"[{this.GetInteractInputDisplayName()}] {promptText}");
+        }
+
+        private void ShowPromptSourcePrompt(IPlayerInteractionPromptSource promptSource)
+        {
+            string promptText = promptSource.GetInteractionPromptText(this.ResolveInteractor());
+            this.ShowPrompt(promptText);
+        }
+
+        //  6. Find Nearest
         private IPlayerInteractable FindNearestInteractable()
         {
             GameObject interactor = this.ResolveInteractor();
@@ -137,60 +253,33 @@ namespace FlameOfTheLost
             return nearestInteractable;
         }
 
-        public void RegisterPromptBlocker(IPlayerInteractionPromptBlocker blocker)
+        private IPlayerInteractionPromptSource FindNearestPromptSource()
         {
-            if (blocker == null) return;
+            GameObject interactor = this.ResolveInteractor();
+            Vector3 origin = interactor != null ? interactor.transform.position : this.transform.position;
 
-            blocker.PromptBlockStarted += this.HandlePromptBlockStarted;
-            blocker.PromptBlockEnded += this.HandlePromptBlockEnded;
+            IPlayerInteractionPromptSource nearestPromptSource = null;
+            float nearestSqrDistance = float.MaxValue;
 
-            if (blocker.IsBlockingPlayerInteractionPrompt)
+            for (int i = 0; i < this.NearbyPromptSourceBehaviours.Count; i++)
             {
-                this.HandlePromptBlockStarted(blocker);
-            }
-        }
-        public void UnregisterPromptBlocker(IPlayerInteractionPromptBlocker blocker)
-        {
-            if (blocker == null) return;
+                MonoBehaviour behaviour = this.NearbyPromptSourceBehaviours[i];
+                if (behaviour == null) continue;
+                if (!behaviour.gameObject.activeInHierarchy) continue;
+                if (behaviour is not IPlayerInteractionPromptSource promptSource) continue;
+                if (!promptSource.CanShowInteractionPrompt(interactor)) continue;
 
-            blocker.PromptBlockStarted -= this.HandlePromptBlockStarted;
-            blocker.PromptBlockEnded -= this.HandlePromptBlockEnded;
+                float sqrDistance = (behaviour.transform.position - origin).sqrMagnitude;
+                if (sqrDistance >= nearestSqrDistance) continue;
 
-            if (_activePromptBlockers.Remove(blocker))
-            {
-                this.RefreshPrompt();
-            }
-        }
-
-        // --- Helpers ---
-
-        private void RefreshPrompt()
-        {
-            if (this.IsPromptBlocked)
-            {
-                this.HidePrompt();
-                return;
+                nearestSqrDistance = sqrDistance;
+                nearestPromptSource = promptSource;
             }
 
-            this.RemoveInvalidInteractables();
-
-            IPlayerInteractable nearestInteractable = this.FindNearestInteractable();
-            if (nearestInteractable == null)
-            {
-                this.HidePrompt();
-                return;
-            }
-
-            string promptText = "Interact";
-
-            if (nearestInteractable is IPlayerInteractionPromptProvider promptProvider)
-            {
-                promptText = promptProvider.GetInteractionPromptText(this.ResolveInteractor());
-            }
-
-            this.ShowPrompt($"[{this.GetInteractInputDisplayName()}] {promptText}");
+            return nearestPromptSource;
         }
 
+        //  7. Cleanup
         private void RemoveInvalidInteractables()
         {
             GameObject interactor = this.ResolveInteractor();
@@ -223,7 +312,40 @@ namespace FlameOfTheLost
                 }
             }
         }
+        private void RemoveInvalidPromptSources()
+        {
+            GameObject interactor = this.ResolveInteractor();
 
+            for (int i = this.NearbyPromptSourceBehaviours.Count - 1; i >= 0; i--)
+            {
+                MonoBehaviour behaviour = this.NearbyPromptSourceBehaviours[i];
+
+                if (behaviour == null)
+                {
+                    _nearbyPromptSourceBehaviours.RemoveAt(i);
+                    continue;
+                }
+
+                if (!behaviour.gameObject.activeInHierarchy)
+                {
+                    _nearbyPromptSourceBehaviours.RemoveAt(i);
+                    continue;
+                }
+
+                if (behaviour is not IPlayerInteractionPromptSource promptSource)
+                {
+                    _nearbyPromptSourceBehaviours.RemoveAt(i);
+                    continue;
+                }
+
+                if (!promptSource.CanShowInteractionPrompt(interactor))
+                {
+                    _nearbyPromptSourceBehaviours.RemoveAt(i);
+                }
+            }
+        }
+
+        //  8. Others
         private GameObject ResolveInteractor()
         {
             return this.PlayerRoot != null ? this.PlayerRoot : this.transform.root.gameObject;
@@ -251,7 +373,7 @@ namespace FlameOfTheLost
 
                 string displayName = interactAction.GetBindingDisplayString(i, InputBinding.DisplayStringOptions.DontIncludeInteractions);
 
-                return string.IsNullOrWhiteSpace(displayName) ? "E" : displayName;
+                return string.IsNullOrWhiteSpace(displayName) ? "I" : displayName;
             }
 
             return "I";

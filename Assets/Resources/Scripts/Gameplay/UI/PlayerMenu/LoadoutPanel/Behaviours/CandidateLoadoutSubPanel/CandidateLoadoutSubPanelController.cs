@@ -236,8 +236,6 @@ namespace FlameOfTheLost
                 return;
             }
 
-            Debug.Log("Clicked");
-
             this.HidePanel();
         }
 

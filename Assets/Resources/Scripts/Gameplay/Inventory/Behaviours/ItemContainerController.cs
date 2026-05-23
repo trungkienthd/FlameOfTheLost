@@ -5,7 +5,7 @@ namespace FlameOfTheLost
     public class ItemContainerController : MonoBehaviour,
         IIdentityProvider,
         IPlayerInteractable,
-        IPlayerInteractionPromptProvider
+        IPlayerInteractionPromptSource
     {
         [Header("Identity")]
         [SerializeField] private int _id;
@@ -53,6 +53,10 @@ namespace FlameOfTheLost
             return true;
         }
 
+        public bool CanShowInteractionPrompt(GameObject interactor)
+        {
+            return true;
+        }
         public string GetInteractionPromptText(GameObject interactor)
         {
             return $"Open {this.DisplayName}";

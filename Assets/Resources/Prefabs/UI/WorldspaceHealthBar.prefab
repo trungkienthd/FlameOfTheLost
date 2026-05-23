@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 7470144004606436843}
   - component: {fileID: 559251228358160871}
   m_Layer: 5
-  m_Name: WorldspaceHealthBar
+  m_Name: WorldSpaceHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
