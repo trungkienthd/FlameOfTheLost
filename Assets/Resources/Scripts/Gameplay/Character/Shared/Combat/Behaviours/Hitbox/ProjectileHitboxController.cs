@@ -62,8 +62,8 @@ namespace FlameOfTheLost
             this.TimeAlive = 0f;
             if (this.ActiveRuntimeSkill.Profile is RangedSkillProfile rangedSkillProfile)
             {
-                this.Lifetime = rangedSkillProfile.ArrowLifetime;
-                this.DestroyOnHit = rangedSkillProfile.DestroyArrowOnHit;
+                this.Lifetime = rangedSkillProfile.ProjectileLifetime;
+                this.DestroyOnHit = rangedSkillProfile.DestroyProjectileOnHit;
             }
         }
 

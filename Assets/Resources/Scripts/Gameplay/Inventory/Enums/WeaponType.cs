@@ -6,6 +6,8 @@ namespace FlameOfTheLost
         Sword, Axe, Dagger,
 
         // Ranged
-        Bow, Crossbow, Staff
+        Bow, Crossbow, Staff,
+
+        Special,
     }
 }

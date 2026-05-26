@@ -21,10 +21,10 @@ namespace FlameOfTheLost
         [Tooltip("Angle gap in degrees between adjacent projectiles.")]
         [SerializeField, Min(0f)] private float _projectileAngleStep = 0f;
 
-        public GameObject ArrowPrefab => _arrowPrefab;
-        public float ArrowSpeed => _arrowSpeed;
-        public float ArrowLifetime => _arrowLifetime;
-        public bool DestroyArrowOnHit => _destroyArrowOnHit;
+        public GameObject ProjectilePrefab => _arrowPrefab;
+        public float ProjectileSpeed => _arrowSpeed;
+        public float ProjectileLifetime => _arrowLifetime;
+        public bool DestroyProjectileOnHit => _destroyArrowOnHit;
 
         public int ProjectileCount => Mathf.Max(1, _projectileCount);
         public float ProjectileAngleStep => Mathf.Max(0f, _projectileAngleStep);

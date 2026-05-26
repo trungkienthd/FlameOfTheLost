@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LAni_Player
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterLocomotionAnimationProfile
   _defaultLocomotion: {fileID: 11400000, guid: 361a7d3144682514c9c6f846eb455b39, type: 2}
-  _carryLocomotionVariants:
+  _locomotionVariants:
   - {fileID: 11400000, guid: a1a5a28614de18941aa42d8ebeff0921, type: 2}
   - {fileID: 11400000, guid: b48289c617dc72949960d7f110cde600, type: 2}

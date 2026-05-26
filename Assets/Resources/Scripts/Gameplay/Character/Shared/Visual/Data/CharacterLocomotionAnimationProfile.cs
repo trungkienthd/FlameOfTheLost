@@ -10,9 +10,9 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterLocomotionAnimationClipSetProfile _defaultLocomotion;
         public CharacterLocomotionAnimationClipSetProfile DefaultLocomotion => _defaultLocomotion;
 
-        [Header("Carry Locomotion Variants")]
-        [SerializeField] private List<CharacterLocomotionAnimationClipSetProfile> _carryLocomotionVariants = new();
-        public IReadOnlyList<CharacterLocomotionAnimationClipSetProfile> CarryLocomotionVariants => _carryLocomotionVariants;
+        [Header("Locomotion Variants")]
+        [SerializeField] private List<CharacterLocomotionAnimationClipSetProfile> _locomotionVariants = new();
+        public IReadOnlyList<CharacterLocomotionAnimationClipSetProfile> LocomotionVariants => _locomotionVariants;
 
         public CharacterLocomotionAnimationClipSetProfile GetLocomotionSet(CharacterLocomotionModeType locomotionMode, CharacterCarryItemType carryItemType, LightSourceType lightSourceType)
         {
@@ -23,11 +23,11 @@ namespace FlameOfTheLost
 
             if (locomotionMode == CharacterLocomotionModeType.Carry)
             {
-                if (this.CarryLocomotionVariants != null)
+                if (this.LocomotionVariants != null)
                 {
-                    for (int i = 0; i < this.CarryLocomotionVariants.Count; i++)
+                    for (int i = 0; i < this.LocomotionVariants.Count; i++)
                     {
-                        CharacterLocomotionAnimationClipSetProfile entry = this.CarryLocomotionVariants[i];
+                        CharacterLocomotionAnimationClipSetProfile entry = this.LocomotionVariants[i];
                         if (entry == null) continue;
 
                         if (entry.Matches(carryItemType, lightSourceType))

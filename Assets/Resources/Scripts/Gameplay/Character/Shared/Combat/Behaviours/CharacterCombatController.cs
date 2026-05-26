@@ -389,7 +389,7 @@ namespace FlameOfTheLost
         {
             if (runtimeSkill == null) return;
             if (!(runtimeSkill.Profile is RangedSkillProfile rangedSkill)) return;
-            if (!rangedSkill.ArrowPrefab) return;
+            if (!rangedSkill.ProjectilePrefab) return;
             if (!this.RangedAnchor) return;
 
             // Baseline direction
@@ -418,14 +418,14 @@ namespace FlameOfTheLost
         private void SpawnSingleProjectile(RuntimeSkill runtimeSkill, RangedSkillProfile rangedSkill, Vector2 direction)
         {
             if (runtimeSkill == null || rangedSkill == null) return;
-            if (!rangedSkill.ArrowPrefab) return;
+            if (!rangedSkill.ProjectilePrefab) return;
             if (!this.RangedAnchor) return;
 
             direction.Normalize();
 
             var projectileObj = UnityEngine.Object.Instantiate
             (
-                rangedSkill.ArrowPrefab,
+                rangedSkill.ProjectilePrefab,
                 this.RangedAnchor.position,
                 Quaternion.identity
             );
@@ -455,7 +455,7 @@ namespace FlameOfTheLost
             var rigidbody2D = projectileObj.GetComponent<Rigidbody2D>();
             if (rigidbody2D != null)
             {
-                rigidbody2D.linearVelocity = direction * rangedSkill.ArrowSpeed;
+                rigidbody2D.linearVelocity = direction * rangedSkill.ProjectileSpeed;
             }
         }
 

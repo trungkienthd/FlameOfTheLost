@@ -32,8 +32,8 @@ MonoBehaviour:
     _allowSelfKillWithHPCost: 0
   _statusEffectApplications:
   - _statusEffect: {fileID: 11400000, guid: f80ee9fdd76611e4293555cf005e24ae, type: 2}
-    _receiver: 0
-    _trigger: 1
     _chance: 1
     _potency: 1
+    _receiver: 0
+    _trigger: 1
     _limit: 0

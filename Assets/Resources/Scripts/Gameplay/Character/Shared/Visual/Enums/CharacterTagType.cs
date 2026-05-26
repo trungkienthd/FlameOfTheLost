@@ -4,6 +4,7 @@ namespace FlameOfTheLost
     {
         Default     = 0,
         Player      = 1,
-        Rattleblade = 2,
+        Bombschroom = 2,
+        Rattleblade = 3,
     }
 }
