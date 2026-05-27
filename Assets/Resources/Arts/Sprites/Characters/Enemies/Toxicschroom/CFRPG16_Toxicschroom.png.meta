@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Default_Down_0
+      name: CFRPG16_Toxicschroom_Idle_Default_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -139,7 +139,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Default_Down_1
+      name: CFRPG16_Toxicschroom_Idle_Default_Down_1
       rect:
         serializedVersion: 2
         x: 16
@@ -161,7 +161,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Default_Up_0
+      name: CFRPG16_Toxicschroom_Idle_Default_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -183,7 +183,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Default_Up_1
+      name: CFRPG16_Toxicschroom_Idle_Default_Up_1
       rect:
         serializedVersion: 2
         x: 16
@@ -205,7 +205,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Default_Side_0
+      name: CFRPG16_Toxicschroom_Idle_Default_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -227,7 +227,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Default_Side_1
+      name: CFRPG16_Toxicschroom_Idle_Default_Side_1
       rect:
         serializedVersion: 2
         x: 16
@@ -249,7 +249,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Down_0
+      name: CFRPG16_Toxicschroom_Idle_Alert_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -271,7 +271,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Down_1
+      name: CFRPG16_Toxicschroom_Idle_Alert_Down_1
       rect:
         serializedVersion: 2
         x: 16
@@ -293,7 +293,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Down_2
+      name: CFRPG16_Toxicschroom_Idle_Alert_Down_2
       rect:
         serializedVersion: 2
         x: 32
@@ -315,7 +315,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Down_3
+      name: CFRPG16_Toxicschroom_Idle_Alert_Down_3
       rect:
         serializedVersion: 2
         x: 48
@@ -337,7 +337,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Down_4
+      name: CFRPG16_Toxicschroom_Idle_Alert_Down_4
       rect:
         serializedVersion: 2
         x: 64
@@ -359,7 +359,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Up_0
+      name: CFRPG16_Toxicschroom_Idle_Alert_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -381,7 +381,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Up_1
+      name: CFRPG16_Toxicschroom_Idle_Alert_Up_1
       rect:
         serializedVersion: 2
         x: 16
@@ -403,7 +403,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Up_2
+      name: CFRPG16_Toxicschroom_Idle_Alert_Up_2
       rect:
         serializedVersion: 2
         x: 32
@@ -425,7 +425,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Up_3
+      name: CFRPG16_Toxicschroom_Idle_Alert_Up_3
       rect:
         serializedVersion: 2
         x: 48
@@ -447,7 +447,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Up_4
+      name: CFRPG16_Toxicschroom_Idle_Alert_Up_4
       rect:
         serializedVersion: 2
         x: 64
@@ -469,7 +469,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Side_0
+      name: CFRPG16_Toxicschroom_Idle_Alert_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -491,7 +491,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Side_1
+      name: CFRPG16_Toxicschroom_Idle_Alert_Side_1
       rect:
         serializedVersion: 2
         x: 16
@@ -513,7 +513,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Side_2
+      name: CFRPG16_Toxicschroom_Idle_Alert_Side_2
       rect:
         serializedVersion: 2
         x: 32
@@ -535,7 +535,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Side_3
+      name: CFRPG16_Toxicschroom_Idle_Alert_Side_3
       rect:
         serializedVersion: 2
         x: 48
@@ -557,7 +557,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Idle_Alert_Side_4
+      name: CFRPG16_Toxicschroom_Idle_Alert_Side_4
       rect:
         serializedVersion: 2
         x: 64
@@ -579,7 +579,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Down_0
+      name: CFRPG16_Toxicschroom_Walk_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -601,7 +601,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Down_1
+      name: CFRPG16_Toxicschroom_Walk_Down_1
       rect:
         serializedVersion: 2
         x: 16
@@ -623,7 +623,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Down_2
+      name: CFRPG16_Toxicschroom_Walk_Down_2
       rect:
         serializedVersion: 2
         x: 32
@@ -645,7 +645,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Down_3
+      name: CFRPG16_Toxicschroom_Walk_Down_3
       rect:
         serializedVersion: 2
         x: 48
@@ -667,7 +667,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Down_4
+      name: CFRPG16_Toxicschroom_Walk_Down_4
       rect:
         serializedVersion: 2
         x: 64
@@ -689,7 +689,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Down_5
+      name: CFRPG16_Toxicschroom_Walk_Down_5
       rect:
         serializedVersion: 2
         x: 80
@@ -711,7 +711,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Up_0
+      name: CFRPG16_Toxicschroom_Walk_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -733,7 +733,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Up_1
+      name: CFRPG16_Toxicschroom_Walk_Up_1
       rect:
         serializedVersion: 2
         x: 16
@@ -755,7 +755,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Up_2
+      name: CFRPG16_Toxicschroom_Walk_Up_2
       rect:
         serializedVersion: 2
         x: 32
@@ -777,7 +777,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Up_3
+      name: CFRPG16_Toxicschroom_Walk_Up_3
       rect:
         serializedVersion: 2
         x: 48
@@ -799,7 +799,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Up_4
+      name: CFRPG16_Toxicschroom_Walk_Up_4
       rect:
         serializedVersion: 2
         x: 64
@@ -821,7 +821,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Up_5
+      name: CFRPG16_Toxicschroom_Walk_Up_5
       rect:
         serializedVersion: 2
         x: 80
@@ -843,7 +843,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Side_0
+      name: CFRPG16_Toxicschroom_Walk_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -865,7 +865,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Side_1
+      name: CFRPG16_Toxicschroom_Walk_Side_1
       rect:
         serializedVersion: 2
         x: 16
@@ -887,7 +887,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Side_2
+      name: CFRPG16_Toxicschroom_Walk_Side_2
       rect:
         serializedVersion: 2
         x: 32
@@ -909,7 +909,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Side_3
+      name: CFRPG16_Toxicschroom_Walk_Side_3
       rect:
         serializedVersion: 2
         x: 48
@@ -931,7 +931,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Side_4
+      name: CFRPG16_Toxicschroom_Walk_Side_4
       rect:
         serializedVersion: 2
         x: 64
@@ -953,7 +953,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Walk_Side_5
+      name: CFRPG16_Toxicschroom_Walk_Side_5
       rect:
         serializedVersion: 2
         x: 80
@@ -1151,7 +1151,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_0
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1173,7 +1173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_1
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_1
       rect:
         serializedVersion: 2
         x: 16
@@ -1195,7 +1195,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_2
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_2
       rect:
         serializedVersion: 2
         x: 32
@@ -1217,7 +1217,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_3
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_3
       rect:
         serializedVersion: 2
         x: 48
@@ -1239,7 +1239,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_4
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_4
       rect:
         serializedVersion: 2
         x: 64
@@ -1261,7 +1261,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_5
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_5
       rect:
         serializedVersion: 2
         x: 80
@@ -1283,7 +1283,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_0
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1305,7 +1305,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_1
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_1
       rect:
         serializedVersion: 2
         x: 16
@@ -1327,7 +1327,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_2
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_2
       rect:
         serializedVersion: 2
         x: 32
@@ -1349,7 +1349,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_3
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_3
       rect:
         serializedVersion: 2
         x: 48
@@ -1371,7 +1371,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_4
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_4
       rect:
         serializedVersion: 2
         x: 64
@@ -1393,7 +1393,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_5
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_5
       rect:
         serializedVersion: 2
         x: 80
@@ -1415,7 +1415,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_0
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1437,7 +1437,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_1
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_1
       rect:
         serializedVersion: 2
         x: 16
@@ -1459,7 +1459,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_2
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_2
       rect:
         serializedVersion: 2
         x: 32
@@ -1481,7 +1481,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_3
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_3
       rect:
         serializedVersion: 2
         x: 48
@@ -1503,7 +1503,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_4
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_4
       rect:
         serializedVersion: 2
         x: 64
@@ -1525,7 +1525,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_5
+      name: CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_5
       rect:
         serializedVersion: 2
         x: 80
@@ -1547,7 +1547,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Down_0
+      name: CFRPG16_Toxicschroom_Hit_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1569,7 +1569,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Down_1
+      name: CFRPG16_Toxicschroom_Hit_Down_1
       rect:
         serializedVersion: 2
         x: 16
@@ -1591,7 +1591,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Down_2
+      name: CFRPG16_Toxicschroom_Hit_Down_2
       rect:
         serializedVersion: 2
         x: 32
@@ -1613,7 +1613,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Down_3
+      name: CFRPG16_Toxicschroom_Hit_Down_3
       rect:
         serializedVersion: 2
         x: 48
@@ -1635,7 +1635,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Up_0
+      name: CFRPG16_Toxicschroom_Hit_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1657,7 +1657,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Up_1
+      name: CFRPG16_Toxicschroom_Hit_Up_1
       rect:
         serializedVersion: 2
         x: 16
@@ -1679,7 +1679,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Up_2
+      name: CFRPG16_Toxicschroom_Hit_Up_2
       rect:
         serializedVersion: 2
         x: 32
@@ -1701,7 +1701,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Up_3
+      name: CFRPG16_Toxicschroom_Hit_Up_3
       rect:
         serializedVersion: 2
         x: 48
@@ -1723,7 +1723,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Side_0
+      name: CFRPG16_Toxicschroom_Hit_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1745,7 +1745,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Side_1
+      name: CFRPG16_Toxicschroom_Hit_Side_1
       rect:
         serializedVersion: 2
         x: 16
@@ -1767,7 +1767,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Side_2
+      name: CFRPG16_Toxicschroom_Hit_Side_2
       rect:
         serializedVersion: 2
         x: 32
@@ -1789,7 +1789,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Hit_Side_3
+      name: CFRPG16_Toxicschroom_Hit_Side_3
       rect:
         serializedVersion: 2
         x: 48
@@ -1811,7 +1811,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Die_Down_0
+      name: CFRPG16_Toxicschroom_Die_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1833,7 +1833,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Die_Down_1
+      name: CFRPG16_Toxicschroom_Die_Down_1
       rect:
         serializedVersion: 2
         x: 16
@@ -1855,7 +1855,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Die_Down_2
+      name: CFRPG16_Toxicschroom_Die_Down_2
       rect:
         serializedVersion: 2
         x: 32
@@ -1877,7 +1877,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Bombschroom_Die_Down_3
+      name: CFRPG16_Toxicschroom_Die_Down_3
       rect:
         serializedVersion: 2
         x: 48
@@ -1927,80 +1927,80 @@ TextureImporter:
       Bombschroom_51: -178780141
       Bombschroom_58: 1467845984
       Bombschroom_65: -1360104144
-      CFRPG16_Bombschroom_Die_Down_0: 946202123
-      CFRPG16_Bombschroom_Die_Down_1: -1512933719
-      CFRPG16_Bombschroom_Die_Down_2: -463637153
-      CFRPG16_Bombschroom_Die_Down_3: 544380747
-      CFRPG16_Bombschroom_Hit_Down_0: -473480334
-      CFRPG16_Bombschroom_Hit_Down_1: -1562720939
-      CFRPG16_Bombschroom_Hit_Down_2: -682884383
-      CFRPG16_Bombschroom_Hit_Down_3: -670923143
-      CFRPG16_Bombschroom_Hit_Side_0: 1671416816
-      CFRPG16_Bombschroom_Hit_Side_1: -1189209696
-      CFRPG16_Bombschroom_Hit_Side_2: 770455262
-      CFRPG16_Bombschroom_Hit_Side_3: -1187859490
-      CFRPG16_Bombschroom_Hit_Up_0: -1867461186
-      CFRPG16_Bombschroom_Hit_Up_1: -2000072798
-      CFRPG16_Bombschroom_Hit_Up_2: 2113228195
-      CFRPG16_Bombschroom_Hit_Up_3: -1723870078
-      CFRPG16_Bombschroom_Idle_Alert_Down_0: -1158539356
-      CFRPG16_Bombschroom_Idle_Alert_Down_1: -1880040385
-      CFRPG16_Bombschroom_Idle_Alert_Down_2: 1728416120
-      CFRPG16_Bombschroom_Idle_Alert_Down_3: -241065354
-      CFRPG16_Bombschroom_Idle_Alert_Down_4: 1438269966
-      CFRPG16_Bombschroom_Idle_Alert_Side_0: 715112714
-      CFRPG16_Bombschroom_Idle_Alert_Side_1: -603934406
-      CFRPG16_Bombschroom_Idle_Alert_Side_2: -1370526796
-      CFRPG16_Bombschroom_Idle_Alert_Side_3: -639073524
-      CFRPG16_Bombschroom_Idle_Alert_Side_4: -161213688
-      CFRPG16_Bombschroom_Idle_Alert_Up_0: -1207191188
-      CFRPG16_Bombschroom_Idle_Alert_Up_1: 1809644029
-      CFRPG16_Bombschroom_Idle_Alert_Up_2: 1477037700
-      CFRPG16_Bombschroom_Idle_Alert_Up_3: 756368090
-      CFRPG16_Bombschroom_Idle_Alert_Up_4: -921157447
-      CFRPG16_Bombschroom_Idle_Default_Down_0: -17488973
-      CFRPG16_Bombschroom_Idle_Default_Down_1: -538191555
-      CFRPG16_Bombschroom_Idle_Default_Side_0: 2146813563
-      CFRPG16_Bombschroom_Idle_Default_Side_1: -1502143274
-      CFRPG16_Bombschroom_Idle_Default_Up_0: -2115064696
-      CFRPG16_Bombschroom_Idle_Default_Up_1: 770164482
       CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKM_To_Down_0: -1020143398
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_0: -1101386201
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_1: 1915440149
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_2: -444836392
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_3: -620154052
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_4: 701626134
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_5: -1773528947
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_0: -1787355121
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_1: 236153345
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_2: 838634816
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_3: 1417556444
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_4: 851902262
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_5: -703362605
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_0: 991540108
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_1: 179475520
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_2: 192147938
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_3: 1803504439
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_4: -56220677
-      CFRPG16_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_5: -535061604
-      CFRPG16_Bombschroom_Walk_Down_0: 1503402784
-      CFRPG16_Bombschroom_Walk_Down_1: 1009842380
-      CFRPG16_Bombschroom_Walk_Down_2: 493243139
-      CFRPG16_Bombschroom_Walk_Down_3: 1351481638
-      CFRPG16_Bombschroom_Walk_Down_4: 2044973546
-      CFRPG16_Bombschroom_Walk_Down_5: 1192769179
-      CFRPG16_Bombschroom_Walk_Side_0: 387168991
-      CFRPG16_Bombschroom_Walk_Side_1: -2126660018
-      CFRPG16_Bombschroom_Walk_Side_2: -632232215
-      CFRPG16_Bombschroom_Walk_Side_3: -449867292
-      CFRPG16_Bombschroom_Walk_Side_4: 753310854
-      CFRPG16_Bombschroom_Walk_Side_5: -695405218
-      CFRPG16_Bombschroom_Walk_Up_0: -304024465
-      CFRPG16_Bombschroom_Walk_Up_1: 937128421
-      CFRPG16_Bombschroom_Walk_Up_2: 1344624406
-      CFRPG16_Bombschroom_Walk_Up_3: 1612741828
-      CFRPG16_Bombschroom_Walk_Up_4: -280965841
-      CFRPG16_Bombschroom_Walk_Up_5: 1708839369
+      CFRPG16_Toxicschroom_Die_Down_0: 946202123
+      CFRPG16_Toxicschroom_Die_Down_1: -1512933719
+      CFRPG16_Toxicschroom_Die_Down_2: -463637153
+      CFRPG16_Toxicschroom_Die_Down_3: 544380747
+      CFRPG16_Toxicschroom_Hit_Down_0: -473480334
+      CFRPG16_Toxicschroom_Hit_Down_1: -1562720939
+      CFRPG16_Toxicschroom_Hit_Down_2: -682884383
+      CFRPG16_Toxicschroom_Hit_Down_3: -670923143
+      CFRPG16_Toxicschroom_Hit_Side_0: 1671416816
+      CFRPG16_Toxicschroom_Hit_Side_1: -1189209696
+      CFRPG16_Toxicschroom_Hit_Side_2: 770455262
+      CFRPG16_Toxicschroom_Hit_Side_3: -1187859490
+      CFRPG16_Toxicschroom_Hit_Up_0: -1867461186
+      CFRPG16_Toxicschroom_Hit_Up_1: -2000072798
+      CFRPG16_Toxicschroom_Hit_Up_2: 2113228195
+      CFRPG16_Toxicschroom_Hit_Up_3: -1723870078
+      CFRPG16_Toxicschroom_Idle_Alert_Down_0: -1158539356
+      CFRPG16_Toxicschroom_Idle_Alert_Down_1: -1880040385
+      CFRPG16_Toxicschroom_Idle_Alert_Down_2: 1728416120
+      CFRPG16_Toxicschroom_Idle_Alert_Down_3: -241065354
+      CFRPG16_Toxicschroom_Idle_Alert_Down_4: 1438269966
+      CFRPG16_Toxicschroom_Idle_Alert_Side_0: 715112714
+      CFRPG16_Toxicschroom_Idle_Alert_Side_1: -603934406
+      CFRPG16_Toxicschroom_Idle_Alert_Side_2: -1370526796
+      CFRPG16_Toxicschroom_Idle_Alert_Side_3: -639073524
+      CFRPG16_Toxicschroom_Idle_Alert_Side_4: -161213688
+      CFRPG16_Toxicschroom_Idle_Alert_Up_0: -1207191188
+      CFRPG16_Toxicschroom_Idle_Alert_Up_1: 1809644029
+      CFRPG16_Toxicschroom_Idle_Alert_Up_2: 1477037700
+      CFRPG16_Toxicschroom_Idle_Alert_Up_3: 756368090
+      CFRPG16_Toxicschroom_Idle_Alert_Up_4: -921157447
+      CFRPG16_Toxicschroom_Idle_Default_Down_0: -17488973
+      CFRPG16_Toxicschroom_Idle_Default_Down_1: -538191555
+      CFRPG16_Toxicschroom_Idle_Default_Side_0: 2146813563
+      CFRPG16_Toxicschroom_Idle_Default_Side_1: -1502143274
+      CFRPG16_Toxicschroom_Idle_Default_Up_0: -2115064696
+      CFRPG16_Toxicschroom_Idle_Default_Up_1: 770164482
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_0: -1101386201
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_1: 1915440149
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_2: -444836392
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_3: -620154052
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_4: 701626134
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Down_5: -1773528947
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_0: -1787355121
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_1: 236153345
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_2: 838634816
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_3: 1417556444
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_4: 851902262
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Side_5: -703362605
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_0: 991540108
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_1: 179475520
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_2: 192147938
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_3: 1803504439
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_4: -56220677
+      CFRPG16_Toxicschroom_WP_BombschroomToxicSac_SKR_ToxicPuff_Up_5: -535061604
+      CFRPG16_Toxicschroom_Walk_Down_0: 1503402784
+      CFRPG16_Toxicschroom_Walk_Down_1: 1009842380
+      CFRPG16_Toxicschroom_Walk_Down_2: 493243139
+      CFRPG16_Toxicschroom_Walk_Down_3: 1351481638
+      CFRPG16_Toxicschroom_Walk_Down_4: 2044973546
+      CFRPG16_Toxicschroom_Walk_Down_5: 1192769179
+      CFRPG16_Toxicschroom_Walk_Side_0: 387168991
+      CFRPG16_Toxicschroom_Walk_Side_1: -2126660018
+      CFRPG16_Toxicschroom_Walk_Side_2: -632232215
+      CFRPG16_Toxicschroom_Walk_Side_3: -449867292
+      CFRPG16_Toxicschroom_Walk_Side_4: 753310854
+      CFRPG16_Toxicschroom_Walk_Side_5: -695405218
+      CFRPG16_Toxicschroom_Walk_Up_0: -304024465
+      CFRPG16_Toxicschroom_Walk_Up_1: 937128421
+      CFRPG16_Toxicschroom_Walk_Up_2: 1344624406
+      CFRPG16_Toxicschroom_Walk_Up_3: 1612741828
+      CFRPG16_Toxicschroom_Walk_Up_4: -280965841
+      CFRPG16_Toxicschroom_Walk_Up_5: 1708839369
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

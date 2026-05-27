@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7287a1f981554f14f988778fed0a6c5c, type: 3}
-  m_Name: WP_BombschroomToxicSac
+  m_Name: WP_ToxicschroomToxicSac
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.WeaponProfile
   _id: 115
   _displayName: Toxic Sac
-  _description: Bombschroom's Toxic Sac
+  _description: Toxicschroom's Toxic Sac
   _icon: {fileID: 0}
   _isStackable: 0
   _maxStackSize: 1

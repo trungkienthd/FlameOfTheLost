@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51d3b9023c5dfeb499619f54ab1144a8, type: 3}
-  m_Name: CAClipHb_Bombschroom_WP_BombschroomToxicSac_SKR_ToxicPuff
+  m_Name: CAClipHb_Toxicschroom_WP_ToxicschroomToxicSac_SKR_ToxicPuff
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAnimationClipHitboxSetProfile
   _skills:
   - {fileID: 11400000, guid: f83ec08a9ac622448ac00cfd201b56bf, type: 2}
