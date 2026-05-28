@@ -14,7 +14,7 @@ namespace FlameOfTheLost
             get;
         }
 
-        public CharacterFactionType SourceCharacterFaction
+        public CharacterFaction SourceCharacterFaction
         {
             get;
         }

@@ -21,18 +21,18 @@ namespace FlameOfTheLost
             _up = up;
         }
 
-        public CombatAnimationClipHitboxEntry GetEntry(CharacterFacingStatusType facing)
+        public CombatAnimationClipHitboxEntry GetEntry(CharacterFacingStatus facing)
         {
             return facing switch
             {
-                CharacterFacingStatusType.Down => _down,
-                CharacterFacingStatusType.Side => _side,
-                CharacterFacingStatusType.Up => _up,
+                CharacterFacingStatus.Down => _down,
+                CharacterFacingStatus.Side => _side,
+                CharacterFacingStatus.Up => _up,
                 _ => _down
             };
         }
 
-        public AnimationClip GetAttackClip(CharacterFacingStatusType facing)
+        public AnimationClip GetAttackClip(CharacterFacingStatus facing)
         {
             return this.GetEntry(facing).AnimationClip;
         }

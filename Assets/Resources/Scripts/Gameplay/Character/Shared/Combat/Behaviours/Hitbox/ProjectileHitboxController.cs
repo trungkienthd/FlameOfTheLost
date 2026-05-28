@@ -54,7 +54,7 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs
-        public override void EnableHitbox(HitboxDamagePayload payload, AttackSideType attackSideType)
+        public override void EnableHitbox(HitboxDamagePayload payload, AttackSide attackSideType)
         {
             base.EnableHitbox(payload, attackSideType);
 

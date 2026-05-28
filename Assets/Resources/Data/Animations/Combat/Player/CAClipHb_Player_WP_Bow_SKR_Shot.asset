@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5582d1a92f20bdd419721a6755dfc723, type: 2}
   - {fileID: 11400000, guid: 61f58431f8a80fe469e6107dd230c0b5, type: 2}
   _weapon: {fileID: 11400000, guid: f14bc7cca332c78468593a8bbd652d25, type: 2}
-  _characterTag: 1
+  _characterType: 1
   _left:
     _down:
       _animationClip: {fileID: 7400000, guid: db29c945bf682ce4d97fc0802860c561, type: 2}

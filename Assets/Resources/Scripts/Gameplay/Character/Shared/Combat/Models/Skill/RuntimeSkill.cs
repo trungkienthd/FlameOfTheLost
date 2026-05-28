@@ -25,17 +25,17 @@ namespace FlameOfTheLost
 
         //  2. Non-serialized runtime data
         [NonSerialized] private GameObject _owner;
-        [NonSerialized] private CharacterTagType _characterTag;
+        [NonSerialized] private CharacterType _characterType;
         [NonSerialized] private CharacterCombatAnimationClipHitboxSetProfile _animationProfile;
         public GameObject Owner
         {
             get => _owner;
             private set => _owner = value;
         }
-        public CharacterTagType CharacterTag
+        public CharacterType CharacterType
         {
-            get => _characterTag;
-            private set => _characterTag = value;
+            get => _characterType;
+            private set => _characterType = value;
         }
         public CharacterCombatAnimationClipHitboxSetProfile CombatAnimationClipHitboxSetProfile
         {
@@ -46,12 +46,12 @@ namespace FlameOfTheLost
         public int SkillID => this.Profile != null ? this.Profile.ID : -1;
 
         // --- Constructors ---
-        public RuntimeSkill(SkillProfile profile, WeaponProfile weapon, SkillProvisionType provisionType, GameObject owner, CharacterTagType characterTag, CharacterCombatAnimationClipHitboxSetProfile animationProfile)
+        public RuntimeSkill(SkillProfile profile, WeaponProfile weapon, SkillProvisionType provisionType, GameObject owner, CharacterType characterType, CharacterCombatAnimationClipHitboxSetProfile animationProfile)
         {
             this.Profile = profile;
             this.ProvisionType = provisionType;
             this.Owner = owner;
-            this.CharacterTag = characterTag;
+            this.CharacterType = characterType;
             this.CombatAnimationClipHitboxSetProfile = animationProfile;
         }
 
@@ -75,7 +75,7 @@ namespace FlameOfTheLost
                 yield return application;
             }
         }
-        public bool TryGetMeleeHitboxShape(AttackSideType attackSideType, out MeleeHitboxShape hitboxShape)
+        public bool TryGetMeleeHitboxShape(AttackSide attackSideType, out MeleeHitboxShape hitboxShape)
         {
             hitboxShape = default;
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b8e2d592e9e394f87118510a16e5f8, type: 3}
   m_Name: CAni_Toxicschroom
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAnimationProfile
-  _characterTag: 2
+  _characterType: 2
   _elements:
   - {fileID: 11400000, guid: bf8bca7c514f8d447af07b5db271376a, type: 2}
   _hitAnimationClipSet:

@@ -41,15 +41,7 @@ namespace FlameOfTheLost
             private set => _maxVirtualHP = Mathf.Clamp(value, 0, this.MaxValue);
         }
 
-        //  3. Status Effect Stat Periodic
-        public override StatusEffectStatPeriodicTargetType PeriodicTarget => StatusEffectStatPeriodicTargetType.HP;
-
-        //  4. Character Faction
-        [Header("Character Faction")]
-        [SerializeField] private CharacterFactionType _characterFaction = CharacterFactionType.Neutral;
-        public CharacterFactionType CharacterFaction => _characterFaction;
-
-        //  5. HP-related States
+        //  3. HP-related States
         [Header("States")]
         [SerializeField] private bool _isDead = false;
         public bool IsDead
@@ -57,6 +49,12 @@ namespace FlameOfTheLost
             get => _isDead;
             private set => _isDead = value;
         }
+
+        //  4. Character Faction
+        public CharacterFaction CharacterFaction => this.CharacterComponentController.IdentityController.Faction;
+
+        //  5. Status Effect Stat Periodic (Type)
+        public override StatusEffectStatPeriodicTargetType PeriodicTarget => StatusEffectStatPeriodicTargetType.HP;
 
         //  6. Events
         public event Action<int> OnDamageTaken;

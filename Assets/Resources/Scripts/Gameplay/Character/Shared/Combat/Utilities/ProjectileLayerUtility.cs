@@ -62,15 +62,15 @@ namespace FlameOfTheLost
             return LAYER_PROJECTILE_PLAYER;
         }
 
-        private static CharacterFactionType LayerToFaction(int ownerLayer)
+        private static CharacterFaction LayerToFaction(int ownerLayer)
         {
-            if (ownerLayer == LAYER_PLAYER) return CharacterFactionType.Player;
-            if (ownerLayer == LAYER_ALLY)   return CharacterFactionType.Ally;
-            if (ownerLayer == LAYER_ENEMY)  return CharacterFactionType.Enemy;
+            if (ownerLayer == LAYER_PLAYER) return CharacterFaction.Player;
+            if (ownerLayer == LAYER_ALLY)   return CharacterFaction.Ally;
+            if (ownerLayer == LAYER_ENEMY)  return CharacterFaction.Enemy;
 
             // Sensible Default
             Debug.LogWarning("[ProjectileLayerUtility] Unsupported owner layer. Defaulting to Player's faction");
-            return CharacterFactionType.Player;
+            return CharacterFaction.Player;
         }
 
         public static void SetLayerRecursively(GameObject go, int layer)

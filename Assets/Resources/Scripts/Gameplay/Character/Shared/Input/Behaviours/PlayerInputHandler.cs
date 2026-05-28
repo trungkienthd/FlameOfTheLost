@@ -48,25 +48,25 @@ namespace FlameOfTheLost
         {
             if (!ctx.performed) return;
 
-            this.RequestNormalAttack(AttackSideType.Left);
+            this.RequestNormalAttack(AttackSide.Left);
         }
         public void OnNormalAttackRight(InputAction.CallbackContext ctx)
         {
             if (!ctx.performed) return;
 
-            this.RequestNormalAttack(AttackSideType.Right);
+            this.RequestNormalAttack(AttackSide.Right);
         }
         public void OnSpecialAttackLeft(InputAction.CallbackContext ctx)
         {
             if (!ctx.performed) return;
 
-            this.RequestSpecialAttack(AttackSideType.Left);
+            this.RequestSpecialAttack(AttackSide.Left);
         }
         public void OnSpecialAttackRight(InputAction.CallbackContext ctx)
         {
             if (!ctx.performed) return;
 
-            this.RequestSpecialAttack(AttackSideType.Right);
+            this.RequestSpecialAttack(AttackSide.Right);
         }
 
         //      1.3. Loadout

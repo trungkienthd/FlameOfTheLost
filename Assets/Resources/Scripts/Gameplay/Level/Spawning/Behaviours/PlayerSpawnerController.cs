@@ -152,7 +152,7 @@ namespace FlameOfTheLost
             (
                 this.Player.transform.position,
                 this.Player.transform.rotation,
-                CharacterFacingStatusType.Side
+                CharacterFacingStatus.Side
             );
         }
 
@@ -188,12 +188,12 @@ namespace FlameOfTheLost
             }
         }
 
-        private void ApplyPlayerFacing(CharacterFacingStatusType facing)
+        private void ApplyPlayerFacing(CharacterFacingStatus facing)
         {
             CharacterVisualController animHandler = this.Player.GetComponent<CharacterVisualController>();
             if (animHandler != null)
             {
-                animHandler.SetFacing(facing);
+                animHandler.SetFacingParameter(facing);
             }
         }
 

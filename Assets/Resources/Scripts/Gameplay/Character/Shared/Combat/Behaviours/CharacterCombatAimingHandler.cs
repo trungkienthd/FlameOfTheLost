@@ -2,15 +2,15 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [RequireComponent(typeof(CombatAimingHandler))]
     public class CharacterCombatAimingHandler : CharacterBehaviourBaseController
     {
         // --- States ---
         //  1. References
         [Header("References")]
-        [SerializeField] private CombatAimingHandler _aimingHandler;
+        [SerializeField] private MonoBehaviour _aimingProviderBehaviour;
         private CharacterVisualController VisualController => this.CharacterComponentController.VisualController;
-        private CombatAimingHandler AimingHandler => _aimingHandler;
+        private MonoBehaviour AimingProviderBehaviour => _aimingProviderBehaviour;
+        private ICombatAimingProvider AimingProvider => this.AimingProviderBehaviour as ICombatAimingProvider;
 
         //  2. Runtime State
         private bool _isFacingLocked = false;                 // Runtime aim/facing
@@ -66,7 +66,7 @@ namespace FlameOfTheLost
             }
 
             // b. Otherwise use live aim
-            if (this.AimingHandler != null && this.AimingHandler.TryGetAimDirection(this.transform, out var aimDirection))
+            if (this.AimingProvider != null && this.AimingProvider.TryGetAimDirection(this.transform, out var aimDirection))
             {
                 return aimDirection.sqrMagnitude > Mathf.Epsilon ? aimDirection.normalized : Vector2.right;
             }
@@ -108,8 +108,8 @@ namespace FlameOfTheLost
             if (this.AimingConfig == null || !this.AimingConfig.AimingOverridesFacing) return;
             if (this.IsFacingLocked && this.AimingConfig.LockFacingDuringActiveFrames) return;
 
-            if (this.AimingHandler == null) return;
-            if (!this.AimingHandler.TryGetAimDirection(this.transform, out var aimDirection)) return;
+            if (this.AimingProvider == null) return;
+            if (!this.AimingProvider.TryGetAimDirection(this.transform, out var aimDirection)) return;
 
             // Deadzone check
             aimDirection = AimingUtility.ApplyDeadzone(aimDirection, this.AimingConfig.DeadzoneRadius);
@@ -126,7 +126,7 @@ namespace FlameOfTheLost
             if (this.VisualController)
             {
                 this.VisualController.ForceFacing(snappedDirection);
-                this.VisualController.SetFacing(facing);
+                this.VisualController.SetFacingParameter(facing);
             }
         }
 
@@ -148,7 +148,7 @@ namespace FlameOfTheLost
         //  5. Fallback direction based on animation facing
         private Vector2 GetFallbackDirectionFromFacing()
         {
-            CharacterFacingStatusType facingStatus = CharacterFacingStatusType.Side;
+            CharacterFacingStatus facingStatus = CharacterFacingStatus.Side;
             bool isFacingRight = true;
 
             if (this.VisualController != null)
@@ -159,11 +159,11 @@ namespace FlameOfTheLost
 
             switch (facingStatus)
             {
-                case CharacterFacingStatusType.Down:
+                case CharacterFacingStatus.Down:
                     return Vector2.down;
-                case CharacterFacingStatusType.Up:
+                case CharacterFacingStatus.Up:
                     return Vector2.up;
-                case CharacterFacingStatusType.Side:
+                case CharacterFacingStatus.Side:
                     return isFacingRight ? Vector2.right : Vector2.left;
                 default:
                     Debug.LogWarning($"[{this.CharacterName}.CharacterCombatAimingHandler] Unknown FacingStatusType '{facingStatus}', defaulting to Vector2.right");
@@ -175,7 +175,11 @@ namespace FlameOfTheLost
         {
             base.CacheReferences();
 
-            if (this.AimingHandler == null) _aimingHandler = this.GetComponent<CombatAimingHandler>();
+            if (this.AimingProviderBehaviour == null)
+            {
+                Debug.LogError($"[{this.CharacterName}.CharacterCombatAimingHandler] No AimingProvider assigned, aiming will not work!", this);
+            }
+
             if (this.AimingConfig == null)
             {
                 Debug.LogWarning($"[{this.CharacterName}.CharacterCombatAimingHandler] No AimingConfig assigned, generic config will be loaded instead.");

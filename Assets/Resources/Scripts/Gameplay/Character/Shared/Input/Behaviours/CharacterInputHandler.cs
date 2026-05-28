@@ -39,12 +39,12 @@ namespace FlameOfTheLost
             this.SetMoveInput(Vector2.zero);
         }
 
-        protected void RequestNormalAttack(AttackSideType attackSide)
+        protected void RequestNormalAttack(AttackSide attackSide)
         {
             this.CombatController?.TryDoNormalAttack(attackSide);
         }
 
-        protected void RequestSpecialAttack(AttackSideType attackSide)
+        protected void RequestSpecialAttack(AttackSide attackSide)
         {
             this.CombatController?.TryDoSpecialAttack(attackSide);
         }

@@ -4,7 +4,7 @@ namespace FlameOfTheLost
 {
     public interface IDamageable
     {
-        public CharacterFactionType CharacterFaction
+        public CharacterFaction CharacterFaction
         {
             get;
         }

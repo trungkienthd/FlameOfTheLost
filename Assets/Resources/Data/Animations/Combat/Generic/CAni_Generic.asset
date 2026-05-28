@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b8e2d592e9e394f87118510a16e5f8, type: 3}
+  m_Name: CAni_Generic
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAnimationProfile
+  _characterType: 0
+  _elements:
+  - {fileID: 11400000, guid: 4a5f865f45d4622438cadc3c2badeaa5, type: 2}
+  _hitAnimationClipSet:
+    _down: {fileID: 7400000, guid: c9ef579214ef8fa4db0464855c2e3ba1, type: 2}
+    _side: {fileID: 7400000, guid: 66419f62336b86345a9ab14513213a26, type: 2}
+    _up: {fileID: 7400000, guid: 01b8e71a934e10f4b9ebd4cc053936b1, type: 2}
+  _dieAnimationClipSet:
+    _down: {fileID: 7400000, guid: e4070887b1b41ce4b84283d8b5445889, type: 2}
+    _side: {fileID: 7400000, guid: 73b6c408c94d3ea43af1c871ae42ffd6, type: 2}
+    _up: {fileID: 7400000, guid: 848c48c67f086fb48ac701897ebabdb9, type: 2}

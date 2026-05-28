@@ -63,9 +63,9 @@ namespace FlameOfTheLost
 
         // --- Source ---
         [Header("Source")]
-        [SerializeField] private CharacterFactionType _sourceCharacterFaction = CharacterFactionType.Neutral;
+        [SerializeField] private CharacterFaction _sourceCharacterFaction = CharacterFaction.Neutral;
         [SerializeField] private Transform _originTransform;
-        public CharacterFactionType SourceCharacterFaction
+        public CharacterFaction SourceCharacterFaction
         {
             get => _sourceCharacterFaction;
             private set => _sourceCharacterFaction = value;
@@ -117,7 +117,7 @@ namespace FlameOfTheLost
         {
             if (origin) this.OriginTransform = origin; 
         }
-        public void SetSourceCharacterFaction(CharacterFactionType characterFaction)
+        public void SetSourceCharacterFaction(CharacterFaction characterFaction)
         {
             this.SourceCharacterFaction = characterFaction;
         }

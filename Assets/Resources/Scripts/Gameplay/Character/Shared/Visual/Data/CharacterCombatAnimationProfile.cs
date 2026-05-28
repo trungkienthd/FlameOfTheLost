@@ -8,8 +8,8 @@ namespace FlameOfTheLost
     {
         // --- States ---
         [Header("Character")]
-        [SerializeField] private CharacterTagType _characterTag = CharacterTagType.Default;
-        public CharacterTagType CharacterTag => _characterTag;
+        [SerializeField] private CharacterType _characterType = CharacterType.Default;
+        public CharacterType CharacterType => _characterType;
 
         [Header("(Override-At-Runtime) Combat Animation Elements")]
         [SerializeField] private List<CharacterCombatAnimationClipHitboxSetProfile> _elements = new();
@@ -25,6 +25,7 @@ namespace FlameOfTheLost
 #if UNITY_EDITOR
         private void OnValidate()
         {
+            if (this.CharacterType == CharacterType.Default) return;
             if (this.Elements == null || this.Elements.Count == 0) return;
 
             for (int i = 0; i < this.Elements.Count; i++)
@@ -37,9 +38,9 @@ namespace FlameOfTheLost
                 }
 
                 // 1. CharacterTag consistency check
-                if (element.CharacterTag != this.CharacterTag)
+                if (element.CharacterType != this.CharacterType)
                 {
-                    Debug.LogError($"[{this.name}] CharacterTag mismatch in entry '{element.name}'. " + $"Entry tag = {element.CharacterTag}, Profile tag = {this.CharacterTag}.", this);
+                    Debug.LogError($"[{this.name}] CharacterType mismatch in entry '{element.name}'. " + $"Entry type = {element.CharacterType}, Profile type = {this.CharacterType}.", this);
                 }
 
                 // 2. Basic validity checks
@@ -140,12 +141,12 @@ namespace FlameOfTheLost
             return entry;
         }
 
-        public AnimationClip GetHitClip(CharacterFacingStatusType facingStatusType)
+        public AnimationClip GetHitClip(CharacterFacingStatus facingStatusType)
         {
             return this.HitAnimationClipSet.GetClip(facingStatusType);
         }
 
-        public AnimationClip GetDieClip(CharacterFacingStatusType facingStatusType)
+        public AnimationClip GetDieClip(CharacterFacingStatus facingStatusType)
         {
             return this.DieAnimationClipSet.GetClip(facingStatusType);
         }

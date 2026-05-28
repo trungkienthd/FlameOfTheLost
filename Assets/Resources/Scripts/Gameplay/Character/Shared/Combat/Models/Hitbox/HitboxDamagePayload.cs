@@ -22,7 +22,7 @@ namespace FlameOfTheLost
             set;
         }
 
-        public CharacterFactionType SourceFaction
+        public CharacterFaction SourceFaction
         {
             get; 
             set;

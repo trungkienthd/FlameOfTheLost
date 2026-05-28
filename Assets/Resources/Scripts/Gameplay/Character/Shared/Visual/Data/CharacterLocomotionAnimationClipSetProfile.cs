@@ -8,8 +8,10 @@ namespace FlameOfTheLost
     public class CharacterLocomotionAnimationClipSetProfile : ScriptableObject
     {
         [Header("Identity")]
+        [SerializeField] private CharacterLocomotionMode _locomotionMode = CharacterLocomotionMode.Default;
         [SerializeField] private CharacterCarryItemType _carryItemType = CharacterCarryItemType.None;
         [SerializeField] private LightSourceType _lightSourceType = LightSourceType.None;
+        public CharacterLocomotionMode LocomotionMode => _locomotionMode;
         public CharacterCarryItemType CarryItemType => _carryItemType;
         public LightSourceType LightSourceType => _lightSourceType;
 
@@ -19,30 +21,38 @@ namespace FlameOfTheLost
         public FacingAnimationClipSet IdleClipSet => _idleClipSet;
         public FacingAnimationClipSet WalkClipSet => _walkClipSet;
 
-        public AnimationClip GetIdleClip(CharacterFacingStatusType facingStatus)
+        public AnimationClip GetIdleClip(CharacterFacingStatus facingStatus)
         {
             return this.IdleClipSet.IsValid
                 ? this.IdleClipSet.GetClip(facingStatus)
                 : null;
         }
 
-        public AnimationClip GetWalkClip(CharacterFacingStatusType facingStatus)
+        public AnimationClip GetWalkClip(CharacterFacingStatus facingStatus)
         {
             return this.WalkClipSet.IsValid
                 ? this.WalkClipSet.GetClip(facingStatus)
                 : null;
         }
 
-        public bool Matches(CharacterCarryItemType carryItemType, LightSourceType lightSourceType)
+        public bool Matches(CharacterLocomotionMode locomotionMode, CharacterCarryItemType carryItemType, LightSourceType lightSourceType)
         {
-            if (this.CarryItemType != carryItemType)
+            if (this.LocomotionMode != locomotionMode)
             {
                 return false;
             }
 
-            if (carryItemType == CharacterCarryItemType.LightSource)
+            if (locomotionMode == CharacterLocomotionMode.Carry)
             {
-                return this.LightSourceType == lightSourceType;
+                if (this.CarryItemType != carryItemType)
+                {
+                    return false;
+                }
+
+                if (carryItemType == CharacterCarryItemType.LightSource)
+                {
+                    return this.LightSourceType == lightSourceType;
+                }
             }
 
             return true;

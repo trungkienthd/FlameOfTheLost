@@ -65,8 +65,8 @@ namespace FlameOfTheLost
         public bool IsSpecialAttackLocked => (this.CannotAttack || this.CannotCastSpecialSkill) && !this.IgnoreAttackLock;
 
         //  4. Last states
-        private AttackSideType _lastAttackSide;
-        public AttackSideType LastAttackSide
+        private AttackSide _lastAttackSide;
+        public AttackSide LastAttackSide
         {
             get => _lastAttackSide;
             private set => _lastAttackSide = value;
@@ -85,7 +85,7 @@ namespace FlameOfTheLost
 
         // --- Public APIs ---
         //      1.1. Try to perform a normal attack with the given side. Returns true if the attack was initiated.
-        public bool TryDoNormalAttack(AttackSideType attackSideType = AttackSideType.Left)
+        public bool TryDoNormalAttack(AttackSide attackSideType = AttackSide.Left)
         {
             if (this.IsAttackLocked) return false;
 
@@ -102,7 +102,7 @@ namespace FlameOfTheLost
         }
 
         //      1.2. Try to perform a special attack with the given side. Returns true if the attack was initiated.
-        public bool TryDoSpecialAttack(AttackSideType attackSideType = AttackSideType.Left)
+        public bool TryDoSpecialAttack(AttackSide attackSideType = AttackSide.Left)
         {
             if (this.IsSpecialAttackLocked) return false;
 
@@ -158,7 +158,7 @@ namespace FlameOfTheLost
                             DamageAmount = meleeSkill.DamageAmount,
                             KnockbackForce = meleeSkill.KnockbackForce,
                             AttackOrigin = this.transform,
-                            SourceFaction = this.CombatResourcesHandler.ResourcesController.HP.CharacterFaction,
+                            SourceFaction = this.CharacterComponentController.IdentityController.Faction
                         };
                         this.MeleeHitboxController.EnableHitbox(meleeHitboxDamagePayload, this.LastAttackSide);          // Enable the melee hitbox
                     }
@@ -308,13 +308,13 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        private bool DoAttack(SkillProfile skill, AttackSideType attackSideType)
+        private bool DoAttack(SkillProfile skill, AttackSide attackSideType)
         {
             this.ActiveRuntimeSkill = null;
 
             WeaponProfile weapon = this.CombatLoadoutController.ActiveEquippedRuntimeWeapon?.Profile;
 
-            CharacterTagType characterTag = this.CharacterComponentController.IdentityController.CharacterTag;
+            CharacterType characterType = this.CharacterComponentController.IdentityController.CharacterType;
 
             // Build runtime skill
             RuntimeSkill runtimeSkill = new RuntimeSkill
@@ -323,13 +323,13 @@ namespace FlameOfTheLost
                 weapon: weapon,
                 provisionType: skill.DefaultProvisionType, 
                 owner: this.gameObject, 
-                characterTag: characterTag,
-                animationProfile: this.VisualController.CharacterCombatAnimationProfile.GetOrNull(skill, weapon)
+                characterType: characterType,
+                animationProfile: this.CharacterComponentController.VisualCombatAnimationHandler.ActiveProfile.GetOrNull(skill, weapon)
             );
 
             if (runtimeSkill.CombatAnimationClipHitboxSetProfile == null)
             {
-                Debug.LogWarning($"[{this.CharacterName}.CharacterCombatAttackController] Missing CombatAnimationClipHitboxSetProfile for SkillID={runtimeSkill.SkillID} ('{skill.name}'), Tag={characterTag}.", this);
+                Debug.LogWarning($"[{this.CharacterName}.CharacterCombatAttackController] Missing CombatAnimationClipHitboxSetProfile for SkillID={runtimeSkill.SkillID} ('{skill.name}'), Tag={characterType}.", this);
                 return false;
             }
 
@@ -349,7 +349,7 @@ namespace FlameOfTheLost
             this.LastAttackSide = attackSideType;
 
             // Trigger attack animation
-            if (this.VisualController != null) this.VisualController.TriggerAttack(runtimeSkill, this.LastAttackSide);
+            if (this.VisualController != null) this.VisualController.TriggerAttack(runtimeSkill, weapon, this.LastAttackSide);
 
             if (this.AttackRoutine != null)
             {
@@ -445,7 +445,7 @@ namespace FlameOfTheLost
                     DamageAmount = rangedSkill.DamageAmount,
                     KnockbackForce = rangedSkill.KnockbackForce,
                     AttackOrigin = this.transform,
-                    SourceFaction = this.CombatResourcesHandler.ResourcesController.HP.CharacterFaction,
+                    SourceFaction = this.CharacterComponentController.IdentityController.Faction
                 };
 
                 projectileHitbox.EnableHitbox(projectileHitboxDamagePayload, this.LastAttackSide);

@@ -15,7 +15,7 @@ MonoBehaviour:
   _skills:
   - {fileID: 11400000, guid: bf6e2cce3d03635488327f97c3d1ad1a, type: 2}
   _weapon: {fileID: 11400000, guid: 13999cb7f005da4438aa073935f6e0ea, type: 2}
-  _characterTag: 1
+  _characterType: 1
   _left:
     _down:
       _animationClip: {fileID: 7400000, guid: 769da27cfb976534faab703447d325ed, type: 2}

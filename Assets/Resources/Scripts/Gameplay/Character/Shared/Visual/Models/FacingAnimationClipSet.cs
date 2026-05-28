@@ -21,13 +21,13 @@ namespace FlameOfTheLost
             _up = up;
         } 
 
-        public AnimationClip GetClip(CharacterFacingStatusType facingStatusType)
+        public AnimationClip GetClip(CharacterFacingStatus facingStatusType)
         {
             return facingStatusType switch
             {
-                CharacterFacingStatusType.Down => this.Down,
-                CharacterFacingStatusType.Side => this.Side,
-                CharacterFacingStatusType.Up => this.Up,
+                CharacterFacingStatus.Down => this.Down,
+                CharacterFacingStatus.Side => this.Side,
+                CharacterFacingStatus.Up => this.Up,
                 _ => null,
             };
         }

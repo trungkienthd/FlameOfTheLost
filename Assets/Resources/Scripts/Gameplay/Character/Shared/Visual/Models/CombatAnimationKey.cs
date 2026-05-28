@@ -6,13 +6,13 @@ namespace FlameOfTheLost
     {
         private readonly int _skillId;
         private readonly int _weaponId;
-        private readonly AttackSideType _side;
+        private readonly AttackSide _side;
 
         public int SkillID => _skillId;
         public int WeaponID => _weaponId;
-        public AttackSideType Side => _side;
+        public AttackSide Side => _side;
 
-        public CombatAnimationKey(int skillId, int weaponId, AttackSideType side)
+        public CombatAnimationKey(int skillId, int weaponId, AttackSide side)
         {
             _skillId = skillId;
             _weaponId = weaponId;

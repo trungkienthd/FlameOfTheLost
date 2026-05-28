@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65163b05174bdc4694637d6b2cc914f, type: 3}
   m_Name: LAClip_Player_Carry_Torch
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterLocomotionClipSetProfile
+  _locomotionMode: 1
   _carryItemType: 1
   _lightSourceType: 1
   _idleClipSet:

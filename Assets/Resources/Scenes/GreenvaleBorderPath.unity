@@ -35598,7 +35598,7 @@ MonoBehaviour:
   _costMultiplier: 1
   _costAdditiveFlat: 0
   _activePeriodicStreams: []
-  _staminaRegenRate: 5
+  _staminaRegenRate: 3
   _staminaRegenDelay: 1
   _minStaminaReserve: 0
   _exhaustedThresholdRatio: 0.1
@@ -35661,7 +35661,6 @@ MonoBehaviour:
   _damageReceivedAdditiveFlat: 0
   _currentVirtualHP: 0
   _maxVirtualHP: 0
-  _characterFaction: 2
   _isDead: 0
 --- !u!114 &53646109
 MonoBehaviour:
@@ -41268,6 +41267,9 @@ GameObject:
   - component: {fileID: 471410253}
   - component: {fileID: 471410252}
   - component: {fileID: 471410251}
+  - component: {fileID: 471410256}
+  - component: {fileID: 471410255}
+  - component: {fileID: 471410257}
   m_Layer: 8
   m_Name: VisualSpace
   m_TagString: Untagged
@@ -41308,22 +41310,6 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 471410253}
   _animator: {fileID: 471410252}
   _characterFlipGroup: {fileID: 400740143}
-  _speedForOne: 10
-  _speedDampTime: 0.05
-  _locomotionPlaceholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
-  _locomotionRuntimeProfile: {fileID: 11400000, guid: fb951246804cd704387ca8a631bcae2c, type: 2}
-  _combatAnimationProfile: {fileID: 11400000, guid: f0e51d36e48ee4e43998ded6f8841cdc, type: 2}
-  _lastDir: {x: 0, y: -1}
-  _currentLocomotionMode: 0
-  _placeholderAttackDown: {fileID: 7400000, guid: 4eef5e0d2c7d11c48be2ec23915732af, type: 2}
-  _placeholderAttackSide: {fileID: 7400000, guid: d1e69b879d4623c4696a7395626101df, type: 2}
-  _placeholderAttackUp: {fileID: 7400000, guid: 9e999f4bbb498904ab0fe76071334040, type: 2}
-  _placeholderHitDown: {fileID: 7400000, guid: c9ef579214ef8fa4db0464855c2e3ba1, type: 2}
-  _placeholderHitSide: {fileID: 7400000, guid: 66419f62336b86345a9ab14513213a26, type: 2}
-  _placeholderHitUp: {fileID: 7400000, guid: 01b8e71a934e10f4b9ebd4cc053936b1, type: 2}
-  _placeholderDieDown: {fileID: 7400000, guid: e4070887b1b41ce4b84283d8b5445889, type: 2}
-  _placeholderDieSide: {fileID: 7400000, guid: 73b6c408c94d3ea43af1c871ae42ffd6, type: 2}
-  _placeholderDieUp: {fileID: 0}
 --- !u!95 &471410252
 Animator:
   serializedVersion: 7
@@ -41418,6 +41404,52 @@ SortingGroup:
   m_SortingOrder: 0
   m_SortAtRoot: 0
   m_Sort3DAs2D: 0
+--- !u!114 &471410255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471410249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5197c307f864ae64aa50185a9389d3fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualLocomotionAnimationHandler
+  _placeholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
+  _activeProfile: {fileID: 11400000, guid: 7fd04fb031aa13145958276ec5b2e235, type: 2}
+  _locomotionModeProviderBehaviour: {fileID: 0}
+  _manualLocomotionMode: 0
+--- !u!114 &471410256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471410249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e7692ca62f06449b2a66f6f95bf12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualFacingHandler
+  _speedForOne: 10
+  _speedDampTime: 0.05
+  _lastDirection: {x: 0, y: -1}
+  _facingSignX: 1
+--- !u!114 &471410257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471410249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f7a3181543f8549960792c643674cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualCombatAnimationHandler
+  _placeholderProfile: {fileID: 11400000, guid: 96e91b24bb5929445b608c7fb8251e81, type: 2}
+  _activeProfile: {fileID: 11400000, guid: f0e51d36e48ee4e43998ded6f8841cdc, type: 2}
 --- !u!1 &489144937
 GameObject:
   m_ObjectHideFlags: 0
@@ -41916,6 +41948,10 @@ GameObject:
   - component: {fileID: 513242083}
   - component: {fileID: 513242085}
   - component: {fileID: 513242084}
+  - component: {fileID: 513242088}
+  - component: {fileID: 513242089}
+  - component: {fileID: 513242090}
+  - component: {fileID: 513242091}
   m_Layer: 8
   m_Name: VisualSpace
   m_TagString: Untagged
@@ -41998,22 +42034,6 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 513242083}
   _animator: {fileID: 513242085}
   _characterFlipGroup: {fileID: 2085343169}
-  _speedForOne: 10
-  _speedDampTime: 0.05
-  _locomotionPlaceholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
-  _locomotionRuntimeProfile: {fileID: 11400000, guid: 988e6a766d65c0d4ba2b4bbe815331de, type: 2}
-  _combatAnimationProfile: {fileID: 11400000, guid: 07e60823c1da7824fb59ea9c8d8627c6, type: 2}
-  _lastDir: {x: 0, y: -1}
-  _currentLocomotionMode: 0
-  _placeholderAttackDown: {fileID: 7400000, guid: 4eef5e0d2c7d11c48be2ec23915732af, type: 2}
-  _placeholderAttackSide: {fileID: 7400000, guid: d1e69b879d4623c4696a7395626101df, type: 2}
-  _placeholderAttackUp: {fileID: 7400000, guid: 9e999f4bbb498904ab0fe76071334040, type: 2}
-  _placeholderHitDown: {fileID: 7400000, guid: c9ef579214ef8fa4db0464855c2e3ba1, type: 2}
-  _placeholderHitSide: {fileID: 7400000, guid: 66419f62336b86345a9ab14513213a26, type: 2}
-  _placeholderHitUp: {fileID: 7400000, guid: 01b8e71a934e10f4b9ebd4cc053936b1, type: 2}
-  _placeholderDieDown: {fileID: 0}
-  _placeholderDieSide: {fileID: 7400000, guid: 73b6c408c94d3ea43af1c871ae42ffd6, type: 2}
-  _placeholderDieUp: {fileID: 0}
 --- !u!95 &513242085
 Animator:
   serializedVersion: 7
@@ -42066,6 +42086,65 @@ Transform:
   - {fileID: 257893929}
   m_Father: {fileID: 2085343169}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &513242088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513242082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e7692ca62f06449b2a66f6f95bf12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualFacingHandler
+  _speedForOne: 10
+  _speedDampTime: 0.05
+  _lastDirection: {x: 0, y: -1}
+  _facingSignX: 1
+--- !u!114 &513242089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513242082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5197c307f864ae64aa50185a9389d3fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualLocomotionAnimationHandler
+  _placeholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
+  _activeProfile: {fileID: 11400000, guid: 988e6a766d65c0d4ba2b4bbe815331de, type: 2}
+  _locomotionModeProviderBehaviour: {fileID: 513242091}
+  _manualLocomotionMode: 0
+--- !u!114 &513242090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513242082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f7a3181543f8549960792c643674cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualCombatAnimationHandler
+  _placeholderProfile: {fileID: 11400000, guid: 96e91b24bb5929445b608c7fb8251e81, type: 2}
+  _activeProfile: {fileID: 11400000, guid: 07e60823c1da7824fb59ea9c8d8627c6, type: 2}
+--- !u!114 &513242091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513242082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d369a3655f699488fa984ba8bac9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerCarryLocomotionVisualModeProvider
+  _characterComponentController: {fileID: 2107461207}
 --- !u!1 &531506779
 GameObject:
   m_ObjectHideFlags: 0
@@ -42259,7 +42338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAimingHandler
   _characterComponentController: {fileID: 2107461207}
-  _aimingHandler: {fileID: 557462167}
+  _aimingProviderBehaviour: {fileID: 557462167}
   _aimingConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
 --- !u!114 &557462169
 MonoBehaviour:
@@ -87723,7 +87802,7 @@ GameObject:
   - component: {fileID: 1896252402}
   - component: {fileID: 1896252401}
   m_Layer: 8
-  m_Name: Bombschroom
+  m_Name: Toxicschroom
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87842,9 +87921,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterIdentityController
   _id: 1
-  _displayName: Bombschroom
-  _description: I am Bombschroom. I can make Toxic Gas.
-  _characterTag: 2
+  _displayName: Toxicschroom
+  _description: I am Toxicschroom. I can make Toxic Gas.
+  _characterType: 0
   _faction: 2
 --- !u!4 &1896252409
 Transform:
@@ -87883,6 +87962,9 @@ MonoBehaviour:
   _movementHandler: {fileID: 1896252402}
   _terrainContactHandler: {fileID: 1896252401}
   _visualController: {fileID: 471410251}
+  _visualFacingHandler: {fileID: 471410256}
+  _visualLocomotionAnimationHandler: {fileID: 471410255}
+  _visualCombatAnimationHandler: {fileID: 471410257}
   _combatController: {fileID: 2083802964}
   _combatLoadoutController: {fileID: 2083802963}
   _combatAimingHandler: {fileID: 2083802961}
@@ -88567,7 +88649,6 @@ MonoBehaviour:
   _damageReceivedAdditiveFlat: 0
   _currentVirtualHP: 0
   _maxVirtualHP: 0
-  _characterFaction: 0
   _isDead: 0
 --- !u!114 &1951002775
 MonoBehaviour:
@@ -89681,7 +89762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAimingHandler
   _characterComponentController: {fileID: 1896252410}
-  _aimingHandler: {fileID: 2083802966}
+  _aimingProviderBehaviour: {fileID: 2083802966}
   _aimingConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
 --- !u!114 &2083802962
 MonoBehaviour:
@@ -90488,7 +90569,7 @@ MonoBehaviour:
   _id: 0
   _displayName: Player
   _description: This is you - the Player.
-  _characterTag: 1
+  _characterType: 0
   _faction: 1
 --- !u!114 &2107461207
 MonoBehaviour:
@@ -90506,6 +90587,9 @@ MonoBehaviour:
   _movementHandler: {fileID: 2107461197}
   _terrainContactHandler: {fileID: 2107461204}
   _visualController: {fileID: 513242084}
+  _visualFacingHandler: {fileID: 513242088}
+  _visualLocomotionAnimationHandler: {fileID: 513242089}
+  _visualCombatAnimationHandler: {fileID: 513242090}
   _combatController: {fileID: 557462172}
   _combatLoadoutController: {fileID: 557462171}
   _combatAimingHandler: {fileID: 557462168}

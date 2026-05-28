@@ -117,7 +117,7 @@ namespace FlameOfTheLost
 
         //  3. Hitbox
         //      3.3. Enable the Hitbox
-        public virtual void EnableHitbox(HitboxDamagePayload payload, AttackSideType attackSideType)
+        public virtual void EnableHitbox(HitboxDamagePayload payload, AttackSide attackSideType)
         {
             this.IsActive = true;
             this.HasConfirmedHit = false; 

@@ -30,9 +30,9 @@ namespace FlameOfTheLost
 
         //  3. Spawn Settings
         [Header("Spawn Settings")]
-        [SerializeField] private CharacterFacingStatusType _defaultFacing = CharacterFacingStatusType.Down;
+        [SerializeField] private CharacterFacingStatus _defaultFacing = CharacterFacingStatus.Down;
         public Transform SpawnAnchor => _spawnAnchor;
-        public CharacterFacingStatusType DefaultFacing => _defaultFacing;
+        public CharacterFacingStatus DefaultFacing => _defaultFacing;
 
         [Header("State")]
         [SerializeField] private bool _isActivated = false;

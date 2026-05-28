@@ -17,14 +17,14 @@ namespace FlameOfTheLost
 
         //  2. Classification
         [Header("Classification")]
-        [SerializeField] private CharacterTagType _characterTag = CharacterTagType.Default;
-        [SerializeField] private CharacterFactionType _faction = CharacterFactionType.Neutral;
-        public CharacterTagType CharacterTag => _characterTag;
-        public CharacterFactionType Faction => _faction;
+        [SerializeField] private CharacterType _characterType = CharacterType.Default;
+        [SerializeField] private CharacterFaction _faction = CharacterFaction.Neutral;
+        public CharacterType CharacterType => _characterType;
+        public CharacterFaction Faction => _faction;
 
         // --- Public APIs ---
-        public bool IsPlayer => _faction == CharacterFactionType.Player;
-        public bool IsEnemy => _faction == CharacterFactionType.Enemy;
-        public bool IsAlly => _faction == CharacterFactionType.Ally;
+        public bool IsPlayer => _faction == CharacterFaction.Player;
+        public bool IsEnemy => _faction == CharacterFaction.Enemy;
+        public bool IsAlly => _faction == CharacterFaction.Ally;
     }
 }

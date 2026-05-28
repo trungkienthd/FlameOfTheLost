@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b8e2d592e9e394f87118510a16e5f8, type: 3}
   m_Name: CAni_Player
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAnimationProfile
-  _characterTag: 1
+  _characterType: 1
   _elements:
   - {fileID: 11400000, guid: c307a85dfb23773489cd28ec36c02d8d, type: 2}
   - {fileID: 11400000, guid: d91b3806cfd9e2d46af3a682bba9c513, type: 2}

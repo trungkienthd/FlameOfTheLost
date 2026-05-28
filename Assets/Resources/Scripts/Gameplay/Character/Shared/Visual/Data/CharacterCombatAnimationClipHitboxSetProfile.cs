@@ -11,10 +11,10 @@ namespace FlameOfTheLost
         [Header("Match Keys")]
         [SerializeField] private List<SkillProfile> _skills = new();
         [SerializeField] private WeaponProfile _weapon;
-        [SerializeField] private CharacterTagType _characterTag;
+        [SerializeField] private CharacterType _characterType;
         public IReadOnlyList<SkillProfile> Skills => _skills;
         public WeaponProfile Weapon => _weapon;
-        public CharacterTagType CharacterTag => _characterTag;
+        public CharacterType CharacterType => _characterType;
 
         //  2. Left / Right attack data
         [Header("Attack Animation + Hitbox Sets")]
@@ -33,6 +33,8 @@ namespace FlameOfTheLost
 #if UNITY_EDITOR
         private void OnValidate()
         {
+            if (this.CharacterType == CharacterType.Default) return;
+
             if (this.Skills == null || this.Skills.Count == 0)
             {
                 Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Missing Skills list.", this);
@@ -87,9 +89,9 @@ namespace FlameOfTheLost
 
         // --- Public APIs ---
         //  1. Get this Animation Clip Set (Facing) for the given side
-        public FacingAnimationClipSet GetFacingAnimationClipSet(AttackSideType attackSideType)
+        public FacingAnimationClipSet GetFacingAnimationClipSet(AttackSide attackSide = AttackSide.Left)
         {
-            CombatAnimationClipHitboxSet set = this.GetAnimationClipHitboxSet(attackSideType);
+            CombatAnimationClipHitboxSet set = this.GetAnimationClipHitboxSet(attackSide);
 
             FacingAnimationClipSet result = new FacingAnimationClipSet
             (
@@ -102,9 +104,9 @@ namespace FlameOfTheLost
         }
 
         //  2. Gets the MeleeHitboxShape for the given side.
-        public MeleeHitboxShape GetMeleeHitboxShape(AttackSideType attackSideType)
+        public MeleeHitboxShape GetMeleeHitboxShape(AttackSide attackSide = AttackSide.Left)
         {
-            CombatAnimationClipHitboxSet set = this.GetAnimationClipHitboxSet(attackSideType);
+            CombatAnimationClipHitboxSet set = this.GetAnimationClipHitboxSet(attackSide);
 
             MeleeHitboxShape result = new MeleeHitboxShape
             (
@@ -164,9 +166,9 @@ namespace FlameOfTheLost
         }
 
         //  2. Get the AttackAnimationHitboxSet for the given side, with fallback to the opposite side if needed.
-        private CombatAnimationClipHitboxSet GetAnimationClipHitboxSet(AttackSideType attackSideType)
+        private CombatAnimationClipHitboxSet GetAnimationClipHitboxSet(AttackSide attackSide = AttackSide.Left)
         {
-            if (attackSideType == AttackSideType.Right)
+            if (attackSide == AttackSide.Right)
             {
                 return this.RightSet.GetResolvedWithFallback(this.LeftSet);
             }

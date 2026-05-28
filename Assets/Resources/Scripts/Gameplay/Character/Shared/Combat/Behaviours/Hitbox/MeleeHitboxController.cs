@@ -85,7 +85,7 @@ namespace FlameOfTheLost
 
         // --- Public APIs
         //      1.1. Enable the hitbox
-        public override void EnableHitbox(HitboxDamagePayload payload, AttackSideType attackSideType)
+        public override void EnableHitbox(HitboxDamagePayload payload, AttackSide attackSideType)
         {
             base.EnableHitbox(payload, attackSideType);
 
@@ -124,13 +124,13 @@ namespace FlameOfTheLost
         {
             if ((!this.PolygonCollider2D) || (this.FacingProvider == null)) return;
 
-            CharacterFacingStatusType facing = this.FacingProvider != null ? this.FacingProvider.FacingStatus : CharacterFacingStatusType.Side;
+            CharacterFacingStatus facing = this.FacingProvider != null ? this.FacingProvider.FacingStatus : CharacterFacingStatus.Side;
             bool isFacingRight = this.FacingProvider != null ? this.FacingProvider.IsFacingRight : true;
 
             PolygonColliderShape shape = facing switch
             {
-                CharacterFacingStatusType.Down => this.ActiveMeleeHitbox.FacingDownShape,
-                CharacterFacingStatusType.Side => this.ActiveMeleeHitbox.FacingSideShape,
+                CharacterFacingStatus.Down => this.ActiveMeleeHitbox.FacingDownShape,
+                CharacterFacingStatus.Side => this.ActiveMeleeHitbox.FacingSideShape,
                 _ => this.ActiveMeleeHitbox.FacingUpShape,
             };
 

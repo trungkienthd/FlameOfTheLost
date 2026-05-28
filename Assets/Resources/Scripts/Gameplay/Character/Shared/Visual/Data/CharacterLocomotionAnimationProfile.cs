@@ -14,37 +14,31 @@ namespace FlameOfTheLost
         [SerializeField] private List<CharacterLocomotionAnimationClipSetProfile> _locomotionVariants = new();
         public IReadOnlyList<CharacterLocomotionAnimationClipSetProfile> LocomotionVariants => _locomotionVariants;
 
-        public CharacterLocomotionAnimationClipSetProfile GetLocomotionSet(CharacterLocomotionModeType locomotionMode, CharacterCarryItemType carryItemType, LightSourceType lightSourceType)
+        public CharacterLocomotionAnimationClipSetProfile GetLocomotionSet(CharacterLocomotionMode locomotionMode, CharacterCarryItemType carryItemType, LightSourceType lightSourceType)
         {
-            if (locomotionMode == CharacterLocomotionModeType.Default)
+            if (locomotionMode == CharacterLocomotionMode.Default)
             {
                 return this.DefaultLocomotion;
             }
 
-            if (locomotionMode == CharacterLocomotionModeType.Carry)
+            if (this.LocomotionVariants != null)
             {
-                if (this.LocomotionVariants != null)
+                for (int i = 0; i < this.LocomotionVariants.Count; i++)
                 {
-                    for (int i = 0; i < this.LocomotionVariants.Count; i++)
-                    {
-                        CharacterLocomotionAnimationClipSetProfile entry = this.LocomotionVariants[i];
-                        if (entry == null) continue;
+                    CharacterLocomotionAnimationClipSetProfile entry = this.LocomotionVariants[i];
+                    if (entry == null) continue;
 
-                        if (entry.Matches(carryItemType, lightSourceType))
-                        {
-                            return entry;
-                        }
+                    if (entry.Matches(locomotionMode, carryItemType, lightSourceType))
+                    {
+                        return entry;
                     }
                 }
-
-                // fallback
-                return this.DefaultLocomotion;
             }
 
             return this.DefaultLocomotion;
         }
 
-        public AnimationClip GetIdleClip(CharacterFacingStatusType facingStatus, CharacterLocomotionModeType locomotionMode = CharacterLocomotionModeType.Default, CharacterCarryItemType carryItemType = CharacterCarryItemType.None, LightSourceType lightSourceType = LightSourceType.None)
+        public AnimationClip GetIdleClip(CharacterFacingStatus facingStatus, CharacterLocomotionMode locomotionMode = CharacterLocomotionMode.Default, CharacterCarryItemType carryItemType = CharacterCarryItemType.None, LightSourceType lightSourceType = LightSourceType.None)
         {
             CharacterLocomotionAnimationClipSetProfile set = this.GetLocomotionSet(locomotionMode, carryItemType, lightSourceType);
 
@@ -53,7 +47,7 @@ namespace FlameOfTheLost
                 : null;
         }
 
-        public AnimationClip GetWalkClip(CharacterFacingStatusType facingStatus, CharacterLocomotionModeType locomotionMode = CharacterLocomotionModeType.Default, CharacterCarryItemType carryItemType = CharacterCarryItemType.None, LightSourceType lightSourceType = LightSourceType.None)
+        public AnimationClip GetWalkClip(CharacterFacingStatus facingStatus, CharacterLocomotionMode locomotionMode = CharacterLocomotionMode.Default, CharacterCarryItemType carryItemType = CharacterCarryItemType.None, LightSourceType lightSourceType = LightSourceType.None)
         {
             CharacterLocomotionAnimationClipSetProfile set = this.GetLocomotionSet(locomotionMode, carryItemType, lightSourceType);
 

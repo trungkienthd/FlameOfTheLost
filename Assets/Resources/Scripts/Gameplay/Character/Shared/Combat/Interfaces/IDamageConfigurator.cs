@@ -7,6 +7,6 @@ namespace FlameOfTheLost
         public void SetDamageAmount(int value);
         public void SetKnockbackForce(float force);
         public void SetOrigin(Transform origin);
-        public void SetSourceCharacterFaction(CharacterFactionType faction);
+        public void SetSourceCharacterFaction(CharacterFaction faction);
     }
 }
