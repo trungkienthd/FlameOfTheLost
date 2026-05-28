@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterInputHandler : CharacterBehaviourBaseController, ICharacterRespawnRefreshable
+    public abstract class CharacterInputHandler : CharacterBehaviourBaseController, ICharacterRespawnRefreshable
     {
         // --- States ---
         //  1. References

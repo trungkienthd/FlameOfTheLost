@@ -348,13 +348,21 @@ namespace FlameOfTheLost
         //  8. Others
         private GameObject ResolveInteractor()
         {
-            return this.PlayerRoot != null ? this.PlayerRoot : this.transform.root.gameObject;
+            return this.PlayerRoot;
         }
 
         private void ShowPrompt(string text)
         {
             if (this.PromptPanelController == null) return;
+
             this.PromptPanelController.Show(text);
+        }
+
+        private void HidePrompt()
+        {
+            if (this.PromptPanelController == null) return;
+
+            this.PromptPanelController.Hide();
         }
 
         private string GetInteractInputDisplayName()
@@ -379,12 +387,6 @@ namespace FlameOfTheLost
             return "I";
         }
 
-        private void HidePrompt()
-        {
-            if (this.PromptPanelController == null) return;
-            this.PromptPanelController.Hide();
-        }
-
         private void HandlePromptBlockStarted(IPlayerInteractionPromptBlocker blocker)
         {
             if (blocker == null) return;
@@ -403,6 +405,8 @@ namespace FlameOfTheLost
 
         protected override void CacheReferences()
         {
+            base.CacheReferences();
+
             if (this.PlayerRoot == null) _playerRoot = this.transform.root.gameObject;
 
             GameObject canvas = GameObject.Find("Canvas");
@@ -428,6 +432,16 @@ namespace FlameOfTheLost
                     if (interactAction != null) _interactActionReference = InputActionReference.Create(interactAction);
                 }
             }
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+            if (this.PlayerRoot == null) Debug.LogError($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Player Root reference is not assigned.", this);
+            if (this.PromptPanelController == null) Debug.LogError($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Prompt Panel Controller reference is not assigned.", this);
+            if (this.PlayerMenuManager == null) Debug.LogError($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Player Menu Manager reference is not assigned.", this);
+            if (this.PlayerInteractionPanelListManager == null) Debug.LogError($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Player Interaction Panel List Manager reference is not assigned.", this);
+            if (this.InteractActionReference == null || this.InteractActionReference.action == null) Debug.LogError($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Interact Action Reference is not assigned or has no action.", this);
         }
     }
 }

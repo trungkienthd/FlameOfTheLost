@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class TopDownCameraFollowController : MonoBehaviour
+    public class TopDownCameraFollowController : FOTLMonoBehaviour
     {
         // --- States ---
         //  1. References
@@ -43,16 +43,6 @@ namespace FlameOfTheLost
         private Vector3 _currentVelocity;
 
         // --- Unity Callbacks ---
-        private void Awake()
-        {
-            if (this.Camera == null) _camera = this.GetComponent<Camera>();
-
-            if (this.Target == null)
-            {
-                Transform playerTransform = GameObject.Find("Player").transform;
-                if (playerTransform != null) _target = playerTransform;
-            }
-        }
         private void Start()
         {
             if (this.Target == null) return;
@@ -154,6 +144,27 @@ namespace FlameOfTheLost
             position.y = Mathf.Clamp(position.y, minY, maxY);
 
             return position;
+        }
+
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (this.Camera == null) _camera = this.GetComponent<Camera>();
+
+            if (this.Target == null)
+            {
+                Transform playerTransform = GameObject.Find("Player").transform;
+                if (playerTransform != null) _target = playerTransform;
+            }
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.Camera == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TopDownCameraFollowController)}] Camera reference is missing.");
+            if (this.Target == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TopDownCameraFollowController)}] Target reference is missing.");
         }
     }
 }

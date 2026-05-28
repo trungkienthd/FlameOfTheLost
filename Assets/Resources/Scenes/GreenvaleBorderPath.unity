@@ -35388,7 +35388,7 @@ GameObject:
   - component: {fileID: 44611550}
   - component: {fileID: 44611549}
   m_Layer: 8
-  m_Name: InventorySpace
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35574,7 +35574,7 @@ GameObject:
   - component: {fileID: 53646107}
   - component: {fileID: 53646105}
   m_Layer: 8
-  m_Name: ResourceSpace
+  m_Name: Resource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40347,6 +40347,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319806079}
   m_CullTransparentMesh: 1
+--- !u!1 &328496605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 328496606}
+  m_Layer: 8
+  m_Name: AlertDetectionTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &328496606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328496605}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1274193398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &331205188
 GameObject:
   m_ObjectHideFlags: 0
@@ -40648,7 +40679,7 @@ GameObject:
   - component: {fileID: 359383320}
   - component: {fileID: 359383321}
   m_Layer: 0
-  m_Name: LightSpace
+  m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41271,7 +41302,7 @@ GameObject:
   - component: {fileID: 471410255}
   - component: {fileID: 471410257}
   m_Layer: 8
-  m_Name: VisualSpace
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41953,7 +41984,7 @@ GameObject:
   - component: {fileID: 513242090}
   - component: {fileID: 513242091}
   m_Layer: 8
-  m_Name: VisualSpace
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42289,7 +42320,7 @@ GameObject:
   - component: {fileID: 557462168}
   - component: {fileID: 557462167}
   m_Layer: 8
-  m_Name: CombatSpace
+  m_Name: Combat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42563,7 +42594,7 @@ GameObject:
   - component: {fileID: 580670448}
   - component: {fileID: 580670449}
   m_Layer: 0
-  m_Name: LightSpace
+  m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45263,7 +45294,7 @@ GameObject:
   - component: {fileID: 883419905}
   - component: {fileID: 883419904}
   m_Layer: 8
-  m_Name: StatusEffectSpace
+  m_Name: StatusEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45957,7 +45988,7 @@ GameObject:
   m_Component:
   - component: {fileID: 989409869}
   m_Layer: 8
-  m_Name: CharacterUISpace
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70323,7 +70354,7 @@ GameObject:
   - component: {fileID: 1122643398}
   - component: {fileID: 1122643397}
   m_Layer: 8
-  m_Name: AudioSpace
+  m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70658,7 +70689,7 @@ GameObject:
   - component: {fileID: 1123552227}
   - component: {fileID: 1123552228}
   m_Layer: 8
-  m_Name: InventorySpace
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80701,6 +80732,39 @@ MonoBehaviour:
   _slotsPerPage: 9
   _maxSupportedPages: 99
   _columnCount: 3
+--- !u!1 &1274193397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1274193398}
+  m_Layer: 8
+  m_Name: AI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1274193398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274193397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 328496606}
+  - {fileID: 1686389674}
+  m_Father: {fileID: 1896252409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1280234347
 GameObject:
   m_ObjectHideFlags: 0
@@ -84540,7 +84604,7 @@ GameObject:
   - component: {fileID: 1668531514}
   - component: {fileID: 1668531513}
   m_Layer: 8
-  m_Name: AudioSpace
+  m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85005,7 +85069,7 @@ GameObject:
   - component: {fileID: 1685654209}
   - component: {fileID: 1685654208}
   m_Layer: 8
-  m_Name: StatusEffectSpace
+  m_Name: StatusEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85086,6 +85150,37 @@ MonoBehaviour:
   _statusEffectVFXHolder: {fileID: 1097086741}
   _statusEffectVFXInstancePrefab: {fileID: 8740500497781535910, guid: 89762261fcc319e49b11d0bfb94586a9, type: 3}
   _ownerSpriteRenderer: {fileID: 513242083}
+--- !u!1 &1686389673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1686389674}
+  m_Layer: 8
+  m_Name: AttackRangeDetectionTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1686389674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686389673}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1274193398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1704369270
 GameObject:
   m_ObjectHideFlags: 0
@@ -85233,7 +85328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1707939384}
   m_Layer: 8
-  m_Name: CharacterUISpace
+  m_Name: CharacterUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87699,7 +87794,7 @@ GameObject:
   - component: {fileID: 1877115629}
   - component: {fileID: 1877115630}
   m_Layer: 8
-  m_Name: InteractionSpace
+  m_Name: Interaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87939,6 +88034,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 400740143}
+  - {fileID: 1274193398}
   - {fileID: 44611550}
   - {fileID: 53646106}
   - {fileID: 1707939384}
@@ -88562,7 +88658,7 @@ GameObject:
   - component: {fileID: 1951002773}
   - component: {fileID: 1951002772}
   m_Layer: 8
-  m_Name: ResourceSpace
+  m_Name: Resource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89730,7 +89826,7 @@ GameObject:
   - component: {fileID: 2083802961}
   - component: {fileID: 2083802966}
   m_Layer: 8
-  m_Name: CombatSpace
+  m_Name: Combat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
