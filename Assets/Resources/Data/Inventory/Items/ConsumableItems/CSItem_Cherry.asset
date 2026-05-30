@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CSItem_Cherry
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ConsumableItemProfile
   _id: 31
+  _key: CHERRY
   _displayName: Cherry
   _description: 
   _icon: {fileID: 327035347, guid: 338eb9325b511bf4dbf0184fff5f5d9c, type: 3}
@@ -30,8 +31,5 @@ MonoBehaviour:
     _allowSelfKillWithHPCost: 0
   _statusEffectApplications:
   - _statusEffect: {fileID: 11400000, guid: bfa7591398c146848b33a663c1c78dd0, type: 2}
-    _receiver: 1
-    _trigger: 0
     _chance: 1
     _potency: 1
-    _limit: 0

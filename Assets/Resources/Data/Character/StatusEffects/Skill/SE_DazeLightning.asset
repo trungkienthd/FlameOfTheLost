@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SE_DazeLightning
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
   _id: 5202
+  _key: SE_DAZE_LIGHTNING
   _displayName: Daze Lightning
   _description: 
   _icon: {fileID: 21300000, guid: 8dfa163736ecc364b807cd5d535e81d3, type: 3}

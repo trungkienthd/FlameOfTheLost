@@ -69,7 +69,7 @@ namespace FlameOfTheLost
                     if (a.Weapon == null || b.Weapon == null) continue;
 
                     // Same weapon?
-                    bool sameWeapon = UnityEngine.Object.ReferenceEquals(a.Weapon, b.Weapon) || (a.Weapon.ID > 0 && b.Weapon.ID > 0 && a.Weapon.ID == b.Weapon.ID);
+                    bool sameWeapon = UnityEngine.Object.ReferenceEquals(a.Weapon, b.Weapon) || (a.Weapon.Id > 0 && b.Weapon.Id > 0 && a.Weapon.Id == b.Weapon.Id);
                     if (!sameWeapon) continue;
 
                     // Check overlapping skills
@@ -85,7 +85,7 @@ namespace FlameOfTheLost
                             var skillB = b.Skills[s2];
                             if (skillB == null) continue;
 
-                            bool sameSkill = UnityEngine.Object.ReferenceEquals(skillA, skillB) ||(skillA.ID > 0 && skillB.ID > 0 && skillA.ID == skillB.ID);
+                            bool sameSkill = UnityEngine.Object.ReferenceEquals(skillA, skillB) ||(skillA.Id > 0 && skillB.Id > 0 && skillA.Id == skillB.Id);
 
                             if (sameSkill)
                             {

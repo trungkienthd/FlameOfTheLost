@@ -2,23 +2,23 @@ namespace FlameOfTheLost
 {
     public sealed class PlayerSpawnState
     {
-        private const string DEFAULT_SPAWN_POINT_ID = "001_MAIN_ENTRANCE";
+        private const int DEFAULT_SPAWN_POINT_ID = 1;
 
-        public PlayerSpawnSourceType SpawnSourceType { get; private set; } = PlayerSpawnSourceType.SpawnPoint;
+        public CharacterSpawnSourceType SpawnSourceType { get; private set; } = CharacterSpawnSourceType.DefaultSpawnPoint;
 
-        public string ActiveSpawnPointId { get; private set; } = DEFAULT_SPAWN_POINT_ID;
+        public int ActiveSpawnPointId { get; private set; } = DEFAULT_SPAWN_POINT_ID;
 
         public string ActiveCheckpointId { get; private set; } = string.Empty;
 
-        public bool HasActiveSpawnPoint => !string.IsNullOrWhiteSpace(this.ActiveSpawnPointId);
+        public bool HasActiveSpawnPoint => this.ActiveSpawnPointId >= 0;
 
         public bool HasActiveCheckpoint => !string.IsNullOrWhiteSpace(this.ActiveCheckpointId);
 
-        public void SetSpawnPointSpawn(string spawnPointId)
+        public void SetSpawnPointSpawn(int spawnPointId)
         {
-            if (string.IsNullOrWhiteSpace(spawnPointId)) return;
+            if (spawnPointId < 0) return;
             
-            this.SpawnSourceType = PlayerSpawnSourceType.SpawnPoint;
+            this.SpawnSourceType = CharacterSpawnSourceType.DefaultSpawnPoint;
             this.ActiveSpawnPointId = spawnPointId;
             this.ActiveCheckpointId = string.Empty;
         }
@@ -28,14 +28,14 @@ namespace FlameOfTheLost
         {
             if (string.IsNullOrWhiteSpace(checkpointId)) return;
             
-            this.SpawnSourceType = PlayerSpawnSourceType.CheckpointSpawn;
+            this.SpawnSourceType = CharacterSpawnSourceType.Checkpoint;
             this.ActiveCheckpointId = checkpointId;
         }
 
         public void ClearCheckpointSpawn()
         {
             this.ActiveCheckpointId = string.Empty;
-            this.SpawnSourceType = PlayerSpawnSourceType.SpawnPoint;
+            this.SpawnSourceType = CharacterSpawnSourceType.DefaultSpawnPoint;
         }
     }
 }

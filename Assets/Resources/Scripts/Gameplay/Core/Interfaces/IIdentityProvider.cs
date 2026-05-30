@@ -2,7 +2,12 @@ namespace FlameOfTheLost
 {
     public interface IIdentityProvider
     {
-        public int ID
+        public int Id
+        {
+            get;
+        }
+
+        public string Key
         {
             get;
         }

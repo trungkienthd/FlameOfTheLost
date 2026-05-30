@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TR_Path
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerrainProfile
   _id: 6003
+  _key: PATH
   _displayName: Path
   _description: A stable path terrain area. Humanoid characters can move normally
     while standing on paths.

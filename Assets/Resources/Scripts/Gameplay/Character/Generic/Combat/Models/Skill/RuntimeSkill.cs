@@ -43,7 +43,7 @@ namespace FlameOfTheLost
             private set => _animationProfile = value;
         }
 
-        public int SkillID => this.Profile != null ? this.Profile.ID : -1;
+        public int SkillID => this.Profile != null ? this.Profile.Id : -1;
 
         // --- Constructors ---
         public RuntimeSkill(SkillProfile profile, WeaponProfile weapon, SkillProvisionType provisionType, GameObject owner, CharacterType characterType, CharacterCombatAnimationClipHitboxSetProfile animationProfile)

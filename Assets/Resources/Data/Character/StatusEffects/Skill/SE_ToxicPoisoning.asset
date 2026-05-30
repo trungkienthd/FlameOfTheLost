@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SE_ToxicPoisoning
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
   _id: 5211
+  _key: SE_TOXIC_POISONING
   _displayName: Toxic Poisoning
   _description: 
   _icon: {fileID: 0}

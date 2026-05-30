@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class PlayerSpawnerController : MonoBehaviour
+    public class PlayerSpawnerController : FOTLMonoBehaviour
     {
         // --- States ---
         [Header("Player")]
@@ -25,16 +25,12 @@ namespace FlameOfTheLost
         // --- Unity Callbacks ---
         private void Reset()
         {
-            this.CacheSpawnPointsInScene();
+            this.CacheReferences();
         }
 
         private void OnValidate()
         {
-            this.CacheSpawnPointsInScene();
-        }
-        private void Awake()
-        {
-            this.InitializeSpawnState();
+            this.CacheReferences();
         }
         private void Start()
         {
@@ -48,17 +44,7 @@ namespace FlameOfTheLost
         }
         public void SpawnPlayer()
         {
-            if (this.Player == null)
-            {
-                Debug.LogError($"[{this.gameObject.name}.PlayerSpawnerController] No Player assigned.", this);
-                return;
-            }
-
-            SpawnResolveResult spawnResult = this.ResolveSpawn();
-
-            this.PlacePlayer(spawnResult.Position, spawnResult.Rotation);
-            this.ApplyPlayerFacing(spawnResult.Facing);
-            this.RestorePlayerAfterRespawn(spawnResult);
+            this.RespawnPlayer();
         }
 
         public void RespawnPlayer()
@@ -70,19 +56,23 @@ namespace FlameOfTheLost
             }
 
             SpawnResolveResult spawnResult = this.ResolveSpawn();
-
-            this.PlacePlayer(spawnResult.Position, spawnResult.Rotation);
-            this.ApplyPlayerFacing(spawnResult.Facing);
-            this.RestorePlayerAfterRespawn(spawnResult);
+            CharacterRespawnUtility.RespawnCharacter
+            (
+                character: this.Player,
+                position: spawnResult.Position,
+                rotation: spawnResult.Rotation,
+                facing: spawnResult.Facing,
+                spawnSourceType: this.SpawnState.SpawnSourceType
+            );
         }
 
         public void ActivateSpawnPoint(PlayerDefaultSpawnPointController spawnPoint)
         {
             if (spawnPoint == null) return;
 
-            this.SpawnState.SetSpawnPointSpawn(spawnPoint.SpawnPointId);
+            this.SpawnState.SetSpawnPointSpawn(spawnPoint.Id);
 
-            Debug.Log($"[{this.gameObject.name}.PlayerSpawnerController] Activated spawn point: {spawnPoint.SpawnPointId}", spawnPoint);
+            Debug.Log($"[{this.gameObject.name}.PlayerSpawnerController] Activated spawn point: {spawnPoint.DisplayName}", spawnPoint);
         }
 
         public void ActivateCheckpoint(CheckpointController checkpoint)
@@ -97,13 +87,9 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        private void InitializeSpawnState()
-        {
-        }
-
         private SpawnResolveResult ResolveSpawn()
         {
-            if (this.SpawnState.SpawnSourceType == PlayerSpawnSourceType.CheckpointSpawn)
+            if (this.SpawnState.SpawnSourceType == CharacterSpawnSourceType.Checkpoint)
             {
                 CheckpointController checkpointCtrl = this.FindCheckpointController(this.SpawnState.ActiveCheckpointId);
 
@@ -156,11 +142,11 @@ namespace FlameOfTheLost
             );
         }
 
-        private PlayerDefaultSpawnPointController FindDefaultSpawnPointController(string spawnPointId)
+        private PlayerDefaultSpawnPointController FindDefaultSpawnPointController(int spawnPointId)
         {
-            if (string.IsNullOrWhiteSpace(spawnPointId)) return null;
+            if (spawnPointId < 0) return null;
 
-            return this.DefaultSpawnPointCtrls.FirstOrDefault(spawnPoint => spawnPoint != null && spawnPoint.SpawnPointId == spawnPointId);
+            return this.DefaultSpawnPointCtrls.FirstOrDefault(spawnPoint => spawnPoint != null && spawnPoint.Id == spawnPointId);
         }
 
         private CheckpointController FindCheckpointController(string checkpointId)
@@ -170,60 +156,11 @@ namespace FlameOfTheLost
             return this.CheckpointCtrls.FirstOrDefault(checkpoint => checkpoint != null && checkpoint.CheckpointId == checkpointId);
         }
 
-        private void PlacePlayer(Vector3 position, Quaternion rotation)
+        protected override void CacheReferences()
         {
-            // Important for Rigidbody2D-based characters.
-            Rigidbody2D rb = this.Player.GetComponent<Rigidbody2D>();
+            if (_defaultSpawnPointCtrls != null && this.DefaultSpawnPointCtrls.Count > 0) return;
 
-            if (rb != null)
-            {
-                rb.linearVelocity = Vector2.zero;
-                rb.angularVelocity = 0f;
-                rb.position = (Vector2)position;
-                rb.rotation = rotation.eulerAngles.z;
-            }
-            else
-            {
-                this.Player.transform.SetPositionAndRotation(position, rotation);
-            }
-        }
-
-        private void ApplyPlayerFacing(CharacterFacingStatus facing)
-        {
-            CharacterVisualController animHandler = this.Player.GetComponent<CharacterVisualController>();
-            if (animHandler != null)
-            {
-                animHandler.SetFacingParameter(facing);
-            }
-        }
-
-        private void RestorePlayerAfterRespawn(SpawnResolveResult spawnResult)
-        {
-            CharacterRespawnRefreshContext context = new CharacterRespawnRefreshContext
-            (
-                character: this.Player,
-                respawnPosition: spawnResult.Position,
-                respawnRotation: spawnResult.Rotation,
-                respawnFacing: spawnResult.Facing,
-                spawnSourceType: this.SpawnState.SpawnSourceType
-            );
-
-            IEnumerable<ICharacterRespawnRefreshable> refreshableSystems = this.Player
-                .GetComponentsInChildren<MonoBehaviour>(true)
-                .OfType<ICharacterRespawnRefreshable>()
-                .OrderBy(system => system.RespawnRefreshPriority);
-
-            foreach (ICharacterRespawnRefreshable refreshableSystem in refreshableSystems)
-            {
-                refreshableSystem.RefreshAfterRespawn(context);
-            }
-        }
-
-        private void CacheSpawnPointsInScene()
-        {
-            if (_defaultSpawnPointCtrls != null && _defaultSpawnPointCtrls.Count > 0) return;
-
-            _defaultSpawnPointCtrls = FindObjectsByType<PlayerDefaultSpawnPointController>(FindObjectsSortMode.None)
+            _defaultSpawnPointCtrls = UnityEngine.Object.FindObjectsByType<PlayerDefaultSpawnPointController>(FindObjectsSortMode.None)
                 .Where(spawnPoint => spawnPoint != null)
                 .ToList();
         }

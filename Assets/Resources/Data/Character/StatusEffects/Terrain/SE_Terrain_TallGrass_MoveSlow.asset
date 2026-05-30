@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SE_Terrain_TallGrass_MoveSlow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
   _id: 5102
+  _key: SE_TERRAIN_TALL_GRASS
   _displayName: Tall Grass Movement Slow
   _description: Moving through tall grass reduces movement speed.
   _icon: {fileID: 0}

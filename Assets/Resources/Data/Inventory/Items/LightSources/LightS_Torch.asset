@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LightS_Torch
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.LightSourceProfile
   _id: 21
+  _key: TORCH
   _displayName: Torch
   _description: 
   _icon: {fileID: 593919293, guid: 7a45b40d73b994d43a78d06cb8eca45f, type: 3}

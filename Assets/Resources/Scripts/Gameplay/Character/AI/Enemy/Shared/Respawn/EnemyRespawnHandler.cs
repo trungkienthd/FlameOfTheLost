@@ -2,29 +2,27 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EnemyRespawnHandler : CharacterBehaviourBaseController
+    public class EnemyRespawnHandler : CharacterRespawnHandler
     {
         [Header("Respawn Settings")]
         [SerializeField] private bool _respawnWhenPlayerRespawns = true;
-        [SerializeField] private Transform _fixedRespawnPoint;
-        [SerializeField] private CharacterFacingStatus _respawnFacing = CharacterFacingStatus.Down;
+        [SerializeField] private CharacterDefaultSpawnPointController _defaultSpawnPoint;
         public bool RespawnWhenPlayerRespawns => _respawnWhenPlayerRespawns;
-        private Transform DefaultRespawnPoint => _fixedRespawnPoint;
-        private CharacterFacingStatus RespawnFacing => _respawnFacing;
+        private CharacterDefaultSpawnPointController DefaultSpawnPoint => _defaultSpawnPoint;
 
-        public void RespawnEnemy()
+        public override void Respawn()
         {
-            if (this.DefaultRespawnPoint == null)
+            if (this.DefaultSpawnPoint == null)
             {
-                Debug.LogWarning($"[{this.CharacterName}.EnemyRespawnHandler] Missing fixed respawn point.", this);
+                Debug.LogWarning($"[{this.CharacterName}.EnemyRespawnHandler] Missing default spawn point.", this);
                 return;
             }
 
             CharacterRespawnUtility.RespawnCharacter(character: this.CharacterRootController.gameObject,
-                position: this.DefaultRespawnPoint.position,
-                rotation: this.DefaultRespawnPoint.rotation,
-                facing: this.RespawnFacing,
-                spawnSourceType: PlayerSpawnSourceType.SpawnPoint
+                position: this.DefaultSpawnPoint.SpawnPosition,
+                rotation: this.DefaultSpawnPoint.SpawnRotation,
+                facing: this.DefaultSpawnPoint.DefaultFacing,
+                spawnSourceType: CharacterSpawnSourceType.DefaultSpawnPoint
             );
         }
     }

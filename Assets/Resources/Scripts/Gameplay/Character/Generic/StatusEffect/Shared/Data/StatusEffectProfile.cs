@@ -10,10 +10,12 @@ namespace FlameOfTheLost
         //  1. Identity
         [Header("Identity")]
         [SerializeField] private int _id;
+        [SerializeField] private string _key;
         [SerializeField] private string _displayName;
         [SerializeField, TextArea(5, 5)] private string _description;
         [SerializeField] private Sprite _icon;
-        public int ID => _id;
+        public int Id => _id;
+        public string Key => _key;
         public string DisplayName => _displayName;
         public string Description => _description;
         public Sprite Icon => _icon;

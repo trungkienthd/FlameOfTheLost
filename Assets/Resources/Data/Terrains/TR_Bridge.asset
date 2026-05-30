@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TR_Bridge
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerrainProfile
   _id: 6004
+  _key: BRIDGE
   _displayName: Bridge
   _description: A bridge terrain area. Humanoid characters can move normally while
     standing on bridges. Bridge terrain overrides a special terrain below it.

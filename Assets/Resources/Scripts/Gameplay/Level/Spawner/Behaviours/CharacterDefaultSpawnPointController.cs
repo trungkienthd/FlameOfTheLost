@@ -2,22 +2,24 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class PlayerDefaultSpawnPointController : MonoBehaviour
+    public class CharacterDefaultSpawnPointController : FOTLMonoBehaviour, IIdentityProvider
     {
         // --- States ---
         //  1. Identity
         [Header("Identity")]
-        [SerializeField] private string _id = "001_MAIN_ENTRANCE";
-        public string SpawnPointId
-        {
-            get => _id;
-            private set => _id = value;
-        }
+        [SerializeField] private int _id = 1;
+        [SerializeField] private string _key = "MAIN_ENTRANCE";
+        [SerializeField] private string _displayName = "Main Entrance";
+        [SerializeField, TextArea(5, 5)] private string _description = "Spawn point for the main entrance of the level.";
+        public int Id => _id;
+        public string Key => _key;
+        public string DisplayName => _displayName;
+        public string Description => _description;
 
         //  2. Anchor
         [Header("Anchor")]
         [SerializeField] private Transform _spawnAnchor;
-        private Transform SpawnAnchor => _spawnAnchor;
+        protected Transform SpawnAnchor => _spawnAnchor;
 
         public Vector3 SpawnPosition
         {
@@ -39,37 +41,22 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterFacingStatus _defaultFacing = CharacterFacingStatus.Down;
         public CharacterFacingStatus DefaultFacing => _defaultFacing;
 
-        //  4. Activation Settings
-        [Header("Activation Settings")]
-        [SerializeField] private bool _activateOnPlayerEnter = true;
-        private bool ActivateOnPlayerEnter => _activateOnPlayerEnter;
-
         // --- Unity Callbacks ---
-        private void Reset()
+        protected virtual void Reset()
         {
             this.CacheReferences();
-            this.ConfigureColliderAsTrigger();
         }
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             this.CacheReferences();
-            this.ConfigureColliderAsTrigger();
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (!this.ActivateOnPlayerEnter) return;
-
-            PlayerRespawnHandler playerRespawnHandler = other.GetComponentInParent<PlayerRespawnHandler>();
-            if (playerRespawnHandler == null) return;
-
-            playerRespawnHandler.RegisterVisitedSpawnPoint(this);
         }
 
         // --- Helpers ---
-        private void CacheReferences()
+        protected override void CacheReferences()
         {
+            base.CacheReferences();
+
             if (this.SpawnAnchor != null) return;
 
             Transform anchor = this.transform.Find("SpawnAnchor");
@@ -80,13 +67,13 @@ namespace FlameOfTheLost
             }
         }
 
-        private void ConfigureColliderAsTrigger()
+        protected override void ValidateReferences()
         {
-            Collider2D triggerCollider = this.GetComponent<Collider2D>();
+            base.ValidateReferences();
 
-            if (triggerCollider != null)
+            if (this.SpawnAnchor == null)
             {
-                triggerCollider.isTrigger = true;
+                Debug.LogWarning($"No spawn anchor found for {this.name}. Defaulting to self transform.");
             }
         }
     }

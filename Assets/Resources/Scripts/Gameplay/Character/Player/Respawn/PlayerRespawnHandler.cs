@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class PlayerRespawnHandler : MonoBehaviour
+    public class PlayerRespawnHandler : CharacterRespawnHandler
     {
         // --- States ---
         [Header("References")]
@@ -26,11 +26,6 @@ namespace FlameOfTheLost
         }
 
         // -- Unity Callbacks ---
-        private void Awake()
-        {
-            this.CacheReferences();
-        }
-
         private void Start()
         {
             PlayerDefaultSpawnPointController firstDefaultSpawnPoint = this.PlayerSpawnerController.GetFirstDefaultSpawnPoint();
@@ -51,7 +46,7 @@ namespace FlameOfTheLost
             this.PlayerSpawnerController.ActivateSpawnPoint(spawnPoint);
         }
 
-        public void Respawn()
+        public override void Respawn()
         {
             if (this.IsRespawning) return;
             
@@ -103,8 +98,10 @@ namespace FlameOfTheLost
             this.PlayerInputHandler.UnblockAllPlayerInputs();
         }
 
-        private void CacheReferences()
+        protected override void CacheReferences()
         {
+            base.CacheReferences();
+
             if (this.PlayerInputHandler == null) _playerInputHandler = this.GetComponent<PlayerInputHandler>();
         }
     }

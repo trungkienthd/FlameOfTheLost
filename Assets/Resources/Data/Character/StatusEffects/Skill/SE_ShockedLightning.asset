@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SE_ShockedLightning
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
   _id: 5203
+  _key: SE_SHOCKED_LIGHTNING
   _displayName: Shocked Lightning
   _description: 
   _icon: {fileID: 21300000, guid: b99857bfaedf5cc44950f16acb0ef23e, type: 3}

@@ -12,14 +12,15 @@ namespace FlameOfTheLost
         // --- Identity
         [Header("Identity")]
         [SerializeField] private int _id;
+        [SerializeField] private string _key;
         [SerializeField] private string _displayName;
         [SerializeField, TextArea(2, 5)] private string _description;
-
-        public int ID
+        public int Id
         {
             get => _id;
             private set => _id = value;
         }
+        public string Key => _key;
         public string DisplayName => _displayName;
         public string Description => _description;
 
@@ -107,7 +108,7 @@ namespace FlameOfTheLost
                     int next = 0;
                     while (used.Contains(next)) next++;
                     Undo.RecordObject(skill, "Assign Next Free Skill ID");
-                    skill.ID = next;
+                    skill.Id = next;
                     EditorUtility.SetDirty(skill);
                     Debug.Log($"Assigned ID={next} to Skill '{skill.name}'");
                 }
@@ -122,7 +123,7 @@ namespace FlameOfTheLost
                 var path = AssetDatabase.GUIDToAssetPath(g);
                 var asset = AssetDatabase.LoadAssetAtPath<SkillProfile>(path);
                 if (!asset || asset == skill) continue;
-                if (asset.ID == id) return asset;
+                if (asset.Id == id) return asset;
             }
             return null;
         }
@@ -135,7 +136,7 @@ namespace FlameOfTheLost
             {
                 var path = AssetDatabase.GUIDToAssetPath(g);
                 var asset = AssetDatabase.LoadAssetAtPath<SkillProfile>(path);
-                if (asset) set.Add(asset.ID);
+                if (asset) set.Add(asset.Id);
             }
             return set;
         }

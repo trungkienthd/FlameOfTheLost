@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TR_Water
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerrainProfile
   _id: 6001
+  _key: WATER
   _displayName: Water
   _description: A water terrain area. Humanoid characters move heavily slower while
     standing in water.

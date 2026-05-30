@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TR_Grass
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerrainProfile
   _id: 6002
+  _key: GRASS
   _displayName: Grass
   _description: A normal grass terrain area. Humanoid characters move slightly slower
     while standing on grass.

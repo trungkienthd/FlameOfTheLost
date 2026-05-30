@@ -45,7 +45,7 @@ namespace FlameOfTheLost
             {
                 Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Missing Weapon reference.", this);
             }
-            else if (this.Weapon.ID <= 0)
+            else if (this.Weapon.Id <= 0)
             {
                 Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Weapon '{this.Weapon.name}' has invalid ID.", this);
             }
@@ -62,7 +62,7 @@ namespace FlameOfTheLost
                     continue;
                 }
 
-                if (skill.ID <= 0)
+                if (skill.Id <= 0)
                 {
                     Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Skill '{skill.name}' has invalid ID.", this);
                     continue;
@@ -70,9 +70,9 @@ namespace FlameOfTheLost
 
                 hasValidSkill = true;
 
-                if (!ids.Add(skill.ID))
+                if (!ids.Add(skill.Id))
                 {
-                    Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Duplicate Skill '{skill.name}' (ID: {skill.ID}) found in Skills list.", this);
+                    Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Duplicate Skill '{skill.name}' (ID: {skill.Id}) found in Skills list.", this);
                 }
             }
 
@@ -124,7 +124,7 @@ namespace FlameOfTheLost
             if (skill == null || weapon == null) return false;
             if (this.Weapon == null) return false;
 
-            bool weaponMatch = UnityEngine.Object.ReferenceEquals(this.Weapon, weapon) || (this.Weapon.ID > 0 && weapon.ID > 0 && this.Weapon.ID == weapon.ID);
+            bool weaponMatch = UnityEngine.Object.ReferenceEquals(this.Weapon, weapon) || (this.Weapon.Id > 0 && weapon.Id > 0 && this.Weapon.Id == weapon.Id);
 
             if (!weaponMatch) return false;
 
@@ -136,7 +136,7 @@ namespace FlameOfTheLost
                 if (current == null) continue;
 
                 if (UnityEngine.Object.ReferenceEquals(current, skill)) return true;
-                if (current.ID > 0 && skill.ID > 0 && current.ID == skill.ID) return true;
+                if (current.Id > 0 && skill.Id > 0 && current.Id == skill.Id) return true;
             }
 
             return false;

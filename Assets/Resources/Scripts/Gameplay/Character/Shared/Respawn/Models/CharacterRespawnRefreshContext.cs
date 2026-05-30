@@ -8,9 +8,9 @@ namespace FlameOfTheLost
         public readonly Vector3 RespawnPosition;
         public readonly Quaternion RespawnRotation;
         public readonly CharacterFacingStatus RespawnFacing;
-        public readonly PlayerSpawnSourceType SpawnSourceType;
+        public readonly CharacterSpawnSourceType SpawnSourceType;
 
-        public CharacterRespawnRefreshContext(GameObject character, Vector3 respawnPosition, Quaternion respawnRotation, CharacterFacingStatus respawnFacing, PlayerSpawnSourceType spawnSourceType)
+        public CharacterRespawnRefreshContext(GameObject character, Vector3 respawnPosition, Quaternion respawnRotation, CharacterFacingStatus respawnFacing, CharacterSpawnSourceType spawnSourceType)
         {
             this.Character = character;
             this.RespawnPosition = respawnPosition;

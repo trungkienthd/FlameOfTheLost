@@ -10,7 +10,8 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterIdentityProfile _identityProfile;
         public CharacterIdentityProfile IdentityProfile => _identityProfile;
 
-        public int ID => this.IdentityProfile != null ? this.IdentityProfile.ID : 0;
+        public int Id => this.IdentityProfile != null ? this.IdentityProfile.Id : 0;
+        public string Key => this.IdentityProfile != null ? this.IdentityProfile.Key : string.Empty;
         public string DisplayName => this.IdentityProfile != null ? this.IdentityProfile.DisplayName : this.CharacterName;
         public string Description => this.IdentityProfile != null ? this.IdentityProfile.Description : string.Empty;
 

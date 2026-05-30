@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SE_Bleed
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
   _id: 5201
+  _key: SE_BLEED
   _displayName: Bleed
   _description: 
   _icon: {fileID: 21300000, guid: 270d912346a7c4b40b414b40a0c41fea, type: 3}

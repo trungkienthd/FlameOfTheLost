@@ -140,7 +140,7 @@ namespace FlameOfTheLost
             }
 
             // Find similar existing status effect(s)
-            int idx = _runtimeStatusEffects.FindIndex(se => se != null && se.Profile != null && se.Profile.ID == profile.ID && se.Source == source);
+            int idx = _runtimeStatusEffects.FindIndex(se => se != null && se.Profile != null && se.Profile.Id == profile.Id && se.Source == source);
             if (idx >= 0)
             {
                 var runtimeStatusEffect = this.RuntimeStatusEffects[idx];
@@ -261,7 +261,7 @@ namespace FlameOfTheLost
         //  2. Check for status effect by ID
         public bool HasStatusEffect(int statusEffectID)
         {
-            return _runtimeStatusEffects.Exists(se => se != null && se.Profile != null && se.Profile.ID == statusEffectID);
+            return _runtimeStatusEffects.Exists(se => se != null && se.Profile != null && se.Profile.Id == statusEffectID);
         }
 
         //  3. Check if a status effect can be applied (immunity rules)
