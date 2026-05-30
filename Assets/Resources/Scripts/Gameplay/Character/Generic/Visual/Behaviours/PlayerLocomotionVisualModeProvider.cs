@@ -10,7 +10,7 @@ namespace FlameOfTheLost
         {
             get
             {
-                if (this.CharacterComponentController is not PlayerComponentController playerComponentController) return null;
+                if (this.CharacterRootController is not PlayerRootController playerComponentController) return null;
 
                 return playerComponentController.PlayerCarryLoadoutController;
             }

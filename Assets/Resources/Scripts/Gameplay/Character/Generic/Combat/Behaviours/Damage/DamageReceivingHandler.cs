@@ -13,7 +13,7 @@ namespace FlameOfTheLost
             get => _knockbackHandler;
             set => _knockbackHandler = value;
         }
-        private HPController HPController => this.CharacterComponentController.HPController;
+        private HPController HPController => this.CharacterRootController.HPController;
 
         // --- Status Effects Flags (Runtime)
         [Header("Status Effects Flags (Runtime)")]

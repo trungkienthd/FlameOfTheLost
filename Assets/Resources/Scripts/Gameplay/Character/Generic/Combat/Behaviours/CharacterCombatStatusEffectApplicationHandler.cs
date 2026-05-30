@@ -7,7 +7,7 @@ namespace FlameOfTheLost
     {
         // --- States ---
         //  1. References
-        private StatusEffectController StatusEffectController => this.CharacterComponentController.StatusEffectController;
+        private StatusEffectController StatusEffectController => this.CharacterRootController.StatusEffectController;
 
         //  2. Limit tracking (per attack-instance = hitboxObject)
         // hitboxId -> firstHitApplied (for FirstHitOnly)

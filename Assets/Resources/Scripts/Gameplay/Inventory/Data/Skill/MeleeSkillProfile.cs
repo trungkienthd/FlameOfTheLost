@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "MeleeSkillProfile", menuName = "Data/FlameOfTheLost/Combat/Skills/MeleeSkill")]
+    [CreateAssetMenu(fileName = "SKM_MeleeSkill", menuName = "Data/FlameOfTheLost/Inventory/Skill/MeleeSkill")]
     public class MeleeSkillProfile : SkillProfile
     {
         // --- Style

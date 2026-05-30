@@ -7,8 +7,8 @@ namespace FlameOfTheLost
     {
         // --- States ---
         //  1. References
-        private InventoryController InventoryController => this.CharacterComponentController.InventoryController;
-        private CharacterCombatLoadoutController PlayerCombatLoadoutController => this.CharacterComponentController.CombatLoadoutController;
+        private InventoryController InventoryController => this.CharacterRootController.InventoryController;
+        private CharacterCombatLoadoutController PlayerCombatLoadoutController => this.CharacterRootController.CombatLoadoutController;
 
         //  2. Equipped Slot
         [Header("Interaction Loadout")]

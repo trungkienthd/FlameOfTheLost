@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "LightSourceProfile", menuName = "Data/FlameOfTheLost/Items/LightSource")]
+    [CreateAssetMenu(fileName = "LightSourceProfile", menuName = "Data/FlameOfTheLost/Inventory/Item/LightSource")]
     public class LightSourceProfile : CarriableItemProfile
     {
         public override bool IsStackable => false;

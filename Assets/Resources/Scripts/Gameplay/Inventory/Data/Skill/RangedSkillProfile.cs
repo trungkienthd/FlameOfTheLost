@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "RangedSkillProfile", menuName = "Data/FlameOfTheLost/Combat/Skills/RangedSkill")]
+    [CreateAssetMenu(fileName = "SKR_RangedSkill", menuName = "Data/FlameOfTheLost/Inventory/Skill/RangedSkill")]
     public class RangedSkillProfile : SkillProfile
     {
         // --- Style

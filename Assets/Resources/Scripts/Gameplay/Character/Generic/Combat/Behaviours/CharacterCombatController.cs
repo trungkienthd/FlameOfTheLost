@@ -13,11 +13,11 @@ namespace FlameOfTheLost
     {
         // --- States ---
         //  1. References
-        private CharacterCombatLoadoutController CombatLoadoutController => this.CharacterComponentController.CombatLoadoutController;
-        private CharacterCombatResourcesHandler CombatResourcesHandler => this.CharacterComponentController.CombatResourcesHandler;
-        private CharacterCombatAimingHandler CombatAimingHandler => this.CharacterComponentController.CombatAimingHandler;
-        public CharacterCombatStatusEffectApplicationHandler CombatStatusEffectHandler => this.CharacterComponentController.CombatStatusEffectApplicationHandler;
-        private CharacterVisualController VisualController => this.CharacterComponentController.VisualController;
+        private CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController.CombatLoadoutController;
+        private CharacterCombatResourcesHandler CombatResourcesHandler => this.CharacterRootController.CombatResourcesHandler;
+        private CharacterCombatAimingHandler CombatAimingHandler => this.CharacterRootController.CombatAimingHandler;
+        public CharacterCombatStatusEffectApplicationHandler CombatStatusEffectHandler => this.CharacterRootController.CombatStatusEffectApplicationHandler;
+        private CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
         [Header("References (Combat)")]
         [SerializeField] private MeleeHitboxController _meleeHitboxController;
@@ -158,7 +158,7 @@ namespace FlameOfTheLost
                             DamageAmount = meleeSkill.DamageAmount,
                             KnockbackForce = meleeSkill.KnockbackForce,
                             AttackOrigin = this.transform,
-                            SourceFaction = this.CharacterComponentController.IdentityController.Faction
+                            SourceFaction = this.CharacterRootController.IdentityController.Faction
                         };
                         this.MeleeHitboxController.EnableHitbox(meleeHitboxDamagePayload, this.LastAttackSide);          // Enable the melee hitbox
                     }
@@ -314,7 +314,7 @@ namespace FlameOfTheLost
 
             WeaponProfile weapon = this.CombatLoadoutController.ActiveEquippedRuntimeWeapon?.Profile;
 
-            CharacterType characterType = this.CharacterComponentController.IdentityController.CharacterType;
+            CharacterType characterType = this.CharacterRootController.IdentityController.CharacterType;
 
             // Build runtime skill
             RuntimeSkill runtimeSkill = new RuntimeSkill
@@ -324,7 +324,7 @@ namespace FlameOfTheLost
                 provisionType: skill.DefaultProvisionType, 
                 owner: this.gameObject, 
                 characterType: characterType,
-                animationProfile: this.CharacterComponentController.VisualCombatAnimationHandler.ActiveProfile.GetOrNull(skill, weapon)
+                animationProfile: this.CharacterRootController.VisualCombatAnimationHandler.ActiveProfile.GetOrNull(skill, weapon)
             );
 
             if (runtimeSkill.CombatAnimationClipHitboxSetProfile == null)
@@ -445,7 +445,7 @@ namespace FlameOfTheLost
                     DamageAmount = rangedSkill.DamageAmount,
                     KnockbackForce = rangedSkill.KnockbackForce,
                     AttackOrigin = this.transform,
-                    SourceFaction = this.CharacterComponentController.IdentityController.Faction
+                    SourceFaction = this.CharacterRootController.IdentityController.Faction
                 };
 
                 projectileHitbox.EnableHitbox(projectileHitboxDamagePayload, this.LastAttackSide);
@@ -468,7 +468,7 @@ namespace FlameOfTheLost
             if (this.RangedAnchor == null)
             {
                 Debug.LogWarning($"[{this.CharacterName}.CharacterCombatAttackController] RangedAnchor is not found. Default to {this.CharacterName}.transform");
-                _rangedAnchor = this.CharacterComponentController.transform;
+                _rangedAnchor = this.CharacterRootController.transform;
             }
         }
     }

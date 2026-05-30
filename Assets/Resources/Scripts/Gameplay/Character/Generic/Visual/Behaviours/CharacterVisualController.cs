@@ -21,9 +21,9 @@ namespace FlameOfTheLost
         public Animator Animator => _animator;
         public Transform CharacterFlipGroup => _characterFlipGroup;
 
-        private CharacterVisualFacingHandler FacingHandler => this.CharacterComponentController.VisualFacingHandler;
-        private CharacterVisualLocomotionAnimationHandler LocomotionAnimationHandler => this.CharacterComponentController.VisualLocomotionAnimationHandler;
-        private CharacterVisualCombatAnimationHandler CombatAnimationHandler => this.CharacterComponentController.VisualCombatAnimationHandler;
+        private CharacterVisualFacingHandler FacingHandler => this.CharacterRootController.VisualFacingHandler;
+        private CharacterVisualLocomotionAnimationHandler LocomotionAnimationHandler => this.CharacterRootController.VisualLocomotionAnimationHandler;
+        private CharacterVisualCombatAnimationHandler CombatAnimationHandler => this.CharacterRootController.VisualCombatAnimationHandler;
 
         //  2. Animation Controller
         private RuntimeAnimatorController _baseAnimationController;

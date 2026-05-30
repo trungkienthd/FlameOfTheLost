@@ -8,7 +8,7 @@ namespace FlameOfTheLost
         //  1. References
         [Header("References")]
         [SerializeField] private MonoBehaviour _aimingProviderBehaviour;
-        private CharacterVisualController VisualController => this.CharacterComponentController.VisualController;
+        private CharacterVisualController VisualController => this.CharacterRootController.VisualController;
         private MonoBehaviour AimingProviderBehaviour => _aimingProviderBehaviour;
         private ICombatAimingProvider AimingProvider => this.AimingProviderBehaviour as ICombatAimingProvider;
 

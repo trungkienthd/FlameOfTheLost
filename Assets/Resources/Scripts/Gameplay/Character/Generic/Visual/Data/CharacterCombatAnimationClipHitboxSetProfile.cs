@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "CharacterCombatAnimationClipHitboxSetProfile", menuName = "Data/FlameOfTheLost/Animations/Combat/CharacterCombatAnimationClipHitboxSetProfile")]
+    [CreateAssetMenu(fileName = "CharacterCombatAnimationClipHitboxSetProfile", menuName = "Data/FlameOfTheLost/Character/Animation/Combat/AnimationClipHitboxSet")]
     public class CharacterCombatAnimationClipHitboxSetProfile : ScriptableObject
     {
         // --- States ---

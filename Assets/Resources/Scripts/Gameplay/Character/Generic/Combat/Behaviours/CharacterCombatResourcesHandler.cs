@@ -7,7 +7,7 @@ namespace FlameOfTheLost
     {
         // --- States ---
         //  1. References
-        public CharacterResourcesController ResourcesController => this.CharacterComponentController.ResourcesController;
+        public CharacterResourcesController ResourcesController => this.CharacterRootController.ResourcesController;
 
         //  2. Active reservation IDs
         private readonly List<int> _activeReservationIDs = new();

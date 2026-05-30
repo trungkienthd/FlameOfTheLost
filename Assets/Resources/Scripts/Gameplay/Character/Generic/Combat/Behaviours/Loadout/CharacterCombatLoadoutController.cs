@@ -7,10 +7,10 @@ namespace FlameOfTheLost
     {
         // --- States ---
         //  1. References
-        private CharacterCombatController CombatController => this.CharacterComponentController.CombatController;
-        private CharacterCombatResourcesHandler CombatResourcesHandler => this.CharacterComponentController.CombatResourcesHandler;
-        private CharacterCombatStatusEffectApplicationHandler CombatStatusEffectHandler => this.CharacterComponentController.CombatStatusEffectApplicationHandler;
-        private InventoryController InventoryController => this.CharacterComponentController.InventoryController;
+        private CharacterCombatController CombatController => this.CharacterRootController.CombatController;
+        private CharacterCombatResourcesHandler CombatResourcesHandler => this.CharacterRootController.CombatResourcesHandler;
+        private CharacterCombatStatusEffectApplicationHandler CombatStatusEffectHandler => this.CharacterRootController.CombatStatusEffectApplicationHandler;
+        private InventoryController InventoryController => this.CharacterRootController.InventoryController;
 
         //  2. Loadout Capacity
         [Header("Loadout Capacity")]

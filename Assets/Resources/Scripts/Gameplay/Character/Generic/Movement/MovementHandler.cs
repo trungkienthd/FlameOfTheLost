@@ -13,8 +13,7 @@ namespace FlameOfTheLost
         [Header("References (Movement)")]
         [SerializeField] private Rigidbody2D _rigidbody2D;
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
-        public CharacterVisualController VisualController => this.CharacterComponentController.VisualController;
-
+        public CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
         //  2. Tuning Config
         [Header("Tuning")]

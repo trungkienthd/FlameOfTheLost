@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "WeaponProfile", menuName = "Data/FlameOfTheLost/Items/Weapon")]
+    [CreateAssetMenu(fileName = "WeaponProfile", menuName = "Data/FlameOfTheLost/Inventory/Item/Weapon")]
     public class WeaponProfile : ItemProfile
     {
         // --- States ---
