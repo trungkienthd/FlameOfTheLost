@@ -18,7 +18,9 @@ namespace FlameOfTheLost
                 return;
             }
 
-            CharacterRespawnUtility.RespawnCharacter(character: this.CharacterRootController.gameObject,
+            CharacterRespawnUtility.RespawnCharacter
+            (
+                character: this.CharacterRootController.gameObject,
                 position: this.DefaultSpawnPoint.SpawnPosition,
                 rotation: this.DefaultSpawnPoint.SpawnRotation,
                 facing: this.DefaultSpawnPoint.DefaultFacing,

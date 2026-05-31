@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,16 +12,23 @@ namespace FlameOfTheLost
         [SerializeField] private GameObject _player;
         private GameObject Player => _player;
 
-        [Header("Spawn Points (Controllers)")]
+        [Header("Spawn Settings")]
+        [SerializeField] private bool _spawnPlayerOnStart = true;
+        private bool SpawnPlayerOnStart => _spawnPlayerOnStart;
+
+        [Header("References - Spawn Points (Controllers)")]
         [SerializeField] private List<PlayerDefaultSpawnPointController> _defaultSpawnPointCtrls = new();
         private IReadOnlyList<PlayerDefaultSpawnPointController> DefaultSpawnPointCtrls => _defaultSpawnPointCtrls;
 
-        [Header("Checkpoints (Controllers)")]
+        [Header("References - Checkpoints (Controllers)")]
         [SerializeField] private List<CheckpointController> _checkpointCtrls = new();
         private IReadOnlyList<CheckpointController> CheckpointCtrls => _checkpointCtrls;
 
         private readonly PlayerSpawnState _spawnState = new();
         public PlayerSpawnState SpawnState => _spawnState;
+
+        // --- Events ---
+        public event Action OnPlayerSpawnedOrRespawned;
 
         // --- Unity Callbacks ---
         private void Reset()
@@ -34,7 +42,12 @@ namespace FlameOfTheLost
         }
         private void Start()
         {
-            this.SpawnPlayer();
+            this.InitializeFirstDefaultSpawnPointIfNeeded();
+
+            if (this.SpawnPlayerOnStart)
+            {
+                this.SpawnPlayer();
+            }
         }
 
         // --- Public APIs ---
@@ -42,6 +55,7 @@ namespace FlameOfTheLost
         {
             return this.DefaultSpawnPointCtrls.FirstOrDefault(spawnPoint => spawnPoint != null);
         }
+
         public void SpawnPlayer()
         {
             this.RespawnPlayer();
@@ -77,16 +91,29 @@ namespace FlameOfTheLost
 
         public void ActivateCheckpoint(CheckpointController checkpoint)
         {
-            if (checkpoint == null) return;            
+            // //TODO
+            //if (checkpoint == null) return;            
 
-            checkpoint.Activate();
+            //checkpoint.Activate();
 
-            this.SpawnState.SetCheckpointSpawn(checkpoint.CheckpointId);
+            //this.SpawnState.SetCheckpointSpawn(checkpoint.CheckpointId);
 
-            Debug.Log($"[{this.gameObject.name}.PlayerSpawnerController] Activated checkpoint: {checkpoint.CheckpointId}", checkpoint);
+            //Debug.Log($"[{this.gameObject.name}.PlayerSpawnerController] Activated checkpoint: {checkpoint.CheckpointId}", checkpoint);
         }
 
         // --- Helpers ---
+        private void InitializeFirstDefaultSpawnPointIfNeeded()
+        {
+            if (this.SpawnState.SpawnSourceType == CharacterSpawnSourceType.Checkpoint) return;
+
+            PlayerDefaultSpawnPointController firstDefaultSpawnPoint = this.GetFirstDefaultSpawnPoint();
+
+            if (firstDefaultSpawnPoint != null)
+            {
+                this.ActivateSpawnPoint(firstDefaultSpawnPoint);
+            }
+        }
+
         private SpawnResolveResult ResolveSpawn()
         {
             if (this.SpawnState.SpawnSourceType == CharacterSpawnSourceType.Checkpoint)
@@ -158,11 +185,28 @@ namespace FlameOfTheLost
 
         protected override void CacheReferences()
         {
-            if (_defaultSpawnPointCtrls != null && this.DefaultSpawnPointCtrls.Count > 0) return;
+            base.CacheReferences();
 
-            _defaultSpawnPointCtrls = UnityEngine.Object.FindObjectsByType<PlayerDefaultSpawnPointController>(FindObjectsSortMode.None)
-                .Where(spawnPoint => spawnPoint != null)
-                .ToList();
+            if (this.Player == null)
+            {
+                PlayerRespawnHandler playerRespawnHandler = UnityEngine.Object.FindFirstObjectByType<PlayerRespawnHandler>();
+
+                if (playerRespawnHandler != null) _player = playerRespawnHandler.gameObject;
+            }
+
+            if (_defaultSpawnPointCtrls == null || _defaultSpawnPointCtrls.Count == 0)
+            {
+                _defaultSpawnPointCtrls = UnityEngine.Object.FindObjectsByType<PlayerDefaultSpawnPointController>(FindObjectsSortMode.None)
+                    .Where(spawnPoint => spawnPoint != null)
+                    .ToList();
+            }
+
+            if (_checkpointCtrls == null || this.CheckpointCtrls.Count == 0)
+            {
+                _checkpointCtrls = UnityEngine.Object.FindObjectsByType<CheckpointController>(FindObjectsSortMode.None)
+                    .Where(checkpoint => checkpoint != null)
+                    .ToList();
+            }
         }
     }
 }

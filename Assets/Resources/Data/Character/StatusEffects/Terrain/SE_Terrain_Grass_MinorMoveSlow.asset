@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SE_Terrain_Grass_MinorMoveSlow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
   _id: 5101
-  _key: SE_TERRAIN_GRASS
-  _displayName: Grass Movement Slow
+  _key: SE_TERRAIN_GRASS_SLIGHTLY_SLOW
+  _displayName: Grass Slight Movement Slow
   _description: Moving through grass slightly reduces movement speed
   _icon: {fileID: 21300000, guid: c4bd1a2d875f326499cec70ec40ab965, type: 3}
   _affinity: 1

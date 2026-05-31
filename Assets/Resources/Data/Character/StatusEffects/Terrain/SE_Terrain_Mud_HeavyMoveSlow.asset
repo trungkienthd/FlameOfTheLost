@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SE_Terrain_Mud_HeavyMoveSlow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
   _id: 5103
-  _key: SE_TERRAIN_MUD
+  _key: SE_TERRAIN_MUD_HEAVILY_SLOW
   _displayName: Mud Heavy Movement Slow
   _description: Moving through mud heavily reduces movement speed
   _icon: {fileID: 0}

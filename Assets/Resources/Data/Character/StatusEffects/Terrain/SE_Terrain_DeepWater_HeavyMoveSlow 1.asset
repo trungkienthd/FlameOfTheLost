@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe320981f246e994ab0cebc1b14323e1, type: 3}
   m_Name: SE_Terrain_DeepWater_HeavyMoveSlow 1
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
-  _id: 5105
-  _key: SE_TERRAIN_DEEP_WATER
+  _id: 5106
+  _key: SE_TERRAIN_DEEP_WATER_EXTREMELY_SLOW
   _displayName: Deep Water Extreme Movement Slow
   _description: Moving through deep water extremely reduces movement speed.
   _icon: {fileID: 0}
@@ -25,7 +25,7 @@ MonoBehaviour:
   _statModifiers:
   - _target: 5
     _operation: 0
-    _value: 0.25
+    _value: 0.15
   _combinationType: 1
   _statPeriodics: []
   _vfxClip: {fileID: 0}

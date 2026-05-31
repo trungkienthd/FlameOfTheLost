@@ -2,13 +2,15 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class CharacterRootController : MonoBehaviour
+    public abstract class CharacterRootController : FOTLMonoBehaviour
     {
         [Header("References (Core)")]
         [SerializeField] private CharacterIdentityController _identityController;
+        [SerializeField] private CharacterInputHandler _inputHandler;
         [SerializeField] private MovementHandler _movementHandler;
         [SerializeField] private CharacterTerrainContactHandler _terrainContactHandler;
         public CharacterIdentityController IdentityController => _identityController;
+        public CharacterInputHandler InputHandler => _inputHandler;
         public MovementHandler MovementHandler => _movementHandler;
         public CharacterTerrainContactHandler TerrainContactHandler => _terrainContactHandler;
 
@@ -58,14 +60,13 @@ namespace FlameOfTheLost
         [SerializeField] private InventoryController _inventoryController;
         public InventoryController InventoryController => _inventoryController;
 
-        private void Awake()
+        protected override void CacheReferences()
         {
-            this.CacheReferences();
-        }
+            base.CacheReferences();
 
-        protected virtual void CacheReferences()
-        {
             if (this.IdentityController == null) _identityController = this.GetComponent<CharacterIdentityController>();
+
+            if (this.InputHandler == null) _inputHandler = this.GetComponent<CharacterInputHandler>();
 
             if (this.MovementHandler == null) _movementHandler = this.GetComponent<MovementHandler>();
 

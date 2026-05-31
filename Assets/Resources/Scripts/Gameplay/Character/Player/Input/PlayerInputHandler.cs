@@ -17,16 +17,16 @@ namespace FlameOfTheLost
         {
             get 
             {
-                var playerComponentController = this.CharacterRootController as PlayerRootController;
-                return playerComponentController != null ? playerComponentController.PlayerCarryLoadoutController : null;
+                var playerRootController = this.CharacterRootController as PlayerRootController;
+                return playerRootController != null ? playerRootController.PlayerCarryLoadoutController : null;
             }
         }
         private PlayerInteractionHandler PlayerInteractionHandler
         {
             get
             {
-                var playerComponentController = this.CharacterRootController as PlayerRootController;
-                return playerComponentController != null ? playerComponentController.PlayerInteractionHandler : null;
+                var playerRootController = this.CharacterRootController as PlayerRootController;
+                return playerRootController != null ? playerRootController.PlayerInteractionHandler : null;
             }
         }
 

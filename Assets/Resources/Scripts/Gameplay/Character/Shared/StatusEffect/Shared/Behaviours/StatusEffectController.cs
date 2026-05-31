@@ -570,9 +570,17 @@ namespace FlameOfTheLost
         {
             base.CacheReferences();
 
-            if (!this.StatusEffectVFXHolder) _statusEffectVFXHolder = this.transform.Find("StatusEffectVFXHolder");
+            if (!this.StatusEffectVFXHolder) _statusEffectVFXHolder = this.CharacterRootController.VisualController.transform.Find("StatusEffectVFXHolder");
 
             if (!this.StatusEffectVFXInstancePrefab) _statusEffectVFXInstancePrefab = UnityEngine.Resources.Load<GameObject>("Prefabs/StatusEffectVFXInstance");
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.StatusEffectVFXHolder == null) Debug.LogError($"[{this.CharacterName}.StatusEffectController] StatusEffectVFXHolder reference is missing. Status effect VFX will not be displayed.", this);
+            if (this.StatusEffectVFXInstancePrefab == null) Debug.LogError($"[{this.CharacterName}.StatusEffectController] StatusEffectVFXInstancePrefab reference is missing. Status effect VFX will not be displayed.", this);
         }
     }
 }

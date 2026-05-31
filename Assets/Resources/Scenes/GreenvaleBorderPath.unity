@@ -40901,7 +40901,6 @@ Transform:
   m_Children:
   - {fileID: 471410250}
   - {fileID: 2083802965}
-  - {fileID: 883419903}
   m_Father: {fileID: 1896252409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &415092167
@@ -41441,6 +41440,7 @@ Transform:
   m_Children:
   - {fileID: 1255039128}
   - {fileID: 1050207437}
+  - {fileID: 1790416602}
   m_Father: {fileID: 400740143}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &471410251
@@ -42233,6 +42233,7 @@ Transform:
   m_Children:
   - {fileID: 834274605}
   - {fileID: 257893929}
+  - {fileID: 1097086741}
   m_Father: {fileID: 2085343169}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &513242088
@@ -45426,13 +45427,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883419902}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1790416602}
-  m_Father: {fileID: 400740143}
+  m_Children: []
+  m_Father: {fileID: 1896252409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &883419904
 MonoBehaviour:
@@ -46107,7 +46107,7 @@ GameObject:
   - component: {fileID: 957075722}
   - component: {fileID: 957075723}
   m_Layer: 0
-  m_Name: ToxicschroomDefaultSpawnPoint_
+  m_Name: ToxicschroomDefaultSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46141,10 +46141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f43f4acc76243469f57703d846aa93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterDefaultSpawnPointController
-  _id: 1
-  _key: MAIN_ENTRANCE
-  _displayName: Main Entrance
-  _description: Spawn point for the main entrance of the level.
+  _id: 0
+  _key: 
+  _displayName: 
+  _description: 
   _spawnAnchor: {fileID: 294221152}
   _defaultFacing: 1
 --- !u!1 &989409868
@@ -70511,7 +70511,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1685654207}
+  m_Father: {fileID: 513242087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1122643395
 GameObject:
@@ -85351,13 +85351,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685654206}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1097086741}
-  m_Father: {fileID: 2085343169}
+  m_Children: []
+  m_Father: {fileID: 2107461203}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1685654208
 MonoBehaviour:
@@ -86796,7 +86795,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 883419903}
+  m_Father: {fileID: 471410250}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1797735069
 PrefabInstance:
@@ -88256,6 +88255,7 @@ GameObject:
   - component: {fileID: 1896252410}
   - component: {fileID: 1896252408}
   - component: {fileID: 1896252411}
+  - component: {fileID: 1896252412}
   - component: {fileID: 1896252407}
   - component: {fileID: 1896252406}
   - component: {fileID: 1896252402}
@@ -88398,6 +88398,7 @@ Transform:
   - {fileID: 1274193398}
   - {fileID: 44611550}
   - {fileID: 53646106}
+  - {fileID: 883419903}
   - {fileID: 1707939384}
   - {fileID: 580670448}
   - {fileID: 1122643396}
@@ -88453,6 +88454,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyAIInputHandler
   _characterRootController: {fileID: 1896252410}
   _isAIInputBlocked: 0
+--- !u!114 &1896252412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896252398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7412bb32ca7592947a9258a8571d6ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyRespawnHandler
+  _characterRootController: {fileID: 1896252410}
+  _respawnWhenPlayerRespawns: 1
+  _defaultSpawnPoint: {fileID: 957075723}
 --- !u!1 &1898475259
 GameObject:
   m_ObjectHideFlags: 0
@@ -90362,7 +90378,6 @@ Transform:
   m_Children:
   - {fileID: 513242087}
   - {fileID: 557462166}
-  - {fileID: 1685654207}
   m_Father: {fileID: 2107461203}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2107461181
@@ -90374,15 +90389,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2107461203}
-  - component: {fileID: 2107461202}
-  - component: {fileID: 2107461201}
   - component: {fileID: 2107461207}
   - component: {fileID: 2107461206}
   - component: {fileID: 2107461200}
   - component: {fileID: 2107461199}
+  - component: {fileID: 2107461205}
+  - component: {fileID: 2107461202}
+  - component: {fileID: 2107461201}
   - component: {fileID: 2107461197}
   - component: {fileID: 2107461204}
-  - component: {fileID: 2107461205}
   - component: {fileID: 2107461182}
   m_Layer: 8
   m_Name: Player
@@ -90991,6 +91006,7 @@ Transform:
   - {fileID: 2085343169}
   - {fileID: 1123552227}
   - {fileID: 1951002771}
+  - {fileID: 1685654207}
   - {fileID: 1877115627}
   - {fileID: 989409869}
   - {fileID: 359383320}
@@ -91025,7 +91041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42122b8089b3de24e890408c5d082ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerRespawnController
-  _characterRootController: {fileID: 0}
+  _characterRootController: {fileID: 2107461207}
   _playerInputHandler: {fileID: 2107461199}
   _playerSpawnerCtrl: {fileID: 331205190}
   _respawnDelaySeconds: 0.5
@@ -91383,6 +91399,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1871641202}
     m_Modifications:
+    - target: {fileID: 1799121282472352539, guid: 8178affb1a35d624aaf4d1b1bcc7c99f, type: 3}
+      propertyPath: _description
+      value: Player's default spawn point for the main entrance of the level.
+      objectReference: {fileID: 0}
     - target: {fileID: 7918980327805844814, guid: 8178affb1a35d624aaf4d1b1bcc7c99f, type: 3}
       propertyPath: m_Name
       value: PlayerDefaultSpawnPoint_001_MAIN_ENTRANCE

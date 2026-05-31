@@ -6,13 +6,18 @@ namespace FlameOfTheLost
     public class PlayerRespawnHandler : CharacterRespawnHandler
     {
         // --- States ---
-        [Header("References")]
-        [SerializeField] private PlayerInputHandler _playerInputHandler;
-        private PlayerInputHandler PlayerInputHandler => _playerInputHandler;
-
-        [Header("Spawner")]
+        [Header("References (Spawner)")]
         [SerializeField] private PlayerSpawnerController _playerSpawnerCtrl;
         private PlayerSpawnerController PlayerSpawnerController => _playerSpawnerCtrl;
+
+        private PlayerInputHandler PlayerInputHandler
+        {
+            get
+            {
+                var playerRootController = this.CharacterRootController as PlayerRootController;
+                return playerRootController != null ? playerRootController.PlayerInputHandler : null;
+            }
+        }
 
         [Header("Respawn Settings")]
         [SerializeField] private float _respawnDelaySeconds = 1.0f;
@@ -23,13 +28,6 @@ namespace FlameOfTheLost
         {
             get => _isRespawning;
             set => _isRespawning = value;
-        }
-
-        // -- Unity Callbacks ---
-        private void Start()
-        {
-            PlayerDefaultSpawnPointController firstDefaultSpawnPoint = this.PlayerSpawnerController.GetFirstDefaultSpawnPoint();
-            if (firstDefaultSpawnPoint != null) this.RegisterVisitedSpawnPoint(firstDefaultSpawnPoint);
         }
 
         // --- Public APIs ---
@@ -102,7 +100,11 @@ namespace FlameOfTheLost
         {
             base.CacheReferences();
 
-            if (this.PlayerInputHandler == null) _playerInputHandler = this.GetComponent<PlayerInputHandler>();
+            if (this.PlayerSpawnerController == null)
+            {
+                GameObject playerSpawner = GameObject.Find("PlayerSpawner");
+                _playerSpawnerCtrl = playerSpawner.GetComponent<PlayerSpawnerController>();
+            }
         }
     }
 }
