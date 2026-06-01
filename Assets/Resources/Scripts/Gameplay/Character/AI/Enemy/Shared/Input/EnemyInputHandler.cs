@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EnemyAIInputHandler : CharacterInputHandler
+    public class EnemyInputHandler : CharacterInputHandler
     {
         [Header("AI Input")]
         [SerializeField] private bool _isAIInputBlocked;

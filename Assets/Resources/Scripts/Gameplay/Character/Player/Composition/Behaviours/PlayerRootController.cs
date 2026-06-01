@@ -7,20 +7,18 @@ namespace FlameOfTheLost
         [Header("References (Player-only)")]
         [SerializeField] private PlayerCarryLoadoutController _playerCarryLoadoutController;
         [SerializeField] private PlayerInteractionHandler _playerInteractionHandler;
-        [SerializeField] private PlayerRespawnHandler _playerRespawnHandler;
         public PlayerCarryLoadoutController PlayerCarryLoadoutController => _playerCarryLoadoutController;
         public PlayerInteractionHandler PlayerInteractionHandler => _playerInteractionHandler;
-        public PlayerRespawnHandler PlayerRespawnHandler => _playerRespawnHandler;
 
         public PlayerInputHandler PlayerInputHandler => base.InputHandler as PlayerInputHandler;
+        public PlayerRespawnHandler PlayerRespawnHandler => base.RespawnHandler as PlayerRespawnHandler;
 
         protected override void CacheReferences()
         {
             base.CacheReferences();
 
-            if (this.PlayerCarryLoadoutController == null) _playerCarryLoadoutController = this.GetComponentInChildren<PlayerCarryLoadoutController>(true);
-            if (this.PlayerInteractionHandler == null) _playerInteractionHandler = this.GetComponentInChildren<PlayerInteractionHandler>(true);
-            if (this.PlayerRespawnHandler == null) _playerRespawnHandler = this.GetComponentInChildren<PlayerRespawnHandler>();
+            if (this.PlayerCarryLoadoutController   == null) _playerCarryLoadoutController  = this.GetComponentInChildren<PlayerCarryLoadoutController>(true);
+            if (this.PlayerInteractionHandler       == null) _playerInteractionHandler      = this.GetComponentInChildren<PlayerInteractionHandler>(true);
         }
 
         protected override void ValidateReferences()
@@ -29,7 +27,22 @@ namespace FlameOfTheLost
 
             if (this.PlayerInputHandler == null)
             {
-                Debug.LogError($"{this.gameObject.name}.{this.GetType().Name} PlayerInputHandler could not be casted successfully");
+                Debug.LogError($"{this.gameObject.name}.{this.GetType().Name} InputHandler must be a PlayerInputHandler.", this);
+            }
+
+            if (this.PlayerRespawnHandler == null)
+            {
+                Debug.LogError($"{this.gameObject.name}.{this.GetType().Name} RespawnHandler must be a PlayerRespawnHandler.", this);
+            }
+
+            if (this.PlayerCarryLoadoutController == null)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No PlayerCarryLoadoutController assigned.", this);
+            }
+
+            if (this.PlayerInteractionHandler == null)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No PlayerInteractionHandler assigned.", this);
             }
         }
     }

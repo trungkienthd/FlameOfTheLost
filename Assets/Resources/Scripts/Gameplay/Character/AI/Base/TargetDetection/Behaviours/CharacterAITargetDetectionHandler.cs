@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EnemyTargetDetectionHandler : CharacterBehaviourBaseController
+    public class CharacterAITargetDetectionHandler : CharacterBehaviourBaseController
     {
         private CharacterFaction Faction => this.CharacterRootController.IdentityController.Faction;
 

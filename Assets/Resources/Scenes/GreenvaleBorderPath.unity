@@ -35430,7 +35430,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9244e1e84e48be488b4521ffd2d14d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.InventoryController
-  _items: []
+  _items:
+  - _item: {fileID: 11400000, guid: 363524329bee2e5448ce96f08412d8f8, type: 2}
+    _quantity: 1
+    _equipped: 0
   _learnedSpecialSkills: []
 --- !u!4 &44611550
 Transform:
@@ -39406,6 +39409,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200905109}
   m_CullTransparentMesh: 1
+--- !u!1 &209471718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 209471719}
+  - component: {fileID: 209471720}
+  m_Layer: 8
+  m_Name: Respawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &209471719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209471718}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2107461203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &209471720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209471718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42122b8089b3de24e890408c5d082ef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerRespawnHandler
+  _characterRootController: {fileID: 2107461207}
+  _playerSpawnerCtrl: {fileID: 331205190}
+  _respawnDelaySeconds: 0.5
 --- !u!1 &223833491
 GameObject:
   m_ObjectHideFlags: 0
@@ -40543,6 +40593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerSpawnerController
   _player: {fileID: 2107461181}
+  _spawnPlayerOnStart: 1
   _defaultSpawnPointCtrls:
   - {fileID: 786795076}
   - {fileID: 1857196025}
@@ -46122,7 +46173,7 @@ Transform:
   m_GameObject: {fileID: 957075721}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5, y: 19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -80666,6 +80717,52 @@ MonoBehaviour:
   _promptText: Use [WASD] or [Arrow Keys] to move
   _startEnabled: 1
   _hideAfterCompleted: 1
+--- !u!1 &1252212107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1252212108}
+  - component: {fileID: 1252212109}
+  m_Layer: 9
+  m_Name: Identity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1252212108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252212107}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1896252409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1252212109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252212107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eaffaf94557d8e449c131f0baf56405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterIdentityController
+  _characterRootController: {fileID: 1896252410}
+  _identityProfile: {fileID: 11400000, guid: 70715efd35b3ad34e92b4d4964035fb5, type: 2}
 --- !u!1 &1255039127
 GameObject:
   m_ObjectHideFlags: 0
@@ -80962,11 +81059,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1274193397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a721b455fb80da6498eaeb90d93f2aad, type: 3}
+  m_Script: {fileID: 11500000, guid: da41aea3899ee814c9a0b7e9cf7c897d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyBrainController
+  m_EditorClassIdentifier: Assembly-CSharp::ToxicschroomBrainController
   _characterRootController: {fileID: 1896252410}
   _currentAIState: 0
+  _homeAreaBottomLeftPos: {x: 4.25, y: 16.5}
+  _homeAreaTopRightPos: {x: 5.75, y: 20.5}
+  _homeReturnReachDistance: 0.2
+  _minRoamWalkDuration: 1.2
+  _maxRoamWalkDuration: 2.5
+  _minRoamIdleDuration: 0.8
+  _maxRoamIdleDuration: 1.8
+  _idealAttackRange: 1.4
+  _attackDecisionCooldown: 1.5
+  _attackingStateDuration: 0.7
+  _normalAttackSide: 0
+  _isRoamWalking: 0
+  _roamMoveDirection: {x: 0, y: 0}
+  _nextRoamPhaseTime: 0
+  _hasHomeReturnPoint: 0
+  _homeReturnPoint: {x: 0, y: 0}
+  _nextAllowedAttackTime: 0
+  _attackingStateEndTime: 0
 --- !u!1 &1280234347
 GameObject:
   m_ObjectHideFlags: 0
@@ -81719,6 +81834,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357485316}
   m_CullTransparentMesh: 1
+--- !u!1 &1365808420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1365808421}
+  - component: {fileID: 1365808422}
+  m_Layer: 9
+  m_Name: Respawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1365808421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365808420}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1896252409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1365808422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365808420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7412bb32ca7592947a9258a8571d6ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyRespawnHandler
+  _characterRootController: {fileID: 1896252410}
+  _respawnWhenPlayerRespawns: 1
+  _defaultSpawnPoint: {fileID: 957075723}
 --- !u!1 &1387403574
 GameObject:
   m_ObjectHideFlags: 0
@@ -82608,8 +82770,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1503040719}
+  - component: {fileID: 1503040720}
   m_Layer: 0
-  m_Name: EnemySpawner
+  m_Name: EnemyGroupSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82631,6 +82794,22 @@ Transform:
   - {fileID: 1760074558}
   m_Father: {fileID: 1681114750}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1503040720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503040718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45f867ad84d9b44fa369cb9762d1e87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyGroupSpawnerController
+  _playerSpawnerController: {fileID: 331205190}
+  _enemyRespawnHandlers:
+  - {fileID: 1365808422}
+  _respawnEnemiesWhenPlayerSpawnsOrRespawns: 1
 --- !u!1 &1506897748
 GameObject:
   m_ObjectHideFlags: 0
@@ -88253,9 +88432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1896252409}
   - component: {fileID: 1896252410}
-  - component: {fileID: 1896252408}
   - component: {fileID: 1896252411}
-  - component: {fileID: 1896252412}
   - component: {fileID: 1896252407}
   - component: {fileID: 1896252406}
   - component: {fileID: 1896252402}
@@ -88367,20 +88544,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1896252408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896252398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eaffaf94557d8e449c131f0baf56405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterIdentityController
-  _characterRootController: {fileID: 1896252410}
-  _identityProfile: {fileID: 11400000, guid: 70715efd35b3ad34e92b4d4964035fb5, type: 2}
 --- !u!4 &1896252409
 Transform:
   m_ObjectHideFlags: 0
@@ -88390,15 +88553,17 @@ Transform:
   m_GameObject: {fileID: 1896252398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 18.5, z: 0}
+  m_LocalPosition: {x: 5, y: 19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1252212108}
   - {fileID: 400740143}
-  - {fileID: 1274193398}
-  - {fileID: 44611550}
   - {fileID: 53646106}
   - {fileID: 883419903}
+  - {fileID: 44611550}
+  - {fileID: 1365808421}
+  - {fileID: 1274193398}
   - {fileID: 1707939384}
   - {fileID: 580670448}
   - {fileID: 1122643396}
@@ -88416,7 +88581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c09f90e37654d442a4285a5516ffb37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyRootController
-  _identityController: {fileID: 1896252408}
+  _identityController: {fileID: 1252212109}
+  _inputHandler: {fileID: 1896252411}
   _movementHandler: {fileID: 1896252402}
   _terrainContactHandler: {fileID: 1896252401}
   _visualController: {fileID: 471410251}
@@ -88437,8 +88603,8 @@ MonoBehaviour:
   _statusEffectStatModifierHandler: {fileID: 883419905}
   _statusEffectStatPeriodicHandler: {fileID: 883419904}
   _inventoryController: {fileID: 44611549}
-  _enemyBrainController: {fileID: 1274193400}
-  _enemyAIInputHandler: {fileID: 1896252411}
+  _respawnHandler: {fileID: 1365808422}
+  _enemyBrainController: {fileID: 0}
   _enemyTargetDetectionHandler: {fileID: 1274193399}
 --- !u!114 &1896252411
 MonoBehaviour:
@@ -88449,26 +88615,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1896252398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3d6d6c52e1a21044b83d3900c87570f, type: 3}
+  m_Script: {fileID: 11500000, guid: 38e9451721c12af4a8b7dae3e494dfce, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyAIInputHandler
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyInputHandler
   _characterRootController: {fileID: 1896252410}
   _isAIInputBlocked: 0
---- !u!114 &1896252412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896252398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7412bb32ca7592947a9258a8571d6ffb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyRespawnHandler
-  _characterRootController: {fileID: 1896252410}
-  _respawnWhenPlayerRespawns: 1
-  _defaultSpawnPoint: {fileID: 957075723}
 --- !u!1 &1898475259
 GameObject:
   m_ObjectHideFlags: 0
@@ -89557,6 +89708,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f87fa363587413418ad5a6914750cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.LoadoutPanelSlotUIController
+--- !u!1 &1971478397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1971478398}
+  - component: {fileID: 1971478399}
+  m_Layer: 8
+  m_Name: Identity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1971478398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971478397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2107461203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1971478399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971478397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eaffaf94557d8e449c131f0baf56405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterIdentityController
+  _characterRootController: {fileID: 2107461207}
+  _identityProfile: {fileID: 11400000, guid: df216b8f685019249b2172be0293dc43, type: 2}
 --- !u!1 &1977710738
 GameObject:
   m_ObjectHideFlags: 0
@@ -90390,10 +90587,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2107461203}
   - component: {fileID: 2107461207}
-  - component: {fileID: 2107461206}
   - component: {fileID: 2107461200}
   - component: {fileID: 2107461199}
-  - component: {fileID: 2107461205}
   - component: {fileID: 2107461202}
   - component: {fileID: 2107461201}
   - component: {fileID: 2107461197}
@@ -91003,10 +91198,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1971478398}
   - {fileID: 2085343169}
-  - {fileID: 1123552227}
   - {fileID: 1951002771}
   - {fileID: 1685654207}
+  - {fileID: 1123552227}
+  - {fileID: 209471719}
   - {fileID: 1877115627}
   - {fileID: 989409869}
   - {fileID: 359383320}
@@ -91029,36 +91226,6 @@ MonoBehaviour:
   _statusEffectController: {fileID: 1685654211}
   _statusEffectApplicationHandler: {fileID: 557462169}
   _terrainStatusEffectRefreshInterval: 0.15
---- !u!114 &2107461205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107461181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42122b8089b3de24e890408c5d082ef9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerRespawnController
-  _characterRootController: {fileID: 2107461207}
-  _playerInputHandler: {fileID: 2107461199}
-  _playerSpawnerCtrl: {fileID: 331205190}
-  _respawnDelaySeconds: 0.5
---- !u!114 &2107461206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107461181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eaffaf94557d8e449c131f0baf56405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterIdentityController
-  _characterRootController: {fileID: 2107461207}
-  _identityProfile: {fileID: 11400000, guid: df216b8f685019249b2172be0293dc43, type: 2}
 --- !u!114 &2107461207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91071,7 +91238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bff32324ad1c7b4cb886caf80d0d429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerComponentController
-  _identityController: {fileID: 2107461206}
+  _identityController: {fileID: 1971478399}
+  _inputHandler: {fileID: 2107461199}
   _movementHandler: {fileID: 2107461197}
   _terrainContactHandler: {fileID: 2107461204}
   _visualController: {fileID: 513242084}
@@ -91092,9 +91260,9 @@ MonoBehaviour:
   _statusEffectStatModifierHandler: {fileID: 1685654209}
   _statusEffectStatPeriodicHandler: {fileID: 1685654208}
   _inventoryController: {fileID: 1123552228}
+  _respawnHandler: {fileID: 209471720}
   _playerCarryLoadoutController: {fileID: 2107461182}
   _playerInteractionHandler: {fileID: 1877115629}
-  _playerRespawnHandler: {fileID: 2107461205}
 --- !u!1001 &2108359412
 PrefabInstance:
   m_ObjectHideFlags: 0

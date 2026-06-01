@@ -59,6 +59,8 @@ namespace FlameOfTheLost
         public void SpawnPlayer()
         {
             this.RespawnPlayer();
+
+            //this.OnPlayerSpawnedOrRespawned?.Invoke();
         }
 
         public void RespawnPlayer()
@@ -78,6 +80,8 @@ namespace FlameOfTheLost
                 facing: spawnResult.Facing,
                 spawnSourceType: this.SpawnState.SpawnSourceType
             );
+
+            this.OnPlayerSpawnedOrRespawned?.Invoke();
         }
 
         public void ActivateSpawnPoint(PlayerDefaultSpawnPointController spawnPoint)

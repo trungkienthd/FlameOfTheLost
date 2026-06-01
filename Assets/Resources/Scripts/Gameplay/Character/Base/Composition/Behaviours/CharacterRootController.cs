@@ -60,11 +60,15 @@ namespace FlameOfTheLost
         [SerializeField] private InventoryController _inventoryController;
         public InventoryController InventoryController => _inventoryController;
 
+        [Header("References (Respawn)")]
+        [SerializeField] private CharacterRespawnHandler _respawnHandler;
+        public CharacterRespawnHandler RespawnHandler => _respawnHandler;
+
         protected override void CacheReferences()
         {
             base.CacheReferences();
 
-            if (this.IdentityController == null) _identityController = this.GetComponent<CharacterIdentityController>();
+            if (this.IdentityController == null) _identityController = this.GetComponentInChildren<CharacterIdentityController>(true);
 
             if (this.InputHandler == null) _inputHandler = this.GetComponent<CharacterInputHandler>();
 
@@ -94,6 +98,8 @@ namespace FlameOfTheLost
             if (this.StatusEffectStatPeriodicHandler    == null) _statusEffectStatPeriodicHandler   = this.GetComponentInChildren<StatusEffectStatPeriodicHandler>(true);
 
             if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>(true);
+
+            if (this.RespawnHandler == null) _respawnHandler = this.GetComponentInChildren<CharacterRespawnHandler>(true);
         }
     }
 }

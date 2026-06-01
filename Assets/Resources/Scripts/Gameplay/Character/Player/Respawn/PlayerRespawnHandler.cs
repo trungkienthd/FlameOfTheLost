@@ -37,7 +37,7 @@ namespace FlameOfTheLost
 
             if (this.PlayerSpawnerController == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.PlayerRespawnHandler] No PlayerSpawnerController assigned.", this);
+                Debug.LogError($"[{this.CharacterName}.PlayerRespawnHandler] No PlayerSpawnerController assigned.", this);
                 return;
             }
 
@@ -66,7 +66,7 @@ namespace FlameOfTheLost
             }
             else
             {
-                Debug.LogError($"[{this.gameObject.name}.PlayerRespawnHandler] No PlayerSpawnerController assigned.", this);
+                Debug.LogError($"[{this.CharacterName}.PlayerRespawnHandler] No PlayerSpawnerController assigned.", this);
             }
 
             this.EnablePlayerAfterRespawn();
@@ -78,7 +78,7 @@ namespace FlameOfTheLost
         {
             if (this.PlayerInputHandler == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.PlayerRespawnHandler] No PlayerInputHandler found to block inputs.", this);
+                Debug.LogWarning($"[{this.CharacterName}.PlayerRespawnHandler] No PlayerInputHandler found to block inputs.", this);
                 return;
             }
 
@@ -89,7 +89,7 @@ namespace FlameOfTheLost
         {
             if (this.PlayerInputHandler == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.PlayerRespawnHandler] No PlayerInputHandler found to unblock inputs.", this);
+                Debug.LogWarning($"[{this.CharacterName}.PlayerRespawnHandler] No PlayerInputHandler found to unblock inputs.", this);
                 return;
             }
 

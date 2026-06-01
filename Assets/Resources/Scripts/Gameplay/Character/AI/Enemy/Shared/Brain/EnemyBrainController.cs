@@ -2,12 +2,12 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EnemyBrainController : CharacterBehaviourBaseController, ICharacterRespawnRefreshable
+    public abstract class EnemyBrainController : CharacterBehaviourBaseController, ICharacterRespawnRefreshable
     {
         // --- State ---
         //  1. Runtime AI State
         [Header("AI State (Runtime)")]
-        [SerializeField] private CharacterAIState _currentAIState = CharacterAIState.Idle;
+        [SerializeField] private CharacterAIState _currentAIState = CharacterAIState.Roaming;
         public CharacterAIState CurrentAIState => _currentAIState;
        
         public bool IsAlert
@@ -21,33 +21,26 @@ namespace FlameOfTheLost
             }
         }
 
+        public bool IsDead => this.CurrentAIState == CharacterAIState.Dead;
+
         //  2. References
-        private EnemyTargetDetectionHandler EnemyTargetDetectionHandler
-        {
-            get
-            {
-                if (this.CharacterRootController is EnemyRootController enemyRoot)
-                {
-                    return enemyRoot.EnemyTargetDetectionHandler;
-                }
-                return null;
-            }
-        }
-        private EnemyAIInputHandler EnemyAIInputHandler
-        {
-            get
-            {
-                if (this.CharacterRootController is EnemyRootController enemyRoot)
-                {
-                    return enemyRoot.EnemyAIInputHandler;
-                }
-                return null;
-            }
-        }
+        protected CharacterVisualController VisualController => this.CharacterRootController.VisualController;
+        private CharacterAITargetDetectionHandler TargetDetectionHandler => this.CharacterRootController is EnemyRootController enemyRoot 
+            ? enemyRoot.TargetDetectionHandler 
+            : null;
+        protected EnemyInputHandler EnemyInputHandler => this.CharacterRootController is EnemyRootController enemyRoot 
+            ? enemyRoot.EnemyInputHandler 
+            : null;
 
         //  3. Current Target Info
-        public Transform CurrentTargetTransform => this.EnemyTargetDetectionHandler != null
-            ? this.EnemyTargetDetectionHandler.CurrentTargetTransform
+        protected CharacterRootController CurrentTarget => this.TargetDetectionHandler != null
+            ? this.TargetDetectionHandler.CurrentTarget
+            : null;
+        protected CharacterRootController CurrentAlertTarget => this.TargetDetectionHandler != null
+            ? this.TargetDetectionHandler.CurrentAlertTarget
+            : null;
+        protected CharacterRootController CurrentAttackRangeTarget => this.TargetDetectionHandler != null
+            ? this.TargetDetectionHandler.CurrentAttackRangeTarget
             : null;
 
         // --- Unity Callbacks ---
@@ -61,53 +54,70 @@ namespace FlameOfTheLost
         public virtual int RespawnRefreshPriority => 90;
         public virtual void RefreshAfterRespawn(CharacterRespawnRefreshContext context)
         {
-            this.SetState(CharacterAIState.Idle);
+            this.SetState(CharacterAIState.Roaming);
 
-            this.EnemyTargetDetectionHandler?.ClearAllTargets();
-            this.EnemyAIInputHandler?.ClearAIMoveInput();
-            this.EnemyAIInputHandler?.UnblockAIInput();
+            this.TargetDetectionHandler?.ClearAllTargets();
+            this.EnemyInputHandler?.ClearAIMoveInput();
+            this.EnemyInputHandler?.UnblockAIInput();
         }
 
         // --- Helpers ---
         protected virtual void TickAI()
         {
-            if (this.EnemyTargetDetectionHandler == null)
+            if (this.IsDead)
             {
-                this.SetState(CharacterAIState.Idle);
+                this.HandleDeadState();
                 return;
             }
 
-            if (this.EnemyTargetDetectionHandler.HasAttackRangeTarget)
+            if (this.TargetDetectionHandler == null)
+            {
+                this.SetState(CharacterAIState.Roaming);
+                this.HandleRoamingState();
+                return;
+            }
+
+            if (this.TargetDetectionHandler.HasAttackRangeTarget)
             {
                 this.SetState(CharacterAIState.ReadyToAttack);
                 this.HandleReadyToAttackState();
                 return;
             }
 
-            if (this.EnemyTargetDetectionHandler.HasAlertTarget)
+            if (this.TargetDetectionHandler.HasAlertTarget)
             {
                 this.SetState(CharacterAIState.Alert);
                 this.HandleAlertState();
                 return;
             }
 
-            this.SetState(CharacterAIState.Idle);
-            this.HandleIdleState();
+            this.SetState(CharacterAIState.Roaming);
+            this.HandleRoamingState();
         }
 
-        protected virtual void HandleIdleState()
+        protected virtual void HandleRoamingState()
         {
-            this.EnemyAIInputHandler?.ClearAIMoveInput();
+            this.EnemyInputHandler?.ClearAIMoveInput();
         }
 
         protected virtual void HandleAlertState()
         {
-            this.EnemyAIInputHandler?.ClearAIMoveInput();
+            this.EnemyInputHandler?.ClearAIMoveInput();
         }
 
         protected virtual void HandleReadyToAttackState()
         {
-            this.EnemyAIInputHandler?.ClearAIMoveInput();
+            this.EnemyInputHandler?.ClearAIMoveInput();
+        }
+
+        protected virtual void HandleAttackingState()
+        {
+            this.EnemyInputHandler?.ClearAIMoveInput();
+        }
+
+        protected virtual void HandleDeadState()
+        {
+            this.EnemyInputHandler?.BlockAIInput();
         }
 
         protected void SetState(CharacterAIState nextState)

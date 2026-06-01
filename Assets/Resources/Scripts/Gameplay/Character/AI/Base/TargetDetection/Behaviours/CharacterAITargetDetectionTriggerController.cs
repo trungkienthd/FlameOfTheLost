@@ -3,15 +3,15 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [RequireComponent(typeof(Collider2D))]
-    public class EnemyTargetDetectionTriggerController : CharacterBehaviourBaseController
+    public class CharacterAITargetDetectionTriggerController : CharacterBehaviourBaseController
     {
-        private EnemyTargetDetectionHandler TargetDetectionHandler
+        private CharacterAITargetDetectionHandler TargetDetectionHandler
         {
             get
             {
                 if (this.CharacterRootController is EnemyRootController enemyRoot)
                 {
-                    return enemyRoot.EnemyTargetDetectionHandler;
+                    return enemyRoot.TargetDetectionHandler;
                 }
                 return null;
             }
