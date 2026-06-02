@@ -16,10 +16,10 @@ MonoBehaviour:
   _key: SE_TOXIC_POISONING
   _displayName: Toxic Poisoning
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 5811096688572129443, guid: dac6df36fbc810a408075865553237e3, type: 3}
   _affinity: 1
-  _duration: 4
-  _maxStacks: 3
+  _duration: 2.5
+  _maxStacks: 2
   _durationRefreshType: 0
   _flags: []
   _statModifiers: []
@@ -28,8 +28,8 @@ MonoBehaviour:
   - _isEnabled: 1
     _target: 0
     _method: 0
-    _amountPerSecond: 3
-    _tickInterval: 1
+    _amountPerSecond: 1
+    _tickInterval: 0.5
     _treatHPDamageAsTrueDamage: 0
     _trueDamageBypassVirtualHP: 0
     _staminaDrainTriggersRegenDelay: 0

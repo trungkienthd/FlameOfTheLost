@@ -40529,7 +40529,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10, y: 9}
   m_EdgeRadius: 0
 --- !u!114 &328496608
 MonoBehaviour:
@@ -40572,7 +40572,7 @@ Transform:
   m_GameObject: {fileID: 331205188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.16015, y: -17.74963, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -41468,6 +41468,7 @@ GameObject:
   - component: {fileID: 471410251}
   - component: {fileID: 471410256}
   - component: {fileID: 471410255}
+  - component: {fileID: 471410258}
   - component: {fileID: 471410257}
   m_Layer: 9
   m_Name: Visual
@@ -41581,7 +41582,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -17488973, guid: be4adecc10265f8489f1aea4e141ec35, type: 3}
+  m_Sprite: {fileID: -1189209696, guid: be4adecc10265f8489f1aea4e141ec35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -41617,8 +41618,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualLocomotionAnimationHandler
   _placeholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
-  _activeProfile: {fileID: 11400000, guid: 7fd04fb031aa13145958276ec5b2e235, type: 2}
-  _locomotionModeProviderBehaviour: {fileID: 0}
+  _activeProfile: {fileID: 11400000, guid: fb951246804cd704387ca8a631bcae2c, type: 2}
+  _locomotionModeProviderBehaviour: {fileID: 471410251}
   _manualLocomotionMode: 0
 --- !u!114 &471410256
 MonoBehaviour:
@@ -41650,6 +41651,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualCombatAnimationHandler
   _placeholderProfile: {fileID: 11400000, guid: 96e91b24bb5929445b608c7fb8251e81, type: 2}
   _activeProfile: {fileID: 11400000, guid: f0e51d36e48ee4e43998ded6f8841cdc, type: 2}
+--- !u!114 &471410258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471410249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84015ce7e66d7e3479c05c6195a55f96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ToxicschroomLocomotionVisualModeProvider
+  _characterRootController: {fileID: 1896252410}
+  _roamingMode: 0
+  _alertMode: 2
+  _readyToAttackMode: 2
+  _attackingMode: 2
+  _recoveringMode: 2
+  _deadMode: 0
+  _currentResolvedMode: 0
 --- !u!1 &489144937
 GameObject:
   m_ObjectHideFlags: 0
@@ -81072,7 +81093,7 @@ MonoBehaviour:
   _minRoamIdleDuration: 0.8
   _maxRoamIdleDuration: 1.8
   _idealAttackRange: 1.4
-  _attackDecisionCooldown: 1.5
+  _attackDecisionCooldown: 2
   _attackingStateDuration: 0.7
   _normalAttackSide: 0
   _isRoamWalking: 0
@@ -84532,7 +84553,7 @@ Transform:
   m_GameObject: {fileID: 1637704987}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85494,7 +85515,7 @@ Transform:
   m_GameObject: {fileID: 1681114749}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.16015, y: 17.74963, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -85591,7 +85612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c83575119cac444f9feb63169496edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectController
-  _characterRootController: {fileID: 0}
+  _characterRootController: {fileID: 2107461207}
   _guardConfig: {fileID: 11400000, guid: e258a45908c1df341bb1a6d2734929bb, type: 2}
   _statusEffectVFXHolder: {fileID: 1097086741}
   _statusEffectVFXInstancePrefab: {fileID: 8740500497781535910, guid: 89762261fcc319e49b11d0bfb94586a9, type: 3}
@@ -85673,7 +85694,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
 --- !u!114 &1686389676
 MonoBehaviour:
@@ -88474,9 +88495,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterRootController: {fileID: 1896252410}
   _rigidbody2D: {fileID: 1896252407}
-  _movementSpeed: 6
-  _accel: 60
-  _decel: 80
+  _movementSpeed: 1.5
+  _accel: 18
+  _decel: 35
   _cannotMove: 0
   _ignoreMovementLock: 0
   _movementSpeedScale: 1
@@ -88604,8 +88625,8 @@ MonoBehaviour:
   _statusEffectStatPeriodicHandler: {fileID: 883419904}
   _inventoryController: {fileID: 44611549}
   _respawnHandler: {fileID: 1365808422}
-  _enemyBrainController: {fileID: 0}
-  _enemyTargetDetectionHandler: {fileID: 1274193399}
+  _targetDetectionHandler: {fileID: 1274193399}
+  _enemyBrainController: {fileID: 1274193400}
 --- !u!114 &1896252411
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -32,6 +32,8 @@ namespace FlameOfTheLost
             {
                 character.transform.SetPositionAndRotation(position, rotation);
             }
+
+            Debug.Log($"[{character.name}] Placed at position {position} with rotation {rotation.eulerAngles.z}.");
         }
 
         private static void ApplyFacing(GameObject character, CharacterFacingStatus facing)

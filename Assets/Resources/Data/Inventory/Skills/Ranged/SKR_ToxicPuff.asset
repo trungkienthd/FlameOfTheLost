@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SKR_ToxicPuff
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.RangedSkillProfile
   _id: 25
+  _key: 
   _displayName: Toxic Puff
   _description: 
   _icon: {fileID: 0}
@@ -30,9 +31,15 @@ MonoBehaviour:
     _costType: 0
     _blockedBySilence: 1
     _allowSelfKillWithHPCost: 0
-  _statusEffectApplications: []
+  _statusEffectApplications:
+  - _statusEffect: {fileID: 11400000, guid: 1d48f48b36c62144cb77fc3593d3a9a1, type: 2}
+    _chance: 0
+    _potency: 0
+    _receiver: 0
+    _trigger: 1
+    _limit: 0
   _arrowPrefab: {fileID: 3043559614890823337, guid: c9d10330d54c80842816a01efac41c94, type: 3}
-  _arrowSpeed: 5
+  _arrowSpeed: 0.5
   _arrowLifetime: 0.75
   _destroyArrowOnHit: 0
   _projectileCount: 1

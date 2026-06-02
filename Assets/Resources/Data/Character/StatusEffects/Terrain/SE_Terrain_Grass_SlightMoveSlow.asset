@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe320981f246e994ab0cebc1b14323e1, type: 3}
-  m_Name: SE_Terrain_Grass_MinorMoveSlow
+  m_Name: SE_Terrain_Grass_SlightMoveSlow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
   _id: 5101
   _key: SE_TERRAIN_GRASS_SLIGHTLY_SLOW
