@@ -9,7 +9,6 @@ namespace FlameOfTheLost
         public EnemyBrainController EnemyBrainController => _enemyBrainController;
 
         public EnemyInputHandler EnemyInputHandler => this.InputHandler as EnemyInputHandler;
-        public EnemyRespawnHandler EnemyRespawnHandler => this.RespawnHandler as EnemyRespawnHandler;
 
         protected override void CacheReferences()
         {
@@ -25,11 +24,6 @@ namespace FlameOfTheLost
             if (this.EnemyInputHandler == null)
             {
                 Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] InputHandler must be an EnemyInputHandler.", this);
-            }
-
-            if (this.EnemyRespawnHandler == null)
-            {
-                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] RespawnHandler must be an EnemyRespawnHandler.", this);
             }
 
             if (this.EnemyBrainController == null)

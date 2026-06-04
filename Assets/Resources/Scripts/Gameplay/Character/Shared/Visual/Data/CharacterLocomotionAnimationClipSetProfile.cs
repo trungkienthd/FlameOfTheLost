@@ -4,7 +4,7 @@ namespace FlameOfTheLost
 {
 
 
-    [CreateAssetMenu(fileName = "CharacterLocomotionAnimationClipSetProfile", menuName = "Data/FlameOfTheLost/Character/Animation/Locomotion/AnimationClipSet")]
+    [CreateAssetMenu(fileName = "CharacterLocomotionAnimationClipSetProfile", menuName = "Data/FlameOfTheLost/Character/Shared/Visual/Animation/Locomotion/AnimationClipSetProfile")]
     public class CharacterLocomotionAnimationClipSetProfile : ScriptableObject
     {
         [Header("Identity")]

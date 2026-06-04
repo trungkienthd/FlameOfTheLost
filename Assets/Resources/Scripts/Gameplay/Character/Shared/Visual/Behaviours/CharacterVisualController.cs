@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -9,7 +10,7 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(CharacterVisualCombatAnimationHandler))]
     public class CharacterVisualController : CharacterBehaviourBaseController,
         IFacingProvider,
-        ICharacterRespawnRefreshable
+        ICharacterPlacementRefreshable
     {
         // --- States ---
         //  1. References
@@ -42,8 +43,12 @@ namespace FlameOfTheLost
         public static readonly int DirYID = Animator.StringToHash("DirY");
         public static readonly int FacingID = Animator.StringToHash("Facing");
         public static readonly int DeadID = Animator.StringToHash("Dead");
+        public static readonly int DieID = Animator.StringToHash("Die");
         public static readonly int AttackID = Animator.StringToHash("Attack");
         public static readonly int HitID = Animator.StringToHash("Hit");
+
+        // --- Events ---
+        public event Action OnDieAnimationFinished;
 
         // --- Unity Callbacks ---
         private void OnEnable()
@@ -60,23 +65,28 @@ namespace FlameOfTheLost
 
         public bool IsFacingRight => this.FacingHandler == null || this.FacingHandler.IsFacingRight;
 
-        //  2. ICharacterRespawnRefreshable implementation
-        public int RespawnRefreshPriority => 50;
-        public void RefreshAfterRespawn(CharacterRespawnRefreshContext context)
+        //  2. ICharacterPlacementRefreshable implementation
+        public int PlacementConfigurePriority => 50;
+        public void RefreshAfterPlace(CharacterPlacementContext context)
         {
             if (this.Animator == null) return;
 
             this.Animator.ResetTrigger(CharacterVisualController.AttackID);
             this.Animator.ResetTrigger(CharacterVisualController.HitID);
+            this.Animator.ResetTrigger(CharacterVisualController.DieID);
+
             this.SetDead(false);
 
             if (this.FacingHandler != null)
             {
-                this.FacingHandler.SetRespawnFacing(context.RespawnFacing);
+                this.FacingHandler.SetRespawnFacing(context.PlacementFacing);
                 this.FacingHandler.SetSpeedImmediate(0f);
             }
 
             this.RebuildBaseAnimationOverride();
+
+            // Double-check
+            this.ForceAnimatorRefreshAfterPlacement();
         }
 
         //  3. Facing-related
@@ -132,19 +142,35 @@ namespace FlameOfTheLost
             this.ApplyCombatAttackAnimationOverride(runtimeSkill, weapon, attackSideType);
             this.Animator.SetTrigger(CharacterVisualController.AttackID);
         }
-
         public void TriggerHit()
         {
             if (this.Animator == null) return;
 
             this.Animator.SetTrigger(CharacterVisualController.HitID);
         }
+        public void TriggerDie()
+        {
+            if (this.Animator == null) return;
 
+            this.Animator.ResetTrigger(CharacterVisualController.AttackID);
+            this.Animator.ResetTrigger(CharacterVisualController.HitID);
+            this.Animator.ResetTrigger(CharacterVisualController.DieID);
+
+            this.Animator.SetFloat(CharacterVisualController.SpeedID, 0f);
+
+            this.Animator.SetBool(CharacterVisualController.DeadID, true);
+
+            this.Animator.SetTrigger(CharacterVisualController.DieID);
+        }
         public void SetDead(bool isDead)
         {
             if (this.Animator == null) return;
 
             this.Animator.SetBool(CharacterVisualController.DeadID, isDead);
+        }
+        public void NotifyDieAnimationFinished()
+        {
+            this.OnDieAnimationFinished?.Invoke();
         }
 
         //  6. Animation Controller-related
@@ -166,7 +192,6 @@ namespace FlameOfTheLost
 
             this.Animator.runtimeAnimatorController = this.RuntimeOverrideController;
         }
-
         public void ApplyCombatAttackAnimationOverride(RuntimeSkill runtimeSkill, WeaponProfile weapon, AttackSide attackSideType)
         {
             if (this.Animator == null || this.BaseAnimationController == null) return;
@@ -204,6 +229,20 @@ namespace FlameOfTheLost
             {
                 this.CombatAnimationHandler.Initialize(this);
             }
+        }
+
+        private void ForceAnimatorRefreshAfterPlacement()
+        {
+            if (this.Animator == null) return;
+
+            this.Animator.ResetTrigger(CharacterVisualController.AttackID);
+            this.Animator.ResetTrigger(CharacterVisualController.HitID);
+            this.Animator.ResetTrigger(CharacterVisualController.DieID);
+
+            this.Animator.SetBool(CharacterVisualController.DeadID, false);
+            this.Animator.SetFloat(CharacterVisualController.SpeedID, 0f);
+
+            this.Animator.Update(0f);
         }
 
         protected override void CacheReferences()

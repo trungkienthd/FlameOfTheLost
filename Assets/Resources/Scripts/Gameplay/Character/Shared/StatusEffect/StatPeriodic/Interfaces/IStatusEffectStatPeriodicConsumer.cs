@@ -4,7 +4,7 @@ namespace FlameOfTheLost
 {
     public interface IStatusEffectStatPeriodicConsumer
     {
-        public StatusEffectStatPeriodicTargetType PeriodicTarget
+        public StatusEffectStatPeriodicTarget Target
         {
             get; 
         }

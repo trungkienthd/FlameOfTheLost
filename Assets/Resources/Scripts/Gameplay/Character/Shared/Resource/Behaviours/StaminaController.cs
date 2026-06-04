@@ -83,7 +83,7 @@ namespace FlameOfTheLost
         }
 
         //  6. Status Effect Stat Periodic
-        public override StatusEffectStatPeriodicTargetType PeriodicTarget => StatusEffectStatPeriodicTargetType.Stamina;
+        public override StatusEffectStatPeriodicTarget Target => StatusEffectStatPeriodicTarget.Stamina;
 
         //  7. Events
         public event Action<bool> OnFatigueStateChanged; // (isFatigued)
@@ -169,35 +169,35 @@ namespace FlameOfTheLost
         }
 
         //  5. Status Effect Stat Modifier Handlers
-        public override void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType target, float multiplier)
+        public override void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget target, float multiplier)
         {
             switch (target)
             {
-                case StatusEffectStatModifierTargetType.StaminaCost:
+                case StatusEffectStatModifierTarget.StaminaCost:
                     this.CostMultiplier = Mathf.Max(0f, multiplier);
                     break;
             }
         }
-        public override void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType target, float additiveFlat)
+        public override void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget target, float additiveFlat)
         {
             switch (target)
             {
-                case StatusEffectStatModifierTargetType.StaminaCost:
+                case StatusEffectStatModifierTarget.StaminaCost:
                     this.CostAdditiveFlat = additiveFlat;
                     break;
-                case StatusEffectStatModifierTargetType.StaminaRegenRate:
+                case StatusEffectStatModifierTarget.StaminaRegenRate:
                     this.StaminaRegenRateAdditiveFlat = additiveFlat;
                     break;
-                case StatusEffectStatModifierTargetType.StaminaRegenDelayDelta:
+                case StatusEffectStatModifierTarget.StaminaRegenDelayDelta:
                     this.StaminaRegenDelayAdditiveFlat = additiveFlat;
                     break;
             }
         }
 
         //  6. Refresh Pool for Respawning
-        public override void RefreshPoolAfterRespawn(CharacterRespawnRefreshContext context)
+        public override void RefreshPoolAfterPlace(CharacterPlacementContext context)
         {
-            base.RefreshPoolAfterRespawn(context);
+            base.RefreshPoolAfterPlace(context);
 
             this.RegenResumeTime = 0f;
             this.RegenAccumulator = 0f;
@@ -246,7 +246,7 @@ namespace FlameOfTheLost
         {
             if (periodic == null) return;
             if (tickAmount <= 0) return;
-            if (periodic.Target != StatusEffectStatPeriodicTargetType.Stamina) return;
+            if (periodic.Target != StatusEffectStatPeriodicTarget.Stamina) return;
 
             switch (periodic.Method)
             {

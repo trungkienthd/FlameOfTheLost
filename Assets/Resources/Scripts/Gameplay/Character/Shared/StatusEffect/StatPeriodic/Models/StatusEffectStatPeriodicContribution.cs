@@ -18,9 +18,9 @@ namespace FlameOfTheLost
 
         //  2. Periodic Specific
         [Header("Specific")]
-        [SerializeField] private StatusEffectStatPeriodicTargetType _target;
+        [SerializeField] private StatusEffectStatPeriodicTarget _target;
         [SerializeField] private StatusEffectStatPeriodicMethodType _method;
-        public StatusEffectStatPeriodicTargetType Target
+        public StatusEffectStatPeriodicTarget Target
         {
             get => _target;
             set => _target = value;

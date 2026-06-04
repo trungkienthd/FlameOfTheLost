@@ -154,7 +154,7 @@ MonoBehaviour:
   _knockbackDealtAddFlat: 0
   _sourceCharacterFaction: 0
   _originTransform: {fileID: 0}
-  _destroyOnHit: 1
+  _destroyOnHit: 0
   _ignoresSameFaction: 1
 --- !u!1 &8674926287107048069
 GameObject:

@@ -7,7 +7,7 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(StatusEffectFlagHandler))]
     [RequireComponent(typeof(StatusEffectStatModifierHandler))]
     [RequireComponent(typeof(StatusEffectStatPeriodicHandler))]
-    public class StatusEffectController : CharacterBehaviourBaseController, ICharacterRespawnRefreshable
+    public class StatusEffectController : CharacterBehaviourBaseController, ICharacterPlacementRefreshable
     {
         // --- States ---
         //  1. References
@@ -45,10 +45,8 @@ namespace FlameOfTheLost
             set => _nextRuntimeID = value;
         }
 
-        //  3. ICharacterRespawnRefreshable implementation: Refresh Respawn Priority
-        public int RespawnRefreshPriority => 20;
 
-        //  4. Events
+        // --- Events ---
         public event Action OnRuntimeListChanged;     // add/remove/clear/expire
         public event Action OnRuntimeValuesChanged;   // stacks/potency/duration refresh without list size change
 
@@ -271,19 +269,19 @@ namespace FlameOfTheLost
 
             // If the incoming effect itself grants an immunity flag, always allow it.
             bool incomingIsImmunity =
-                this.ProfileHasFlag(profile, StatusEffectFlagType.IgnoreAllStatusEffects)    ||
-                this.ProfileHasFlag(profile, StatusEffectFlagType.IgnoreDebuffStatusEffects) ||
-                this.ProfileHasFlag(profile, StatusEffectFlagType.IgnoreBuffStatusEffects);
+                this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreAllStatusEffects)    ||
+                this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreDebuffStatusEffects) ||
+                this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreBuffStatusEffects);
 
             if (incomingIsImmunity) return true;
 
             // Non-immunity status effects
             //  If IgnoreAll is active, block anything that is not an immunity.
-            if (this.HasActiveFlag(StatusEffectFlagType.IgnoreAllStatusEffects)) return false;
+            if (this.HasActiveFlag(StatusEffectFlagTarget.IgnoreAllStatusEffects)) return false;
 
             //  Debuff/Buff immunity blocks new incoming effects based on Affinity
-            bool ignoreDebuff   = this.HasActiveFlag(StatusEffectFlagType.IgnoreDebuffStatusEffects);
-            bool ignoreBuff     = this.HasActiveFlag(StatusEffectFlagType.IgnoreBuffStatusEffects);
+            bool ignoreDebuff   = this.HasActiveFlag(StatusEffectFlagTarget.IgnoreDebuffStatusEffects);
+            bool ignoreBuff     = this.HasActiveFlag(StatusEffectFlagTarget.IgnoreBuffStatusEffects);
 
             //  Treat Mixed as both (conservative & consistent with "immune to debuffs/buffs being applied")
             if (ignoreDebuff    && (profile.Affinity == StatusEffectAffinityType.Debuff || profile.Affinity == StatusEffectAffinityType.Mixed)) return false;
@@ -299,8 +297,9 @@ namespace FlameOfTheLost
             return this.RemoveAllFromSource(source);
         }
 
-        //  5. ICharacterRespawnRefreshable implementation: Refresh Respawn (clear all)
-        public void RefreshAfterRespawn(CharacterRespawnRefreshContext context)
+        //  5. ICharacterPlacementRefreshable implementation
+        public int PlacementConfigurePriority => 20;
+        public void RefreshAfterPlace(CharacterPlacementContext context)
         {
             this.RemoveAllStatusEffectVFXInstances();
 
@@ -413,9 +412,9 @@ namespace FlameOfTheLost
         //  3. SE Flag Immunity Rules
         private bool EnforceImmunityRulesAndPurge()
         {
-            bool ignoreAll      = this.HasActiveFlag(StatusEffectFlagType.IgnoreAllStatusEffects);
-            bool ignoreDebuff   = this.HasActiveFlag(StatusEffectFlagType.IgnoreDebuffStatusEffects);
-            bool ignoreBuff     = this.HasActiveFlag(StatusEffectFlagType.IgnoreBuffStatusEffects);
+            bool ignoreAll      = this.HasActiveFlag(StatusEffectFlagTarget.IgnoreAllStatusEffects);
+            bool ignoreDebuff   = this.HasActiveFlag(StatusEffectFlagTarget.IgnoreDebuffStatusEffects);
+            bool ignoreBuff     = this.HasActiveFlag(StatusEffectFlagTarget.IgnoreBuffStatusEffects);
 
             if (!ignoreAll && !ignoreDebuff && !ignoreBuff) return false;
 
@@ -435,9 +434,9 @@ namespace FlameOfTheLost
 
                 // Never purge the immunity providers themselves.
                 bool isImmunityProvider =
-                    this.ProfileHasFlag(profile, StatusEffectFlagType.IgnoreAllStatusEffects)      ||
-                    this.ProfileHasFlag(profile, StatusEffectFlagType.IgnoreDebuffStatusEffects)   ||
-                    this.ProfileHasFlag(profile, StatusEffectFlagType.IgnoreBuffStatusEffects);
+                    this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreAllStatusEffects)      ||
+                    this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreDebuffStatusEffects)   ||
+                    this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreBuffStatusEffects);
 
                 // Never purge the immunity providers themselves
                 if (isImmunityProvider) continue;
@@ -474,7 +473,7 @@ namespace FlameOfTheLost
             return removedAny;
         }
 
-        private bool HasActiveFlag(StatusEffectFlagType flagType)
+        private bool HasActiveFlag(StatusEffectFlagTarget flagType)
         {
             // Scan runtime list directly (no reliance on FlagHandler aggregation order).
             for (int i = 0; i < this.RuntimeStatusEffects.Count; i++)
@@ -487,7 +486,7 @@ namespace FlameOfTheLost
             return false;
         }
 
-        private bool ProfileHasFlag(StatusEffectProfile profile, StatusEffectFlagType flagType)
+        private bool ProfileHasFlag(StatusEffectProfile profile, StatusEffectFlagTarget flagType)
         {
             if (profile == null) return false;
 

@@ -46,7 +46,7 @@ namespace FlameOfTheLost
 
         //  3. Status Effect Stat Periodic
         //      3.1. Stat Periodic Target Type
-        public abstract StatusEffectStatPeriodicTargetType PeriodicTarget
+        public abstract StatusEffectStatPeriodicTarget Target
         {
             get;
         }
@@ -132,8 +132,8 @@ namespace FlameOfTheLost
         }
 
         //  6. SE Stat Modifier APIs
-        public abstract void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType target, float multiplier);
-        public abstract void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType target, float additiveFlat);
+        public abstract void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget target, float multiplier);
+        public abstract void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget target, float additiveFlat);
 
         //  7. SE Stat Periodic APIs
         public virtual void SetActivePeriodicStreams(IReadOnlyList<StatusEffectStatPeriodicStream> streams)
@@ -153,7 +153,7 @@ namespace FlameOfTheLost
         }
 
         //  8. Refresh Pool for Respawning
-        public virtual void RefreshPoolAfterRespawn(CharacterRespawnRefreshContext context)
+        public virtual void RefreshPoolAfterPlace(CharacterPlacementContext context)
         {
             this.ActiveStatPeriodicStreams.Clear();
             this.SetCurrentValue(this.MaxValue);

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "CID_CharacterIdentity", menuName = "Data/FlameOfTheLost/Character/Identity")]
+    [CreateAssetMenu(fileName = "CID_CharacterIdentity", menuName = "Data/FlameOfTheLost/Character/Shared/Identity")]
     public class CharacterIdentityProfile : ScriptableObject, IIdentityProvider
     {
         [Header("Identity")]
@@ -18,7 +18,9 @@ namespace FlameOfTheLost
         [Header("Classification")]
         [SerializeField] private CharacterType _characterType;
         [SerializeField] private CharacterFaction _faction;
+        [SerializeField] private CharacterTraversalType _traversalType;
         public CharacterType CharacterType => _characterType;
         public CharacterFaction Faction => _faction;
+        public CharacterTraversalType TraversalType => _traversalType;
     }
 }

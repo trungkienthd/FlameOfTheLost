@@ -16,8 +16,9 @@ namespace FlameOfTheLost
         }
 
         //  2. Consumers discovered in children (HP/FP/Stamina etc.)
-        private readonly Dictionary<StatusEffectStatPeriodicTargetType, List<IStatusEffectStatPeriodicConsumer>> _consumersByTarget = new();
-        private Dictionary<StatusEffectStatPeriodicTargetType, List<IStatusEffectStatPeriodicConsumer>> ConsumersByTarget => _consumersByTarget;
+        [Header("SE Periodic Map (Runtime)")]
+        [SerializeField] private StatusEffectStatPeriodicTargetToConsumerDictionary _periodicMap = new();
+        private IReadOnlyDictionary<StatusEffectStatPeriodicTarget, List<IStatusEffectStatPeriodicConsumer>> PeriodicMap => _periodicMap;
 
         // --- Unity Callbacks ---
         private void Awake()
@@ -56,7 +57,7 @@ namespace FlameOfTheLost
             if (this.StatusEffectController == null) return;
 
             // Build streams per target
-            var streamsByTarget = new Dictionary<StatusEffectStatPeriodicTargetType, List<StatusEffectStatPeriodicStream>>();
+            var streamsByTarget = new Dictionary<StatusEffectStatPeriodicTarget, List<StatusEffectStatPeriodicStream>>();
 
             var runtimeStatusEffects = this.StatusEffectController.RuntimeStatusEffects;
             if (runtimeStatusEffects != null)
@@ -91,7 +92,7 @@ namespace FlameOfTheLost
             }
 
             // Push streams to consumers
-            foreach (var kvp in this.ConsumersByTarget)
+            foreach (var kvp in this.PeriodicMap)
             {
                 var target = kvp.Key;
                 var consumers = kvp.Value;
@@ -108,7 +109,7 @@ namespace FlameOfTheLost
 
         public void ClearAndApply()
         {
-            foreach (var kvp in this.ConsumersByTarget)
+            foreach (var kvp in this.PeriodicMap)
             {
                 var consumers = kvp.Value;
 
@@ -126,7 +127,7 @@ namespace FlameOfTheLost
         }
         private void CacheConsumers()
         {
-            this.ConsumersByTarget.Clear();
+            _periodicMap.Clear();
 
             var allBehaviours = this.GetComponentsInChildren<MonoBehaviour>(true);
             for (int i = 0; i < allBehaviours.Length; i++)
@@ -135,15 +136,15 @@ namespace FlameOfTheLost
                 if (behaviour is not IStatusEffectStatPeriodicConsumer consumer) continue;
 
                 // NEW: direct mapping via consumer.PeriodicTarget
-                this.RegisterConsumer(consumer.PeriodicTarget, consumer);
+                this.RegisterConsumer(consumer.Target, consumer);
             }
         }
-        private void RegisterConsumer(StatusEffectStatPeriodicTargetType target, IStatusEffectStatPeriodicConsumer consumer)
+        private void RegisterConsumer(StatusEffectStatPeriodicTarget target, IStatusEffectStatPeriodicConsumer consumer)
         {
-            if (!this.ConsumersByTarget.TryGetValue(target, out var list))
+            if (!this.PeriodicMap.TryGetValue(target, out var list))
             {
                 list = new List<IStatusEffectStatPeriodicConsumer>();
-                this.ConsumersByTarget[target] = list;
+                _periodicMap[target] = list;
             }
 
             // avoid duplicates if CacheConsumers() is called redundantly (still cheap, but safe)
@@ -156,16 +157,16 @@ namespace FlameOfTheLost
             if (guard == null) return Mathf.Max(0.01f, raw);
             return Mathf.Clamp(raw, guard.MinTickInterval, guard.MaxTickInterval);
         }
-        private float ClampAmountPerSecond(StatusEffectStatPeriodicTargetType target, float rawValue)
+        private float ClampAmountPerSecond(StatusEffectStatPeriodicTarget target, float rawValue)
         {
             var guard = this.StatusEffectController?.GuardConfig;
             if (guard == null) return rawValue;
 
             return target switch
             {
-                StatusEffectStatPeriodicTargetType.HP       => Mathf.Clamp(rawValue, float.MinValue, guard.MaxHPPerSecond),
-                StatusEffectStatPeriodicTargetType.FP       => Mathf.Clamp(rawValue, float.MinValue, guard.MaxFPPerSecond),
-                StatusEffectStatPeriodicTargetType.Stamina  => Mathf.Clamp(rawValue, float.MinValue, guard.MaxStaminaPerSecond),
+                StatusEffectStatPeriodicTarget.HP       => Mathf.Clamp(rawValue, float.MinValue, guard.MaxHPPerSecond),
+                StatusEffectStatPeriodicTarget.FP       => Mathf.Clamp(rawValue, float.MinValue, guard.MaxFPPerSecond),
+                StatusEffectStatPeriodicTarget.Stamina  => Mathf.Clamp(rawValue, float.MinValue, guard.MaxStaminaPerSecond),
                 _ => rawValue,
             };
         }

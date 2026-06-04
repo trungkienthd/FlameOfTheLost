@@ -6,7 +6,7 @@ namespace FlameOfTheLost
     public class MovementHandler : CharacterBehaviourBaseController, 
         IStatusEffectFlagConsumer, 
         IStatusEffectStatModifierMultiplierConsumer,
-        ICharacterRespawnRefreshable
+        ICharacterPlacementRefreshable
     {
         // --- States ---
         //  1. References
@@ -68,10 +68,7 @@ namespace FlameOfTheLost
             set => _vel = value;
         }
 
-        //  5. Respawn Refresh
-        public int RespawnRefreshPriority => 30;
-
-        // --- Unity Methods --- 
+        // --- Unity Callbacks --- 
         private void FixedUpdate()
         {
             // IMPORTANT: Status Effects apply here via MovementSpeedScale (0 if blocked)
@@ -105,14 +102,14 @@ namespace FlameOfTheLost
 
         // --- Public APIs ---
         //  1. Status Effect Flag consumption
-        public void SetStatusEffectFlag(StatusEffectFlagType flagType, bool value)
+        public void SetStatusEffectFlag(StatusEffectFlagTarget flagType, bool value)
         {
             switch (flagType)
             {
-                case StatusEffectFlagType.CannotMove:
+                case StatusEffectFlagTarget.CannotMove:
                     this.CannotMove = value;
                     return;
-                case StatusEffectFlagType.IgnoreMovementLock:
+                case StatusEffectFlagTarget.IgnoreMovementLock:
                     this.IgnoreMovementLock = value;
                     return;
                 default:
@@ -122,16 +119,17 @@ namespace FlameOfTheLost
         }
 
         //  2. Status Effect Stat Modifier consumption
-        public void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType target, float multiplier)
+        public void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget target, float multiplier)
         {
-            if (target != StatusEffectStatModifierTargetType.MovementSpeedScale) return;
+            if (target != StatusEffectStatModifierTarget.MovementSpeedScale) return;
 
             // Do NOT clamp to config here; ModifierHandler should do global clamps.
             this.MovementSpeedScale = multiplier;
         }
 
-        //  3. Respawn Refresh
-        public void RefreshAfterRespawn(CharacterRespawnRefreshContext context)
+        //  3. ICharacterPlacementRefreshable implementation
+        public int PlacementConfigurePriority => 30;
+        public void RefreshAfterPlace(CharacterPlacementContext context)
         {
             this.RawMovementInput = Vector2.zero;
             this.DesiredMovement = Vector2.zero;

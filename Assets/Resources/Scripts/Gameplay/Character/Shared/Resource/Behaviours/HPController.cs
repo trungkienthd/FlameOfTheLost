@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -41,26 +42,32 @@ namespace FlameOfTheLost
             private set => _maxVirtualHP = Mathf.Clamp(value, 0, this.MaxValue);
         }
 
-        //  3. HP-related States
-        [Header("States")]
+        //  3. Death-related States
+        [Header("Death")]
         [SerializeField] private bool _isDead = false;
+        [SerializeField] private float _deathAnimationFallbackSeconds = 0.825f;
         public bool IsDead
         {
             get => _isDead;
             private set => _isDead = value;
         }
+        private float DeathAnimationFallbackSeconds => _deathAnimationFallbackSeconds;
+
+        private Coroutine _deathSequenceRoutine;
 
         //  4. Character Faction
         public CharacterFaction CharacterFaction => this.CharacterRootController.IdentityController.Faction;
 
         //  5. Status Effect Stat Periodic (Type)
-        public override StatusEffectStatPeriodicTargetType PeriodicTarget => StatusEffectStatPeriodicTargetType.HP;
+        public override StatusEffectStatPeriodicTarget Target => StatusEffectStatPeriodicTarget.HP;
 
-        //  6. Events
+        // --- Events ---
         public event Action<int> OnDamageTaken;
         public event Action<int> OnHealed;
         public event Action OnDeath;
         public event Action<int, int> OnVirtualHPChanged;
+        public event Action OnDeathStarted;
+        public event Action OnDeathAnimationFinished;
 
         // --- Unity Callbacks ---
         private void Start()
@@ -123,12 +130,7 @@ namespace FlameOfTheLost
             if (this.IsDead) return;
 
             this.SetCurrentValue(0);
-            this.IsDead = true;
-
-            this.VisualController?.SetDead(true);
-            if (this.Rigidbody2D != null) this.Rigidbody2D.linearVelocity = Vector2.zero; // Stop movement on death
-
-            this.OnDeath?.Invoke();
+            this.BeginDeathSequence("Instant Kill");
         }
 
         //  4. TrySpend override not to account for Virtual HP, but only Current HP (Value)
@@ -176,28 +178,28 @@ namespace FlameOfTheLost
         }
 
         //  6. Status Efect Stat Modifiers hooks
-        public override void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType target, float multiplier)
+        public override void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget target, float multiplier)
         {
             switch (target)
             {
-                case StatusEffectStatModifierTargetType.DamageReceived:
+                case StatusEffectStatModifierTarget.DamageReceived:
                     this.DamageReceivedMultiplier = multiplier;
                     return;
-                case StatusEffectStatModifierTargetType.HPCost:
+                case StatusEffectStatModifierTarget.HPCost:
                     this.CostMultiplier = multiplier;
                     return;
                 default:
                     return;
             }
         }
-        public override void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType target, float additiveFlat)
+        public override void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget target, float additiveFlat)
         {
             switch (target)
             {
-                case StatusEffectStatModifierTargetType.DamageReceived:
+                case StatusEffectStatModifierTarget.DamageReceived:
                     this.DamageReceivedAdditiveFlat = additiveFlat;
                     return;
-                case StatusEffectStatModifierTargetType.HPCost:
+                case StatusEffectStatModifierTarget.HPCost:
                     this.CostAdditiveFlat = additiveFlat;
                     return;
                 default:
@@ -205,18 +207,22 @@ namespace FlameOfTheLost
             }
         }
 
-        //  7. Refresh Pool for Respawning
-        public override void RefreshPoolAfterRespawn(CharacterRespawnRefreshContext context)
+        //  7. Refresh Pool for Placement
+        public override void RefreshPoolAfterPlace(CharacterPlacementContext context)
         {
-            base.RefreshPoolAfterRespawn(context);
+            base.RefreshPoolAfterPlace(context);
 
             this.IsDead = false;
+
+            if (_deathSequenceRoutine != null)
+            {
+                this.StopCoroutine(_deathSequenceRoutine);
+                _deathSequenceRoutine = null;
+            }
 
             this.MaxVirtualHP = 0;
             this.CurrentVirtualHP = 0;
             this.OnVirtualHPChanged?.Invoke(this.CurrentVirtualHP, this.MaxVirtualHP);
-
-            this.VisualController?.SetDead(false);
         }
 
         // --- Helpers ---
@@ -237,12 +243,7 @@ namespace FlameOfTheLost
 
             if (this.CurrentValue <= 0)
             {
-                this.IsDead = true;
-                this.VisualController?.SetDead(true);
-                if (this.Rigidbody2D != null) this.Rigidbody2D.linearVelocity = Vector2.zero;
-
-                this.OnDeath?.Invoke();
-                Debug.Log($"[{this.CharacterName}.HPController] Entity is dead (self-cost or status effect periodic cost).");
+                this.BeginDeathSequence("Self-cost or Status effect periodic cost");
             }
         }
 
@@ -253,12 +254,7 @@ namespace FlameOfTheLost
 
             if (this.CurrentValue <= 0)
             {
-                this.IsDead = true;
-                this.VisualController?.SetDead(true);
-                if (this.Rigidbody2D != null) this.Rigidbody2D.linearVelocity = Vector2.zero;
-
-                this.OnDeath?.Invoke();
-                Debug.Log($"[{this.CharacterName}.HPController] Entity is dead.");
+                this.BeginDeathSequence("External damage");
                 return;
             }
 
@@ -318,7 +314,7 @@ namespace FlameOfTheLost
             if (periodic == null) return;
             if (tickAmount <= 0) return;
             if (this.IsDead) return;
-            if (periodic.Target != StatusEffectStatPeriodicTargetType.HP) return;
+            if (periodic.Target != StatusEffectStatPeriodicTarget.HP) return;
 
             switch (periodic.Method)
             {
@@ -341,6 +337,67 @@ namespace FlameOfTheLost
                     this.Heal(tickAmount);
                     break;
             }
+        }
+
+        //  6. Death sequence handling (animation timing, events)
+        private void BeginDeathSequence(string cause)
+        {
+            if (this.IsDead) return;
+
+            this.IsDead = true;
+
+            if (this.Rigidbody2D != null)
+            {
+                this.Rigidbody2D.linearVelocity = Vector2.zero;
+                this.Rigidbody2D.angularVelocity = 0f;
+            }
+
+            if (_deathSequenceRoutine != null)
+            {
+                this.StopCoroutine(_deathSequenceRoutine);
+            }
+
+            // Start listening BEFORE requesting the Die animation.
+            _deathSequenceRoutine = this.StartCoroutine(this.DeathSequenceRoutine());
+
+            this.VisualController?.TriggerDie();
+
+            this.OnDeathStarted?.Invoke();
+
+            this.OnDeath?.Invoke();
+
+            Debug.Log($"[{this.CharacterName}.HPController] Entity is dead. Cause: {cause}.");
+        }
+        private IEnumerator DeathSequenceRoutine()
+        {
+            bool animationFinished = false;
+
+            void HandleDieAnimationFinished()
+            {
+                animationFinished = true;
+            }
+
+            if (this.VisualController != null)
+            {
+                this.VisualController.OnDieAnimationFinished += HandleDieAnimationFinished;
+            }
+
+            float timer = 0f;
+
+            while (!animationFinished && timer < this.DeathAnimationFallbackSeconds)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            if (this.VisualController != null)
+            {
+                this.VisualController.OnDieAnimationFinished -= HandleDieAnimationFinished;
+            }
+
+            _deathSequenceRoutine = null;
+
+            this.OnDeathAnimationFinished?.Invoke();
         }
     }
 }

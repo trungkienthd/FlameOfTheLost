@@ -23,6 +23,10 @@ namespace FlameOfTheLost
             ? this.IdentityProfile.Faction
             : CharacterFaction.Neutral;
 
+        public CharacterTraversalType TraversalType => this.IdentityProfile != null
+            ? this.IdentityProfile.TraversalType
+            : CharacterTraversalType.Humanoid;
+
         // --- Public APIs ---
         public bool IsPlayer => this.Faction == CharacterFaction.Player;
         public bool IsEnemy => this.Faction == CharacterFaction.Enemy;

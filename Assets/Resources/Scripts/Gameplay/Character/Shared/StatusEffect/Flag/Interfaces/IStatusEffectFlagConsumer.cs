@@ -2,6 +2,6 @@ namespace FlameOfTheLost
 {
     public interface IStatusEffectFlagConsumer
     {
-        public void SetStatusEffectFlag(StatusEffectFlagType flagType, bool value);
+        public void SetStatusEffectFlag(StatusEffectFlagTarget flagType, bool value);
     }
 }

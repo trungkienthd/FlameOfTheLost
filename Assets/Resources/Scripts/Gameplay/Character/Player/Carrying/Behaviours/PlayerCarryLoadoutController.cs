@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class PlayerCarryLoadoutController : CharacterBehaviourBaseController, ICharacterRespawnRefreshable
+    public class PlayerCarryLoadoutController : CharacterBehaviourBaseController, ICharacterPlacementRefreshable
     {
         // --- States ---
         //  1. References
@@ -32,10 +32,7 @@ namespace FlameOfTheLost
         public bool IsInAttackWindow => this.PlayerCombatLoadoutController.IsInAttackWindow;
         public bool IsLoadoutSwapLocked => this.PlayerCombatLoadoutController.IsLoadoutSwapLocked;
 
-        //  5. ICharacterRespawnRefreshable implementation: Respawn Refresh Priority
-        public int RespawnRefreshPriority => 45;
-
-        //  6. Events
+        // --- Events ---
         public event Action<InventoryItemEntry> OnEquippedCarriableItemChanged;
         public event Action<InventoryItemEntry> OnCarriableItemEquipped;
         public event Action<InventoryItemEntry> OnCarriableItemUnequipped;
@@ -161,8 +158,9 @@ namespace FlameOfTheLost
             return true;
         }
 
-        //  3. ICharacterRespawnRefreshable implementation: Respawn Refresh
-        public void RefreshAfterRespawn(CharacterRespawnRefreshContext context)
+        //  3. ICharacterPlacementRefreshable implementation
+        public int PlacementConfigurePriority => 45;
+        public void RefreshAfterPlace(CharacterPlacementContext context)
         {
             this.SyncEquippedState();
 

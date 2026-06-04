@@ -6,11 +6,11 @@ namespace FlameOfTheLost
     [Serializable]
     public sealed class StatusEffectStatModifierContribution
     {
-        [SerializeField] private StatusEffectStatModifierTargetType _target;
+        [SerializeField] private StatusEffectStatModifierTarget _target;
         [SerializeField] private StatusEffectStatModifierOperationType _operation;
         [SerializeField] private float _value;                          // Multiply: x1.2, AddFlat: +3
 
-        public StatusEffectStatModifierTargetType Target
+        public StatusEffectStatModifierTarget Target
         {
             get => _target;
             set => _target = value;

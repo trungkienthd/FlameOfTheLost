@@ -2,6 +2,6 @@ namespace FlameOfTheLost
 {
     public interface IStatusEffectStatModifierMultiplierConsumer
     {
-        public void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType target, float multiplier);
+        public void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget target, float multiplier);
     }
 }

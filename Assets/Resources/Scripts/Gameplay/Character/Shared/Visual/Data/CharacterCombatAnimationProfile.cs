@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "CharacterCombatAnimationProfile", menuName = "Data/FlameOfTheLost/Character/Animation/Combat/CharacterCombatAnimation")]
+    [CreateAssetMenu(fileName = "CAni_New", menuName = "Data/FlameOfTheLost/Character/Shared/Visual/Animation/Combat/CombatAnimationProfile")]
     public class CharacterCombatAnimationProfile : ScriptableObject
     {
         // --- States ---

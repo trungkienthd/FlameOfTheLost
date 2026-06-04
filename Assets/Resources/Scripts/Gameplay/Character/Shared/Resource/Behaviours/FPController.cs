@@ -22,7 +22,7 @@ namespace FlameOfTheLost
         }
 
         //  2. Status Effect Stat Periodic
-        public override StatusEffectStatPeriodicTargetType PeriodicTarget => StatusEffectStatPeriodicTargetType.FP;
+        public override StatusEffectStatPeriodicTarget Target => StatusEffectStatPeriodicTarget.FP;
 
         //  3. Events
         public event Action<bool> OnSilenceStateChanged; // (isSilenced)
@@ -41,25 +41,25 @@ namespace FlameOfTheLost
         }
 
         //  2. Status Effect Stat Modifier Handlers
-        public override void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType target, float multiplier)
+        public override void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget target, float multiplier)
         {
-            if (target == StatusEffectStatModifierTargetType.FPCost)
+            if (target == StatusEffectStatModifierTarget.FPCost)
             {
                 this.CostMultiplier = multiplier;
             }
         }
-        public override void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType target, float additiveFlat)
+        public override void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget target, float additiveFlat)
         {
-            if (target == StatusEffectStatModifierTargetType.FPCost)
+            if (target == StatusEffectStatModifierTarget.FPCost)
             {
                 this.CostAdditiveFlat = additiveFlat;
             }
         }
 
         //  3. Refresh Pool for Respawning
-        public override void RefreshPoolAfterRespawn(CharacterRespawnRefreshContext context)
+        public override void RefreshPoolAfterPlace(CharacterPlacementContext context)
         {
-            base.RefreshPoolAfterRespawn(context);
+            base.RefreshPoolAfterPlace(context);
 
             this.SetSilenced(false);
         }
@@ -69,7 +69,7 @@ namespace FlameOfTheLost
         {
             if (periodic == null) return;
             if (tickAmount <= 0) return;
-            if (periodic.Target != StatusEffectStatPeriodicTargetType.FP) return;
+            if (periodic.Target != StatusEffectStatPeriodicTarget.FP) return;
 
             switch (periodic.Method)
             {

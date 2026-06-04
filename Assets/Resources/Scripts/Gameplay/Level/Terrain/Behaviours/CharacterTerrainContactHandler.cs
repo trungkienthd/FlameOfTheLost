@@ -3,13 +3,11 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterTerrainContactHandler : MonoBehaviour
+    public class CharacterTerrainContactHandler : CharacterBehaviourBaseController
     {
         // --- States ---
         //  1. Traversal type
-        [Header("Traversal")]
-        [SerializeField] private CharacterTraversalType _traversalType = CharacterTraversalType.Humanoid;
-        public CharacterTraversalType TraversalType => _traversalType;
+        public CharacterTraversalType TraversalType => this.CharacterRootController.IdentityController.TraversalType;
 
         //  2. References 
         [Header("References")]
@@ -32,8 +30,10 @@ namespace FlameOfTheLost
         private float NextTerrainStatusEffectRefreshTime => _nextTerrainStatusEffectRefreshTime;
 
         // --- Unity Callbacks ---
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             if (this.StatusEffectController == null) _statusEffectController = this.GetComponentInChildren<StatusEffectController>();
             if (this.StatusEffectApplicationHandler == null) _statusEffectApplicationHandler = this.GetComponentInChildren<CharacterCombatStatusEffectApplicationHandler>();
         }
@@ -118,7 +118,7 @@ namespace FlameOfTheLost
 
             TerrainProfile terrainProfile = this.CurrentTerrainCtrl.TerrainProfile;
 
-            if (!terrainProfile.TryGetRule(_traversalType, out TerrainStatusEffectRule rule)) return;
+            if (!terrainProfile.TryGetRule(this.TraversalType, out TerrainStatusEffectRule rule)) return;
             if (rule == null) return;
             if (!rule.CanEnter) return;
 

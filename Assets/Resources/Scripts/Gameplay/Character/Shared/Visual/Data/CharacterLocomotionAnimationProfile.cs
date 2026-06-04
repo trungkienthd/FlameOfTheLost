@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "CharacterLocomotionAnimationProfile", menuName = "Data/FlameOfTheLost/Character/Animation/Locomotion/CharacterLocomotionAnimation")]
+    [CreateAssetMenu(fileName = "LAni_New", menuName = "Data/FlameOfTheLost/Character/Shared/Visual/Animation/Locomotion/CharacterLocomotionAnimationProfile")]
     public class CharacterLocomotionAnimationProfile : ScriptableObject
     {
         [Header("Default Locomotion")]

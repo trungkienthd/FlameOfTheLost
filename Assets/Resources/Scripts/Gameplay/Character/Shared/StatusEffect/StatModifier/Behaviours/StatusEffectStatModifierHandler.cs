@@ -34,11 +34,8 @@ namespace FlameOfTheLost
         }
 
         //  2. Aggregate Map
-        [SerializeField] private StatModifierTargetTypeToAccumulatorDictionary _aggregateMap = new StatModifierTargetTypeToAccumulatorDictionary();
-        private StatModifierTargetTypeToAccumulatorDictionary AggregateMap 
-        {
-            get => _aggregateMap;
-        }
+        [Header("SE Modifier Aggregate Map (Runtime)")]
+        [SerializeField] private StatusEffectStatModifierTargetToAccumulatorDictionary _modifierAggregateMap = new StatusEffectStatModifierTargetToAccumulatorDictionary();
 
         // --- Unity Callbacks ---
         private void Awake()
@@ -80,7 +77,7 @@ namespace FlameOfTheLost
             this.ClearAggregateMap();
 
             // (Target, Operation) -> accumulated bucket state
-            var buckets = new Dictionary<(StatusEffectStatModifierTargetType target, StatusEffectStatModifierOperationType operation), StatusEffectStatModifierBucketState>();
+            var buckets = new Dictionary<(StatusEffectStatModifierTarget target, StatusEffectStatModifierOperationType operation), StatusEffectStatModifierBucketState>();
 
             foreach (var runtimeStatusEffect in this.StatusEffectController.RuntimeStatusEffects)
             {
@@ -175,15 +172,15 @@ namespace FlameOfTheLost
         //      3.1. Clear existing aggregates
         private void ClearAggregateMap()
         {
-            this.AggregateMap.Clear();
+            _modifierAggregateMap.Clear();
         }
         //      3.2. Accumulate new modifier into aggregate map
-        private void Accumulate(StatusEffectStatModifierTargetType target, StatusEffectStatModifierOperationType operation, float value)
+        private void Accumulate(StatusEffectStatModifierTarget target, StatusEffectStatModifierOperationType operation, float value)
         {
-            if (!this.AggregateMap.TryGetValue(target, out var channel))
+            if (!_modifierAggregateMap.TryGetValue(target, out var channel))
             {
                 channel = new StatusEffectStatModifierAccumulator();
-                this.AggregateMap[target] = channel;
+                _modifierAggregateMap[target] = channel;
             }
 
             if      (operation == StatusEffectStatModifierOperationType.Multiply)   channel.TotalMultiplier     *= Mathf.Max(0f, value);
@@ -206,62 +203,62 @@ namespace FlameOfTheLost
         //     4.1. Individual Apply Methods: Movement Speed
         private void ApplyMovementSpeedScaleModifiers()
         {
-            float rawScale = this.GetMultiplier(StatusEffectStatModifierTargetType.MovementSpeedScale);
+            float rawScale = this.GetMultiplier(StatusEffectStatModifierTarget.MovementSpeedScale);
 
             // Clamp using system config if available
-            float clampedScale = this.ClampMultiplier(StatusEffectStatModifierTargetType.MovementSpeedScale, rawScale);
+            float clampedScale = this.ClampMultiplier(StatusEffectStatModifierTarget.MovementSpeedScale, rawScale);
 
             // Push to all multiplier consumers (MovementHandler will pick it up via target filter)
             for (int i = 0; i < this.MultiplierConsumers.Count; i++)
-                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType.MovementSpeedScale, clampedScale);
+                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget.MovementSpeedScale, clampedScale);
         }
         //     4.2. Individual Apply Methods: Damage/Knockback Dealt
         private void ApplyDamageAndKnockbackDealtModifiers()
         {
-            float rawDmgMul = this.GetMultiplier(StatusEffectStatModifierTargetType.DamageDealt);
-            float rawDmgAdd = this.GetAdditiveFlat(StatusEffectStatModifierTargetType.DamageDealt);
-            float rawKbMul = this.GetMultiplier(StatusEffectStatModifierTargetType.KnockbackDealt);
-            float rawKbAdd = this.GetAdditiveFlat(StatusEffectStatModifierTargetType.KnockbackDealt);
+            float rawDmgMul = this.GetMultiplier(StatusEffectStatModifierTarget.DamageDealt);
+            float rawDmgAdd = this.GetAdditiveFlat(StatusEffectStatModifierTarget.DamageDealt);
+            float rawKbMul = this.GetMultiplier(StatusEffectStatModifierTarget.KnockbackDealt);
+            float rawKbAdd = this.GetAdditiveFlat(StatusEffectStatModifierTarget.KnockbackDealt);
 
-            float dmgMul = this.ClampMultiplier(StatusEffectStatModifierTargetType.DamageDealt, rawDmgMul);
-            float dmgAdd = this.ClampAddFlat(StatusEffectStatModifierTargetType.DamageDealt, rawDmgAdd);
-            float kbMul = this.ClampMultiplier(StatusEffectStatModifierTargetType.KnockbackDealt, rawKbMul);
-            float kbAdd = this.ClampAddFlat(StatusEffectStatModifierTargetType.KnockbackDealt, rawKbAdd);
+            float dmgMul = this.ClampMultiplier(StatusEffectStatModifierTarget.DamageDealt, rawDmgMul);
+            float dmgAdd = this.ClampAddFlat(StatusEffectStatModifierTarget.DamageDealt, rawDmgAdd);
+            float kbMul = this.ClampMultiplier(StatusEffectStatModifierTarget.KnockbackDealt, rawKbMul);
+            float kbAdd = this.ClampAddFlat(StatusEffectStatModifierTarget.KnockbackDealt, rawKbAdd);
 
             for (int i = 0; i < this.MultiplierConsumers.Count; i++)
             {
-                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType.DamageDealt, dmgMul);
-                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType.KnockbackDealt, kbMul);
+                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget.DamageDealt, dmgMul);
+                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget.KnockbackDealt, kbMul);
             }
             for (int i = 0; i < this.AdditiveConsumers.Count; i++)
             {
-                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType.DamageDealt, dmgAdd);
-                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType.KnockbackDealt, kbAdd);
+                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget.DamageDealt, dmgAdd);
+                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget.KnockbackDealt, kbAdd);
             }
         }
         //     4.3. Individual Apply Methods: Damage/Knockback Taken
         private void ApplyDamageAndKnockbackTakenModifiers()
         {
-            float rawDmgMul = this.GetMultiplier(StatusEffectStatModifierTargetType.DamageReceived);
-            float rawDmgAdd = this.GetAdditiveFlat(StatusEffectStatModifierTargetType.DamageReceived);
-            float rawKbMul = this.GetMultiplier(StatusEffectStatModifierTargetType.KnockbackReceived);
-            float rawKbAdd = this.GetAdditiveFlat(StatusEffectStatModifierTargetType.KnockbackReceived);
+            float rawDmgMul = this.GetMultiplier(StatusEffectStatModifierTarget.DamageReceived);
+            float rawDmgAdd = this.GetAdditiveFlat(StatusEffectStatModifierTarget.DamageReceived);
+            float rawKbMul = this.GetMultiplier(StatusEffectStatModifierTarget.KnockbackReceived);
+            float rawKbAdd = this.GetAdditiveFlat(StatusEffectStatModifierTarget.KnockbackReceived);
 
-            float dmgMul = this.ClampMultiplier(StatusEffectStatModifierTargetType.DamageReceived, rawDmgMul);
-            float dmgAdd = this.ClampAddFlat(StatusEffectStatModifierTargetType.DamageReceived, rawDmgAdd);
-            float kbMul = this.ClampMultiplier(StatusEffectStatModifierTargetType.KnockbackReceived, rawKbMul);
-            float kbAdd = this.ClampAddFlat(StatusEffectStatModifierTargetType.KnockbackReceived, rawKbAdd);
+            float dmgMul = this.ClampMultiplier(StatusEffectStatModifierTarget.DamageReceived, rawDmgMul);
+            float dmgAdd = this.ClampAddFlat(StatusEffectStatModifierTarget.DamageReceived, rawDmgAdd);
+            float kbMul = this.ClampMultiplier(StatusEffectStatModifierTarget.KnockbackReceived, rawKbMul);
+            float kbAdd = this.ClampAddFlat(StatusEffectStatModifierTarget.KnockbackReceived, rawKbAdd);
 
             for (int i = 0; i < this.MultiplierConsumers.Count; i++)
             {
-                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType.DamageReceived, dmgMul);
-                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType.KnockbackReceived, kbMul);
+                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget.DamageReceived, dmgMul);
+                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget.KnockbackReceived, kbMul);
             }
 
             for (int i = 0; i < this.AdditiveConsumers.Count; i++)
             {
-                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType.DamageReceived, dmgAdd);
-                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType.KnockbackReceived, kbAdd);
+                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget.DamageReceived, dmgAdd);
+                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget.KnockbackReceived, kbAdd);
             }
         }
         //     4.4. Individual Apply Methods: Virtual HP Granted
@@ -269,7 +266,7 @@ namespace FlameOfTheLost
         {
             if (this.VirtualHPGrantedConsumer != null)
             {
-                float rawVirtualHPGranted = this.GetAdditiveFlat(StatusEffectStatModifierTargetType.VirtualHPGranted);
+                float rawVirtualHPGranted = this.GetAdditiveFlat(StatusEffectStatModifierTarget.VirtualHPGranted);
 
                 // Clamp and convert to int
                 int clampedVirtualHPGranted = Mathf.Max(0, Mathf.RoundToInt(rawVirtualHPGranted));
@@ -280,62 +277,62 @@ namespace FlameOfTheLost
         //     4.5. Individual Apply Methods: FP Cost & Regen
         private void ApplyFPCostModifiers()
         {
-            float rawCostMul = this.GetMultiplier(StatusEffectStatModifierTargetType.FPCost);
-            float costMul = this.ClampMultiplier(StatusEffectStatModifierTargetType.FPCost, rawCostMul);
-            float costAdd = this.GetAdditiveFlat(StatusEffectStatModifierTargetType.FPCost);
+            float rawCostMul = this.GetMultiplier(StatusEffectStatModifierTarget.FPCost);
+            float costMul = this.ClampMultiplier(StatusEffectStatModifierTarget.FPCost, rawCostMul);
+            float costAdd = this.GetAdditiveFlat(StatusEffectStatModifierTarget.FPCost);
             for (int i = 0; i < this.MultiplierConsumers.Count; i++)
             {
-                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType.FPCost, costMul);
+                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget.FPCost, costMul);
             }
             for (int i = 0; i < this.AdditiveConsumers.Count; i++)
             {
-                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType.FPCost, costAdd);
+                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget.FPCost, costAdd);
             }
         }
         //    4.6. Individual Apply Methods: Stamina Cost & Regen
         private void ApplyStaminaCostModifiers()
         {
-            float rawCostMul = this.GetMultiplier(StatusEffectStatModifierTargetType.StaminaCost);
-            float costMul = this.ClampMultiplier(StatusEffectStatModifierTargetType.StaminaCost, rawCostMul);
-            float costAdd = this.GetAdditiveFlat(StatusEffectStatModifierTargetType.StaminaCost);
+            float rawCostMul = this.GetMultiplier(StatusEffectStatModifierTarget.StaminaCost);
+            float costMul = this.ClampMultiplier(StatusEffectStatModifierTarget.StaminaCost, rawCostMul);
+            float costAdd = this.GetAdditiveFlat(StatusEffectStatModifierTarget.StaminaCost);
             for (int i = 0; i < this.MultiplierConsumers.Count; i++)
             {
-                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType.StaminaCost, costMul);
+                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget.StaminaCost, costMul);
             }
             for (int i = 0; i < this.AdditiveConsumers.Count; i++)
             {
-                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType.StaminaCost, costAdd);
+                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget.StaminaCost, costAdd);
             }
         }
         //    4.7. Individual Apply Methods: Stamina Regen Rate & Delay
         private void ApplyStaminaRegenRateModifiers()
         {
-            float regenMul = this.GetMultiplier(StatusEffectStatModifierTargetType.StaminaRegenRate);
-            float rawRegenAdd = this.GetAdditiveFlat(StatusEffectStatModifierTargetType.StaminaRegenRate);
-            float regenAdd = this.ClampAddFlat(StatusEffectStatModifierTargetType.StaminaRegenRate, rawRegenAdd);
+            float regenMul = this.GetMultiplier(StatusEffectStatModifierTarget.StaminaRegenRate);
+            float rawRegenAdd = this.GetAdditiveFlat(StatusEffectStatModifierTarget.StaminaRegenRate);
+            float regenAdd = this.ClampAddFlat(StatusEffectStatModifierTarget.StaminaRegenRate, rawRegenAdd);
             for (int i = 0; i < this.MultiplierConsumers.Count; i++)
             {
-                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTargetType.StaminaRegenRate, regenMul);
+                this.MultiplierConsumers[i]?.SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget.StaminaRegenRate, regenMul);
             }
             for (int i = 0; i < this.AdditiveConsumers.Count; i++)
             {
-                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType.StaminaRegenRate, regenAdd);
+                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget.StaminaRegenRate, regenAdd);
             }
         }
         //    4.8. Individual Apply Methods: Stamina Regen Delay Delta
         private void ApplyStaminaRegenDelayDelta()
         {
-            float rawDelayAdd = this.GetAdditiveFlat(StatusEffectStatModifierTargetType.StaminaRegenDelayDelta);
-            float delayAdd = this.ClampAddFlat(StatusEffectStatModifierTargetType.StaminaRegenDelayDelta, rawDelayAdd);
+            float rawDelayAdd = this.GetAdditiveFlat(StatusEffectStatModifierTarget.StaminaRegenDelayDelta);
+            float delayAdd = this.ClampAddFlat(StatusEffectStatModifierTarget.StaminaRegenDelayDelta, rawDelayAdd);
             for (int i = 0; i < this.AdditiveConsumers.Count; i++)
             {
-                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType.StaminaRegenDelayDelta, delayAdd);
+                this.AdditiveConsumers[i]?.SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget.StaminaRegenDelayDelta, delayAdd);
             }
         }
 
         //  5. Aggregate read helpers
         //    5.1. Multiplier Helper
-        private float GetMultiplier(StatusEffectStatModifierTargetType target)
+        private float GetMultiplier(StatusEffectStatModifierTarget target)
         {
             if (!StatusEffectStatModifierUtility.ValidateOperation(target, StatusEffectStatModifierOperationType.Multiply))
             {
@@ -343,10 +340,10 @@ namespace FlameOfTheLost
                 return 1f;
             }
 
-            return this.AggregateMap.TryGetValue(target, out var channel) ? channel.TotalMultiplier : 1f;
+            return _modifierAggregateMap.TryGetValue(target, out var channel) ? channel.TotalMultiplier : 1f;
         }
         //    5.2. Additive Helper
-        private float GetAdditiveFlat(StatusEffectStatModifierTargetType target)
+        private float GetAdditiveFlat(StatusEffectStatModifierTarget target)
         {
             if (!StatusEffectStatModifierUtility.ValidateOperation(target, StatusEffectStatModifierOperationType.AddFlat))
             {
@@ -354,33 +351,33 @@ namespace FlameOfTheLost
                 return 0f;
             }
 
-            return this.AggregateMap.TryGetValue(target, out var channel) ? channel.TotalAdditiveFlat : 0f;
+            return _modifierAggregateMap.TryGetValue(target, out var channel) ? channel.TotalAdditiveFlat : 0f;
         }
         //     5.3. Clamp Multiplier Helper
-        private float ClampMultiplier(StatusEffectStatModifierTargetType target, float raw)
+        private float ClampMultiplier(StatusEffectStatModifierTarget target, float raw)
         {
             var guardConfig = this.StatusEffectController?.GuardConfig;
             if (guardConfig == null) return Mathf.Max(0f, raw);
 
             switch (target)
             {
-                case StatusEffectStatModifierTargetType.MovementSpeedScale:
+                case StatusEffectStatModifierTarget.MovementSpeedScale:
                     return Mathf.Clamp(raw, guardConfig.MinMovementSpeedScale, guardConfig.MaxMovementSpeedScale);
 
-                case StatusEffectStatModifierTargetType.DamageReceived:
+                case StatusEffectStatModifierTarget.DamageReceived:
                     return Mathf.Max(guardConfig.MinDamageTakenScale, raw);
 
-                case StatusEffectStatModifierTargetType.DamageDealt:
+                case StatusEffectStatModifierTarget.DamageDealt:
                     return Mathf.Max(guardConfig.MinDamageDealtScale, raw);
 
-                case StatusEffectStatModifierTargetType.KnockbackReceived:
+                case StatusEffectStatModifierTarget.KnockbackReceived:
                     return Mathf.Max(guardConfig.MinKnockbackTakenScale, raw);
 
-                case StatusEffectStatModifierTargetType.KnockbackDealt:
+                case StatusEffectStatModifierTarget.KnockbackDealt:
                     return Mathf.Max(guardConfig.MinKnockbackDealtScale, raw);
 
-                case StatusEffectStatModifierTargetType.FPCost:
-                case StatusEffectStatModifierTargetType.StaminaCost:
+                case StatusEffectStatModifierTarget.FPCost:
+                case StatusEffectStatModifierTarget.StaminaCost:
                     return Mathf.Max(guardConfig.MinCostScale, raw);
 
                 default:
@@ -388,7 +385,7 @@ namespace FlameOfTheLost
             }
         }
         //     5.4. Clamp Additive Helper
-        private float ClampAddFlat(StatusEffectStatModifierTargetType target, float raw)
+        private float ClampAddFlat(StatusEffectStatModifierTarget target, float raw)
         {
             var guardConfig = this.StatusEffectController?.GuardConfig;
             if (guardConfig == null) return raw;
@@ -396,8 +393,8 @@ namespace FlameOfTheLost
             // Regen channels: optionally disallow negative
             if (!guardConfig.AllowNegativeRegen)
             {
-                if (target == StatusEffectStatModifierTargetType.StaminaRegenRate && raw < 0f) raw = 0f;
-                if (target == StatusEffectStatModifierTargetType.StaminaRegenDelayDelta && raw < 0f) raw = 0f;
+                if (target == StatusEffectStatModifierTarget.StaminaRegenRate && raw < 0f) raw = 0f;
+                if (target == StatusEffectStatModifierTarget.StaminaRegenDelayDelta && raw < 0f) raw = 0f;
             }
             return raw;
         }

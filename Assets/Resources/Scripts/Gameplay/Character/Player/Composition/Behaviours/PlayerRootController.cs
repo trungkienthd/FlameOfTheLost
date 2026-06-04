@@ -11,7 +11,6 @@ namespace FlameOfTheLost
         public PlayerInteractionHandler PlayerInteractionHandler => _playerInteractionHandler;
 
         public PlayerInputHandler PlayerInputHandler => base.InputHandler as PlayerInputHandler;
-        public PlayerRespawnHandler PlayerRespawnHandler => base.RespawnHandler as PlayerRespawnHandler;
 
         protected override void CacheReferences()
         {
@@ -28,11 +27,6 @@ namespace FlameOfTheLost
             if (this.PlayerInputHandler == null)
             {
                 Debug.LogError($"{this.gameObject.name}.{this.GetType().Name} InputHandler must be a PlayerInputHandler.", this);
-            }
-
-            if (this.PlayerRespawnHandler == null)
-            {
-                Debug.LogError($"{this.gameObject.name}.{this.GetType().Name} RespawnHandler must be a PlayerRespawnHandler.", this);
             }
 
             if (this.PlayerCarryLoadoutController == null)

@@ -23,10 +23,10 @@ namespace FlameOfTheLost
         }
 
         //  2. Aggregated Dictionary: Flag => IsActive (boolean)
-        private readonly Dictionary<StatusEffectFlagType, bool> _flagActiveMap = new();
-        private Dictionary<StatusEffectFlagType, bool> FlagActiveMap => _flagActiveMap;
+        [Header("SE Flag Map (Runtime)")]
+        [SerializeField] private StatusEffectFlagActiveMap _flagActiveMap = new();
 
-        //  3. Events
+        // --- Events ---
         public event Action OnFlagsRecomputed;
 
         // --- Unity Callbacks ---
@@ -63,15 +63,15 @@ namespace FlameOfTheLost
             this.Recompute();
         }
 
-        public bool HasFlag(StatusEffectFlagType flag)
+        public bool HasFlag(StatusEffectFlagTarget flag)
         {
-            if (flag == StatusEffectFlagType.None) return false;
-            return this.FlagActiveMap.TryGetValue(flag, out bool isActive) && isActive;
+            if (flag == StatusEffectFlagTarget.None) return false;
+            return _flagActiveMap.TryGetValue(flag, out bool isActive) && isActive;
         }
 
         public void ClearAndApply()
         {
-            this.FlagActiveMap.Clear();
+            _flagActiveMap.Clear();
 
             this.ApplyAllKnownFlagsAsInactiveToConsumers();
 
@@ -80,7 +80,7 @@ namespace FlameOfTheLost
 
         public void Recompute()
         {
-            this.FlagActiveMap.Clear();
+            _flagActiveMap.Clear();
 
             if (this.StatusEffectController == null)
             {
@@ -108,9 +108,9 @@ namespace FlameOfTheLost
                 {
                     if (flag == null) continue;
                     if (!flag.IsEnabled) continue;
-                    if (flag.Flag == StatusEffectFlagType.None) continue;
+                    if (flag.Flag == StatusEffectFlagTarget.None) continue;
 
-                    this.FlagActiveMap[flag.Flag] = true;
+                    _flagActiveMap[flag.Flag] = true;
                 }
             }
 
@@ -141,11 +141,11 @@ namespace FlameOfTheLost
 
             foreach (var consumer in this.FlagConsumers)
             {
-                foreach (StatusEffectFlagType flagType in Enum.GetValues(typeof(StatusEffectFlagType)))
+                foreach (StatusEffectFlagTarget flagType in Enum.GetValues(typeof(StatusEffectFlagTarget)))
                 {
-                    if (flagType == StatusEffectFlagType.None) continue;
+                    if (flagType == StatusEffectFlagTarget.None) continue;
 
-                    bool isActive = this.FlagActiveMap.TryGetValue(flagType, out bool active) && active;
+                    bool isActive = _flagActiveMap.TryGetValue(flagType, out bool active) && active;
                     consumer.SetStatusEffectFlag(flagType, isActive);
                 }
             }
@@ -157,9 +157,9 @@ namespace FlameOfTheLost
 
             foreach (var consumer in this.FlagConsumers)
             {
-                foreach (StatusEffectFlagType flagType in Enum.GetValues(typeof(StatusEffectFlagType)))
+                foreach (StatusEffectFlagTarget flagType in Enum.GetValues(typeof(StatusEffectFlagTarget)))
                 {
-                    if (flagType == StatusEffectFlagType.None) continue;
+                    if (flagType == StatusEffectFlagTarget.None) continue;
 
                     consumer.SetStatusEffectFlag(flagType, false);
                 }

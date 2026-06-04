@@ -2,6 +2,6 @@ namespace FlameOfTheLost
 {
     public interface IStatusEffectStatModifierAdditiveConsumer
     {
-        public void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTargetType target, float additiveFlat);
+        public void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget target, float additiveFlat);
     }
 }

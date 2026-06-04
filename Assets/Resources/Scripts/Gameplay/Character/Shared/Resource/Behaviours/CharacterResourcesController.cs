@@ -8,7 +8,7 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(StaminaController))]
     public class CharacterResourcesController : CharacterBehaviourBaseController, 
         ICharacterResourcesGateContext,
-        ICharacterRespawnRefreshable
+        ICharacterPlacementRefreshable
     {
         // --- States ---
         //  1. References
@@ -26,9 +26,6 @@ namespace FlameOfTheLost
 
         private readonly Dictionary<int, ResourceReservationRecord> _reservations = new Dictionary<int, ResourceReservationRecord>(32);
         public Dictionary<int, ResourceReservationRecord> ReservationRecords => _reservations;
-
-        //  3. ICharacterRespawnRefreshable implementation: Respawn Refresh
-        public int RespawnRefreshPriority => 10;
 
         // --- Public APIs ---
         //  1. Gate + spend in one call for OnStart costs. If cost.CostType is OnHit/OnEnd, this will reserve (spend) instead of only spending at end.
@@ -98,14 +95,16 @@ namespace FlameOfTheLost
             return this.ReservationRecords.Remove(reservationID);
         }
 
-        //  4. ICharacterRespawnRefreshable implementation: on respawn, clear all reservations (no refunds).
-        public void RefreshAfterRespawn(CharacterRespawnRefreshContext context)
+        //  4. ICharacterPlacementRefreshable implementation
+        public int PlacementConfigurePriority => 10;
+        public void RefreshAfterPlace(CharacterPlacementContext context)
         {
+            // Clear all reservations(no refunds).
             this.ClearAllResourceReservations();
 
-            this.HP?.RefreshPoolAfterRespawn(context);
-            this.FP?.RefreshPoolAfterRespawn(context);
-            this.Stamina?.RefreshPoolAfterRespawn(context);
+            this.HP?.RefreshPoolAfterPlace(context);
+            this.FP?.RefreshPoolAfterPlace(context);
+            this.Stamina?.RefreshPoolAfterPlace(context);
         }
 
         // --- Helpers ---

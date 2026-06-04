@@ -4,7 +4,7 @@ namespace FlameOfTheLost
     {
         private const int DEFAULT_SPAWN_POINT_ID = 1;
 
-        public CharacterSpawnSourceType SpawnSourceType { get; private set; } = CharacterSpawnSourceType.DefaultSpawnPoint;
+        public CharacterPlacementSourceType SpawnSourceType { get; private set; } = CharacterPlacementSourceType.DefaultSpawnPoint;
 
         public int ActiveSpawnPointId { get; private set; } = DEFAULT_SPAWN_POINT_ID;
 
@@ -18,7 +18,7 @@ namespace FlameOfTheLost
         {
             if (spawnPointId < 0) return;
             
-            this.SpawnSourceType = CharacterSpawnSourceType.DefaultSpawnPoint;
+            this.SpawnSourceType = CharacterPlacementSourceType.DefaultSpawnPoint;
             this.ActiveSpawnPointId = spawnPointId;
             this.ActiveCheckpointId = string.Empty;
         }
@@ -28,14 +28,14 @@ namespace FlameOfTheLost
         {
             if (string.IsNullOrWhiteSpace(checkpointId)) return;
             
-            this.SpawnSourceType = CharacterSpawnSourceType.Checkpoint;
+            this.SpawnSourceType = CharacterPlacementSourceType.Checkpoint;
             this.ActiveCheckpointId = checkpointId;
         }
 
         public void ClearCheckpointSpawn()
         {
             this.ActiveCheckpointId = string.Empty;
-            this.SpawnSourceType = CharacterSpawnSourceType.DefaultSpawnPoint;
+            this.SpawnSourceType = CharacterPlacementSourceType.DefaultSpawnPoint;
         }
     }
 }
