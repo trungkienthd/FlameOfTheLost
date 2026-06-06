@@ -243,7 +243,7 @@ namespace FlameOfTheLost
         }
 
         //  3. Hitbox Events
-        public void OnHitConfirmedFromHitbox(RuntimeSkill runtimeSkill, GameObject targetGameObject, GameObject hitboxGameObject)
+        public void OnHitConfirmedFromHitbox(RuntimeSkill runtimeSkill, CharacterRootController target, GameObject hitboxGameObject)
         {
             if (runtimeSkill == null) return;
 
@@ -251,7 +251,7 @@ namespace FlameOfTheLost
             this.CombatResourcesHandler?.ResolveOnHitConfirmed(skillStyle: runtimeSkill.Style);
 
             // b) Apply skill status effects on hit (self + target), respecting limits
-            this.CombatStatusEffectHandler.ApplySkillStatusEffectsOnHitConfirmed(runtimeSkill, targetGameObject, hitboxGameObject);
+            this.CombatStatusEffectHandler.ApplySkillStatusEffectsOnHitConfirmed(runtimeSkill, target, hitboxGameObject);
         }
 
         public void OnHitboxDisabledWithoutHit(RuntimeSkill runtimeSkill)

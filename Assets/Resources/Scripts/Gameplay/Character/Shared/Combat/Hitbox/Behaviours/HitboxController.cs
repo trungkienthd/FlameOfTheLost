@@ -66,7 +66,7 @@ namespace FlameOfTheLost
         //      If false: first valid target consumes this hitbox (your current behavior).
         //      If true: allow multiple targets, but still only once per target per enable window.
 
-        // --- Unity methods
+        // --- Unity Callbacks ---
         protected virtual void Awake()
         {
             var collider = this.GetComponent<Collider2D>();
@@ -78,7 +78,7 @@ namespace FlameOfTheLost
             if (this.DamageConfigurator == null) Debug.LogError($"[{this.gameObject.name}.HitboxController] Missing IDamageConfigurator on the same GameObject.", this);
         }
 
-        // --- Public APIs
+        // --- Public APIs ---
         //      1.1 Binding Context
         public virtual void BindHitContext(CharacterCombatController attackerCombatController, RuntimeSkill runtimeSkill)
         {
@@ -94,12 +94,12 @@ namespace FlameOfTheLost
 
         //  2. Notification
         //      2.1. Notify the Hit, called by DamageReceivingHandler (on target) when a valid hit actually happened
-        public virtual void NotifyHitConfirmed(GameObject targetGameObject)
+        public virtual void NotifyHitConfirmed(CharacterRootController target)
         {
             if (!this.IsActive) return;
 
             this.HasConfirmedHit = true;
-            this.ForwardHitConfirmedToCombat(targetGameObject);
+            this.ForwardHitConfirmedToCombat(target);
         }
 
         //      2.2. Notify disabled before hit
@@ -151,12 +151,12 @@ namespace FlameOfTheLost
         //  4. Register Hits (Call before applying damage). Returns:
         //      - True if this hit should be processed (damage + notify).
         //      - False = already hit this target in this enable window.
-        public bool TryRegisterHitTarget(GameObject targetGameObject)
+        public bool TryRegisterHitTarget(CharacterRootController target)
         {
             if (!this.IsActive) return false;
-            if (targetGameObject == null) return false;
+            if (target == null) return false;
 
-            int targetID = targetGameObject.GetInstanceID();
+            int targetID = target.GetInstanceID();
 
             // Already hit this target during this enable window
             if (this.HitTargetIDs.Contains(targetID)) return false;
@@ -169,8 +169,8 @@ namespace FlameOfTheLost
             return true;
         }
 
-        // --- Helpers
-        protected void ForwardHitConfirmedToCombat(GameObject targetGameObject)
+        // --- Helpers ---
+        protected void ForwardHitConfirmedToCombat(CharacterRootController target)
         {
             if (this.AttackerCombatController == null) return;
             if (this.ActiveRuntimeSkill == null) return;
@@ -178,7 +178,7 @@ namespace FlameOfTheLost
             this.AttackerCombatController.OnHitConfirmedFromHitbox
             (
                 runtimeSkill: this.ActiveRuntimeSkill,
-                targetGameObject: targetGameObject,
+                target: target,
                 hitboxGameObject: this.gameObject
             );
         }

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class StatusEffectStatModifierHandler : MonoBehaviour
+    public class StatusEffectStatModifierHandler : FOTLMonoBehaviour
     {
         // --- States ---
         //  1. References
@@ -38,12 +39,11 @@ namespace FlameOfTheLost
         [SerializeField] private StatusEffectStatModifierTargetToAccumulatorDictionary _modifierAggregateMap = new StatusEffectStatModifierTargetToAccumulatorDictionary();
 
         // --- Unity Callbacks ---
-        private void Awake()
+        private void OnDisable()
         {
-            if (this.StatusEffectController == null) this.StatusEffectController = this.GetComponent<StatusEffectController>();
-
-            this.CacheConsumers();
-
+            if (this.StatusEffectController == null) return;
+            this.StatusEffectController.OnRuntimeListChanged -= this.HandleRuntimeChanged;
+            this.StatusEffectController.OnRuntimeValuesChanged -= this.HandleRuntimeChanged;
         }
         private void OnDestroy()
         {
@@ -53,7 +53,6 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs --- 
-
         public void Bind(StatusEffectController controller)
         {
             this.StatusEffectController = controller;
@@ -67,7 +66,7 @@ namespace FlameOfTheLost
                 this.StatusEffectController.OnRuntimeValuesChanged  += this.HandleRuntimeChanged;
             }
 
-            this.CacheConsumers();
+            this.RegisterConsumers();
             this.Recompute();
         }
         public void Recompute()
@@ -146,20 +145,21 @@ namespace FlameOfTheLost
 
         // --- Helpers ---
         //  1. Cache all modifier consumers on this GameObject and its children
-        private void CacheConsumers()
+        private void RegisterConsumers()
         {
             this.MultiplierConsumers = new List<IStatusEffectStatModifierMultiplierConsumer>();
             this.AdditiveConsumers = new List<IStatusEffectStatModifierAdditiveConsumer>();
+            this.VirtualHPGrantedConsumer = null;
 
-            // Scan only once through MonoBehaviours
-            var behaviours = this.GetComponentsInChildren<MonoBehaviour>(true);
+            if (this.StatusEffectController == null) return;
+
+            var behaviours = this.StatusEffectController.GetStatusEffectConsumerBehaviours();
             foreach (var behaviour in behaviours)
             {
                 if (behaviour is IStatusEffectStatModifierMultiplierConsumer    multiplierConsumer) this.MultiplierConsumers.Add(multiplierConsumer);
                 if (behaviour is IStatusEffectStatModifierAdditiveConsumer      additiveConsumer)   this.AdditiveConsumers.Add(additiveConsumer);
+                if (behaviour is IVirtualHPGrantedConsumer                      virtualHPConsumer)  this.VirtualHPGrantedConsumer = virtualHPConsumer;
             }
-
-            this.VirtualHPGrantedConsumer = this.GetComponentInChildren<IVirtualHPGrantedConsumer>(true);
         }
 
         //  2. Event Handlers

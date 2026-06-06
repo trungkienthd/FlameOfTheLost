@@ -19,7 +19,7 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _defaultProvisionType: 0
   _attachableWeaponTypes: 06000000
-  _damageAmount: 5
+  _damageAmount: 2
   _knockbackForce: 0
   _resourceCost:
     _hp: 0

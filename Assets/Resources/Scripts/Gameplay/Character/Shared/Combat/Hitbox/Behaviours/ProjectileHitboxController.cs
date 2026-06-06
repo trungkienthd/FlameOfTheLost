@@ -67,9 +67,9 @@ namespace FlameOfTheLost
             }
         }
 
-        public override void NotifyHitConfirmed(GameObject targetGameObject)
+        public override void NotifyHitConfirmed(CharacterRootController target)
         {
-            base.NotifyHitConfirmed(targetGameObject);
+            base.NotifyHitConfirmed(target);
 
             if (this.DestroyOnHit)
             {

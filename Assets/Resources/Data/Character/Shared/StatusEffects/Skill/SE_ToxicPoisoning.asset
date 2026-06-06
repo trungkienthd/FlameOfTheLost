@@ -29,9 +29,9 @@ MonoBehaviour:
     _target: 0
     _method: 0
     _amountPerSecond: 1
-    _tickInterval: 0.5
+    _tickInterval: 1
     _treatHPDamageAsTrueDamage: 0
-    _trueDamageBypassVirtualHP: 0
+    _trueDamageBypassVirtualHP: 1
     _staminaDrainTriggersRegenDelay: 0
   _vfxClip: {fileID: 0}
   _vfxSortingOrderOffset: 5

@@ -315,6 +315,16 @@ namespace FlameOfTheLost
             this.ForceRecomputeAll();
         }
 
+        //  6. Expose consumer behaviours for accessing in handlers
+        public MonoBehaviour[] GetStatusEffectConsumerBehaviours()
+        {
+            Transform searchRoot = this.CharacterRootController != null
+                ? this.CharacterRootController.transform
+                : this.transform.root;
+
+            return searchRoot.GetComponentsInChildren<MonoBehaviour>(true);
+        }
+
         // --- Helpers ---
         //  0. Runtime ID Sync (Start)
         private void SyncNextRuntimeID()

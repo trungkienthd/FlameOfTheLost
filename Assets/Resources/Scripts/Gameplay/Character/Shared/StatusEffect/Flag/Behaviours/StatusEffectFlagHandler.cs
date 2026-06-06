@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class StatusEffectFlagHandler : MonoBehaviour
+    public class StatusEffectFlagHandler : FOTLMonoBehaviour
     {
         // --- States ---
         //  1. References
@@ -30,13 +30,13 @@ namespace FlameOfTheLost
         public event Action OnFlagsRecomputed;
 
         // --- Unity Callbacks ---
-        private void Awake()
-        {
-            if (this.StatusEffectController == null) this.StatusEffectController = this.GetComponent<StatusEffectController>();
-
-            this.CacheConsumers();
-        }
         private void OnDisable()
+        {
+            if (this.StatusEffectController == null) return;
+            this.StatusEffectController.OnRuntimeListChanged -= this.HandleRuntimeChanged;
+            this.StatusEffectController.OnRuntimeValuesChanged -= this.HandleRuntimeChanged;
+        }
+        private void OnDestroy()
         {
             if (this.StatusEffectController == null) return;
             this.StatusEffectController.OnRuntimeListChanged -= this.HandleRuntimeChanged;
@@ -59,7 +59,7 @@ namespace FlameOfTheLost
             this.StatusEffectController.OnRuntimeListChanged += this.HandleRuntimeChanged;
             this.StatusEffectController.OnRuntimeValuesChanged += this.HandleRuntimeChanged;
 
-            this.CacheConsumers();
+            this.RegisterConsumers();
             this.Recompute();
         }
 
@@ -119,12 +119,13 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        private void CacheConsumers()
+        private void RegisterConsumers()
         {
             this.FlagConsumers = new List<IStatusEffectFlagConsumer>();
 
-            // Scan only once through MonoBehaviours
-            var behaviours = this.GetComponentsInChildren<MonoBehaviour>(true);
+            if (this.StatusEffectController == null) return;
+
+            var behaviours = this.StatusEffectController.GetStatusEffectConsumerBehaviours();
             foreach (var behaviour in behaviours)
             {
                 if (behaviour is IStatusEffectFlagConsumer consumer) this.FlagConsumers.Add(consumer);
@@ -164,6 +165,13 @@ namespace FlameOfTheLost
                     consumer.SetStatusEffectFlag(flagType, false);
                 }
             }
+        }
+
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (this.StatusEffectController == null) this.StatusEffectController = this.GetComponent<StatusEffectController>();
         }
     }
 }

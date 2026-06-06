@@ -48,18 +48,16 @@ namespace FlameOfTheLost
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (this.HPController == null || this.HPController.IsDead) return;
-            if (!(this.HPController is IDamageable target)) return;
+            if (!(this.HPController is IDamageable targetDamageable)) return;
             if (!other.TryGetComponent<IDamager>(out var damagerObj)) return;
 
             // Root GameObject representing the target (usually the character root)
-            GameObject targetGameObject = this.HPController != null
-                ? this.HPController.gameObject
-                : this.transform.root.gameObject;
+            CharacterRootController target = this.CharacterRootController;
 
             // If this collider is a hitbox, enforce "once per target per enable window"
             if (other.TryGetComponent<HitboxController>(out var hitboxController))
             {
-                if (!hitboxController.TryRegisterHitTarget(targetGameObject))
+                if (!hitboxController.TryRegisterHitTarget(target))
                 {
                     return; // already hit this target (or hitbox is single-target and already consumed)
                 }
@@ -67,7 +65,7 @@ namespace FlameOfTheLost
 
             // Character Faction filter
             var damager = damagerObj;
-            if (damager is DamageDealingHandler dd && !dd.CanHit(target)) return;
+            if (damager is DamageDealingHandler dd && !dd.CanHit(targetDamageable)) return;
 
             // Check if already processed this attacker (This is not the main protection, which is done by HitboxController)
             if (Time.frameCount == this.LastHitFrame && System.Object.ReferenceEquals(this.LastDamager, damager)) return;
@@ -79,7 +77,7 @@ namespace FlameOfTheLost
             Vector2 direction = (this.transform.position - damager.OriginTransform.position).normalized;
 
             // Apply damage and knockback
-            if (!this.IgnoreDamageReceived) target.TakeDamage(damager.EffectiveDamageAmount);
+            if (!this.IgnoreDamageReceived) targetDamageable.TakeDamage(damager.EffectiveDamageAmount);
             if (!this.IgnoreKnockbackReceived) this.KnockbackHandler?.ApplyKnockback(direction, damager.EffectiveKnockbackForce);
 
             //Debug.Log($"[DRH] ENTER: other={other.name} (path={other.transform.GetHierarchyPath()}) " +
@@ -88,7 +86,7 @@ namespace FlameOfTheLost
             // Notify resource-resolution & skill status effect application handlers on the ATTACK collider (melee/projectile hitbox)
             if (hitboxController != null)
             {
-                hitboxController.NotifyHitConfirmed(targetGameObject);
+                hitboxController.NotifyHitConfirmed(target);
             }
 
             // Notify damager

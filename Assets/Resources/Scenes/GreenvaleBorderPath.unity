@@ -86882,7 +86882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3987b8e9da6e478a0f1ca7ff8f508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterRootController: {fileID: 0}
+  _characterRootController: {fileID: 2107461207}
   _knockbackHandler: {fileID: 1917189433}
   _ignoreDamageReceived: 0
   _ignoreKnockbackReceived: 0

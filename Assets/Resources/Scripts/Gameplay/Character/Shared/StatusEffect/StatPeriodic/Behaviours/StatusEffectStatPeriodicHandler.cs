@@ -17,19 +17,19 @@ namespace FlameOfTheLost
 
         //  2. Consumers discovered in children (HP/FP/Stamina etc.)
         [Header("SE Periodic Map (Runtime)")]
-        [SerializeField] private StatusEffectStatPeriodicTargetToConsumerDictionary _periodicMap = new();
-        private IReadOnlyDictionary<StatusEffectStatPeriodicTarget, List<IStatusEffectStatPeriodicConsumer>> PeriodicMap => _periodicMap;
+        [SerializeField] private StatusEffectStatPeriodicTargetToConsumerDictionary _consumersByTarget = new();
+        private IReadOnlyDictionary<StatusEffectStatPeriodicTarget, List<IStatusEffectStatPeriodicConsumer>> PeriodicConsumersByTarget => _consumersByTarget;
 
         // --- Unity Callbacks ---
-        private void Awake()
+        private void OnDisable()
         {
-            if (this.StatusEffectController == null) this.StatusEffectController = this.GetComponent<StatusEffectController>();
-            this.CacheConsumers();
+            if (this.StatusEffectController == null) return;
+            this.StatusEffectController.OnRuntimeListChanged    -= this.HandleRuntimeChanged;
+            this.StatusEffectController.OnRuntimeValuesChanged  -= this.HandleRuntimeChanged;
         }
         private void OnDestroy()
         {
             if (this.StatusEffectController == null) return;
-
             this.StatusEffectController.OnRuntimeListChanged    -= this.HandleRuntimeChanged;
             this.StatusEffectController.OnRuntimeValuesChanged  -= this.HandleRuntimeChanged;
         }
@@ -48,7 +48,7 @@ namespace FlameOfTheLost
                 this.StatusEffectController.OnRuntimeValuesChanged  += this.HandleRuntimeChanged;
             }
 
-            this.CacheConsumers();
+            this.RegisterConsumers();
             this.Recompute();
         }
 
@@ -74,6 +74,8 @@ namespace FlameOfTheLost
                         if (statPeriodic == null) continue;
                         if (!statPeriodic.IsEnabled) continue;
 
+                        Debug.Log($"Processing SE '{runtimeStatusEffect.Profile.DisplayName}' stat periodic contribution: Target={statPeriodic.Target}, Method={statPeriodic.Method}, AmountPerSecond={statPeriodic.AmountPerSecond}, TickInterval={statPeriodic.TickInterval}");
+
                         float interval = this.ClampTickInterval(statPeriodic.TickInterval);
                         float amountPerSecond = this.ClampAmountPerSecond(statPeriodic.Target, statPeriodic.AmountPerSecond);
 
@@ -92,7 +94,7 @@ namespace FlameOfTheLost
             }
 
             // Push streams to consumers
-            foreach (var kvp in this.PeriodicMap)
+            foreach (var kvp in this.PeriodicConsumersByTarget)
             {
                 var target = kvp.Key;
                 var consumers = kvp.Value;
@@ -109,7 +111,7 @@ namespace FlameOfTheLost
 
         public void ClearAndApply()
         {
-            foreach (var kvp in this.PeriodicMap)
+            foreach (var kvp in this.PeriodicConsumersByTarget)
             {
                 var consumers = kvp.Value;
 
@@ -125,11 +127,13 @@ namespace FlameOfTheLost
         {
             this.Recompute();
         }
-        private void CacheConsumers()
+        private void RegisterConsumers()
         {
-            _periodicMap.Clear();
+            _consumersByTarget.Clear();
 
-            var allBehaviours = this.GetComponentsInChildren<MonoBehaviour>(true);
+            if (this.StatusEffectController == null) return;
+
+            var allBehaviours = this.StatusEffectController.GetStatusEffectConsumerBehaviours();
             for (int i = 0; i < allBehaviours.Length; i++)
             {
                 var behaviour = allBehaviours[i];
@@ -141,10 +145,10 @@ namespace FlameOfTheLost
         }
         private void RegisterConsumer(StatusEffectStatPeriodicTarget target, IStatusEffectStatPeriodicConsumer consumer)
         {
-            if (!this.PeriodicMap.TryGetValue(target, out var list))
+            if (!this.PeriodicConsumersByTarget.TryGetValue(target, out var list))
             {
                 list = new List<IStatusEffectStatPeriodicConsumer>();
-                _periodicMap[target] = list;
+                _consumersByTarget[target] = list;
             }
 
             // avoid duplicates if CacheConsumers() is called redundantly (still cheap, but safe)

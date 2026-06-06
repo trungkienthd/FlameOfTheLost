@@ -82,17 +82,17 @@ namespace FlameOfTheLost
         }
 
         //  3. Apply when the hit is confirmed: SkillStatusEffectApplication (OnHitConfirmed)
-        public void ApplySkillStatusEffectsOnHitConfirmed(RuntimeSkill runtimeSkill, GameObject targetGameObject, GameObject hitboxGameObject)
+        public void ApplySkillStatusEffectsOnHitConfirmed(RuntimeSkill runtimeSkill, CharacterRootController target, GameObject hitboxGameObject)
         {
             if (runtimeSkill == null) return;
-            if (targetGameObject == null) return;
+            if (target == null) return;
             if (hitboxGameObject == null) return;
 
             int hitboxId = hitboxGameObject.GetInstanceID();
-            int targetId = targetGameObject.GetInstanceID();
+            int targetId = target.GetInstanceID();
 
             // Apply to TARGET
-            var receiver = targetGameObject.GetComponentInParent<StatusEffectController>() ?? targetGameObject.GetComponentInChildren<StatusEffectController>(true);
+            var receiver = target.StatusEffectController;
             this.ApplyToReceiverOnHitConfirmed
             (
                 receiverStatusEffectController: receiver,
@@ -148,7 +148,7 @@ namespace FlameOfTheLost
                 // Apply
                 receiverStatusEffectController.ApplyStatusEffect(application.StatusEffect, this.gameObject, application.Potency);
             }
-        }    
+        }   
         private bool PassesLimit(SkillStatusEffectApplicationLimitType limit, StatusEffectProfile statusEffect, int hitboxID, int targetID)
         {
             if (statusEffect == null) return false;

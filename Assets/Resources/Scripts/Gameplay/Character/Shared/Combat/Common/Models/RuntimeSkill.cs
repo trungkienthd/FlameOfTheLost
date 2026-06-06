@@ -64,7 +64,6 @@ namespace FlameOfTheLost
         public IEnumerable<SkillStatusEffectApplication> EnumerateStatusEffectApplications(SkillStatusEffectTriggerType trigger, SkillStatusEffectReceiverType receiver)
         {
             if (this.StatusEffectApplications == null) yield break;
-
             for (int i = 0; i < this.StatusEffectApplications.Count; i++)
             {
                 var application = this.StatusEffectApplications[i];
