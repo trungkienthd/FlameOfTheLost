@@ -2,15 +2,24 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class InputPromptTriggerController : MonoBehaviour, IPlayerInteractionPromptSource
+    public class InputPromptTriggerController : FOTLMonoBehaviour, IIdentityProvider, IPlayerInteractionPromptSource
     {
         // --- States ---
-        //  1. Prompt Settings
+        //  1. Identity
+        [Header("Identity")]
+        [SerializeField] private int _id = 4100;
+        [SerializeField] private string _key = "TUTORIAL_PROMPT";
+        [SerializeField] private string _displayName = "Tutorial Prompt";
+        [SerializeField, TextArea(5, 5)] private string _description = "Tutorial prompt.";
+        public int Id => _id;
+        public string Key => _key;
+        public string DisplayName => _displayName;
+        public string Description => _description;
+
+        //  2. Prompt Settings
         [Header("Prompt Settings")]
-        [SerializeField, TextArea(5, 5)] private string _promptText = "Tutorial prompt.";
         [SerializeField] private bool _startEnabled = true;
         [SerializeField] private bool _hideAfterCompleted = true;
-        private string PromptText => _promptText;
         private bool StartEnabled => _startEnabled;
         private bool HideAfterCompleted => _hideAfterCompleted;
 
@@ -29,8 +38,9 @@ namespace FlameOfTheLost
         }
 
         // --- Unity Callbacks ---
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             this.IsPromptEnabled = this.StartEnabled;
         }
 
@@ -46,7 +56,7 @@ namespace FlameOfTheLost
         }
         public string GetInteractionPromptText(GameObject interactor)
         {
-            return this.PromptText;
+            return this.Description;
         }
 
         //  2. Enable/Disable Prompt

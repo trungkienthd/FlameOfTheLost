@@ -256,6 +256,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23262685}
   m_CullTransparentMesh: 1
+--- !u!1 &26008822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 26008823}
+  m_Layer: 8
+  m_Name: RangedAnchor_Up
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &26008823
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26008822}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 150202304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &36743524
 GameObject:
   m_ObjectHideFlags: 0
@@ -38611,6 +38642,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139854280}
   m_CullTransparentMesh: 1
+--- !u!1 &145344185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 145344186}
+  m_Layer: 8
+  m_Name: RangedAnchor_Down
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &145344186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145344185}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 150202304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &150202303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 150202304}
+  m_Layer: 8
+  m_Name: RangedAchors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &150202304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150202303}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 145344186}
+  - {fileID: 334233953}
+  - {fileID: 26008823}
+  m_Father: {fileID: 557462166}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &160102437 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
@@ -40308,7 +40404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 334233953}
   m_Layer: 8
-  m_Name: RangedAnchor
+  m_Name: RangedAnchor_Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40323,11 +40419,11 @@ Transform:
   m_GameObject: {fileID: 334233952}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.65, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 557462166}
+  m_Father: {fileID: 150202304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &340634813
 GameObject:
@@ -41882,7 +41978,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 77027719}
-  - {fileID: 334233953}
+  - {fileID: 150202304}
   - {fileID: 1917189432}
   m_Father: {fileID: 2085343169}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41983,7 +42079,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAttackController
   _characterRootController: {fileID: 2107461207}
   _meleeHitboxController: {fileID: 77027721}
-  _rangedAnchor: {fileID: 334233953}
+  _rangedAnchorDown: {fileID: 145344186}
+  _rangedAnchorSide: {fileID: 334233953}
+  _rangedAnchorUp: {fileID: 26008823}
   _isInAttackWindow: 0
   _cannotAttack: 0
   _cannotCastSpecialSkill: 0
@@ -44151,7 +44249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
-      value: TutorialWorldVisual_002_START_DAGGER_CHEST
+      value: TutorialWorldVisual_4002_START_DAGGER_CHEST
       objectReference: {fileID: 0}
     - target: {fileID: 5474480641570702319, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_SizeDelta.x
@@ -44160,6 +44258,22 @@ PrefabInstance:
     - target: {fileID: 6970610019680808802, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_text
       value: Open this chest to collect your first weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _id
+      value: 4002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _key
+      value: START_DAGGER_CHEST
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _description
+      value: This chest contains the very first weapon in the game - Dagger.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _displayName
+      value: Start Dagger Chest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -79282,7 +79396,7 @@ GameObject:
   - component: {fileID: 1244134771}
   - component: {fileID: 1244134772}
   m_Layer: 18
-  m_Name: InputPromptTrigger_002_NORMAL_ATTACK
+  m_Name: InputPromptTrigger_4102_EQUIP_WEAPON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79316,7 +79430,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54723fa5a77d4124dba832342de4baf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TutorialPromptTriggerController
-  _promptText: Open Player Menu [Tab] to equip your weapon.
+  _id: 4102
+  _key: TUTORIAL_PROMPT
+  _displayName: Tutorial Prompt
+  _description: Use [Tab] to open the Loadout panel and equip a weapon.
   _startEnabled: 1
   _hideAfterCompleted: 1
 --- !u!1 &1252133226
@@ -79330,7 +79447,7 @@ GameObject:
   - component: {fileID: 1252133227}
   - component: {fileID: 1252133228}
   m_Layer: 18
-  m_Name: InputPromptTrigger_001_MOVEMENT
+  m_Name: InputPromptTrigger_4101_MOVEMENT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79364,7 +79481,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54723fa5a77d4124dba832342de4baf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TutorialPromptTriggerController
-  _promptText: Use [WASD] or [Arrow Keys] to move
+  _id: 4101
+  _key: TUTORIAL_PROMPT
+  _displayName: Tutorial Prompt
+  _description: Use [WASD] or Arrow Keys to move.
   _startEnabled: 1
   _hideAfterCompleted: 1
 --- !u!1001 &1262526873
@@ -79429,7 +79549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
-      value: TutorialWorldVisual_003_RESPAWN_HOLE_WARNING
+      value: TutorialWorldVisual_4003_DEATH_HOLE_WARNING
       objectReference: {fileID: 0}
     - target: {fileID: 5474480641570702319, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_SizeDelta.x
@@ -79449,6 +79569,22 @@ PrefabInstance:
     - target: {fileID: 6970610019680808802, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_fontSizeBase
       value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _id
+      value: 4003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _key
+      value: DEATH_HOLE_WARNING
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _description
+      value: 'Warning: Going to this hole triggers Death.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _displayName
+      value: Death Hole Warning
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -80360,8 +80496,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1244134771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1387403576
-CircleCollider2D:
+--- !u!61 &1387403576
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -80394,8 +80530,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 3
+  m_Offset: {x: 0, y: 1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 15, y: 3}
+  m_EdgeRadius: 0
 --- !u!1 &1399067909
 GameObject:
   m_ObjectHideFlags: 0
@@ -83949,7 +84095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectStatPeriodicHandler
   _statusEffectController: {fileID: 1685654211}
-  _periodicMap:
+  _consumersByTarget:
     _keys: 
 --- !u!114 &1685654209
 MonoBehaviour:
@@ -89362,7 +89508,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
-      value: TutorialWorldVisual_001_PLAYER_DEFAULT_SPAWN_POINT
+      value: TutorialWorldVisual_4001_PLAYER_DEFAULT_SPAWN_POINT
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _id
+      value: 4001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _key
+      value: PLAYER_DEFAULT_SPAWN_POINT
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _description
+      value: This is the first spawn point in the game.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _displayName
+      value: Player's default spawn point
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

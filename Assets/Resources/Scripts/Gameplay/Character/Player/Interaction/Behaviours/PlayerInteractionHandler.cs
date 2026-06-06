@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -137,7 +138,7 @@ namespace FlameOfTheLost
             IPlayerInteractable interactable = other.GetComponentInParent<IPlayerInteractable>();
             if (interactable == null) return;
             if (interactable is not MonoBehaviour behaviour) return;
-            if (_nearbyInteractableBehaviours.Contains(behaviour)) return;
+            if (this.NearbyInteractableBehaviours.Contains(behaviour)) return;
 
             GameObject interactor = this.ResolveInteractor();
             if (!interactable.CanInteract(interactor)) return;
@@ -160,7 +161,7 @@ namespace FlameOfTheLost
             IPlayerInteractionPromptSource promptSource = other.GetComponentInParent<IPlayerInteractionPromptSource>();
             if (promptSource == null) return;
             if (promptSource is not MonoBehaviour behaviour) return;
-            if (_nearbyPromptSourceBehaviours.Contains(behaviour)) return;
+            if (this.NearbyPromptSourceBehaviours.Contains(behaviour)) return;
 
             GameObject interactor = this.ResolveInteractor();
             if (!promptSource.CanShowInteractionPrompt(interactor)) return;

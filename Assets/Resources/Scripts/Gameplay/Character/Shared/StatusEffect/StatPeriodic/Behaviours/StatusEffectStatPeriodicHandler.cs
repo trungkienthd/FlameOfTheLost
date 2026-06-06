@@ -74,7 +74,7 @@ namespace FlameOfTheLost
                         if (statPeriodic == null) continue;
                         if (!statPeriodic.IsEnabled) continue;
 
-                        Debug.Log($"Processing SE '{runtimeStatusEffect.Profile.DisplayName}' stat periodic contribution: Target={statPeriodic.Target}, Method={statPeriodic.Method}, AmountPerSecond={statPeriodic.AmountPerSecond}, TickInterval={statPeriodic.TickInterval}");
+                        // Debug.Log($"Processing SE '{runtimeStatusEffect.Profile.DisplayName}' stat periodic contribution: Target={statPeriodic.Target}, Method={statPeriodic.Method}, AmountPerSecond={statPeriodic.AmountPerSecond}, TickInterval={statPeriodic.TickInterval}");
 
                         float interval = this.ClampTickInterval(statPeriodic.TickInterval);
                         float amountPerSecond = this.ClampAmountPerSecond(statPeriodic.Target, statPeriodic.AmountPerSecond);

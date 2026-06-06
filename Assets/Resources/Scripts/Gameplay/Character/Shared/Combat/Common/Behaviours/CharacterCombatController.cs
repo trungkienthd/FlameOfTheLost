@@ -21,9 +21,13 @@ namespace FlameOfTheLost
 
         [Header("References (Combat)")]
         [SerializeField] private MeleeHitboxController _meleeHitboxController;
-        [SerializeField] private Transform _rangedAnchor;
+        [SerializeField] private Transform _rangedAnchorDown;
+        [SerializeField] private Transform _rangedAnchorSide;
+        [SerializeField] private Transform _rangedAnchorUp;
         public MeleeHitboxController MeleeHitboxController => _meleeHitboxController;
-        private Transform RangedAnchor => _rangedAnchor;
+        private Transform RangedAnchorDown => _rangedAnchorDown;
+        private Transform RangedAnchorSide => _rangedAnchorSide;
+        private Transform RangedAnchorUp => _rangedAnchorUp;
 
         //  2. Attack State
         [Header("Runtime State (Read Only)")]
@@ -388,12 +392,14 @@ namespace FlameOfTheLost
             if (runtimeSkill == null) return;
             if (!(runtimeSkill.Profile is RangedSkillProfile rangedSkill)) return;
             if (!rangedSkill.ProjectilePrefab) return;
-            if (!this.RangedAnchor) return;
+
+            Transform rangedAnchor = this.GetCurrentRangedAnchor();
+            if (rangedAnchor == null) return;
 
             // Baseline direction
             Vector2 baselineDirection = this.CombatAimingHandler != null
                 ? this.CombatAimingHandler.GetCurrentAttackDirection()
-                : (Vector2)this.RangedAnchor.right;
+                : (Vector2)rangedAnchor.right;
 
             if (baselineDirection.sqrMagnitude < 0.0001f) baselineDirection = Vector2.right;
             baselineDirection.Normalize();
@@ -409,22 +415,48 @@ namespace FlameOfTheLost
                 float angleOffset = startAngleOffset + (i * angleStep);
                 Vector2 projectileDirection = baselineDirection.Rotate(angleOffset);
 
-                this.SpawnSingleProjectile(runtimeSkill, rangedSkill, projectileDirection);
+                this.SpawnSingleProjectile(runtimeSkill, rangedSkill, projectileDirection, rangedAnchor);
             }
         }
+        private Transform GetCurrentRangedAnchor()
+        {
+            CharacterFacingStatus facingStatus = this.VisualController != null
+            ? this.VisualController.FacingStatus
+            : CharacterFacingStatus.Down;
 
-        private void SpawnSingleProjectile(RuntimeSkill runtimeSkill, RangedSkillProfile rangedSkill, Vector2 direction)
+            switch (facingStatus)
+            {
+                case CharacterFacingStatus.Down:
+                    return this.RangedAnchorDown != null
+                        ? this.RangedAnchorDown
+                        : this.transform;
+
+                case CharacterFacingStatus.Side:
+                    return this.RangedAnchorSide != null
+                        ? this.RangedAnchorSide
+                        : this.transform;
+
+                case CharacterFacingStatus.Up:
+                    return this.RangedAnchorUp != null
+                        ? this.RangedAnchorUp
+                        : this.transform;
+
+                default:
+                    return this.transform;
+            }
+        }
+        private void SpawnSingleProjectile(RuntimeSkill runtimeSkill, RangedSkillProfile rangedSkill, Vector2 direction, Transform rangedAnchor)
         {
             if (runtimeSkill == null || rangedSkill == null) return;
             if (!rangedSkill.ProjectilePrefab) return;
-            if (!this.RangedAnchor) return;
+            if (rangedAnchor == null) return;
 
             direction.Normalize();
 
             var projectileObj = UnityEngine.Object.Instantiate
             (
                 rangedSkill.ProjectilePrefab,
-                this.RangedAnchor.position,
+                rangedAnchor.position,
                 Quaternion.identity
             );
 
@@ -462,12 +494,19 @@ namespace FlameOfTheLost
             base.CacheReferences();
 
             if (this.MeleeHitboxController == null) _meleeHitboxController = this.GetComponentInChildren<MeleeHitboxController>(true);
-            if (this.RangedAnchor == null) _rangedAnchor = this.transform.Find("RangedAnchor");
-            if (this.RangedAnchor == null)
-            {
-                Debug.LogWarning($"[{this.CharacterName}.CharacterCombatAttackController] RangedAnchor is not found. Default to {this.CharacterName}.transform");
-                _rangedAnchor = this.CharacterRootController.transform;
-            }
+
+            if (this.RangedAnchorDown   == null) _rangedAnchorDown  = this.transform.Find("RangedAnchors/RangedAnchor_Down");
+            if (this.RangedAnchorSide   == null) _rangedAnchorSide  = this.transform.Find("RangedAnchors/RangedAnchor_Side");
+            if (this.RangedAnchorUp     == null) _rangedAnchorUp    = this.transform.Find("RangedAnchors/RangedAnchor_Up");
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.MeleeHitboxController == null) Debug.LogError($"[{this.CharacterName}.CharacterCombatController] MeleeHitboxController reference is missing. Expected to find a child with a MeleeHitboxController component.", this);
+
+            if (this.RangedAnchorDown == null || this.RangedAnchorSide == null || this.RangedAnchorUp == null) Debug.LogWarning($"[{this.CharacterName}.CharacterCombatController] One or more ranged anchors are missing. " + $"Expected: RangedAnchors/RangedAnchor_Down, RangedAnchors/RangedAnchor_Side, RangedAnchors/RangedAnchor_Up.", this);
         }
     }
 }
