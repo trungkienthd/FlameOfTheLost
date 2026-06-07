@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -15,8 +16,10 @@ namespace FlameOfTheLost
         public string Description => _description;
 
         [Header("References")]
-        [SerializeField] private GameObject _visualRoot;
-        private GameObject VisualRoot => _visualRoot != null ? _visualRoot : this.gameObject;
+        [SerializeField] private GameObject _instructionVisual;
+        [SerializeField] private TMP_Text _instructionText;
+        private GameObject InstructionVisual => _instructionVisual;
+        private TMP_Text InstructionText => _instructionText;
 
         [Header("Settings")]
         [SerializeField] private bool _visibleOnStart = true;
@@ -39,9 +42,29 @@ namespace FlameOfTheLost
 
         public void SetVisible(bool isVisible)
         {
-            if (this.VisualRoot == null) return;
+            if (this.InstructionVisual == null) return;
 
-            this.VisualRoot.SetActive(isVisible);
+            this.InstructionVisual.SetActive(isVisible);
+
+            if (isVisible)
+            {
+                this.InstructionText.text = this.Description;
+            }
+        }
+
+        // --- Helpers ---
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (this.InstructionVisual == null) _instructionVisual = this.transform.Find("WorldSpaceTutorialVisual")?.gameObject;
+            if (this.InstructionText == null)
+            {
+                if (this.InstructionVisual != null)
+                {
+                    _instructionText = this.InstructionVisual.transform.Find("InstructionText")?.GetComponent<TMP_Text>();
+                }
+            }
         }
     }
 }

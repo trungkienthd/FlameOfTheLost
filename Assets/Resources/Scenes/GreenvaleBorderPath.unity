@@ -38565,6 +38565,7 @@ Transform:
   - {fileID: 1243752741}
   - {fileID: 160102437}
   - {fileID: 1012245344}
+  - {fileID: 385688410}
   m_Father: {fileID: 802897977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &139854280
@@ -40619,6 +40620,120 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1001 &385688409
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 137617157}
+    m_Modifications:
+    - target: {fileID: 34792264231603796, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1784876780}
+    - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 902215287030758171, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_Size.x
+      value: 2.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 902215287030758171, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449838527064477310, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381086708614630247, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_Name
+      value: TutorialWorldVisual_4004_DEATH_HOLE_WARNING_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5474480641570702319, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 420
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970610019680808802, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_text
+      value: "You will respawn at \nthe latest spawn point."
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970610019680808802, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_fontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970610019680808802, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _id
+      value: 4004
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _key
+      value: DEATH_HOLE_WARNING_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _description
+      value: "You will respawn at \nthe latest spawn point."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: _displayName
+      value: Death Hole Warning 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+--- !u!4 &385688410 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+  m_PrefabInstance: {fileID: 385688409}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &415092167
 GameObject:
   m_ObjectHideFlags: 0
@@ -44241,11 +44356,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 902215287030758171, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Size.x
-      value: 3.35
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449838527064477310, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 2381086708614630247, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 360
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
@@ -44269,7 +44388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: _description
-      value: This chest contains the very first weapon in the game - Dagger.
+      value: Open this chest to collect your first weapon
       objectReference: {fileID: 0}
     - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: _displayName
@@ -79501,7 +79620,7 @@ PrefabInstance:
       objectReference: {fileID: 1784876780}
     - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.5
+      value: 9.25
       objectReference: {fileID: 0}
     - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -79541,15 +79660,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 902215287030758171, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Size.x
-      value: 4.5
+      value: 2.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1449838527064477310, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 2381086708614630247, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 480
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
-      value: TutorialWorldVisual_4003_DEATH_HOLE_WARNING
+      value: TutorialWorldVisual_4003_DEATH_HOLE_WARNING_1
       objectReference: {fileID: 0}
     - target: {fileID: 5474480641570702319, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_SizeDelta.x
@@ -79557,10 +79680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6970610019680808802, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_text
-      value: 'Falling into this hole will defeat you.
-
-        You will respawn at
-        the latest spawn point.'
+      value: "Falling into this hole \nwill defeat you."
       objectReference: {fileID: 0}
     - target: {fileID: 6970610019680808802, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_fontSize
@@ -79576,15 +79696,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: _key
-      value: DEATH_HOLE_WARNING
+      value: DEATH_HOLE_WARNING_1
       objectReference: {fileID: 0}
     - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: _description
-      value: 'Warning: Going to this hole triggers Death.'
+      value: "Falling into this hole \nwill defeat you."
       objectReference: {fileID: 0}
     - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: _displayName
-      value: Death Hole Warning
+      value: Death Hole Warning 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -89466,6 +89586,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1784876780}
+    - target: {fileID: 195056985002367712, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.75
@@ -89506,6 +89630,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 902215287030758171, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
+      propertyPath: m_Size.x
+      value: 2.35
+      objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
       value: TutorialWorldVisual_4001_PLAYER_DEFAULT_SPAWN_POINT
@@ -89520,7 +89648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: _description
-      value: This is the first spawn point in the game.
+      value: "You spawn here \nby default"
       objectReference: {fileID: 0}
     - target: {fileID: 7098934308595656849, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: _displayName
