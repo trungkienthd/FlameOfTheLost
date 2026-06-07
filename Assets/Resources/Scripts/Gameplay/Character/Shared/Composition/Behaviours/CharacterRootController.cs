@@ -4,14 +4,24 @@ namespace FlameOfTheLost
 {
     public abstract class CharacterRootController : FOTLMonoBehaviour
     {
-        [Header("References (Core)")]
+        [Header("References (Identity)")]
         [SerializeField] private CharacterIdentityController _identityController;
-        [SerializeField] private CharacterInputHandler _inputHandler;
-        [SerializeField] private MovementHandler _movementHandler;
-        [SerializeField] private CharacterTerrainContactHandler _terrainContactHandler;
         public CharacterIdentityController IdentityController => _identityController;
+
+        [Header("References (Placement)")]
+        [SerializeField] private CharacterPlacementHandler _placementHandler;
+        public CharacterPlacementHandler PlacementHandler => _placementHandler;
+
+        [Header("References (Input)")]
+        [SerializeField] private CharacterInputHandler _inputHandler;
         public CharacterInputHandler InputHandler => _inputHandler;
+
+        [Header("References (Movement)")]
+        [SerializeField] private MovementHandler _movementHandler;
         public MovementHandler MovementHandler => _movementHandler;
+
+        [Header("References (Terrain Contact)")]
+        [SerializeField] private CharacterTerrainContactHandler _terrainContactHandler;
         public CharacterTerrainContactHandler TerrainContactHandler => _terrainContactHandler;
 
         [Header("References (Visual)")]
@@ -56,19 +66,23 @@ namespace FlameOfTheLost
         public StatusEffectStatModifierHandler StatusEffectStatModifierHandler => _statusEffectStatModifierHandler;
         public StatusEffectStatPeriodicHandler StatusEffectStatPeriodicHandler => _statusEffectStatPeriodicHandler;
 
+        [Header("References (Progression)")]
+        [SerializeField] private CharacterProgressionController _progressionController;
+        [SerializeField] private CharacterRewardWalletController _rewardWalletController;
+        public CharacterProgressionController ProgressionController => _progressionController;
+        public CharacterRewardWalletController RewardWalletController => _rewardWalletController;
+
         [Header("References (Inventory)")]
         [SerializeField] private InventoryController _inventoryController;
         public InventoryController InventoryController => _inventoryController;
-
-        [Header("References (Placement)")]
-        [SerializeField] private CharacterPlacementHandler _placementHandler;
-        public CharacterPlacementHandler PlacementHandler => _placementHandler;
 
         protected override void CacheReferences()
         {
             base.CacheReferences();
 
             if (this.IdentityController == null) _identityController = this.GetComponentInChildren<CharacterIdentityController>(true);
+
+            if (this.PlacementHandler == null) _placementHandler = this.GetComponentInChildren<CharacterPlacementHandler>(true);
 
             if (this.InputHandler == null) _inputHandler = this.GetComponent<CharacterInputHandler>();
 
@@ -97,9 +111,10 @@ namespace FlameOfTheLost
             if (this.StatusEffectStatModifierHandler    == null) _statusEffectStatModifierHandler   = this.GetComponentInChildren<StatusEffectStatModifierHandler>(true);
             if (this.StatusEffectStatPeriodicHandler    == null) _statusEffectStatPeriodicHandler   = this.GetComponentInChildren<StatusEffectStatPeriodicHandler>(true);
 
-            if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>(true);
+            if (this.ProgressionController == null)     _progressionController  = this.GetComponentInChildren<CharacterProgressionController>(true);
+            if (this.RewardWalletController == null)    _rewardWalletController = this.GetComponentInChildren<CharacterRewardWalletController>(true);
 
-            if (this.PlacementHandler == null) _placementHandler = this.GetComponentInChildren<CharacterPlacementHandler>(true);
+            if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>(true);
         }
     }
 }

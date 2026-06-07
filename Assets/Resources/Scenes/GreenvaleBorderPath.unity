@@ -41940,7 +41940,7 @@ GameObject:
   - component: {fileID: 531506780}
   - component: {fileID: 531506781}
   m_Layer: 5
-  m_Name: CombatLoadoutSpace
+  m_Name: CombatLoadoutSlotGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45613,6 +45613,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997383670}
   m_CullTransparentMesh: 1
+--- !u!1 &1006287876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1006287877}
+  m_Layer: 8
+  m_Name: Progression
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1006287877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006287876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2107461203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1011574957
 GameObject:
   m_ObjectHideFlags: 0
@@ -89275,6 +89306,7 @@ Transform:
   - {fileID: 2085343169}
   - {fileID: 1951002771}
   - {fileID: 1685654207}
+  - {fileID: 1006287877}
   - {fileID: 1123552227}
   - {fileID: 1877115627}
   - {fileID: 989409869}
@@ -89311,6 +89343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerComponentController
   _identityController: {fileID: 1971478399}
+  _placementHandler: {fileID: 209471720}
   _inputHandler: {fileID: 2107461199}
   _movementHandler: {fileID: 2107461197}
   _terrainContactHandler: {fileID: 2107461204}
@@ -89331,8 +89364,9 @@ MonoBehaviour:
   _statusEffectFlagHandler: {fileID: 1685654210}
   _statusEffectStatModifierHandler: {fileID: 1685654209}
   _statusEffectStatPeriodicHandler: {fileID: 1685654208}
+  _progressionController: {fileID: 0}
+  _rewardWalletController: {fileID: 0}
   _inventoryController: {fileID: 1123552228}
-  _placementHandler: {fileID: 209471720}
   _playerCarryLoadoutController: {fileID: 2107461182}
   _playerInteractionHandler: {fileID: 1877115629}
 --- !u!1001 &2108359412
