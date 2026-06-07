@@ -41940,7 +41940,7 @@ GameObject:
   - component: {fileID: 531506780}
   - component: {fileID: 531506781}
   m_Layer: 5
-  m_Name: CombatLoadoutPanel
+  m_Name: CombatLoadoutSpace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42349,7 +42349,7 @@ GameObject:
   - component: {fileID: 589333458}
   - component: {fileID: 589333459}
   m_Layer: 5
-  m_Name: ResourcesPanel
+  m_Name: ResourceBarGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44444,7 +44444,7 @@ GameObject:
   - component: {fileID: 849270070}
   - component: {fileID: 849270071}
   m_Layer: 5
-  m_Name: AppliedStatusEffectsPanel
+  m_Name: AppliedStatusEffectSlotContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44482,7 +44482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AppliedStatusEffectsPanelUIController
   _playerStatusEffectController: {fileID: 1685654211}
-  _slotPrefabCtrl: {fileID: 5508457746305231071, guid: 9e744b7dd268faf4698cbb3a509c7628, type: 3}
+  _slotCtrl: {fileID: 5508457746305231071, guid: 9e744b7dd268faf4698cbb3a509c7628, type: 3}
   _startX: 0
   _stepX: 35
   _maxSlots: 10
@@ -79195,7 +79195,7 @@ GameObject:
   - component: {fileID: 1222258334}
   - component: {fileID: 1222258333}
   m_Layer: 5
-  m_Name: HPBarUI
+  m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82045,7 +82045,7 @@ GameObject:
   - component: {fileID: 1555061068}
   - component: {fileID: 1555061067}
   m_Layer: 5
-  m_Name: FPBarUI
+  m_Name: FPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88296,7 +88296,7 @@ GameObject:
   - component: {fileID: 2032190787}
   - component: {fileID: 2032190786}
   m_Layer: 5
-  m_Name: StaminaBarUI
+  m_Name: StaminaBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

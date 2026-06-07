@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class UICanvasHUDAppliedStatusEffectsPanelController : MonoBehaviour
+    public class UICanvasHUDAppliedStatusEffectSlotContainerController : FOTLMonoBehaviour
     {
         // --- States ---
         //  1. References
         [Header("References")]
         [SerializeField] private StatusEffectController _playerStatusEffectController;
-        [SerializeField] private AppliedStatusEffectSlotUIController _slotPrefabCtrl;
+        [SerializeField] private UICanvasHUDAppliedStatusEffectSlotController _slotCtrl;
         private StatusEffectController PlayerStatusEffectController => _playerStatusEffectController;
-        private AppliedStatusEffectSlotUIController SlotPrefabController => _slotPrefabCtrl;
+        private UICanvasHUDAppliedStatusEffectSlotController SlotController => _slotCtrl;
 
         //  2. Layout Configuration
         [Header("Layout")]
@@ -23,18 +23,10 @@ namespace FlameOfTheLost
         private int MaxSlots => _maxSlots;
 
         //  3. Runtime
-        private readonly List<AppliedStatusEffectSlotUIController> _spawnedSlots = new();
-        private IReadOnlyList<AppliedStatusEffectSlotUIController> SpawnedSlots => _spawnedSlots;
+        private readonly List<UICanvasHUDAppliedStatusEffectSlotController> _spawnedSlots = new();
+        private IReadOnlyList<UICanvasHUDAppliedStatusEffectSlotController> SpawnedSlots => _spawnedSlots;
 
         // --- Unity Callbacks ---
-        private void Awake()
-        {
-            if (this.PlayerStatusEffectController == null)
-            {
-                GameObject player = GameObject.Find("Player");
-                if (player != null) _playerStatusEffectController = player.GetComponentInChildren<StatusEffectController>();
-            }
-        }
         private void OnEnable()
         {
             if (this.PlayerStatusEffectController != null)
@@ -61,7 +53,7 @@ namespace FlameOfTheLost
             this.ClearSlots();
 
             if (this.PlayerStatusEffectController == null) return;
-            if (this.SlotPrefabController == null) return;
+            if (this.SlotController == null) return;
             if (this.MaxSlots <= 0) return;
 
             IReadOnlyList<RuntimeStatusEffect> runtimeStatusEffects = this.PlayerStatusEffectController.RuntimeStatusEffects;
@@ -77,7 +69,7 @@ namespace FlameOfTheLost
                 RuntimeStatusEffect runtimeStatusEffect = runtimeStatusEffects[i];
                 if (runtimeStatusEffect == null || runtimeStatusEffect.Profile == null) continue;
 
-                AppliedStatusEffectSlotUIController newSlot = UnityEngine.Object.Instantiate(this.SlotPrefabController, this.transform);
+                UICanvasHUDAppliedStatusEffectSlotController newSlot = UnityEngine.Object.Instantiate(this.SlotController, this.transform);
                 newSlot.name = $"AppliedStatusEffectSlot_{createdSlotCount}_{runtimeStatusEffect.Profile.name}";
                 newSlot.Bind(runtimeStatusEffect);
 
@@ -93,7 +85,7 @@ namespace FlameOfTheLost
         {
             for (int i = this.SpawnedSlots.Count - 1; i >= 0; i--)
             {
-                AppliedStatusEffectSlotUIController slot = this.SpawnedSlots[i];
+                UICanvasHUDAppliedStatusEffectSlotController slot = this.SpawnedSlots[i];
 
                 if (slot == null)
                 {
@@ -105,7 +97,7 @@ namespace FlameOfTheLost
             }
         }
 
-        private void SetSlotPosition(AppliedStatusEffectSlotUIController slot, int slotIndex)
+        private void SetSlotPosition(UICanvasHUDAppliedStatusEffectSlotController slot, int slotIndex)
         {
             if (slot == null) return;
 
@@ -127,7 +119,6 @@ namespace FlameOfTheLost
             }
         }
 
-
         private void ClearSlots()
         {
             for (int i = this.SpawnedSlots.Count - 1; i >= 0; i--)
@@ -139,6 +130,38 @@ namespace FlameOfTheLost
             }
 
             _spawnedSlots.Clear();
+        }
+
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (this.PlayerStatusEffectController == null)
+            {
+                GameObject player = GameObject.Find("Player");
+                if (player != null) _playerStatusEffectController = player.GetComponentInChildren<StatusEffectController>();
+            }
+
+            if (this.SlotController == null)
+            {
+                GameObject slot = Resources.Load<GameObject>("Prefabs/UI/HUD/AppliedStatusEffectSlot");
+                if (slot != null) _slotCtrl = slot.GetComponent<UICanvasHUDAppliedStatusEffectSlotController>();
+            }
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.PlayerStatusEffectController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDAppliedStatusEffectSlotContainerController)}] PlayerStatusEffectController reference is not set and could not be found via fallback.");
+            }
+
+            if (this.SlotController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDAppliedStatusEffectSlotContainerController)}] SlotController reference is not set and could not be found via fallback.");
+            }
         }
     }
 }

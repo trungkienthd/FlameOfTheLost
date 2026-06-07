@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class UICanvasHUDCombatLoadoutPanelController : MonoBehaviour
+    public class UICanvasHUDCombatLoadoutSlotGroupController : FOTLMonoBehaviour
     {
         // --- States ---
         //  1. References
@@ -44,16 +44,7 @@ namespace FlameOfTheLost
             set => _time = value;
         }
 
-        // --- Unity methods ---
-        private void Awake()
-        {
-            if (this.PlayerCombatLoadoutController == null)
-            {
-                GameObject player = GameObject.Find("Player");
-                _playerCombatLoadoutController = player.GetComponentInChildren<CharacterCombatLoadoutController>();
-                if (this.PlayerCombatLoadoutController == null) Debug.LogWarning($"[{this.gameObject.name}.HUDCombatLoadoutPanelController] Player's CharacterCombatLoadoutController is not found.");
-            }
-        }
+        // --- Unity Callbacks ---
         private void Start()
         {
             this.RefreshAll();
@@ -182,6 +173,24 @@ namespace FlameOfTheLost
 
             this.ConsumableQuantityIcon.sprite = null;
             this.ConsumableQuantityIconBackup.sprite = null;
+        }
+
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (this.PlayerCombatLoadoutController == null)
+            {
+                GameObject player = GameObject.Find("Player");
+                _playerCombatLoadoutController = player.GetComponentInChildren<CharacterCombatLoadoutController>();
+            }
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.PlayerCombatLoadoutController == null) Debug.LogError("PlayerCombatLoadoutController reference is not set on " + this.name);
         }
     }
 }

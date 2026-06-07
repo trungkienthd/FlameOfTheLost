@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class AppliedStatusEffectSlotUIController : MonoBehaviour
+    public class UICanvasHUDAppliedStatusEffectSlotController : FOTLMonoBehaviour
     {
         // --- States ---
         //  1. References
@@ -104,6 +104,38 @@ namespace FlameOfTheLost
                 this.StackText.text = string.Empty;
                 this.StackText.gameObject.SetActive(false);
             }
+        }
+
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (this.Icon == null)
+            {
+                Transform icon = this.transform.Find("Icon");
+                if (icon != null) _icon = icon.GetComponent<Image>();
+            }
+
+            if (this.CooldownFill == null)
+            {
+                Transform cooldownFill = this.transform.Find("CooldownFill");
+                if (cooldownFill != null) _cooldownFill = cooldownFill.GetComponent<Image>();
+            }
+
+            if (this.StackText == null)
+            {
+                Transform stackText = this.transform.Find("StackText");
+                if (stackText != null) _stackText = stackText.GetComponent<TMP_Text>();
+            }
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.Icon == null)          Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDAppliedStatusEffectSlotController)}] Icon reference is not set on " + this.name);
+            if (this.CooldownFill == null)  Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDAppliedStatusEffectSlotController)}] CooldownFill reference is not set on " + this.name);
+            if (this.StackText == null)     Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDAppliedStatusEffectSlotController)}] StackText reference is not set on " + this.name);
         }
     }
 }

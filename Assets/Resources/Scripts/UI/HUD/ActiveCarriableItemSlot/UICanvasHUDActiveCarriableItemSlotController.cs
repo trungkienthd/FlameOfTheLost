@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class UICanvasHUDActiveCarriableItemSlotController : MonoBehaviour
+    public class UICanvasHUDActiveCarriableItemSlotController : FOTLMonoBehaviour
     {
         // --- States ---
         //  1. References
@@ -36,18 +36,6 @@ namespace FlameOfTheLost
         private Color CarriedColor => _carriedColor;
 
         // --- Unity Callbacks ---
-        private void Awake()
-        {
-            if (this.PlayerCarryLoadoutController == null)
-            {
-                GameObject player = GameObject.Find("Player");
-                if (player != null) _playerCarryLoadoutController = player.GetComponent<PlayerCarryLoadoutController>();
-                if (this.PlayerCarryLoadoutController == null) Debug.LogWarning($"[{this.gameObject.name}.HUDActiveCarriableItemSlotController] Player's PlayerCarryLoadoutController is not found.");
-            }
-
-            if (this.SlotBackground == null) _slotBackground = this.GetComponent<Image>();
-            if (this.Icon == null) _icon = this.transform.GetChild(0).GetComponent<Image>();
-        }
         private void Start()
         {
             this.RefreshAll();
@@ -96,6 +84,33 @@ namespace FlameOfTheLost
 
             bool isCarrying = this.PlayerCarryLoadoutController.IsCarryingCarriableItem;
             this.SlotBackground.color = isCarrying ? this.CarriedColor : this.NormalColor;
+        }
+
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (this.PlayerCarryLoadoutController == null)
+            {
+                GameObject player = GameObject.Find("Player");
+                if (player != null) _playerCarryLoadoutController = player.GetComponent<PlayerCarryLoadoutController>();
+            }
+
+            if (this.SlotBackground == null) _slotBackground = this.GetComponent<Image>();
+            if (this.Icon == null)
+            {
+                Transform iconTransform = this.transform.Find("Icon");
+                if (iconTransform != null) _icon = iconTransform.GetComponent<Image>();
+            }
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.PlayerCarryLoadoutController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDActiveCarriableItemSlotController)}] PlayerCarryLoadoutController reference is missing.", this);
+            if (this.SlotBackground == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDActiveCarriableItemSlotController)}] SlotBackground Image reference is missing.", this);
+            if (this.Icon == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDActiveCarriableItemSlotController)}] Icon Image reference is missing.", this);
         }
     }
 }

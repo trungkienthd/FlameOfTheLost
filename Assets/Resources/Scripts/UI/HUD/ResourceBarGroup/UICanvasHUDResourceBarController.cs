@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class ResourceBarUIController : MonoBehaviour
+    public class UICanvasHUDResourceBarController : FOTLMonoBehaviour
     {
         [Header("References")]
         [SerializeField] private Slider _slider;
@@ -14,9 +14,8 @@ namespace FlameOfTheLost
             set => _slider = value;
         }
 
-        private void Awake()
+        private void Start()
         {
-            if (!this.Slider) this.Slider = this.GetComponent<Slider>();
             if (this.Slider)
             {
                 this.Slider.minValue = 0f;
@@ -36,6 +35,20 @@ namespace FlameOfTheLost
         public void SetNormalized(float normalizedValue)
         {
             if (this.Slider) this.Slider.value = Mathf.Clamp01(normalizedValue);
+        }
+
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (!this.Slider) this.Slider = this.GetComponent<Slider>();
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.Slider ==  null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarController)}] Slider reference is missing.");
         }
     }
 }

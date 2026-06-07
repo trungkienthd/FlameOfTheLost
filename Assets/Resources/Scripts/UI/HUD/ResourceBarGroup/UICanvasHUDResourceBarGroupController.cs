@@ -2,49 +2,33 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class UICanvasHUDResourcesPanelController : MonoBehaviour
+    public class UICanvasHUDResourceBarGroupController : FOTLMonoBehaviour
     {
         [Header("Gameplay Resources (Player)")]
         [SerializeField] private CharacterResourcesController _resources;
         private CharacterResourcesController PlayerResourcesController => _resources;
 
         [Header("UI Bars")]
-        [SerializeField] private ResourceBarUIController _hpBar;
-        [SerializeField] private ResourceBarUIController _fpBar;
-        [SerializeField] private ResourceBarUIController _staminaBar;
-        private ResourceBarUIController HPBar
+        [SerializeField] private UICanvasHUDResourceBarController _hpBar;
+        [SerializeField] private UICanvasHUDResourceBarController _fpBar;
+        [SerializeField] private UICanvasHUDResourceBarController _staminaBar;
+        private UICanvasHUDResourceBarController HPBar
         {
             get => _hpBar;
             set => _hpBar = value;
         }
-        private ResourceBarUIController FPBar
+        private UICanvasHUDResourceBarController FPBar
         {
             get => _fpBar;
             set => _fpBar = value;
         }
-        private ResourceBarUIController StaminaBar
+        private UICanvasHUDResourceBarController StaminaBar
         {
             get => _staminaBar;
             set => _staminaBar = value;
         }
 
         // --- Unity Callbacks ---
-        private void Awake()
-        {
-            if (this.PlayerResourcesController == null)
-            {
-                GameObject player = GameObject.Find("Player");
-                if (player != null) _resources = player.GetComponentInChildren<CharacterResourcesController>();
-                if (this.PlayerResourcesController == null) Debug.LogWarning($"[{this.gameObject.name}.TopLeftResourcesPanelUIController] Player's CharacterResourcesController is not found.");
-            }
-
-            // Try to find bars by common names if not set
-            if (this.HPBar == null) this.HPBar = this.transform.GetChild(0).GetComponent<ResourceBarUIController>();
-            if (this.FPBar == null) this.FPBar = this.transform.GetChild(1).GetComponent<ResourceBarUIController>();
-            if (this.StaminaBar == null) this.StaminaBar = this.transform.GetChild(2).GetComponent<ResourceBarUIController>();
-
-        }
-
         private void OnEnable()
         {
             this.SendAll();
@@ -114,26 +98,26 @@ namespace FlameOfTheLost
             if (this.HPBar != null && this.PlayerResourcesController != null)
             {
                 this.ReadHealth(out int currentHP, out int maxHP);
-                UICanvasHUDResourcesPanelController.PushToBar(this.HPBar, currentHP, maxHP);
+                UICanvasHUDResourceBarGroupController.PushToBar(this.HPBar, currentHP, maxHP);
             }
 
             if (this.FPBar != null && this.PlayerResourcesController != null)
             {
                 this.ReadFP(out int currentFP, out int maxFP);
-                UICanvasHUDResourcesPanelController.PushToBar(this.FPBar, currentFP, maxFP);
+                UICanvasHUDResourceBarGroupController.PushToBar(this.FPBar, currentFP, maxFP);
             }
 
             if (this.StaminaBar != null && this.PlayerResourcesController != null)
             {
                 this.ReadStamina(out int currentStamina, out int maxStamina);
-                UICanvasHUDResourcesPanelController.PushToBar(this.StaminaBar, currentStamina, maxStamina);
+                UICanvasHUDResourceBarGroupController.PushToBar(this.StaminaBar, currentStamina, maxStamina);
             }
         }
 
         // --- Event handlers (C# event path) ---
-        private void HandleHealthChanged(int currentValue, int maxValue) => UICanvasHUDResourcesPanelController.PushToBar(this.HPBar, currentValue, maxValue);
-        private void HandleFPChanged(int currentValue, int maxValue) => UICanvasHUDResourcesPanelController.PushToBar(this.FPBar, currentValue, maxValue);
-        private void HandleStaminaChanged(int currentValue, int maxValue) => UICanvasHUDResourcesPanelController.PushToBar(this.StaminaBar, currentValue, maxValue);
+        private void HandleHealthChanged(int currentValue, int maxValue) => UICanvasHUDResourceBarGroupController.PushToBar(this.HPBar, currentValue, maxValue);
+        private void HandleFPChanged(int currentValue, int maxValue) => UICanvasHUDResourceBarGroupController.PushToBar(this.FPBar, currentValue, maxValue);
+        private void HandleStaminaChanged(int currentValue, int maxValue) => UICanvasHUDResourceBarGroupController.PushToBar(this.StaminaBar, currentValue, maxValue);
 
         // --- Public hooks (for UnityEvent path) ---
         public void OnHealthChanged(int currentValue, int maxValue) => this.HandleHealthChanged(currentValue, maxValue);
@@ -161,7 +145,7 @@ namespace FlameOfTheLost
         }
 
         // --- PUSH adapter (works with common patterns) ---
-        private static void PushToBar(ResourceBarUIController bar, int currentValue, int maxValue)
+        private static void PushToBar(UICanvasHUDResourceBarController bar, int currentValue, int maxValue)
         {
             if (bar == null) return;
 
@@ -194,6 +178,45 @@ namespace FlameOfTheLost
                 // Last resort: allow a MonoBehaviour on the same GO to listen.
                 // bar.SendMessage("SetNormalized", t, SendMessageOptions.DontRequireReceiver);
             }
+        }
+
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (this.PlayerResourcesController == null)
+            {
+                GameObject player = GameObject.Find("Player");
+                if (player != null) _resources = player.GetComponentInChildren<CharacterResourcesController>();
+            }
+
+            // Try to find bars by common names if not set
+            if (this.HPBar == null)
+            {
+                Transform hpBar = this.transform.Find("HPBar");
+                if (hpBar != null) this.HPBar = hpBar.GetComponent<UICanvasHUDResourceBarController>();
+            }
+            if (this.FPBar == null)
+            {
+                Transform fpBar = this.transform.Find("FPBar");
+                if (fpBar != null) this.FPBar = fpBar.GetComponent<UICanvasHUDResourceBarController>();
+            }
+            if (this.StaminaBar == null)
+            {
+                Transform staminaBar = this.transform.Find("StaminaBar");
+                if (staminaBar != null) this.StaminaBar = staminaBar.GetComponent<UICanvasHUDResourceBarController>();
+            }
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.PlayerResourcesController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarGroupController)}] Player's CharacterResourcesController reference is missing.");
+
+            if (this.HPBar == null)         Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarGroupController)}] HPBar reference is missing.");
+            if (this.FPBar == null)         Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarGroupController)}] FPBar reference is missing.");
+            if (this.StaminaBar == null)    Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarGroupController)}] StaminaBar reference is missing.");
         }
     }
 }
