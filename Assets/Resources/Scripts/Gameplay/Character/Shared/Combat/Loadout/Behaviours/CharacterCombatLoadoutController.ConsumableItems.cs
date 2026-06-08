@@ -18,7 +18,7 @@ namespace FlameOfTheLost
         }
 
         //  7. Events
-        public event Action<InventoryItemEntry> OnActiveEquippedConsumableItemChange;
+        public event Action<InventoryItemEntry> OnActiveEquippedConsumableItemChanged;
 
         // --- Public APIs ---
         //  4. Consumable Item Management
@@ -224,7 +224,7 @@ namespace FlameOfTheLost
             }
             else
             {
-                this.OnActiveEquippedConsumableItemChange?.Invoke(this.ActiveEquippedConsumableItemEntry);
+                this.OnActiveEquippedConsumableItemChanged?.Invoke(this.ActiveEquippedConsumableItemEntry);
             }
 
             return true;
@@ -295,7 +295,7 @@ namespace FlameOfTheLost
             if (newEntry == null)
             {
                 this.ActiveEquippedConsumableItemEntry = null;
-                this.OnActiveEquippedConsumableItemChange?.Invoke(null);
+                this.OnActiveEquippedConsumableItemChanged?.Invoke(null);
                 return;
             }
 
@@ -329,7 +329,7 @@ namespace FlameOfTheLost
             }
 
             this.ActiveEquippedConsumableItemEntry = newEntry;
-            this.OnActiveEquippedConsumableItemChange?.Invoke(this.ActiveEquippedConsumableItemEntry);
+            this.OnActiveEquippedConsumableItemChanged?.Invoke(this.ActiveEquippedConsumableItemEntry);
         }
 
         //      2.3. Check if a consumable item entry is valid:

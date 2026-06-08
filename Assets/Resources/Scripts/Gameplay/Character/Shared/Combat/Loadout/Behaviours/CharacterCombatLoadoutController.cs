@@ -10,6 +10,7 @@ namespace FlameOfTheLost
         private CharacterCombatController CombatController => this.CharacterRootController.CombatController;
         private CharacterCombatResourcesHandler CombatResourcesHandler => this.CharacterRootController.CombatResourcesHandler;
         private CharacterCombatStatusEffectApplicationHandler CombatStatusEffectHandler => this.CharacterRootController.CombatStatusEffectApplicationHandler;
+        private CharacterProgressionController ProgressionController => this.CharacterRootController.ProgressionController;
         private InventoryController InventoryController => this.CharacterRootController.InventoryController;
 
         //  2. Loadout Capacity
@@ -96,9 +97,9 @@ namespace FlameOfTheLost
             this.EnsureActiveWeaponIsValid();
             this.EnsureActiveConsumableItemIsValid();
 
-            this.OnActiveEquippedWeaponChange?.Invoke(this.ActiveEquippedWeaponEntry);
-            this.OnActiveSpecialSkillChange?.Invoke(this.ActiveEquippedRuntimeWeapon?.ActiveSpecialSkill);
-            this.OnActiveEquippedConsumableItemChange?.Invoke(this.ActiveEquippedConsumableItemEntry);
+            this.OnActiveEquippedWeaponChanged?.Invoke(this.ActiveEquippedWeaponEntry);
+            this.OnActiveSpecialSkillChanged?.Invoke(this.ActiveEquippedRuntimeWeapon?.ActiveSpecialSkill);
+            this.OnActiveEquippedConsumableItemChanged?.Invoke(this.ActiveEquippedConsumableItemEntry);
         }
 
         // --- Helpers ---

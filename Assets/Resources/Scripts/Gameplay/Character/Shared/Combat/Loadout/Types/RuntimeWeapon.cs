@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -18,7 +19,6 @@ namespace FlameOfTheLost
 
         //  2. Active Skills
         [Header("Active Skills (Runtime)")]
-        [SerializeField] private SkillProfile _normalSkill;
         [SerializeField] private SkillProfile _activeSpecialSkill;
         public SkillProfile NormalSkill => this.Profile.NormalSkill;
         public SkillProfile ActiveSpecialSkill
@@ -27,16 +27,19 @@ namespace FlameOfTheLost
             set => _activeSpecialSkill = value;
         }
 
-        //  3. Non-serialized runtime data
-        [NonSerialized] private GameObject _owner;
-        public GameObject Owner
+        //  3. Capability Requirements
+        public IReadOnlyList<CharacterCapabilityRequirement> Requirements => this.Profile.Requirements;
+
+        //  4. Non-serialized runtime data
+        [NonSerialized] private CharacterRootController _owner;
+        public CharacterRootController Owner
         {
             get => _owner;
             private set => _owner = value;
         }
 
         // --- Constructors ---
-        public RuntimeWeapon(WeaponProfile profile, GameObject owner)
+        public RuntimeWeapon(WeaponProfile profile, CharacterRootController owner)
         {
             this.Profile = profile;
             this.ActiveSpecialSkill = this.Profile.InnateSpecialSkill;

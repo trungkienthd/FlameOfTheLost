@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -69,8 +70,10 @@ namespace FlameOfTheLost
         [Header("References (Progression)")]
         [SerializeField] private CharacterProgressionController _progressionController;
         [SerializeField] private CharacterRewardWalletController _rewardWalletController;
+        [SerializeField] private CharacterRewardDropProvider _rewardDropProvider;
         public CharacterProgressionController ProgressionController => _progressionController;
         public CharacterRewardWalletController RewardWalletController => _rewardWalletController;
+        public CharacterRewardDropProvider RewardDropProvider => _rewardDropProvider;
 
         [Header("References (Inventory)")]
         [SerializeField] private InventoryController _inventoryController;
@@ -113,6 +116,7 @@ namespace FlameOfTheLost
 
             if (this.ProgressionController == null)     _progressionController  = this.GetComponentInChildren<CharacterProgressionController>(true);
             if (this.RewardWalletController == null)    _rewardWalletController = this.GetComponentInChildren<CharacterRewardWalletController>(true);
+            if (this.RewardDropProvider == null)        _rewardDropProvider     = this.GetComponentInChildren<CharacterRewardDropProvider>(true);
 
             if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>(true);
         }

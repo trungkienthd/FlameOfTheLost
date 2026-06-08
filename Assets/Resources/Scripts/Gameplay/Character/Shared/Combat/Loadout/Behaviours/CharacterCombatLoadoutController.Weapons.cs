@@ -26,8 +26,8 @@ namespace FlameOfTheLost
         private RuntimeWeaponDictionary RuntimeWeaponMap => _runtimeWeaponMap;
 
         //  7. Events
-        public event Action<InventoryItemEntry> OnActiveEquippedWeaponChange;
-        public event Action<SkillProfile> OnActiveSpecialSkillChange;
+        public event Action<InventoryItemEntry> OnActiveEquippedWeaponChanged;
+        public event Action<SkillProfile> OnActiveSpecialSkillChanged;
 
         // --- Public APIs ---
         //  2. Weapon Management
@@ -38,12 +38,12 @@ namespace FlameOfTheLost
         {
             if (this.IsInAttackWindow)
             {
-                Debug.Log($"[{this.CharacterName}.CharacterCombatLoadoutController] TryCycleWeaponEntry blocked: Weapon switching is locked.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] TryCycleWeaponEntry blocked: Weapon switching is locked.");
                 return false;
             }
             if (this.IsLoadoutSwapLocked)
             {
-                Debug.Log($"[{this.CharacterName}.CharacterCombatLoadoutController] TryCycleWeaponEntry blocked: CannotSwapLoadout flag is active.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] TryCycleWeaponEntry blocked: CannotSwapLoadout flag is active.");
                 return false;
             }
 
@@ -90,12 +90,12 @@ namespace FlameOfTheLost
 
             if (this.IsInAttackWindow)
             {
-                Debug.Log($"[{this.CharacterName}.CharacterCombatLoadoutController] TryReplaceEquippedWeapon blocked: Weapon Replacement is locked.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] TryReplaceEquippedWeapon blocked: Weapon Replacement is locked.");
                 return false;
             }
             if (this.IsLoadoutSwapLocked)
             {
-                Debug.Log($"[{this.CharacterName}.CharacterCombatLoadoutController] TryReplaceEquippedWeapon blocked: CannotSwapLoadout flag is active.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] TryReplaceEquippedWeapon blocked: CannotSwapLoadout flag is active.");
                 return false;
             }
 
@@ -138,12 +138,12 @@ namespace FlameOfTheLost
         {
             if (this.IsInAttackWindow)
             {
-                Debug.Log($"[{this.CharacterName}.CharacterCombatLoadoutController] TryUnequipWeapon blocked: Weapon Unequipping is locked.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] TryUnequipWeapon blocked: Weapon Unequipping is locked.");
                 return false;
             }
             if (this.IsLoadoutSwapLocked)
             {
-                Debug.Log($"[{this.CharacterName}.CharacterCombatLoadoutController] TryUnequipWeapon blocked: CannotSwapLoadout flag is active.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] TryUnequipWeapon blocked: CannotSwapLoadout flag is active.");
                 return false;
             }
 
@@ -167,12 +167,12 @@ namespace FlameOfTheLost
         {
             if (this.IsInAttackWindow)
             {
-                Debug.Log($"[{this.CharacterName}.CharacterCombatLoadoutController] TryQuickEquipWeapon blocked: Weapon Quick Equipping is locked.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] TryQuickEquipWeapon blocked: Weapon Quick Equipping is locked.");
                 return false;
             }
             if (this.IsLoadoutSwapLocked)
             {
-                Debug.Log($"[{this.CharacterName}.CharacterCombatLoadoutController] TryQuickEquipWeapon blocked: CannotSwapLoadout flag is active.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] TryQuickEquipWeapon blocked: CannotSwapLoadout flag is active.");
                 return false;
             }
 
@@ -247,7 +247,7 @@ namespace FlameOfTheLost
             // Refresh UI only if this weapon is currently active
             if (UnityEngine.Object.ReferenceEquals(this.ActiveEquippedWeaponEntry, weaponEntry))
             {
-                this.OnActiveSpecialSkillChange?.Invoke(weapon.ResolveSpecialSkill(runtimeWeapon.ActiveSpecialSkill));
+                this.OnActiveSpecialSkillChanged?.Invoke(weapon.ResolveSpecialSkill(runtimeWeapon.ActiveSpecialSkill));
             }
 
             return true;
@@ -358,8 +358,8 @@ namespace FlameOfTheLost
             if (newWeaponEntry == null)
             {
                 this.ActiveEquippedWeaponEntry = null;
-                this.OnActiveEquippedWeaponChange?.Invoke(null);
-                this.OnActiveSpecialSkillChange?.Invoke(null);
+                this.OnActiveEquippedWeaponChanged?.Invoke(null);
+                this.OnActiveSpecialSkillChanged?.Invoke(null);
                 return;
             }
 
@@ -393,10 +393,10 @@ namespace FlameOfTheLost
             }
 
             this.ActiveEquippedWeaponEntry = newWeaponEntry;
-            this.OnActiveEquippedWeaponChange?.Invoke(this.ActiveEquippedWeaponEntry);
+            this.OnActiveEquippedWeaponChanged?.Invoke(this.ActiveEquippedWeaponEntry);
 
             RuntimeWeapon runtimeWeapon = this.GetOrCreateRuntimeInstance(newWeaponEntry);
-            this.OnActiveSpecialSkillChange?.Invoke(newWeapon.ResolveSpecialSkill(runtimeWeapon?.ActiveSpecialSkill));
+            this.OnActiveSpecialSkillChanged?.Invoke(newWeapon.ResolveSpecialSkill(runtimeWeapon?.ActiveSpecialSkill));
         }
 
         //      1.3. Get or create runtime weapon instance for a given equipped weapon entry
@@ -406,7 +406,7 @@ namespace FlameOfTheLost
 
             if (this.RuntimeWeaponMap.TryGetValue(weaponEntry, out var runtimeWeapon) && runtimeWeapon != null) return runtimeWeapon;
 
-            runtimeWeapon = new RuntimeWeapon(weapon, this.gameObject);
+            runtimeWeapon = new RuntimeWeapon(weapon, this.CharacterRootController);
             this.RuntimeWeaponMap[weaponEntry] = runtimeWeapon;
 
             return runtimeWeapon;

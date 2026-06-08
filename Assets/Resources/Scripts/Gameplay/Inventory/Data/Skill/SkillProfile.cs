@@ -1,15 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
-    using UnityEditor;
-#endif
-
 namespace FlameOfTheLost
 {
     public abstract class SkillProfile : ScriptableObject, IIdentityProvider, IIconProvider
     {
-        // --- Identity
+        // --- States ---
+        //  1. Identity
         [Header("Identity")]
         [SerializeField] private int _id;
         [SerializeField] private string _key;
@@ -24,46 +21,40 @@ namespace FlameOfTheLost
         public string DisplayName => _displayName;
         public string Description => _description;
 
-        // --- Icon
+        //  2. Icon
         [Header("UI (Icon)")]
         [SerializeField] private Sprite _icon;
         public Sprite Icon => _icon;
 
-        // --- Style
+        //  3. Style
         public abstract SkillStyleType Style 
         {
             get; 
         }
 
-        // --- Provision (authoring hint; runtime can override)
+        //  4. Provision (authoring hint; runtime can override)
         [Header("Provision (Authoring)")]
         [SerializeField] private SkillProvisionType _defaultProvisionType = SkillProvisionType.CharacterLearned;
         public SkillProvisionType DefaultProvisionType => _defaultProvisionType;
 
-        // --- Weapon Compatibility
+        //  5. Weapon Compatibility
         [Header("Weapon Compatibility")]
         [SerializeField] private List<WeaponType> _attachableWeaponTypes;
         public IReadOnlyList<WeaponType> AttachableWeaponTypes => _attachableWeaponTypes;
 
-        // --- Compatibility helper (policy: empty list => unrestricted)
-        public bool IsCompatibleWithWeaponType(WeaponType weaponType)
-        {
-            if (this.AttachableWeaponTypes == null || this.AttachableWeaponTypes.Count == 0) return true;
-            for (int i = 0; i < this.AttachableWeaponTypes.Count; i++)
-            {
-                if (this.AttachableWeaponTypes[i] == weaponType) return true;
-            }
-            return false;
-        }
+        //  6. Capability Requirements
+        [Header("Capability Requirements")]
+        [SerializeField] private List<CharacterCapabilityRequirement> _requirements = new();
+        public IReadOnlyList<CharacterCapabilityRequirement> Requirements => _requirements;
 
-        // --- Attack Properties
+        //  7. Attack Properties
         [Header("Attack Properties")]
         [SerializeField, Min(0)] private int _damageAmount = 10;
         [SerializeField, Min(0f)] private float _knockbackForce = 5f;
         public int DamageAmount => _damageAmount;
         public float KnockbackForce => _knockbackForce;
 
-        // --- Resource Cost
+        //  8. Resource Cost
         [Header("Resource Cost")]
         [SerializeField] private ResourceCost _resourceCost = new()
         {
@@ -79,67 +70,21 @@ namespace FlameOfTheLost
         };
         public ResourceCost ResourceCost => _resourceCost;
 
-        // --- Status Effects
+        //  9. Status Effects
         [Header("Status Effects")]
         [SerializeField] private List<SkillStatusEffectApplication> _statusEffectApplications = new();
 
         public IReadOnlyList<SkillStatusEffectApplication> StatusEffectApplications => _statusEffectApplications;
 
-#if UNITY_EDITOR
-        //private void OnValidate()
-        //{
-        //    // Uniqueness check across project (Editor only)
-        //    var dup = SkillProfile.FindDuplicateID(this, this.ID);
-        //    if (dup != null && dup != this)
-        //    {
-        //        Debug.LogError($"[SkillProfile] Duplicate ID={this.ID} detected between '{this.name}' and '{dup.name}'. " +
-        //                       $"Please assign a different ID to one of them.", this);
-        //    }
-        //}
-
-        [MenuItem("Tools/Combat/Skills/AssignNextFreeID")]
-        private static void AssignNextFreeIDSelected()
+        // --- Public APIs ---
+        public bool IsCompatibleWithWeaponType(WeaponType weaponType)
         {
-            foreach (var obj in Selection.objects)
+            if (this.AttachableWeaponTypes == null || this.AttachableWeaponTypes.Count == 0) return true;
+            for (int i = 0; i < this.AttachableWeaponTypes.Count; i++)
             {
-                if (obj is SkillProfile skill)
-                {
-                    var used = SkillProfile.CollectUsedIDs();
-                    int next = 0;
-                    while (used.Contains(next)) next++;
-                    Undo.RecordObject(skill, "Assign Next Free Skill ID");
-                    skill.Id = next;
-                    EditorUtility.SetDirty(skill);
-                    Debug.Log($"Assigned ID={next} to Skill '{skill.name}'");
-                }
+                if (this.AttachableWeaponTypes[i] == weaponType) return true;
             }
+            return false;
         }
-
-        private static SkillProfile FindDuplicateID(SkillProfile skill, int id)
-        {
-            var guids = AssetDatabase.FindAssets("t:SkillProfile");
-            foreach (var g in guids)
-            {
-                var path = AssetDatabase.GUIDToAssetPath(g);
-                var asset = AssetDatabase.LoadAssetAtPath<SkillProfile>(path);
-                if (!asset || asset == skill) continue;
-                if (asset.Id == id) return asset;
-            }
-            return null;
-        }
-
-        private static HashSet<int> CollectUsedIDs()
-        {
-            var set = new HashSet<int>();
-            var guids = AssetDatabase.FindAssets("t:SkillProfile");
-            foreach (var g in guids)
-            {
-                var path = AssetDatabase.GUIDToAssetPath(g);
-                var asset = AssetDatabase.LoadAssetAtPath<SkillProfile>(path);
-                if (asset) set.Add(asset.Id);
-            }
-            return set;
-        }
-#endif
     }
 }

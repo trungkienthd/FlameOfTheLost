@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -23,7 +24,12 @@ namespace FlameOfTheLost
         public SkillProfile NormalSkill => _normalSkill;
         public SkillProfile InnateSpecialSkill => _innateSpecialSkill;
 
-        // --- Unity Methods ---
+        //  3. Capability Requirements
+        [Header("Capability Requirements")]
+        [SerializeField] private List<CharacterCapabilityRequirement> _requirements = new();
+        public IReadOnlyList<CharacterCapabilityRequirement> Requirements => _requirements;
+
+        // --- Unity Callbacks ---
 #if UNITY_EDITOR
         protected override void OnValidate()
         {
