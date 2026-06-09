@@ -1,6 +1,6 @@
 namespace FlameOfTheLost
 {
-    public class CharacterPlacementHandler : CharacterBehaviourBaseController
+    public class CharacterPlacementHandler : CharacterBehaviourControllerBase
     {
         public virtual void PlaceCharacter(SpawnResolveResult spawnResult,  CharacterPlacementSourceType placementSourceType)
         {

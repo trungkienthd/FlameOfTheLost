@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterProgressionController : CharacterBehaviourBaseController
+    public class CharacterProgressionController : CharacterBehaviourControllerBase
     {
         // --- States ---
         [Header("Progression Attributes")]

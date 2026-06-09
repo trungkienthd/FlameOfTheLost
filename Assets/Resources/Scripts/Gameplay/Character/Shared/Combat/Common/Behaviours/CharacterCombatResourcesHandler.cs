@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterCombatResourcesHandler : CharacterBehaviourBaseController
+    public class CharacterCombatResourcesHandler : CharacterBehaviourControllerBase
     {
         // --- States ---
         //  1. References
@@ -274,7 +274,7 @@ namespace FlameOfTheLost
         }
 
         //  3. Refresh for Respawn: Clears all runtime reservation
-        public void ClearCombatReservationsAfterRespawn()
+        public void ClearCombatReservationsAfterCharacterPlacement()
         {
             this.ClearAttackReservations();
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [RequireComponent(typeof(Collider2D))]
-    public class CharacterAITargetDetectionTriggerController : CharacterBehaviourBaseController
+    public class CharacterAITargetDetectionTriggerController : CharacterBehaviourControllerBase
     {
         private CharacterAITargetDetectionHandler TargetDetectionHandler
         {

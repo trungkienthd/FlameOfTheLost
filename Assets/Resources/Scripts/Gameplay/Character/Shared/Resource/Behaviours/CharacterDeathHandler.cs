@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterDeathHandler : CharacterBehaviourBaseController
+    public class CharacterDeathHandler : CharacterBehaviourControllerBase
     {
         // --- States ---
         //  1. References

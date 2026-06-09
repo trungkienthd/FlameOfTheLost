@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace FlameOfTheLost
 {
-    public class PlayerInteractionHandler : CharacterBehaviourBaseController
+    public class PlayerInteractionHandler : CharacterBehaviourControllerBase
     {
         // --- States ---
         //  1. References

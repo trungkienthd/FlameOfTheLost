@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class CharacterResourcePoolController : CharacterBehaviourBaseController, IStatusEffectStatModifierMultiplierConsumer, IStatusEffectStatModifierAdditiveConsumer, IStatusEffectStatPeriodicConsumer
+    public abstract class CharacterResourcePoolController : CharacterBehaviourControllerBase, IStatusEffectStatModifierMultiplierConsumer, IStatusEffectStatModifierAdditiveConsumer, IStatusEffectStatPeriodicConsumer
     {
         // --- States ---
         //  1. Resource Pool

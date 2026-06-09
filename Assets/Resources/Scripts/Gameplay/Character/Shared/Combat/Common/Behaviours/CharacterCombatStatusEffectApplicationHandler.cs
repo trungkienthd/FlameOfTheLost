@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterCombatStatusEffectApplicationHandler : CharacterBehaviourBaseController
+    public class CharacterCombatStatusEffectApplicationHandler : CharacterBehaviourControllerBase
     {
         // --- States ---
         //  1. References
@@ -123,7 +123,7 @@ namespace FlameOfTheLost
         }
 
         //  4. Refresh for respawn: Clear all tracking maps
-        public void ClearRuntimeTrackingAfterRespawn()
+        public void ClearRuntimeTrackingAfterCharacterPlacement()
         {
             _firstHitAppliedMap.Clear();
             _oncePerTargetMap.Clear();

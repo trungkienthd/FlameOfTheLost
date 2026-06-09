@@ -3,7 +3,7 @@ using UnityEngine.Tilemaps;
 
 namespace FlameOfTheLost
 {
-    public class TilemapTerrainController : MonoBehaviour
+    public class TilemapTerrainController : FOTLMonoBehaviour
     {
         [Header("References")]
         [SerializeField] private TilemapRenderer _tilemapRenderer;
@@ -11,14 +11,10 @@ namespace FlameOfTheLost
 
         [Header("Data")]
         [SerializeField] private TerrainProfile _profile;
-
         public TerrainProfile TerrainProfile => _profile;
+
         public int Priority => this.TerrainProfile != null ? this.TerrainProfile.Priority : 0;
 
-        private void Awake()
-        {
-            if (this.TilemapRenderer == null) _tilemapRenderer = this.GetComponent<TilemapRenderer>();
-        }
         private void Start()
         {
             //if (this.TilemapRenderer != null)
@@ -51,6 +47,14 @@ namespace FlameOfTheLost
             if (contactHandler == null) return;
 
             contactHandler.UnregisterTerrain(this);
+        }
+
+        // --- Helpers ---
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (this.TilemapRenderer == null) _tilemapRenderer = this.GetComponent<TilemapRenderer>();
         }
     }
 }

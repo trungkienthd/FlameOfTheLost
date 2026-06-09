@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterCombatAimingHandler : CharacterBehaviourBaseController
+    public class CharacterCombatAimingHandler : CharacterBehaviourControllerBase
     {
         // --- States ---
         //  1. References
@@ -83,7 +83,7 @@ namespace FlameOfTheLost
         }
 
         //  5. Refresh for Respawn: clear snapshot and unlock facing
-        public void ClearAimingStateAfterRespawn()
+        public void ClearAimingStateAfterCharacterPlacement()
         {
             this.UnlockFacing();
             this.ClearAttackSnapshotDirection();

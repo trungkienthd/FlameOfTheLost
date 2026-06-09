@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterIdentityController : CharacterBehaviourBaseController, IIdentityProvider
+    public class CharacterIdentityController : CharacterBehaviourControllerBase, IIdentityProvider
     {
         // --- States ---
         //  1. Identity

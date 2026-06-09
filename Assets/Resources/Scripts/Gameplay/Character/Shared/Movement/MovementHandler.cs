@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class MovementHandler : CharacterBehaviourBaseController, 
+    public class MovementHandler : CharacterBehaviourControllerBase, 
         IStatusEffectFlagConsumer, 
         IStatusEffectStatModifierMultiplierConsumer,
         ICharacterPlacementRefreshable
@@ -129,7 +129,7 @@ namespace FlameOfTheLost
 
         //  3. ICharacterPlacementRefreshable implementation
         public int PlacementConfigurePriority => 30;
-        public void RefreshAfterPlace(CharacterPlacementContext context)
+        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
         {
             this.RawMovementInput = Vector2.zero;
             this.DesiredMovement = Vector2.zero;

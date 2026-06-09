@@ -3,11 +3,9 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [RequireComponent(typeof(CharacterCombatLoadoutController))]
     [RequireComponent(typeof(CharacterCombatResourcesHandler))]
     [RequireComponent(typeof(CharacterCombatStatusEffectApplicationHandler))]
-    [RequireComponent(typeof(CharacterCombatAimingHandler))]
-    public class CharacterCombatController : CharacterBehaviourBaseController, 
+    public class CharacterCombatController : CharacterBehaviourControllerBase, 
         IStatusEffectFlagConsumer,
         ICharacterPlacementRefreshable
     {
@@ -290,7 +288,7 @@ namespace FlameOfTheLost
 
         //  5. ICharacterPlacementRefreshable implementation
         public int PlacementConfigurePriority => 40;
-        public void RefreshAfterPlace(CharacterPlacementContext context)
+        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
         {
             if (this.AttackRoutine != null)
             {
@@ -303,10 +301,10 @@ namespace FlameOfTheLost
 
             this.MeleeHitboxController?.DisableHitbox();
 
-            this.CombatLoadoutController?.RefreshLoadoutAfterRespawn();
-            this.CombatAimingHandler?.ClearAimingStateAfterRespawn();
-            this.CombatResourcesHandler?.ClearCombatReservationsAfterRespawn();
-            this.CombatStatusEffectHandler?.ClearRuntimeTrackingAfterRespawn();
+            this.CombatLoadoutController?.RefreshLoadoutAfterCharacterPlacement();
+            this.CombatAimingHandler?.ClearAimingStateAfterCharacterPlacement();
+            this.CombatResourcesHandler?.ClearCombatReservationsAfterCharacterPlacement();
+            this.CombatStatusEffectHandler?.ClearRuntimeTrackingAfterCharacterPlacement();
         }
 
         // --- Helpers ---

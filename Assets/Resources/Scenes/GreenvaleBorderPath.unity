@@ -41088,7 +41088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1496c5f7a899a614c837e5305652289f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EquippedLoadoutSubPanelController
-  _playerCombatLoadoutController: {fileID: 557462171}
+  _playerCombatLoadoutController: {fileID: 1267844716}
   _playerInteractionLoadoutController: {fileID: 2107461182}
   _candidateLoadoutSubPanelController: {fileID: 1547136688}
   _weaponListSection: {fileID: 437503168}
@@ -41979,7 +41979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0963051e27d2e424ea11dfcaefcb4466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCombatLoadoutController: {fileID: 557462171}
+  _playerCombatLoadoutController: {fileID: 0}
   _weaponIcon: {fileID: 1595549757}
   _activeSpecialSkillIcon: {fileID: 997383672}
   _consumableItemIcon: {fileID: 348001887}
@@ -42067,11 +42067,8 @@ GameObject:
   m_Component:
   - component: {fileID: 557462166}
   - component: {fileID: 557462172}
-  - component: {fileID: 557462171}
   - component: {fileID: 557462170}
   - component: {fileID: 557462169}
-  - component: {fileID: 557462168}
-  - component: {fileID: 557462167}
   m_Layer: 8
   m_Name: Combat
   m_TagString: Untagged
@@ -42092,38 +42089,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1267844715}
+  - {fileID: 1317997555}
   - {fileID: 77027719}
   - {fileID: 150202304}
   - {fileID: 1917189432}
   m_Father: {fileID: 2085343169}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &557462167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557462165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf43de2b2632e1418dab6af1d9bcb3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MouseCombatAimingHandler
---- !u!114 &557462168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557462165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c037b53ade72324885b81e82a003e3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAimingHandler
-  _characterRootController: {fileID: 2107461207}
-  _aimingProviderBehaviour: {fileID: 557462167}
-  _aimingConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
 --- !u!114 &557462169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42150,36 +42122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatResourcesHandler
   _characterRootController: {fileID: 2107461207}
---- !u!114 &557462171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557462165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7923366f865bed049afe59470bced360, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutController
-  _characterRootController: {fileID: 2107461207}
-  _equippedConsumableItemEntries: []
-  _activeEquippedConsumableItemEntry:
-    _item: {fileID: 0}
-    _quantity: 0
-    _equipped: 0
-  _maxEquippedWeapons: 2
-  _maxEquippedConsumableItems: 4
-  _cannotSwapLoadout: 0
-  _ignoreSwapLock: 0
-  _equippedWeaponEntries: []
-  _activeEquippedWeaponEntry:
-    _item: {fileID: 0}
-    _quantity: 0
-    _equipped: 0
-  _runtimeWeaponMap:
-    _keys: []
-    _values: []
 --- !u!114 &557462172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79895,6 +79837,119 @@ MonoBehaviour:
   _slotsPerPage: 9
   _maxSupportedPages: 99
   _columnCount: 3
+--- !u!1 &1267844714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1267844715}
+  - component: {fileID: 1267844716}
+  - component: {fileID: 1267844719}
+  - component: {fileID: 1267844718}
+  - component: {fileID: 1267844717}
+  m_Layer: 8
+  m_Name: Loadout
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1267844715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267844714}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 557462166}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1267844716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267844714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7923366f865bed049afe59470bced360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutController
+  _characterRootController: {fileID: 2107461207}
+  _cannotSwapLoadout: 0
+  _ignoreSwapLock: 0
+--- !u!114 &1267844717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267844714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 912c447cd5d0719429dfa75f3981786e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutConsumableItemHandler
+  _characterRootController: {fileID: 2107461207}
+  _maxEquippedEntries: 2
+  _equippedEntries:
+  - _item: {fileID: 0}
+    _quantity: 0
+    _equipped: 0
+  - _item: {fileID: 0}
+    _quantity: 0
+    _equipped: 0
+  _activeEquippedEntry:
+    _item: {fileID: 0}
+    _quantity: 0
+    _equipped: 0
+--- !u!114 &1267844718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267844714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d308567992dd904ca51a20c458f7884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutSpecialSkillHandler
+  _characterRootController: {fileID: 2107461207}
+--- !u!114 &1267844719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267844714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bafbe0cdb0d29a4799ee60634bb9445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutWeaponHandler
+  _characterRootController: {fileID: 2107461207}
+  _maxEquippedEntries: 1
+  _equippedEntries:
+  - _item: {fileID: 0}
+    _quantity: 0
+    _equipped: 0
+  _activeEquippedEntry:
+    _item: {fileID: 0}
+    _quantity: 0
+    _equipped: 0
+  _runtimeWeaponMap:
+    _keys: []
+    _values: []
 --- !u!1 &1280234347
 GameObject:
   m_ObjectHideFlags: 0
@@ -80528,6 +80583,66 @@ RectTransform:
   m_AnchoredPosition: {x: -210, y: 110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1317997554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1317997555}
+  - component: {fileID: 1317997557}
+  - component: {fileID: 1317997556}
+  m_Layer: 8
+  m_Name: Aiming
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1317997555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317997554}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 557462166}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1317997556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317997554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf43de2b2632e1418dab6af1d9bcb3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MouseCombatAimingProvider
+--- !u!114 &1317997557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317997554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c037b53ade72324885b81e82a003e3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAimingHandler
+  _characterRootController: {fileID: 2107461207}
+  _aimingProviderBehaviour: {fileID: 1317997557}
+  _aimingConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
 --- !u!1 &1334256572
 GameObject:
   m_ObjectHideFlags: 0
@@ -82112,7 +82227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348a815c10956944885cf6598d02c4e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CandidateLoadoutSubPanelController
-  _playerCombatLoadoutController: {fileID: 557462171}
+  _playerCombatLoadoutController: {fileID: 1267844716}
   _playerInteractionLoadoutController: {fileID: 2107461182}
   _playerInventoryController: {fileID: 1123552228}
   _equippedLoadoutSubPanelController: {fileID: 459125927}
@@ -89445,8 +89560,11 @@ MonoBehaviour:
   _visualLocomotionAnimationHandler: {fileID: 513242089}
   _visualCombatAnimationHandler: {fileID: 513242090}
   _combatController: {fileID: 557462172}
-  _combatLoadoutController: {fileID: 557462171}
-  _combatAimingHandler: {fileID: 557462168}
+  _combatLoadoutController: {fileID: 1267844716}
+  _combatLoadoutWeaponHandler: {fileID: 1267844719}
+  _combatLoadoutSpecialSkillHandler: {fileID: 1267844718}
+  _combatLoadoutConsumableItemHandler: {fileID: 1267844717}
+  _combatAimingHandler: {fileID: 1317997557}
   _combatResourcesHandler: {fileID: 557462170}
   _combatStatusEffectApplicationHandler: {fileID: 557462169}
   _resourcesController: {fileID: 1951002775}
@@ -89457,8 +89575,8 @@ MonoBehaviour:
   _statusEffectFlagHandler: {fileID: 1685654210}
   _statusEffectStatModifierHandler: {fileID: 1685654209}
   _statusEffectStatPeriodicHandler: {fileID: 1685654208}
-  _progressionController: {fileID: 0}
-  _rewardWalletController: {fileID: 0}
+  _progressionController: {fileID: 1006287878}
+  _rewardWalletController: {fileID: 1006287879}
   _rewardDropProvider: {fileID: 0}
   _inventoryController: {fileID: 1123552228}
   _playerCarryLoadoutController: {fileID: 2107461182}

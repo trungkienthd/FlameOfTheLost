@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class CharacterBehaviourBaseController : FOTLMonoBehaviour
+    public abstract class CharacterBehaviourControllerBase : FOTLMonoBehaviour
     {
         [Header("References (Character Root)")]
         [SerializeField] private CharacterRootController _characterRootController;

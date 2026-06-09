@@ -51,7 +51,7 @@ namespace FlameOfTheLost
 
             foreach (ICharacterPlacementRefreshable refreshableSystem in refreshableSystems)
             {
-                refreshableSystem.RefreshAfterPlace(context);
+                refreshableSystem.RefreshAfterCharacterPlacement(context);
             }
         }
     }

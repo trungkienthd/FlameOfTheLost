@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterTerrainContactHandler : CharacterBehaviourBaseController
+    public class CharacterTerrainContactHandler : CharacterBehaviourControllerBase
     {
         // --- States ---
         //  1. Traversal type

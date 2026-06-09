@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public sealed class TerritorialLocomotionVisualModeProvider : CharacterBehaviourBaseController,
+    public sealed class TerritorialLocomotionVisualModeProvider : CharacterBehaviourControllerBase,
         ICharacterLocomotionVisualModeProvider,
         ICharacterPlacementRefreshable
     {
@@ -80,7 +80,7 @@ namespace FlameOfTheLost
 
         //  2. ICharacterPlacementRefreshable implementation
         public int PlacementConfigurePriority => 92;
-        public void RefreshAfterPlace(CharacterPlacementContext context)
+        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
         {
             this.CurrentResolvedMode = this.RoamingMode;
             this.OnLocomotionVisualModeChanged?.Invoke();

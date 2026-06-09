@@ -8,7 +8,7 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(CharacterVisualFacingHandler))]
     [RequireComponent(typeof(CharacterVisualLocomotionAnimationHandler))]
     [RequireComponent(typeof(CharacterVisualCombatAnimationHandler))]
-    public class CharacterVisualController : CharacterBehaviourBaseController,
+    public class CharacterVisualController : CharacterBehaviourControllerBase,
         IFacingProvider,
         ICharacterPlacementRefreshable
     {
@@ -67,7 +67,7 @@ namespace FlameOfTheLost
 
         //  2. ICharacterPlacementRefreshable implementation
         public int PlacementConfigurePriority => 50;
-        public void RefreshAfterPlace(CharacterPlacementContext context)
+        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
         {
             if (this.Animator == null) return;
 

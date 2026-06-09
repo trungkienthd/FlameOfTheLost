@@ -7,7 +7,7 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(StatusEffectFlagHandler))]
     [RequireComponent(typeof(StatusEffectStatModifierHandler))]
     [RequireComponent(typeof(StatusEffectStatPeriodicHandler))]
-    public class StatusEffectController : CharacterBehaviourBaseController, ICharacterPlacementRefreshable
+    public class StatusEffectController : CharacterBehaviourControllerBase, ICharacterPlacementRefreshable
     {
         // --- States ---
         //  1. References
@@ -299,7 +299,7 @@ namespace FlameOfTheLost
 
         //  5. ICharacterPlacementRefreshable implementation
         public int PlacementConfigurePriority => 20;
-        public void RefreshAfterPlace(CharacterPlacementContext context)
+        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
         {
             this.RemoveAllStatusEffectVFXInstances();
 

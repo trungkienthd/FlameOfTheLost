@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterRewardWalletController : CharacterBehaviourBaseController
+    public class CharacterRewardWalletController : CharacterBehaviourControllerBase
     {
         // --- States ---
         [Header("Amount (Lost Embers)")]

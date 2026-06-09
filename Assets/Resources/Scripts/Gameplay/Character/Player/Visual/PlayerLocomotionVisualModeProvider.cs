@@ -2,7 +2,7 @@ using System;
 
 namespace FlameOfTheLost
 {
-    public class PlayerLocomotionVisualModeProvider : CharacterBehaviourBaseController, ICharacterLocomotionVisualModeProvider
+    public class PlayerLocomotionVisualModeProvider : CharacterBehaviourControllerBase, ICharacterLocomotionVisualModeProvider
     {
         // --- States ---
         private PlayerCarryLoadoutController PlayerCarryLoadoutController

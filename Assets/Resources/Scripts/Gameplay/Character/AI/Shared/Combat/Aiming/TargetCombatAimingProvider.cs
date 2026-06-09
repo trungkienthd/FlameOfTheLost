@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class TargetCombatAimingProvider : CharacterBehaviourBaseController, ICombatAimingProvider
+    public class TargetCombatAimingProvider : CharacterBehaviourControllerBase, ICombatAimingProvider
     {
         // --- States ---
         //  1. References

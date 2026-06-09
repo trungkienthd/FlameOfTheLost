@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [RequireComponent(typeof(KnockbackReceivingHandler))]
-    public class DamageReceivingHandler : CharacterBehaviourBaseController, IStatusEffectFlagConsumer
+    public class DamageReceivingHandler : CharacterBehaviourControllerBase, IStatusEffectFlagConsumer
     {
         // --- References
         [Header("References (Knockback)")]
