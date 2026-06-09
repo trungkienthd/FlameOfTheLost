@@ -45565,7 +45565,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1006287877}
   - component: {fileID: 1006287878}
-  - component: {fileID: 1006287879}
   m_Layer: 8
   m_Name: Progression
   m_TagString: Untagged
@@ -45601,84 +45600,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionController
   _characterRootController: {fileID: 2107461207}
-  _attributes:
-  - _attributeType: 0
-    _baseValue: 50
-    _valuePerLevel: 5
-    _level: 0
-    _maxLevel: 50
-    _baseUpgradeCost: 50
-    _upgradeCostPerLevel: 25
-  - _attributeType: 1
-    _baseValue: 50
-    _valuePerLevel: 3
-    _level: 0
-    _maxLevel: 50
-    _baseUpgradeCost: 40
-    _upgradeCostPerLevel: 20
-  - _attributeType: 2
-    _baseValue: 100
-    _valuePerLevel: 8
-    _level: 0
-    _maxLevel: 20
-    _baseUpgradeCost: 40
-    _upgradeCostPerLevel: 20
-  - _attributeType: 10
-    _baseValue: 1
-    _valuePerLevel: 1
-    _level: 0
-    _maxLevel: 3
-    _baseUpgradeCost: 200
-    _upgradeCostPerLevel: 300
-  - _attributeType: 11
-    _baseValue: 2
-    _valuePerLevel: 1
-    _level: 0
-    _maxLevel: 6
-    _baseUpgradeCost: 100
-    _upgradeCostPerLevel: 150
-  - _attributeType: 20
-    _baseValue: 1
-    _valuePerLevel: 1
-    _level: 0
-    _maxLevel: 30
-    _baseUpgradeCost: 30
-    _upgradeCostPerLevel: 15
-  - _attributeType: 21
-    _baseValue: 1
-    _valuePerLevel: 1
-    _level: 0
-    _maxLevel: 30
-    _baseUpgradeCost: 30
-    _upgradeCostPerLevel: 15
-  - _attributeType: 22
-    _baseValue: 1
-    _valuePerLevel: 1
-    _level: 0
-    _maxLevel: 30
-    _baseUpgradeCost: 30
-    _upgradeCostPerLevel: 15
-  - _attributeType: 23
-    _baseValue: 1
-    _valuePerLevel: 1
-    _level: 0
-    _maxLevel: 30
-    _baseUpgradeCost: 30
-    _upgradeCostPerLevel: 15
---- !u!114 &1006287879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006287876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b53bb9daedba2ea4bb1a336946f40dfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardWalletController
-  _characterRootController: {fileID: 2107461207}
-  _currentAmount: 0
+  _attributeEntries: []
+  _derivedStatEntries: []
 --- !u!1 &1011574957
 GameObject:
   m_ObjectHideFlags: 0
@@ -82522,6 +82445,52 @@ MonoBehaviour:
   _slotsPerPage: 12
   _maxSupportedPages: 99
   _columnCount: 4
+--- !u!1 &1580262301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1580262302}
+  - component: {fileID: 1580262303}
+  m_Layer: 8
+  m_Name: Reward
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1580262302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580262301}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2107461203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1580262303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580262301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53bb9daedba2ea4bb1a336946f40dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardWalletController
+  _characterRootController: {fileID: 2107461207}
+  _currentAmount: 0
 --- !u!1001 &1589897160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89515,6 +89484,7 @@ Transform:
   - {fileID: 1951002771}
   - {fileID: 1685654207}
   - {fileID: 1006287877}
+  - {fileID: 1580262302}
   - {fileID: 1123552227}
   - {fileID: 1877115627}
   - {fileID: 989409869}
@@ -89576,7 +89546,7 @@ MonoBehaviour:
   _statusEffectStatModifierHandler: {fileID: 1685654209}
   _statusEffectStatPeriodicHandler: {fileID: 1685654208}
   _progressionController: {fileID: 1006287878}
-  _rewardWalletController: {fileID: 1006287879}
+  _rewardWalletController: {fileID: 0}
   _rewardDropProvider: {fileID: 0}
   _inventoryController: {fileID: 1123552228}
   _playerCarryLoadoutController: {fileID: 2107461182}

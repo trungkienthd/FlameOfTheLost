@@ -15,14 +15,12 @@ namespace FlameOfTheLost
             private set
             {
                 _currentAmount = Mathf.Max(0, value);
-                this.OnChanged?.Invoke(this.CurrentAmount);
+                this.AmountChanged?.Invoke(this.CurrentAmount);
             }
         }
 
         // --- Events ---
-        public event Action<int> OnChanged;
-        public event Action<int> OnGained;
-        public event Action<int> OnSpent;
+        public event Action<int> AmountChanged;
 
         // --- Public APIs ---
         public void Add(int amount)
@@ -30,8 +28,6 @@ namespace FlameOfTheLost
             if (amount <= 0) return;
 
             this.CurrentAmount += amount;
-
-            this.OnGained?.Invoke(amount);
         }
 
         public bool CanSpend(int amount)
@@ -47,15 +43,12 @@ namespace FlameOfTheLost
 
             this.CurrentAmount -= amount;
 
-            this.OnSpent?.Invoke(amount);
-
             return true;
         }
 
-        // --- Helpers ---
-        private void OnSpentSafe(int amount)
+        public void SetAmount(int amount)
         {
-            this.OnSpent?.Invoke(amount);
+            this.CurrentAmount = Mathf.Max(0, amount);
         }
     }
 }

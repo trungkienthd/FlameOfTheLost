@@ -7,5 +7,10 @@ namespace FlameOfTheLost
         [Header("Reward")]
         [SerializeField, Min(0)] private int _rewardAmount = 1;
         public int RewardAmount => _rewardAmount;
+
+        public CharacterRewardAmount CreateRewardAmount()
+        {
+            return new CharacterRewardAmount(this.RewardAmount);
+        }
     }
 }

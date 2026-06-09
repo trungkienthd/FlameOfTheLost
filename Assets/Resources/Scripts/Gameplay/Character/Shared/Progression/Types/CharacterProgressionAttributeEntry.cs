@@ -7,44 +7,49 @@ namespace FlameOfTheLost
     public class CharacterProgressionAttributeEntry
     {
         [SerializeField] private CharacterProgressionAttributeType _attributeType;
-        public CharacterProgressionAttributeType AttributeType => _attributeType;
+        public CharacterProgressionAttributeType AttributeType
+        {
+            get => _attributeType;
+            private set => _attributeType = value;
+        }
 
         [Header("Value")]
         [SerializeField, Min(0)] private int _baseValue = 1;
-        [SerializeField, Min(0)] private int _valuePerLevel = 1;
-        public int BaseValue => _baseValue;
-        public int ValuePerLevel => _valuePerLevel;
-        public int EffectiveValue => this.BaseValue + (this.ValuePerLevel * this.Level);
-
-        [Header("Upgrade")]
-        [SerializeField, Min(0)] private int _level = 0;
-        [SerializeField, Min(0)] private int _maxLevel = 10;
-        public int Level
+        [SerializeField, Min(0)] private int _bonusValue;
+        public int BaseValue
         {
-            get => _level;
-            private set => _level = Mathf.Clamp(value, 0, this.MaxLevel);
+            get => _baseValue;
+            private set => _baseValue = value;
         }
-        public int MaxLevel => _maxLevel;
-        public bool IsMaxLevel => this.Level >= this.MaxLevel;
-
-        [Header("Cost")]
-        [SerializeField, Min(0)] private int _baseUpgradeCost = 10;
-        [SerializeField, Min(0)] private int _upgradeCostPerLevel = 5;
-        public int BaseUpgradeCost => _baseUpgradeCost;
-        public int UpgradeCostPerLevel => _upgradeCostPerLevel;
-        public int NextLevelUpgradeCost => (!this.IsMaxLevel) ? this.BaseUpgradeCost + (this.UpgradeCostPerLevel * this.Level) : 0;
-
-        public bool TryIncreaseLevel()
+        public int BonusValue
         {
-            if (this.IsMaxLevel) return false;
+            get => _bonusValue;
+            private set => _bonusValue = value;
+        }
+        public int CurrentValue => _baseValue + _bonusValue;
 
-            this.Level++;
-            return true;
+        public CharacterProgressionAttributeEntry(CharacterProgressionAttributeType attributeType, int baseValue)
+        {
+            this.AttributeType = attributeType;
+            this.BaseValue = Mathf.Max(0, baseValue);
+            this.BonusValue = 0;
         }
 
-        public void SetLevel(int level)
+        public void AddBonus(int amount)
         {
-            this.Level = level;
+            if (amount <= 0) return;
+
+            this.BonusValue += amount;
+        }
+
+        public void SetBaseValue(int value)
+        {
+            this.BaseValue = Mathf.Max(0, value);
+        }
+
+        public void SetBonusValue(int value)
+        {
+            this.BonusValue = Mathf.Max(0, value);
         }
     }
 }

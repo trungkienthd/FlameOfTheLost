@@ -8,23 +8,31 @@ namespace FlameOfTheLost
     {
         // --- States ---
         [Header("Progression Attributes")]
-        [SerializeField] private List<CharacterProgressionAttributeEntry> _attributes = new();
-        public IReadOnlyList<CharacterProgressionAttributeEntry> Attributes => _attributes;
+        [SerializeField] private List<CharacterProgressionAttributeEntry> _attributeEntries = new();
+        public IReadOnlyList<CharacterProgressionAttributeEntry> AttributeEntries => _attributeEntries;
+
+        [Header("Derived Stats")]
+        [SerializeField] private List<CharacterProgressionDerivedStatEntry> _derivedStatEntries = new();
+        public IReadOnlyList<CharacterProgressionDerivedStatEntry> DerivedStatEntries => _derivedStatEntries;
+
+        private readonly Dictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeEntry> _attributeMap = new();
+        private readonly Dictionary<CharacterProgressionDerivedStatType, int> _derivedStatValueMap = new();
+        private IReadOnlyDictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeEntry> AttributeMap => _attributeMap;
+        private IReadOnlyDictionary<CharacterProgressionDerivedStatType, int> DerivedStatValueMap => _derivedStatValueMap;
 
         private HPController HPController => this.CharacterRootController.HPController;
         private FPController FPController => this.CharacterRootController.FPController;
         private StaminaController StaminaController => this.CharacterRootController.StaminaController;
         private CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController.CombatLoadoutController;
-        private CharacterRewardWalletController RewardWalletController => this.CharacterRootController.RewardWalletController;
 
         // --- Events ---
-        public event Action<CharacterProgressionAttributeType, int> OnAttributeValueChanged;
-        public event Action<CharacterProgressionAttributeType, int> OnAttributeLevelChanged;
+        public event Action ProgressionChanged;
 
         // --- Unity Callbacks ---
         private void Start()
         {
-            this.ApplyProgressionToCharacterSystems(keepResourceRatio: false);
+            this.RebuildMaps();
+            this.RecalculateAndApplyDerivedStats();
         }
 #if UNITY_EDITOR
         //private void OnValidate()
@@ -36,118 +44,159 @@ namespace FlameOfTheLost
         // --- Public APIs ---
         public int GetAttributeValue(CharacterProgressionAttributeType attributeType)
         {
-            if (!this.TryGetAttributeEntry(attributeType, out CharacterProgressionAttributeEntry entry)) return 0;
-            return entry.EffectiveValue;
+            if (this.AttributeMap.TryGetValue(attributeType, out CharacterProgressionAttributeEntry entry))
+            {
+                return entry.CurrentValue;
+            }
+
+            return 0;
         }
-        public int GetAttributeLevel(CharacterProgressionAttributeType attributeType)
+        public int GetDerivedStatValue(CharacterProgressionDerivedStatType derivedStatType)
         {
-            if (!this.TryGetAttributeEntry(attributeType, out CharacterProgressionAttributeEntry entry)) return 0;
-            return entry.Level;
-        }
+            if (this.DerivedStatValueMap.TryGetValue(derivedStatType, out int value))
+            {
+                return value;
+            }
 
-        public bool CanUpgradeAttribute(CharacterProgressionAttributeType attributeType)
-        {
-            if (!this.TryGetAttributeEntry(attributeType, out CharacterProgressionAttributeEntry entry)) return false;
-            if (entry.IsMaxLevel) return false;
-
-            if (this.RewardWalletController == null) return false;
-            return this.RewardWalletController.CanSpend(entry.NextLevelUpgradeCost);
-        }
-
-        public bool TryUpgradeAttribute(CharacterProgressionAttributeType attributeType)
-        {
-            if (!this.TryGetAttributeEntry(attributeType, out CharacterProgressionAttributeEntry entry)) return false;
-            if (entry.IsMaxLevel) return false;
-            if (this.RewardWalletController == null) return false;
-
-            int cost = entry.NextLevelUpgradeCost;
-            if (!this.RewardWalletController.TrySpend(cost)) return false;
-
-            if (!entry.TryIncreaseLevel()) return false;
-
-            this.ApplyProgressionToCharacterSystems(keepResourceRatio: true);
-
-            this.OnAttributeLevelChanged?.Invoke(attributeType, entry.Level);
-            this.OnAttributeValueChanged?.Invoke(attributeType, entry.EffectiveValue);
-
-            return true;
-        }
-
-        public bool CanSatisfyRequirement(CharacterCapabilityRequirement requirement)
-        {
-            if (requirement == null) return true;
-
-            int currentValue = this.GetAttributeValue(requirement.AttributeType);
-            return currentValue >= requirement.RequiredValue;
+            return 0;
         }
 
         public bool CanSatisfyRequirements(IReadOnlyList<CharacterCapabilityRequirement> requirements)
         {
-            if (requirements == null || requirements.Count == 0) return true;
-
-            for (int i = 0; i < requirements.Count; i++)
-            {
-                if (!this.CanSatisfyRequirement(requirements[i])) return false;
-            }
-
-            return true;
+            return CharacterCapabilityRequirementUtility.AreRequirementsSatisfied(this, requirements);
         }
 
-        public void ApplyProgressionToCharacterSystems(bool keepResourceRatio)
+        public void AddAttributeBonus(CharacterProgressionAttributeType attributeType, int amount)
         {
-            int maxHP = this.GetAttributeValue(CharacterProgressionAttributeType.MAX_HP);
-            int maxFP = this.GetAttributeValue(CharacterProgressionAttributeType.MAX_FP);
-            int maxStamina = this.GetAttributeValue(CharacterProgressionAttributeType.MAX_STAMINA);
+            if (amount <= 0) return;
 
-            int maxEquippedWeapons = this.GetAttributeValue(CharacterProgressionAttributeType.MAX_EQUIPPED_WEAPONS);
-            int maxEquippedConsumables = this.GetAttributeValue(CharacterProgressionAttributeType.MAX_EQUIPPED_CONSUMABLES);
+            CharacterProgressionAttributeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
+            entry.AddBonus(amount);
 
-            if (this.HPController       != null & maxHP     > 0) this.HPController.SetMaxValue(maxHP, keepRatio: keepResourceRatio);
-            if (this.FPController       != null & maxFP         > 0) this.FPController.SetMaxValue(maxFP, keepRatio: keepResourceRatio);
-            if (this.StaminaController  != null & maxStamina    > 0) this.StaminaController.SetMaxValue(maxStamina, keepRatio: keepResourceRatio);
+            this.RebuildMaps();
+            this.RecalculateAndApplyDerivedStats();
 
-            if (this.CombatLoadoutController != null)
-            {
-                this.CombatLoadoutController.SetMaxEquippedWeaponsFromProgression(maxEquippedWeapons);
-                this.CombatLoadoutController.SetMaxEquippedConsumablesFromProgression(maxEquippedConsumables);
-            }
+            this.ProgressionChanged?.Invoke();
+        }
+
+        public void SetAttributeBaseValue(CharacterProgressionAttributeType attributeType, int value)
+        {
+            CharacterProgressionAttributeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
+            entry.SetBaseValue(value);
+
+            this.RebuildMaps();
+            this.RecalculateAndApplyDerivedStats();
+
+            this.ProgressionChanged?.Invoke();
+        }
+
+        public void SetAttributeBonusValue(CharacterProgressionAttributeType attributeType, int value)
+        {
+            CharacterProgressionAttributeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
+            entry.SetBonusValue(value);
+
+            this.RebuildMaps();
+            this.RecalculateAndApplyDerivedStats();
+
+            this.ProgressionChanged?.Invoke();
         }
 
         // --- Helpers ---
-        private bool TryGetAttributeEntry(CharacterProgressionAttributeType attributeType, out CharacterProgressionAttributeEntry entry)
+        private void RebuildMaps()
         {
-            entry = null;
+            _attributeMap.Clear();
 
-            if (_attributes == null) return false;
-
-            for (int i = 0; i < this.Attributes.Count; i++)
+            foreach (CharacterProgressionAttributeEntry entry in this.AttributeEntries)
             {
-                CharacterProgressionAttributeEntry currentEntry = this.Attributes[i];
-                if (currentEntry == null) continue;
-                if (currentEntry.AttributeType != attributeType) continue;
+                if (entry == null) continue;
 
-                entry = currentEntry;
-                return true;
+                _attributeMap[entry.AttributeType] = entry;
+            }
+        }
+
+        private CharacterProgressionAttributeEntry GetOrCreateAttributeEntry(CharacterProgressionAttributeType attributeType)
+        {
+            if (this.AttributeMap.TryGetValue(attributeType, out CharacterProgressionAttributeEntry existingEntry))
+            {
+                return existingEntry;
             }
 
-            return false;
+            CharacterProgressionAttributeEntry newEntry = new CharacterProgressionAttributeEntry(attributeType, 0);
+            _attributeEntries.Add(newEntry);
+            _attributeMap[attributeType] = newEntry;
+
+            return newEntry;
+        }
+
+        public void RecalculateAndApplyDerivedStats()
+        {
+            this.RecalculateDerivedStats();
+            this.ApplyDerivedStatsToCharacterSystems();
+        }
+
+        private void RecalculateDerivedStats()
+        {
+            _derivedStatValueMap.Clear();
+
+            foreach (CharacterProgressionDerivedStatEntry entry in this.DerivedStatEntries)
+            {
+                if (entry == null) continue;
+
+                int value = entry.CalculateValue(this);
+                _derivedStatValueMap[entry.DerivedStatType] = value;
+            }
+        }
+
+        private void ApplyDerivedStatsToCharacterSystems()
+        {
+            this.ApplyResourceDerivedStats();
+            this.ApplyLoadoutDerivedStats();
+        }
+
+        private void ApplyResourceDerivedStats()
+        {
+            int maxHP       = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_HP);
+            int maxFP       = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_FP);
+            int maxStamina  = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_STAMINA);
+
+            if (this.HPController       != null && maxHP        > 0) this.HPController.SetMaxValue(maxHP, true);
+            if (this.FPController       != null && maxFP        > 0) this.FPController.SetMaxValue(maxFP, true);
+            if (this.StaminaController  != null && maxStamina   > 0) this.StaminaController.SetMaxValue(maxStamina, true);
+        }
+
+        private void ApplyLoadoutDerivedStats()
+        {
+            if (this.CombatLoadoutController == null) return;
+
+            int maxEquippedWeapons = GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_WEAPONS);
+            int maxEquippedConsumableItems = GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_CONSUMABLE_ITEMS);
+
+            if (maxEquippedWeapons > 0)
+            {
+                this.CombatLoadoutController.SetMaxEquippedWeaponsFromProgression(maxEquippedWeapons);
+            }
+
+            if (maxEquippedConsumableItems > 0)
+            {
+                this.CombatLoadoutController.SetMaxEquippedConsumableItemsFromProgression(maxEquippedConsumableItems);
+            }
         }
 
 #if UNITY_EDITOR
         private void RemoveDuplicateAttributesInEditor()
         {
-            if (_attributes == null) return;
+            if (_attributeEntries == null) return;
 
             HashSet<CharacterProgressionAttributeType> seen = new();
 
-            for (int i = this.Attributes.Count - 1; i >= 0; i--)
+            for (int i = this.AttributeEntries.Count - 1; i >= 0; i--)
             {
-                CharacterProgressionAttributeEntry entry = this.Attributes[i];
+                CharacterProgressionAttributeEntry entry = this.AttributeEntries[i];
                 if (entry == null) continue;
 
                 if (seen.Contains(entry.AttributeType))
                 {
-                    _attributes.RemoveAt(i);
+                    _attributeEntries.RemoveAt(i);
                     continue;
                 }
 

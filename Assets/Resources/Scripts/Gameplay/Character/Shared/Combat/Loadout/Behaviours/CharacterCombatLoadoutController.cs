@@ -59,7 +59,7 @@ namespace FlameOfTheLost
         {
             this.WeaponHandler.SetMaxEquippedEntriesFromProgression(amount);
         }
-        public void SetMaxEquippedConsumablesFromProgression(int amount)
+        public void SetMaxEquippedConsumableItemsFromProgression(int amount)
         {
             this.ConsumableItemHandler.SetMaxEquippedEntriesFromProgression(amount);
         }
