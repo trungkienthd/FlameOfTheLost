@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -126,14 +127,14 @@ namespace FlameOfTheLost
         {
             if (profile == null)
             {
-                Debug.LogWarning($"[{this.CharacterName}.StatusEffectController] Attempted to apply NULL profile.");
+                Debug.LogWarning($"[{this.CharacterName}.{nameof(StatusEffectController)}] Attempted to apply NULL profile.");
                 return 0;
             }
 
             // Block if cannot apply (immunity flags etc.)
             if (!this.CanApply(profile))
             {
-                Debug.Log($"[{this.CharacterName}.StatusEffectController] BLOCKED - Cannot apply '{profile.name}' due to immunity or rules.");
+                Debug.Log($"[{this.CharacterName}.{nameof(StatusEffectController)}] BLOCKED - Cannot apply '{profile.name}' due to immunity or rules.");
                 return 0;
             }
 
@@ -144,7 +145,7 @@ namespace FlameOfTheLost
                 var runtimeStatusEffect = this.RuntimeStatusEffects[idx];
                 if (runtimeStatusEffect == null)
                 {
-                    Debug.LogWarning($"[{this.CharacterName}.StatusEffectController] Found index but runtimeStatusEffect is NULL.");
+                    Debug.LogWarning($"[{this.CharacterName}.{nameof(StatusEffectController)}] Found index but runtimeStatusEffect is NULL.");
                     return 0;
                 }
 
@@ -158,13 +159,13 @@ namespace FlameOfTheLost
                         float maxDuration = profile.Duration * Mathf.Max(1, profile.MaxStacks);
                         runtimeStatusEffect.RemainingDuration = Mathf.Clamp(runtimeStatusEffect.RemainingDuration + profile.Duration, 0f, maxDuration);
 
-                        Debug.Log($"[{this.CharacterName}.StatusEffectController] -> EXTEND applied | NewStacks={runtimeStatusEffect.CurrentStacks}, NewDuration={runtimeStatusEffect.RemainingDuration:F2}");
+                        //Debug.Log($"[{this.CharacterName}.{nameof(StatusEffectController)}] -> EXTEND applied | NewStacks={runtimeStatusEffect.CurrentStacks}, NewDuration={runtimeStatusEffect.RemainingDuration:F2}");
                         break;
 
                     case StatusEffectDurationRefreshType.Refresh:
                         runtimeStatusEffect.RemainingDuration = profile.Duration;
 
-                        Debug.Log($"[{this.CharacterName}.StatusEffectController] -> REFRESH applied | Duration reset to {profile.Duration:F2}");
+                        //Debug.Log($"[{this.CharacterName}.{nameof(StatusEffectController)}] -> REFRESH applied | Duration reset to {profile.Duration:F2}");
                         break;
                     case StatusEffectDurationRefreshType.Remain:
                         if (potency > runtimeStatusEffect.Potency)
@@ -172,11 +173,11 @@ namespace FlameOfTheLost
                             runtimeStatusEffect.Potency = potency;
                             runtimeStatusEffect.RemainingDuration = profile.Duration;
 
-                            Debug.Log($"[{this.CharacterName}.StatusEffectController] -> REMAIN (override) | NewPotency={potency:F2}, Duration reset");
+                            //Debug.Log($"[{this.CharacterName}.{nameof(StatusEffectController)}] -> REMAIN (override) | NewPotency={potency:F2}, Duration reset");
                         }
                         else
                         {
-                            Debug.Log($"[{this.CharacterName}.StatusEffectController] -> REMAIN (ignored) | Incoming potency {potency:F2} <= Current {runtimeStatusEffect.Potency:F2}");
+                            //Debug.Log($"[{this.CharacterName}.{nameof(StatusEffectController)}] -> REMAIN (ignored) | Incoming potency {potency:F2} <= Current {runtimeStatusEffect.Potency:F2}");
                         }
                         break;
                 }
@@ -187,28 +188,28 @@ namespace FlameOfTheLost
                 bool purged = this.EnforceImmunityRulesAndPurge();
                 if (purged)
                 {
-                    Debug.Log($"[{this.CharacterName}.StatusEffectController] Immunity purge triggered after update.");
+                    //Debug.Log($"[{this.CharacterName}.{nameof(StatusEffectController)}] Immunity purge triggered after update.");
                     this.OnRuntimeListChanged?.Invoke();
                 }
 
                 this.ForceRecomputeAll();
 
-                bool stillExists = _runtimeStatusEffects.Exists(se => se != null && se.RuntimeID == runtimeStatusEffect.RuntimeID);
+                bool stillExists = this.RuntimeStatusEffects.Any(se => se != null && se.RuntimeID == runtimeStatusEffect.RuntimeID);
                 if (!stillExists)
                 {
-                    Debug.Log($"[{this.CharacterName}.StatusEffectController] REMOVED after recompute (RuntimeID={runtimeStatusEffect.RuntimeID})");
+                    //Debug.Log($"[{this.CharacterName}.{nameof(StatusEffectController)}] REMOVED after recompute (RuntimeID={runtimeStatusEffect.RuntimeID})");
                     return 0;
                 }
 
                 this.EnsureStatusEffectVFX(runtimeStatusEffect);
 
-                Debug.Log
-                (
-                    $"[{this.CharacterName}.StatusEffectController] FINAL (Updated EXISTING) '{profile.name}' | " +
-                    $"Stacks={runtimeStatusEffect.CurrentStacks} | " +
-                    $"Duration={runtimeStatusEffect.RemainingDuration:F2} | " +
-                    $"Potency={runtimeStatusEffect.Potency:F2}"
-                );
+                //Debug.Log
+                //(
+                //    $"[{this.CharacterName}.{nameof(StatusEffectController)}] FINAL (Updated EXISTING) '{profile.name}' | " +
+                //    $"Stacks={runtimeStatusEffect.CurrentStacks} | " +
+                //    $"Duration={runtimeStatusEffect.RemainingDuration:F2} | " +
+                //    $"Potency={runtimeStatusEffect.Potency:F2}"
+                //);
 
                 return runtimeStatusEffect.RuntimeID;
             }
@@ -230,16 +231,16 @@ namespace FlameOfTheLost
             bool purgedNew = this.EnforceImmunityRulesAndPurge();
             if (purgedNew)
             {
-                Debug.Log($"[{this.CharacterName}.StatusEffectController] Immunity purge triggered after NEW apply.");
+                //Debug.Log($"[{this.CharacterName}.{nameof(StatusEffectController)}] Immunity purge triggered after NEW apply.");
             }
 
             this.OnRuntimeListChanged?.Invoke();
             this.ForceRecomputeAll();
 
-            bool newStatusEffectStillExists = _runtimeStatusEffects.Exists(se => se != null && se.RuntimeID == newStatusEffect.RuntimeID);
+            bool newStatusEffectStillExists = this.RuntimeStatusEffects.Any(se => se != null && se.RuntimeID == newStatusEffect.RuntimeID);
             if (!newStatusEffectStillExists)
             {
-                Debug.Log($"[{this.CharacterName}.StatusEffectController] NEW effect immediately removed (RuntimeID={newStatusEffect.RuntimeID})");
+                //Debug.Log($"[{this.CharacterName}.{nameof(StatusEffectController)}] NEW effect immediately removed (RuntimeID={newStatusEffect.RuntimeID})");
                 this.RemoveStatusEffectVFX(newStatusEffect.RuntimeID);
                 return 0;
             }
@@ -248,7 +249,7 @@ namespace FlameOfTheLost
 
             Debug.Log
             (
-                $"[{this.CharacterName}.StatusEffectController] FINAL (NEW applied) '{profile.name}' | " +
+                $"[{this.CharacterName}.{nameof(StatusEffectController)}] FINAL (NEW applied) '{profile.name}' | " +
                 $"(RuntimeID={newStatusEffect.RuntimeID}) | " +
                 $"Stacks=1 | Duration={profile.Duration:F2} | Potency={newStatusEffect.Potency:F2}"
             );
@@ -562,7 +563,7 @@ namespace FlameOfTheLost
 
         private void RemoveAllStatusEffectVFXInstances()
         {
-            foreach (var kvp in _runtimeVFXMap)
+            foreach (var kvp in this.RuntimeVFXMap)
             {
                 StatusEffectVFXHandler handler = kvp.Value;
 
@@ -579,17 +580,21 @@ namespace FlameOfTheLost
         {
             base.CacheReferences();
 
-            if (!this.StatusEffectVFXHolder) _statusEffectVFXHolder = this.CharacterRootController.VisualController.transform.Find("StatusEffectVFXHolder");
+            if (this.StatusEffectVFXHolder == null)
+            { 
+                _statusEffectVFXHolder = this.CharacterRootController.VisualController.transform.Find("StatusEffectVFXHolder");
+                if (this.StatusEffectVFXHolder == null) _statusEffectVFXHolder = this.transform;
+            }
 
-            if (!this.StatusEffectVFXInstancePrefab) _statusEffectVFXInstancePrefab = UnityEngine.Resources.Load<GameObject>("Prefabs/StatusEffectVFXInstance");
+            if (this.StatusEffectVFXInstancePrefab == null) _statusEffectVFXInstancePrefab = UnityEngine.Resources.Load<GameObject>("Prefabs/StatusEffectVFXInstance");
         }
 
         protected override void ValidateReferences()
         {
             base.ValidateReferences();
 
-            if (this.StatusEffectVFXHolder == null) Debug.LogError($"[{this.CharacterName}.StatusEffectController] StatusEffectVFXHolder reference is missing. Status effect VFX will not be displayed.", this);
-            if (this.StatusEffectVFXInstancePrefab == null) Debug.LogError($"[{this.CharacterName}.StatusEffectController] StatusEffectVFXInstancePrefab reference is missing. Status effect VFX will not be displayed.", this);
+            if (this.StatusEffectVFXHolder == null) Debug.LogError($"[{this.CharacterName}.{nameof(StatusEffectController)}] StatusEffectVFXHolder reference is missing. Status effect VFX will not be displayed.", this);
+            if (this.StatusEffectVFXInstancePrefab == null) Debug.LogError($"[{this.CharacterName}.{nameof(StatusEffectController)}] StatusEffectVFXInstancePrefab reference is missing. Status effect VFX will not be displayed.", this);
         }
     }
 }

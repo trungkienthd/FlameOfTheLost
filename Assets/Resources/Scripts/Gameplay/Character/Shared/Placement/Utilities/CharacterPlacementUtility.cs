@@ -39,7 +39,7 @@ namespace FlameOfTheLost
                 context.Character.transform.SetPositionAndRotation(context.PlacementPosition, context.PlacementRotation);
             }
 
-            Debug.Log($"[{context.Character.name}.{nameof(CharacterPlacementUtility)}] Placed at position {context.PlacementPosition} with rotation {context.PlacementRotation.eulerAngles.z}.");
+            //Debug.Log($"[{context.Character.name}.{nameof(CharacterPlacementHandler)}] Placed at position {context.PlacementPosition} with rotation {context.PlacementRotation.eulerAngles.z}.");
         }
 
         private static void RefreshCharacterSystems(CharacterPlacementContext context)

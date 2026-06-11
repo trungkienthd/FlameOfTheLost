@@ -20,7 +20,7 @@ namespace FlameOfTheLost
         {
             base.ValidateReferences();
 
-            if (this.CharacterRootController == null) Debug.LogError($"[{this.CharacterName}.{this.GetType().Name}] CharacterComponentController reference is not set in the inspector and could not be found via GetComponentInParent.");
+            if (this.CharacterRootController == null) Debug.LogError($"[{this.CharacterName}.{this.GetType().Name}] {nameof(CharacterRootController)} reference is not set in the inspector and could not be found via GetComponentInParent.", this);
         }
     }
 }

@@ -405,13 +405,13 @@ namespace FlameOfTheLost
 
             this.OnDeath?.Invoke();
 
-            //Debug.Log
-            //(
-            //    $"[{this.CharacterName}.{this.GetType().Name}] Entity is dead. " +
-            //    $"CauseType: {this.LastDeathCause.CauseType}. " +
-            //    $"SourceCharacter: {(this.LastDeathCause.SourceCharacter != null ? this.LastDeathCause.SourceCharacter.name : "None")}. " +
-            //    $"Reason: {this.LastDeathCause.Reason}."
-            //);
+            Debug.Log
+            (
+                $"[{this.CharacterName}.{this.GetType().Name}] Entity is dead. " +
+                $"CauseType: {this.LastDeathCause.CauseType}. " +
+                $"SourceCharacter: {(this.LastDeathCause.SourceCharacter != null ? this.LastDeathCause.SourceCharacter.name : "None")}. " +
+                $"Reason: {this.LastDeathCause.Reason}."
+            );
         }
         private IEnumerator DeathSequenceRoutine()
         {

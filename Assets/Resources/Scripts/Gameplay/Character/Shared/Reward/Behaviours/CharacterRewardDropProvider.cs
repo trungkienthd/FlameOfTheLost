@@ -19,7 +19,7 @@ namespace FlameOfTheLost
             if (this.DropProfile == null)
             {
                 Debug.LogWarning($"[{this.CharacterName}.{this.GetType().Name}] No Drop Profile assigned. Using default profile.", this);
-                _dropProfile = Resources.Load<CharacterRewardDropProfile>("Data/FlameOfTheLost/Character/Shared/Reward/RwdDrop_Generic");
+                _dropProfile = Resources.Load<CharacterRewardDropProfile>("Data/Character/Shared/Reward/RwdDrop_Generic");
             }
         }
 

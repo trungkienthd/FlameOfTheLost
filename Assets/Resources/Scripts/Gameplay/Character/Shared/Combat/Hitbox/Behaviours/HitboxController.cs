@@ -4,7 +4,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [RequireComponent(typeof(DamageDealingHandler))]
-    public abstract class HitboxController : MonoBehaviour
+    public abstract class HitboxController : FOTLMonoBehaviour
     {
         // --- Damage Configurator (same GameObject)
         [Header("Damage Configurator (Cached)")]
@@ -67,15 +67,12 @@ namespace FlameOfTheLost
         //      If true: allow multiple targets, but still only once per target per enable window.
 
         // --- Unity Callbacks ---
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             var collider = this.GetComponent<Collider2D>();
             if (collider) collider.isTrigger = true;
-
-            // Cache configurator from same GO
-            if (this.DamageConfiguratorSource != null) this.DamageConfigurator = this.DamageConfiguratorSource as IDamageConfigurator;
-            if (this.DamageConfigurator == null) this.DamageConfigurator = this.GetComponent<IDamageConfigurator>(); // DamageDealingHandler
-            if (this.DamageConfigurator == null) Debug.LogError($"[{this.gameObject.name}.HitboxController] Missing IDamageConfigurator on the same GameObject.", this);
         }
 
         // --- Public APIs ---
@@ -201,6 +198,22 @@ namespace FlameOfTheLost
             if (this.ActiveRuntimeSkill == null) return;
 
             this.AttackerCombatController.OnHitboxDisabledWithoutHit(runtimeSkill: this.ActiveRuntimeSkill);
+        }
+
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            // Cache configurator from same GO
+            if (this.DamageConfiguratorSource != null) this.DamageConfigurator = this.DamageConfiguratorSource as IDamageConfigurator;
+            if (this.DamageConfigurator == null) this.DamageConfigurator = this.GetComponent<IDamageConfigurator>(); // DamageDealingHandler
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.DamageConfigurator == null) Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] Missing {nameof(IDamageConfigurator)} on the same GameObject.", this);
         }
     }
 }
