@@ -9,8 +9,8 @@ namespace FlameOfTheLost
             get;
         }
 
-        public void TakeDamage(int damageAmount);
+        public void TakeDamage(int damageAmount, CharacterDeathCauseEntry deathCause);
         public void Heal(int healAmount);
-        public void Kill();
+        public void Kill(CharacterDeathCauseEntry deathCause);
     }
 }

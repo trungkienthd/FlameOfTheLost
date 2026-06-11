@@ -23,5 +23,10 @@ namespace FlameOfTheLost
         {
             get;
         }
+
+        public CharacterRootController SourceCharacterRootController 
+        { 
+            get; 
+        }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public static class CharacterDeathCauseGetterUtility
+    public static class CharacterDeathCauseGenerationUtility
     {
         public static CharacterDeathCauseEntry Unknown(string reason = null)
         {
@@ -41,7 +41,7 @@ namespace FlameOfTheLost
         {
             if (sourceCharacter == null)
             {
-                return CharacterDeathCauseGetterUtility.Unknown(reason);
+                return CharacterDeathCauseGenerationUtility.Unknown(reason);
             }
 
             return new CharacterDeathCauseEntry
@@ -53,19 +53,30 @@ namespace FlameOfTheLost
             );
         }
 
-        public static CharacterDeathCauseEntry FromSourceCharacter(CharacterRootController victim, CharacterRootController sourceCharacter, GameObject sourceObject = null, string reason = null)
+        public static CharacterDeathCauseEntry FromDamageSource
+        (
+            CharacterRootController victim,
+            CharacterRootController sourceCharacter,
+            GameObject sourceObject = null,
+            string reason = null
+        )
         {
-            if (sourceCharacter == null)
+            if (sourceCharacter != null)
             {
-                return CharacterDeathCauseGetterUtility.Unknown(reason);
+                if (victim != null && sourceCharacter == victim)
+                {
+                    return CharacterDeathCauseGenerationUtility.Self(victim, sourceObject, reason);
+                }
+
+                return CharacterDeathCauseGenerationUtility.OtherCharacter(sourceCharacter, sourceObject, reason);
             }
 
-            if (victim != null && sourceCharacter == victim)
+            if (sourceObject != null)
             {
-                return CharacterDeathCauseGetterUtility.Self(victim, sourceObject, reason);
+                return CharacterDeathCauseGenerationUtility.Environment(sourceObject, reason);
             }
 
-            return CharacterDeathCauseGetterUtility.OtherCharacter(sourceCharacter, sourceObject, reason);
+            return CharacterDeathCauseGenerationUtility.Unknown(reason);
         }
     }
 }

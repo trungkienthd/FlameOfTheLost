@@ -307,6 +307,12 @@ namespace FlameOfTheLost
             this.CombatStatusEffectHandler?.ClearRuntimeTrackingAfterCharacterPlacement();
         }
 
+        //  6. Get Root (Composition) Controller
+        public CharacterRootController GetCharacterRootController()
+        {
+            return this.CharacterRootController;
+        }
+
         // --- Helpers ---
         private bool DoAttack(SkillProfile skill, AttackSide attackSideType)
         {

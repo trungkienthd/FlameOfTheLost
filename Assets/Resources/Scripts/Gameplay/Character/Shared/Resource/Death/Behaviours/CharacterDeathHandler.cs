@@ -9,9 +9,13 @@ namespace FlameOfTheLost
         [Header("References - Player Spawner")]
         [SerializeField] private PlayerSpawnerController _playerSpawnerController;
         private PlayerSpawnerController PlayerSpawnerController => _playerSpawnerController;
-
         private CharacterIdentityController IdentityController => this.CharacterRootController.IdentityController;
         private HPController HPController => this.CharacterRootController.HPController;
+
+        //  2. Runtime Death Cause
+        private CharacterDeathCauseEntry LastDeathCause => this.HPController != null
+            ? this.HPController.LastDeathCause
+            : null;
 
         // --- Unity Callbacks ---
         private void OnEnable()
@@ -43,6 +47,14 @@ namespace FlameOfTheLost
         //  2. Event Handlers
         private void HandleDeathAnimationFinished()
         {
+            CharacterDeathCauseEntry deathCause = this.LastDeathCause;
+            Debug.Log
+            (
+                $"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Resolving death. " +
+                $"CauseType: {(deathCause != null ? deathCause.CauseType.ToString() : "None")}. " +
+                $"SourceCharacter: {(deathCause?.SourceCharacter != null ? deathCause.SourceCharacter.name : "None")}."
+            );
+
             if (this.IdentityController == null)
             {
                 Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] No CharacterIdentityController found. Destroying character by fallback.", this);

@@ -77,7 +77,7 @@ namespace FlameOfTheLost
                 float chance = Mathf.Clamp01(application.Chance);
                 if (chance < 1f && Random.value > chance) continue;
 
-                this.StatusEffectController.ApplyStatusEffect(application.StatusEffect, this.gameObject, application.Potency);
+                this.StatusEffectController.ApplyStatusEffect(application.StatusEffect, this.CharacterRootController.gameObject, application.Potency);
             }
         }
 
@@ -146,7 +146,7 @@ namespace FlameOfTheLost
                 if (chance < 1f && Random.value > chance) continue;
 
                 // Apply
-                receiverStatusEffectController.ApplyStatusEffect(application.StatusEffect, this.gameObject, application.Potency);
+                receiverStatusEffectController.ApplyStatusEffect(application.StatusEffect, this.CharacterRootController.gameObject, application.Potency);
             }
         }   
         private bool PassesLimit(SkillStatusEffectApplicationLimitType limit, StatusEffectProfile statusEffect, int hitboxID, int targetID)

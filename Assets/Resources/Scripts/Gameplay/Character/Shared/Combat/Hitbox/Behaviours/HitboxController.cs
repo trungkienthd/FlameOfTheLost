@@ -129,8 +129,21 @@ namespace FlameOfTheLost
             {
                 this.DamageConfigurator.SetDamageAmount(payload.DamageAmount);
                 this.DamageConfigurator.SetKnockbackForce(payload.KnockbackForce);
-                if (payload.AttackOrigin != null) this.DamageConfigurator.SetOrigin(payload.AttackOrigin);
+
+                if (payload.AttackOrigin != null)
+                {
+                    this.DamageConfigurator.SetOrigin(payload.AttackOrigin);
+                }
+
                 this.DamageConfigurator.SetSourceCharacterFaction(payload.SourceFaction);
+
+                if (this.AttackerCombatController != null)
+                {
+                    this.DamageConfigurator.SetSourceCharacterRootController
+                    (
+                        this.AttackerCombatController.GetCharacterRootController()
+                    );
+                }
             }
         }
 

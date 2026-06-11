@@ -5,7 +5,8 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(KnockbackReceivingHandler))]
     public class DamageReceivingHandler : CharacterBehaviourControllerBase, IStatusEffectFlagConsumer
     {
-        // --- References
+        // --- States ---
+        //  1. References
         [Header("References (Knockback)")]
         [SerializeField] private KnockbackReceivingHandler _knockbackHandler;
         private KnockbackReceivingHandler KnockbackHandler
@@ -15,7 +16,7 @@ namespace FlameOfTheLost
         }
         private HPController HPController => this.CharacterRootController.HPController;
 
-        // --- Status Effects Flags (Runtime)
+        //  2. Status Effects Flags (Runtime)
         [Header("Status Effects Flags (Runtime)")]
         [SerializeField] private bool _ignoreDamageReceived;
         [SerializeField] private bool _ignoreKnockbackReceived;
@@ -30,7 +31,7 @@ namespace FlameOfTheLost
             private set => _ignoreKnockbackReceived = value;
         }
 
-        // --- Internal States: Last Hit Event's attributes
+        //  3. Internal States: Last Hit Event's attributes
         private int _lastHitFrame = -1;
         private IDamager _lastDamager = null;
         private int LastHitFrame
@@ -54,6 +55,14 @@ namespace FlameOfTheLost
             // Root GameObject representing the target (usually the character root)
             CharacterRootController target = this.CharacterRootController;
 
+            // Character Faction filter
+            var damager = damagerObj;
+            DamageDealingHandler damageDealingHandler = damager as DamageDealingHandler;
+            if (damageDealingHandler != null && !damageDealingHandler.CanHit(targetDamageable)) return;
+
+            // Check if already processed this attacker (This is not the main protection, which is done by HitboxController)
+            if (Time.frameCount == this.LastHitFrame && System.Object.ReferenceEquals(this.LastDamager, damager)) return;
+
             // If this collider is a hitbox, enforce "once per target per enable window"
             if (other.TryGetComponent<HitboxController>(out var hitboxController))
             {
@@ -63,22 +72,32 @@ namespace FlameOfTheLost
                 }
             }
 
-            // Character Faction filter
-            var damager = damagerObj;
-            if (damager is DamageDealingHandler dd && !dd.CanHit(targetDamageable)) return;
-
-            // Check if already processed this attacker (This is not the main protection, which is done by HitboxController)
-            if (Time.frameCount == this.LastHitFrame && System.Object.ReferenceEquals(this.LastDamager, damager)) return;
-
             this.LastHitFrame = Time.frameCount;
             this.LastDamager = damager;
 
             // Direction = from damager origin to this
-            Vector2 direction = (this.transform.position - damager.OriginTransform.position).normalized;
+            Vector2 direction = damager.OriginTransform != null 
+                ? (this.transform.position - damager.OriginTransform.position).normalized 
+                : Vector2.zero;
 
             // Apply damage and knockback
-            if (!this.IgnoreDamageReceived) targetDamageable.TakeDamage(damager.EffectiveDamageAmount);
-            if (!this.IgnoreKnockbackReceived) this.KnockbackHandler?.ApplyKnockback(direction, damager.EffectiveKnockbackForce);
+            if (!this.IgnoreDamageReceived)
+            {
+                CharacterDeathCauseEntry deathCause = CharacterDeathCauseGenerationUtility.FromDamageSource
+                (
+                    victim: this.CharacterRootController,
+                    sourceCharacter: damager.SourceCharacterRootController,
+                    sourceObject: other.gameObject,
+                    reason: "Direct damage"
+                );
+
+                targetDamageable.TakeDamage(damager.EffectiveDamageAmount, deathCause);
+            }
+
+            if (!this.IgnoreKnockbackReceived)
+            {
+                this.KnockbackHandler?.ApplyKnockback(direction, damager.EffectiveKnockbackForce);
+            }
 
             //Debug.Log($"[DRH] ENTER: other={other.name} (path={other.transform.GetHierarchyPath()}) " +
             //          $"this={this.name} (path={this.transform.GetHierarchyPath()})");
@@ -90,7 +109,7 @@ namespace FlameOfTheLost
             }
 
             // Notify damager
-            if (damager is DamageDealingHandler dd2) dd2.OnSuccessfulHit();
+            damageDealingHandler?.OnSuccessfulHit();
         }
 
         // --- Public APIs ---

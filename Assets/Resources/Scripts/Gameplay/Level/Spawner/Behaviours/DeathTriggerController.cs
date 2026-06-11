@@ -79,7 +79,8 @@ namespace FlameOfTheLost
 
             _triggeredHPControllers.Add(hpCtrl);
 
-            hpCtrl.Kill();
+            CharacterDeathCauseEntry deathCause = CharacterDeathCauseGenerationUtility.Environment(sourceObject: this.gameObject);
+            hpCtrl.Kill(deathCause);
         }
 
         private void OnTriggerExit2D(Collider2D other)

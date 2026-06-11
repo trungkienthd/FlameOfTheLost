@@ -46,14 +46,26 @@ namespace FlameOfTheLost
         [Header("Death")]
         [SerializeField] private bool _isDead = false;
         [SerializeField] private float _deathAnimationFallbackSeconds = 0.825f;
+        [SerializeField] private CharacterDeathCauseEntry _lastDeathCause;
         public bool IsDead
         {
             get => _isDead;
             private set => _isDead = value;
         }
         private float DeathAnimationFallbackSeconds => _deathAnimationFallbackSeconds;
+        public CharacterDeathCauseEntry LastDeathCause
+        {
+            get => _lastDeathCause;
+            private set => _lastDeathCause = value;
+        }
 
         private Coroutine _deathSequenceRoutine;
+        private bool _dieAnimationFinished;
+        private bool DieAnimationFinished
+        {
+            get => _dieAnimationFinished;
+            set => _dieAnimationFinished = value;
+        }
 
         //  4. Character Faction
         public CharacterFaction CharacterFaction => this.CharacterRootController.IdentityController.Faction;
@@ -66,7 +78,6 @@ namespace FlameOfTheLost
         public event Action<int> OnHealed;
         public event Action OnDeath;
         public event Action<int, int> OnVirtualHPChanged;
-        public event Action OnDeathStarted;
         public event Action OnDeathAnimationFinished;
 
         // --- Unity Callbacks ---
@@ -80,7 +91,7 @@ namespace FlameOfTheLost
 
         // --- Public APIs ---
         //  1. Primarily spend HP for damage taking (Virtual HP is considered first)
-        public void TakeDamage(int damageAmount)
+        public void TakeDamage(int damageAmount, CharacterDeathCauseEntry deathCause)
         {
             if (this.IsDead) return;
             if (damageAmount <= 0) return;
@@ -111,12 +122,13 @@ namespace FlameOfTheLost
             }
 
             // c. invoke damage taken event (Death/Hit)
-            this.ApplyAnimationAfterDamage();
+            this.ApplyAnimationAfterDamage(deathCause);
         }
 
         //  2. Heal HP directly
         public void Heal(int healAmount)
         {
+            if (this.IsDead) return;
             if (healAmount <= 0) return;
 
             this.Restore(healAmount);
@@ -125,28 +137,43 @@ namespace FlameOfTheLost
         }
 
         //  3. Kill will pass Virtual HP, and affect Current HP directly
-        public void Kill()
+        public void Kill(CharacterDeathCauseEntry deathCause)
         {
             if (this.IsDead) return;
 
             this.SetCurrentValue(0);
-            this.BeginDeathSequence("Instant Kill");
+            this.BeginDeathSequence(deathCause, "Instant Kill");
         }
 
         //  4. TrySpend override not to account for Virtual HP, but only Current HP (Value)
-        public override bool TrySpendCost(int baseCostValue)
+        public bool TrySpendCost(int baseCostValue, CharacterDeathCauseEntry deathCause)
         {
+            if (this.IsDead) return false;
             if (baseCostValue < 0) return false;
             if (baseCostValue == 0) return true;
-            if (!this.CanSpendCost(baseCostValue)) return false;
 
             int effectiveCostValue = this.ComputeEffectiveCostValue(baseCostValue);
+
+            if (!this.CanSpendCost(effectiveCostValue)) return false;
+
             this.CurrentValue -= effectiveCostValue;
 
-            // HP Cost may kill, but never trigger hit animation
-            this.TryHandleDeath();
+            this.TryHandleDeath(deathCause);
 
             return true;
+        }
+        public override bool TrySpendCost(int baseCostValue)
+        {
+            return this.TrySpendCost
+            (
+                baseCostValue,
+                CharacterDeathCauseGenerationUtility.Self
+                (
+                    selfCharacter: this.CharacterRootController,
+                    sourceObject: this.gameObject,
+                    reason: "HP self-cost"
+                )
+            );
         }
 
         //  5. Virtual HP handling
@@ -212,13 +239,12 @@ namespace FlameOfTheLost
         {
             base.RefreshPoolAfterPlace(context);
 
-            this.IsDead = false;
+            this.StopDeathSequenceRoutine();
+            this.StopListeningToDieAnimation();
 
-            if (_deathSequenceRoutine != null)
-            {
-                this.StopCoroutine(_deathSequenceRoutine);
-                _deathSequenceRoutine = null;
-            }
+            this.IsDead = false;
+            this.LastDeathCause = null;
+            this.DieAnimationFinished = false;
 
             this.MaxVirtualHP = 0;
             this.CurrentVirtualHP = 0;
@@ -237,41 +263,43 @@ namespace FlameOfTheLost
         }
 
         //  2. Death-only check. Does NOT trigger Hit. This is called after taking HP cost (TrySpend).
-        private void TryHandleDeath()
+        private void TryHandleDeath(CharacterDeathCauseEntry deathCause)
         {
             if (this.IsDead) return;
 
             if (this.CurrentValue <= 0)
             {
-                this.BeginDeathSequence("Self-cost or Status effect periodic cost");
+                this.BeginDeathSequence(deathCause, "Self-cost or Status effect periodic cost");
             }
         }
 
         //  3. Damage feedback: if dead => death flow; else => trigger Hit. This is called after taking external damage.
-        private void ApplyAnimationAfterDamage()
+        private void ApplyAnimationAfterDamage(CharacterDeathCauseEntry deathCause)
         {
             if (this.IsDead) return;
 
             if (this.CurrentValue <= 0)
             {
-                this.BeginDeathSequence("External damage");
+                this.BeginDeathSequence(deathCause, "External damage");
                 return;
             }
 
             this.VisualController?.TriggerHit();
-            Debug.Log($"[{this.CharacterName}.HPController] Current HP: {this.CurrentValue}");
+            // Debug.Log($"[{this.CharacterName}.HPController] Current HP: {this.CurrentValue}");
         }
 
         //  4. Apply periodic damage according to policies
-        private void ApplyPeriodicDamage(int amount, bool treatAsTrueDamage, bool bypassVirtualHP)
+        private void ApplyPeriodicDamage(int amount, bool treatAsTrueDamage, bool bypassVirtualHP, RuntimeStatusEffect sourceStatusEffect)
         {
             if (amount <= 0) return;
+
+            CharacterDeathCauseEntry deathCause = this.CreateDeathCauseFromStatusEffectSource(sourceStatusEffect);
 
             // Case A: Not true damage => interpret as HP self-cost.
             // Virtual HP is NEVER considered for self-cost, so bypass flag is irrelevant here.
             if (!treatAsTrueDamage)
             {
-                this.TrySpendCost(amount);     // HP cost only (modifiers apply)
+                this.TrySpendCost(amount, deathCause);     // HP cost only (modifiers apply)
                 return;
             }
 
@@ -305,11 +333,11 @@ namespace FlameOfTheLost
                 this.OnDamageTaken?.Invoke(amount);
             }
 
-            this.ApplyAnimationAfterDamage();
+            this.ApplyAnimationAfterDamage(deathCause);
         }
 
         //  5. Status Effect Stat Periodic handler
-        protected override void ApplyStatPeriodicTick(StatusEffectStatPeriodicContribution periodic, int tickAmount, RuntimeStatusEffect source)
+        protected override void ApplyStatPeriodicTick(StatusEffectStatPeriodicContribution periodic, int tickAmount, RuntimeStatusEffect sourceStatusEffect)
         {
             if (periodic == null) return;
             if (tickAmount <= 0) return;
@@ -319,7 +347,7 @@ namespace FlameOfTheLost
             switch (periodic.Method)
             {
                 case StatusEffectStatPeriodicMethodType.Damage:
-                    this.ApplyPeriodicDamage(tickAmount, periodic.TreatHPDamageAsTrueDamage, periodic.TrueDamageBypassVirtualHP);
+                    this.ApplyPeriodicDamage(tickAmount, periodic.TreatHPDamageAsTrueDamage, periodic.TrueDamageBypassVirtualHP, sourceStatusEffect);
                     break;
 
                 case StatusEffectStatPeriodicMethodType.Heal:
@@ -328,8 +356,9 @@ namespace FlameOfTheLost
 
                 // Not recommended for HP, but make it robust:
                 case StatusEffectStatPeriodicMethodType.Drain:
-                    // interpret as self-cost
-                    this.TrySpendCost(tickAmount);
+                    // interpret as cost
+                    CharacterDeathCauseEntry deathCause = this.CreateDeathCauseFromStatusEffectSource(sourceStatusEffect);
+                    this.TrySpendCost(tickAmount, deathCause);
                     break;
 
                 case StatusEffectStatPeriodicMethodType.Restore:
@@ -340,11 +369,17 @@ namespace FlameOfTheLost
         }
 
         //  6. Death sequence handling (animation timing, events)
-        private void BeginDeathSequence(string cause)
+        private void HandleDieAnimationFinished()
+        {
+            this.DieAnimationFinished = true;
+        }
+
+        private void BeginDeathSequence(CharacterDeathCauseEntry deathCause, string causeString = "")
         {
             if (this.IsDead) return;
 
             this.IsDead = true;
+            this.LastDeathCause = deathCause ?? CharacterDeathCauseGenerationUtility.Unknown("Unknown death cause");
 
             if (this.Rigidbody2D != null)
             {
@@ -352,9 +387,15 @@ namespace FlameOfTheLost
                 this.Rigidbody2D.angularVelocity = 0f;
             }
 
-            if (_deathSequenceRoutine != null)
+            this.StopDeathSequenceRoutine();
+            this.StopListeningToDieAnimation();
+
+            this.DieAnimationFinished = false;
+
+            if (this.VisualController != null)
             {
-                this.StopCoroutine(_deathSequenceRoutine);
+                this.VisualController.OnDieAnimationFinished -= this.HandleDieAnimationFinished;
+                this.VisualController.OnDieAnimationFinished += this.HandleDieAnimationFinished;
             }
 
             // Start listening BEFORE requesting the Die animation.
@@ -362,42 +403,66 @@ namespace FlameOfTheLost
 
             this.VisualController?.TriggerDie();
 
-            this.OnDeathStarted?.Invoke();
-
             this.OnDeath?.Invoke();
 
-            Debug.Log($"[{this.CharacterName}.HPController] Entity is dead. Cause: {cause}.");
+            //Debug.Log
+            //(
+            //    $"[{this.CharacterName}.{this.GetType().Name}] Entity is dead. " +
+            //    $"CauseType: {this.LastDeathCause.CauseType}. " +
+            //    $"SourceCharacter: {(this.LastDeathCause.SourceCharacter != null ? this.LastDeathCause.SourceCharacter.name : "None")}. " +
+            //    $"Reason: {this.LastDeathCause.Reason}."
+            //);
         }
         private IEnumerator DeathSequenceRoutine()
         {
-            bool animationFinished = false;
-
-            void HandleDieAnimationFinished()
-            {
-                animationFinished = true;
-            }
-
-            if (this.VisualController != null)
-            {
-                this.VisualController.OnDieAnimationFinished += HandleDieAnimationFinished;
-            }
-
             float timer = 0f;
 
-            while (!animationFinished && timer < this.DeathAnimationFallbackSeconds)
+            while (!this.DieAnimationFinished && timer < this.DeathAnimationFallbackSeconds)
             {
                 timer += Time.deltaTime;
                 yield return null;
             }
 
-            if (this.VisualController != null)
-            {
-                this.VisualController.OnDieAnimationFinished -= HandleDieAnimationFinished;
-            }
-
+            this.StopListeningToDieAnimation();
             _deathSequenceRoutine = null;
 
             this.OnDeathAnimationFinished?.Invoke();
+        }
+
+        private void StopDeathSequenceRoutine()
+        {
+            if (_deathSequenceRoutine != null)
+            {
+                this.StopCoroutine(_deathSequenceRoutine);
+                _deathSequenceRoutine = null;
+            }
+        }
+
+        private void StopListeningToDieAnimation()
+        {
+            if (this.VisualController != null)
+            {
+                this.VisualController.OnDieAnimationFinished -= this.HandleDieAnimationFinished;
+            }
+        }
+
+        private CharacterDeathCauseEntry CreateDeathCauseFromStatusEffectSource(RuntimeStatusEffect source)
+        {
+            GameObject sourceObject = source != null ? source.Source : null;
+
+            CharacterRootController sourceCharacter = sourceObject != null
+                ? sourceObject.GetComponentInParent<CharacterRootController>()
+                : null;
+
+            return CharacterDeathCauseGenerationUtility.FromDamageSource
+            (
+                victim: this.CharacterRootController,
+                sourceCharacter: sourceCharacter,
+                sourceObject: sourceObject,
+                reason: source?.Profile != null
+                    ? $"Status effect: {source.Profile.name}"
+                    : "Status effect periodic"
+            );
         }
     }
 }

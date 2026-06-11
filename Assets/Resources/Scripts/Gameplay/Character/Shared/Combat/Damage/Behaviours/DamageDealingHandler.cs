@@ -2,9 +2,10 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class DamageDealingHandler : MonoBehaviour, IDamager, IDamageConfigurator, IHitFilter, IHitPostProcessor, IStatusEffectStatModifierMultiplierConsumer, IStatusEffectStatModifierAdditiveConsumer
+    public class DamageDealingHandler : FOTLMonoBehaviour, IDamager, IDamageConfigurator, IHitFilter, IHitPostProcessor, IStatusEffectStatModifierMultiplierConsumer, IStatusEffectStatModifierAdditiveConsumer
     {
-        // --- Data Fields (Base) ---
+        // --- State ---
+        //  1. Data Fields (Base)
         [Header("Damage Payload (Base)")]
         [SerializeField] private int _baseDamageAmount = 0;
         [SerializeField] private float _baseKnockbackForce = 0f;
@@ -19,7 +20,7 @@ namespace FlameOfTheLost
             private set => _baseKnockbackForce = value;
         }
 
-        // --- Effective Payload ---
+        //  2. Effective Payload
         [Header("Damage Payload (Final)")]
         [SerializeField] private int _damageAmount = 0;
         [SerializeField] private float _knockbackForce = 0f;
@@ -34,7 +35,7 @@ namespace FlameOfTheLost
             private set => _knockbackForce = value;
         }
 
-        // --- Stat Modifiers ---
+        //  3. Stat Modifiers
         [Header("Status Effects Stat Modifier (Runtime Channels)")]
         [SerializeField] private float _damageDealtMultiplier = 1f;
         [SerializeField] private float _damageDealtAddFlat = 0f;
@@ -61,10 +62,11 @@ namespace FlameOfTheLost
             private set => _knockbackDealtAddFlat = value;
         }
 
-        // --- Source ---
+        //  4. Source
         [Header("Source")]
         [SerializeField] private CharacterFaction _sourceCharacterFaction = CharacterFaction.Neutral;
         [SerializeField] private Transform _originTransform;
+        [SerializeField] private CharacterRootController _sourceCharacterRootController;
         public CharacterFaction SourceCharacterFaction
         {
             get => _sourceCharacterFaction;
@@ -75,31 +77,37 @@ namespace FlameOfTheLost
             get => _originTransform;
             private set => _originTransform = value;
         }
+        public CharacterRootController SourceCharacterRootController
+        {
+            get => _sourceCharacterRootController;
+            private set => _sourceCharacterRootController = value;
+        }
 
-        // --- Hit Rules ---
+        //  5. Hit Rules
         [Header("Hit Rules")]
         [SerializeField] private bool _ignoresSameFaction = true;
         private bool IgnoresSameFaction => _ignoresSameFaction;
 
-        // --- Unity Methods ---
-        private void Awake()
+        // --- Unity Callbacks ---
+        private void Start()
         {
-            if (this.OriginTransform == null) this.OriginTransform = this.transform;
-
             this.RecomputePayload();
         }
 
+        // --- Public APIs ---
+        //  1. IHitFilter implementation
         public bool CanHit(IDamageable target)
         {
             if (!this.IgnoresSameFaction) return true;
             return (target.CharacterFaction != this.SourceCharacterFaction);
         }
 
+        //  2. IHitPostProcessor implementation
         public void OnSuccessfulHit()
         {
         }
 
-        // IDamageConfigurator
+        //  3. IDamageConfigurator implementation
         public void SetDamageAmount(int value) 
         { 
             this.BaseDamageAmount = Mathf.Max(0, value); 
@@ -110,16 +118,20 @@ namespace FlameOfTheLost
             this.BaseKnockbackForce = Mathf.Max(0f, force); 
             this.RecomputePayload();
         }
-        public void SetOrigin(Transform origin) 
-        {
-            if (origin) this.OriginTransform = origin; 
-        }
         public void SetSourceCharacterFaction(CharacterFaction characterFaction)
         {
             this.SourceCharacterFaction = characterFaction;
         }
+        public void SetOrigin(Transform origin)
+        {
+            if (origin) this.OriginTransform = origin;
+        }
+        public void SetSourceCharacterRootController(CharacterRootController sourceCharacterRootController)
+        {
+            this.SourceCharacterRootController = sourceCharacterRootController;
+        }
 
-        // Status Effect Stat Modifier consumers
+        //  4. IStatusEffectStatModifierMultiplierConsumer & IStatusEffectStatModifierAdditiveConsumer implementation
         public void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget target, float multiplier)
         {
             switch (target)
@@ -136,7 +148,6 @@ namespace FlameOfTheLost
                     break;
             }
         }
-
         public void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget target, float addFlat)
         {
             switch (target)
@@ -154,7 +165,7 @@ namespace FlameOfTheLost
             }
         }
 
-        // --- Helpers
+        // --- Helpers ---
         private void RecomputePayload()
         {
             float dmg = ((float)this.BaseDamageAmount * this.DamageDealtMultiplier) + this.DamageDealtAddFlat;
@@ -165,6 +176,17 @@ namespace FlameOfTheLost
 
             this.EffectiveDamageAmount = finalDmg;
             this.EffectiveKnockbackForce = finalKb;
+        }
+
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (this.OriginTransform == null) this.OriginTransform = this.transform;
+
+            if (this.SourceCharacterRootController == null) this.SourceCharacterRootController = this.GetComponentInParent<CharacterRootController>();
+            
+            if (this.SourceCharacterRootController != null) this.SourceCharacterFaction = this.SourceCharacterRootController.IdentityController.Faction;
         }
     }
 }

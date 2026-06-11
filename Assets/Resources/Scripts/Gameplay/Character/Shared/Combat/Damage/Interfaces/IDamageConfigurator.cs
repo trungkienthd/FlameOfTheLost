@@ -8,5 +8,7 @@ namespace FlameOfTheLost
         public void SetKnockbackForce(float force);
         public void SetOrigin(Transform origin);
         public void SetSourceCharacterFaction(CharacterFaction faction);
+
+        public void SetSourceCharacterRootController(CharacterRootController sourceCharacter);
     }
 }
