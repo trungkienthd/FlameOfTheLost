@@ -34,7 +34,7 @@ MonoBehaviour:
       _valuePerStep: 0
       _attributePointsPerStep: 1
   - _derivedStatType: 1
-    _baseValue: 50
+    _baseValue: 0
     _hasMaximumValue: 0
     _maximumValue: 0
     _contributions:

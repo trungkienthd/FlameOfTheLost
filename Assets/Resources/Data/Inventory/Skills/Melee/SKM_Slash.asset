@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: SKM_Slash
   m_EditorClassIdentifier: 
   _id: 11
+  _key: SLASH
   _displayName: Slash
   _description: 
   _icon: {fileID: 21300000, guid: 2aecc5a2a324ee94caf1bf8ecd1bb432, type: 3}
   _defaultProvisionType: 0
   _attachableWeaponTypes: 000000000100000002000000
+  _requirements: []
   _damageAmount: 10
   _knockbackForce: 4
   _resourceCost:

@@ -55,13 +55,15 @@ namespace FlameOfTheLost
 
         [Header("References (Resources)")]
         [SerializeField] private CharacterResourcesController _resourcesController;
-        [SerializeField] private HPController _hpController;
+        [SerializeField] private HPController _hpController; 
         [SerializeField] private FPController _fpController;
         [SerializeField] private StaminaController _staminaController;
+        [SerializeField] private CharacterDeathHandler _deathHandler;
         public CharacterResourcesController ResourcesController => _resourcesController;
         public HPController HPController => _hpController;
         public FPController FPController => _fpController;
         public StaminaController StaminaController => _staminaController;
+        public CharacterDeathHandler DeathHandler => _deathHandler;
 
         [Header("References (Status Effects)")]
         [SerializeField] private StatusEffectController _statusEffectController;
@@ -120,6 +122,7 @@ namespace FlameOfTheLost
             if (this.HPController           == null) _hpController          = this.GetComponentInChildren<HPController>(true);
             if (this.FPController           == null) _fpController          = this.GetComponentInChildren<FPController>(true);
             if (this.StaminaController      == null) _staminaController     = this.GetComponentInChildren<StaminaController>(true);
+            if (this.DeathHandler           == null) _deathHandler          = this.GetComponentInChildren<CharacterDeathHandler>(true);
 
             if (this.StatusEffectController             == null) _statusEffectController            = this.GetComponentInChildren<StatusEffectController>(true);
             if (this.StatusEffectFlagHandler            == null) _statusEffectFlagHandler           = this.GetComponentInChildren<StatusEffectFlagHandler>(true);
@@ -129,7 +132,7 @@ namespace FlameOfTheLost
             if (this.ProgressionController      == null) _progressionController     = this.GetComponentInChildren<CharacterProgressionController>(true);
             if (this.ProgressionUpgradeHandler  == null) _progressionUpgradeHandler = this.GetComponentInChildren<CharacterProgressionUpgradeHandler>(true);
 
-            if (this.RewardWalletController == null)    _rewardWalletController = this.GetComponentInChildren<CharacterRewardWalletController>(true);
+            if (this.RewardWalletController == null) _rewardWalletController = this.GetComponentInChildren<CharacterRewardWalletController>(true);
 
             if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>(true);
         }

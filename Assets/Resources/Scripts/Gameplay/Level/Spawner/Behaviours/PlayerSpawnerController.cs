@@ -90,7 +90,7 @@ namespace FlameOfTheLost
 
             this.SpawnState.SetSpawnPointSpawn(spawnPoint.Id);
 
-            Debug.Log($"[{this.gameObject.name}.PlayerSpawnerController] Activated spawn point: {spawnPoint.DisplayName}", spawnPoint);
+            //Debug.Log($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Activated spawn point: {spawnPoint.DisplayName}", spawnPoint);
         }
 
         public void ActivateCheckpoint(CheckpointController checkpoint)
@@ -102,7 +102,7 @@ namespace FlameOfTheLost
 
             //this.SpawnState.SetCheckpointSpawn(checkpoint.CheckpointId);
 
-            //Debug.Log($"[{this.gameObject.name}.PlayerSpawnerController] Activated checkpoint: {checkpoint.CheckpointId}", checkpoint);
+            //Debug.Log($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Activated checkpoint: {checkpoint.CheckpointId}", checkpoint);
         }
 
         // --- Helpers ---

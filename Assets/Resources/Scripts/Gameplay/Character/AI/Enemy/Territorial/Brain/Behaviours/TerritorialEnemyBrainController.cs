@@ -186,14 +186,14 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     {
         this.EnemyInputHandler?.ClearAIMoveInput();
 
-        Transform targetTransform = this.CurrentTarget.transform;
+        Transform targetTransform = this.CurrentTarget?.transform;
         if (targetTransform == null) return;
 
         this.FaceTarget(targetTransform);
     }
     private void HandleReadyToAttackState()
     {
-        Transform targetTransform = this.CurrentTarget.transform;
+        Transform targetTransform = this.CurrentTarget?.transform;
         if (targetTransform == null)
         {
             this.EnemyInputHandler?.ClearAIMoveInput();
@@ -231,7 +231,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     {
         this.EnemyInputHandler?.ClearAIMoveInput();
 
-        Transform targetTransform = this.CurrentTarget.transform;
+        Transform targetTransform = this.CurrentTarget?.transform;
         if (targetTransform != null)
         {
             this.FaceTarget(targetTransform);

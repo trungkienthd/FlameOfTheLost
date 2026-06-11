@@ -143,7 +143,7 @@ namespace FlameOfTheLost
             GameObject interactor = this.ResolveInteractor();
             if (!interactable.CanInteract(interactor)) return;
 
-            Debug.Log($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Detected nearby interactable: {behaviour.gameObject.name}", behaviour);
+            //Debug.Log($"[{this.PlayerRoot.name}.{this.GetType().Name}] Detected nearby interactable: {behaviour.gameObject.name}", behaviour);
 
             _nearbyInteractableBehaviours.Add(behaviour);
         }
@@ -166,7 +166,7 @@ namespace FlameOfTheLost
             GameObject interactor = this.ResolveInteractor();
             if (!promptSource.CanShowInteractionPrompt(interactor)) return;
 
-            Debug.Log($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Detected nearby prompt source: {behaviour.gameObject.name}", behaviour);
+            //Debug.Log($"[{this.PlayerRoot.name}.{this.GetType().Name}] Detected nearby prompt source: {behaviour.gameObject.name}", behaviour);
 
             _nearbyPromptSourceBehaviours.Add(behaviour);
         }

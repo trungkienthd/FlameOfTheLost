@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterDeathHandler : CharacterBehaviourControllerBase
+    public class CharacterDeathHandler : CharacterBehaviourControllerBase, ICharacterPlacementRefreshable
     {
         // --- States ---
         //  1. References
@@ -17,6 +17,20 @@ namespace FlameOfTheLost
             ? this.HPController.LastDeathCause
             : null;
 
+        //  3. Runtime States
+        private bool _hasResolvedDeath = false;
+        private bool _hasDistributedReward = false;
+        private bool HasResolvedDeath
+        {
+            get => _hasResolvedDeath;
+            set => _hasResolvedDeath = value;
+        }
+        private bool HasDistributedReward
+        {
+            get => _hasDistributedReward;
+            set => _hasDistributedReward = value;
+        }
+
         // --- Unity Callbacks ---
         private void OnEnable()
         {
@@ -26,6 +40,15 @@ namespace FlameOfTheLost
         private void OnDisable()
         {
             this.UnbindEvents();
+        }
+
+        // --- Public Methods ---
+        //  1. ICharacterPlacementRefreshable Implementation
+        public int PlacementConfigurePriority => 10;
+        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        {
+            this.HasResolvedDeath = false;
+            this.HasDistributedReward = false;
         }
 
         // --- Helpers ---
@@ -47,6 +70,9 @@ namespace FlameOfTheLost
         //  2. Event Handlers
         private void HandleDeathAnimationFinished()
         {
+            if (this.HasResolvedDeath) return;
+            this.HasResolvedDeath = true;
+
             CharacterDeathCauseEntry deathCause = this.LastDeathCause;
             Debug.Log
             (
@@ -54,6 +80,8 @@ namespace FlameOfTheLost
                 $"CauseType: {(deathCause != null ? deathCause.CauseType.ToString() : "None")}. " +
                 $"SourceCharacter: {(deathCause?.SourceCharacter != null ? deathCause.SourceCharacter.name : "None")}."
             );
+
+            this.TryDistributeRewardAfterDeath(deathCause);
 
             if (this.IdentityController == null)
             {
@@ -78,6 +106,40 @@ namespace FlameOfTheLost
                     this.DestroyCharacter();
                     break;
             }
+        }
+
+        private void TryDistributeRewardAfterDeath(CharacterDeathCauseEntry deathCause)
+        {
+            if (this.HasDistributedReward) return;
+            this.HasDistributedReward = true;
+
+            if (deathCause == null) return;
+
+            if (deathCause.CauseType != CharacterDeathCauseType.OtherCharacter) return;
+
+            CharacterRootController receiverCharacter = deathCause.SourceCharacter;
+            CharacterRootController defeatedCharacter = this.CharacterRootController;
+
+            if (receiverCharacter == null) return;
+            if (defeatedCharacter == null) return;
+
+            if (receiverCharacter == defeatedCharacter) return;
+
+            bool distributed = CharacterRewardDistributionUtility.TryDistributeRewardFromDefeatedCharacter
+            (
+                receiverCharacter: receiverCharacter,
+                defeatedCharacter: defeatedCharacter
+            );
+
+            if (!distributed) return;
+
+            Debug.Log
+            (
+                $"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Reward distributed. " +
+                $"Receiver: {receiverCharacter.name}. " +
+                $"Defeated: {defeatedCharacter.name}.",
+                this
+            );
         }
 
         private void RespawnPlayer()

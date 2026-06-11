@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -27,9 +28,8 @@ namespace FlameOfTheLost
             }
         }
 
-        private readonly Dictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeRuntimeEntry> _attributeMap = new();
-        private readonly Dictionary<CharacterProgressionDerivedStatType, int> _derivedStatValueMap = new();
-        private IReadOnlyDictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeRuntimeEntry> AttributeMap => _attributeMap;
+        [Header("Progression Derived Stats (Runtime)")]
+        [SerializeField] private DerivedStatValueMap _derivedStatValueMap = new();
         private IReadOnlyDictionary<CharacterProgressionDerivedStatType, int> DerivedStatValueMap => _derivedStatValueMap;
 
         private HPController HPController => this.CharacterRootController.HPController;
@@ -56,12 +56,9 @@ namespace FlameOfTheLost
         //  1. Getters for attributes and derived stats
         public int GetAttributeValue(CharacterProgressionAttributeType attributeType)
         {
-            if (this.AttributeMap.TryGetValue(attributeType, out CharacterProgressionAttributeRuntimeEntry entry))
-            {
-                return entry.CurrentValue;
-            }
+            CharacterProgressionAttributeRuntimeEntry entry = this.GetAttributeEntry(attributeType);
 
-            return 0;
+            return entry != null ? entry.CurrentValue : 0;
         }
         public int GetDerivedStatValue(CharacterProgressionDerivedStatType derivedStatType)
         {
@@ -81,7 +78,6 @@ namespace FlameOfTheLost
             CharacterProgressionAttributeRuntimeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
             entry.AddBonus(amount);
 
-            this.RebuildMaps();
             this.RecalculateAndApplyDerivedStats();
 
             this.ProgressionChanged?.Invoke();
@@ -103,7 +99,6 @@ namespace FlameOfTheLost
             CharacterProgressionAttributeRuntimeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
             entry.SetBonusValue(value);
 
-            this.RebuildMaps();
             this.RecalculateAndApplyDerivedStats();
 
             this.ProgressionChanged?.Invoke();
@@ -120,7 +115,6 @@ namespace FlameOfTheLost
         private void InitializeProgression()
         {
             this.InitializeRuntimeAttributesFromConfig();
-            this.RebuildMaps();
             this.RecalculateAndApplyDerivedStats();
         }
 
@@ -143,28 +137,19 @@ namespace FlameOfTheLost
             }
         }
 
-        private void RebuildMaps()
+        private CharacterProgressionAttributeRuntimeEntry GetAttributeEntry(CharacterProgressionAttributeType attributeType)
         {
-            _attributeMap.Clear();
-
-            foreach (CharacterProgressionAttributeRuntimeEntry entry in this.RuntimeAttributeEntries)
-            {
-                if (entry == null) continue;
-
-                _attributeMap[entry.AttributeType] = entry;
-            }
+            return this.RuntimeAttributeEntries.FirstOrDefault(entry => entry.AttributeType == attributeType);
         }
 
         private CharacterProgressionAttributeRuntimeEntry GetOrCreateAttributeEntry(CharacterProgressionAttributeType attributeType)
         {
-            if (this.AttributeMap.TryGetValue(attributeType, out CharacterProgressionAttributeRuntimeEntry existingEntry))
-            {
-                return existingEntry;
-            }
+            CharacterProgressionAttributeRuntimeEntry entry = this.GetAttributeEntry(attributeType);
+
+            if (entry != null) return entry;
 
             CharacterProgressionAttributeRuntimeEntry newEntry = new CharacterProgressionAttributeRuntimeEntry(attributeType, 0);
             _runtimeAttributeEntries.Add(newEntry);
-            _attributeMap[attributeType] = newEntry;
 
             return newEntry;
         }
@@ -196,13 +181,13 @@ namespace FlameOfTheLost
 
         private void ApplyResourceDerivedStats()
         {
-            int maxHP       = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_HP);
-            int maxFP       = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_FP);
-            int maxStamina  = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_STAMINA);
+            int maxHP = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_HP);
+            int maxFP = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_FP);
+            int maxStamina = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_STAMINA);
 
-            if (this.HPController       != null && maxHP        > 0) this.HPController.SetMaxValue(maxHP, true);
-            if (this.FPController       != null && maxFP        > 0) this.FPController.SetMaxValue(maxFP, true);
-            if (this.StaminaController  != null && maxStamina   > 0) this.StaminaController.SetMaxValue(maxStamina, true);
+            if (this.HPController != null && maxHP > 0) this.HPController.SetMaxValue(maxHP, true);
+            if (this.FPController != null && maxFP > 0) this.FPController.SetMaxValue(maxFP, true);
+            if (this.StaminaController != null && maxStamina > 0) this.StaminaController.SetMaxValue(maxStamina, true);
         }
 
         private void ApplyLoadoutDerivedStats()

@@ -1475,6 +1475,7 @@ MonoBehaviour:
   _hpController: {fileID: 5982666654865387023}
   _fpController: {fileID: 5142835455269067001}
   _staminaController: {fileID: 2874977548991289660}
+  _deathHandler: {fileID: 0}
   _statusEffectController: {fileID: 5925318029874374298}
   _statusEffectFlagHandler: {fileID: 170678299568170964}
   _statusEffectStatModifierHandler: {fileID: 6752401894994764133}
@@ -1695,7 +1696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionController
   _characterRootController: {fileID: 5013856377803996316}
-  _progressionConfig: {fileID: 11400000, guid: 08751a03d3f26d54a89c89b455f8d8df, type: 2}
+  _progressionConfig: {fileID: 11400000, guid: 13e8895b8b3489342b82009b5cfbb868, type: 2}
   _runtimeAttributeEntries: []
 --- !u!114 &7109462879358384833
 MonoBehaviour:
