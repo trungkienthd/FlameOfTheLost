@@ -27,7 +27,7 @@ namespace FlameOfTheLost
         public Sprite Icon => _icon;
 
         //  3. Style
-        public abstract SkillStyleType Style 
+        public abstract SkillStyle Style 
         {
             get; 
         }
@@ -85,6 +85,11 @@ namespace FlameOfTheLost
                 if (this.AttachableWeaponTypes[i] == weaponType) return true;
             }
             return false;
+        }
+
+        public bool CanBeUsedBy(CharacterProgressionController progressionController)
+        {
+            return CharacterCapabilityRequirementUtility.AreRequirementsSatisfied(progressionController, this.Requirements);
         }
     }
 }

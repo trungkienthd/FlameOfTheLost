@@ -2,15 +2,32 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterRewardDropProvider : FOTLMonoBehaviour
+    public class CharacterRewardDropProvider : CharacterBehaviourControllerBase
     {
         [Header("Reward")]
-        [SerializeField, Min(0)] private int _rewardAmount = 1;
-        public int RewardAmount => _rewardAmount;
+        [SerializeField] private CharacterRewardDropProfile _dropProfile;
+        public CharacterRewardDropProfile DropProfile => _dropProfile;
 
-        public CharacterRewardAmount CreateRewardAmount()
+        public int RewardAmount => this.DropProfile != null ? this.DropProfile.Amount : 0;
+
+        public bool HasReward => this.RewardAmount > 0;
+
+        protected override void CacheReferences()
         {
-            return new CharacterRewardAmount(this.RewardAmount);
+            base.CacheReferences();
+
+            if (this.DropProfile == null)
+            {
+                Debug.LogWarning($"[{this.CharacterName}.{this.GetType().Name}] No Drop Profile assigned. Using default profile.", this);
+                _dropProfile = Resources.Load<CharacterRewardDropProfile>("Data/FlameOfTheLost/Character/Shared/Reward/RwdDrop_Generic");
+            }
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.DropProfile == null) Debug.LogError($"[{this.CharacterName}.{this.GetType().Name}] No Drop Profile assigned. Please assign a valid Drop Profile.", this);
         }
     }
 }

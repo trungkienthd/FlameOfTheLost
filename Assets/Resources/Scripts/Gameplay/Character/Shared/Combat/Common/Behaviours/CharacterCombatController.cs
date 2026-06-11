@@ -138,7 +138,7 @@ namespace FlameOfTheLost
             // MELEE: enable hitbox for the whole animation window
             switch (this.ActiveRuntimeSkill.Style)
             {
-                case SkillStyleType.Melee:
+                case SkillStyle.Melee:
                     // Get melee skill profile
                     var meleeSkill = this.ActiveRuntimeSkill.Profile as MeleeSkillProfile;
                     if (meleeSkill == null)
@@ -162,7 +162,7 @@ namespace FlameOfTheLost
                         this.MeleeHitboxController.EnableHitbox(meleeHitboxDamagePayload, this.LastAttackSide);          // Enable the melee hitbox
                     }
                     break;
-                case SkillStyleType.Ranged:
+                case SkillStyle.Ranged:
                     // Ranged projectile will be spawned at OnAttackWindowEnd()
                     break;
                 default:
@@ -189,13 +189,13 @@ namespace FlameOfTheLost
             }
 
             // MELEE
-            SkillStyleType activeSkillStyle = this.ActiveRuntimeSkill.Style;
+            SkillStyle activeSkillStyle = this.ActiveRuntimeSkill.Style;
             switch (activeSkillStyle)
             {
-                case SkillStyleType.Melee:
+                case SkillStyle.Melee:
                     this.MeleeHitboxController?.DisableHitbox();     // Disable hitbox
                     break;
-                case SkillStyleType.Ranged:
+                case SkillStyle.Ranged:
                     this.FireRangedProjectile(runtimeSkill);
                     break;
                 default:

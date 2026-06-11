@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "CID_CharacterIdentity", menuName = "Data/FlameOfTheLost/Character/Shared/Identity")]
+    [CreateAssetMenu(fileName = "CId_Character", menuName = "Data/FlameOfTheLost/Character/Shared/Identity/CharacterIdentityProfile")]
     public class CharacterIdentityProfile : ScriptableObject, IIdentityProvider
     {
         [Header("Identity")]

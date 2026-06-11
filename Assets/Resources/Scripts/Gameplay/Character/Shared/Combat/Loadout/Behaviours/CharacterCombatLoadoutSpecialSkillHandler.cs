@@ -94,7 +94,7 @@ namespace FlameOfTheLost
 
             if (this.ProgressionController == null) return true;
 
-            return this.ProgressionController.CanSatisfyRequirements(skill.Requirements);
+            return skill.CanBeUsedBy(this.ProgressionController);
         }
     }
 }

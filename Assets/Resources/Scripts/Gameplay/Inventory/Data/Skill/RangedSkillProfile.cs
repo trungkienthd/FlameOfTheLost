@@ -6,7 +6,7 @@ namespace FlameOfTheLost
     public class RangedSkillProfile : SkillProfile
     {
         // --- Style
-        public override SkillStyleType Style => SkillStyleType.Ranged;
+        public override SkillStyle Style => SkillStyle.Ranged;
 
         // --- Projectile Config
         [Header("Projectile Config")]

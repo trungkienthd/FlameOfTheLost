@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "CAim_New", menuName = "Data/FlameOfTheLost/Character/Shared/Combat/Aiming/Config/CombatAimingConfig")]
+    [CreateAssetMenu(fileName = "CbAim_New", menuName = "Data/FlameOfTheLost/Character/Shared/Combat/Aiming/Config/CombatAimingConfig")]
     public class CombatAimingConfig : ScriptableObject
     {
         [Header("Routing")]

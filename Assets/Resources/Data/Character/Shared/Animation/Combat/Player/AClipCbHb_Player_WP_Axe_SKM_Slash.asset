@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d3b9023c5dfeb499619f54ab1144a8, type: 3}
+  m_Name: AClipCbHb_Player_WP_Axe_SKM_Slash
+  m_EditorClassIdentifier: 
+  _skills:
+  - {fileID: 11400000, guid: 46169a2cfdc6f3e4ab299d8cf8474d9c, type: 2}
+  _weapon: {fileID: 11400000, guid: 13999cb7f005da4438aa073935f6e0ea, type: 2}
+  _characterType: 1
+  _left:
+    _down:
+      _animationClip: {fileID: 7400000, guid: bdf0153071aac4a439b61a4b91854cf2, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: -0.25, y: -1}
+        - {x: 0.45, y: -1.2}
+        - {x: 0.8, y: 0}
+        - {x: 0.3, y: 1}
+        - {x: 0.4, y: -0.65}
+        _offset: {x: 0, y: 0}
+    _side:
+      _animationClip: {fileID: 0}
+      _hitboxShape:
+        _points: []
+        _offset: {x: 0, y: 0}
+    _up:
+      _animationClip: {fileID: 7400000, guid: f4059b7966ef3f54ab1ac70a5ebcd570, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0.3, y: 1.1}
+        - {x: -0.6, y: 1}
+        - {x: -0.75, y: -0.5}
+        - {x: -0.15, y: -1}
+        - {x: -0.5, y: 0.4}
+        _offset: {x: 0, y: 0}
+  _right:
+    _down:
+      _animationClip: {fileID: 7400000, guid: 4cea53ee5251a1c4aa505d9df6b7f29e, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0.25, y: -1}
+        - {x: -0.45, y: -1.2}
+        - {x: -0.8, y: 0}
+        - {x: -0.3, y: 1}
+        - {x: -0.4, y: -0.65}
+        _offset: {x: 0, y: 0}
+    _side:
+      _animationClip: {fileID: 7400000, guid: 1dac831ef2468d94a8d1667f1c3c5fec, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 1.2, y: 0.1}
+        - {x: 0.8, y: -0.9}
+        - {x: -0.5, y: -0.85}
+        - {x: -1, y: -0.4}
+        - {x: 0.4, y: -0.7}
+        _offset: {x: 0, y: 0}
+    _up:
+      _animationClip: {fileID: 7400000, guid: 8e9e5c229b5ca544ba7ce3424426979b, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: -0.3, y: 1.1}
+        - {x: 0.6, y: 1}
+        - {x: 0.75, y: -0.5}
+        - {x: 0.15, y: -1}
+        - {x: 0.5, y: 0.4}
+        _offset: {x: 0, y: 0}
+  _attackWindowDuration: 0.5

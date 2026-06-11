@@ -56,7 +56,7 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs ---
-        public SkillStyleType Style => this.Profile != null ? this.Profile.Style : SkillStyleType.Default;
+        public SkillStyle Style => this.Profile != null ? this.Profile.Style : SkillStyle.Default;
         public int DamageAmount => this.Profile != null ? this.Profile.DamageAmount : 0;
         public float KnockbackForce => this.Profile != null ? this.Profile.KnockbackForce : 0f;
         public ResourceCost ResourceCost => this.Profile != null ? this.Profile.ResourceCost : default;

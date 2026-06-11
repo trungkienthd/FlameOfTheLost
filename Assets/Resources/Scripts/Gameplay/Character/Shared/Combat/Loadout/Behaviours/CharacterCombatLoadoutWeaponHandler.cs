@@ -110,7 +110,7 @@ namespace FlameOfTheLost
 
             if (this.ProgressionController == null) return true;
 
-            return this.ProgressionController.CanSatisfyRequirements(weapon.Requirements);
+            return weapon.CanBeEquippedBy(this.ProgressionController);
         }
     }
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88ad75085c63ca34fb95e550c543ce6f, type: 3}
-  m_Name: CID_Toxicschroom
+  m_Name: CId_Toxicschroom
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterIdentityProfile
   _id: 1001
   _key: TOXICSCHROOM

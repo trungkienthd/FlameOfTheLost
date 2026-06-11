@@ -56,5 +56,11 @@ namespace FlameOfTheLost
 
             return this.NormalSkill;
         }
+
+        //  2. Checks if the given character progression can satisfy the requirements to equip this weapon.
+        public bool CanBeEquippedBy(CharacterProgressionController progressionController)
+        {
+            return CharacterCapabilityRequirementUtility.AreRequirementsSatisfied(progressionController, this.Requirements);
+        }
     }
 }

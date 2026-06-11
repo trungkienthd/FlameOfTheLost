@@ -4,20 +4,32 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterProgressionController : CharacterBehaviourControllerBase
+    public class CharacterProgressionController : CharacterBehaviourControllerBase, ICharacterPlacementRefreshable
     {
         // --- States ---
-        [Header("Progression Attributes")]
-        [SerializeField] private List<CharacterProgressionAttributeEntry> _attributeEntries = new();
-        public IReadOnlyList<CharacterProgressionAttributeEntry> AttributeEntries => _attributeEntries;
+        [Header("Progression Initial Configurations")]
+        [SerializeField] private CharacterProgressionConfig _progressionConfig;
+        public CharacterProgressionConfig ProgressionConfig => _progressionConfig;
 
-        [Header("Derived Stats")]
-        [SerializeField] private List<CharacterProgressionDerivedStatEntry> _derivedStatEntries = new();
-        public IReadOnlyList<CharacterProgressionDerivedStatEntry> DerivedStatEntries => _derivedStatEntries;
+        [Header("Progression Attributes (Runtime)")]
+        [SerializeField] private List<CharacterProgressionAttributeRuntimeEntry> _runtimeAttributeEntries = new();
+        public IReadOnlyList<CharacterProgressionAttributeRuntimeEntry> RuntimeAttributeEntries => _runtimeAttributeEntries;
+        private IReadOnlyList<CharacterProgressionDerivedStatEntry> DerivedStatEntries
+        {
+            get
+            {
+                if (this.ProgressionConfig == null)
+                {
+                    return Array.Empty<CharacterProgressionDerivedStatEntry>();
+                }
 
-        private readonly Dictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeEntry> _attributeMap = new();
+                return this.ProgressionConfig.DerivedStatEntries;
+            }
+        }
+
+        private readonly Dictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeRuntimeEntry> _attributeMap = new();
         private readonly Dictionary<CharacterProgressionDerivedStatType, int> _derivedStatValueMap = new();
-        private IReadOnlyDictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeEntry> AttributeMap => _attributeMap;
+        private IReadOnlyDictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeRuntimeEntry> AttributeMap => _attributeMap;
         private IReadOnlyDictionary<CharacterProgressionDerivedStatType, int> DerivedStatValueMap => _derivedStatValueMap;
 
         private HPController HPController => this.CharacterRootController.HPController;
@@ -31,8 +43,7 @@ namespace FlameOfTheLost
         // --- Unity Callbacks ---
         private void Start()
         {
-            this.RebuildMaps();
-            this.RecalculateAndApplyDerivedStats();
+            this.InitializeProgression();
         }
 #if UNITY_EDITOR
         //private void OnValidate()
@@ -42,9 +53,10 @@ namespace FlameOfTheLost
 #endif
 
         // --- Public APIs ---
+        //  1. Getters for attributes and derived stats
         public int GetAttributeValue(CharacterProgressionAttributeType attributeType)
         {
-            if (this.AttributeMap.TryGetValue(attributeType, out CharacterProgressionAttributeEntry entry))
+            if (this.AttributeMap.TryGetValue(attributeType, out CharacterProgressionAttributeRuntimeEntry entry))
             {
                 return entry.CurrentValue;
             }
@@ -61,16 +73,12 @@ namespace FlameOfTheLost
             return 0;
         }
 
-        public bool CanSatisfyRequirements(IReadOnlyList<CharacterCapabilityRequirement> requirements)
-        {
-            return CharacterCapabilityRequirementUtility.AreRequirementsSatisfied(this, requirements);
-        }
-
+        //  2. Methods to modify attributes (e.g., adding bonuses from upgrades)
         public void AddAttributeBonus(CharacterProgressionAttributeType attributeType, int amount)
         {
             if (amount <= 0) return;
 
-            CharacterProgressionAttributeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
+            CharacterProgressionAttributeRuntimeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
             entry.AddBonus(amount);
 
             this.RebuildMaps();
@@ -79,20 +87,20 @@ namespace FlameOfTheLost
             this.ProgressionChanged?.Invoke();
         }
 
-        public void SetAttributeBaseValue(CharacterProgressionAttributeType attributeType, int value)
-        {
-            CharacterProgressionAttributeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
-            entry.SetBaseValue(value);
+        //public void SetAttributeBaseValue(CharacterProgressionAttributeType attributeType, int value)
+        //{
+        //    CharacterProgressionAttributeRuntimeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
+        //    entry.SetBaseValue(value);
 
-            this.RebuildMaps();
-            this.RecalculateAndApplyDerivedStats();
+        //    this.RebuildMaps();
+        //    this.RecalculateAndApplyDerivedStats();
 
-            this.ProgressionChanged?.Invoke();
-        }
+        //    this.ProgressionChanged?.Invoke();
+        //}
 
         public void SetAttributeBonusValue(CharacterProgressionAttributeType attributeType, int value)
         {
-            CharacterProgressionAttributeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
+            CharacterProgressionAttributeRuntimeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
             entry.SetBonusValue(value);
 
             this.RebuildMaps();
@@ -101,12 +109,45 @@ namespace FlameOfTheLost
             this.ProgressionChanged?.Invoke();
         }
 
+        //  3. ICharacterPlacementRefreshable implementation
+        public int PlacementConfigurePriority => 20;
+        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        {
+            this.InitializeProgression();
+        }
+
         // --- Helpers ---
+        private void InitializeProgression()
+        {
+            this.InitializeRuntimeAttributesFromConfig();
+            this.RebuildMaps();
+            this.RecalculateAndApplyDerivedStats();
+        }
+
+        private void InitializeRuntimeAttributesFromConfig()
+        {
+            if (this.ProgressionConfig == null) return;
+
+            // Do not overwrite runtime attributes if they already exist.
+            // This keeps the system compatible with future save/load.
+            if (_runtimeAttributeEntries != null && this.RuntimeAttributeEntries.Count > 0) return;
+
+            _runtimeAttributeEntries = new List<CharacterProgressionAttributeRuntimeEntry>();
+
+            foreach (CharacterProgressionBaseAttributeConfigEntry configEntry in this.ProgressionConfig.BaseAttributeEntries)
+            {
+                if (configEntry == null) continue;
+
+                CharacterProgressionAttributeRuntimeEntry runtimeEntry = new CharacterProgressionAttributeRuntimeEntry(configEntry);
+                _runtimeAttributeEntries.Add(runtimeEntry);
+            }
+        }
+
         private void RebuildMaps()
         {
             _attributeMap.Clear();
 
-            foreach (CharacterProgressionAttributeEntry entry in this.AttributeEntries)
+            foreach (CharacterProgressionAttributeRuntimeEntry entry in this.RuntimeAttributeEntries)
             {
                 if (entry == null) continue;
 
@@ -114,21 +155,21 @@ namespace FlameOfTheLost
             }
         }
 
-        private CharacterProgressionAttributeEntry GetOrCreateAttributeEntry(CharacterProgressionAttributeType attributeType)
+        private CharacterProgressionAttributeRuntimeEntry GetOrCreateAttributeEntry(CharacterProgressionAttributeType attributeType)
         {
-            if (this.AttributeMap.TryGetValue(attributeType, out CharacterProgressionAttributeEntry existingEntry))
+            if (this.AttributeMap.TryGetValue(attributeType, out CharacterProgressionAttributeRuntimeEntry existingEntry))
             {
                 return existingEntry;
             }
 
-            CharacterProgressionAttributeEntry newEntry = new CharacterProgressionAttributeEntry(attributeType, 0);
-            _attributeEntries.Add(newEntry);
+            CharacterProgressionAttributeRuntimeEntry newEntry = new CharacterProgressionAttributeRuntimeEntry(attributeType, 0);
+            _runtimeAttributeEntries.Add(newEntry);
             _attributeMap[attributeType] = newEntry;
 
             return newEntry;
         }
 
-        public void RecalculateAndApplyDerivedStats()
+        private void RecalculateAndApplyDerivedStats()
         {
             this.RecalculateDerivedStats();
             this.ApplyDerivedStatsToCharacterSystems();
@@ -168,8 +209,8 @@ namespace FlameOfTheLost
         {
             if (this.CombatLoadoutController == null) return;
 
-            int maxEquippedWeapons = GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_WEAPONS);
-            int maxEquippedConsumableItems = GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_CONSUMABLE_ITEMS);
+            int maxEquippedWeapons = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_WEAPONS);
+            int maxEquippedConsumableItems = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_CONSUMABLE_ITEMS);
 
             if (maxEquippedWeapons > 0)
             {
@@ -182,21 +223,39 @@ namespace FlameOfTheLost
             }
         }
 
+        protected override void CacheReferences()
+        {
+            base.CacheReferences();
+
+            if (this.ProgressionConfig == null)
+            {
+                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterProgressionUpgradeHandler)}] ProgressionConfig reference is not set on {this.gameObject.name}. Loading the default config from Resources.");
+                _progressionConfig = Resources.Load<CharacterProgressionConfig>("Data/Character/Shared/Progression/Prg_Generic");
+            }
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.ProgressionConfig == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterProgressionController)}] ProgressionConfig reference is missing on {this.gameObject.name}");
+        }
+
 #if UNITY_EDITOR
         private void RemoveDuplicateAttributesInEditor()
         {
-            if (_attributeEntries == null) return;
+            if (_runtimeAttributeEntries == null) return;
 
             HashSet<CharacterProgressionAttributeType> seen = new();
 
-            for (int i = this.AttributeEntries.Count - 1; i >= 0; i--)
+            for (int i = this.RuntimeAttributeEntries.Count - 1; i >= 0; i--)
             {
-                CharacterProgressionAttributeEntry entry = this.AttributeEntries[i];
+                CharacterProgressionAttributeRuntimeEntry entry = this.RuntimeAttributeEntries[i];
                 if (entry == null) continue;
 
                 if (seen.Contains(entry.AttributeType))
                 {
-                    _attributeEntries.RemoveAt(i);
+                    _runtimeAttributeEntries.RemoveAt(i);
                     continue;
                 }
 

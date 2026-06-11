@@ -7,7 +7,7 @@ namespace FlameOfTheLost
     public class CharacterRewardWalletController : CharacterBehaviourControllerBase
     {
         // --- States ---
-        [Header("Amount (Lost Embers)")]
+        [Header("Lost Embers Amount (Runtime)")]
         [SerializeField, Min(0)] private int _currentAmount = 0;
         public int CurrentAmount
         {

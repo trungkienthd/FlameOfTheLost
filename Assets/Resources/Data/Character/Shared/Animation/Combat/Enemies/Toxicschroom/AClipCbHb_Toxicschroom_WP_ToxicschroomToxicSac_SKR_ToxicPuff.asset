@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d3b9023c5dfeb499619f54ab1144a8, type: 3}
+  m_Name: AClipCbHb_Toxicschroom_WP_ToxicschroomToxicSac_SKR_ToxicPuff
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAnimationClipHitboxSetProfile
+  _skills:
+  - {fileID: 11400000, guid: f83ec08a9ac622448ac00cfd201b56bf, type: 2}
+  _weapon: {fileID: 11400000, guid: 363524329bee2e5448ce96f08412d8f8, type: 2}
+  _characterType: 2
+  _left:
+    _down:
+      _animationClip: {fileID: 7400000, guid: 5953682c5f858a44cbb09bfd84e2f21d, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0, y: 0}
+        _offset: {x: 0, y: 0}
+    _side:
+      _animationClip: {fileID: 7400000, guid: 6fb8776f631699d4393d6320dba81f68, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0, y: 0}
+        _offset: {x: 0, y: 0}
+    _up:
+      _animationClip: {fileID: 7400000, guid: dc9607b8f0aeb014aa30784da2ca1684, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0, y: 0}
+        _offset: {x: 0, y: 0}
+  _right:
+    _down:
+      _animationClip: {fileID: 0}
+      _hitboxShape:
+        _points: []
+        _offset: {x: 0, y: 0}
+    _side:
+      _animationClip: {fileID: 0}
+      _hitboxShape:
+        _points: []
+        _offset: {x: 0, y: 0}
+    _up:
+      _animationClip: {fileID: 0}
+      _hitboxShape:
+        _points: []
+        _offset: {x: 0, y: 0}
+  _attackWindowDuration: 0.5

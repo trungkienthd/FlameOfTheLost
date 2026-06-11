@@ -9,18 +9,16 @@ namespace FlameOfTheLost
             if (receiverCharacter == null) return false;
             if (defeatedCharacter == null) return false;
 
-            CharacterRewardDropProvider defeatedRewardDropProvider = defeatedCharacter.RewardDropProvider;
+            CharacterAIRootController defeatedAICharacter = defeatedCharacter as CharacterAIRootController;
+            if (defeatedAICharacter == null) return false;
+
+            CharacterRewardDropProvider defeatedRewardDropProvider = defeatedAICharacter.RewardDropProvider;
             if (defeatedRewardDropProvider == null) return false;
 
             CharacterRewardWalletController receiverRewardWallet = receiverCharacter.RewardWalletController;
             if (receiverRewardWallet == null) return false;
 
-            CharacterRewardAmount rewardAmount = defeatedRewardDropProvider.CreateRewardAmount();
-            if (rewardAmount == null || rewardAmount.Amount <= 0) return false;
-
-            receiverRewardWallet.Add(rewardAmount.Amount);
-
-            return true;
+            return CharacterRewardDistributionUtility.TryDistributeReward(defeatedRewardDropProvider, receiverRewardWallet);
         }
 
         public static bool TryDistributeReward(CharacterRewardDropProvider dropProvider, CharacterRewardWalletController walletController)
@@ -28,10 +26,10 @@ namespace FlameOfTheLost
             if (dropProvider == null) return false;
             if (walletController == null) return false;
 
-            CharacterRewardAmount rewardAmount = dropProvider.CreateRewardAmount();
-            if (rewardAmount == null || rewardAmount.Amount <= 0) return false;
+            int rewardAmount = dropProvider.RewardAmount;
+            if (rewardAmount <= 0) return false;
 
-            walletController.Add(rewardAmount.Amount);
+            walletController.Add(rewardAmount);
 
             return true;
         }

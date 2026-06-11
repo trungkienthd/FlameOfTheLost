@@ -45565,6 +45565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1006287877}
   - component: {fileID: 1006287878}
+  - component: {fileID: 1006287879}
   m_Layer: 8
   m_Name: Progression
   m_TagString: Untagged
@@ -45600,8 +45601,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionController
   _characterRootController: {fileID: 2107461207}
-  _attributeEntries: []
-  _derivedStatEntries: []
+  _progressionConfig: {fileID: 11400000, guid: e0ad21b21291f254ab256c22ffcdd067, type: 2}
+  _runtimeAttributeEntries: []
+--- !u!114 &1006287879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006287876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 492e64d8f2cfff6488659ee9b5f72306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionUpgradeHandler
+  _characterRootController: {fileID: 2107461207}
+  _upgradeConfig: {fileID: 11400000, guid: 0656340d436a57f45a848cbae7c5215b, type: 2}
 --- !u!1 &1011574957
 GameObject:
   m_ObjectHideFlags: 0

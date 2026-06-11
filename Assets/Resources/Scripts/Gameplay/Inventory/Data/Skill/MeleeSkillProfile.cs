@@ -6,6 +6,6 @@ namespace FlameOfTheLost
     public class MeleeSkillProfile : SkillProfile
     {
         // --- Style
-        public override SkillStyleType Style => SkillStyleType.Melee;
+        public override SkillStyle Style => SkillStyle.Melee;
     }
 }

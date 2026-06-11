@@ -60,7 +60,7 @@ namespace FlameOfTheLost
 
         //  2. Reservation Resolution
         //      2.1.1. Attack Window End resolution
-        public void ResolveOnAttackWindowEnd(SkillStyleType skillStyle)
+        public void ResolveOnAttackWindowEnd(SkillStyle skillStyle)
         {
             if (this.ResourcesController == null) 
             {
@@ -90,13 +90,13 @@ namespace FlameOfTheLost
                     case ResourceCostTriggerType.OnHitConfirmed:
                         switch (skillStyle)
                         {
-                            case SkillStyleType.Melee:
+                            case SkillStyle.Melee:
                                 // Your rule: for melee, if still here at End -> no hit confirmed -> Consume.
                                 // (If a hit confirmed earlier, it should have been removed already.)
                                 this.ResourcesController.ConsumeReservedCost(reservationID);
                                 this.ActiveReservationIDs.RemoveAt(i);
                                 break;
-                            case SkillStyleType.Ranged:
+                            case SkillStyle.Ranged:
                                 // Ranged: projectile/hitbox decides later. Do nothing here.
                                 break;
                             default:
@@ -118,7 +118,7 @@ namespace FlameOfTheLost
         }
 
         //      2.1.2. Attack Window Interrupt resolution
-        public void ResolveOnAttackWindowInterrupt(SkillStyleType skillStyle)
+        public void ResolveOnAttackWindowInterrupt(SkillStyle skillStyle)
         {
             if (this.ResourcesController == null)
             {
@@ -141,11 +141,11 @@ namespace FlameOfTheLost
                     case ResourceCostTriggerType.OnAttackEnd:
                         switch (skillStyle)
                         {
-                            case SkillStyleType.Melee:
+                            case SkillStyle.Melee:
                                 // Melee: hitbox was enabled since WindowStart -> Consume
                                 this.ResourcesController.ConsumeReservedCost(reservationID);
                                 break;
-                            case SkillStyleType.Ranged:
+                            case SkillStyle.Ranged:
                                 // Ranged: projectile never created -> Cancel + Refund
                                 this.ResourcesController.CancelReservedCost(reservationID, 1f);
                                 break;
@@ -160,11 +160,11 @@ namespace FlameOfTheLost
                     case ResourceCostTriggerType.OnHitConfirmed:
                         switch (skillStyle)
                         {
-                            case SkillStyleType.Melee:
+                            case SkillStyle.Melee:
                                 // Your rule: if still here at Interrupt -> no hit confirmed -> Consume
                                 this.ResourcesController.ConsumeReservedCost(reservationID);
                                 break;
-                            case SkillStyleType.Ranged:
+                            case SkillStyle.Ranged:
                                 // Ranged: projectile never created -> Cancel + Refund
                                 this.ResourcesController.CancelReservedCost(reservationID, 1f);
                                 break;
@@ -182,10 +182,10 @@ namespace FlameOfTheLost
                         
                         switch (skillStyle)
                         {
-                            case SkillStyleType.Melee:
+                            case SkillStyle.Melee:
                                 this.ResourcesController.ConsumeReservedCost(reservationID);
                                 break;
-                            case SkillStyleType.Ranged:
+                            case SkillStyle.Ranged:
                                 this.ResourcesController.CancelReservedCost(reservationID, 1f);
                                 break;
                             default:
@@ -201,7 +201,7 @@ namespace FlameOfTheLost
         }
 
         //      2.2.1. Resolved when a hit is confirmed by a hitbox (melee or projectile) (any OnHitConfirmed reservations)
-        public void ResolveOnHitConfirmed(SkillStyleType skillStyle = SkillStyleType.Default)
+        public void ResolveOnHitConfirmed(SkillStyle skillStyle = SkillStyle.Default)
         {
             if (this.ResourcesController == null)
             {
@@ -232,7 +232,7 @@ namespace FlameOfTheLost
         //          Resolves any OnHitConfirmed reservations.
         //              - Melee: typically already handled by End/Interrupt logic (consume). We keep it safe: consume (to match your current melee rules).
         //              - Ranged: cancel + refund (projectile never hit).
-        public void ResolveOnHitboxDisabledWithoutHit(SkillStyleType skillStyle = SkillStyleType.Default)
+        public void ResolveOnHitboxDisabledWithoutHit(SkillStyle skillStyle = SkillStyle.Default)
         {
             if (this.ResourcesController == null)
             {
@@ -254,11 +254,11 @@ namespace FlameOfTheLost
 
                 switch (skillStyle)
                 {
-                    case SkillStyleType.Melee:
+                    case SkillStyle.Melee:
                         // Match your melee rule set: no hit by the time it ends => consume.
                         this.ResourcesController.ConsumeReservedCost(reservationID);
                         break;
-                    case SkillStyleType.Ranged:
+                    case SkillStyle.Ranged:
                         // Ranged miss => refund fully.
                         this.ResourcesController.CancelReservedCost(reservationID, 1f);
                         break;

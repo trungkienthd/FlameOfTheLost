@@ -75,11 +75,14 @@ namespace FlameOfTheLost
 
         [Header("References (Progression)")]
         [SerializeField] private CharacterProgressionController _progressionController;
-        [SerializeField] private CharacterRewardWalletController _rewardWalletController;
-        [SerializeField] private CharacterRewardDropProvider _rewardDropProvider;
+        [SerializeField] private CharacterProgressionUpgradeHandler _progressionUpgradeHandler;
         public CharacterProgressionController ProgressionController => _progressionController;
+        public CharacterProgressionUpgradeHandler ProgressionUpgradeHandler => _progressionUpgradeHandler;
+
+        [Header("References (Reward)")]
+
+        [SerializeField] private CharacterRewardWalletController _rewardWalletController;
         public CharacterRewardWalletController RewardWalletController => _rewardWalletController;
-        public CharacterRewardDropProvider RewardDropProvider => _rewardDropProvider;
 
         [Header("References (Inventory)")]
         [SerializeField] private InventoryController _inventoryController;
@@ -123,9 +126,10 @@ namespace FlameOfTheLost
             if (this.StatusEffectStatModifierHandler    == null) _statusEffectStatModifierHandler   = this.GetComponentInChildren<StatusEffectStatModifierHandler>(true);
             if (this.StatusEffectStatPeriodicHandler    == null) _statusEffectStatPeriodicHandler   = this.GetComponentInChildren<StatusEffectStatPeriodicHandler>(true);
 
-            if (this.ProgressionController == null)     _progressionController  = this.GetComponentInChildren<CharacterProgressionController>(true);
+            if (this.ProgressionController      == null) _progressionController     = this.GetComponentInChildren<CharacterProgressionController>(true);
+            if (this.ProgressionUpgradeHandler  == null) _progressionUpgradeHandler = this.GetComponentInChildren<CharacterProgressionUpgradeHandler>(true);
+
             if (this.RewardWalletController == null)    _rewardWalletController = this.GetComponentInChildren<CharacterRewardWalletController>(true);
-            if (this.RewardDropProvider == null)        _rewardDropProvider     = this.GetComponentInChildren<CharacterRewardDropProvider>(true);
 
             if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>(true);
         }
