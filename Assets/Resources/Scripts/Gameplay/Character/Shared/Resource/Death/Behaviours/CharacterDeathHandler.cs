@@ -57,6 +57,9 @@ namespace FlameOfTheLost
         {
             if (this.HPController == null) return;
 
+            this.HPController.OnDeath -= this.HandleDeath;
+            this.HPController.OnDeath += this.HandleDeath;
+
             this.HPController.OnDeathAnimationFinished -= this.HandleDeathAnimationFinished;
             this.HPController.OnDeathAnimationFinished += this.HandleDeathAnimationFinished;
         }
@@ -64,24 +67,36 @@ namespace FlameOfTheLost
         {
             if (this.HPController == null) return;
 
+            this.HPController.OnDeath -= this.HandleDeath;
+
             this.HPController.OnDeathAnimationFinished -= this.HandleDeathAnimationFinished;
         }
 
         //  2. Event Handlers
+        private void HandleDeath()
+        {
+            CharacterDeathCauseEntry deathCause = this.LastDeathCause;
+            Debug.Log
+            (
+                $"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Character died. " +
+                $"CauseType: {(deathCause != null ? deathCause.CauseType.ToString() : "None")}. " +
+                $"SourceCharacter: {(deathCause?.SourceCharacter != null ? deathCause.SourceCharacter.name : "None")}."
+            );
+
+            this.TryDistributeRewardAfterDeath(deathCause);
+        }
         private void HandleDeathAnimationFinished()
         {
             if (this.HasResolvedDeath) return;
             this.HasResolvedDeath = true;
 
             CharacterDeathCauseEntry deathCause = this.LastDeathCause;
-            Debug.Log
-            (
-                $"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Resolving death. " +
-                $"CauseType: {(deathCause != null ? deathCause.CauseType.ToString() : "None")}. " +
-                $"SourceCharacter: {(deathCause?.SourceCharacter != null ? deathCause.SourceCharacter.name : "None")}."
-            );
-
-            this.TryDistributeRewardAfterDeath(deathCause);
+            //Debug.Log
+            //(
+            //    $"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Resolving death after animation. " +
+            //    $"CauseType: {(deathCause != null ? deathCause.CauseType.ToString() : "None")}. " +
+            //    $"SourceCharacter: {(deathCause?.SourceCharacter != null ? deathCause.SourceCharacter.name : "None")}."
+            //);
 
             if (this.IdentityController == null)
             {
@@ -133,13 +148,13 @@ namespace FlameOfTheLost
 
             if (!distributed) return;
 
-            Debug.Log
-            (
-                $"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Reward distributed. " +
-                $"Receiver: {receiverCharacter.name}. " +
-                $"Defeated: {defeatedCharacter.name}.",
-                this
-            );
+            //Debug.Log
+            //(
+            //    $"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Reward distributed. " +
+            //    $"Receiver: {receiverCharacter.name}. " +
+            //    $"Defeated: {defeatedCharacter.name}.",
+            //    this
+            //);
         }
 
         private void RespawnPlayer()

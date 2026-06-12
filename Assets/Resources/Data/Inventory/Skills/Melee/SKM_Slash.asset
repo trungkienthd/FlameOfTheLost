@@ -20,7 +20,7 @@ MonoBehaviour:
   _defaultProvisionType: 0
   _attachableWeaponTypes: 000000000100000002000000
   _requirements: []
-  _damageAmount: 10
+  _damageAmount: 100
   _knockbackForce: 4
   _resourceCost:
     _hp: 0

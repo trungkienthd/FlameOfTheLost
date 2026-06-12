@@ -397,6 +397,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 6084845536400234014}
   _animator: {fileID: 100178451394550758}
   _characterFlipGroup: {fileID: 9065100916030918952}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &6836829972921874162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,7 +1098,7 @@ MonoBehaviour:
   _currentVirtualHP: 0
   _maxVirtualHP: 0
   _isDead: 0
-  _deathAnimationFallbackSeconds: 0.825
+  _deathAnimationFallbackSeconds: 1.125
   _lastDeathCause:
     _causeType: 0
     _sourceCharacter: {fileID: 0}
@@ -1463,6 +1464,8 @@ MonoBehaviour:
   _visualFacingHandler: {fileID: 6836829972921874162}
   _visualLocomotionAnimationHandler: {fileID: 8471074619670850254}
   _visualCombatAnimationHandler: {fileID: 6819824635726035935}
+  _statusEffectVFXHandler: {fileID: 0}
+  _rewardVFXHandler: {fileID: 0}
   _combatController: {fileID: 2103035301200508583}
   _combatLoadoutController: {fileID: 0}
   _combatLoadoutWeaponHandler: {fileID: 0}
@@ -1698,6 +1701,9 @@ MonoBehaviour:
   _characterRootController: {fileID: 5013856377803996316}
   _progressionConfig: {fileID: 11400000, guid: 13e8895b8b3489342b82009b5cfbb868, type: 2}
   _runtimeAttributeEntries: []
+  _derivedStatValueMap:
+    _keys: 
+    _values: 
 --- !u!114 &7109462879358384833
 MonoBehaviour:
   m_ObjectHideFlags: 0

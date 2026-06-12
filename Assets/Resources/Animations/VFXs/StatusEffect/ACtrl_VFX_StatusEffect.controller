@@ -31,7 +31,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ACtrl_VFX_StatusEffects
+  m_Name: ACtrl_VFX_StatusEffect
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:

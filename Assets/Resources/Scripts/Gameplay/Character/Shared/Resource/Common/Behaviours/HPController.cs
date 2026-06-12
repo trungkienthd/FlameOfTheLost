@@ -45,7 +45,7 @@ namespace FlameOfTheLost
         //  3. Death-related States
         [Header("Death")]
         [SerializeField] private bool _isDead = false;
-        [SerializeField] private float _deathAnimationFallbackSeconds = 0.825f;
+        [SerializeField] private float _deathAnimationFallbackSeconds = 1.125f;
         [SerializeField] private CharacterDeathCauseEntry _lastDeathCause;
         public bool IsDead
         {

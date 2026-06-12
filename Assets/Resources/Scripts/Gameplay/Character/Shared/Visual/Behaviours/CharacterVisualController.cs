@@ -22,6 +22,10 @@ namespace FlameOfTheLost
         public Animator Animator => _animator;
         public Transform CharacterFlipGroup => _characterFlipGroup;
 
+        [Header("Visual Color")]
+        [SerializeField] private Color _normalColor = Color.white;
+        public Color NormalColor => _normalColor;
+
         private CharacterVisualFacingHandler FacingHandler => this.CharacterRootController.VisualFacingHandler;
         private CharacterVisualLocomotionAnimationHandler LocomotionAnimationHandler => this.CharacterRootController.VisualLocomotionAnimationHandler;
         private CharacterVisualCombatAnimationHandler CombatAnimationHandler => this.CharacterRootController.VisualCombatAnimationHandler;
@@ -76,6 +80,8 @@ namespace FlameOfTheLost
             this.Animator.ResetTrigger(CharacterVisualController.DieID);
 
             this.SetDead(false);
+
+            this.ResetVisualColor();
 
             if (this.FacingHandler != null)
             {
@@ -210,6 +216,18 @@ namespace FlameOfTheLost
             }
 
             this.Animator.runtimeAnimatorController = this.RuntimeOverrideController;
+        }
+
+        //  7. Manage color
+        public void SetVisualColor(Color color)
+        {
+            if (this.SpriteRenderer == null) return;
+
+            this.SpriteRenderer.color = color;
+        }
+        public void ResetVisualColor()
+        {
+            this.SetVisualColor(this.NormalColor);
         }
 
         // --- Helpers ---

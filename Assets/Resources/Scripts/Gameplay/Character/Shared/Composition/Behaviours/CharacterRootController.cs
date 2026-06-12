@@ -35,6 +35,12 @@ namespace FlameOfTheLost
         public CharacterVisualLocomotionAnimationHandler VisualLocomotionAnimationHandler => _visualLocomotionAnimationHandler;
         public CharacterVisualCombatAnimationHandler VisualCombatAnimationHandler => _visualCombatAnimationHandler;
 
+        [Header("References (Visual - VFX)")]
+        [SerializeField] private StatusEffectVFXHandler _statusEffectVFXHandler;
+        [SerializeField] private CharacterRewardVFXHandler _rewardVFXHandler;
+        public StatusEffectVFXHandler StatusEffectVFXHandler => _statusEffectVFXHandler;
+        public CharacterRewardVFXHandler RewardVFXHandler => _rewardVFXHandler;
+
         [Header("References (Combat)")]
         [SerializeField] private CharacterCombatController _combatController;
         [SerializeField] private CharacterCombatLoadoutController _combatLoadoutController;
@@ -108,6 +114,9 @@ namespace FlameOfTheLost
             if (this.VisualFacingHandler                == null) _visualFacingHandler               = this.GetComponentInChildren<CharacterVisualFacingHandler>(true);
             if (this.VisualLocomotionAnimationHandler   == null) _visualLocomotionAnimationHandler  = this.GetComponentInChildren<CharacterVisualLocomotionAnimationHandler>(true);
             if (this.VisualCombatAnimationHandler       == null) _visualCombatAnimationHandler      = this.GetComponentInChildren<CharacterVisualCombatAnimationHandler>(true);
+            
+            if (this.StatusEffectVFXHandler == null) _statusEffectVFXHandler    = this.GetComponentInChildren<StatusEffectVFXHandler>(true);
+            if (this.RewardVFXHandler       == null) _rewardVFXHandler          = this.GetComponentInChildren<CharacterRewardVFXHandler>(true);
 
             if (this.CombatController                       == null) _combatController                      = this.GetComponentInChildren<CharacterCombatController>(true);
             if (this.CombatLoadoutController                == null) _combatLoadoutController               = this.GetComponentInChildren<CharacterCombatLoadoutController>(true);

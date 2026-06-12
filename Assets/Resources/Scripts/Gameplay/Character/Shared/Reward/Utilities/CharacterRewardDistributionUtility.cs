@@ -18,7 +18,15 @@ namespace FlameOfTheLost
             CharacterRewardWalletController receiverRewardWallet = receiverCharacter.RewardWalletController;
             if (receiverRewardWallet == null) return false;
 
-            return CharacterRewardDistributionUtility.TryDistributeReward(defeatedRewardDropProvider, receiverRewardWallet);
+            if (CharacterRewardDistributionUtility.TryDistributeReward(defeatedRewardDropProvider, receiverRewardWallet))
+            {
+                receiverCharacter?.RewardVFXHandler?.PlayGainVFX();
+                defeatedCharacter?.RewardVFXHandler?.PlayReleaseVFX();
+
+                return true;
+            }
+
+            return false;
         }
 
         public static bool TryDistributeReward(CharacterRewardDropProvider dropProvider, CharacterRewardWalletController walletController)
