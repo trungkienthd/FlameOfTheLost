@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterProgressionController : CharacterBehaviourControllerBase, ICharacterPlacementRefreshable
+    public class CharacterProgressionController : CharacterBehaviourControllerBase, ICharacterRefreshable
     {
         // --- States ---
         [Header("Progression Initial Configurations")]
@@ -105,8 +105,8 @@ namespace FlameOfTheLost
         }
 
         //  3. ICharacterPlacementRefreshable implementation
-        public int PlacementConfigurePriority => 20;
-        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        public int RefreshmentConfigurePriority => 20;
+        public void RefreshCharacter(CharacterPlacementContext context)
         {
             this.InitializeProgression();
         }

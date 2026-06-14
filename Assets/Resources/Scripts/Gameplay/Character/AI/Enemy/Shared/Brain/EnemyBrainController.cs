@@ -1,6 +1,6 @@
 namespace FlameOfTheLost
 {
-    public abstract class EnemyBrainController : CharacterBehaviourControllerBase, ICharacterPlacementRefreshable
+    public abstract class EnemyBrainController : CharacterBehaviourControllerBase, ICharacterRefreshable
     {
         // --- State ---
         //  1. References
@@ -25,8 +25,8 @@ namespace FlameOfTheLost
 
         // --- Public APIs ---
         //  1. ICharacterPlacementRefreshable implementation
-        public virtual int PlacementConfigurePriority => 90;
-        public virtual void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        public virtual int RefreshmentConfigurePriority => 90;
+        public virtual void RefreshCharacter(CharacterPlacementContext context)
         {
             this.TargetDetectionHandler?.ClearAllTargets();
         }

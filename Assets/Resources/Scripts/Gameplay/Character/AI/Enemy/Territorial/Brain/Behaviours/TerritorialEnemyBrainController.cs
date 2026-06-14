@@ -16,7 +16,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     [SerializeField] private TerritorialEnemyState _currentAIState = TerritorialEnemyState.Roaming;
     public TerritorialEnemyState CurrentState => _currentAIState;
 
-    //  2. Home Area
+    //  2. Home Area (Runtime)
     [Header("Home Area (Runtime)")]
     [SerializeField] private TerritorialEnemyHomeAreaEntry _homeAreaEntry;
     private TerritorialEnemyHomeAreaEntry HomeAreaEntry
@@ -25,7 +25,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         set => _homeAreaEntry = value;
     }
 
-    //  3. Runtime Roaming State
+    //  3. Roaming State (Runtime)
     [Header("Roaming (Runtime)")]
     [SerializeField] private bool _isRoamWalking;
     [SerializeField] private Vector2 _roamMoveDirection;
@@ -58,8 +58,8 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         set => _homeReturnPoint = value;
     }
 
-    //  4. Runtime Attack State
-    [Header("Attack (Runtime)")]
+    //  4. Attack State (Runtime)
+    [Header("Attack & PreAttack (Runtime)")]
     [SerializeField] private float _nextAllowedAttackTime;
     [SerializeField] private float _attackingStateEndTime;
     private float NextAllowedAttackTime
@@ -71,6 +71,14 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     {
         get => _attackingStateEndTime;
         set => _attackingStateEndTime = value;
+    }
+
+    //      4.1. PreAttack State (Runtime)
+    [SerializeField] private float _preAttackStateEndTime;
+    private float PreAttackStateEndTime
+    {
+        get => _preAttackStateEndTime;
+        set => _preAttackStateEndTime = value;
     }
 
     //  5. References 
@@ -106,9 +114,9 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     }
 
     //  1. ICharacterPlacementRefreshable implementation
-    public override void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+    public override void RefreshCharacter(CharacterPlacementContext context)
     {
-        base.RefreshAfterCharacterPlacement(context);
+        base.RefreshCharacter(context);
 
         this.ResetRoamingRuntime();
         this.ResetAttackRuntime();
@@ -138,6 +146,12 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         if (this.CurrentState == TerritorialEnemyState.Dead)
         {
             this.HandleDeadState();
+            return;
+        }
+
+        if (this.CurrentState == TerritorialEnemyState.PreAttack)
+        {
+            this.HandlePreAttackState();
             return;
         }
 
@@ -219,6 +233,21 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         this.EnemyInputHandler?.ClearAIMoveInput();
 
         if (Time.time < this.NextAllowedAttackTime) return;
+
+        this.PreAttackStateEndTime = Time.time + this.AttackConfig.PreAttackDuration;
+        this.SetState(TerritorialEnemyState.PreAttack);
+    }
+    private void HandlePreAttackState()
+    {
+        this.EnemyInputHandler?.ClearAIMoveInput();
+
+        Transform targetTransform = this.CurrentTarget?.transform;
+        if (targetTransform != null)
+        {
+            this.FaceTarget(targetTransform);
+        }
+
+        if (Time.time < this.PreAttackStateEndTime) return;
 
         this.EnemyInputHandler?.RequestAINormalAttack(this.AttackConfig.NormalAttackSide);
 
@@ -353,6 +382,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     private void ResetAttackRuntime()
     {
         this.NextAllowedAttackTime = 0f;
+        this.PreAttackStateEndTime = 0f;
         this.AttackingStateEndTime = 0f;
     }
 

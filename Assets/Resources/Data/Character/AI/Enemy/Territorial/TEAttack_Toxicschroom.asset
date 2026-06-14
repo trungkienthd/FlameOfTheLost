@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TEAttack_Toxicschroom
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyAttackConfig
   _idealAttackRange: 1.8
+  _preAttackDuration: 0.45
   _attackDecisionCooldown: 2.5
   _attackingStateDuration: 0.7
   _normalAttackSide: 0

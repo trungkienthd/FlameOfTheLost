@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterDeathHandler : CharacterBehaviourControllerBase, ICharacterPlacementRefreshable
+    public class CharacterDeathHandler : CharacterBehaviourControllerBase, ICharacterRefreshable
     {
         // --- States ---
         //  1. References
@@ -44,8 +44,8 @@ namespace FlameOfTheLost
 
         // --- Public Methods ---
         //  1. ICharacterPlacementRefreshable Implementation
-        public int PlacementConfigurePriority => 10;
-        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        public int RefreshmentConfigurePriority => 10;
+        public void RefreshCharacter(CharacterPlacementContext context)
         {
             this.HasResolvedDeath = false;
             this.HasDistributedReward = false;

@@ -44,14 +44,14 @@ namespace FlameOfTheLost
 
         private static void RefreshCharacterSystems(CharacterPlacementContext context)
         {
-            IEnumerable<ICharacterPlacementRefreshable> refreshableSystems = context.Character
+            IEnumerable<ICharacterRefreshable> refreshableSystems = context.Character
                 .GetComponentsInChildren<MonoBehaviour>(true)
-                .OfType<ICharacterPlacementRefreshable>()
-                .OrderBy(system => system.PlacementConfigurePriority);
+                .OfType<ICharacterRefreshable>()
+                .OrderBy(system => system.RefreshmentConfigurePriority);
 
-            foreach (ICharacterPlacementRefreshable refreshableSystem in refreshableSystems)
+            foreach (ICharacterRefreshable refreshableSystem in refreshableSystems)
             {
-                refreshableSystem.RefreshAfterCharacterPlacement(context);
+                refreshableSystem.RefreshCharacter(context);
             }
         }
     }

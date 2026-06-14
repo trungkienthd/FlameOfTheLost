@@ -36,9 +36,9 @@ namespace FlameOfTheLost
         public CharacterVisualCombatAnimationHandler VisualCombatAnimationHandler => _visualCombatAnimationHandler;
 
         [Header("References (Visual - VFX)")]
-        [SerializeField] private StatusEffectVFXHandler _statusEffectVFXHandler;
+        [SerializeField] private Transform _statusEffectVFXHolder;
         [SerializeField] private CharacterRewardVFXHandler _rewardVFXHandler;
-        public StatusEffectVFXHandler StatusEffectVFXHandler => _statusEffectVFXHandler;
+        public Transform StatusEffectVFXHolder => _statusEffectVFXHolder;
         public CharacterRewardVFXHandler RewardVFXHandler => _rewardVFXHandler;
 
         [Header("References (Combat)")]
@@ -114,9 +114,16 @@ namespace FlameOfTheLost
             if (this.VisualFacingHandler                == null) _visualFacingHandler               = this.GetComponentInChildren<CharacterVisualFacingHandler>(true);
             if (this.VisualLocomotionAnimationHandler   == null) _visualLocomotionAnimationHandler  = this.GetComponentInChildren<CharacterVisualLocomotionAnimationHandler>(true);
             if (this.VisualCombatAnimationHandler       == null) _visualCombatAnimationHandler      = this.GetComponentInChildren<CharacterVisualCombatAnimationHandler>(true);
-            
-            if (this.StatusEffectVFXHandler == null) _statusEffectVFXHandler    = this.GetComponentInChildren<StatusEffectVFXHandler>(true);
-            if (this.RewardVFXHandler       == null) _rewardVFXHandler          = this.GetComponentInChildren<CharacterRewardVFXHandler>(true);
+
+            if (this.StatusEffectVFXHolder == null)
+            { 
+                Transform visual = this.VisualController?.transform;
+                if (visual != null)
+                {
+                    _statusEffectVFXHolder = visual.Find("StatusEffectVFXHolder");
+                }
+            }
+            if (this.RewardVFXHandler       == null) _rewardVFXHandler      = this.GetComponentInChildren<CharacterRewardVFXHandler>(true);
 
             if (this.CombatController                       == null) _combatController                      = this.GetComponentInChildren<CharacterCombatController>(true);
             if (this.CombatLoadoutController                == null) _combatLoadoutController               = this.GetComponentInChildren<CharacterCombatLoadoutController>(true);

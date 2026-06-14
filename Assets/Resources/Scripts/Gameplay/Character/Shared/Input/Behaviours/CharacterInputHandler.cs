@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class CharacterInputHandler : CharacterBehaviourControllerBase, ICharacterPlacementRefreshable
+    public abstract class CharacterInputHandler : CharacterBehaviourControllerBase, ICharacterRefreshable
     {
         // --- States ---
         //  1. References
@@ -15,8 +15,8 @@ namespace FlameOfTheLost
 
         // --- Public APIs ---
         //  1. ICharacterPlacementRefreshable implementation
-        public virtual int PlacementConfigurePriority => 100;
-        public virtual void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        public virtual int RefreshmentConfigurePriority => 100;
+        public virtual void RefreshCharacter(CharacterPlacementContext context)
         {
             this.ClearMoveInput();
         }

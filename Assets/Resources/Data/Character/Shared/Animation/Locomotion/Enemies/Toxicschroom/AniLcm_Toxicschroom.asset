@@ -15,3 +15,4 @@ MonoBehaviour:
   _defaultLocomotion: {fileID: 11400000, guid: 07292e5642a7a5e44a4bf4f21d79c72d, type: 2}
   _locomotionVariants:
   - {fileID: 11400000, guid: 772045f2cb8ced141884420f662755cf, type: 2}
+  - {fileID: 11400000, guid: 65eca09a4f72b2747bd967d5110b3961, type: 2}

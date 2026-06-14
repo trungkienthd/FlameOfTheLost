@@ -99150,9 +99150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectController
   _characterRootController: {fileID: 2107461207}
   _guardConfig: {fileID: 11400000, guid: e258a45908c1df341bb1a6d2734929bb, type: 2}
-  _statusEffectVFXHolder: {fileID: 1097086741}
   _statusEffectVFXInstancePrefab: {fileID: 8740500497781535910, guid: 89762261fcc319e49b11d0bfb94586a9, type: 3}
-  _ownerSpriteRenderer: {fileID: 513242083}
 --- !u!1 &1704369270
 GameObject:
   m_ObjectHideFlags: 0
@@ -104335,8 +104333,8 @@ MonoBehaviour:
   _visualFacingHandler: {fileID: 513242088}
   _visualLocomotionAnimationHandler: {fileID: 513242089}
   _visualCombatAnimationHandler: {fileID: 513242090}
-  _statusEffectVFXHandler: {fileID: 0}
-  _rewardVFXHandler: {fileID: 0}
+  _statusEffectVFXHolder: {fileID: 1097086741}
+  _rewardVFXHandler: {fileID: 6884279}
   _combatController: {fileID: 557462172}
   _combatLoadoutController: {fileID: 1267844716}
   _combatLoadoutWeaponHandler: {fileID: 1267844719}
@@ -104349,14 +104347,14 @@ MonoBehaviour:
   _hpController: {fileID: 1951002774}
   _fpController: {fileID: 1951002773}
   _staminaController: {fileID: 1951002772}
-  _deathHandler: {fileID: 0}
+  _deathHandler: {fileID: 1951002776}
   _statusEffectController: {fileID: 1685654211}
   _statusEffectFlagHandler: {fileID: 1685654210}
   _statusEffectStatModifierHandler: {fileID: 1685654209}
   _statusEffectStatPeriodicHandler: {fileID: 1685654208}
   _progressionController: {fileID: 1006287878}
-  _progressionUpgradeHandler: {fileID: 0}
-  _rewardWalletController: {fileID: 0}
+  _progressionUpgradeHandler: {fileID: 1006287879}
+  _rewardWalletController: {fileID: 1580262303}
   _inventoryController: {fileID: 1123552228}
   _playerCarryLoadoutController: {fileID: 2107461182}
   _playerInteractionHandler: {fileID: 1877115629}

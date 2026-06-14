@@ -6,7 +6,7 @@ namespace FlameOfTheLost
     public class MovementHandler : CharacterBehaviourControllerBase, 
         IStatusEffectFlagConsumer, 
         IStatusEffectStatModifierMultiplierConsumer,
-        ICharacterPlacementRefreshable
+        ICharacterRefreshable
     {
         // --- States ---
         //  1. References
@@ -128,8 +128,8 @@ namespace FlameOfTheLost
         }
 
         //  3. ICharacterPlacementRefreshable implementation
-        public int PlacementConfigurePriority => 30;
-        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        public int RefreshmentConfigurePriority => 30;
+        public void RefreshCharacter(CharacterPlacementContext context)
         {
             this.RawMovementInput = Vector2.zero;
             this.DesiredMovement = Vector2.zero;

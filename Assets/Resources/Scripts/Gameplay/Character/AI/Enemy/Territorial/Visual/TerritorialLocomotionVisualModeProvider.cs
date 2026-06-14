@@ -5,7 +5,7 @@ namespace FlameOfTheLost
 {
     public sealed class TerritorialLocomotionVisualModeProvider : CharacterBehaviourControllerBase,
         ICharacterLocomotionVisualModeProvider,
-        ICharacterPlacementRefreshable
+        ICharacterRefreshable
     {
         // --- States ---
         //  1. References
@@ -31,12 +31,14 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterLocomotionMode _roamingMode = CharacterLocomotionMode.Default;
         [SerializeField] private CharacterLocomotionMode _alertMode = CharacterLocomotionMode.Alert;
         [SerializeField] private CharacterLocomotionMode _readyToAttackMode = CharacterLocomotionMode.Alert;
+        [SerializeField] private CharacterLocomotionMode _preAttackMode = CharacterLocomotionMode.PreAttack;
         [SerializeField] private CharacterLocomotionMode _attackingMode = CharacterLocomotionMode.Alert;
         [SerializeField] private CharacterLocomotionMode _recoveringMode = CharacterLocomotionMode.Alert;
         [SerializeField] private CharacterLocomotionMode _deadMode = CharacterLocomotionMode.Default;
         private CharacterLocomotionMode RoamingMode => _roamingMode;
         private CharacterLocomotionMode AlertMode => _alertMode;
         private CharacterLocomotionMode ReadyToAttackMode => _readyToAttackMode;
+        private CharacterLocomotionMode PreAttackMode => _preAttackMode;
         private CharacterLocomotionMode AttackingMode => _attackingMode;
         private CharacterLocomotionMode RecoveringMode => _recoveringMode;
         private CharacterLocomotionMode DeadMode => _deadMode;
@@ -79,8 +81,8 @@ namespace FlameOfTheLost
         }
 
         //  2. ICharacterPlacementRefreshable implementation
-        public int PlacementConfigurePriority => 92;
-        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        public int RefreshmentConfigurePriority => 92;
+        public void RefreshCharacter(CharacterPlacementContext context)
         {
             this.CurrentResolvedMode = this.RoamingMode;
             this.OnLocomotionVisualModeChanged?.Invoke();
@@ -112,6 +114,7 @@ namespace FlameOfTheLost
                 TerritorialEnemyState.Roaming => this.RoamingMode,
                 TerritorialEnemyState.Alert => this.AlertMode,
                 TerritorialEnemyState.ReadyToAttack => this.ReadyToAttackMode,
+                TerritorialEnemyState.PreAttack => this.PreAttackMode,
                 TerritorialEnemyState.Attacking => this.AttackingMode,
                 TerritorialEnemyState.Recovering => this.RecoveringMode,
                 TerritorialEnemyState.Dead => this.DeadMode,

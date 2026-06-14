@@ -9,6 +9,10 @@ namespace FlameOfTheLost
         [SerializeField] private float _idealAttackRange = 1.4f;
         public float IdealAttackRange => _idealAttackRange;
 
+        [Header("Pre Attack")]
+        [SerializeField, Min(0f)] private float _preAttackDuration = 0.75f;
+        public float PreAttackDuration => _preAttackDuration;
+
         [Header("Attack Timing")]
         [SerializeField] private float _attackDecisionCooldown = 1.5f;
         [SerializeField] private float _attackingStateDuration = 0.7f;

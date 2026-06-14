@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class PlayerCarryLoadoutController : CharacterBehaviourControllerBase, ICharacterPlacementRefreshable
+    public class PlayerCarryLoadoutController : CharacterBehaviourControllerBase, ICharacterRefreshable
     {
         // --- States ---
         //  1. References
@@ -159,8 +159,8 @@ namespace FlameOfTheLost
         }
 
         //  3. ICharacterPlacementRefreshable implementation
-        public int PlacementConfigurePriority => 45;
-        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        public int RefreshmentConfigurePriority => 45;
+        public void RefreshCharacter(CharacterPlacementContext context)
         {
             this.SyncEquippedState();
 

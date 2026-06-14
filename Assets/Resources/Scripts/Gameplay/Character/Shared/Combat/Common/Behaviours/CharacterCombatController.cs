@@ -7,7 +7,7 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(CharacterCombatStatusEffectApplicationHandler))]
     public class CharacterCombatController : CharacterBehaviourControllerBase, 
         IStatusEffectFlagConsumer,
-        ICharacterPlacementRefreshable
+        ICharacterRefreshable
     {
         // --- States ---
         //  1. References
@@ -287,8 +287,8 @@ namespace FlameOfTheLost
         }
 
         //  5. ICharacterPlacementRefreshable implementation
-        public int PlacementConfigurePriority => 40;
-        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        public int RefreshmentConfigurePriority => 40;
+        public void RefreshCharacter(CharacterPlacementContext context)
         {
             if (this.AttackRoutine != null)
             {

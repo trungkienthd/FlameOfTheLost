@@ -285,6 +285,7 @@ Transform:
   - {fileID: 6459228503871874162}
   - {fileID: 6111924175821854058}
   - {fileID: 2170281567699780899}
+  - {fileID: 6578639863588825330}
   m_Father: {fileID: 9065100916030918952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!210 &8847238316356154005
@@ -428,7 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualLocomotionAnimationHandler
   _placeholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
   _activeProfile: {fileID: 11400000, guid: fb951246804cd704387ca8a631bcae2c, type: 2}
-  _locomotionModeProviderBehaviour: {fileID: 584078816329254573}
+  _locomotionModeProviderBehaviour: {fileID: 8619395251524575671}
   _manualLocomotionMode: 0
 --- !u!114 &8619395251524575671
 MonoBehaviour:
@@ -446,6 +447,7 @@ MonoBehaviour:
   _roamingMode: 0
   _alertMode: 2
   _readyToAttackMode: 2
+  _preAttackMode: 3
   _attackingMode: 2
   _recoveringMode: 2
   _deadMode: 0
@@ -513,9 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectController
   _characterRootController: {fileID: 5013856377803996316}
   _guardConfig: {fileID: 11400000, guid: af619af4a1df1ff4b87877e5452c7a03, type: 2}
-  _statusEffectVFXHolder: {fileID: 2170281567699780899}
   _statusEffectVFXInstancePrefab: {fileID: 8740500497781535910, guid: 89762261fcc319e49b11d0bfb94586a9, type: 3}
-  _ownerSpriteRenderer: {fileID: 6084845536400234014}
 --- !u!114 &170678299568170964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1464,31 +1464,31 @@ MonoBehaviour:
   _visualFacingHandler: {fileID: 6836829972921874162}
   _visualLocomotionAnimationHandler: {fileID: 8471074619670850254}
   _visualCombatAnimationHandler: {fileID: 6819824635726035935}
-  _statusEffectVFXHandler: {fileID: 0}
-  _rewardVFXHandler: {fileID: 0}
+  _statusEffectVFXHolder: {fileID: 2170281567699780899}
+  _rewardVFXHandler: {fileID: 2103957974545232575}
   _combatController: {fileID: 2103035301200508583}
-  _combatLoadoutController: {fileID: 0}
-  _combatLoadoutWeaponHandler: {fileID: 0}
-  _combatLoadoutSpecialSkillHandler: {fileID: 0}
-  _combatLoadoutConsumableItemHandler: {fileID: 0}
-  _combatAimingHandler: {fileID: 0}
+  _combatLoadoutController: {fileID: 1967698609657820187}
+  _combatLoadoutWeaponHandler: {fileID: 7713573844728834922}
+  _combatLoadoutSpecialSkillHandler: {fileID: 8004577590191508396}
+  _combatLoadoutConsumableItemHandler: {fileID: 835810724065106510}
+  _combatAimingHandler: {fileID: 7605741533168208685}
   _combatResourcesHandler: {fileID: 783385799977608782}
   _combatStatusEffectApplicationHandler: {fileID: 5725249818390235073}
   _resourcesController: {fileID: 3489836886529276943}
   _hpController: {fileID: 5982666654865387023}
   _fpController: {fileID: 5142835455269067001}
   _staminaController: {fileID: 2874977548991289660}
-  _deathHandler: {fileID: 0}
+  _deathHandler: {fileID: 1376990476584990730}
   _statusEffectController: {fileID: 5925318029874374298}
   _statusEffectFlagHandler: {fileID: 170678299568170964}
   _statusEffectStatModifierHandler: {fileID: 6752401894994764133}
   _statusEffectStatPeriodicHandler: {fileID: 1945701627411390369}
-  _progressionController: {fileID: 0}
-  _progressionUpgradeHandler: {fileID: 0}
-  _rewardWalletController: {fileID: 0}
+  _progressionController: {fileID: 140287800853943158}
+  _progressionUpgradeHandler: {fileID: 7109462879358384833}
+  _rewardWalletController: {fileID: 1482769842203035230}
   _inventoryController: {fileID: 9039944795399646901}
   _targetDetectionHandler: {fileID: 8768203270480612390}
-  _rewardDropProvider: {fileID: 0}
+  _rewardDropProvider: {fileID: 5302589758685020755}
   _enemyBrainController: {fileID: 285781198037708616}
 --- !u!114 &5857655726257863253
 MonoBehaviour:
@@ -1837,6 +1837,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 926192897596052555}
+  - component: {fileID: 1482769842203035230}
   - component: {fileID: 5302589758685020755}
   m_Layer: 9
   m_Name: Reward
@@ -1860,6 +1861,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5963968130057620577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1482769842203035230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093055742189135577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53bb9daedba2ea4bb1a336946f40dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardWalletController
+  _characterRootController: {fileID: 5013856377803996316}
+  _currentAmount: 0
 --- !u!114 &5302589758685020755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2101,6 +2116,7 @@ MonoBehaviour:
   _homeReturnPoint: {x: 0, y: 0}
   _nextAllowedAttackTime: 0
   _attackingStateEndTime: 0
+  _preAttackStateEndTime: 0
 --- !u!114 &8768203270480612390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2114,6 +2130,150 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyTargetDetectionHandler
   _characterRootController: {fileID: 5013856377803996316}
+--- !u!1 &6460524695558877784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6578639863588825330}
+  - component: {fileID: 6816956181992634307}
+  - component: {fileID: 4557069012829800054}
+  - component: {fileID: 8094952317328987354}
+  - component: {fileID: 2103957974545232575}
+  m_Layer: 9
+  m_Name: RewardVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6578639863588825330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460524695558877784}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2906988059610458126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &6816956181992634307
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460524695558877784}
+  m_Enabled: 1
+  m_SortingLayerID: -2079717993
+  m_SortingLayer: 4
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
+--- !u!212 &4557069012829800054
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460524695558877784}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: -2079717993
+  m_SortingLayer: 4
+  m_SortingOrder: 10
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_SpriteSortPoint: 0
+--- !u!95 &8094952317328987354
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460524695558877784}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b1a7dbdc70b2cc94587e3e6d09d20fab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2103957974545232575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460524695558877784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692050e6fe29ca443b25aba9e91f9bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardVFXHandler
+  _characterRootController: {fileID: 5013856377803996316}
+  _animator: {fileID: 8094952317328987354}
+  _gainColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &6803090282198875247
 GameObject:
   m_ObjectHideFlags: 0

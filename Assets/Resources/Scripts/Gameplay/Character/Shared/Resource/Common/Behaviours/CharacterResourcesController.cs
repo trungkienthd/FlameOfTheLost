@@ -8,7 +8,7 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(StaminaController))]
     public class CharacterResourcesController : CharacterBehaviourControllerBase, 
         ICharacterResourcesGateContext,
-        ICharacterPlacementRefreshable
+        ICharacterRefreshable
     {
         // --- States ---
         //  1. References
@@ -96,8 +96,8 @@ namespace FlameOfTheLost
         }
 
         //  4. ICharacterPlacementRefreshable implementation
-        public int PlacementConfigurePriority => 10;
-        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        public int RefreshmentConfigurePriority => 10;
+        public void RefreshCharacter(CharacterPlacementContext context)
         {
             // Clear all reservations(no refunds).
             this.ClearAllResourceReservations();

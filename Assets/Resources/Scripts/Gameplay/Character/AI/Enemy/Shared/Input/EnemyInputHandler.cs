@@ -53,9 +53,9 @@ namespace FlameOfTheLost
             this.IsAIInputBlocked = false;
         }
 
-        public override void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        public override void RefreshCharacter(CharacterPlacementContext context)
         {
-            base.RefreshAfterCharacterPlacement(context);
+            base.RefreshCharacter(context);
 
             this.UnblockAIInput();
         }

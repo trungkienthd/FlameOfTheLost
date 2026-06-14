@@ -8,12 +8,12 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(StatusEffectFlagHandler))]
     [RequireComponent(typeof(StatusEffectStatModifierHandler))]
     [RequireComponent(typeof(StatusEffectStatPeriodicHandler))]
-    public class StatusEffectController : CharacterBehaviourControllerBase, ICharacterPlacementRefreshable
+    public class StatusEffectController : CharacterBehaviourControllerBase, ICharacterRefreshable
     {
         // --- States ---
         //  1. References
         //      1.1. Guard Configuration
-        [Header("References (Guard)")]
+        [Header("Data (SE Guard)")]
         [SerializeField] private StatusEffectGuardConfig _guardConfig;
         public StatusEffectGuardConfig GuardConfig => _guardConfig;
 
@@ -24,12 +24,9 @@ namespace FlameOfTheLost
 
         //      1.3. VFX References
         [Header("References (VFX)")]
-        [SerializeField] private Transform _statusEffectVFXHolder;
         [SerializeField] private GameObject _statusEffectVFXInstancePrefab;
-        [SerializeField] private SpriteRenderer _ownerSpriteRenderer;
-        private Transform StatusEffectVFXHolder => _statusEffectVFXHolder;
-
         private GameObject StatusEffectVFXInstancePrefab => _statusEffectVFXInstancePrefab;
+        private Transform StatusEffectVFXHolder => this.CharacterRootController?.StatusEffectVFXHolder;
 
         private readonly Dictionary<uint, StatusEffectVFXHandler> _runtimeVFXMap = new();
         private IReadOnlyDictionary<uint, StatusEffectVFXHandler> RuntimeVFXMap => _runtimeVFXMap;
@@ -299,8 +296,8 @@ namespace FlameOfTheLost
         }
 
         //  5. ICharacterPlacementRefreshable implementation
-        public int PlacementConfigurePriority => 20;
-        public void RefreshAfterCharacterPlacement(CharacterPlacementContext context)
+        public int RefreshmentConfigurePriority => 20;
+        public void RefreshCharacter(CharacterPlacementContext context)
         {
             this.RemoveAllStatusEffectVFXInstances();
 
@@ -579,12 +576,6 @@ namespace FlameOfTheLost
         protected override void CacheReferences()
         {
             base.CacheReferences();
-
-            if (this.StatusEffectVFXHolder == null)
-            { 
-                _statusEffectVFXHolder = this.CharacterRootController.VisualController.transform.Find("StatusEffectVFXHolder");
-                if (this.StatusEffectVFXHolder == null) _statusEffectVFXHolder = this.transform;
-            }
 
             if (this.StatusEffectVFXInstancePrefab == null) _statusEffectVFXInstancePrefab = UnityEngine.Resources.Load<GameObject>("Prefabs/StatusEffectVFXInstance");
         }
