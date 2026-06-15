@@ -82,7 +82,7 @@ namespace FlameOfTheLost
 
         //  2. ICharacterPlacementRefreshable implementation
         public int RefreshmentConfigurePriority => 92;
-        public void RefreshCharacter(CharacterPlacementContext context)
+        public void RefreshCharacter(CharacterRefreshmentContext context)
         {
             this.CurrentResolvedMode = this.RoamingMode;
             this.OnLocomotionVisualModeChanged?.Invoke();

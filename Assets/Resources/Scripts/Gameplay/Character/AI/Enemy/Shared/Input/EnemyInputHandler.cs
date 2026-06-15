@@ -53,7 +53,7 @@ namespace FlameOfTheLost
             this.IsAIInputBlocked = false;
         }
 
-        public override void RefreshCharacter(CharacterPlacementContext context)
+        public override void RefreshCharacter(CharacterRefreshmentContext context)
         {
             base.RefreshCharacter(context);
 

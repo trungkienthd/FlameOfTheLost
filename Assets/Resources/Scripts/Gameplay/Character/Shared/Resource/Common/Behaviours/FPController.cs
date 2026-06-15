@@ -57,7 +57,7 @@ namespace FlameOfTheLost
         }
 
         //  3. Refresh Pool for Respawning
-        public override void RefreshPoolAfterPlace(CharacterPlacementContext context)
+        public override void RefreshPoolAfterPlace(CharacterRefreshmentContext context)
         {
             base.RefreshPoolAfterPlace(context);
 

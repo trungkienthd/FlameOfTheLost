@@ -297,7 +297,7 @@ namespace FlameOfTheLost
 
         //  5. ICharacterPlacementRefreshable implementation
         public int RefreshmentConfigurePriority => 20;
-        public void RefreshCharacter(CharacterPlacementContext context)
+        public void RefreshCharacter(CharacterRefreshmentContext context)
         {
             this.RemoveAllStatusEffectVFXInstances();
 

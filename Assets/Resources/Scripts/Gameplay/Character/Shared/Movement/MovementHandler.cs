@@ -129,7 +129,7 @@ namespace FlameOfTheLost
 
         //  3. ICharacterPlacementRefreshable implementation
         public int RefreshmentConfigurePriority => 30;
-        public void RefreshCharacter(CharacterPlacementContext context)
+        public void RefreshCharacter(CharacterRefreshmentContext context)
         {
             this.RawMovementInput = Vector2.zero;
             this.DesiredMovement = Vector2.zero;

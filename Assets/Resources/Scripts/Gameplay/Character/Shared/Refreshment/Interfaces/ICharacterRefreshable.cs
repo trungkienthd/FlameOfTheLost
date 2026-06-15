@@ -4,6 +4,6 @@ namespace FlameOfTheLost
     {
         public int RefreshmentConfigurePriority { get; }
 
-        public void RefreshCharacter(CharacterPlacementContext context);
+        public void RefreshCharacter(CharacterRefreshmentContext context);
     }
 }

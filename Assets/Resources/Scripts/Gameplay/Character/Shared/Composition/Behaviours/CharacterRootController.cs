@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -9,9 +8,9 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterIdentityController _identityController;
         public CharacterIdentityController IdentityController => _identityController;
 
-        [Header("References (Placement)")]
-        [SerializeField] private CharacterPlacementHandler _placementHandler;
-        public CharacterPlacementHandler PlacementHandler => _placementHandler;
+        [Header("References (Refreshment)")]
+        [SerializeField] private CharacterRefreshmentHandler _refreshmentHandler;
+        public CharacterRefreshmentHandler RefreshmentHandler => _refreshmentHandler;
 
         [Header("References (Input)")]
         [SerializeField] private CharacterInputHandler _inputHandler;
@@ -102,7 +101,7 @@ namespace FlameOfTheLost
 
             if (this.IdentityController == null) _identityController = this.GetComponentInChildren<CharacterIdentityController>(true);
 
-            if (this.PlacementHandler == null) _placementHandler = this.GetComponentInChildren<CharacterPlacementHandler>(true);
+            if (this.RefreshmentHandler == null) _refreshmentHandler = this.GetComponentInChildren<CharacterRefreshmentHandler>(true);
 
             if (this.InputHandler == null) _inputHandler = this.GetComponent<CharacterInputHandler>();
 

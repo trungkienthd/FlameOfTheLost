@@ -1,6 +1,6 @@
 namespace FlameOfTheLost
 {
-    public enum CharacterPlacementSourceType
+    public enum CharacterPlacementSource
     {
         DefaultSpawnPoint = 0,
         Checkpoint = 1,

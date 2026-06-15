@@ -71,7 +71,7 @@ namespace FlameOfTheLost
 
         //  2. ICharacterPlacementRefreshable implementation
         public int RefreshmentConfigurePriority => 50;
-        public void RefreshCharacter(CharacterPlacementContext context)
+        public void RefreshCharacter(CharacterRefreshmentContext context)
         {
             if (this.Animator == null) return;
 
@@ -85,7 +85,7 @@ namespace FlameOfTheLost
 
             if (this.FacingHandler != null)
             {
-                this.FacingHandler.SetRespawnFacing(context.PlacementFacing);
+                this.FacingHandler.SetRespawnFacing(context.RefreshmentFacing);
                 this.FacingHandler.SetSpeedImmediate(0f);
             }
 

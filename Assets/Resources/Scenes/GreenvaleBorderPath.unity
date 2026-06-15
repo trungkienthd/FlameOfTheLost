@@ -46417,7 +46417,7 @@ GameObject:
   - component: {fileID: 209471719}
   - component: {fileID: 209471720}
   m_Layer: 8
-  m_Name: Placement
+  m_Name: Refreshment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104325,7 +104325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerComponentController
   _identityController: {fileID: 1971478399}
-  _placementHandler: {fileID: 209471720}
+  _refreshmentHandler: {fileID: 209471720}
   _inputHandler: {fileID: 2107461199}
   _movementHandler: {fileID: 2107461197}
   _terrainContactHandler: {fileID: 2107461204}

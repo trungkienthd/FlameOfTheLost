@@ -160,7 +160,7 @@ namespace FlameOfTheLost
 
         //  3. ICharacterPlacementRefreshable implementation
         public int RefreshmentConfigurePriority => 45;
-        public void RefreshCharacter(CharacterPlacementContext context)
+        public void RefreshCharacter(CharacterRefreshmentContext context)
         {
             this.SyncEquippedState();
 

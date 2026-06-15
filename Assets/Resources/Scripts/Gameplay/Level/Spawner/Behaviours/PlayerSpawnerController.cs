@@ -13,7 +13,7 @@ namespace FlameOfTheLost
         [SerializeField] private PlayerRootController _playerRoot;
         private PlayerRootController PlayerRoot => _playerRoot;
         private PlayerInputHandler PlayerInputHandler => this.PlayerRoot != null ? this.PlayerRoot.PlayerInputHandler : null;
-        private CharacterPlacementHandler PlayerPlacementHandler => this.PlayerRoot != null ? this.PlayerRoot.PlacementHandler : null;
+        private CharacterRefreshmentHandler PlayerPlacementHandler => this.PlayerRoot != null ? this.PlayerRoot.RefreshmentHandler : null;
 
         [Header("References - Spawn Points (Controllers)")]
         [SerializeField] private List<PlayerDefaultSpawnPointController> _defaultSpawnPointCtrls = new();
@@ -116,7 +116,7 @@ namespace FlameOfTheLost
 
             SpawnResolveResult spawnResult = this.ResolveSpawn();
 
-            this.PlayerPlacementHandler.PlaceCharacter(spawnResult, this.SpawnState.SpawnSourceType);
+            this.PlayerPlacementHandler.Refresh(spawnResult, this.SpawnState.SpawnSourceType);
         }
 
         private IEnumerator RespawnPlayerRoutine()
@@ -159,7 +159,7 @@ namespace FlameOfTheLost
 
         private void InitializeFirstDefaultSpawnPointIfNeeded()
         {
-            if (this.SpawnState.SpawnSourceType == CharacterPlacementSourceType.Checkpoint) return;
+            if (this.SpawnState.SpawnSourceType == CharacterPlacementSource.Checkpoint) return;
 
             PlayerDefaultSpawnPointController firstDefaultSpawnPoint = this.GetFirstDefaultSpawnPoint();
 
@@ -175,7 +175,7 @@ namespace FlameOfTheLost
 
         private SpawnResolveResult ResolveSpawn()
         {
-            if (this.SpawnState.SpawnSourceType == CharacterPlacementSourceType.Checkpoint)
+            if (this.SpawnState.SpawnSourceType == CharacterPlacementSource.Checkpoint)
             {
                 CheckpointController checkpointCtrl = this.FindCheckpointController(this.SpawnState.ActiveCheckpointId);
 

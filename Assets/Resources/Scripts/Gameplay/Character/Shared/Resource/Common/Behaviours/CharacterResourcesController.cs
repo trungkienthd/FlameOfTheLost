@@ -97,7 +97,7 @@ namespace FlameOfTheLost
 
         //  4. ICharacterPlacementRefreshable implementation
         public int RefreshmentConfigurePriority => 10;
-        public void RefreshCharacter(CharacterPlacementContext context)
+        public void RefreshCharacter(CharacterRefreshmentContext context)
         {
             // Clear all reservations(no refunds).
             this.ClearAllResourceReservations();

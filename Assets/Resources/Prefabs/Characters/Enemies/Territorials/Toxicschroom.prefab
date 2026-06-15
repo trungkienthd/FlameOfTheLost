@@ -1456,7 +1456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyRootController
   _identityController: {fileID: 7856838754344447587}
-  _placementHandler: {fileID: 6031001468286940557}
+  _refreshmentHandler: {fileID: 6031001468286940557}
   _inputHandler: {fileID: 5857655726257863253}
   _movementHandler: {fileID: 5200811322357388364}
   _terrainContactHandler: {fileID: 138990756075370264}
@@ -1600,7 +1600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 021f985d802a54d489f415007dcd1f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterTerrainContactHandler
-  _characterRootController: {fileID: 0}
+  _characterRootController: {fileID: 5013856377803996316}
   _statusEffectController: {fileID: 5925318029874374298}
   _statusEffectApplicationHandler: {fileID: 5725249818390235073}
   _terrainStatusEffectRefreshInterval: 0.15
@@ -1986,7 +1986,7 @@ GameObject:
   - component: {fileID: 6428682736234800016}
   - component: {fileID: 6031001468286940557}
   m_Layer: 9
-  m_Name: Placement
+  m_Name: Refreshment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

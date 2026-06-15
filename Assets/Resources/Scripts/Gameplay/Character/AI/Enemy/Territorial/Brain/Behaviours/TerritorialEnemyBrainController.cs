@@ -114,7 +114,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     }
 
     //  1. ICharacterPlacementRefreshable implementation
-    public override void RefreshCharacter(CharacterPlacementContext context)
+    public override void RefreshCharacter(CharacterRefreshmentContext context)
     {
         base.RefreshCharacter(context);
 

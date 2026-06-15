@@ -235,7 +235,7 @@ namespace FlameOfTheLost
         }
 
         //  7. Refresh Pool for Placement
-        public override void RefreshPoolAfterPlace(CharacterPlacementContext context)
+        public override void RefreshPoolAfterPlace(CharacterRefreshmentContext context)
         {
             base.RefreshPoolAfterPlace(context);
 

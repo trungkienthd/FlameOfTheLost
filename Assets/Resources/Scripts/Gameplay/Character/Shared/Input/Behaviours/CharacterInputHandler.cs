@@ -16,7 +16,7 @@ namespace FlameOfTheLost
         // --- Public APIs ---
         //  1. ICharacterPlacementRefreshable implementation
         public virtual int RefreshmentConfigurePriority => 100;
-        public virtual void RefreshCharacter(CharacterPlacementContext context)
+        public virtual void RefreshCharacter(CharacterRefreshmentContext context)
         {
             this.ClearMoveInput();
         }

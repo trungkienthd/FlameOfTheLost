@@ -153,7 +153,7 @@ namespace FlameOfTheLost
         }
 
         //  8. Refresh Pool for Respawning
-        public virtual void RefreshPoolAfterPlace(CharacterPlacementContext context)
+        public virtual void RefreshPoolAfterPlace(CharacterRefreshmentContext context)
         {
             this.ActiveStatPeriodicStreams.Clear();
             this.SetCurrentValue(this.MaxValue);
