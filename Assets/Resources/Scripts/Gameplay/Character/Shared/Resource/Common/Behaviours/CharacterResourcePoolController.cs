@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class CharacterResourcePoolController : CharacterBehaviourControllerBase, IStatusEffectStatModifierMultiplierConsumer, IStatusEffectStatModifierAdditiveConsumer, IStatusEffectStatPeriodicConsumer
+    public abstract class CharacterResourcePoolController : CharacterBehaviourControllerBase, 
+        IStatusEffectStatModifierMultiplierConsumer, 
+        IStatusEffectStatModifierAdditiveConsumer, 
+        IStatusEffectStatPeriodicConsumer
     {
         // --- States ---
         //  1. Resource Pool
@@ -55,7 +58,16 @@ namespace FlameOfTheLost
         [SerializeField] private List<StatusEffectStatPeriodicStream> _activePeriodicStreams = new();
         protected List<StatusEffectStatPeriodicStream> ActiveStatPeriodicStreams => _activePeriodicStreams;
 
-        //  4. Events
+        //  4. Death Disable State (Runtime)
+        [Header("Death Disable (Runtime)")]
+        [SerializeField] private bool _isDeathDisabled;
+        public bool IsDeathDisabled
+        {
+            get => _isDeathDisabled;
+            private set => _isDeathDisabled = value;
+        }
+
+        // --- Events ---
         public event Action<int, int> OnValueChanged;
 
         // --- Unity Callbacks ---
@@ -67,6 +79,8 @@ namespace FlameOfTheLost
         }
         protected virtual void Update()
         {
+            if (this.IsDeathDisabled) return;
+
             this.TickStatPeriodic(Time.deltaTime);
         }
 
@@ -83,6 +97,7 @@ namespace FlameOfTheLost
         //  2. Adds immediately (e.g., item, script action). Does not change regen timers.
         public void Restore(int amount)
         {
+            if (this.IsDeathDisabled) return;
             if (amount <= 0) return;
 
             this.ApplyRawDelta(+amount);
@@ -91,6 +106,8 @@ namespace FlameOfTheLost
         //  3. Can spend check
         public virtual bool CanSpendCost(int baseCostValue)
         {
+            if (this.IsDeathDisabled) return false;
+
             int effectiveCostValue = this.ComputeEffectiveCostValue(baseCostValue);
             return this.CurrentValue >= effectiveCostValue;
         }
@@ -131,11 +148,11 @@ namespace FlameOfTheLost
             }
         }
 
-        //  6. SE Stat Modifier APIs
+        //  6. IStatusEffectStatModifierMultiplierConsumer & IStatusEffectStatModifierAdditiveConsumer implementation
         public abstract void SetStatusEffectStatModifierMultiplier(StatusEffectStatModifierTarget target, float multiplier);
         public abstract void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget target, float additiveFlat);
 
-        //  7. SE Stat Periodic APIs
+        //  7. IStatusEffectStatPeriodicConsumer implementation
         public virtual void SetActivePeriodicStreams(IReadOnlyList<StatusEffectStatPeriodicStream> streams)
         {
             // Store a copy so each consumer owns its own accumulators
@@ -152,11 +169,20 @@ namespace FlameOfTheLost
             }
         }
 
-        //  8. Refresh Pool for Respawning
+        //  8. Character Refresh
         public virtual void RefreshPoolAfterPlace(CharacterRefreshmentContext context)
         {
+            this.IsDeathDisabled = false;
+
             this.ActiveStatPeriodicStreams.Clear();
             this.SetCurrentValue(this.MaxValue);
+        }
+
+        //  9. Character Death Handling (Disable resource pool depletion if death is disabled)
+        public virtual void DisableResourcePoolAfterCharacterDeath(CharacterDeathContext context)
+        {
+            this.IsDeathDisabled = true;
+            this.ActiveStatPeriodicStreams.Clear();
         }
 
         // --- Helpers ---

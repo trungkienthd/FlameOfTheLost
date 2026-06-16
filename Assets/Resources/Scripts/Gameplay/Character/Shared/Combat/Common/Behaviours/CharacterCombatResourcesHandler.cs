@@ -274,7 +274,7 @@ namespace FlameOfTheLost
         }
 
         //  3. Refresh for Respawn: Clears all runtime reservation
-        public void ClearCombatReservationsAfterCharacterPlacement()
+        public void ClearCombatReservationsAfterCharacterRefreshment()
         {
             this.ClearAttackReservations();
         }

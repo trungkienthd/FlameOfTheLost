@@ -8,7 +8,9 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(StatusEffectFlagHandler))]
     [RequireComponent(typeof(StatusEffectStatModifierHandler))]
     [RequireComponent(typeof(StatusEffectStatPeriodicHandler))]
-    public class StatusEffectController : CharacterBehaviourControllerBase, ICharacterRefreshable
+    public class StatusEffectController : CharacterBehaviourControllerBase,
+        ICharacterRefreshable,
+        ICharacterDeathDisableable
     {
         // --- States ---
         //  1. References
@@ -31,7 +33,7 @@ namespace FlameOfTheLost
         private readonly Dictionary<uint, StatusEffectVFXHandler> _runtimeVFXMap = new();
         private IReadOnlyDictionary<uint, StatusEffectVFXHandler> RuntimeVFXMap => _runtimeVFXMap;
 
-        //  2. Runtime state
+        //  2. SE Lists (Runtime)
         [Header("Runtime")]
         [SerializeField] private List<RuntimeStatusEffect> _runtimeStatusEffects = new();
         public IReadOnlyList<RuntimeStatusEffect> RuntimeStatusEffects => _runtimeStatusEffects;
@@ -43,6 +45,14 @@ namespace FlameOfTheLost
             set => _nextRuntimeID = value;
         }
 
+        //  3. Death Disable State (Runtime)
+        [Header("Death Disable (Runtime)")]
+        [SerializeField] private bool _isDeathDisabled;
+        public bool IsDeathDisabled
+        {
+            get => _isDeathDisabled;
+            private set => _isDeathDisabled = value;
+        }
 
         // --- Events ---
         public event Action OnRuntimeListChanged;     // add/remove/clear/expire
@@ -79,6 +89,8 @@ namespace FlameOfTheLost
         }
         private void Update()
         {
+            if (this.IsDeathDisabled) return;
+
             float dt = Time.deltaTime;
             bool listIsChanged = false;
 
@@ -122,6 +134,8 @@ namespace FlameOfTheLost
         //  1. Apply or refresh a status effect; returns runtime id
         public uint ApplyStatusEffect(StatusEffectProfile profile, GameObject source, float potency = 1f)
         {
+            if (this.IsDeathDisabled) return 0;
+
             if (profile == null)
             {
                 Debug.LogWarning($"[{this.CharacterName}.{nameof(StatusEffectController)}] Attempted to apply NULL profile.");
@@ -267,8 +281,8 @@ namespace FlameOfTheLost
 
             // If the incoming effect itself grants an immunity flag, always allow it.
             bool incomingIsImmunity =
-                this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreAllStatusEffects)    ||
-                this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreDebuffStatusEffects) ||
+                this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreAllStatusEffects)     ||
+                this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreDebuffStatusEffects)  ||
                 this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreBuffStatusEffects);
 
             if (incomingIsImmunity) return true;
@@ -278,8 +292,8 @@ namespace FlameOfTheLost
             if (this.HasActiveFlag(StatusEffectFlagTarget.IgnoreAllStatusEffects)) return false;
 
             //  Debuff/Buff immunity blocks new incoming effects based on Affinity
-            bool ignoreDebuff   = this.HasActiveFlag(StatusEffectFlagTarget.IgnoreDebuffStatusEffects);
-            bool ignoreBuff     = this.HasActiveFlag(StatusEffectFlagTarget.IgnoreBuffStatusEffects);
+            bool ignoreDebuff = this.HasActiveFlag(StatusEffectFlagTarget.IgnoreDebuffStatusEffects);
+            bool ignoreBuff = this.HasActiveFlag(StatusEffectFlagTarget.IgnoreBuffStatusEffects);
 
             //  Treat Mixed as both (conservative & consistent with "immune to debuffs/buffs being applied")
             if (ignoreDebuff    && (profile.Affinity == StatusEffectAffinityType.Debuff || profile.Affinity == StatusEffectAffinityType.Mixed)) return false;
@@ -295,10 +309,22 @@ namespace FlameOfTheLost
             return this.RemoveAllFromSource(source);
         }
 
-        //  5. ICharacterPlacementRefreshable implementation
+        //  5. Expose consumer behaviours for accessing in handlers
+        public MonoBehaviour[] GetStatusEffectConsumerBehaviours()
+        {
+            Transform searchRoot = this.CharacterRootController != null
+                ? this.CharacterRootController.transform
+                : this.transform.root;
+
+            return searchRoot.GetComponentsInChildren<MonoBehaviour>(true);
+        }
+
+        //  6. ICharacterRefreshable implementation
         public int RefreshmentConfigurePriority => 20;
         public void RefreshCharacter(CharacterRefreshmentContext context)
         {
+            this.IsDeathDisabled = false;
+
             this.RemoveAllStatusEffectVFXInstances();
 
             _runtimeStatusEffects.Clear();
@@ -313,14 +339,24 @@ namespace FlameOfTheLost
             this.ForceRecomputeAll();
         }
 
-        //  6. Expose consumer behaviours for accessing in handlers
-        public MonoBehaviour[] GetStatusEffectConsumerBehaviours()
+        //  7. ICharacterDeathDisablable implementation
+        public int DeathDisablePriority => 50;
+        public void DisableAfterCharacterDeath(CharacterDeathContext context)
         {
-            Transform searchRoot = this.CharacterRootController != null
-                ? this.CharacterRootController.transform
-                : this.transform.root;
+            this.IsDeathDisabled = true;
 
-            return searchRoot.GetComponentsInChildren<MonoBehaviour>(true);
+            this.RemoveAllStatusEffectVFXInstances();
+
+            _runtimeStatusEffects.Clear();
+            this.NextRuntimeID = 1;
+
+            this.FlagHandler?.ClearAndApply();
+            this.StatModifierHandler?.ClearAndApply();
+            this.StatPeriodicHandler?.ClearAndApply();
+
+            this.OnRuntimeListChanged?.Invoke();
+
+            this.ForceRecomputeAll();
         }
 
         // --- Helpers ---
@@ -442,8 +478,8 @@ namespace FlameOfTheLost
 
                 // Never purge the immunity providers themselves.
                 bool isImmunityProvider =
-                    this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreAllStatusEffects)      ||
-                    this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreDebuffStatusEffects)   ||
+                    this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreAllStatusEffects)     ||
+                    this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreDebuffStatusEffects)  ||
                     this.ProfileHasFlag(profile, StatusEffectFlagTarget.IgnoreBuffStatusEffects);
 
                 // Never purge the immunity providers themselves
@@ -476,7 +512,7 @@ namespace FlameOfTheLost
                     }
                     continue;
                 }
-            }    
+            }
 
             return removedAny;
         }

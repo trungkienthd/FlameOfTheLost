@@ -123,7 +123,7 @@ namespace FlameOfTheLost
         }
 
         //  4. Refresh for respawn: Clear all tracking maps
-        public void ClearRuntimeTrackingAfterCharacterPlacement()
+        public void ClearRuntimeTrackingAfterCharacterRefreshment()
         {
             _firstHitAppliedMap.Clear();
             _oncePerTargetMap.Clear();

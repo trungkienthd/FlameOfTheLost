@@ -6,7 +6,8 @@ namespace FlameOfTheLost
     public class MovementHandler : CharacterBehaviourControllerBase, 
         IStatusEffectFlagConsumer, 
         IStatusEffectStatModifierMultiplierConsumer,
-        ICharacterRefreshable
+        ICharacterRefreshable,
+        ICharacterDeathDisableable
     {
         // --- States ---
         //  1. References
@@ -68,9 +69,30 @@ namespace FlameOfTheLost
             set => _vel = value;
         }
 
+        //  5. Death Disable State (Runtime)
+        [Header("Death Disable (Runtime)")]
+        [SerializeField] private bool _isDeathDisabled;
+        public bool IsDeathDisabled
+        {
+            get => _isDeathDisabled;
+            private set => _isDeathDisabled = value;
+        }
+
         // --- Unity Callbacks --- 
         private void FixedUpdate()
         {
+            if (this.IsDeathDisabled)
+            {
+                if (this.Rigidbody2D != null)
+                {
+                    this.Rigidbody2D.linearVelocity = Vector2.zero;
+                    this.Rigidbody2D.angularVelocity = 0f;
+                }
+
+                this.VisualController?.FeedMovement(Vector2.zero);
+                return;
+            }
+
             // IMPORTANT: Status Effects apply here via MovementSpeedScale (0 if blocked)
             float finalMovementSpeed = this.MovementBlocked ? 0f : (this.MovementSpeed * this.MovementSpeedScale);
 
@@ -127,10 +149,31 @@ namespace FlameOfTheLost
             this.MovementSpeedScale = multiplier;
         }
 
-        //  3. ICharacterPlacementRefreshable implementation
+        //  3. ICharacterRefreshable implementation
         public int RefreshmentConfigurePriority => 30;
         public void RefreshCharacter(CharacterRefreshmentContext context)
         {
+            this.IsDeathDisabled = false;
+
+            this.RawMovementInput = Vector2.zero;
+            this.DesiredMovement = Vector2.zero;
+            this.Velocity = Vector2.zero;
+
+            if (this.Rigidbody2D != null)
+            {
+                this.Rigidbody2D.linearVelocity = Vector2.zero;
+                this.Rigidbody2D.angularVelocity = 0f;
+            }
+
+            this.VisualController?.FeedMovement(Vector2.zero);
+        }
+
+        //  4. ICharacterDeathDisableable implementation
+        public int DeathDisablePriority => 20;
+        public void DisableAfterCharacterDeath(CharacterDeathContext context)
+        {
+            this.IsDeathDisabled = true;
+
             this.RawMovementInput = Vector2.zero;
             this.DesiredMovement = Vector2.zero;
             this.Velocity = Vector2.zero;

@@ -16,6 +16,8 @@ namespace FlameOfTheLost
         // HP cost would reduce HP to <= 0 while AllowSelfKillWithHPCost is false.
         WouldSelfKill = 30,
 
+        CharacterIsDead = 35,
+
         Unknown = 40
     }
 }

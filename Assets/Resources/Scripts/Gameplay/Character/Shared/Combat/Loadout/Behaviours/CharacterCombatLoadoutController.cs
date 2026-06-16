@@ -7,7 +7,7 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(CharacterCombatLoadoutWeaponHandler))]
     [RequireComponent(typeof(CharacterCombatLoadoutSpecialSkillHandler))]
     [RequireComponent(typeof(CharacterCombatLoadoutConsumableItemHandler))]
-    public class CharacterCombatLoadoutController : CharacterBehaviourControllerBase, IStatusEffectFlagConsumer
+    public class CharacterCombatLoadoutController : CharacterBehaviourControllerBase, IStatusEffectFlagConsumer, ICharacterDeathDisableable
     {
         // --- States ---
         //  1. References
@@ -48,6 +48,15 @@ namespace FlameOfTheLost
         public IReadOnlyList<InventoryItemEntry> EquippedConsumableItemEntries => this.ConsumableItemHandler.EquippedEntries;
         public InventoryItemEntry ActiveEquippedConsumableItemEntry => this.ConsumableItemHandler.ActiveEquippedEntry;
 
+        //  6. Death Disable State (Runtime)
+        [Header("Death Disable")]
+        [SerializeField] private bool _isDeathDisabled;
+        public bool IsDeathDisabled
+        {
+            get => _isDeathDisabled;
+            private set => _isDeathDisabled = value;
+        }
+
         // --- Events ---
         public event Action<InventoryItemEntry> OnActiveEquippedWeaponChanged;
         public event Action<SkillProfile> OnActiveSpecialSkillChanged;
@@ -70,24 +79,36 @@ namespace FlameOfTheLost
         //          NegativeValue = Previous
         public bool TryCycleWeaponEntry(int step)
         {
+            if (this.IsDeathDisabled) return false;
+
             return this.WeaponHandler.TryCycleEquippedEntry(step);
         }
 
         //      2.2. Replace Equipped Weapon at specific slot index, returning removed weapon if any
         public bool TryReplaceEquippedWeaponEntry(int slotIndex, InventoryItemEntry newWeaponEntry, out InventoryItemEntry removedWeaponEntry)
         {
+            if (this.IsDeathDisabled)
+            {
+                removedWeaponEntry = null;
+                return false;
+            }
+
             return this.WeaponHandler.TryReplaceEquippedEntry(slotIndex, newWeaponEntry, out removedWeaponEntry);
         }
 
         //      2.3. Unequip Weapon
         public bool TryUnequipWeaponEntry(InventoryItemEntry weaponEntry)
         {
+            if (this.IsDeathDisabled) return false;
+
             return this.WeaponHandler.TryUnequipEntry(weaponEntry);
         }
 
         //      2.4. Quick equip weapon
         public bool TryQuickEquipWeapon()
         {
+            if (this.IsDeathDisabled) return false;
+
             return this.WeaponHandler.TryQuickEquip();
         }
 
@@ -95,18 +116,24 @@ namespace FlameOfTheLost
         //      3.1. Attach / Replace runtime active special skill on an equipped weapon
         public bool TrySetEquippedWeaponActiveSpecialSkill(InventoryItemEntry weaponEntry, SkillProfile specialSkill)
         {
+            if (this.IsDeathDisabled) return false;
+
             return this.SpecialSkillHandler.TrySetEquippedWeaponActiveSpecialSkill(weaponEntry, specialSkill);
         }
 
         //      3.2. Quick set active equipped weapon's active special skill
         public bool TrySetActiveEquippedWeaponActiveSpecialSkill(SkillProfile specialSkill)
         {
+            if (this.IsDeathDisabled) return false;
+
             return this.SpecialSkillHandler.TrySetActiveEquippedWeaponActiveSpecialSkill(specialSkill);
         }
 
         //      3.3. Clear runtime active special skill so resolution falls back to innate special skill
         public bool TryClearWeaponActiveSpecialSkill(InventoryItemEntry weaponEntry)
         {
+            if (this.IsDeathDisabled) return false;
+
             return this.SpecialSkillHandler.TryClearWeaponActiveSpecialSkill(weaponEntry);
         }
 
@@ -121,6 +148,8 @@ namespace FlameOfTheLost
         //          with optional wrapping around the list, and set the next valid consumable item as active.
         public bool TryCycleConsumableItemEntry(int step)
         {
+            if (this.IsDeathDisabled) return false;
+
             return this.ConsumableItemHandler.TryCycleEquippedEntry(step);
         }
 
@@ -129,6 +158,12 @@ namespace FlameOfTheLost
         //          and update the active entry reference if necessary.
         public bool TryReplaceEquippedConsumableItemEntry(int slotIndex, InventoryItemEntry newConsumableEntry, out InventoryItemEntry removedConsumableEntry)
         {
+            if (this.IsDeathDisabled)
+            {
+                removedConsumableEntry = null;
+                return false;
+            }
+
             return this.ConsumableItemHandler.TryReplaceEquippedEntry(slotIndex, newConsumableEntry, out removedConsumableEntry);
         }
 
@@ -136,12 +171,16 @@ namespace FlameOfTheLost
         //          and update the active entry reference if necessary.
         public bool TryUnequipEquippedConsumableItemEntry(InventoryItemEntry consumableEntry)
         {
+            if (this.IsDeathDisabled) return false;
+
             return this.ConsumableItemHandler.TryUnequipEntry(consumableEntry);
         }
 
         //      4.4. Try to consume the active equipped consumable item, applying its effects and reducing quantity,
         public bool TryConsumeConsumableItem()
         {
+            if (this.IsDeathDisabled) return false;
+
             return this.ConsumableItemHandler.TryConsume();
         }
 
@@ -196,12 +235,21 @@ namespace FlameOfTheLost
             }
         }
 
-        //  8. Refresh for Character Placement: Reset all loadout states and ensure validity
-        public void RefreshLoadoutAfterCharacterPlacement()
+        //  8. Refresh Character: Reset all loadout states and ensure validity
+        public void RefreshLoadoutAfterCharacterRefreshment()
         {
-            this.WeaponHandler.RefreshLoadoutAfterCharacterPlacement();
-            this.SpecialSkillHandler.RefreshLoadoutAfterCharacterPlacement();
-            this.ConsumableItemHandler.RefreshLoadoutAfterCharacterPlacement();
+            this.IsDeathDisabled = false;
+
+            this.WeaponHandler.RefreshLoadoutAfterCharacterRefreshment();
+            this.SpecialSkillHandler.RefreshLoadoutAfterCharacterRefreshment();
+            this.ConsumableItemHandler.RefreshLoadoutAfterCharacterRefreshment();
+        }
+
+        //  9. ICharacterDeathDisableable implementation
+        public int DeathDisablePriority => 40;
+        public void DisableAfterCharacterDeath(CharacterDeathContext context)
+        {
+            this.IsDeathDisabled = true;
         }
     }
 }

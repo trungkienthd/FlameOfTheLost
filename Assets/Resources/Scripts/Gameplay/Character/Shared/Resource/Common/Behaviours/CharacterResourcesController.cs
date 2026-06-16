@@ -8,7 +8,8 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(StaminaController))]
     public class CharacterResourcesController : CharacterBehaviourControllerBase, 
         ICharacterResourcesGateContext,
-        ICharacterRefreshable
+        ICharacterRefreshable,
+        ICharacterDeathDisableable
     {
         // --- States ---
         //  1. References
@@ -16,7 +17,7 @@ namespace FlameOfTheLost
         public FPController FP => this.CharacterRootController.FPController;
         public StaminaController Stamina => this.CharacterRootController.StaminaController;
 
-        //  2. Runtime Reservations
+        //  2. Runtime Reservation(s) states
         private int _nextReservationId = 1;
         private int NextReservationID
         {
@@ -27,11 +28,29 @@ namespace FlameOfTheLost
         private readonly Dictionary<int, ResourceReservationRecord> _reservations = new Dictionary<int, ResourceReservationRecord>(32);
         public Dictionary<int, ResourceReservationRecord> ReservationRecords => _reservations;
 
+        //  3. Death Disable State (Runtime)
+        [Header("Death Disable (Runtime)")]
+        [SerializeField] private bool _isDeathDisabled;
+        public bool IsDeathDisabled
+        {
+            get => _isDeathDisabled;
+            private set => _isDeathDisabled = value;
+        }
+
         // --- Public APIs ---
         //  1. Gate + spend in one call for OnStart costs. If cost.CostType is OnHit/OnEnd, this will reserve (spend) instead of only spending at end.
         public GateResult TryPayCost(ResourceCost baseCost, out int reservationID)
         {
             reservationID = -1;
+
+            if (this.IsDeathDisabled)
+            {
+                return new GateResult
+                {
+                    IsAccepted = false,
+                    RejectType = GateRejectType.CharacterIsDead,
+                };
+            }
 
             var gate = ResourceCostUtility.Check(this, baseCost);
             if (!gate.IsAccepted) return gate;
@@ -95,16 +114,32 @@ namespace FlameOfTheLost
             return this.ReservationRecords.Remove(reservationID);
         }
 
-        //  4. ICharacterPlacementRefreshable implementation
+        //  4. ICharacterRefreshable implementation
         public int RefreshmentConfigurePriority => 10;
         public void RefreshCharacter(CharacterRefreshmentContext context)
         {
+            this.IsDeathDisabled = false;
+
             // Clear all reservations(no refunds).
             this.ClearAllResourceReservations();
 
             this.HP?.RefreshPoolAfterPlace(context);
             this.FP?.RefreshPoolAfterPlace(context);
             this.Stamina?.RefreshPoolAfterPlace(context);
+        }
+
+        //  5. ICharacterDeathDisableable implementation
+        public int DeathDisablePriority => 60;
+        public void DisableAfterCharacterDeath(CharacterDeathContext context)
+        {
+            this.IsDeathDisabled = true;
+
+            // Do not refund. Dead characters do not need attack-cost restoration.
+            this.ClearAllResourceReservations();
+
+            this.HP?.DisableResourcePoolAfterCharacterDeath(context);
+            this.FP?.DisableResourcePoolAfterCharacterDeath(context);
+            this.Stamina?.DisableResourcePoolAfterCharacterDeath(context);
         }
 
         // --- Helpers ---

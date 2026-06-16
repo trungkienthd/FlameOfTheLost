@@ -82,7 +82,7 @@ namespace FlameOfTheLost
             return resolvedSkill != null ? resolvedSkill.Icon : null;
         }
 
-        public void RefreshLoadoutAfterCharacterPlacement()
+        public void RefreshLoadoutAfterCharacterRefreshment()
         {
             // this.CombatLoadoutController.NotifyActiveSpecialSkillChanged(this.CombatLoadoutWeaponHandler.ActiveEquippedRuntimeWeapon?.ActiveSpecialSkill);
         }

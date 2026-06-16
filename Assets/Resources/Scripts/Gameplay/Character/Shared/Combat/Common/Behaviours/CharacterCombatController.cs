@@ -7,7 +7,8 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(CharacterCombatStatusEffectApplicationHandler))]
     public class CharacterCombatController : CharacterBehaviourControllerBase, 
         IStatusEffectFlagConsumer,
-        ICharacterRefreshable
+        ICharacterRefreshable,
+        ICharacterDeathDisableable
     {
         // --- States ---
         //  1. References
@@ -27,13 +28,13 @@ namespace FlameOfTheLost
         private Transform RangedAnchorSide => _rangedAnchorSide;
         private Transform RangedAnchorUp => _rangedAnchorUp;
 
-        //  2. Attack State
-        [Header("Runtime State (Read Only)")]
+        //  2. Attack State (Runtime)
+        [Header("Runtime State (Runtime)")]
         [SerializeField] private bool _isInAttackWindow = false;
         public bool IsInAttackWindow
         {
             get => _isInAttackWindow;
-            set => _isInAttackWindow = value;
+            private set => _isInAttackWindow = value;
         }
         
         private RuntimeSkill _activeRuntimeSkill;
@@ -82,11 +83,26 @@ namespace FlameOfTheLost
             set => _attackRoutine = value;
         }
 
+        //  6. Death Disable State (Runtime)
+        [Header("Death Disable")]
+        [SerializeField] private bool _isDeathDisabled;
+        public bool IsDeathDisabled
+        {
+            get => _isDeathDisabled;
+            private set => _isDeathDisabled = value;
+        }
+
         // --- Public APIs ---
         //      1.1. Try to perform a normal attack with the given side. Returns true if the attack was initiated.
         public bool TryDoNormalAttack(AttackSide attackSideType = AttackSide.Left)
         {
-            if (this.IsAttackLocked) return false;
+            if (this.IsDeathDisabled) return false;
+
+            if (this.IsAttackLocked)
+            {
+                Debug.Log($"[{this.CharacterName}.CharacterCombatAttackController] TryDoNormalAttack: Attack is locked.");
+                return false;
+            }
 
             if (this.CombatLoadoutController == null) return false;
             if (this.IsInAttackWindow) return false;
@@ -103,7 +119,13 @@ namespace FlameOfTheLost
         //      1.2. Try to perform a special attack with the given side. Returns true if the attack was initiated.
         public bool TryDoSpecialAttack(AttackSide attackSideType = AttackSide.Left)
         {
-            if (this.IsSpecialAttackLocked) return false;
+            if (this.IsDeathDisabled) return false;
+
+            if (this.IsSpecialAttackLocked)
+            {
+                Debug.Log($"[{this.CharacterName}.CharacterCombatAttackController] TryDoSpecialAttack: Special attack is locked.");
+                return false;
+            }
 
             if (this.CombatLoadoutController == null) return false;
             if (this.IsInAttackWindow) return false;
@@ -286,10 +308,18 @@ namespace FlameOfTheLost
             }
         }
 
-        //  5. ICharacterPlacementRefreshable implementation
+        //  5. Get Root (Composition) Controller
+        public CharacterRootController GetCharacterRootController()
+        {
+            return this.CharacterRootController;
+        }
+
+        //  6. ICharacterRefreshable implementation
         public int RefreshmentConfigurePriority => 40;
         public void RefreshCharacter(CharacterRefreshmentContext context)
         {
+            this.IsDeathDisabled = false;
+
             if (this.AttackRoutine != null)
             {
                 this.StopCoroutine(this.AttackRoutine);
@@ -301,16 +331,34 @@ namespace FlameOfTheLost
 
             this.MeleeHitboxController?.DisableHitbox();
 
-            this.CombatLoadoutController?.RefreshLoadoutAfterCharacterPlacement();
-            this.CombatAimingHandler?.ClearAimingStateAfterCharacterPlacement();
-            this.CombatResourcesHandler?.ClearCombatReservationsAfterCharacterPlacement();
-            this.CombatStatusEffectHandler?.ClearRuntimeTrackingAfterCharacterPlacement();
+            this.CombatLoadoutController?.RefreshLoadoutAfterCharacterRefreshment();
+            this.CombatAimingHandler?.ClearAimingStateAfterCharacterRefreshment();
+            this.CombatResourcesHandler?.ClearCombatReservationsAfterCharacterRefreshment();
+            this.CombatStatusEffectHandler?.ClearRuntimeTrackingAfterCharacterRefreshment();
         }
 
-        //  6. Get Root (Composition) Controller
-        public CharacterRootController GetCharacterRootController()
+        //  7. ICharacterDeathDisableable implementation
+        public int DeathDisablePriority => 30;
+        public void DisableAfterCharacterDeath(CharacterDeathContext context)
         {
-            return this.CharacterRootController;
+            this.IsDeathDisabled = true;
+
+            if (this.AttackRoutine != null)
+            {
+                this.StopCoroutine(this.AttackRoutine);
+                this.AttackRoutine = null;
+            }
+
+            this.IsInAttackWindow = false;
+            this.ActiveRuntimeSkill = null;
+
+            this.MeleeHitboxController?.DisableHitbox();
+
+            this.CombatAimingHandler?.ResolveOnAttackWindowEnd();
+            this.CombatStatusEffectHandler?.ClearRuntimeTrackingAfterCharacterRefreshment();
+
+            // Prefer a death-specific method later, but this is okay for now.
+            this.CombatResourcesHandler?.ClearCombatReservationsAfterCharacterRefreshment();
         }
 
         // --- Helpers ---

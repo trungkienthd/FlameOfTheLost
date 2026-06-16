@@ -140,14 +140,10 @@ namespace FlameOfTheLost
         //  4. TrySpend override not to account for Virtual HP, but only Current HP (Value)
         public bool TrySpendCost(int baseCostValue, CharacterDeathCauseEntry deathCause)
         {
-            if (this.IsDead) return false;
             if (baseCostValue < 0) return false;
             if (baseCostValue == 0) return true;
 
             int effectiveCostValue = this.ComputeEffectiveCostValue(baseCostValue);
-
-            if (!this.CanSpendCost(effectiveCostValue)) return false;
-
             this.CurrentValue -= effectiveCostValue;
 
             bool died = this.TryMarkDead(deathCause, "HP self-cost");
@@ -158,6 +154,9 @@ namespace FlameOfTheLost
         }
         public override bool TrySpendCost(int baseCostValue)
         {
+            if (this.IsDead) return false;
+            if (!this.CanSpendCost(baseCostValue)) return false;
+
             return this.TrySpendCost
             (
                 baseCostValue,

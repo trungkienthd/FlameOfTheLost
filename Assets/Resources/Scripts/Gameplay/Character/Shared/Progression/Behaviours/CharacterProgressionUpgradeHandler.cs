@@ -3,7 +3,9 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterProgressionUpgradeHandler : CharacterBehaviourControllerBase
+    public class CharacterProgressionUpgradeHandler : CharacterBehaviourControllerBase,
+        ICharacterRefreshable,
+        ICharacterDeathDisableable
     {
         // --- States ---
         //  1. Data
@@ -11,13 +13,22 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterProgressionUpgradeConfig _upgradeConfig;
         public CharacterProgressionUpgradeConfig UpgradeConfig => _upgradeConfig;
 
-        //  2. Runtime Dictionary
+        //  2. References
+        private CharacterProgressionController ProgressionController => this.CharacterRootController.ProgressionController;
+        private CharacterRewardWalletController RewardWalletController => this.CharacterRootController.RewardWalletController;
+
+        //  3. Runtime Dictionary
         private readonly Dictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeUpgradeCost> _upgradeCostMap = new();
         private IReadOnlyDictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeUpgradeCost> UpgradeCostMap => _upgradeCostMap;
 
-        //  3. References
-        private CharacterProgressionController ProgressionController => this.CharacterRootController.ProgressionController;
-        private CharacterRewardWalletController RewardWalletController => this.CharacterRootController.RewardWalletController;
+        //  4. Death Disable State (Runtime)
+        [Header("Death Disable (Runtime)")]
+        [SerializeField] private bool _isDeathDisabled;
+        public bool IsDeathDisabled
+        {
+            get => _isDeathDisabled;
+            private set => _isDeathDisabled = value;
+        }
 
         // --- Unity Callbacks ---
         private void Start()
@@ -26,31 +37,7 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs ---
-        public bool CanUpgrade(CharacterProgressionAttributeType attributeType)
-        {
-            if (this.ProgressionController == null) return false;
-            if (this.RewardWalletController == null) return false;
-
-            int cost = this.GetUpgradeCost(attributeType);
-            if (cost < 0) return false;
-
-            return this.RewardWalletController.CanSpend(cost);
-        }
-
-        public int GetUpgradeCost(CharacterProgressionAttributeType attributeType)
-        {
-            if (this.ProgressionController == null) return -1;
-
-            int currentValue = this.ProgressionController.GetAttributeValue(attributeType);
-
-            if (this.UpgradeCostMap.TryGetValue(attributeType, out CharacterProgressionAttributeUpgradeCost cost))
-            {
-                return cost.CalculateCost(currentValue);
-            }
-
-            return -1;
-        }
-
+        //  1. Upgrade Handling
         public bool TryUpgrade(CharacterProgressionAttributeType attributeType)
         {
             if (!this.CanUpgrade(attributeType)) return false;
@@ -66,6 +53,20 @@ namespace FlameOfTheLost
             return true;
         }
 
+        //  2. ICharacterRefreshable implementation
+        public int RefreshmentConfigurePriority => 110;
+        public void RefreshCharacter(CharacterRefreshmentContext context)
+        {
+            this.IsDeathDisabled = false;
+        }
+
+        //  3. ICharacterDeathDisableable implementation
+        public int DeathDisablePriority => 70;
+        public void DisableAfterCharacterDeath(CharacterDeathContext context)
+        {
+            this.IsDeathDisabled = true;
+        }
+
         // --- Helpers ---
         //  1. Rebuild Cost Map
         private void RebuildCostMap()
@@ -78,6 +79,34 @@ namespace FlameOfTheLost
 
                 _upgradeCostMap[cost.AttributeType] = cost;
             }
+        }
+
+        //  2. Upgrade Handling
+        private bool CanUpgrade(CharacterProgressionAttributeType attributeType)
+        {
+            if (this.IsDeathDisabled) return false;
+
+            if (this.ProgressionController == null) return false;
+            if (this.RewardWalletController == null) return false;
+
+            int cost = this.GetUpgradeCost(attributeType);
+            if (cost < 0) return false;
+
+            return this.RewardWalletController.CanSpend(cost);
+        }
+
+        private int GetUpgradeCost(CharacterProgressionAttributeType attributeType)
+        {
+            if (this.ProgressionController == null) return -1;
+
+            int currentValue = this.ProgressionController.GetAttributeValue(attributeType);
+
+            if (this.UpgradeCostMap.TryGetValue(attributeType, out CharacterProgressionAttributeUpgradeCost cost))
+            {
+                return cost.CalculateCost(currentValue);
+            }
+
+            return -1;
         }
 
         //  2. Cache and Validate References

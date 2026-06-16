@@ -82,8 +82,8 @@ namespace FlameOfTheLost
             this.SnapshotAttackDirection(this.GetCurrentAttackDirection());
         }
 
-        //  5. Refresh for Respawn: clear snapshot and unlock facing
-        public void ClearAimingStateAfterCharacterPlacement()
+        //  5. Refresh Character: clear snapshot and unlock facing
+        public void ClearAimingStateAfterCharacterRefreshment()
         {
             this.UnlockFacing();
             this.ClearAttackSnapshotDirection();

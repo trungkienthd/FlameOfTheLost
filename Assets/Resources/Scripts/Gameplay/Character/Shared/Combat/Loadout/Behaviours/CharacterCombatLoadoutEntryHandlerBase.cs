@@ -225,7 +225,7 @@ namespace FlameOfTheLost
             return this.ActiveEquippedEntry != null ? this.ActiveEquippedEntry.Icon : null;
         }
 
-        public void RefreshLoadoutAfterCharacterPlacement()
+        public void RefreshLoadoutAfterCharacterRefreshment()
         {
             this.ClampEquippedEntriesToCapacity();
             this.RemoveInvalidEquippedEntries();
