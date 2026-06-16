@@ -26,7 +26,7 @@ namespace FlameOfTheLost
         //  2. Non-serialized runtime data
         [NonSerialized] private GameObject _owner;
         [NonSerialized] private CharacterType _characterType;
-        [NonSerialized] private CharacterCombatAnimationClipHitboxSetProfile _animationProfile;
+        [NonSerialized] private CharacterAttackAnimationClipHitboxSetProfile _animationProfile;
         public GameObject Owner
         {
             get => _owner;
@@ -37,7 +37,7 @@ namespace FlameOfTheLost
             get => _characterType;
             private set => _characterType = value;
         }
-        public CharacterCombatAnimationClipHitboxSetProfile CombatAnimationClipHitboxSetProfile
+        public CharacterAttackAnimationClipHitboxSetProfile CombatAnimationClipHitboxSetProfile
         {
             get => _animationProfile;
             private set => _animationProfile = value;
@@ -46,7 +46,7 @@ namespace FlameOfTheLost
         public int SkillID => this.Profile != null ? this.Profile.Id : -1;
 
         // --- Constructors ---
-        public RuntimeSkill(SkillProfile profile, WeaponProfile weapon, SkillProvisionType provisionType, GameObject owner, CharacterType characterType, CharacterCombatAnimationClipHitboxSetProfile animationProfile)
+        public RuntimeSkill(SkillProfile profile, WeaponProfile weapon, SkillProvisionType provisionType, GameObject owner, CharacterType characterType, CharacterAttackAnimationClipHitboxSetProfile animationProfile)
         {
             this.Profile = profile;
             this.ProvisionType = provisionType;

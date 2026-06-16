@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 8471074619670850254}
   - component: {fileID: 8619395251524575671}
   - component: {fileID: 6819824635726035935}
+  - component: {fileID: 391864750833664329}
   m_Layer: 9
   m_Name: Visual
   m_TagString: Untagged
@@ -466,6 +467,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualCombatAnimationHandler
   _placeholderProfile: {fileID: 11400000, guid: 96e91b24bb5929445b608c7fb8251e81, type: 2}
   _activeProfile: {fileID: 11400000, guid: f0e51d36e48ee4e43998ded6f8841cdc, type: 2}
+--- !u!114 &391864750833664329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333170155362222021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715e41325612da24eab2c65bacad6902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualHitDeathAnimationHandler
+  _placeholderProfile: {fileID: 11400000, guid: cba0c4783b92dc34295f5a1cb5341fa0, type: 2}
+  _activeProfile: {fileID: 11400000, guid: 374684fe68157104fb4be74de54fa19a, type: 2}
+  _hitToDeathDelay: 0.15
 --- !u!1 &546589716473818984
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1114,6 @@ MonoBehaviour:
   _currentVirtualHP: 0
   _maxVirtualHP: 0
   _isDead: 0
-  _deathAnimationFallbackSeconds: 1.125
   _lastDeathCause:
     _causeType: 0
     _sourceCharacter: {fileID: 0}
@@ -1463,7 +1478,9 @@ MonoBehaviour:
   _visualController: {fileID: 584078816329254573}
   _visualFacingHandler: {fileID: 6836829972921874162}
   _visualLocomotionAnimationHandler: {fileID: 8471074619670850254}
-  _visualCombatAnimationHandler: {fileID: 6819824635726035935}
+  _visualAttackAnimationHandler: {fileID: 0}
+  _visualHitDeathAnimationHandler: {fileID: 0}
+  _resourceVFXHolder: {fileID: 0}
   _statusEffectVFXHolder: {fileID: 2170281567699780899}
   _rewardVFXHandler: {fileID: 2103957974545232575}
   _combatController: {fileID: 2103035301200508583}

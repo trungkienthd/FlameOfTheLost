@@ -247,7 +247,7 @@ namespace FlameOfTheLost
             this.ShowThenMaybeAutoHide();
         }
 
-        private void OnDeathInternal()
+        private void OnDeathInternal(CharacterDeathCauseEntry deathCause)
         {
             this.EventDrivenUpdateReceived = true;
 

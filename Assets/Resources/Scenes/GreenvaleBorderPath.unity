@@ -48942,6 +48942,7 @@ GameObject:
   - component: {fileID: 513242089}
   - component: {fileID: 513242091}
   - component: {fileID: 513242090}
+  - component: {fileID: 513242092}
   m_Layer: 8
   m_Name: Visual
   m_TagString: Untagged
@@ -49138,6 +49139,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerCarryLocomotionVisualModeProvider
   _characterRootController: {fileID: 2107461207}
+--- !u!114 &513242092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513242082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715e41325612da24eab2c65bacad6902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualHitDeathAnimationHandler
+  _placeholderProfile: {fileID: 11400000, guid: cba0c4783b92dc34295f5a1cb5341fa0, type: 2}
+  _activeProfile: {fileID: 11400000, guid: e71a8942c889d4c418673e1d862790e5, type: 2}
+  _hitToDeathDelay: 0.15
+  _deathCompletionFallbackDelay: 1
+  _deathCompletionPadding: 0.03
 --- !u!1 &531506779
 GameObject:
   m_ObjectHideFlags: 0
@@ -95572,8 +95590,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.5}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 29, y: 29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1447246181
 MonoBehaviour:
@@ -102498,7 +102516,6 @@ MonoBehaviour:
   _currentVirtualHP: 0
   _maxVirtualHP: 0
   _isDead: 0
-  _deathAnimationFallbackSeconds: 1.125
   _lastDeathCause:
     _causeType: 0
     _sourceCharacter: {fileID: 0}
@@ -104332,7 +104349,8 @@ MonoBehaviour:
   _visualController: {fileID: 513242084}
   _visualFacingHandler: {fileID: 513242088}
   _visualLocomotionAnimationHandler: {fileID: 513242089}
-  _visualCombatAnimationHandler: {fileID: 513242090}
+  _visualAttackAnimationHandler: {fileID: 513242090}
+  _visualHitDeathAnimationHandler: {fileID: 513242092}
   _statusEffectVFXHolder: {fileID: 1097086741}
   _rewardVFXHandler: {fileID: 6884279}
   _combatController: {fileID: 557462172}

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -11,6 +13,7 @@ namespace FlameOfTheLost
         private PlayerSpawnerController PlayerSpawnerController => _playerSpawnerController;
         private CharacterIdentityController IdentityController => this.CharacterRootController.IdentityController;
         private HPController HPController => this.CharacterRootController.HPController;
+        private CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
         //  2. Runtime Death Cause
         private CharacterDeathCauseEntry LastDeathCause => this.HPController != null
@@ -18,12 +21,18 @@ namespace FlameOfTheLost
             : null;
 
         //  3. Runtime States
-        private bool _hasResolvedDeath = false;
+        private bool _hasHandledTechnicalDeath = false;
+        private bool _hasHandledDeathAnimationFinished = false;
         private bool _hasDistributedReward = false;
-        private bool HasResolvedDeath
+        private bool HasHandledTechnicalDeath
         {
-            get => _hasResolvedDeath;
-            set => _hasResolvedDeath = value;
+            get => _hasHandledTechnicalDeath;
+            set => _hasHandledTechnicalDeath = value;
+        }
+        private bool HasHandledDeathAnimationFinished
+        {
+            get => _hasHandledDeathAnimationFinished;
+            set => _hasHandledDeathAnimationFinished = value;
         }
         private bool HasDistributedReward
         {
@@ -47,7 +56,8 @@ namespace FlameOfTheLost
         public int RefreshmentConfigurePriority => 10;
         public void RefreshCharacter(CharacterRefreshmentContext context)
         {
-            this.HasResolvedDeath = false;
+            this.HasHandledTechnicalDeath = false;
+            this.HasHandledDeathAnimationFinished = false;
             this.HasDistributedReward = false;
         }
 
@@ -57,50 +67,79 @@ namespace FlameOfTheLost
         {
             if (this.HPController == null) return;
 
-            this.HPController.OnDeath -= this.HandleDeath;
-            this.HPController.OnDeath += this.HandleDeath;
+            this.HPController.OnDeath -= this.HandleTechnicalDeath;
+            this.HPController.OnDeath += this.HandleTechnicalDeath;
 
-            this.HPController.OnDeathAnimationFinished -= this.HandleDeathAnimationFinished;
-            this.HPController.OnDeathAnimationFinished += this.HandleDeathAnimationFinished;
+            if (this.VisualController == null) return;
+
+            this.VisualController.OnDeathAnimationFinished -= this.HandleDeathAnimationFinished;
+            this.VisualController.OnDeathAnimationFinished += this.HandleDeathAnimationFinished;
         }
         private void UnbindEvents()
         {
-            if (this.HPController == null) return;
+            if (this.HPController != null)
+            {
+                this.HPController.OnDeath -= this.HandleTechnicalDeath;
+            }
 
-            this.HPController.OnDeath -= this.HandleDeath;
-
-            this.HPController.OnDeathAnimationFinished -= this.HandleDeathAnimationFinished;
+            if (this.VisualController != null)
+            {
+                this.VisualController.OnDeathAnimationFinished -= this.HandleDeathAnimationFinished;
+            }
         }
 
         //  2. Event Handlers
-        private void HandleDeath()
+        //      2.1. Stage 1: Handle Death (technically)
+        private void HandleTechnicalDeath(CharacterDeathCauseEntry deathCause)
         {
-            CharacterDeathCauseEntry deathCause = this.LastDeathCause;
+            if (this.HasHandledTechnicalDeath) return;
+            this.HasHandledTechnicalDeath = true;
+
             Debug.Log
             (
-                $"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Character died. " +
+                $"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Character is technically dead. " +
                 $"CauseType: {(deathCause != null ? deathCause.CauseType.ToString() : "None")}. " +
-                $"SourceCharacter: {(deathCause?.SourceCharacter != null ? deathCause.SourceCharacter.name : "None")}."
+                $"SourceCharacter: {(deathCause?.SourceCharacter != null ? deathCause.SourceCharacter.name : "None")}.",
+                this
             );
 
-            this.TryDistributeRewardAfterDeath(deathCause);
+            this.DisableDeathDisableableSystems(deathCause);
         }
+
+        private void DisableDeathDisableableSystems(CharacterDeathCauseEntry deathCause)
+        {
+            if (this.CharacterRootController == null) return;
+
+            CharacterDeathContext context = new CharacterDeathContext
+            (
+                character: this.CharacterRootController,
+                deathCause: deathCause
+            );
+
+            IEnumerable<ICharacterDeathDisableable> disableableSystems = this.CharacterRootController
+                .GetComponentsInChildren<MonoBehaviour>(true)
+                .OfType<ICharacterDeathDisableable>()
+                .OrderBy(system => system.DeathDisablePriority);
+
+            foreach (ICharacterDeathDisableable disableableSystem in disableableSystems)
+            {
+                disableableSystem.DisableAfterCharacterDeath(context);
+            }
+        }
+
+        //      2.2. Stage 2: Handle Death Animation Finished
         private void HandleDeathAnimationFinished()
         {
-            if (this.HasResolvedDeath) return;
-            this.HasResolvedDeath = true;
+            if (this.HasHandledDeathAnimationFinished) return;
+            this.HasHandledDeathAnimationFinished = true;
 
             CharacterDeathCauseEntry deathCause = this.LastDeathCause;
-            //Debug.Log
-            //(
-            //    $"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Resolving death after animation. " +
-            //    $"CauseType: {(deathCause != null ? deathCause.CauseType.ToString() : "None")}. " +
-            //    $"SourceCharacter: {(deathCause?.SourceCharacter != null ? deathCause.SourceCharacter.name : "None")}."
-            //);
 
             if (this.IdentityController == null)
             {
                 Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] No CharacterIdentityController found. Destroying character by fallback.", this);
+                
+                this.TryDistributeRewardAfterDeath(deathCause);
                 this.DestroyCharacter();
                 return;
             }
@@ -113,40 +152,38 @@ namespace FlameOfTheLost
 
                 case CharacterFaction.Enemy:
                 case CharacterFaction.Ally:
+                    this.TryDistributeRewardAfterDeath(deathCause);
                     this.DestroyCharacter();
                     break;
 
                 case CharacterFaction.Neutral:
                 default:
+                    this.TryDistributeRewardAfterDeath(deathCause);
                     this.DestroyCharacter();
                     break;
             }
         }
 
-        private void TryDistributeRewardAfterDeath(CharacterDeathCauseEntry deathCause)
+        private bool TryDistributeRewardAfterDeath(CharacterDeathCauseEntry deathCause)
         {
-            if (this.HasDistributedReward) return;
+            if (this.HasDistributedReward) return true;
             this.HasDistributedReward = true;
 
-            if (deathCause == null) return;
-
-            if (deathCause.CauseType != CharacterDeathCauseType.OtherCharacter) return;
+            if (deathCause == null) return false;
+            if (deathCause.CauseType != CharacterDeathCauseType.OtherCharacter) return false;
 
             CharacterRootController receiverCharacter = deathCause.SourceCharacter;
             CharacterRootController defeatedCharacter = this.CharacterRootController;
 
-            if (receiverCharacter == null) return;
-            if (defeatedCharacter == null) return;
-
-            if (receiverCharacter == defeatedCharacter) return;
+            if (receiverCharacter == null) return false;
+            if (defeatedCharacter == null) return false;
+            if (receiverCharacter == defeatedCharacter) return false;
 
             bool distributed = CharacterRewardDistributionUtility.TryDistributeRewardFromDefeatedCharacter
             (
                 receiverCharacter: receiverCharacter,
                 defeatedCharacter: defeatedCharacter
             );
-
-            if (!distributed) return;
 
             //Debug.Log
             //(
@@ -155,6 +192,8 @@ namespace FlameOfTheLost
             //    $"Defeated: {defeatedCharacter.name}.",
             //    this
             //);
+
+            return distributed;
         }
 
         private void RespawnPlayer()

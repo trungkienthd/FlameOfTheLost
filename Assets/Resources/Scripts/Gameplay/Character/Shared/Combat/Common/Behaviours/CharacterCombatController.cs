@@ -330,7 +330,7 @@ namespace FlameOfTheLost
                 provisionType: skill.DefaultProvisionType, 
                 owner: this.gameObject, 
                 characterType: characterType,
-                animationProfile: this.CharacterRootController.VisualCombatAnimationHandler.ActiveProfile.GetOrNull(skill, weapon)
+                animationProfile: this.CharacterRootController.VisualAttackAnimationHandler.ActiveProfile.GetOrNull(skill, weapon)
             );
 
             if (runtimeSkill.CombatAnimationClipHitboxSetProfile == null)

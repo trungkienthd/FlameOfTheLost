@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ae294ba8c27c224b9ae5de55b824480, type: 3}
+  m_Name: AniAtk_Player
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAnimationProfile
+  _characterType: 1
+  _elements:
+  - {fileID: 11400000, guid: c307a85dfb23773489cd28ec36c02d8d, type: 2}
+  - {fileID: 11400000, guid: d91b3806cfd9e2d46af3a682bba9c513, type: 2}
+  - {fileID: 11400000, guid: ed4fc39db5007684d8229a738ef886c7, type: 2}
+  - {fileID: 11400000, guid: b4d6248d810aff84e980e7756d0bd3d5, type: 2}
+  - {fileID: 11400000, guid: 854dd18741eb68e4da1ecf40b153fd20, type: 2}
+  - {fileID: 11400000, guid: eaaafe14b69162d46b08148c0e3f583f, type: 2}
+  - {fileID: 11400000, guid: 826d70a5e8c4e0b4ebb82b399ead2a01, type: 2}
+  - {fileID: 11400000, guid: d6c5aa4badb9e384bbaf967bb601953c, type: 2}

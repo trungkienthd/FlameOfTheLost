@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d3b9023c5dfeb499619f54ab1144a8, type: 3}
+  m_Name: AClipAtkHb_Player_WP_Dagger_SKM_LightningStab
+  m_EditorClassIdentifier: 
+  _skills:
+  - {fileID: 11400000, guid: f834ce4f2a9b0ad47a2e04a77e5bbaa9, type: 2}
+  _weapon: {fileID: 11400000, guid: 6000f6500a611c742a83c08327182149, type: 2}
+  _characterType: 1
+  _left:
+    _down:
+      _animationClip: {fileID: 7400000, guid: 20554b5652df2d044ba1ab35e7bcb871, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0.95, y: -0.35}
+        - {x: 0.4, y: 0.15}
+        - {x: -0.2, y: -0.95}
+        _offset: {x: 0, y: 0}
+    _side:
+      _animationClip: {fileID: 0}
+      _hitboxShape:
+        _points: []
+        _offset: {x: 0, y: 0}
+    _up:
+      _animationClip: {fileID: 7400000, guid: 53d6ab2a9c5311b4099bbb8720afc3af, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: -0.9, y: 0.35}
+        - {x: -0.4, y: -0.15}
+        - {x: 0.2, y: 0.95}
+        _offset: {x: 0, y: 0}
+  _right:
+    _down:
+      _animationClip: {fileID: 7400000, guid: 43c001107cac74b42823cbfec88b5d97, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: -0.95, y: -0.35}
+        - {x: -0.4, y: 0.15}
+        - {x: 0.2, y: -0.95}
+        _offset: {x: 0, y: 0}
+    _side:
+      _animationClip: {fileID: 7400000, guid: 510ac65af3b60dc4a8b1244221b83176, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: -0.1, y: -0.5}
+        - {x: -0.1, y: -0.05}
+        - {x: 1, y: -0.3}
+        _offset: {x: 0, y: 0}
+    _up:
+      _animationClip: {fileID: 7400000, guid: 664798bc3f592bd498cb712a043fd470, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0.9, y: 0.35}
+        - {x: 0.4, y: -0.15}
+        - {x: -0.2, y: 0.95}
+        _offset: {x: 0, y: 0}
+  _attackWindowDuration: 0.5

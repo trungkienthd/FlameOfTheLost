@@ -421,7 +421,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
 
         this.HPController.OnDeath -= this.HandleDeath;
     }
-    private void HandleDeath()
+    private void HandleDeath(CharacterDeathCauseEntry deathCause)
     {
         this.SetState(TerritorialEnemyState.Dead);
         this.EnemyInputHandler?.BlockAIInput();
