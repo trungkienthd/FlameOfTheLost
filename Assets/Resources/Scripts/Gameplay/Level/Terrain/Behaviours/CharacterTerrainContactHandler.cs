@@ -118,7 +118,7 @@ namespace FlameOfTheLost
 
             TerrainProfile terrainProfile = this.CurrentTerrainCtrl.TerrainProfile;
 
-            if (!terrainProfile.TryGetRule(this.TraversalType, out TerrainStatusEffectRule rule)) return;
+            if (!terrainProfile.TryGetRule(this.TraversalType, out TerrainStatusEffectRuleEntry rule)) return;
             if (rule == null) return;
             if (!rule.CanEnter) return;
 

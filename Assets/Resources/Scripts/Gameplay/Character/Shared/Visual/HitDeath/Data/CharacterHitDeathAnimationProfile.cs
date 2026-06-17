@@ -10,10 +10,10 @@ namespace FlameOfTheLost
         public CharacterType CharacterType => _characterType;
 
         [Header("Hit / Death Clips")]
-        [SerializeField] private FacingAnimationClipSet _hitAnimationClipSet;
-        [SerializeField] private FacingAnimationClipSet _deathAnimationClipSet;
-        public FacingAnimationClipSet HitAnimationClipSet => _hitAnimationClipSet;
-        public FacingAnimationClipSet DeathAnimationClipSet => _deathAnimationClipSet;
+        [SerializeField] private CharacterFacingAnimationClipSetEntry _hitAnimationClipSet;
+        [SerializeField] private CharacterFacingAnimationClipSetEntry _deathAnimationClipSet;
+        public CharacterFacingAnimationClipSetEntry HitAnimationClipSet => _hitAnimationClipSet;
+        public CharacterFacingAnimationClipSetEntry DeathAnimationClipSet => _deathAnimationClipSet;
 
         public AnimationClip GetHitClip(CharacterFacingStatus facingStatus)
         {

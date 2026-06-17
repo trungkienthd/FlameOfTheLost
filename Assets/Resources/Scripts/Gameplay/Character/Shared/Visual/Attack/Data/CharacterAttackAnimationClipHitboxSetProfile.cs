@@ -18,11 +18,11 @@ namespace FlameOfTheLost
 
         //  2. Left / Right attack data
         [Header("Attack Animation + Hitbox Sets")]
-        [SerializeField] private CombatAnimationClipHitboxSet _left;
-        [SerializeField] private CombatAnimationClipHitboxSet _right;
+        [SerializeField] private CharacterAttackAnimationClipHitboxSetEntry _left;
+        [SerializeField] private CharacterAttackAnimationClipHitboxSetEntry _right;
 
-        public CombatAnimationClipHitboxSet LeftSet => _left;
-        public CombatAnimationClipHitboxSet RightSet => _right;
+        public CharacterAttackAnimationClipHitboxSetEntry LeftSet => _left;
+        public CharacterAttackAnimationClipHitboxSetEntry RightSet => _right;
 
         //  3. Attack Window
         [Header("Attack Window")]
@@ -89,11 +89,11 @@ namespace FlameOfTheLost
 
         // --- Public APIs ---
         //  1. Get this Animation Clip Set (Facing) for the given side
-        public FacingAnimationClipSet GetFacingAnimationClipSet(AttackSide attackSide = AttackSide.Left)
+        public CharacterFacingAnimationClipSetEntry GetFacingAnimationClipSet(AttackSide attackSide = AttackSide.Left)
         {
-            CombatAnimationClipHitboxSet set = this.GetAnimationClipHitboxSet(attackSide);
+            CharacterAttackAnimationClipHitboxSetEntry set = this.GetAnimationClipHitboxSet(attackSide);
 
-            FacingAnimationClipSet result = new FacingAnimationClipSet
+            CharacterFacingAnimationClipSetEntry result = new CharacterFacingAnimationClipSetEntry
             (
                 set.Down.AnimationClip,
                 set.Side.AnimationClip,
@@ -106,7 +106,7 @@ namespace FlameOfTheLost
         //  2. Gets the MeleeHitboxShape for the given side.
         public MeleeHitboxShape GetMeleeHitboxShape(AttackSide attackSide = AttackSide.Left)
         {
-            CombatAnimationClipHitboxSet set = this.GetAnimationClipHitboxSet(attackSide);
+            CharacterAttackAnimationClipHitboxSetEntry set = this.GetAnimationClipHitboxSet(attackSide);
 
             MeleeHitboxShape result = new MeleeHitboxShape
             (
@@ -144,7 +144,7 @@ namespace FlameOfTheLost
 
         // --- Helpers ---
         //  1. Validation for Left/Right entry pairs (Down, Side, Up)
-        private void ValidateEntryPair(CombatAnimationClipHitboxEntry leftEntry, CombatAnimationClipHitboxEntry rightEntry, string facingName)
+        private void ValidateEntryPair(CharacterAttackAnimationClipHitboxEntry leftEntry, CharacterAttackAnimationClipHitboxEntry rightEntry, string facingName)
         {
             this.ValidateClipPair(leftEntry.AnimationClip, rightEntry.AnimationClip, $"{facingName} AnimationClip");
 
@@ -166,7 +166,7 @@ namespace FlameOfTheLost
         }
 
         //  2. Get the AttackAnimationHitboxSet for the given side, with fallback to the opposite side if needed.
-        private CombatAnimationClipHitboxSet GetAnimationClipHitboxSet(AttackSide attackSide = AttackSide.Left)
+        private CharacterAttackAnimationClipHitboxSetEntry GetAnimationClipHitboxSet(AttackSide attackSide = AttackSide.Left)
         {
             if (attackSide == AttackSide.Right)
             {

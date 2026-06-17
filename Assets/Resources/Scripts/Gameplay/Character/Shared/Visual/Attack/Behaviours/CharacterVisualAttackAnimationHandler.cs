@@ -38,7 +38,7 @@ namespace FlameOfTheLost
                 return;
             }
 
-            FacingAnimationClipSet animationClipSet = element.GetFacingAnimationClipSet(attackSideType);
+            CharacterFacingAnimationClipSetEntry animationClipSet = element.GetFacingAnimationClipSet(attackSideType);
             if (!animationClipSet.IsValid)
             {
                 string skillName = runtimeSkill.Profile != null ? runtimeSkill.Profile.name : "NULL";

@@ -23,14 +23,14 @@ namespace FlameOfTheLost
         public int Priority => _priority;
 
         [Header("Rules")]
-        [SerializeField] private List<TerrainStatusEffectRule> _rules = new();
-        public IReadOnlyList<TerrainStatusEffectRule> Rules => _rules;
+        [SerializeField] private List<TerrainStatusEffectRuleEntry> _rules = new();
+        public IReadOnlyList<TerrainStatusEffectRuleEntry> Rules => _rules;
 
-        public bool TryGetRule(CharacterTraversalType traversalType, out TerrainStatusEffectRule rule)
+        public bool TryGetRule(CharacterTraversalType traversalType, out TerrainStatusEffectRuleEntry rule)
         {
-            for (int i = 0; i < _rules.Count; i++)
+            for (int i = 0; i < this.Rules.Count; i++)
             {
-                TerrainStatusEffectRule current = _rules[i];
+                TerrainStatusEffectRuleEntry current = this.Rules[i];
                 if (current == null) continue;
 
                 if (current.TargetTraversalType == traversalType)

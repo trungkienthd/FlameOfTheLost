@@ -48999,7 +48999,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1084513806, guid: d64fdee322d99594386840d1d5369625, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -49007,7 +49007,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!114 &513242084
 MonoBehaviour:
@@ -49153,7 +49153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualHitDeathAnimationHandler
   _placeholderProfile: {fileID: 11400000, guid: cba0c4783b92dc34295f5a1cb5341fa0, type: 2}
   _activeProfile: {fileID: 11400000, guid: e71a8942c889d4c418673e1d862790e5, type: 2}
-  _hitToDeathDelay: 0.15
+  _hitToDeathDelay: 0.5
   _deathCompletionFallbackDelay: 1
   _deathCompletionPadding: 0.03
 --- !u!1 &531506779

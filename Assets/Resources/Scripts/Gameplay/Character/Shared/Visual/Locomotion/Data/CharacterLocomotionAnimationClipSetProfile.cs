@@ -16,10 +16,10 @@ namespace FlameOfTheLost
         public LightSourceType LightSourceType => _lightSourceType;
 
         [Header("Animation Sets")]
-        [SerializeField] private FacingAnimationClipSet _idleClipSet;
-        [SerializeField] private FacingAnimationClipSet _walkClipSet;
-        public FacingAnimationClipSet IdleClipSet => _idleClipSet;
-        public FacingAnimationClipSet WalkClipSet => _walkClipSet;
+        [SerializeField] private CharacterFacingAnimationClipSetEntry _idleClipSet;
+        [SerializeField] private CharacterFacingAnimationClipSetEntry _walkClipSet;
+        public CharacterFacingAnimationClipSetEntry IdleClipSet => _idleClipSet;
+        public CharacterFacingAnimationClipSetEntry WalkClipSet => _walkClipSet;
 
         public AnimationClip GetIdleClip(CharacterFacingStatus facingStatus)
         {

@@ -85,8 +85,8 @@ namespace FlameOfTheLost
             {
                 if (this.Rigidbody2D != null)
                 {
-                    this.Rigidbody2D.linearVelocity = Vector2.zero;
-                    this.Rigidbody2D.angularVelocity = 0f;
+                    //this.Rigidbody2D.linearVelocity = Vector2.zero;
+                    //this.Rigidbody2D.angularVelocity = 0f;
                 }
 
                 this.VisualController?.FeedMovement(Vector2.zero);
@@ -176,12 +176,12 @@ namespace FlameOfTheLost
 
             this.RawMovementInput = Vector2.zero;
             this.DesiredMovement = Vector2.zero;
-            this.Velocity = Vector2.zero;
+            // this.Velocity = Vector2.zero;
 
             if (this.Rigidbody2D != null)
             {
-                this.Rigidbody2D.linearVelocity = Vector2.zero;
-                this.Rigidbody2D.angularVelocity = 0f;
+                // this.Rigidbody2D.linearVelocity = Vector2.zero;
+                // this.Rigidbody2D.angularVelocity = 0f;
             }
 
             this.VisualController?.FeedMovement(Vector2.zero);

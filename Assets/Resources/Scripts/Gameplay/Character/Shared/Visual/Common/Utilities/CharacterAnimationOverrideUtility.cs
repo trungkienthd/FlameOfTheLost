@@ -4,7 +4,7 @@ namespace FlameOfTheLost
 {
     public static class CharacterAnimationOverrideUtility
     {
-        public static void ApplyFacingClipSetOverride(AnimatorOverrideController overrideController, FacingAnimationClipSet placeholderSet, FacingAnimationClipSet targetSet)
+        public static void ApplyFacingClipSetOverride(AnimatorOverrideController overrideController, CharacterFacingAnimationClipSetEntry placeholderSet, CharacterFacingAnimationClipSetEntry targetSet)
         {
             if (overrideController == null) return;
             if (!placeholderSet.IsValid) return;

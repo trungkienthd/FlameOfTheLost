@@ -4,17 +4,16 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [Serializable]
-    public struct FacingAnimationClipSet
+    public struct CharacterFacingAnimationClipSetEntry
     {
         [SerializeField] private AnimationClip _down;
         [SerializeField] private AnimationClip _side;
         [SerializeField] private AnimationClip _up;
-
         public AnimationClip Down => _down;
         public AnimationClip Side => _side;
         public AnimationClip Up => _up;
 
-        public FacingAnimationClipSet(AnimationClip down, AnimationClip side, AnimationClip up)
+        public CharacterFacingAnimationClipSetEntry(AnimationClip down, AnimationClip side, AnimationClip up)
         {
             _down = down;
             _side = side;

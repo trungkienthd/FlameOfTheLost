@@ -5,7 +5,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [Serializable]
-    public sealed class TerrainStatusEffectRule
+    public sealed class TerrainStatusEffectRuleEntry
     {
         [SerializeField] private CharacterTraversalType _targetTraversalType;
         [SerializeField] private bool _canEnter = true;
