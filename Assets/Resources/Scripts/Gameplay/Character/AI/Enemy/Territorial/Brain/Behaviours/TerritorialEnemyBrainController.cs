@@ -5,18 +5,22 @@ public class TerritorialEnemyBrainController : EnemyBrainController
 {
     // --- States ---
     //  1. Data
-    [Header("Territorial Config Data")]
+    [Header("Territorial Config (Data)")]
     [SerializeField] private TerritorialEnemyRoamingConfig _roamingConfig;
     [SerializeField] private TerritorialEnemyAttackConfig _attackConfig;
     private TerritorialEnemyRoamingConfig RoamingConfig => _roamingConfig;
     private TerritorialEnemyAttackConfig AttackConfig => _attackConfig;
 
-    //  1. Runtime AI State
+    //  2. Runtime AI State
     [Header("AI State (Runtime)")]
     [SerializeField] private TerritorialEnemyState _currentAIState = TerritorialEnemyState.Roaming;
-    public TerritorialEnemyState CurrentState => _currentAIState;
+    public TerritorialEnemyState CurrentAIState
+    {
+        get => _currentAIState;
+        private set => _currentAIState = value;
+    }
 
-    //  2. Home Area (Runtime)
+    //  3. Home Area (Runtime)
     [Header("Home Area (Runtime)")]
     [SerializeField] private TerritorialEnemyHomeAreaEntry _homeAreaEntry;
     private TerritorialEnemyHomeAreaEntry HomeAreaEntry
@@ -25,7 +29,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         set => _homeAreaEntry = value;
     }
 
-    //  3. Roaming State (Runtime)
+    //  4. Roaming State (Runtime)
     [Header("Roaming (Runtime)")]
     [SerializeField] private bool _isRoamWalking;
     [SerializeField] private Vector2 _roamMoveDirection;
@@ -58,7 +62,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         set => _homeReturnPoint = value;
     }
 
-    //  4. Attack State (Runtime)
+    //  5. Attack States (Runtime)
     [Header("Attack & PreAttack (Runtime)")]
     [SerializeField] private float _nextAllowedAttackTime;
     [SerializeField] private float _attackingStateEndTime;
@@ -73,7 +77,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         set => _attackingStateEndTime = value;
     }
 
-    //      4.1. PreAttack State (Runtime)
+    //      5.1. PreAttack State (Runtime)
     [SerializeField] private float _preAttackStateEndTime;
     private float PreAttackStateEndTime
     {
@@ -81,25 +85,22 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         set => _preAttackStateEndTime = value;
     }
 
-    //  5. References 
-    private HPController HPController => this.CharacterRootController.HPController;
+    //  6. References 
     private CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController.CombatLoadoutController;
 
     // --- Unity Callbacks ---
     private void Start()
     {
-        this.SubscribeToHPDeathEvent();
         this.ResetRoamingRuntime();
+        this.ResetAttackRuntime();
 
         this.CombatLoadoutController?.TryQuickEquipWeapon();   
     }
     protected virtual void Update()
     {
+        if (this.IsDeathDisabled) return;
+
         this.TickAI();
-    }
-    protected virtual void OnDestroy()
-    {
-        this.UnsubscribeFromHPDeathEvent();
     }
 
     // --- Public APIs ---
@@ -113,49 +114,30 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         this.HomeAreaEntry = homeAreaEntry;
     }
 
-    //  1. ICharacterPlacementRefreshable implementation
-    public override void RefreshCharacter(CharacterRefreshmentContext context)
-    {
-        base.RefreshCharacter(context);
-
-        this.ResetRoamingRuntime();
-        this.ResetAttackRuntime();
-
-        this.SetState(TerritorialEnemyState.Roaming);
-
-        this.EnemyInputHandler?.UnblockAIInput();
-        this.EnemyInputHandler?.ClearAIMoveInput();
-
-        this.SubscribeToHPDeathEvent();
-
-        this.CombatLoadoutController?.TryQuickEquipWeapon();
-    }
-
-    // --- Public APIs ---
-    //  1. ICharacterPlacementRefreshable implementation
-
     // --- Helpers ---
-    private void SetState(TerritorialEnemyState nextState)
+    private void SetAIState(TerritorialEnemyState nextState)
     {
-        if (this.CurrentState == nextState) return;
+        if (this.CurrentAIState == nextState) return;
 
-        _currentAIState = nextState;
+        this.CurrentAIState = nextState;
     }
     private void TickAI()
     {
-        if (this.CurrentState == TerritorialEnemyState.Dead)
+        if (this.IsDeathDisabled) return;
+
+        if (this.CurrentAIState == TerritorialEnemyState.Dead)
         {
             this.HandleDeadState();
             return;
         }
 
-        if (this.CurrentState == TerritorialEnemyState.PreAttack)
+        if (this.CurrentAIState == TerritorialEnemyState.PreAttack)
         {
             this.HandlePreAttackState();
             return;
         }
 
-        if (this.CurrentState == TerritorialEnemyState.Attacking)
+        if (this.CurrentAIState == TerritorialEnemyState.Attacking)
         {
             this.HandleAttackingState();
             return;
@@ -163,19 +145,19 @@ public class TerritorialEnemyBrainController : EnemyBrainController
 
         if (this.CurrentAttackRangeTarget != null)
         {
-            this.SetState(TerritorialEnemyState.ReadyToAttack);
+            this.SetAIState(TerritorialEnemyState.ReadyToAttack);
             this.HandleReadyToAttackState();
             return;
         }
 
         if (this.CurrentAlertTarget != null)
         {
-            this.SetState(TerritorialEnemyState.Alert);
+            this.SetAIState(TerritorialEnemyState.Alert);
             this.HandleAlertState();
             return;
         }
 
-        this.SetState(TerritorialEnemyState.Roaming);
+        this.SetAIState(TerritorialEnemyState.Roaming);
         this.HandleRoamingState();
     }
 
@@ -183,7 +165,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     {
         if (!this.HasValidHomeArea())
         {
-            this.EnemyInputHandler?.ClearAIMoveInput();
+            this.EnemyInputHandler?.ClearMoveInput();
             return;
         }
 
@@ -198,7 +180,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     }
     private void HandleAlertState()
     {
-        this.EnemyInputHandler?.ClearAIMoveInput();
+        this.EnemyInputHandler?.ClearMoveInput();
 
         Transform targetTransform = this.CurrentTarget?.transform;
         if (targetTransform == null) return;
@@ -210,8 +192,8 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         Transform targetTransform = this.CurrentTarget?.transform;
         if (targetTransform == null)
         {
-            this.EnemyInputHandler?.ClearAIMoveInput();
-            this.SetState(TerritorialEnemyState.Roaming);
+            this.EnemyInputHandler?.ClearMoveInput();
+            this.SetAIState(TerritorialEnemyState.Roaming);
             return;
         }
 
@@ -226,20 +208,20 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         if (distanceToTarget > this.AttackConfig.IdealAttackRange)
         {
             Vector2 moveDirection = toTarget.normalized;
-            this.EnemyInputHandler?.SetAIMoveInput(moveDirection);
+            this.EnemyInputHandler?.SetMoveInput(moveDirection);
             return;
         }
 
-        this.EnemyInputHandler?.ClearAIMoveInput();
+        this.EnemyInputHandler?.ClearMoveInput();
 
         if (Time.time < this.NextAllowedAttackTime) return;
 
         this.PreAttackStateEndTime = Time.time + this.AttackConfig.PreAttackDuration;
-        this.SetState(TerritorialEnemyState.PreAttack);
+        this.SetAIState(TerritorialEnemyState.PreAttack);
     }
     private void HandlePreAttackState()
     {
-        this.EnemyInputHandler?.ClearAIMoveInput();
+        this.EnemyInputHandler?.ClearMoveInput();
 
         Transform targetTransform = this.CurrentTarget?.transform;
         if (targetTransform != null)
@@ -249,16 +231,16 @@ public class TerritorialEnemyBrainController : EnemyBrainController
 
         if (Time.time < this.PreAttackStateEndTime) return;
 
-        this.EnemyInputHandler?.RequestAINormalAttack(this.AttackConfig.NormalAttackSide);
+        this.EnemyInputHandler?.RequestNormalAttack(this.AttackConfig.NormalAttackSide);
 
         this.NextAllowedAttackTime = Time.time + this.AttackConfig.AttackDecisionCooldown;
         this.AttackingStateEndTime = Time.time + this.AttackConfig.AttackingStateDuration;
 
-        this.SetState(TerritorialEnemyState.Attacking);
+        this.SetAIState(TerritorialEnemyState.Attacking);
     }
     private void HandleAttackingState()
     {
-        this.EnemyInputHandler?.ClearAIMoveInput();
+        this.EnemyInputHandler?.ClearMoveInput();
 
         Transform targetTransform = this.CurrentTarget?.transform;
         if (targetTransform != null)
@@ -270,22 +252,21 @@ public class TerritorialEnemyBrainController : EnemyBrainController
 
         if (this.CurrentAttackRangeTarget != null)
         {
-            this.SetState(TerritorialEnemyState.ReadyToAttack);
+            this.SetAIState(TerritorialEnemyState.ReadyToAttack);
             return;
         }
 
         if (this.CurrentAlertTarget != null)
         {
-            this.SetState(TerritorialEnemyState.Alert);
+            this.SetAIState(TerritorialEnemyState.Alert);
             return;
         }
 
-        this.SetState(TerritorialEnemyState.Roaming);
+        this.SetAIState(TerritorialEnemyState.Roaming);
     }
     private void HandleDeadState()
     {
-        this.EnemyInputHandler?.BlockAIInput();
-        this.EnemyInputHandler?.ClearAIMoveInput();
+        this.EnemyInputHandler?.ClearMoveInput();
     }
 
     //  2. Roaming Helpers
@@ -293,7 +274,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     {
         if (this.RoamingConfig == null)
         {
-            this.EnemyInputHandler?.ClearAIMoveInput();
+            this.EnemyInputHandler?.ClearMoveInput();
 
             Debug.LogWarning($"[{this.CharacterName}.{nameof(TerritorialEnemyBrainController)}] Missing roaming config.", this);
             return;
@@ -306,7 +287,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
 
         if (!this.IsRoamWalking)
         {
-            this.EnemyInputHandler?.ClearAIMoveInput();
+            this.EnemyInputHandler?.ClearMoveInput();
             return;
         }
 
@@ -318,7 +299,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
             this.RoamMoveDirection = (randomPoint - currentPosition).normalized;
         }
 
-        this.EnemyInputHandler?.SetAIMoveInput(this.RoamMoveDirection);
+        this.EnemyInputHandler?.SetMoveInput(this.RoamMoveDirection);
     }
     private void BeginNextRoamPhase(Vector2 currentPosition)
     {
@@ -356,13 +337,13 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         if (toReturnPoint.magnitude <= this.HomeAreaEntry.ReturnReachDistance)
         {
             this.HasHomeReturnPoint = false;
-            this.EnemyInputHandler?.ClearAIMoveInput();
+            this.EnemyInputHandler?.ClearMoveInput();
             this.BeginIdleRoamPhase();
             return;
         }
 
         Vector2 moveDirection = toReturnPoint.normalized;
-        this.EnemyInputHandler?.SetAIMoveInput(moveDirection);
+        this.EnemyInputHandler?.SetMoveInput(moveDirection);
     }
     private void BeginIdleRoamPhase()
     {
@@ -407,28 +388,26 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         this.VisualController?.ForceFacing(direction);
     }
 
-    //  5. Death Helpers 
-    private void SubscribeToHPDeathEvent()
+    //  5. Hooks
+    protected override void OnBrainDeathDisabled(CharacterDeathContext context)
     {
-        if (this.HPController == null) return;
+        this.SetAIState(TerritorialEnemyState.Dead);
 
-        this.HPController.OnDeath -= this.HandleDeath;
-        this.HPController.OnDeath += this.HandleDeath;
-    }
-    private void UnsubscribeFromHPDeathEvent()
-    {
-        if (this.HPController == null) return;
-
-        this.HPController.OnDeath -= this.HandleDeath;
-    }
-    private void HandleDeath(CharacterDeathCauseEntry deathCause)
-    {
-        this.SetState(TerritorialEnemyState.Dead);
-        this.EnemyInputHandler?.BlockAIInput();
-        this.EnemyInputHandler?.ClearAIMoveInput();
+        this.EnemyInputHandler?.ClearMoveInput();
 
         this.ResetRoamingRuntime();
         this.ResetAttackRuntime();
+    }
+    protected override void OnBrainRefreshed(CharacterRefreshmentContext context)
+    {
+        this.ResetRoamingRuntime();
+        this.ResetAttackRuntime();
+
+        this.SetAIState(TerritorialEnemyState.Roaming);
+
+        this.EnemyInputHandler?.ClearMoveInput();
+
+        this.CombatLoadoutController?.TryQuickEquipWeapon();
     }
 
     //  6. Cache & Validate References

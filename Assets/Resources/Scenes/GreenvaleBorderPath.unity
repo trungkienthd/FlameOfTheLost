@@ -248,7 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardVFXHandler
   _characterRootController: {fileID: 0}
   _animator: {fileID: 6884278}
-  _gainColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _gainColor: {r: 1, g: 0.95, b: 0.75, a: 1}
 --- !u!1 &23262685
 GameObject:
   m_ObjectHideFlags: 0
@@ -49370,6 +49370,7 @@ MonoBehaviour:
   _cannotAttack: 0
   _cannotCastSpecialSkill: 0
   _ignoreAttackLock: 0
+  _isDeathDisabled: 0
 --- !u!1 &579122005
 GameObject:
   m_ObjectHideFlags: 0
@@ -52847,6 +52848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionUpgradeHandler
   _characterRootController: {fileID: 2107461207}
   _upgradeConfig: {fileID: 11400000, guid: 0656340d436a57f45a848cbae7c5215b, type: 2}
+  _isDeathDisabled: 0
 --- !u!1 &1011574957
 GameObject:
   m_ObjectHideFlags: 0
@@ -82827,12 +82829,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 13.25, y: -5.25}
-      - {x: 13.25, y: -3.75}
-      - {x: 9.75, y: -3.75}
-      - {x: 9.75, y: -6.25}
-      - {x: 12.25, y: -6.25}
-      - {x: 12.5, y: -5.5}
+    - - {x: 13.127745, y: -5.0944023}
+      - {x: 13.1166315, y: -4.0500813}
+      - {x: 9.972282, y: -4.0723095}
+      - {x: 9.927826, y: -6.0721755}
+      - {x: 12.027718, y: -6.0388317}
+      - {x: 12.31106, y: -5.355516}
   m_UseDelaunayMesh: 1
 --- !u!114 &1084493025
 MonoBehaviour:
@@ -94402,6 +94404,7 @@ MonoBehaviour:
   _characterRootController: {fileID: 2107461207}
   _cannotSwapLoadout: 0
   _ignoreSwapLock: 0
+  _isDeathDisabled: 0
 --- !u!114 &1267844717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99169,6 +99172,7 @@ MonoBehaviour:
   _characterRootController: {fileID: 2107461207}
   _guardConfig: {fileID: 11400000, guid: e258a45908c1df341bb1a6d2734929bb, type: 2}
   _statusEffectVFXInstancePrefab: {fileID: 8740500497781535910, guid: 89762261fcc319e49b11d0bfb94586a9, type: 3}
+  _isDeathDisabled: 0
 --- !u!1 &1704369270
 GameObject:
   m_ObjectHideFlags: 0
@@ -101844,6 +101848,7 @@ MonoBehaviour:
   _playerMenuManager: {fileID: 1043804205}
   _playerInteractionPanelListManager: {fileID: 1947496558}
   _interactActionReference: {fileID: -8492070336657233018, guid: 7faf2b57d247a384c9498ad8791a4215, type: 3}
+  _isDeathDisabled: 0
 --- !u!1 &1898475259
 GameObject:
   m_ObjectHideFlags: 0
@@ -102467,6 +102472,7 @@ MonoBehaviour:
   _costMultiplier: 1
   _costAdditiveFlat: 0
   _activePeriodicStreams: []
+  _isDeathDisabled: 0
   _staminaRegenRate: 5
   _staminaRegenDelay: 1
   _minStaminaReserve: 0
@@ -102492,6 +102498,7 @@ MonoBehaviour:
   _costMultiplier: 1
   _costAdditiveFlat: 0
   _activePeriodicStreams: []
+  _isDeathDisabled: 0
   _isSilenced: 0
 --- !u!114 &1951002774
 MonoBehaviour:
@@ -102511,6 +102518,7 @@ MonoBehaviour:
   _costMultiplier: 1
   _costAdditiveFlat: 0
   _activePeriodicStreams: []
+  _isDeathDisabled: 0
   _damageReceivedMultiplier: 1
   _damageReceivedAdditiveFlat: 0
   _currentVirtualHP: 0
@@ -102534,6 +102542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterResourcesController
   _characterRootController: {fileID: 2107461207}
+  _isDeathDisabled: 0
 --- !u!114 &1951002776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103720,6 +103729,7 @@ MonoBehaviour:
     _quantity: 0
     _equipped: 0
   _isCarryingCarriableItem: 0
+  _isDeathDisabled: 0
 --- !u!114 &2107461197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103740,6 +103750,7 @@ MonoBehaviour:
   _cannotMove: 0
   _ignoreMovementLock: 0
   _movementSpeedScale: 1
+  _isDeathDisabled: 0
 --- !u!114 &2107461199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103753,6 +103764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterRootController: {fileID: 2107461207}
+  _isDeathDisabled: 0
   _playerMenuManager: {fileID: 1043804205}
   _playerInteractionPanelListManager: {fileID: 1947496558}
   _playerInput: {fileID: 2107461200}

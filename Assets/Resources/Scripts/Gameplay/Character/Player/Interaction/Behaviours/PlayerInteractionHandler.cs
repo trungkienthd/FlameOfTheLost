@@ -5,7 +5,9 @@ using UnityEngine.InputSystem;
 
 namespace FlameOfTheLost
 {
-    public class PlayerInteractionHandler : CharacterBehaviourControllerBase
+    public class PlayerInteractionHandler : CharacterBehaviourControllerBase, 
+        ICharacterRefreshable,
+        ICharacterDeathDisableable
     {
         // --- States ---
         //  1. References
@@ -44,6 +46,15 @@ namespace FlameOfTheLost
         public IReadOnlyCollection<IPlayerInteractionPromptBlocker> ActivePromptBlockers => _activePromptBlockers;
         private bool IsPromptBlocked => this.ActivePromptBlockers.Count > 0;
 
+        //  6. Death Disable State (Runtime)
+        [Header("Death Disable (Runtime)")]
+        [SerializeField] private bool _isDeathDisabled;
+        public bool IsDeathDisabled
+        {
+            get => _isDeathDisabled;
+            private set => _isDeathDisabled = value;
+        }
+
         // --- Unity Callbacks ---
         protected override void Awake()
         {
@@ -62,6 +73,7 @@ namespace FlameOfTheLost
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (this.IsDeathDisabled) return;
             if (!other.isTrigger) return;
 
             this.TryRegisterNearbyInteractable(other);
@@ -76,12 +88,22 @@ namespace FlameOfTheLost
             this.TryUnregisterNearbyInteractable(other);
             this.TryUnregisterNearbyPromptSource(other);
 
-            this.RefreshPrompt();
+            if (!this.IsDeathDisabled)
+            {
+                this.RefreshPrompt();
+            }
         }
 
         // --- Public APIs ---
+        //  1. (Nearest) Interaction Handling
         public bool TryInteractNearest()
         {
+            if (this.IsDeathDisabled)
+            {
+                this.HidePrompt();
+                return false;
+            }
+
             if (this.IsPromptBlocked)
             {
                 this.HidePrompt();
@@ -105,9 +127,33 @@ namespace FlameOfTheLost
             return result;
         }
 
+        //  2. ICharacterRefreshable implementation
+        public int RefreshmentConfigurePriority => 50;
+        public void RefreshCharacter(CharacterRefreshmentContext context)
+        {
+            this.IsDeathDisabled = false;
+
+            this.ClearNearbyInteractionState();
+            this.HidePrompt();
+
+            // Nearby trigger cache will be rebuilt naturally when the player enters trigger areas again.
+            // If later you need instant prompt after teleporting into a trigger,
+            // add an overlap scan here.
+        }
+
+        //  3. ICharacterDeathDisableable implementation
+        public int DeathDisablePriority => 15;
+        public void DisableAfterCharacterDeath(CharacterDeathContext context)
+        {
+            this.IsDeathDisabled = true;
+
+            this.ClearNearbyInteractionState();
+            this.HidePrompt();
+        }
+
         // --- Helpers ---
         //  1. Prompt Blocker (UI) Registration
-        public void RegisterPromptBlocker(IPlayerInteractionPromptBlocker blocker)
+        private void RegisterPromptBlocker(IPlayerInteractionPromptBlocker blocker)
         {
             if (blocker == null) return;
 
@@ -119,7 +165,7 @@ namespace FlameOfTheLost
                 this.HandlePromptBlockStarted(blocker);
             }
         }
-        public void UnregisterPromptBlocker(IPlayerInteractionPromptBlocker blocker)
+        private void UnregisterPromptBlocker(IPlayerInteractionPromptBlocker blocker)
         {
             if (blocker == null) return;
 
@@ -345,6 +391,11 @@ namespace FlameOfTheLost
                 }
             }
         }
+        private void ClearNearbyInteractionState()
+        {
+            _nearbyInteractableBehaviours.Clear();
+            _nearbyPromptSourceBehaviours.Clear();
+        }
 
         //  8. Others
         private GameObject ResolveInteractor()
@@ -438,11 +489,12 @@ namespace FlameOfTheLost
         protected override void ValidateReferences()
         {
             base.ValidateReferences();
-            if (this.PlayerRoot == null) Debug.LogError($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Player Root reference is not assigned.", this);
-            if (this.PromptPanelController == null) Debug.LogError($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Prompt Panel Controller reference is not assigned.", this);
-            if (this.PlayerMenuManager == null) Debug.LogError($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Player Menu Manager reference is not assigned.", this);
-            if (this.PlayerInteractionPanelListManager == null) Debug.LogError($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Player Interaction Panel List Manager reference is not assigned.", this);
-            if (this.InteractActionReference == null || this.InteractActionReference.action == null) Debug.LogError($"[{this.PlayerRoot.name}.PlayerInteractionHandler] Interact Action Reference is not assigned or has no action.", this);
+
+            if (this.PlayerRoot == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Player Root reference is not assigned.", this);
+            if (this.PromptPanelController == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Prompt Panel Controller reference is not assigned.", this);
+            if (this.PlayerMenuManager == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Player Menu Manager reference is not assigned.", this);
+            if (this.PlayerInteractionPanelListManager == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Player Interaction Panel List Manager reference is not assigned.", this);
+            if (this.InteractActionReference == null || this.InteractActionReference.action == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Interact Action Reference is not assigned or has no action.", this);
         }
     }
 }

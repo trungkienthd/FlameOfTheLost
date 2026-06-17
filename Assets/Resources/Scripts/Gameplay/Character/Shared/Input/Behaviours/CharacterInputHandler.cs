@@ -34,15 +34,15 @@ namespace FlameOfTheLost
         }
 
         //  2. ICharacterDeathDisableable implementation
-        public int DeathDisablePriority => 10;
-        public void DisableAfterCharacterDeath(CharacterDeathContext context)
+        public virtual int DeathDisablePriority => 10;
+        public virtual void DisableAfterCharacterDeath(CharacterDeathContext context)
         {
             this.IsDeathDisabled = true;
             this.ClearMoveInput();
         }
 
-        // --- Helpers ---
-        protected void SetMoveInput(Vector2 moveInput)
+        //  3. Movement Input APIs
+        public void SetMoveInput(Vector2 moveInput)
         {
             if (this.IsDeathDisabled)
             {
@@ -56,48 +56,51 @@ namespace FlameOfTheLost
             this.MovementHandler.RawMovementInput = moveInput;
         }
 
-        protected void ClearMoveInput()
+        public void ClearMoveInput()
         {
             this.SetMoveInput(Vector2.zero);
         }
 
-        protected void RequestNormalAttack(AttackSide attackSide)
+        //  4. Combat Input APIs
+        //      4.1. Attack Input
+        public void RequestNormalAttack(AttackSide attackSide)
         {
             if (this.IsDeathDisabled) return;
             this.CombatController?.TryDoNormalAttack(attackSide);
         }
 
-        protected void RequestSpecialAttack(AttackSide attackSide)
+        public void RequestSpecialAttack(AttackSide attackSide)
         {
             if (this.IsDeathDisabled) return;
             this.CombatController?.TryDoSpecialAttack(attackSide);
         }
 
-        protected void RequestCycleWeapon(int direction)
+        //      4.2. Combat Loadout Input
+        public void RequestCycleWeapon(int direction)
         {
             if (this.IsDeathDisabled) return;
             this.CombatLoadoutController?.TryCycleWeaponEntry(direction);
         }
 
-        protected void RequestQuickEquipWeapon()
+        public void RequestQuickEquipWeapon()
         {
             if (this.IsDeathDisabled) return;
             this.CombatLoadoutController?.TryQuickEquipWeapon();
         }
 
-        protected void RequestCycleConsumableItem(int direction)
+        public void RequestCycleConsumableItem(int direction)
         {
             if (this.IsDeathDisabled) return;
             this.CombatLoadoutController?.TryCycleConsumableItemEntry(direction);
         }
 
-        protected void RequestConsumeConsumableItem()
+        public void RequestConsumeConsumableItem()
         {
             if (this.IsDeathDisabled) return;
             this.CombatLoadoutController?.TryConsumeConsumableItem();
         }
 
-        protected void RequestSetActiveWeaponSpecialSkill(SkillProfile skill)
+        public void RequestSetActiveWeaponSpecialSkill(SkillProfile skill)
         {
             if (this.IsDeathDisabled) return;
             if (skill == null) return;

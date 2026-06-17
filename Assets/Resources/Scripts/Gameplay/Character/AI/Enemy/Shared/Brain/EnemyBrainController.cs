@@ -1,6 +1,10 @@
+using UnityEngine;
+
 namespace FlameOfTheLost
 {
-    public abstract class EnemyBrainController : CharacterBehaviourControllerBase, ICharacterRefreshable
+    public abstract class EnemyBrainController : CharacterBehaviourControllerBase, 
+        ICharacterRefreshable,
+        ICharacterDeathDisableable
     {
         // --- State ---
         //  1. References
@@ -12,23 +16,81 @@ namespace FlameOfTheLost
             ? enemyRoot.EnemyInputHandler 
             : null;
 
-        //  3. Current Target Info
-        protected CharacterRootController CurrentTarget => this.TargetDetectionHandler != null
-            ? this.TargetDetectionHandler.CurrentTarget
-            : null;
-        protected CharacterRootController CurrentAlertTarget => this.TargetDetectionHandler != null
-            ? this.TargetDetectionHandler.CurrentAlertTarget
-            : null;
-        protected CharacterRootController CurrentAttackRangeTarget => this.TargetDetectionHandler != null
-            ? this.TargetDetectionHandler.CurrentAttackRangeTarget
-            : null;
+        //  2. Current Target Info
+        protected CharacterRootController CurrentTarget
+        {
+            get
+            {
+                if (this.IsDeathDisabled) return null;
+
+                return this.TargetDetectionHandler != null
+                    ? this.TargetDetectionHandler.CurrentTarget
+                    : null;
+            }
+        }
+        protected CharacterRootController CurrentAlertTarget
+        {
+            get
+            {
+                if (this.IsDeathDisabled) return null;
+
+                return this.TargetDetectionHandler != null
+                    ? this.TargetDetectionHandler.CurrentAlertTarget
+                    : null;
+            }
+        }
+        protected CharacterRootController CurrentAttackRangeTarget
+        {
+            get
+            {
+                if (this.IsDeathDisabled) return null;
+
+                return this.TargetDetectionHandler != null
+                    ? this.TargetDetectionHandler.CurrentAttackRangeTarget
+                    : null;
+            }
+        }
+
+        //  3. Death Disable State (Runtime)
+        [Header("Death Disable (Runtime)")]
+        [SerializeField] private bool _isDeathDisabled;
+        public bool IsDeathDisabled
+        {
+            get => _isDeathDisabled;
+            private set => _isDeathDisabled = value;
+        }
 
         // --- Public APIs ---
         //  1. ICharacterPlacementRefreshable implementation
         public virtual int RefreshmentConfigurePriority => 90;
         public virtual void RefreshCharacter(CharacterRefreshmentContext context)
         {
+            this.IsDeathDisabled = false;
+
             this.TargetDetectionHandler?.ClearAllTargets();
+            this.EnemyInputHandler?.ClearMoveInput();
+
+            this.OnBrainRefreshed(context);
+        }
+
+        //  2. ICharacterDeathDisableable implementation
+        public virtual int DeathDisablePriority => 25;
+        public virtual void DisableAfterCharacterDeath(CharacterDeathContext context)
+        {
+            _isDeathDisabled = true;
+
+            this.TargetDetectionHandler?.ClearAllTargets();
+            this.EnemyInputHandler?.ClearMoveInput();
+
+            this.OnBrainDeathDisabled(context);
+        }
+
+        // --- Helpers ---
+        protected virtual void OnBrainDeathDisabled(CharacterDeathContext context)
+        {
+        }
+        protected virtual void OnBrainRefreshed(CharacterRefreshmentContext context)
+        {
         }
     }
 }

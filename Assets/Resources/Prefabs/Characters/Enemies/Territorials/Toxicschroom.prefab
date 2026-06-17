@@ -482,6 +482,8 @@ MonoBehaviour:
   _placeholderProfile: {fileID: 11400000, guid: cba0c4783b92dc34295f5a1cb5341fa0, type: 2}
   _activeProfile: {fileID: 11400000, guid: 374684fe68157104fb4be74de54fa19a, type: 2}
   _hitToDeathDelay: 0.15
+  _deathCompletionFallbackDelay: 1
+  _deathCompletionPadding: 0.03
 --- !u!1 &546589716473818984
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +534,7 @@ MonoBehaviour:
   _characterRootController: {fileID: 5013856377803996316}
   _guardConfig: {fileID: 11400000, guid: af619af4a1df1ff4b87877e5452c7a03, type: 2}
   _statusEffectVFXInstancePrefab: {fileID: 8740500497781535910, guid: 89762261fcc319e49b11d0bfb94586a9, type: 3}
+  _isDeathDisabled: 0
 --- !u!114 &170678299568170964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1091,6 +1094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterResourcesController
   _characterRootController: {fileID: 5013856377803996316}
+  _isDeathDisabled: 0
 --- !u!114 &5982666654865387023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1109,6 +1113,7 @@ MonoBehaviour:
   _costMultiplier: 1
   _costAdditiveFlat: 0
   _activePeriodicStreams: []
+  _isDeathDisabled: 0
   _damageReceivedMultiplier: 1
   _damageReceivedAdditiveFlat: 0
   _currentVirtualHP: 0
@@ -1151,6 +1156,7 @@ MonoBehaviour:
   _costMultiplier: 1
   _costAdditiveFlat: 0
   _activePeriodicStreams: []
+  _isDeathDisabled: 0
   _isSilenced: 0
 --- !u!114 &2874977548991289660
 MonoBehaviour:
@@ -1170,6 +1176,7 @@ MonoBehaviour:
   _costMultiplier: 1
   _costAdditiveFlat: 0
   _activePeriodicStreams: []
+  _isDeathDisabled: 0
   _staminaRegenRate: 3
   _staminaRegenDelay: 1
   _minStaminaReserve: 0
@@ -1478,9 +1485,8 @@ MonoBehaviour:
   _visualController: {fileID: 584078816329254573}
   _visualFacingHandler: {fileID: 6836829972921874162}
   _visualLocomotionAnimationHandler: {fileID: 8471074619670850254}
-  _visualAttackAnimationHandler: {fileID: 0}
-  _visualHitDeathAnimationHandler: {fileID: 0}
-  _resourceVFXHolder: {fileID: 0}
+  _visualAttackAnimationHandler: {fileID: 6819824635726035935}
+  _visualHitDeathAnimationHandler: {fileID: 391864750833664329}
   _statusEffectVFXHolder: {fileID: 2170281567699780899}
   _rewardVFXHandler: {fileID: 2103957974545232575}
   _combatController: {fileID: 2103035301200508583}
@@ -1520,7 +1526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyInputHandler
   _characterRootController: {fileID: 5013856377803996316}
-  _isAIInputBlocked: 0
+  _isDeathDisabled: 0
 --- !u!50 &8000788421409976908
 Rigidbody2D:
   serializedVersion: 5
@@ -1605,6 +1611,7 @@ MonoBehaviour:
   _cannotMove: 0
   _ignoreMovementLock: 0
   _movementSpeedScale: 1
+  _isDeathDisabled: 0
 --- !u!114 &138990756075370264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1735,6 +1742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionUpgradeHandler
   _characterRootController: {fileID: 5013856377803996316}
   _upgradeConfig: {fileID: 11400000, guid: ff4c70972face4742860645c5ab2826c, type: 2}
+  _isDeathDisabled: 0
 --- !u!1 &4083793858068222385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,6 +1793,7 @@ MonoBehaviour:
   _characterRootController: {fileID: 5013856377803996316}
   _cannotSwapLoadout: 0
   _ignoreSwapLock: 0
+  _isDeathDisabled: 0
 --- !u!114 &7713573844728834922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1966,6 +1975,7 @@ MonoBehaviour:
   _cannotAttack: 0
   _cannotCastSpecialSkill: 0
   _ignoreAttackLock: 0
+  _isDeathDisabled: 0
 --- !u!114 &783385799977608782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2119,6 +2129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToxicschroomBrainController
   _characterRootController: {fileID: 5013856377803996316}
+  _isDeathDisabled: 0
   _roamingConfig: {fileID: 11400000, guid: 2169f9fea3c023d419e2f3b7ceda6517, type: 2}
   _attackConfig: {fileID: 11400000, guid: 9889e5b49170bfd47a1cee6a9bfd12fa, type: 2}
   _currentAIState: 0
@@ -2147,6 +2158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyTargetDetectionHandler
   _characterRootController: {fileID: 5013856377803996316}
+  _isDeathDisabled: 0
 --- !u!1 &6460524695558877784
 GameObject:
   m_ObjectHideFlags: 0

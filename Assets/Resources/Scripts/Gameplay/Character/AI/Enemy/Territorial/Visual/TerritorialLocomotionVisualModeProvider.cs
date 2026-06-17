@@ -109,7 +109,7 @@ namespace FlameOfTheLost
                 return this.RoamingMode;
             }
 
-            return this.TerritorialEnemyBrainController.CurrentState switch
+            return this.TerritorialEnemyBrainController.CurrentAIState switch
             {
                 TerritorialEnemyState.Roaming => this.RoamingMode,
                 TerritorialEnemyState.Alert => this.AlertMode,

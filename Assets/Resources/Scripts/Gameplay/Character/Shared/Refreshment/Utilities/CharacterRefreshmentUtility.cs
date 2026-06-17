@@ -49,7 +49,7 @@ namespace FlameOfTheLost
                 .OfType<ICharacterRefreshable>()
                 .OrderBy(system => system.RefreshmentConfigurePriority);
 
-            Debug.Log($"[{context.Character.name}.{nameof(CharacterRefreshmentHandler)}] Found { refreshableSystems.Count()} refreshable systems to refresh");
+            //Debug.Log($"[{context.Character.name}.{nameof(CharacterRefreshmentHandler)}] Found { refreshableSystems.Count()} refreshable systems to refresh");
 
             foreach (ICharacterRefreshable refreshableSystem in refreshableSystems)
             {

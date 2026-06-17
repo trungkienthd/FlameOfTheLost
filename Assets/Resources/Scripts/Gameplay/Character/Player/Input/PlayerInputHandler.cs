@@ -106,6 +106,7 @@ namespace FlameOfTheLost
         //          1.4.1. Player-only actions
         public void OnCarryCarriableItem(InputAction.CallbackContext ctx)
         {
+            if (this.IsDeathDisabled) return;
             if (this.PlayerCarryLoadoutController == null) return;
 
             if (ctx.started)
@@ -121,6 +122,7 @@ namespace FlameOfTheLost
         //      1.5. Interaction
         public void OnInteract(InputAction.CallbackContext context)
         {
+            if (this.IsDeathDisabled) return;
             if (!context.performed) return;
             if (this.PlayerInteractionHandler == null) return;
 
@@ -130,6 +132,7 @@ namespace FlameOfTheLost
         //      1.6. Player-only Menu Actions
         public void OnPause(InputAction.CallbackContext context)
         {
+            if (this.IsDeathDisabled) return;
             if (!context.performed) return;
             if (this.PlayerMenuManager == null) return;
 
@@ -138,6 +141,7 @@ namespace FlameOfTheLost
 
         public void OnOpenSettingPanel(InputAction.CallbackContext context)
         {
+            if (this.IsDeathDisabled) return;
             if (!context.performed) return;
             if (this.PlayerMenuManager == null) return;
 
@@ -146,6 +150,7 @@ namespace FlameOfTheLost
 
         public void OnOpenInventoryPanel(InputAction.CallbackContext context)
         {
+            if (this.IsDeathDisabled) return;
             if (!context.performed) return;
             if (this.PlayerMenuManager == null) return;
 
@@ -154,6 +159,7 @@ namespace FlameOfTheLost
 
         public void OnOpenLoadoutPanel(InputAction.CallbackContext context)
         {
+            if (this.IsDeathDisabled) return;
             if (!context.performed) return;
             if (this.PlayerMenuManager == null) return;
 
@@ -162,6 +168,7 @@ namespace FlameOfTheLost
 
         public void OnOpenQuestPanel(InputAction.CallbackContext context)
         {
+            if (this.IsDeathDisabled) return;
             if (!context.performed) return;
             if (this.PlayerMenuManager == null) return;
 
@@ -170,6 +177,7 @@ namespace FlameOfTheLost
 
         public void OnOpenMapPanel(InputAction.CallbackContext context)
         {
+            if (this.IsDeathDisabled) return;
             if (!context.performed) return;
             if (this.PlayerMenuManager == null) return;
 
@@ -178,6 +186,7 @@ namespace FlameOfTheLost
 
         public void OnCancel(InputAction.CallbackContext context)
         {
+            if (this.IsDeathDisabled) return;
             if (!context.performed) return;
             if (this.PlayerMenuManager == null) return;
 
@@ -186,6 +195,7 @@ namespace FlameOfTheLost
 
         public void OnCloseInteractionPanel(InputAction.CallbackContext context)
         {
+            if (this.IsDeathDisabled) return;
             if (!context.performed) return;
             if (this.PlayerInteractionPanelListManager == null) return;
 
@@ -201,7 +211,7 @@ namespace FlameOfTheLost
 
             if (this.PlayerInput == null)
             {
-                Debug.LogWarning($"[{this.CharacterName}.PlayerInputHandler] No PlayerInput found to block inputs.", this);
+                //Debug.LogWarning($"[{this.CharacterName}.{nameof(PlayerInputHandler)}] No PlayerInput found to block inputs.", this);
                 return;
             }
 
@@ -209,11 +219,17 @@ namespace FlameOfTheLost
         }
         public void UnblockAllPlayerInputs()
         {
+            if (this.IsDeathDisabled)
+            {
+                this.ClearMoveInput();
+                return;
+            }
+
             this.ClearMoveInput();
 
             if (this.PlayerInput == null)
             {
-                Debug.LogWarning($"[{this.CharacterName}.PlayerInputHandler] No PlayerInput found to unblock inputs.", this);
+                //Debug.LogWarning($"[{this.CharacterName}.{nameof(PlayerInputHandler)}] No PlayerInput found to unblock inputs.", this);
                 return;
             }
 
@@ -282,6 +298,16 @@ namespace FlameOfTheLost
             }
 
             if (this.PlayerInput == null) _playerInput = this.GetComponent<PlayerInput>();
+        }
+
+        protected override void ValidateReferences()
+        {
+            base.ValidateReferences();
+
+            if (this.PlayerInput == null)
+            {
+                Debug.LogError($"[{this.CharacterName}.{nameof(PlayerInputHandler)}] No PlayerInput component found on the GameObject.", this);
+            }
         }
     }
 }

@@ -34,7 +34,7 @@ namespace FlameOfTheLost
         public bool IsInAttackWindow => this.PlayerCombatLoadoutController.IsInAttackWindow;
         public bool IsLoadoutSwapLocked => this.PlayerCombatLoadoutController.IsLoadoutSwapLocked;
 
-        //  5. Death Disable
+        //  5. Death Disable State (Runtime)
         [Header("Death Disable (Runtime)")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
