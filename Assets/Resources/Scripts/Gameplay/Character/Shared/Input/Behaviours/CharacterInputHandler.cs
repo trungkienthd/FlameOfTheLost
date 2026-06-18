@@ -9,6 +9,7 @@ namespace FlameOfTheLost
         // --- States ---
         //  1. References
         protected MovementHandler MovementHandler => this.CharacterRootController.MovementHandler;
+        protected CharacterDodgeController DodgeController => this.CharacterRootController.DodgeController;
         protected CharacterCombatController CombatController => this.CharacterRootController.CombatController;
         protected CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController.CombatLoadoutController;
 
@@ -61,8 +62,16 @@ namespace FlameOfTheLost
             this.SetMoveInput(Vector2.zero);
         }
 
-        //  4. Combat Input APIs
-        //      4.1. Attack Input
+        //  4. Dodging Input APIs
+        public void RequestDodge()
+        {
+            if (this.IsDeathDisabled) return;
+
+            this.DodgeController?.TryDodge(this.MoveInput);
+        }
+
+        //  5. Combat Input APIs
+        //      5.1. Attack Input
         public void RequestNormalAttack(AttackSide attackSide)
         {
             if (this.IsDeathDisabled) return;
@@ -75,7 +84,7 @@ namespace FlameOfTheLost
             this.CombatController?.TryDoSpecialAttack(attackSide);
         }
 
-        //      4.2. Combat Loadout Input
+        //      5.2. Combat Loadout Input
         public void RequestCycleWeapon(int direction)
         {
             if (this.IsDeathDisabled) return;

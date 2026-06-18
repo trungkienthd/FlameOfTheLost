@@ -4,27 +4,31 @@ namespace FlameOfTheLost
 {
     public abstract class CharacterRootController : FOTLMonoBehaviour
     {
-        [Header("References (Identity)")]
+        [Header("References - Identity")]
         [SerializeField] private CharacterIdentityController _identityController;
         public CharacterIdentityController IdentityController => _identityController;
 
-        [Header("References (Refreshment)")]
+        [Header("References - Refreshment")]
         [SerializeField] private CharacterRefreshHandler _refreshHandler;
         public CharacterRefreshHandler RefreshHandler => _refreshHandler;
 
-        [Header("References (Input)")]
+        [Header("References - Input")]
         [SerializeField] private CharacterInputHandler _inputHandler;
         public CharacterInputHandler InputHandler => _inputHandler;
 
-        [Header("References (Movement)")]
+        [Header("References - Movement")]
         [SerializeField] private MovementHandler _movementHandler;
         public MovementHandler MovementHandler => _movementHandler;
 
-        [Header("References (Terrain Contact)")]
+        [Header("References - Dodging")]
+        [SerializeField] private CharacterDodgeController _dodgeController;
+        public CharacterDodgeController DodgeController => _dodgeController;
+
+        [Header("References - Terrain Contact")]
         [SerializeField] private CharacterTerrainContactHandler _terrainContactHandler;
         public CharacterTerrainContactHandler TerrainContactHandler => _terrainContactHandler;
 
-        [Header("References (Visual)")]
+        [Header("References - Visual")]
         [SerializeField] private CharacterVisualController _visualController;
         [SerializeField] private CharacterVisualFacingHandler _visualFacingHandler;
         [SerializeField] private CharacterVisualLocomotionAnimationHandler _visualLocomotionAnimationHandler;
@@ -36,13 +40,13 @@ namespace FlameOfTheLost
         public CharacterVisualAttackAnimationHandler VisualAttackAnimationHandler => _visualAttackAnimationHandler;
         public CharacterVisualHitDeathAnimationHandler VisualHitDeathAnimationHandler => _visualHitDeathAnimationHandler;
 
-        [Header("References (Visual - VFX)")]
+        [Header("References - Visual/VFX")]
         [SerializeField] private Transform _statusEffectVFXHolder;
         [SerializeField] private CharacterRewardVFXHandler _rewardVFXHandler;
         public Transform StatusEffectVFXHolder => _statusEffectVFXHolder;
         public CharacterRewardVFXHandler RewardVFXHandler => _rewardVFXHandler;
 
-        [Header("References (Combat)")]
+        [Header("References - Combat")]
         [SerializeField] private CharacterCombatController _combatController;
         [SerializeField] private CharacterCombatLoadoutController _combatLoadoutController;
         [SerializeField] private CharacterCombatLoadoutWeaponHandler _combatLoadoutWeaponHandler;
@@ -60,7 +64,7 @@ namespace FlameOfTheLost
         public CharacterCombatResourcesHandler CombatResourcesHandler => _combatResourcesHandler;
         public CharacterCombatStatusEffectApplicationHandler CombatStatusEffectApplicationHandler => _combatStatusEffectApplicationHandler;
 
-        [Header("References (Resources)")]
+        [Header("References - Resources")]
         [SerializeField] private CharacterResourcesController _resourcesController;
         [SerializeField] private HPController _hpController; 
         [SerializeField] private FPController _fpController;
@@ -72,7 +76,7 @@ namespace FlameOfTheLost
         public StaminaController StaminaController => _staminaController;
         public CharacterDeathHandler DeathHandler => _deathHandler;
 
-        [Header("References (Status Effects)")]
+        [Header("References - Status Effects")]
         [SerializeField] private StatusEffectController _statusEffectController;
         [SerializeField] private StatusEffectFlagHandler _statusEffectFlagHandler;
         [SerializeField] private StatusEffectStatModifierHandler _statusEffectStatModifierHandler;
@@ -82,18 +86,18 @@ namespace FlameOfTheLost
         public StatusEffectStatModifierHandler StatusEffectStatModifierHandler => _statusEffectStatModifierHandler;
         public StatusEffectStatPeriodicHandler StatusEffectStatPeriodicHandler => _statusEffectStatPeriodicHandler;
 
-        [Header("References (Progression)")]
+        [Header("References - Progression")]
         [SerializeField] private CharacterProgressionController _progressionController;
         [SerializeField] private CharacterProgressionUpgradeHandler _progressionUpgradeHandler;
         public CharacterProgressionController ProgressionController => _progressionController;
         public CharacterProgressionUpgradeHandler ProgressionUpgradeHandler => _progressionUpgradeHandler;
 
-        [Header("References (Reward)")]
+        [Header("References - Reward")]
 
         [SerializeField] private CharacterRewardWalletController _rewardWalletController;
         public CharacterRewardWalletController RewardWalletController => _rewardWalletController;
 
-        [Header("References (Inventory)")]
+        [Header("References - Inventory")]
         [SerializeField] private InventoryController _inventoryController;
         public InventoryController InventoryController => _inventoryController;
 
@@ -108,6 +112,8 @@ namespace FlameOfTheLost
             if (this.InputHandler == null) _inputHandler = this.GetComponent<CharacterInputHandler>();
 
             if (this.MovementHandler == null) _movementHandler = this.GetComponent<MovementHandler>();
+
+            if (this.DodgeController == null) _dodgeController = this.GetComponent<CharacterDodgeController>();
 
             if (this.TerrainContactHandler == null) _terrainContactHandler = this.GetComponent<CharacterTerrainContactHandler>();
 

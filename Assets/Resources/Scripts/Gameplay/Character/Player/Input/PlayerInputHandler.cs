@@ -43,7 +43,14 @@ namespace FlameOfTheLost
 
             this.SetMoveInput(moveInput);
         }
-        //      1.2. Attacking
+        //      1.2. Dodge
+        public void OnDodge(InputAction.CallbackContext ctx)
+        {
+            if (!ctx.performed) return;
+
+            this.RequestDodge();
+        }
+        //      1.3. Combat
         public void OnNormalAttackLeft(InputAction.CallbackContext ctx)
         {
             if (!ctx.performed) return;
@@ -69,7 +76,7 @@ namespace FlameOfTheLost
             this.RequestSpecialAttack(AttackSide.Right);
         }
 
-        //      1.3. Loadout
+        //      1.4. Combat Loadout
         public void OnSwitchWeapon(InputAction.CallbackContext ctx)
         {
             if (!ctx.performed) return;

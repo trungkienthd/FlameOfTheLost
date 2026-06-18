@@ -1430,6 +1430,7 @@ GameObject:
   - component: {fileID: 8000788421409976908}
   - component: {fileID: 6947550545768482147}
   - component: {fileID: 5200811322357388364}
+  - component: {fileID: 4017276766413093160}
   - component: {fileID: 138990756075370264}
   m_Layer: 9
   m_Name: Toxicschroom
@@ -1481,6 +1482,7 @@ MonoBehaviour:
   _refreshHandler: {fileID: 6031001468286940557}
   _inputHandler: {fileID: 5857655726257863253}
   _movementHandler: {fileID: 5200811322357388364}
+  _dodgeController: {fileID: 4017276766413093160}
   _terrainContactHandler: {fileID: 138990756075370264}
   _visualController: {fileID: 584078816329254573}
   _visualFacingHandler: {fileID: 6836829972921874162}
@@ -1611,6 +1613,24 @@ MonoBehaviour:
   _cannotMove: 0
   _ignoreMovementLock: 0
   _movementSpeedScale: 1
+  _isDeathDisabled: 0
+--- !u!114 &4017276766413093160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2810860427036246779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded66bad28df0864fadc0b30250aeb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterDodgeController
+  _characterRootController: {fileID: 5013856377803996316}
+  _config: {fileID: 11400000, guid: c8c205336bbc80c4c820e4c00b8c8748, type: 2}
+  _rigidbody2D: {fileID: 8000788421409976908}
+  _dodgeState: 0
+  _currentDodgeDirection: {x: 0, y: 0}
   _isDeathDisabled: 0
 --- !u!114 &138990756075370264
 MonoBehaviour:

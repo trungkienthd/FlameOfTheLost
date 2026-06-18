@@ -103706,6 +103706,7 @@ GameObject:
   - component: {fileID: 2107461202}
   - component: {fileID: 2107461201}
   - component: {fileID: 2107461197}
+  - component: {fileID: 2107461208}
   - component: {fileID: 2107461204}
   - component: {fileID: 2107461182}
   m_Layer: 8
@@ -103814,7 +103815,19 @@ MonoBehaviour:
     m_ActionId: 09e4dedf-a3a6-41cf-9186-a0d1bc3ba517
     m_ActionName: 'Player/AttackMelee[/Mouse/leftButton,/Keyboard/j]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2107461199}
+        m_TargetAssemblyTypeName: FlameOfTheLost.PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnDodge
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 21377406-8b5a-4435-8e19-c8008871e8d1
     m_ActionName: 'Player/Dash[/Keyboard/space]'
   - m_PersistentCalls:
@@ -104361,6 +104374,7 @@ MonoBehaviour:
   _refreshHandler: {fileID: 209471720}
   _inputHandler: {fileID: 2107461199}
   _movementHandler: {fileID: 2107461197}
+  _dodgeController: {fileID: 2107461208}
   _terrainContactHandler: {fileID: 2107461204}
   _visualController: {fileID: 513242084}
   _visualFacingHandler: {fileID: 513242088}
@@ -104392,6 +104406,24 @@ MonoBehaviour:
   _inventoryController: {fileID: 1123552228}
   _playerCarryLoadoutController: {fileID: 2107461182}
   _playerInteractionHandler: {fileID: 1877115629}
+--- !u!114 &2107461208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107461181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded66bad28df0864fadc0b30250aeb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterDodgeController
+  _characterRootController: {fileID: 2107461207}
+  _config: {fileID: 11400000, guid: 198e41c6dc8d48b4d8f9fedc3c644bea, type: 2}
+  _rigidbody2D: {fileID: 2107461202}
+  _dodgeState: 0
+  _currentDodgeDirection: {x: 0, y: 0}
+  _isDeathDisabled: 0
 --- !u!1001 &2108359412
 PrefabInstance:
   m_ObjectHideFlags: 0
