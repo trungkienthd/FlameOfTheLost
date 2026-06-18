@@ -15,15 +15,15 @@ namespace FlameOfTheLost
 
         // --- Public APIs ---
         //  0. Pay Cost Immediately
-        public bool TryPayImmediateCost(ResourceCost resourceCost)
+        public bool TryPayImmediateCost(ResourceCostEntry resourceCost)
         {
             if (this.ResourcesController == null) return false;
             if (!resourceCost.HasAnyCost) return true;
 
-            GateResult payResult = this.ResourcesController.TryPayCost(resourceCost, out int reservationId);
-            if (!payResult.IsAccepted)
+            ResourceGateResponseRecord payResponseRecord = this.ResourcesController.TryPayCost(resourceCost, out int reservationId);
+            if (!payResponseRecord.IsAccepted)
             {
-                Debug.Log($"[{this.gameObject.name}.CharacterCombatResourcesHandler] Immediate cost is rejected: {payResult.RejectType}");
+                Debug.Log($"[{this.gameObject.name}.{nameof(CharacterCombatResourcesHandler)}] Immediate cost is rejected: {payResponseRecord.RejectType}");
                 return false;
             }
 
@@ -44,10 +44,10 @@ namespace FlameOfTheLost
 
             if (this.ResourcesController == null || runtimeSkill == null) return false;
 
-            GateResult payResult = this.ResourcesController.TryPayCost(runtimeSkill.ResourceCost, out reservationID);
-            if (!payResult.IsAccepted)
+            ResourceGateResponseRecord payResponseRecord = this.ResourcesController.TryPayCost(runtimeSkill.ResourceCost, out reservationID);
+            if (!payResponseRecord.IsAccepted)
             {
-                Debug.Log($"[{this.gameObject.name}.CharacterCombatResourcesHandler] Cost is Rejected: {payResult.RejectType.ToString()}");
+                Debug.Log($"[{this.gameObject.name}.{nameof(CharacterCombatResourcesHandler)}] Cost is Rejected: {payResponseRecord.RejectType.ToString()}");
                 reservationID = -1;
                 return false;
             }
@@ -100,7 +100,7 @@ namespace FlameOfTheLost
                                 // Ranged: projectile/hitbox decides later. Do nothing here.
                                 break;
                             default:
-                                Debug.LogWarning($"[{this.gameObject.name}.CharacterCombatResourcesHandler] Unknown SkillStyleType in OnAttackWindowEnd resolution. Consume reservation to avoid free casts.");
+                                Debug.LogWarning($"[{this.gameObject.name}.{nameof(CharacterCombatResourcesHandler)}] Unknown SkillStyleType in OnAttackWindowEnd resolution. Consume reservation to avoid free casts.");
                                 this.ResourcesController.ConsumeReservedCost(reservationID);
                                 this.ActiveReservationIDs.RemoveAt(i);
                                 break;
@@ -109,7 +109,7 @@ namespace FlameOfTheLost
 
                     default:
                         // Unknown trigger => safest is to consume to avoid free casts.
-                        Debug.LogWarning($"[{this.gameObject.name}.CharacterCombatResourcesHandler] Unknown CostTriggerType. Consume reservation to avoid free casts.");
+                        Debug.LogWarning($"[{this.gameObject.name}.{nameof(CharacterCombatResourcesHandler)}] Unknown CostTriggerType. Consume reservation to avoid free casts.");
                         this.ResourcesController.ConsumeReservedCost(reservationID);
                         this.ActiveReservationIDs.RemoveAt(i);
                         break;
@@ -150,7 +150,7 @@ namespace FlameOfTheLost
                                 this.ResourcesController.CancelReservedCost(reservationID, 1f);
                                 break;
                             default:
-                                Debug.LogWarning($"[{this.gameObject.name}.CharacterCombatResourcesHandler] Unknown SkillStyleType in OnAttackWindowInterrupt resolution. Consume reservation to avoid free casts.");
+                                Debug.LogWarning($"[{this.gameObject.name}.{nameof(CharacterCombatResourcesHandler)}] Unknown SkillStyleType in OnAttackWindowInterrupt resolution. Consume reservation to avoid free casts.");
                                 this.ResourcesController.ConsumeReservedCost(reservationID);
                                 break;
                         }
@@ -169,7 +169,7 @@ namespace FlameOfTheLost
                                 this.ResourcesController.CancelReservedCost(reservationID, 1f);
                                 break;
                             default:
-                                Debug.LogWarning($"[{this.gameObject.name}.CharacterCombatResourcesHandler] Unknown SkillStyleType in OnAttackWindowInterrupt resolution. Consume reservation to avoid free casts.");
+                                Debug.LogWarning($"[{this.gameObject.name}.{nameof(CharacterCombatResourcesHandler)}] Unknown SkillStyleType in OnAttackWindowInterrupt resolution. Consume reservation to avoid free casts.");
                                 this.ResourcesController.ConsumeReservedCost(reservationID);
                                 break;
                         }
@@ -178,7 +178,7 @@ namespace FlameOfTheLost
 
                     default:
                         // Unknown trigger => safest: cancel on interrupt for ranged, consume for melee.
-                        Debug.LogWarning($"[{this.gameObject.name}.CharacterCombatResourcesHandler] Unknown CostTriggerType. Cancel reservation for Ranged, Consume for Melee to avoid free casts.");
+                        Debug.LogWarning($"[{this.gameObject.name}.{nameof(CharacterCombatResourcesHandler)}] Unknown CostTriggerType. Cancel reservation for Ranged, Consume for Melee to avoid free casts.");
                         
                         switch (skillStyle)
                         {
@@ -189,7 +189,7 @@ namespace FlameOfTheLost
                                 this.ResourcesController.CancelReservedCost(reservationID, 1f);
                                 break;
                             default:
-                                Debug.LogWarning($"[{this.gameObject.name}.CharacterCombatResourcesHandler] Unknown SkillStyleType in Unknown CostTriggerType resolution. Consume reservation to avoid free casts.");
+                                Debug.LogWarning($"[{this.gameObject.name}.{nameof(CharacterCombatResourcesHandler)}] Unknown SkillStyleType in Unknown CostTriggerType resolution. Consume reservation to avoid free casts.");
                                 this.ResourcesController.ConsumeReservedCost(reservationID);
                                 break;
                         }
@@ -263,7 +263,7 @@ namespace FlameOfTheLost
                         this.ResourcesController.CancelReservedCost(reservationID, 1f);
                         break;
                     default:
-                        Debug.LogWarning($"[{this.gameObject.name}.CharacterCombatResourcesHandler] Unknown SkillStyleType in OnHitboxDisabledWithoutHit resolution. Consume reservation to avoid free casts.");
+                        Debug.LogWarning($"[{this.gameObject.name}.{nameof(CharacterCombatResourcesHandler)}] Unknown SkillStyleType in OnHitboxDisabledWithoutHit resolution. Consume reservation to avoid free casts.");
                         this.ResourcesController.ConsumeReservedCost(reservationID);
                         break;
                 }

@@ -398,7 +398,7 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         this.ResetRoamingRuntime();
         this.ResetAttackRuntime();
     }
-    protected override void OnBrainRefreshed(CharacterRefreshmentContext context)
+    protected override void OnBrainRefreshed(CharacterRefreshContext context)
     {
         this.ResetRoamingRuntime();
         this.ResetAttackRuntime();

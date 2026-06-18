@@ -7,7 +7,7 @@ namespace FlameOfTheLost
     public class CharacterProgressionUpgradeConfig : ScriptableObject
     {
         [Header("Upgrade Costs")]
-        [SerializeField] private List<CharacterProgressionAttributeUpgradeCost> _upgradeCosts = new();
-        public IReadOnlyList<CharacterProgressionAttributeUpgradeCost> UpgradeCosts => _upgradeCosts;
+        [SerializeField] private List<CharacterProgressionAttributeUpgradeCostEntry> _upgradeCosts = new();
+        public IReadOnlyList<CharacterProgressionAttributeUpgradeCostEntry> UpgradeCosts => _upgradeCosts;
     }
 }

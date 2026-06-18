@@ -57,7 +57,7 @@ namespace FlameOfTheLost
             if (this.StatusEffectController == null) return;
 
             // Build streams per target
-            var streamsByTarget = new Dictionary<StatusEffectStatPeriodicTarget, List<StatusEffectStatPeriodicStream>>();
+            var streamsByTarget = new Dictionary<StatusEffectStatPeriodicTarget, List<RuntimeStatusEffectStatPeriodicStream>>();
 
             var runtimeStatusEffects = this.StatusEffectController.RuntimeStatusEffects;
             if (runtimeStatusEffects != null)
@@ -84,11 +84,11 @@ namespace FlameOfTheLost
 
                         if (!streamsByTarget.TryGetValue(statPeriodic.Target, out var list))
                         {
-                            list = new List<StatusEffectStatPeriodicStream>();
+                            list = new List<RuntimeStatusEffectStatPeriodicStream>();
                             streamsByTarget[statPeriodic.Target] = list;
                         }
 
-                        list.Add(new StatusEffectStatPeriodicStream(statPeriodic, runtimeStatusEffect, interval, amountPerSecond));
+                        list.Add(new RuntimeStatusEffectStatPeriodicStream(statPeriodic, runtimeStatusEffect, interval, amountPerSecond));
                     }
                 }
             }
@@ -100,7 +100,7 @@ namespace FlameOfTheLost
                 var consumers = kvp.Value;
 
                 streamsByTarget.TryGetValue(target, out var streams);
-                streams ??= new List<StatusEffectStatPeriodicStream>(0);
+                streams ??= new List<RuntimeStatusEffectStatPeriodicStream>(0);
 
                 foreach (var consumer in consumers)
                 {
@@ -117,7 +117,7 @@ namespace FlameOfTheLost
 
                 foreach (var consumer in consumers)
                 {
-                    consumer?.SetActivePeriodicStreams(new List<StatusEffectStatPeriodicStream>(0));
+                    consumer?.SetActivePeriodicStreams(new List<RuntimeStatusEffectStatPeriodicStream>(0));
                 }
             }
         }

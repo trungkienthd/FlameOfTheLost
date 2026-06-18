@@ -44,8 +44,8 @@ namespace FlameOfTheLost
 
         //  6. Capability Requirements
         [Header("Capability Requirements")]
-        [SerializeField] private List<CharacterCapabilityRequirement> _requirements = new();
-        public IReadOnlyList<CharacterCapabilityRequirement> Requirements => _requirements;
+        [SerializeField] private List<CharacterCapabilityRequirementEntry> _requirements = new();
+        public IReadOnlyList<CharacterCapabilityRequirementEntry> Requirements => _requirements;
 
         //  7. Attack Properties
         [Header("Attack Properties")]
@@ -56,7 +56,7 @@ namespace FlameOfTheLost
 
         //  8. Resource Cost
         [Header("Resource Cost")]
-        [SerializeField] private ResourceCost _resourceCost = new()
+        [SerializeField] private ResourceCostEntry _resourceCost = new()
         {
             HPFlatCost = 0,
             FPFlatCost = 0,
@@ -68,13 +68,13 @@ namespace FlameOfTheLost
             IsSilenceBlocked = true,
             AllowSelfKillWithHPCost = false
         };
-        public ResourceCost ResourceCost => _resourceCost;
+        public ResourceCostEntry ResourceCost => _resourceCost;
 
         //  9. Status Effects
         [Header("Status Effects")]
-        [SerializeField] private List<SkillStatusEffectApplication> _statusEffectApplications = new();
+        [SerializeField] private List<SkillStatusEffectApplicationEntry> _statusEffectApplications = new();
 
-        public IReadOnlyList<SkillStatusEffectApplication> StatusEffectApplications => _statusEffectApplications;
+        public IReadOnlyList<SkillStatusEffectApplicationEntry> StatusEffectApplications => _statusEffectApplications;
 
         // --- Public APIs ---
         public bool IsCompatibleWithWeaponType(WeaponType weaponType)

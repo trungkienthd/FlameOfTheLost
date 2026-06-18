@@ -1112,7 +1112,7 @@ MonoBehaviour:
   _maxValue: 50
   _costMultiplier: 1
   _costAdditiveFlat: 0
-  _activePeriodicStreams: []
+  _runtimeStatPeriodicStreams: []
   _isDeathDisabled: 0
   _damageReceivedMultiplier: 1
   _damageReceivedAdditiveFlat: 0
@@ -1155,7 +1155,7 @@ MonoBehaviour:
   _maxValue: 50
   _costMultiplier: 1
   _costAdditiveFlat: 0
-  _activePeriodicStreams: []
+  _runtimeStatPeriodicStreams: []
   _isDeathDisabled: 0
   _isSilenced: 0
 --- !u!114 &2874977548991289660
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   _maxValue: 50
   _costMultiplier: 1
   _costAdditiveFlat: 0
-  _activePeriodicStreams: []
+  _runtimeStatPeriodicStreams: []
   _isDeathDisabled: 0
   _staminaRegenRate: 3
   _staminaRegenDelay: 1
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyRootController
   _identityController: {fileID: 7856838754344447587}
-  _refreshmentHandler: {fileID: 6031001468286940557}
+  _refreshHandler: {fileID: 6031001468286940557}
   _inputHandler: {fileID: 5857655726257863253}
   _movementHandler: {fileID: 5200811322357388364}
   _terrainContactHandler: {fileID: 138990756075370264}
@@ -2013,7 +2013,7 @@ GameObject:
   - component: {fileID: 6428682736234800016}
   - component: {fileID: 6031001468286940557}
   m_Layer: 9
-  m_Name: Refreshment
+  m_Name: Refresh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2302,7 +2302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardVFXHandler
   _characterRootController: {fileID: 5013856377803996316}
   _animator: {fileID: 8094952317328987354}
-  _gainColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _gainColor: {r: 1, g: 0.95, b: 0.75, a: 1}
 --- !u!1 &6803090282198875247
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,8 +18,8 @@ namespace FlameOfTheLost
         private CharacterRewardWalletController RewardWalletController => this.CharacterRootController.RewardWalletController;
 
         //  3. Runtime Dictionary
-        private readonly Dictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeUpgradeCost> _upgradeCostMap = new();
-        private IReadOnlyDictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeUpgradeCost> UpgradeCostMap => _upgradeCostMap;
+        private readonly Dictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeUpgradeCostEntry> _upgradeCostMap = new();
+        private IReadOnlyDictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeUpgradeCostEntry> UpgradeCostMap => _upgradeCostMap;
 
         //  4. Death Disable State (Runtime)
         [Header("Death Disable (Runtime)")]
@@ -55,7 +55,7 @@ namespace FlameOfTheLost
 
         //  2. ICharacterRefreshable implementation
         public int RefreshmentConfigurePriority => 110;
-        public void RefreshCharacter(CharacterRefreshmentContext context)
+        public void RefreshCharacter(CharacterRefreshContext context)
         {
             this.IsDeathDisabled = false;
         }
@@ -73,7 +73,7 @@ namespace FlameOfTheLost
         {
             _upgradeCostMap.Clear();
 
-            foreach (CharacterProgressionAttributeUpgradeCost cost in this.UpgradeConfig.UpgradeCosts)
+            foreach (CharacterProgressionAttributeUpgradeCostEntry cost in this.UpgradeConfig.UpgradeCosts)
             {
                 if (cost == null) continue;
 
@@ -101,7 +101,7 @@ namespace FlameOfTheLost
 
             int currentValue = this.ProgressionController.GetAttributeValue(attributeType);
 
-            if (this.UpgradeCostMap.TryGetValue(attributeType, out CharacterProgressionAttributeUpgradeCost cost))
+            if (this.UpgradeCostMap.TryGetValue(attributeType, out CharacterProgressionAttributeUpgradeCostEntry cost))
             {
                 return cost.CalculateCost(currentValue);
             }

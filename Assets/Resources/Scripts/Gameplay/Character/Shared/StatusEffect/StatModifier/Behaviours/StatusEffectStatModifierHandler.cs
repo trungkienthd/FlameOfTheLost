@@ -76,7 +76,7 @@ namespace FlameOfTheLost
             this.ClearAggregateMap();
 
             // (Target, Operation) -> accumulated bucket state
-            var buckets = new Dictionary<(StatusEffectStatModifierTarget target, StatusEffectStatModifierOperationType operation), StatusEffectStatModifierBucketState>();
+            var buckets = new Dictionary<(StatusEffectStatModifierTarget target, StatusEffectStatModifierOperationType operation), RuntimeStatusEffectStatModifierBucketState>();
 
             foreach (var runtimeStatusEffect in this.StatusEffectController.RuntimeStatusEffects)
             {
@@ -93,7 +93,7 @@ namespace FlameOfTheLost
                     var key = (modifier.Target, modifier.Operation);
                     if (!buckets.TryGetValue(key, out var state))
                     {
-                        state = new StatusEffectStatModifierBucketState()
+                        state = new RuntimeStatusEffectStatModifierBucketState()
                         {
                             // Baseline depends on operation for stacking:
                             //  Multiply -> neutral 1;  AddFlat -> neutral 0
@@ -179,7 +179,7 @@ namespace FlameOfTheLost
         {
             if (!_modifierAggregateMap.TryGetValue(target, out var channel))
             {
-                channel = new StatusEffectStatModifierAccumulator();
+                channel = new RuntimeStatusEffectStatModifierAccumulator();
                 _modifierAggregateMap[target] = channel;
             }
 

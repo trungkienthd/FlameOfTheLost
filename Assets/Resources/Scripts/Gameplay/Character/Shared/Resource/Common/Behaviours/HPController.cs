@@ -228,7 +228,7 @@ namespace FlameOfTheLost
         }
 
         //  7. Refresh Pool for Placement
-        public override void RefreshPoolAfterPlace(CharacterRefreshmentContext context)
+        public override void RefreshPoolAfterPlace(CharacterRefreshContext context)
         {
             base.RefreshPoolAfterPlace(context);
 
@@ -326,7 +326,7 @@ namespace FlameOfTheLost
         }
 
         //  5. Status Effect Stat Periodic handler
-        protected override void ApplyStatPeriodicTick(StatusEffectStatPeriodicContribution periodic, int tickAmount, RuntimeStatusEffect sourceStatusEffect)
+        protected override void ApplyStatPeriodicTick(StatusEffectStatPeriodicContributionEntry periodic, int tickAmount, RuntimeStatusEffect sourceStatusEffect)
         {
             if (periodic == null) return;
             if (tickAmount <= 0) return;

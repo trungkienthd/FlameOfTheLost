@@ -100,7 +100,7 @@ namespace FlameOfTheLost
 
             if (this.IsAttackLocked)
             {
-                Debug.Log($"[{this.CharacterName}.CharacterCombatAttackController] TryDoNormalAttack: Attack is locked.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(TryDoNormalAttack)}: Attack is locked.");
                 return false;
             }
 
@@ -123,7 +123,7 @@ namespace FlameOfTheLost
 
             if (this.IsSpecialAttackLocked)
             {
-                Debug.Log($"[{this.CharacterName}.CharacterCombatAttackController] TryDoSpecialAttack: Special attack is locked.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(TryDoSpecialAttack)}: Special attack is locked.");
                 return false;
             }
 
@@ -165,7 +165,7 @@ namespace FlameOfTheLost
                     var meleeSkill = this.ActiveRuntimeSkill.Profile as MeleeSkillProfile;
                     if (meleeSkill == null)
                     {
-                        Debug.LogError($"[{this.CharacterName}.CharacterCombatAttackController] OnAttackWindowStart: Melee skill profile is null for skill ID {this.ActiveRuntimeSkill.SkillID}.");
+                        Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(OnAttackWindowStart)}: Melee skill profile is null for skill ID {this.ActiveRuntimeSkill.SkillID}.");
                         break;
                     }
 
@@ -174,7 +174,7 @@ namespace FlameOfTheLost
                     {
                         this.MeleeHitboxController.BindHitContext(this, this.ActiveRuntimeSkill);   // Bind combat context
 
-                        HitboxDamagePayload meleeHitboxDamagePayload = new HitboxDamagePayload()
+                        HitboxActivationContext meleeHitboxDamagePayload = new HitboxActivationContext()
                         {
                             DamageAmount = meleeSkill.DamageAmount,
                             KnockbackForce = meleeSkill.KnockbackForce,
@@ -188,7 +188,7 @@ namespace FlameOfTheLost
                     // Ranged projectile will be spawned at OnAttackWindowEnd()
                     break;
                 default:
-                    Debug.LogError($"[{this.CharacterName}.CharacterCombatAttackController] OnAttackWindowStart: Unsupported skill style {this.ActiveRuntimeSkill.Style}.");
+                    Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(OnAttackWindowStart)}: Unsupported skill style {this.ActiveRuntimeSkill.Style}.");
                     break;
             }
 
@@ -221,7 +221,7 @@ namespace FlameOfTheLost
                     this.FireRangedProjectile(runtimeSkill);
                     break;
                 default:
-                    Debug.LogError($"[{this.CharacterName}.CharacterCombatAttackController] OnAttackWindowEnd: Unsupported skill style {activeSkillStyle}.");
+                    Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(OnAttackWindowEnd)}: Unsupported skill style {activeSkillStyle}.");
                     break;
             }
 
@@ -316,7 +316,7 @@ namespace FlameOfTheLost
 
         //  6. ICharacterRefreshable implementation
         public int RefreshmentConfigurePriority => 40;
-        public void RefreshCharacter(CharacterRefreshmentContext context)
+        public void RefreshCharacter(CharacterRefreshContext context)
         {
             this.IsDeathDisabled = false;
 
@@ -381,9 +381,9 @@ namespace FlameOfTheLost
                 animationProfile: this.CharacterRootController.VisualAttackAnimationHandler.ActiveProfile.GetOrNull(skill, weapon)
             );
 
-            if (runtimeSkill.CombatAnimationClipHitboxSetProfile == null)
+            if (runtimeSkill.AttackAnimationClipHitboxSetProfile == null)
             {
-                Debug.LogWarning($"[{this.CharacterName}.CharacterCombatAttackController] Missing CombatAnimationClipHitboxSetProfile for SkillID={runtimeSkill.SkillID} ('{skill.name}'), Tag={characterType}.", this);
+                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterCombatController)}] Missing CombatAnimationClipHitboxSetProfile for SkillID={runtimeSkill.SkillID} ('{skill.name}'), Tag={characterType}.", this);
                 return false;
             }
 
@@ -418,7 +418,7 @@ namespace FlameOfTheLost
 
         private IEnumerator CoHandleAttack(RuntimeSkill runtimeSkill)
         {
-            if (runtimeSkill == null || runtimeSkill.CombatAnimationClipHitboxSetProfile == null)
+            if (runtimeSkill == null || runtimeSkill.AttackAnimationClipHitboxSetProfile == null)
             {
                 this.AttackRoutine = null;
                 yield break;
@@ -426,7 +426,7 @@ namespace FlameOfTheLost
 
             this.OnAttackWindowStart();
 
-            float attackLength = runtimeSkill.CombatAnimationClipHitboxSetProfile.AttackWindowDuration;
+            float attackLength = runtimeSkill.AttackAnimationClipHitboxSetProfile.AttackWindowDuration;
             if (attackLength > 0f) yield return new WaitForSeconds(attackLength);
 
             if (this.ActiveRuntimeSkill != runtimeSkill)
@@ -522,7 +522,7 @@ namespace FlameOfTheLost
             {
                 projectileHitbox.BindHitContext(this, runtimeSkill);
 
-                HitboxDamagePayload projectileHitboxDamagePayload = new HitboxDamagePayload()
+                HitboxActivationContext projectileHitboxDamagePayload = new HitboxActivationContext()
                 {
                     DamageAmount = rangedSkill.DamageAmount,
                     KnockbackForce = rangedSkill.KnockbackForce,
@@ -556,9 +556,9 @@ namespace FlameOfTheLost
         {
             base.ValidateReferences();
 
-            if (this.MeleeHitboxController == null) Debug.LogError($"[{this.CharacterName}.CharacterCombatController] MeleeHitboxController reference is missing. Expected to find a child with a MeleeHitboxController component.", this);
+            if (this.MeleeHitboxController == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] MeleeHitboxController reference is missing. Expected to find a child with a MeleeHitboxController component.", this);
 
-            if (this.RangedAnchorDown == null || this.RangedAnchorSide == null || this.RangedAnchorUp == null) Debug.LogWarning($"[{this.CharacterName}.CharacterCombatController] One or more ranged anchors are missing. " + $"Expected: RangedAnchors/RangedAnchor_Down, RangedAnchors/RangedAnchor_Side, RangedAnchors/RangedAnchor_Up.", this);
+            if (this.RangedAnchorDown == null || this.RangedAnchorSide == null || this.RangedAnchorUp == null) Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterCombatController)}] One or more ranged anchors are missing. " + $"Expected: RangedAnchors/RangedAnchor_Down, RangedAnchors/RangedAnchor_Side, RangedAnchors/RangedAnchor_Up.", this);
         }
     }
 }

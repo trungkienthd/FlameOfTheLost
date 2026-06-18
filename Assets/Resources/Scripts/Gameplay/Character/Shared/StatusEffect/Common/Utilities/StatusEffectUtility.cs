@@ -5,18 +5,18 @@ namespace FlameOfTheLost
 {
     public static class StatusEffectUtility
     {
-        public static List<StatusEffectStatModifierContribution> BuildScaledContributions(IReadOnlyList<StatusEffectStatModifierContribution> rawStatModifiers, float potency, int stacks)
+        public static List<StatusEffectStatModifierContributionEntry> BuildScaledContributions(IReadOnlyList<StatusEffectStatModifierContributionEntry> rawStatModifiers, float potency, int stacks)
         {
-            if (rawStatModifiers == null) return new List<StatusEffectStatModifierContribution>(0);
+            if (rawStatModifiers == null) return new List<StatusEffectStatModifierContributionEntry>(0);
 
             float scale = Mathf.Max(0f, potency) * Mathf.Max(1, stacks);
 
-            var list = new List<StatusEffectStatModifierContribution>(rawStatModifiers.Count);
+            var list = new List<StatusEffectStatModifierContributionEntry>(rawStatModifiers.Count);
             foreach (var rawStatModifier in rawStatModifiers)
             {
                 list.Add
                 (
-                    new StatusEffectStatModifierContribution
+                    new StatusEffectStatModifierContributionEntry
                     {
                         Target = rawStatModifier.Target,
                         Operation = rawStatModifier.Operation,
@@ -28,13 +28,13 @@ namespace FlameOfTheLost
             return list;
         }
 
-        public static List<StatusEffectStatPeriodicContribution> BuildScaledContributions(IReadOnlyList<StatusEffectStatPeriodicContribution> rawStatPeriodics, float potency, int stacks)
+        public static List<StatusEffectStatPeriodicContributionEntry> BuildScaledContributions(IReadOnlyList<StatusEffectStatPeriodicContributionEntry> rawStatPeriodics, float potency, int stacks)
         {
-            if (rawStatPeriodics == null || rawStatPeriodics.Count == 0) return new List<StatusEffectStatPeriodicContribution>(0);
+            if (rawStatPeriodics == null || rawStatPeriodics.Count == 0) return new List<StatusEffectStatPeriodicContributionEntry>(0);
 
             float scale = Mathf.Max(0f, potency) * Mathf.Max(1, stacks);
 
-            var list = new List<StatusEffectStatPeriodicContribution>(rawStatPeriodics.Count);
+            var list = new List<StatusEffectStatPeriodicContributionEntry>(rawStatPeriodics.Count);
             foreach (var rawStatPeriodic in rawStatPeriodics)    
             {
                 if (rawStatPeriodic == null || !rawStatPeriodic.IsEnabled) continue;

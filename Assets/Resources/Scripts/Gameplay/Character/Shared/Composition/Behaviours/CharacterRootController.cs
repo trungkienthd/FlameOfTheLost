@@ -9,8 +9,8 @@ namespace FlameOfTheLost
         public CharacterIdentityController IdentityController => _identityController;
 
         [Header("References (Refreshment)")]
-        [SerializeField] private CharacterRefreshmentHandler _refreshmentHandler;
-        public CharacterRefreshmentHandler RefreshmentHandler => _refreshmentHandler;
+        [SerializeField] private CharacterRefreshHandler _refreshHandler;
+        public CharacterRefreshHandler RefreshHandler => _refreshHandler;
 
         [Header("References (Input)")]
         [SerializeField] private CharacterInputHandler _inputHandler;
@@ -103,7 +103,7 @@ namespace FlameOfTheLost
 
             if (this.IdentityController == null) _identityController = this.GetComponentInChildren<CharacterIdentityController>(true);
 
-            if (this.RefreshmentHandler == null) _refreshmentHandler = this.GetComponentInChildren<CharacterRefreshmentHandler>(true);
+            if (this.RefreshHandler == null) _refreshHandler = this.GetComponentInChildren<CharacterRefreshHandler>(true);
 
             if (this.InputHandler == null) _inputHandler = this.GetComponent<CharacterInputHandler>();
 

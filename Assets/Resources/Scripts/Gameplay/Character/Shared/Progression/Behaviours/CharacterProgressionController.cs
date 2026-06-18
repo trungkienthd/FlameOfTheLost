@@ -13,8 +13,8 @@ namespace FlameOfTheLost
         public CharacterProgressionConfig ProgressionConfig => _progressionConfig;
 
         [Header("Progression Attributes (Runtime)")]
-        [SerializeField] private List<CharacterProgressionAttributeRuntimeEntry> _runtimeAttributeEntries = new();
-        public IReadOnlyList<CharacterProgressionAttributeRuntimeEntry> RuntimeAttributeEntries => _runtimeAttributeEntries;
+        [SerializeField] private List<RuntimeCharacterProgressionAttribute> _runtimeAttributeEntries = new();
+        public IReadOnlyList<RuntimeCharacterProgressionAttribute> RuntimeAttributeEntries => _runtimeAttributeEntries;
         private IReadOnlyList<CharacterProgressionDerivedStatEntry> DerivedStatEntries
         {
             get
@@ -56,7 +56,7 @@ namespace FlameOfTheLost
         //  1. Getters for attributes and derived stats
         public int GetAttributeValue(CharacterProgressionAttributeType attributeType)
         {
-            CharacterProgressionAttributeRuntimeEntry entry = this.GetAttributeEntry(attributeType);
+            RuntimeCharacterProgressionAttribute entry = this.GetAttributeEntry(attributeType);
 
             return entry != null ? entry.CurrentValue : 0;
         }
@@ -75,7 +75,7 @@ namespace FlameOfTheLost
         {
             if (amount <= 0) return;
 
-            CharacterProgressionAttributeRuntimeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
+            RuntimeCharacterProgressionAttribute entry = this.GetOrCreateAttributeEntry(attributeType);
             entry.AddBonus(amount);
 
             this.RecalculateAndApplyDerivedStats();
@@ -96,7 +96,7 @@ namespace FlameOfTheLost
 
         public void SetAttributeBonusValue(CharacterProgressionAttributeType attributeType, int value)
         {
-            CharacterProgressionAttributeRuntimeEntry entry = this.GetOrCreateAttributeEntry(attributeType);
+            RuntimeCharacterProgressionAttribute entry = this.GetOrCreateAttributeEntry(attributeType);
             entry.SetBonusValue(value);
 
             this.RecalculateAndApplyDerivedStats();
@@ -106,7 +106,7 @@ namespace FlameOfTheLost
 
         //  3. ICharacterPlacementRefreshable implementation
         public int RefreshmentConfigurePriority => 20;
-        public void RefreshCharacter(CharacterRefreshmentContext context)
+        public void RefreshCharacter(CharacterRefreshContext context)
         {
             this.InitializeProgression();
         }
@@ -126,29 +126,29 @@ namespace FlameOfTheLost
             // This keeps the system compatible with future save/load.
             if (_runtimeAttributeEntries != null && this.RuntimeAttributeEntries.Count > 0) return;
 
-            _runtimeAttributeEntries = new List<CharacterProgressionAttributeRuntimeEntry>();
+            _runtimeAttributeEntries = new List<RuntimeCharacterProgressionAttribute>();
 
-            foreach (CharacterProgressionBaseAttributeConfigEntry configEntry in this.ProgressionConfig.BaseAttributeEntries)
+            foreach (CharacterProgressionBaseAttributeEntry configEntry in this.ProgressionConfig.BaseAttributeEntries)
             {
                 if (configEntry == null) continue;
 
-                CharacterProgressionAttributeRuntimeEntry runtimeEntry = new CharacterProgressionAttributeRuntimeEntry(configEntry);
+                RuntimeCharacterProgressionAttribute runtimeEntry = new RuntimeCharacterProgressionAttribute(configEntry);
                 _runtimeAttributeEntries.Add(runtimeEntry);
             }
         }
 
-        private CharacterProgressionAttributeRuntimeEntry GetAttributeEntry(CharacterProgressionAttributeType attributeType)
+        private RuntimeCharacterProgressionAttribute GetAttributeEntry(CharacterProgressionAttributeType attributeType)
         {
             return this.RuntimeAttributeEntries.FirstOrDefault(entry => entry.AttributeType == attributeType);
         }
 
-        private CharacterProgressionAttributeRuntimeEntry GetOrCreateAttributeEntry(CharacterProgressionAttributeType attributeType)
+        private RuntimeCharacterProgressionAttribute GetOrCreateAttributeEntry(CharacterProgressionAttributeType attributeType)
         {
-            CharacterProgressionAttributeRuntimeEntry entry = this.GetAttributeEntry(attributeType);
+            RuntimeCharacterProgressionAttribute entry = this.GetAttributeEntry(attributeType);
 
             if (entry != null) return entry;
 
-            CharacterProgressionAttributeRuntimeEntry newEntry = new CharacterProgressionAttributeRuntimeEntry(attributeType, 0);
+            RuntimeCharacterProgressionAttribute newEntry = new RuntimeCharacterProgressionAttribute(attributeType, 0);
             _runtimeAttributeEntries.Add(newEntry);
 
             return newEntry;
@@ -235,7 +235,7 @@ namespace FlameOfTheLost
 
             for (int i = this.RuntimeAttributeEntries.Count - 1; i >= 0; i--)
             {
-                CharacterProgressionAttributeRuntimeEntry entry = this.RuntimeAttributeEntries[i];
+                RuntimeCharacterProgressionAttribute entry = this.RuntimeAttributeEntries[i];
                 if (entry == null) continue;
 
                 if (seen.Contains(entry.AttributeType))

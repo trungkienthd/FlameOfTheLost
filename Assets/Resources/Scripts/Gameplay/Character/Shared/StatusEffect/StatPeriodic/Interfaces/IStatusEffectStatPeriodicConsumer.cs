@@ -9,6 +9,6 @@ namespace FlameOfTheLost
             get; 
         }
 
-        public void SetActivePeriodicStreams(IReadOnlyList<StatusEffectStatPeriodicStream> streams);
+        public void SetActivePeriodicStreams(IReadOnlyList<RuntimeStatusEffectStatPeriodicStream> streams);
     }
 }

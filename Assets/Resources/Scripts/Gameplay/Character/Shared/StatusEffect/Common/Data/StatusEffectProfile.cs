@@ -48,21 +48,21 @@ namespace FlameOfTheLost
         //  4. Contributions
         //      4.1. Flag
         [Header("Flag")]
-        [SerializeField] private List<StatusEffectFlagContribution> _flags = new();
-        public IReadOnlyList<StatusEffectFlagContribution> Flags => _flags;
+        [SerializeField] private List<StatusEffectFlagContributionEntry> _flags = new();
+        public IReadOnlyList<StatusEffectFlagContributionEntry> Flags => _flags;
 
         //      4.2. Stat Modifier
         [Header("Stat Modifier")]
-        [SerializeField] private List<StatusEffectStatModifierContribution> _statModifiers = new();
-        public IReadOnlyList<StatusEffectStatModifierContribution> StatModifiers => _statModifiers;
+        [SerializeField] private List<StatusEffectStatModifierContributionEntry> _statModifiers = new();
+        public IReadOnlyList<StatusEffectStatModifierContributionEntry> StatModifiers => _statModifiers;
 
         [SerializeField] private StatusEffectStatModifierCombinationType _combinationType = StatusEffectStatModifierCombinationType.AddStacks;
         public StatusEffectStatModifierCombinationType StatModifierCombinationType => _combinationType;
 
         //      4.3. Stat Periodic
         [Header("Stat Periodic")]
-        [SerializeField] private List<StatusEffectStatPeriodicContribution> _statPeriodics = new();
-        public IReadOnlyList<StatusEffectStatPeriodicContribution> StatPeriodics => _statPeriodics;
+        [SerializeField] private List<StatusEffectStatPeriodicContributionEntry> _statPeriodics = new();
+        public IReadOnlyList<StatusEffectStatPeriodicContributionEntry> StatPeriodics => _statPeriodics;
 
         //  5. VFX
         [Header("VFX")]

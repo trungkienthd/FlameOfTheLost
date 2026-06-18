@@ -13,7 +13,7 @@ namespace FlameOfTheLost
         [SerializeField] private PlayerRootController _playerRoot;
         private PlayerRootController PlayerRoot => _playerRoot;
         private PlayerInputHandler PlayerInputHandler => this.PlayerRoot != null ? this.PlayerRoot.PlayerInputHandler : null;
-        private CharacterRefreshmentHandler PlayerPlacementHandler => this.PlayerRoot != null ? this.PlayerRoot.RefreshmentHandler : null;
+        private CharacterRefreshHandler PlayerRefreshHandler => this.PlayerRoot != null ? this.PlayerRoot.RefreshHandler : null;
 
         [Header("References - Spawn Points (Controllers)")]
         [SerializeField] private List<PlayerDefaultSpawnPointController> _defaultSpawnPointCtrls = new();
@@ -23,7 +23,7 @@ namespace FlameOfTheLost
         [SerializeField] private List<CheckpointController> _checkpointCtrls = new();
         private IReadOnlyList<CheckpointController> CheckpointCtrls => _checkpointCtrls;
 
-        [Header("Spawn/Respawn Settings")]
+        [Header("Spawn/Respawn Configs")]
         [SerializeField] private bool _spawnPlayerOnStart = true;
         [SerializeField] private float _respawnDelaySeconds = 1.0f;
         private bool SpawnPlayerOnStart => _spawnPlayerOnStart;
@@ -36,8 +36,9 @@ namespace FlameOfTheLost
             set => _isRespawning = value;
         }
 
-        private readonly PlayerSpawnState _spawnState = new();
-        public PlayerSpawnState SpawnState => _spawnState;
+        [Header("Recorded Player Spawn State(s)")]
+        [SerializeField] private PlayerSpawnRecord _spawnRecord = new();
+        public PlayerSpawnRecord PlayerSpawnRecord => _spawnRecord;
 
         // --- Events ---
         public event Action OnPlayerSpawned;
@@ -88,7 +89,7 @@ namespace FlameOfTheLost
         {
             if (spawnPoint == null) return;
 
-            this.SpawnState.SetSpawnPointSpawn(spawnPoint.Id);
+            this.PlayerSpawnRecord.SetSpawnPointSpawn(spawnPoint.Id);
 
             //Debug.Log($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Activated spawn point: {spawnPoint.DisplayName}", spawnPoint);
         }
@@ -108,15 +109,15 @@ namespace FlameOfTheLost
         // --- Helpers ---
         private void PlacePlayer()
         {
-            if (this.PlayerPlacementHandler == null)
+            if (this.PlayerRefreshHandler == null)
             {
                 Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No PlayerPlacementHandler assigned.", this);
                 return;
             }
 
-            SpawnResolveResult spawnResult = this.ResolveSpawn();
+            CharacterRefreshTarget spawnResult = this.ResolveSpawn();
 
-            this.PlayerPlacementHandler.Refresh(spawnResult, this.SpawnState.SpawnSourceType);
+            this.PlayerRefreshHandler.Refresh(spawnResult, this.PlayerSpawnRecord.SpawnPlacementSourceType);
         }
 
         private IEnumerator RespawnPlayerRoutine()
@@ -159,7 +160,7 @@ namespace FlameOfTheLost
 
         private void InitializeFirstDefaultSpawnPointIfNeeded()
         {
-            if (this.SpawnState.SpawnSourceType == CharacterPlacementSource.Checkpoint) return;
+            if (this.PlayerSpawnRecord.SpawnPlacementSourceType == CharacterRefreshOrigin.Checkpoint) return;
 
             PlayerDefaultSpawnPointController firstDefaultSpawnPoint = this.GetFirstDefaultSpawnPoint();
 
@@ -173,15 +174,15 @@ namespace FlameOfTheLost
             
         }
 
-        private SpawnResolveResult ResolveSpawn()
+        private CharacterRefreshTarget ResolveSpawn()
         {
-            if (this.SpawnState.SpawnSourceType == CharacterPlacementSource.Checkpoint)
+            if (this.PlayerSpawnRecord.SpawnPlacementSourceType == CharacterRefreshOrigin.Checkpoint)
             {
-                CheckpointController checkpointCtrl = this.FindCheckpointController(this.SpawnState.ActiveCheckpointId);
+                CheckpointController checkpointCtrl = this.FindCheckpointController(this.PlayerSpawnRecord.ActiveCheckpointId);
 
                 if (checkpointCtrl != null)
                 {
-                    return new SpawnResolveResult
+                    return new CharacterRefreshTarget
                     (
                         checkpointCtrl.SpawnPosition,
                         checkpointCtrl.SpawnRotation,
@@ -189,14 +190,14 @@ namespace FlameOfTheLost
                     );
                 }
 
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Checkpoint '{this.SpawnState.ActiveCheckpointId}' was not found. Falling back to default spawn.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Checkpoint '{this.PlayerSpawnRecord.ActiveCheckpointId}' was not found. Falling back to default spawn.", this);
             }
 
-            PlayerDefaultSpawnPointController defaultSpawnPointCtrl = this.FindDefaultSpawnPointController(this.SpawnState.ActiveSpawnPointId);
+            PlayerDefaultSpawnPointController defaultSpawnPointCtrl = this.FindDefaultSpawnPointController(this.PlayerSpawnRecord.ActiveSpawnPointId);
 
             if (defaultSpawnPointCtrl != null)
             {
-                return new SpawnResolveResult
+                return new CharacterRefreshTarget
                 (
                     defaultSpawnPointCtrl.SpawnPosition,
                     defaultSpawnPointCtrl.SpawnRotation,
@@ -208,9 +209,9 @@ namespace FlameOfTheLost
             {
                 PlayerDefaultSpawnPointController fallbackSpawnPoint = this.DefaultSpawnPointCtrls[0];
 
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Default spawn point '{this.SpawnState.ActiveSpawnPointId}' was not found. Using first default spawn point.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Default spawn point '{this.PlayerSpawnRecord.ActiveSpawnPointId}' was not found. Using first default spawn point.", this);
 
-                return new SpawnResolveResult
+                return new CharacterRefreshTarget
                 (
                     fallbackSpawnPoint.SpawnPosition,
                     fallbackSpawnPoint.SpawnRotation,
@@ -221,7 +222,7 @@ namespace FlameOfTheLost
             Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No valid spawn point was found. Using Player's current transform.", this);
             if (this.PlayerRoot != null)
             {
-                return new SpawnResolveResult
+                return new CharacterRefreshTarget
                 (
                     this.PlayerRoot.transform.position,
                     this.PlayerRoot.transform.rotation,
@@ -229,7 +230,7 @@ namespace FlameOfTheLost
                 );
             }
 
-            return new SpawnResolveResult
+            return new CharacterRefreshTarget
             (
                 Vector3.zero,
                 Quaternion.identity,

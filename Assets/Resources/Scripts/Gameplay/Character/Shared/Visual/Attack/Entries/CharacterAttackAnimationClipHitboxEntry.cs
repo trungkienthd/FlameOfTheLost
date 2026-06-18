@@ -7,12 +7,12 @@ namespace FlameOfTheLost
     public struct CharacterAttackAnimationClipHitboxEntry
     {
         [SerializeField] private AnimationClip _animationClip;
-        [SerializeField] private PolygonColliderShape _hitboxShape;
+        [SerializeField] private PolygonColliderShapeEntry _hitboxShape;
 
         public AnimationClip AnimationClip => _animationClip;
-        public PolygonColliderShape HitboxShape => _hitboxShape;
+        public PolygonColliderShapeEntry HitboxShape => _hitboxShape;
 
-        public CharacterAttackAnimationClipHitboxEntry(AnimationClip animationClip, PolygonColliderShape hitboxShape)
+        public CharacterAttackAnimationClipHitboxEntry(AnimationClip animationClip, PolygonColliderShapeEntry hitboxShape)
         {
             _animationClip = animationClip;
             _hitboxShape = hitboxShape;

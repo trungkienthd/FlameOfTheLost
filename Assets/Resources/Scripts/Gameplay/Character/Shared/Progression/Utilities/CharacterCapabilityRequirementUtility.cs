@@ -4,12 +4,12 @@ namespace FlameOfTheLost
 {
     public static class CharacterCapabilityRequirementUtility
     {
-        public static bool AreRequirementsSatisfied(CharacterProgressionController progressionController, IReadOnlyList<CharacterCapabilityRequirement> requirements)
+        public static bool AreRequirementsSatisfied(CharacterProgressionController progressionController, IReadOnlyList<CharacterCapabilityRequirementEntry> requirements)
         {
             if (requirements == null || requirements.Count == 0) return true;
             if (progressionController == null) return false;
 
-            foreach (CharacterCapabilityRequirement requirement in requirements)
+            foreach (CharacterCapabilityRequirementEntry requirement in requirements)
             {
                 if (requirement == null) continue;
 

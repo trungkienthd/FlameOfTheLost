@@ -54,7 +54,7 @@ namespace FlameOfTheLost
         // --- Public Methods ---
         //  1. ICharacterPlacementRefreshable Implementation
         public int RefreshmentConfigurePriority => 10;
-        public void RefreshCharacter(CharacterRefreshmentContext context)
+        public void RefreshCharacter(CharacterRefreshContext context)
         {
             this.HasHandledTechnicalDeath = false;
             this.HasHandledDeathAnimationFinished = false;

@@ -39,13 +39,13 @@ namespace FlameOfTheLost
 
         // --- Public APIs ---
         //  1. Gate + spend in one call for OnStart costs. If cost.CostType is OnHit/OnEnd, this will reserve (spend) instead of only spending at end.
-        public GateResult TryPayCost(ResourceCost baseCost, out int reservationID)
+        public ResourceGateResponseRecord TryPayCost(ResourceCostEntry baseCost, out int reservationID)
         {
             reservationID = -1;
 
             if (this.IsDeathDisabled)
             {
-                return new GateResult
+                return new ResourceGateResponseRecord
                 {
                     IsAccepted = false,
                     RejectType = GateRejectType.CharacterIsDead,
@@ -62,7 +62,7 @@ namespace FlameOfTheLost
                 case ResourceCostTriggerType.OnAttackStart:
                     if (!this.TrySpendCost(runtimeCost))
                     {
-                        return new GateResult
+                        return new ResourceGateResponseRecord
                         {
                             IsAccepted = false,
                             RejectType = GateRejectType.Unknown,
@@ -74,7 +74,7 @@ namespace FlameOfTheLost
                 case ResourceCostTriggerType.OnAttackEnd:
                     // strict reserve model
                     if (!this.TryReserveCost(runtimeCost, out reservationID))
-                        return new GateResult
+                        return new ResourceGateResponseRecord
                         {
                             IsAccepted = false,
                             RejectType = GateRejectType.Unknown,
@@ -86,7 +86,7 @@ namespace FlameOfTheLost
             return gate;
         }
         //      1a. Overload without reservation handle output
-        public GateResult TryPayCost(ResourceCost baseCost) => this.TryPayCost(baseCost, out _);
+        public ResourceGateResponseRecord TryPayCost(ResourceCostEntry baseCost) => this.TryPayCost(baseCost, out _);
 
         //  2. Get the Reserved Cost's record
         public bool TryGetReservationRecord(int reservationId, out ResourceReservationRecord record)
@@ -116,7 +116,7 @@ namespace FlameOfTheLost
 
         //  4. ICharacterRefreshable implementation
         public int RefreshmentConfigurePriority => 10;
-        public void RefreshCharacter(CharacterRefreshmentContext context)
+        public void RefreshCharacter(CharacterRefreshContext context)
         {
             this.IsDeathDisabled = false;
 

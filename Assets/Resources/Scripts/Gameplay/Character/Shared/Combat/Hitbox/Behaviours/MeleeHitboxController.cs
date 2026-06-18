@@ -22,16 +22,16 @@ namespace FlameOfTheLost
         }
 
         [Header("Shapes")]
-        [SerializeField] private MeleeHitboxShape _defaultMeleeHitbox;
-        [SerializeField] private MeleeHitboxShape _overrideHitbox;
+        [SerializeField] private MeleeHitboxShapeEntry _defaultMeleeHitbox;
+        [SerializeField] private MeleeHitboxShapeEntry _overrideHitbox;
         [SerializeField] private bool _hasOverrideMeleeHitboxShape = false;
-        private MeleeHitboxShape DefaultMeleeHitbox => _defaultMeleeHitbox;
-        private MeleeHitboxShape OverrideHitbox
+        private MeleeHitboxShapeEntry DefaultMeleeHitbox => _defaultMeleeHitbox;
+        private MeleeHitboxShapeEntry OverrideHitbox
         {
             get => _overrideHitbox;
             set => _overrideHitbox = value;
         }
-        private MeleeHitboxShape ActiveMeleeHitbox => this.HasOverrideMeleeHitboxShape ? this.OverrideHitbox : this.DefaultMeleeHitbox;
+        private MeleeHitboxShapeEntry ActiveMeleeHitbox => this.HasOverrideMeleeHitboxShape ? this.OverrideHitbox : this.DefaultMeleeHitbox;
         private bool HasOverrideMeleeHitboxShape
         {
             get => _hasOverrideMeleeHitboxShape;
@@ -85,7 +85,7 @@ namespace FlameOfTheLost
 
         // --- Public APIs
         //      1.1. Enable the hitbox
-        public override void EnableHitbox(HitboxDamagePayload payload, AttackSide attackSideType)
+        public override void EnableHitbox(HitboxActivationContext payload, AttackSide attackSideType)
         {
             base.EnableHitbox(payload, attackSideType);
 
@@ -106,7 +106,7 @@ namespace FlameOfTheLost
         }
 
         //      2.2. Set the Hitbox Shape override
-        public void SetOverrideMeleeHitboxShape(MeleeHitboxShape meleeHitbox)
+        public void SetOverrideMeleeHitboxShape(MeleeHitboxShapeEntry meleeHitbox)
         {
             this.OverrideHitbox = meleeHitbox;
             this.HasOverrideMeleeHitboxShape = true;
@@ -127,7 +127,7 @@ namespace FlameOfTheLost
             CharacterFacingStatus facing = this.FacingProvider != null ? this.FacingProvider.FacingStatus : CharacterFacingStatus.Side;
             bool isFacingRight = this.FacingProvider != null ? this.FacingProvider.IsFacingRight : true;
 
-            PolygonColliderShape shape = facing switch
+            PolygonColliderShapeEntry shape = facing switch
             {
                 CharacterFacingStatus.Down => this.ActiveMeleeHitbox.FacingDownShape,
                 CharacterFacingStatus.Side => this.ActiveMeleeHitbox.FacingSideShape,

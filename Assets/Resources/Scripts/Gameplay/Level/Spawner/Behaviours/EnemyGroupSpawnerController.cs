@@ -112,16 +112,16 @@ namespace FlameOfTheLost
 
             this.RegisterSpawnedEnemy(spawnEntry, spawnedEnemy);
 
-            CharacterRefreshmentHandler enemyRefreshmentHandler = spawnedEnemy.GetComponentInChildren<CharacterRefreshmentHandler>(true);
-            if (enemyRefreshmentHandler == null)
+            CharacterRefreshHandler enemyRefreshHandler = spawnedEnemy.GetComponentInChildren<CharacterRefreshHandler>(true);
+            if (enemyRefreshHandler == null)
             {
-                Debug.LogWarning($"[{spawnedEnemy.name}.{nameof(EnemyGroupSpawnerController<T>)}] Spawned enemy has no CharacterRefreshmentHandler.", spawnedEnemy);
+                Debug.LogWarning($"[{spawnedEnemy.name}.{nameof(EnemyGroupSpawnerController<T>)}] Spawned enemy has no {nameof(CharacterRefreshHandler)}.", spawnedEnemy);
 
                 return spawnedEnemy;
             }
 
-            SpawnResolveResult spawnResult = spawnEntry.ResolveSpawnResult();
-            enemyRefreshmentHandler.Refresh(spawnResult, CharacterPlacementSource.DefaultSpawnPoint);
+            CharacterRefreshTarget spawnResult = spawnEntry.ResolveSpawnResult();
+            enemyRefreshHandler.Refresh(spawnResult, CharacterRefreshOrigin.DefaultSpawnPoint);
 
             this.ConfigureSpawnedEnemy(spawnedEnemy, spawnEntry);
 

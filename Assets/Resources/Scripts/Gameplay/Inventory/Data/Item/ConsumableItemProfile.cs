@@ -9,11 +9,11 @@ namespace FlameOfTheLost
         public override ItemType ItemType => ItemType.ConsumableItem;
 
         [Header("Use Cost")]
-        [SerializeField] private ResourceCost _useCost = new();
-        public ResourceCost UseResourceCost => _useCost;
+        [SerializeField] private ResourceCostEntry _useCost = new();
+        public ResourceCostEntry UseResourceCost => _useCost;
 
         [Header("Status Effects")]
-        [SerializeField] private List<StatusEffectApplication> _statusEffectApplications = new();
-        public IReadOnlyList<StatusEffectApplication> StatusEffectApplications => _statusEffectApplications;
+        [SerializeField] private List<StatusEffectApplicationEntry> _statusEffectApplications = new();
+        public IReadOnlyList<StatusEffectApplicationEntry> StatusEffectApplications => _statusEffectApplications;
     }
 }

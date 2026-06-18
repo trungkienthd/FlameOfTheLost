@@ -63,7 +63,7 @@ namespace FlameOfTheLost
         // --- Public APIs ---
         //  1. ICharacterPlacementRefreshable implementation
         public virtual int RefreshmentConfigurePriority => 90;
-        public virtual void RefreshCharacter(CharacterRefreshmentContext context)
+        public virtual void RefreshCharacter(CharacterRefreshContext context)
         {
             this.IsDeathDisabled = false;
 
@@ -89,7 +89,7 @@ namespace FlameOfTheLost
         protected virtual void OnBrainDeathDisabled(CharacterDeathContext context)
         {
         }
-        protected virtual void OnBrainRefreshed(CharacterRefreshmentContext context)
+        protected virtual void OnBrainRefreshed(CharacterRefreshContext context)
         {
         }
     }

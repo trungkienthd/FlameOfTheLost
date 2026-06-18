@@ -20,11 +20,11 @@ namespace FlameOfTheLost
 
         // --- Public APIs ---
         //  1. Generic apply-to-self for non-skill systems (e.g. ConsumableItem, Terrain)
-        public bool TryApplyStatusEffectApplicationToSelf(StatusEffectApplication application)
+        public bool TryApplyStatusEffectApplicationToSelf(StatusEffectApplicationEntry application)
         {
             return this.TryApplyStatusEffectApplicationToSelf(application, this.gameObject);
         }
-        public bool TryApplyStatusEffectApplicationToSelf(StatusEffectApplication application, GameObject sourceOverride)
+        public bool TryApplyStatusEffectApplicationToSelf(StatusEffectApplicationEntry application, GameObject sourceOverride)
         {
             if (application == null) return false;
             if (!application.IsValid) return false;
@@ -41,18 +41,18 @@ namespace FlameOfTheLost
         }
 
         //      1.1. 
-        public int TryApplyStatusEffectApplicationsToSelf(IEnumerable<StatusEffectApplication> applications)
+        public int TryApplyStatusEffectApplicationsToSelf(IEnumerable<StatusEffectApplicationEntry> applications)
         {
             return this.TryApplyStatusEffectApplicationsToSelf(applications, this.gameObject);
         }
-        public int TryApplyStatusEffectApplicationsToSelf(IEnumerable<StatusEffectApplication> applications, GameObject sourceOverride)
+        public int TryApplyStatusEffectApplicationsToSelf(IEnumerable<StatusEffectApplicationEntry> applications, GameObject sourceOverride)
         {
             if (applications == null) return 0;
             if (this.StatusEffectController == null) return 0;
 
             int appliedCount = 0;
 
-            foreach (StatusEffectApplication application in applications)
+            foreach (StatusEffectApplicationEntry application in applications)
             {
                 if (this.TryApplyStatusEffectApplicationToSelf(application, sourceOverride))
                 {

@@ -46417,7 +46417,7 @@ GameObject:
   - component: {fileID: 209471719}
   - component: {fileID: 209471720}
   m_Layer: 8
-  m_Name: Refreshment
+  m_Name: Refresh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47501,6 +47501,10 @@ MonoBehaviour:
   - {fileID: 1506897750}
   _spawnPlayerOnStart: 1
   _respawnDelaySeconds: 0
+  _spawnRecord:
+    _spawnPlacementSourceType: 0
+    _activeSpawnPointId: 1
+    _activeCheckpointId: 
 --- !u!1 &332704649
 GameObject:
   m_ObjectHideFlags: 0
@@ -102471,7 +102475,7 @@ MonoBehaviour:
   _maxValue: 100
   _costMultiplier: 1
   _costAdditiveFlat: 0
-  _activePeriodicStreams: []
+  _runtimeStatPeriodicStreams: []
   _isDeathDisabled: 0
   _staminaRegenRate: 5
   _staminaRegenDelay: 1
@@ -102497,7 +102501,7 @@ MonoBehaviour:
   _maxValue: 100
   _costMultiplier: 1
   _costAdditiveFlat: 0
-  _activePeriodicStreams: []
+  _runtimeStatPeriodicStreams: []
   _isDeathDisabled: 0
   _isSilenced: 0
 --- !u!114 &1951002774
@@ -102517,7 +102521,7 @@ MonoBehaviour:
   _maxValue: 100
   _costMultiplier: 1
   _costAdditiveFlat: 0
-  _activePeriodicStreams: []
+  _runtimeStatPeriodicStreams: []
   _isDeathDisabled: 0
   _damageReceivedMultiplier: 1
   _damageReceivedAdditiveFlat: 0
@@ -104354,7 +104358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerComponentController
   _identityController: {fileID: 1971478399}
-  _refreshmentHandler: {fileID: 209471720}
+  _refreshHandler: {fileID: 209471720}
   _inputHandler: {fileID: 2107461199}
   _movementHandler: {fileID: 2107461197}
   _terrainContactHandler: {fileID: 2107461204}

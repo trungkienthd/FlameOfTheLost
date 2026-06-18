@@ -6,48 +6,48 @@ namespace FlameOfTheLost
     public static class ResourceCostUtility
     {
         // cooldownCheck: () => true if the skill is currently on cooldown
-        public static GateResult Check(ICharacterResourcesGateContext context, ResourceCost resourceCost)
+        public static ResourceGateResponseRecord Check(ICharacterResourcesGateContext context, ResourceCostEntry resourceCost)
         {
             // Compute cost (percent-of-max -> flat)
             var runtimeCost = ResourceCostUtility.GetRuntimeResourceCost(resourceCost, context.HP.MaxValue, context.FP.MaxValue, context.Stamina.MaxValue);
 
             // Silence check
-            if (runtimeCost.IsSilencedBlocked && context.FP.IsSilenced) return ResourceCostUtility.GetRejectedGateResult(GateRejectType.Silenced, runtimeCost);
+            if (runtimeCost.IsSilencedBlocked && context.FP.IsSilenced) return ResourceCostUtility.GetRejectedGateResponse(GateRejectType.Silenced, runtimeCost);
 
             // Stamina check: strict reserve + affordability
             if (runtimeCost.StaminaCost > 0)
             {
                 if (context.Stamina.CurrentValue < runtimeCost.StaminaCost)
-                    return ResourceCostUtility.GetRejectedGateResult(GateRejectType.NotEnoughStamina, runtimeCost);
+                    return ResourceCostUtility.GetRejectedGateResponse(GateRejectType.NotEnoughStamina, runtimeCost);
 
                 // Authoritative check (includes SE scaling + reserve enforcement inside StaminaController)
                 if (!context.Stamina.CanSpendCost(runtimeCost.StaminaCost))
-                    return ResourceCostUtility.GetRejectedGateResult(GateRejectType.ReserveWouldBreakMinStamina, runtimeCost);
+                    return ResourceCostUtility.GetRejectedGateResponse(GateRejectType.ReserveWouldBreakMinStamina, runtimeCost);
             }
 
             // FP check: affordability
             if (runtimeCost.FPCost > 0 && context.FP.CurrentValue < runtimeCost.FPCost)
             {
-                return ResourceCostUtility.GetRejectedGateResult(GateRejectType.NotEnoughFP, runtimeCost);
+                return ResourceCostUtility.GetRejectedGateResponse(GateRejectType.NotEnoughFP, runtimeCost);
             }
 
             // HP check: affordability + self-kill rule
             if (runtimeCost.HPCost > 0)
             {
                 if (context.HP.CurrentValue < runtimeCost.HPCost)
-                    return ResourceCostUtility.GetRejectedGateResult(GateRejectType.NotEnoughHP, runtimeCost);
+                    return ResourceCostUtility.GetRejectedGateResponse(GateRejectType.NotEnoughHP, runtimeCost);
 
                 int hpAfterCost = context.HP.CurrentValue - runtimeCost.HPCost;
                 if (hpAfterCost <= 0 && !runtimeCost.AllowSelfKillWithHPCost)
-                    return ResourceCostUtility.GetRejectedGateResult(GateRejectType.WouldSelfKill, runtimeCost);
+                    return ResourceCostUtility.GetRejectedGateResponse(GateRejectType.WouldSelfKill, runtimeCost);
             }
 
-            return ResourceCostUtility.GetAcceptedGateResult(runtimeCost);
+            return ResourceCostUtility.GetAcceptedGateResponse(runtimeCost);
         }
 
-        public static GateResult GetAcceptedGateResult(RuntimeResourceCost runtimeCost)
+        public static ResourceGateResponseRecord GetAcceptedGateResponse(RuntimeResourceCost runtimeCost)
         {
-            return new GateResult
+            return new ResourceGateResponseRecord
             {
                 IsAccepted = true,
                 RejectType = GateRejectType.None,
@@ -55,9 +55,9 @@ namespace FlameOfTheLost
             };
         }
 
-        public static GateResult GetRejectedGateResult(GateRejectType rejectType, RuntimeResourceCost runtimeCost = default)
+        public static ResourceGateResponseRecord GetRejectedGateResponse(GateRejectType rejectType, RuntimeResourceCost runtimeCost = default)
         {
-            return new GateResult
+            return new ResourceGateResponseRecord
             {
                 IsAccepted = false,
                 RejectType = rejectType,
@@ -65,7 +65,7 @@ namespace FlameOfTheLost
             };
         }
 
-        public static RuntimeResourceCost GetRuntimeResourceCost(ResourceCost baseCost, int maxHP, int maxFP, int maxStamina)
+        public static RuntimeResourceCost GetRuntimeResourceCost(ResourceCostEntry baseCost, int maxHP, int maxFP, int maxStamina)
         {
             // Convert percent-of-max into integer costs (ceil so small % still costs at least 1 when >0).
             int hpFromPercentOfMax      = baseCost.HPPercentOfMaxCost       > 0f ? Mathf.CeilToInt(baseCost.HPPercentOfMaxCost      * maxHP)        : 0;
@@ -84,6 +84,5 @@ namespace FlameOfTheLost
                 AllowSelfKillWithHPCost = baseCost.AllowSelfKillWithHPCost
             };
         }
-
     }
 }

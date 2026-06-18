@@ -129,7 +129,7 @@ namespace FlameOfTheLost
 
         //  2. ICharacterRefreshable implementation
         public int RefreshmentConfigurePriority => 50;
-        public void RefreshCharacter(CharacterRefreshmentContext context)
+        public void RefreshCharacter(CharacterRefreshContext context)
         {
             this.IsDeathDisabled = false;
 

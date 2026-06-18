@@ -57,7 +57,7 @@ namespace FlameOfTheLost
         }
 
         //  3. Refresh Pool for Respawning
-        public override void RefreshPoolAfterPlace(CharacterRefreshmentContext context)
+        public override void RefreshPoolAfterPlace(CharacterRefreshContext context)
         {
             base.RefreshPoolAfterPlace(context);
 
@@ -65,7 +65,7 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        protected override void ApplyStatPeriodicTick(StatusEffectStatPeriodicContribution periodic, int tickAmount, RuntimeStatusEffect source)
+        protected override void ApplyStatPeriodicTick(StatusEffectStatPeriodicContributionEntry periodic, int tickAmount, RuntimeStatusEffect source)
         {
             if (periodic == null) return;
             if (tickAmount <= 0) return;

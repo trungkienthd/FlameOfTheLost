@@ -104,11 +104,11 @@ namespace FlameOfTheLost
         }
 
         //  2. Gets the MeleeHitboxShape for the given side.
-        public MeleeHitboxShape GetMeleeHitboxShape(AttackSide attackSide = AttackSide.Left)
+        public MeleeHitboxShapeEntry GetMeleeHitboxShape(AttackSide attackSide = AttackSide.Left)
         {
             CharacterAttackAnimationClipHitboxSetEntry set = this.GetAnimationClipHitboxSet(attackSide);
 
-            MeleeHitboxShape result = new MeleeHitboxShape
+            MeleeHitboxShapeEntry result = new MeleeHitboxShapeEntry
             (
                 set.Down.HitboxShape,
                 set.Side.HitboxShape,
@@ -157,7 +157,7 @@ namespace FlameOfTheLost
                 Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Both Left and Right '{label}' are null. At least one must be assigned.", this);
             }
         }
-        private void ValidatePolygonShapePair(PolygonColliderShape leftShape, PolygonColliderShape rightShape, string label)
+        private void ValidatePolygonShapePair(PolygonColliderShapeEntry leftShape, PolygonColliderShapeEntry rightShape, string label)
         {
             if (!leftShape.IsValid && !rightShape.IsValid)
             {

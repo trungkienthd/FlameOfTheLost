@@ -13,7 +13,7 @@ namespace FlameOfTheLost
         private CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
         [Header("Gain Visual")]
-        [SerializeField] private Color _gainColor = Color.yellow;
+        [SerializeField] private Color _gainColor = new Color(1, 0.95f, 0.75f);
         private Color GainColor => _gainColor;
 
         public void PlayGainVFX()

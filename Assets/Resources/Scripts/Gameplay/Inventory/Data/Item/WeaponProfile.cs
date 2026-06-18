@@ -26,8 +26,8 @@ namespace FlameOfTheLost
 
         //  3. Capability Requirements
         [Header("Capability Requirements")]
-        [SerializeField] private List<CharacterCapabilityRequirement> _requirements = new();
-        public IReadOnlyList<CharacterCapabilityRequirement> Requirements => _requirements;
+        [SerializeField] private List<CharacterCapabilityRequirementEntry> _requirements = new();
+        public IReadOnlyList<CharacterCapabilityRequirementEntry> Requirements => _requirements;
 
         // --- Unity Callbacks ---
 #if UNITY_EDITOR

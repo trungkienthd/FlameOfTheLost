@@ -9,10 +9,10 @@ namespace FlameOfTheLost
     {
         [SerializeField] private CharacterTraversalType _targetTraversalType;
         [SerializeField] private bool _canEnter = true;
-        [SerializeField] private List<StatusEffectApplication> _applications = new();
+        [SerializeField] private List<StatusEffectApplicationEntry> _applications = new();
 
         public CharacterTraversalType TargetTraversalType => _targetTraversalType;
         public bool CanEnter => _canEnter;
-        public IReadOnlyList<StatusEffectApplication> Applications => _applications;
+        public IReadOnlyList<StatusEffectApplicationEntry> Applications => _applications;
     }
 }

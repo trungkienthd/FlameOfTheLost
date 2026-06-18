@@ -55,8 +55,8 @@ namespace FlameOfTheLost
         }
 
         //      3.2. Stat Periodic streams injected by StatPeriodicHandler.Recompute()
-        [SerializeField] private List<StatusEffectStatPeriodicStream> _activePeriodicStreams = new();
-        protected List<StatusEffectStatPeriodicStream> ActiveStatPeriodicStreams => _activePeriodicStreams;
+        [SerializeField] private List<RuntimeStatusEffectStatPeriodicStream> _runtimeStatPeriodicStreams = new();
+        protected IReadOnlyList<RuntimeStatusEffectStatPeriodicStream> RuntimeStatPeriodicStreams => _runtimeStatPeriodicStreams;
 
         //  4. Death Disable State (Runtime)
         [Header("Death Disable (Runtime)")]
@@ -153,10 +153,10 @@ namespace FlameOfTheLost
         public abstract void SetStatusEffectStatModifierAdditiveFlat(StatusEffectStatModifierTarget target, float additiveFlat);
 
         //  7. IStatusEffectStatPeriodicConsumer implementation
-        public virtual void SetActivePeriodicStreams(IReadOnlyList<StatusEffectStatPeriodicStream> streams)
+        public virtual void SetActivePeriodicStreams(IReadOnlyList<RuntimeStatusEffectStatPeriodicStream> streams)
         {
             // Store a copy so each consumer owns its own accumulators
-            this.ActiveStatPeriodicStreams.Clear();
+            _runtimeStatPeriodicStreams.Clear();
             if (streams == null) return;
 
             for (int i = 0; i < streams.Count; i++)
@@ -165,16 +165,16 @@ namespace FlameOfTheLost
                 if (s == null) continue;
 
                 // Copy stream, accumulator starts at 0 for this consumer
-                this.ActiveStatPeriodicStreams.Add(new StatusEffectStatPeriodicStream(s.StatPeriodicContribution, s.Source, s.TickInterval, s.TickAmountPerSecond));
+                _runtimeStatPeriodicStreams.Add(new RuntimeStatusEffectStatPeriodicStream(s.StatPeriodicContribution, s.Source, s.TickInterval, s.TickAmountPerSecond));
             }
         }
 
         //  8. Character Refresh
-        public virtual void RefreshPoolAfterPlace(CharacterRefreshmentContext context)
+        public virtual void RefreshPoolAfterPlace(CharacterRefreshContext context)
         {
             this.IsDeathDisabled = false;
 
-            this.ActiveStatPeriodicStreams.Clear();
+            _runtimeStatPeriodicStreams.Clear();
             this.SetCurrentValue(this.MaxValue);
         }
 
@@ -182,22 +182,22 @@ namespace FlameOfTheLost
         public virtual void DisableResourcePoolAfterCharacterDeath(CharacterDeathContext context)
         {
             this.IsDeathDisabled = true;
-            this.ActiveStatPeriodicStreams.Clear();
+            _runtimeStatPeriodicStreams.Clear();
         }
 
         // --- Helpers ---
         //  1. Subclass-specific application of a stat periodic tick
-        protected abstract void ApplyStatPeriodicTick(StatusEffectStatPeriodicContribution periodic, int tickAmount, RuntimeStatusEffect source);
+        protected abstract void ApplyStatPeriodicTick(StatusEffectStatPeriodicContributionEntry periodic, int tickAmount, RuntimeStatusEffect source);
 
         //  2. Ticking stat periodic streams
         protected virtual void TickStatPeriodic(float dt)
         {
             if (dt <= 0f) return;
-            if (this.ActiveStatPeriodicStreams == null || this.ActiveStatPeriodicStreams.Count == 0) return;
+            if (_runtimeStatPeriodicStreams == null || this.RuntimeStatPeriodicStreams.Count == 0) return;
 
-            for (int i = 0; i < this.ActiveStatPeriodicStreams.Count; i++)
+            for (int i = 0; i < this.RuntimeStatPeriodicStreams.Count; i++)
             {
-                var stream = this.ActiveStatPeriodicStreams[i];
+                var stream = this.RuntimeStatPeriodicStreams[i];
                 if (stream == null) continue;
 
                 // Accumulate
