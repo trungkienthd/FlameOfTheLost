@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Ddg_Player
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterDodgeConfig
   _dodgeDuration: 0.25
-  _recoveryDuration: 0.15
-  _dodgeSpeed: 8
+  _recoveryDuration: 1
+  _dodgeSpeed: 16
   _useLastFacingDirectionWhenNoInput: 1
   _isHitInvulnerableDuringDodge: 1
   _isHitInvulnerableDuringRecovery: 0

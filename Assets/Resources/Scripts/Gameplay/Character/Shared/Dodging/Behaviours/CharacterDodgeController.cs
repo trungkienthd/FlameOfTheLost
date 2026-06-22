@@ -5,6 +5,7 @@ namespace FlameOfTheLost
 {
     public class CharacterDodgeController : CharacterBehaviourControllerBase,
         ICharacterHitInvulnerabilityProvider,
+        IStatusEffectFlagConsumer,
         ICharacterRefreshable,
         ICharacterDeathDisableable
     {
@@ -19,6 +20,7 @@ namespace FlameOfTheLost
         private Rigidbody2D Rigidbody2D => _rigidbody2D;
 
         private IFacingProvider FacingProvider => this.CharacterRootController.VisualController;
+        private CharacterResourcesController ResourcesController => this.CharacterRootController.ResourcesController;
 
         //  2. Dodge State
         [Header("Dodge State (Runtime)")]
@@ -39,7 +41,30 @@ namespace FlameOfTheLost
             set => _currentDodgeDirection = value;
         }
 
-        //  3. ICharacterHitInvulnerabilityProvider implementation
+        //  3. Last Resource Gate Result
+        public ResourceGateResponseRecord LastDodgeCostGateResponse
+        {
+            get;
+            private set;
+        }
+
+        //  4. Status Effects Flags
+        [Header("Status Effects Flags (Runtime)")]
+        [SerializeField] private bool _cannotDodge = false;
+        [SerializeField] private bool _ignoreDodgeLock = false;
+        private bool CannotDodge
+        {
+            get => _cannotDodge;
+            set => _cannotDodge = value;
+        }
+        private bool IgnoreDodgeLock
+        {
+            get => _ignoreDodgeLock;
+            set => _ignoreDodgeLock = value;
+        }
+        public bool DodgeBlocked => this.CannotDodge && !this.IgnoreDodgeLock;
+
+        //  5. ICharacterHitInvulnerabilityProvider implementation
         public bool IsHitInvulnerable
         {
             get
@@ -60,7 +85,7 @@ namespace FlameOfTheLost
             }
         }
 
-        //  4. Coroutine
+        //  6. Coroutine
         private Coroutine _dodgeRoutine;
         private Coroutine DodgeRoutine
         {
@@ -68,7 +93,7 @@ namespace FlameOfTheLost
             set => _dodgeRoutine = value;
         }
 
-        //  5. Death Disable
+        //  7. Death Disable
         [Header("Death Disable (Runtime)")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
@@ -82,11 +107,19 @@ namespace FlameOfTheLost
         public bool TryDodge(Vector2 requestedDirection)
         {
             if (this.IsDeathDisabled) return false;
+            if (this.DodgeBlocked) return false;
             if (this.Config == null) return false;
             if (this.DodgeState != CharacterDodgeState.None) return false;
 
             Vector2 dodgeDirection = this.ResolveDodgeDirection(requestedDirection);
             if (dodgeDirection.sqrMagnitude < 0.0001f) return false;
+
+            // Pay immediately before the dodge starts.
+            // If this fails, the dodge does not begin.
+            if (!this.TryPayDodgeCost())
+            {
+                return false;
+            }
 
             this.StartDodge(dodgeDirection);
             return true;
@@ -96,23 +129,63 @@ namespace FlameOfTheLost
             return this.TryDodge(Vector2.zero);
         }
 
-        //  2. ICharacterRefreshable implementation
+        //  2. IStatusEffectFlagConsumer implementation
+        public void SetStatusEffectFlag(StatusEffectFlagTarget flagType, bool value)
+        {
+            switch (flagType)
+            {
+                case StatusEffectFlagTarget.CannotDodge:
+                    this.CannotDodge = value;
+                    return;
+
+                case StatusEffectFlagTarget.IgnoreDodgeLock:
+                    this.IgnoreDodgeLock = value;
+                    return;
+
+                default:
+                    // Do nothing for other flags.
+                    return;
+            }
+        }
+
+        //  3. ICharacterRefreshable implementation
         public int RefreshmentConfigurePriority => 35;
         public void RefreshCharacter(CharacterRefreshContext context)
         {
             this.IsDeathDisabled = false;
+            this.LastDodgeCostGateResponse = default;
             this.ClearDodgeState();
         }
 
-        //  3. ICharacterDeathDisableable implementation
+        //  4. ICharacterDeathDisableable implementation
         public int DeathDisablePriority => 20;
         public void DisableAfterCharacterDeath(CharacterDeathContext context)
         {
             this.IsDeathDisabled = true;
+            this.LastDodgeCostGateResponse = default;
             this.ClearDodgeState();
         }
 
         // --- Helpers ---
+        private bool TryPayDodgeCost()
+        {
+            this.LastDodgeCostGateResponse = default;
+
+            if (this.Config == null) return false;
+
+            CharacterResourcesController resourcesController = this.ResourcesController;
+            if (resourcesController == null)
+            {
+                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterDodgeController)}] Missing {nameof(CharacterResourcesController)}. Dodge cost cannot be paid.", this);
+                return false;
+            }
+
+            ResourceGateResponseRecord response = resourcesController.TryPayCost(this.Config.DodgeCost);
+            this.LastDodgeCostGateResponse = response;
+
+            return response.IsAccepted;
+        }
+
         private void StartDodge(Vector2 dodgeDirection)
         {
             this.ClearDodgeRoutineOnly();

@@ -7,14 +7,19 @@ namespace FlameOfTheLost
     {
         // --- States ---
         //  1. References
-        [Header("References (Knockback)")]
-        [SerializeField] private KnockbackReceivingHandler _knockbackHandler;
-        private KnockbackReceivingHandler KnockbackHandler
-        {
-            get => _knockbackHandler;
-            set => _knockbackHandler = value;
-        }
         private HPController HPController => this.CharacterRootController.HPController;
+
+        [Header("References - Knockback")]
+        [SerializeField] private KnockbackReceivingHandler _knockbackHandler;
+        private KnockbackReceivingHandler KnockbackHandler => _knockbackHandler;
+
+
+        [Header("References - Hit Invulnerability")]
+        [SerializeField] private MonoBehaviour _hitInvulnerabilityProviderSource;
+
+        private ICharacterHitInvulnerabilityProvider _hitInvulnerabilityProvider;
+        private MonoBehaviour HitInvulnerabilityProviderSource => _hitInvulnerabilityProviderSource;
+        private ICharacterHitInvulnerabilityProvider HitInvulnerabilityProvider => _hitInvulnerabilityProvider;
 
         //  2. Status Effects Flags (Runtime)
         [Header("Status Effects Flags (Runtime)")]
@@ -60,6 +65,15 @@ namespace FlameOfTheLost
             DamageDealingHandler damageDealingHandler = damager as DamageDealingHandler;
             if (damageDealingHandler != null && !damageDealingHandler.CanHit(targetDamageable)) return;
 
+            // Hit invulnerability check (e.g., dodging)
+            // IMPORTANT:
+            // This must happen before TryRegisterHitTarget and NotifyHitConfirmed.
+            // Otherwise dodge would still consume the hitbox and trigger on-hit status effects.
+            if (this.ShouldAvoidIncomingHit())
+            {
+                return;
+            }
+
             // Check if already processed this attacker (This is not the main protection, which is done by HitboxController)
             if (Time.frameCount == this.LastHitFrame && System.Object.ReferenceEquals(this.LastDamager, damager)) return;
 
@@ -80,7 +94,7 @@ namespace FlameOfTheLost
                 ? (this.transform.position - damager.OriginTransform.position).normalized 
                 : Vector2.zero;
 
-            // Apply damage and knockback
+            // Apply damage 
             if (!this.IgnoreDamageReceived)
             {
                 CharacterDeathCauseEntry deathCause = CharacterDeathCauseGenerationUtility.FromDamageSource
@@ -94,6 +108,7 @@ namespace FlameOfTheLost
                 targetDamageable.TakeDamage(damager.EffectiveDamageAmount, deathCause);
             }
 
+            // Apply knockback
             if (!this.IgnoreKnockbackReceived)
             {
                 this.KnockbackHandler?.ApplyKnockback(direction, damager.EffectiveKnockbackForce);
@@ -132,11 +147,40 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
+        private bool ShouldAvoidIncomingHit()
+        {
+            return this.HitInvulnerabilityProvider != null &&
+                   this.HitInvulnerabilityProvider.IsHitInvulnerable;
+        }
+
         protected override void CacheReferences()
         {
             base.CacheReferences();
 
             if (!this.KnockbackHandler) _knockbackHandler = this.GetComponent<KnockbackReceivingHandler>();
+
+            if (this.HitInvulnerabilityProvider == null)
+            {
+                if (this.HitInvulnerabilityProviderSource == null)
+                {
+                    _hitInvulnerabilityProviderSource = this.CharacterRootController.DodgeController;
+                }
+
+                if (this.HitInvulnerabilityProviderSource != null)
+                {
+                    _hitInvulnerabilityProvider = this.HitInvulnerabilityProviderSource as ICharacterHitInvulnerabilityProvider;
+                }
+
+                if (this.HitInvulnerabilityProvider == null)
+                {
+                    _hitInvulnerabilityProvider = this.GetComponentInParent<ICharacterHitInvulnerabilityProvider>();
+                }
+
+                if (this.HitInvulnerabilityProvider == null)
+                {
+                    _hitInvulnerabilityProvider = this.GetComponentInChildren<ICharacterHitInvulnerabilityProvider>(true);
+                }
+            }
         }
     }
 }
