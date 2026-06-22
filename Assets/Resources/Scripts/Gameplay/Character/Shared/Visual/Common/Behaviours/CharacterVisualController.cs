@@ -27,6 +27,7 @@ namespace FlameOfTheLost
         private CharacterVisualLocomotionAnimationHandler LocomotionAnimationHandler => this.CharacterRootController.VisualLocomotionAnimationHandler;
         private CharacterVisualAttackAnimationHandler AttackAnimationHandler => this.CharacterRootController.VisualAttackAnimationHandler;
         private CharacterVisualHitDeathAnimationHandler HitDeathAnimationHandler => this.CharacterRootController.VisualHitDeathAnimationHandler;
+        private CharacterVisualDodgeAnimationHandler DodgeAnimationHandler => this.CharacterRootController.VisualDodgeAnimationHandler;
 
         //  2. Color configuration
         [Header("Visual Color")]
@@ -53,6 +54,7 @@ namespace FlameOfTheLost
         public static readonly int DieID = Animator.StringToHash("Die");
         public static readonly int AttackID = Animator.StringToHash("Attack");
         public static readonly int HitID = Animator.StringToHash("Hit");
+        public static readonly int DodgeID = Animator.StringToHash("Dodge");
 
         // --- Events ---
         public event Action OnDeathAnimationFinished
@@ -95,6 +97,7 @@ namespace FlameOfTheLost
             this.Animator.ResetTrigger(CharacterVisualController.AttackID);
             this.Animator.ResetTrigger(CharacterVisualController.HitID);
             this.Animator.ResetTrigger(CharacterVisualController.DieID);
+            this.Animator.ResetTrigger(CharacterVisualController.DodgeID);
 
             this.SetDead(false);
 
@@ -199,7 +202,21 @@ namespace FlameOfTheLost
             this.Animator.SetBool(CharacterVisualController.DeadID, isDead);
         }
 
-        //  7. Animation Controller-related
+        //  7. Dodge-related
+        public void TriggerDodge()
+        {
+            if (this.DodgeAnimationHandler == null) return;
+
+            this.DodgeAnimationHandler.TriggerDodge();
+        }
+        public void TriggerDodge(Vector2 dodgeDirection)
+        {
+            if (this.DodgeAnimationHandler == null) return;
+
+            this.DodgeAnimationHandler.TriggerDodge(dodgeDirection);
+        }
+
+        //  8. Animation Controller-related
         public void RebuildBaseAnimationOverride()
         {
             if (this.Animator == null || this.BaseAnimationController == null) return;
@@ -214,6 +231,11 @@ namespace FlameOfTheLost
             if (this.HitDeathAnimationHandler != null)
             {
                 this.HitDeathAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
+            }
+
+            if (this.DodgeAnimationHandler != null)
+            {
+                this.DodgeAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
             }
 
             this.Animator.runtimeAnimatorController = this.RuntimeOverrideController;
@@ -234,6 +256,11 @@ namespace FlameOfTheLost
                 this.HitDeathAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
             }
 
+            if (this.DodgeAnimationHandler != null)
+            {
+                this.DodgeAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
+            }
+
             if (this.AttackAnimationHandler != null)
             {
                 this.AttackAnimationHandler.ApplyAttackOverridesTo(this.RuntimeOverrideController, runtimeSkill, weapon, attackSideType);
@@ -242,7 +269,7 @@ namespace FlameOfTheLost
             this.Animator.runtimeAnimatorController = this.RuntimeOverrideController;
         }
 
-        //  7. Manage color
+        //  9. Manage color
         public void SetVisualColor(Color color)
         {
             if (this.SpriteRenderer == null) return;
@@ -276,6 +303,11 @@ namespace FlameOfTheLost
             {
                 this.HitDeathAnimationHandler.Initialize(this);
             }
+
+            if (this.DodgeAnimationHandler != null)
+            {
+                this.DodgeAnimationHandler.Initialize(this);
+            }
         }
 
         private void ForceAnimatorRefreshAfterCharacterRefreshment()
@@ -285,6 +317,7 @@ namespace FlameOfTheLost
             this.Animator.ResetTrigger(CharacterVisualController.AttackID);
             this.Animator.ResetTrigger(CharacterVisualController.HitID);
             this.Animator.ResetTrigger(CharacterVisualController.DieID);
+            this.Animator.ResetTrigger(CharacterVisualController.DodgeID);
 
             this.Animator.SetBool(CharacterVisualController.DeadID, false);
             this.Animator.SetFloat(CharacterVisualController.SpeedID, 0f);

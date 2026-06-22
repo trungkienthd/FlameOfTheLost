@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "Ddg_New", menuName = "Data/FlameOfTheLost/Character/Shared/Dodging/CharacterDodgeConfig")]
+    [CreateAssetMenu(fileName = "Ddg_New", menuName = "Data/FlameOfTheLost/Character/Shared/Dodge/CharacterDodgeConfig")]
     public class CharacterDodgeConfig : ScriptableObject
     {
         [Header("Timing")]

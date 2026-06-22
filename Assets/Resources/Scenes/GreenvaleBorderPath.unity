@@ -48947,6 +48947,7 @@ GameObject:
   - component: {fileID: 513242091}
   - component: {fileID: 513242090}
   - component: {fileID: 513242092}
+  - component: {fileID: 513242093}
   m_Layer: 8
   m_Name: Visual
   m_TagString: Untagged
@@ -49011,7 +49012,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!114 &513242084
 MonoBehaviour:
@@ -49160,6 +49161,20 @@ MonoBehaviour:
   _hitToDeathDelay: 0.5
   _deathCompletionFallbackDelay: 1
   _deathCompletionPadding: 0.03
+--- !u!114 &513242093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513242082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19cd58fe1fa00d24b9450c5fd9a56a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualDodgeAnimationHandler
+  _placeholderProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
+  _activeProfile: {fileID: 11400000, guid: 858e6abb6f0c8324bb20878a3a0ae59c, type: 2}
 --- !u!1 &531506779
 GameObject:
   m_ObjectHideFlags: 0
@@ -102184,6 +102199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterRootController: {fileID: 2107461207}
   _knockbackHandler: {fileID: 1917189433}
+  _hitInvulnerabilityProviderSource: {fileID: 0}
   _ignoreDamageReceived: 0
   _ignoreKnockbackReceived: 0
 --- !u!70 &1917189435
@@ -104381,6 +104397,7 @@ MonoBehaviour:
   _visualLocomotionAnimationHandler: {fileID: 513242089}
   _visualAttackAnimationHandler: {fileID: 513242090}
   _visualHitDeathAnimationHandler: {fileID: 513242092}
+  _visualDodgeAnimationHandler: {fileID: 513242093}
   _statusEffectVFXHolder: {fileID: 1097086741}
   _rewardVFXHandler: {fileID: 6884279}
   _combatController: {fileID: 557462172}
@@ -104423,6 +104440,8 @@ MonoBehaviour:
   _rigidbody2D: {fileID: 2107461202}
   _dodgeState: 0
   _currentDodgeDirection: {x: 0, y: 0}
+  _cannotDodge: 0
+  _ignoreDodgeLock: 0
   _isDeathDisabled: 0
 --- !u!1001 &2108359412
 PrefabInstance:

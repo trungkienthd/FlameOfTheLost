@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f19e0b99c58f7b44cab85bd35ccbd576, type: 3}
-  m_Name: Ddg_Generic
+  m_Name: Ddg_Player
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterDodgeConfig
   _dodgeDuration: 0.25
-  _recoveryDuration: 0.15
-  _dodgeSpeed: 8
+  _recoveryDuration: 1
+  _dodgeSpeed: 15
   _useLastFacingDirectionWhenNoInput: 1
+  _staminaCost: 15
   _isHitInvulnerableDuringDodge: 1
   _isHitInvulnerableDuringRecovery: 0

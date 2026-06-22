@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 8619395251524575671}
   - component: {fileID: 6819824635726035935}
   - component: {fileID: 391864750833664329}
+  - component: {fileID: 8086331531521290570}
   m_Layer: 9
   m_Name: Visual
   m_TagString: Untagged
@@ -484,6 +485,20 @@ MonoBehaviour:
   _hitToDeathDelay: 0.15
   _deathCompletionFallbackDelay: 1
   _deathCompletionPadding: 0.03
+--- !u!114 &8086331531521290570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333170155362222021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19cd58fe1fa00d24b9450c5fd9a56a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualDodgeAnimationHandler
+  _placeholderProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
+  _activeProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
 --- !u!1 &546589716473818984
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,6 +1042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterRootController: {fileID: 5013856377803996316}
   _knockbackHandler: {fileID: 4182638521067918659}
+  _hitInvulnerabilityProviderSource: {fileID: 0}
   _ignoreDamageReceived: 0
   _ignoreKnockbackReceived: 0
 --- !u!114 &4182638521067918659
@@ -1489,6 +1505,7 @@ MonoBehaviour:
   _visualLocomotionAnimationHandler: {fileID: 8471074619670850254}
   _visualAttackAnimationHandler: {fileID: 6819824635726035935}
   _visualHitDeathAnimationHandler: {fileID: 391864750833664329}
+  _visualDodgeAnimationHandler: {fileID: 8086331531521290570}
   _statusEffectVFXHolder: {fileID: 2170281567699780899}
   _rewardVFXHandler: {fileID: 2103957974545232575}
   _combatController: {fileID: 2103035301200508583}
@@ -1631,6 +1648,8 @@ MonoBehaviour:
   _rigidbody2D: {fileID: 8000788421409976908}
   _dodgeState: 0
   _currentDodgeDirection: {x: 0, y: 0}
+  _cannotDodge: 0
+  _ignoreDodgeLock: 0
   _isDeathDisabled: 0
 --- !u!114 &138990756075370264
 MonoBehaviour:

@@ -21,6 +21,7 @@ namespace FlameOfTheLost
 
         private IFacingProvider FacingProvider => this.CharacterRootController.VisualController;
         private CharacterResourcesController ResourcesController => this.CharacterRootController.ResourcesController;
+        private CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
         //  2. Dodge State
         [Header("Dodge State (Runtime)")]
@@ -191,12 +192,22 @@ namespace FlameOfTheLost
             this.ClearDodgeRoutineOnly();
 
             this.CurrentDodgeDirection = dodgeDirection.normalized;
+
+            // Gameplay state should begin immediately when dodge is accepted.
+            this.DodgeState = CharacterDodgeState.Dodging;
+
+            // Visual should react only after the real dodge has started.
+            if (this.VisualController != null)
+            {
+                this.VisualController.TriggerDodge(this.CurrentDodgeDirection);
+            }
+
             this.DodgeRoutine = this.StartCoroutine(this.CoHandleDodge());
         }
 
         private IEnumerator CoHandleDodge()
         {
-            this.DodgeState = CharacterDodgeState.Dodging;
+            //this.DodgeState = CharacterDodgeState.Dodging;
 
             float dodgeDuration = this.Config != null ? this.Config.DodgeDuration : 0f;
             float dodgeSpeed = this.Config != null ? this.Config.DodgeSpeed : 0f;
@@ -291,7 +302,7 @@ namespace FlameOfTheLost
             if (this.Config == null)
             {
                 Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterDodgeController)}] No dodge config assigned. Loading default config.", this);
-                _config = Resources.Load<CharacterDodgeConfig>("Data/Character/Shared/Dodging/Ddg_Generic");
+                _config = Resources.Load<CharacterDodgeConfig>("Data/Character/Shared/Dodge/Ddg_Generic");
             }
 
             if (this.Rigidbody2D == null) _rigidbody2D = this.GetComponent<Rigidbody2D>();
