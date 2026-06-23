@@ -13,10 +13,22 @@ namespace FlameOfTheLost
         protected CharacterCombatController CombatController => this.CharacterRootController.CombatController;
         protected CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController.CombatLoadoutController;
 
-        //  2. Movement Input
+        //  2. Input block(s)
+        protected bool IsInputBlocked
+        {
+            get
+            {
+                if (this.IsDeathDisabled) return true;
+                if (this.DodgeController != null && this.DodgeController.ShouldBlockOtherInputs) return true;
+
+                return false;
+            }
+        }
+
+        //  3. Movement Input
         public Vector2 MoveInput { get; private set; }
 
-        //  3. Death Disable state (Runtime)
+        //  4. Death Disable state (Runtime)
         [Header("Death Disable (Runtime)")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
@@ -65,6 +77,7 @@ namespace FlameOfTheLost
         //  4. Dodging Input APIs
         public void RequestDodge()
         {
+            //if (this.IsInputBlocked) return;
             if (this.IsDeathDisabled) return;
 
             this.DodgeController?.TryDodge(this.MoveInput);
@@ -74,44 +87,44 @@ namespace FlameOfTheLost
         //      5.1. Attack Input
         public void RequestNormalAttack(AttackSide attackSide)
         {
-            if (this.IsDeathDisabled) return;
+            if (this.IsInputBlocked) return;
             this.CombatController?.TryDoNormalAttack(attackSide);
         }
 
         public void RequestSpecialAttack(AttackSide attackSide)
         {
-            if (this.IsDeathDisabled) return;
+            if (this.IsInputBlocked) return;
             this.CombatController?.TryDoSpecialAttack(attackSide);
         }
 
         //      5.2. Combat Loadout Input
         public void RequestCycleWeapon(int direction)
         {
-            if (this.IsDeathDisabled) return;
+            if (this.IsInputBlocked) return;
             this.CombatLoadoutController?.TryCycleWeaponEntry(direction);
         }
 
         public void RequestQuickEquipWeapon()
         {
-            if (this.IsDeathDisabled) return;
+            if (this.IsInputBlocked) return;
             this.CombatLoadoutController?.TryQuickEquipWeapon();
         }
 
         public void RequestCycleConsumableItem(int direction)
         {
-            if (this.IsDeathDisabled) return;
+            if (this.IsInputBlocked) return;
             this.CombatLoadoutController?.TryCycleConsumableItemEntry(direction);
         }
 
         public void RequestConsumeConsumableItem()
         {
-            if (this.IsDeathDisabled) return;
+            if (this.IsInputBlocked) return;
             this.CombatLoadoutController?.TryConsumeConsumableItem();
         }
 
         public void RequestSetActiveWeaponSpecialSkill(SkillProfile skill)
         {
-            if (this.IsDeathDisabled) return;
+            if (this.IsInputBlocked) return;
             if (skill == null) return;
 
             this.CombatLoadoutController?.TrySetActiveEquippedWeaponActiveSpecialSkill(skill);

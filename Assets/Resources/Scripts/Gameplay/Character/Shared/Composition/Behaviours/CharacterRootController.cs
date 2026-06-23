@@ -8,6 +8,12 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterIdentityController _identityController;
         public CharacterIdentityController IdentityController => _identityController;
 
+        [Header("References - Body")]
+        [SerializeField] private Rigidbody2D _rigidbody2D;
+        [SerializeField] private Collider2D _mainCollider2D;
+        public Rigidbody2D Rigidbody2D => _rigidbody2D;
+        public Collider2D MainCollider2D => _mainCollider2D;
+
         [Header("References - Refreshment")]
         [SerializeField] private CharacterRefreshHandler _refreshHandler;
         public CharacterRefreshHandler RefreshHandler => _refreshHandler;
@@ -108,6 +114,9 @@ namespace FlameOfTheLost
             base.CacheReferences();
 
             if (this.IdentityController == null) _identityController = this.GetComponentInChildren<CharacterIdentityController>(true);
+
+            if (this.Rigidbody2D == null) _rigidbody2D = this.GetComponent<Rigidbody2D>();
+            if (this.MainCollider2D == null) _mainCollider2D = this.GetComponent<Collider2D>();
 
             if (this.RefreshHandler == null) _refreshHandler = this.GetComponentInChildren<CharacterRefreshHandler>(true);
 

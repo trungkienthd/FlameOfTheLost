@@ -49012,7 +49012,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!114 &513242084
 MonoBehaviour:
@@ -103764,7 +103764,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterRootController: {fileID: 2107461207}
-  _rigidbody2D: {fileID: 2107461202}
   _movementSpeed: 5
   _accel: 50
   _decel: 60
@@ -104387,6 +104386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerComponentController
   _identityController: {fileID: 1971478399}
+  _rigidbody2D: {fileID: 2107461202}
+  _mainCollider2D: {fileID: 2107461201}
   _refreshHandler: {fileID: 209471720}
   _inputHandler: {fileID: 2107461199}
   _movementHandler: {fileID: 2107461197}
@@ -104437,9 +104438,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterDodgeController
   _characterRootController: {fileID: 2107461207}
   _config: {fileID: 11400000, guid: 198e41c6dc8d48b4d8f9fedc3c644bea, type: 2}
-  _rigidbody2D: {fileID: 2107461202}
   _dodgeState: 0
   _currentDodgeDirection: {x: 0, y: 0}
+  _isMainColliderDisabledByDodge: 0
+  _mainColliderWasEnabledBeforeDodge: 0
   _cannotDodge: 0
   _ignoreDodgeLock: 0
   _isDeathDisabled: 0

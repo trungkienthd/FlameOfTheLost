@@ -11,9 +11,7 @@ namespace FlameOfTheLost
     {
         // --- States ---
         //  1. References
-        [Header("References (Movement)")]
-        [SerializeField] private Rigidbody2D _rigidbody2D;
-        public Rigidbody2D Rigidbody2D => _rigidbody2D;
+        public Rigidbody2D Rigidbody2D => this.CharacterRootController.Rigidbody2D;
         public CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
         //  2. Tuning Config
@@ -185,13 +183,6 @@ namespace FlameOfTheLost
             }
 
             this.VisualController?.FeedMovement(Vector2.zero);
-        }
-
-        // --- Helpers ---
-        protected override void CacheReferences()
-        {
-            base.CacheReferences();
-            if (this.Rigidbody2D == null) _rigidbody2D = this.GetComponent<Rigidbody2D>();
         }
     }
 }
