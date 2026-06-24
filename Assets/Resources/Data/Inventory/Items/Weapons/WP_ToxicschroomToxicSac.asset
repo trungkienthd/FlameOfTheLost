@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7287a1f981554f14f988778fed0a6c5c, type: 3}
   m_Name: WP_ToxicschroomToxicSac
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.WeaponProfile
-  _id: 115
+  _id: 71002
+  _key: TOXIC_SAC
   _displayName: Toxic Sac
   _description: Toxicschroom's Toxic Sac
   _icon: {fileID: 0}
@@ -21,3 +22,4 @@ MonoBehaviour:
   _type: 6
   _normalSkill: {fileID: 11400000, guid: f83ec08a9ac622448ac00cfd201b56bf, type: 2}
   _innateSpecialSkill: {fileID: 0}
+  _requirements: []

@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066661c177f42b944b17c8871d1f7693, type: 3}
   m_Name: SKM_Chop
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MeleeSkillProfile
-  _id: 16
+  _id: 81102
+  _key: 
   _displayName: Chop
   _description: 
   _icon: {fileID: 21300000, guid: f29630b8c2b6a6c4281812419df67feb, type: 3}
   _defaultProvisionType: 1
   _attachableWeaponTypes: 01000000
+  _requirements: []
   _damageAmount: 20
   _knockbackForce: 3
   _resourceCost:

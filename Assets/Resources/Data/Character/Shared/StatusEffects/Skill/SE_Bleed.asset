@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe320981f246e994ab0cebc1b14323e1, type: 3}
   m_Name: SE_Bleed
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
-  _id: 5201
+  _id: 52001
   _key: SE_BLEED
   _displayName: Bleed
   _description: 

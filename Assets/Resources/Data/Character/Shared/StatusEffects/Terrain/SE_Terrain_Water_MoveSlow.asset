@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe320981f246e994ab0cebc1b14323e1, type: 3}
   m_Name: SE_Terrain_Water_MoveSlow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
-  _id: 5104
+  _id: 51004
   _key: SE_TERRAIN_WATER_SLOW
   _displayName: Water Movement Slow
   _description: Moving through water reduces movement speed.

@@ -1144,7 +1144,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_0
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1166,7 +1166,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_1
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_1
       rect:
         serializedVersion: 2
         x: 16
@@ -1188,7 +1188,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_2
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_2
       rect:
         serializedVersion: 2
         x: 32
@@ -1210,7 +1210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_3
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_3
       rect:
         serializedVersion: 2
         x: 48
@@ -1232,7 +1232,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_4
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_4
       rect:
         serializedVersion: 2
         x: 64
@@ -1254,7 +1254,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_5
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_5
       rect:
         serializedVersion: 2
         x: 80
@@ -1276,7 +1276,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_0
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1298,7 +1298,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_1
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_1
       rect:
         serializedVersion: 2
         x: 16
@@ -1320,7 +1320,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_2
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_2
       rect:
         serializedVersion: 2
         x: 32
@@ -1342,7 +1342,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_3
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_3
       rect:
         serializedVersion: 2
         x: 48
@@ -1364,7 +1364,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_4
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_4
       rect:
         serializedVersion: 2
         x: 64
@@ -1386,7 +1386,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_5
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_5
       rect:
         serializedVersion: 2
         x: 80
@@ -1408,7 +1408,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_0
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1430,7 +1430,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_1
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_1
       rect:
         serializedVersion: 2
         x: 16
@@ -1452,7 +1452,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_2
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_2
       rect:
         serializedVersion: 2
         x: 32
@@ -1474,7 +1474,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_3
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_3
       rect:
         serializedVersion: 2
         x: 48
@@ -1496,7 +1496,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_4
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_4
       rect:
         serializedVersion: 2
         x: 64
@@ -1518,7 +1518,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_5
+      name: CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_5
       rect:
         serializedVersion: 2
         x: 80
@@ -1957,24 +1957,24 @@ TextureImporter:
       CFRPG16_Biteschroom_Idle_Default_Side_1: -1502143274
       CFRPG16_Biteschroom_Idle_Default_Up_0: -2115064696
       CFRPG16_Biteschroom_Idle_Default_Up_1: 770164482
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_0: -1101386201
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_1: 1915440149
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_2: -444836392
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_3: -620154052
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_4: 701626134
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Down_5: -1773528947
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_0: -1787355121
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_1: 236153345
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_2: 838634816
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_3: 1417556444
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_4: 851902262
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Side_5: -703362605
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_0: 991540108
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_1: 179475520
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_2: 192147938
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_3: 1803504439
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_4: -56220677
-      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKR_Chomp_Up_5: -535061604
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_0: -1101386201
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_1: 1915440149
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_2: -444836392
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_3: -620154052
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_4: 701626134
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Down_5: -1773528947
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_0: -1787355121
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_1: 236153345
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_2: 838634816
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_3: 1417556444
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_4: 851902262
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Side_5: -703362605
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_0: 991540108
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_1: 179475520
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_2: 192147938
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_3: 1803504439
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_4: -56220677
+      CFRPG16_Biteschroom_WP_BiteschroomBitingCap_SKM_Chomp_Up_5: -535061604
       CFRPG16_Biteschroom_Walk_Down_0: 1503402784
       CFRPG16_Biteschroom_Walk_Down_1: 1009842380
       CFRPG16_Biteschroom_Walk_Down_2: 493243139

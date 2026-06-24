@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066661c177f42b944b17c8871d1f7693, type: 3}
   m_Name: SKM_HemorrhageSlash
   m_EditorClassIdentifier: 
-  _id: 14
+  _id: 81201
+  _key: 
   _displayName: Hemorrhage Slash
   _description: 
   _icon: {fileID: 21300000, guid: 9a2fd91a1a9668b4199707e6aa891db4, type: 3}
   _defaultProvisionType: 2
   _attachableWeaponTypes: 0000000002000000
+  _requirements: []
   _damageAmount: 12
   _knockbackForce: 4
   _resourceCost:

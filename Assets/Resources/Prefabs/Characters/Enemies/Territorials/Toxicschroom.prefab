@@ -1625,8 +1625,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterRootController: {fileID: 5013856377803996316}
-  _movementSpeed: 1.5
-  _accel: 18
+  _movementSpeed: 1.45
+  _accel: 16
   _decel: 35
   _cannotMove: 0
   _ignoreMovementLock: 0

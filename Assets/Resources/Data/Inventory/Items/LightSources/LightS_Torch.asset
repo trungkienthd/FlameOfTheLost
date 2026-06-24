@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa240ccd086238949bdcf9cff36d72dd, type: 3}
   m_Name: LightS_Torch
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.LightSourceProfile
-  _id: 21
+  _id: 70001
   _key: TORCH
   _displayName: Torch
   _description: 

@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc1fbdd3fd47a146b22544a6eae4a7d, type: 3}
   m_Name: SKR_QuickShot
   m_EditorClassIdentifier: 
-  _id: 22
+  _id: 82101
+  _key: 
   _displayName: Quick Shot
   _description: 
   _icon: {fileID: 21300000, guid: 5865721334e29f84ba57dcf3311acebd, type: 3}
   _defaultProvisionType: 1
   _attachableWeaponTypes: 03000000
+  _requirements: []
   _damageAmount: 12
   _knockbackForce: 4
   _resourceCost:

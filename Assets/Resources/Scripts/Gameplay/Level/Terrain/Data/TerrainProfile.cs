@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "TerrainProfile", menuName = "Data/FlameOfTheLost/Environment/TerrainProfile")]
+    [CreateAssetMenu(fileName = "Terrain_New", menuName = "Data/FlameOfTheLost/Environment/TerrainProfile")]
     public class TerrainProfile : ScriptableObject, IIdentityProvider
     {
         [Header("Identity")]

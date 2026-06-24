@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe320981f246e994ab0cebc1b14323e1, type: 3}
   m_Name: SE_Terrain_Grass_SlightMoveSlow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
-  _id: 5101
+  _id: 51001
   _key: SE_TERRAIN_GRASS_SLIGHTLY_SLOW
   _displayName: Grass Slight Movement Slow
   _description: Moving through grass slightly reduces movement speed

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7287a1f981554f14f988778fed0a6c5c, type: 3}
   m_Name: WP_Axe
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.WeaponProfile
-  _id: 112
+  _id: 71302
+  _key: AXE
   _displayName: Axe
   _description: 
   _icon: {fileID: 381413843, guid: 7a45b40d73b994d43a78d06cb8eca45f, type: 3}
@@ -21,3 +22,4 @@ MonoBehaviour:
   _type: 1
   _normalSkill: {fileID: 11400000, guid: 46169a2cfdc6f3e4ab299d8cf8474d9c, type: 2}
   _innateSpecialSkill: {fileID: 11400000, guid: bf6e2cce3d03635488327f97c3d1ad1a, type: 2}
+  _requirements: []

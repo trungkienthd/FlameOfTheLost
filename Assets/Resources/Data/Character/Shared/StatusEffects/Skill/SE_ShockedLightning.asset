@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe320981f246e994ab0cebc1b14323e1, type: 3}
   m_Name: SE_ShockedLightning
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectProfile
-  _id: 5203
+  _id: 52003
   _key: SE_SHOCKED_LIGHTNING
   _displayName: Shocked Lightning
   _description: 

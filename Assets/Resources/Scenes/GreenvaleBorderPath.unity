@@ -49009,7 +49009,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -95228,7 +95228,7 @@ MonoBehaviour:
   _playerSpawnerController: {fileID: 331205190}
   _enemyGroupRoot: {fileID: 625036373}
   _spawnEntries:
-  - _enemyPrefab: {fileID: 2810860427036246779, guid: 2cf69941bf2d26947a773c321d00d5ba, type: 3}
+  - _enemyPrefab: {fileID: 7730519756982016145, guid: 0e3ca8f0a83f5944aa24450754ae83b4, type: 3}
     _spawnPoint: {fileID: 957075723}
     _spawnCount: 1
     _spawnOnStart: 1

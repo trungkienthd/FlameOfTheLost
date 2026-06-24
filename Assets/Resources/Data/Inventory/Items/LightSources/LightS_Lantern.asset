@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa240ccd086238949bdcf9cff36d72dd, type: 3}
   m_Name: LightS_Lantern
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.LightSourceProfile
-  _id: 22
+  _id: 70002
   _key: LANTERN
   _displayName: Lantern
   _description: 

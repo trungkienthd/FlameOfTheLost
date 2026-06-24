@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc1fbdd3fd47a146b22544a6eae4a7d, type: 3}
   m_Name: SKR_ToxicPuff
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.RangedSkillProfile
-  _id: 25
+  _id: 82011
   _key: 
   _displayName: Toxic Puff
   _description: 

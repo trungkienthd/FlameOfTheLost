@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc1fbdd3fd47a146b22544a6eae4a7d, type: 3}
   m_Name: SKR_TrippleShot
   m_EditorClassIdentifier: 
-  _id: 24
+  _id: 82102
+  _key: 
   _displayName: Tripple Shot
   _description: 
   _icon: {fileID: 21300000, guid: 7998f41afc8e8e34bb608ca8b48f78be, type: 3}
   _defaultProvisionType: 2
   _attachableWeaponTypes: 03000000
+  _requirements: []
   _damageAmount: 6
   _knockbackForce: 2
   _resourceCost:
