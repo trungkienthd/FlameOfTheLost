@@ -84,7 +84,7 @@ namespace FlameOfTheLost
         }
 
         //  6. Death Disable State (Runtime)
-        [Header("Death Disable")]
+        [Header("Death Disable (Runtime)")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
         {
@@ -157,32 +157,11 @@ namespace FlameOfTheLost
             // Lock facing direction during attack
             this.CombatAimingHandler?.ResolveOnAttackWindowStart();
 
-            // MELEE: enable hitbox for the whole animation window
+            // Validate supported skill style early
             switch (this.ActiveRuntimeSkill.Style)
             {
                 case SkillStyle.Melee:
-                    // Get melee skill profile
-                    var meleeSkill = this.ActiveRuntimeSkill.Profile as MeleeSkillProfile;
-                    if (meleeSkill == null)
-                    {
-                        Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(OnAttackWindowStart)}: Melee skill profile is null for skill ID {this.ActiveRuntimeSkill.SkillID}.");
-                        break;
-                    }
-
-                    // Enable hitbox
-                    if (this.MeleeHitboxController != null)
-                    {
-                        this.MeleeHitboxController.BindHitContext(this, this.ActiveRuntimeSkill);   // Bind combat context
-
-                        HitboxActivationContext meleeHitboxDamagePayload = new HitboxActivationContext()
-                        {
-                            DamageAmount = meleeSkill.DamageAmount,
-                            KnockbackForce = meleeSkill.KnockbackForce,
-                            AttackOrigin = this.transform,
-                            SourceFaction = this.CharacterRootController.IdentityController.Faction
-                        };
-                        this.MeleeHitboxController.EnableHitbox(meleeHitboxDamagePayload, this.LastAttackSide);          // Enable the melee hitbox
-                    }
+                    // Hitbox is enabled later by CoHandleAttack(), after profile delay.
                     break;
                 case SkillStyle.Ranged:
                     // Ranged projectile will be spawned at OnAttackWindowEnd()
@@ -252,18 +231,15 @@ namespace FlameOfTheLost
 
             bool wasInAttackWindow = this.IsInAttackWindow;
 
-            // End window now
-            this.IsInAttackWindow = false;
-            this.MeleeHitboxController?.DisableHitbox();    // If melee hitbox is active, disable immediately
-            this.CombatAimingHandler?.ResolveOnAttackWindowEnd();
+            SkillStyle interruptedSkillStyle = this.ActiveRuntimeSkill.Style;
 
             // Resolve reserved costs (interruption/cancel path)
             if (wasInAttackWindow)
             {
-                this.CombatResourcesHandler?.ResolveOnAttackWindowInterrupt(skillStyle: this.ActiveRuntimeSkill.Style);
+                this.CombatResourcesHandler?.ResolveOnAttackWindowInterrupt(skillStyle: interruptedSkillStyle);
             }
 
-            this.ActiveRuntimeSkill = null;
+            this.CancelAttackWindowRuntimeState(resolveAiming: true);
         }
 
         //  3. Hitbox Events
@@ -326,10 +302,7 @@ namespace FlameOfTheLost
                 this.AttackRoutine = null;
             }
 
-            this.IsInAttackWindow = false;
-            this.ActiveRuntimeSkill = null;
-
-            this.MeleeHitboxController?.DisableHitbox();
+            this.CancelAttackWindowRuntimeState(resolveAiming: false);
 
             this.CombatLoadoutController?.RefreshLoadoutAfterCharacterRefreshment();
             this.CombatAimingHandler?.ClearAimingStateAfterCharacterRefreshment();
@@ -349,12 +322,8 @@ namespace FlameOfTheLost
                 this.AttackRoutine = null;
             }
 
-            this.IsInAttackWindow = false;
-            this.ActiveRuntimeSkill = null;
+            this.CancelAttackWindowRuntimeState(resolveAiming: true);
 
-            this.MeleeHitboxController?.DisableHitbox();
-
-            this.CombatAimingHandler?.ResolveOnAttackWindowEnd();
             this.CombatStatusEffectHandler?.ClearRuntimeTrackingAfterCharacterRefreshment();
 
             // Prefer a death-specific method later, but this is okay for now.
@@ -427,16 +396,87 @@ namespace FlameOfTheLost
             this.OnAttackWindowStart();
 
             float attackLength = runtimeSkill.AttackAnimationClipHitboxSetProfile.AttackWindowDuration;
-            if (attackLength > 0f) yield return new WaitForSeconds(attackLength);
+            float hitboxDelay = runtimeSkill.AttackAnimationClipHitboxSetProfile.HitboxActivationDelay;
+            
+            attackLength = Mathf.Max(0f, attackLength);
+            hitboxDelay = Mathf.Max(0f, hitboxDelay);
+
+            // If the delay is longer than the attack window, the melee hitbox should not activate.
+            float clampedHitboxDelay = Mathf.Min(hitboxDelay, attackLength);
+            if (clampedHitboxDelay > 0f)
+            {
+                yield return new WaitForSeconds(clampedHitboxDelay);
+            }
 
             if (this.ActiveRuntimeSkill != runtimeSkill)
             {
+                this.CancelAttackWindowRuntimeState();
+                this.AttackRoutine = null;
+                yield break;
+            }
+
+            bool shouldEnableMeleeHitbox = (runtimeSkill.Style == SkillStyle.Melee) && (hitboxDelay < attackLength);
+            if (shouldEnableMeleeHitbox)
+            {
+                this.EnableMeleeHitboxForActiveSkill();
+            }
+
+            float remainingAttackLength = attackLength - clampedHitboxDelay;
+            if (remainingAttackLength > 0f)
+            {
+                yield return new WaitForSeconds(remainingAttackLength);
+            }
+
+            if (this.ActiveRuntimeSkill != runtimeSkill)
+            {
+                this.CancelAttackWindowRuntimeState();
                 this.AttackRoutine = null;
                 yield break;
             }
 
             this.OnAttackWindowEnd();
             this.AttackRoutine = null;
+        }
+
+        private void CancelAttackWindowRuntimeState(bool resolveAiming = true)
+        {
+            this.IsInAttackWindow = false;
+
+            this.MeleeHitboxController?.DisableHitbox();
+
+            if (resolveAiming)
+            {
+                this.CombatAimingHandler?.ResolveOnAttackWindowEnd();
+            }
+
+            this.ActiveRuntimeSkill = null;
+        }
+
+        private void EnableMeleeHitboxForActiveSkill()
+        {
+            if (this.ActiveRuntimeSkill == null) return;
+            if (this.ActiveRuntimeSkill.Style != SkillStyle.Melee) return;
+
+            var meleeSkill = this.ActiveRuntimeSkill.Profile as MeleeSkillProfile;
+            if (meleeSkill == null)
+            {
+                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] " + $"{nameof(EnableMeleeHitboxForActiveSkill)}: Melee skill profile is null for skill ID {this.ActiveRuntimeSkill.SkillID}.", this);
+                return;
+            }
+
+            if (this.MeleeHitboxController == null) return;
+
+            this.MeleeHitboxController.BindHitContext(this, this.ActiveRuntimeSkill);
+
+            HitboxActivationContext meleeHitboxDamagePayload = new HitboxActivationContext()
+            {
+                DamageAmount = meleeSkill.DamageAmount,
+                KnockbackForce = meleeSkill.KnockbackForce,
+                AttackOrigin = this.transform,
+                SourceFaction = this.CharacterRootController.IdentityController.Faction
+            };
+
+            this.MeleeHitboxController.EnableHitbox(meleeHitboxDamagePayload, this.LastAttackSide);
         }
 
         private void FireRangedProjectile(RuntimeSkill runtimeSkill)

@@ -2,11 +2,13 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class ItemContainerController : MonoBehaviour,
+    public class ItemContainerController : FOTLMonoBehaviour,
         IIdentityProvider,
         IPlayerInteractable,
         IPlayerInteractionPromptSource
     {
+        // --- States ---
+        //  1. Identity
         [Header("Identity")]
         [SerializeField] private int _id;
         [SerializeField] private string _key;
@@ -17,16 +19,17 @@ namespace FlameOfTheLost
         public string DisplayName => _displayName;
         public string Description => _description;
 
+        //  2. References
         [Header("References")]
         [SerializeField] private InventoryController _inventoryController;
         [SerializeField] private ItemContainerPanelController _itemContainerPanelController;
         private InventoryController InventoryController => _inventoryController;
         private ItemContainerPanelController ItemContainerPanelController => _itemContainerPanelController;
 
-        private void Awake()
-        {
-            this.CacheReferences();
-        }
+        //  3. Prompt Settings
+        [Header("Prompt Settings")]
+        [SerializeField] private int _interactionPromptPriority = 100;
+        public int InteractionPromptPriority => _interactionPromptPriority;
 
         public bool CanInteract(GameObject interactor)
         {
@@ -64,8 +67,10 @@ namespace FlameOfTheLost
             return $"Open {this.DisplayName}";
         }
 
-        private void CacheReferences()
+        protected override void CacheReferences()
         {
+            base.CacheReferences();
+
             if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>();
 
             if (this.ItemContainerPanelController == null)

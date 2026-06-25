@@ -56,10 +56,8 @@ namespace FlameOfTheLost
         }
 
         // --- Unity Callbacks ---
-        protected override void Awake()
+        private void Start()
         {
-            base.Awake();
-
             this.RegisterPromptBlocker(this.PlayerMenuManager);
             this.RegisterPromptBlocker(this.PlayerInteractionPanelListManager);
 
@@ -201,6 +199,7 @@ namespace FlameOfTheLost
 
             _nearbyInteractableBehaviours.Remove(behaviour);
         }
+
         //  3. Nearby Prompt Source Registration
         private void TryRegisterNearbyPromptSource(Collider2D other)
         {
@@ -209,12 +208,14 @@ namespace FlameOfTheLost
             if (promptSource is not MonoBehaviour behaviour) return;
             if (this.NearbyPromptSourceBehaviours.Contains(behaviour)) return;
 
-            GameObject interactor = this.ResolveInteractor();
-            if (!promptSource.CanShowInteractionPrompt(interactor)) return;
-
             //Debug.Log($"[{this.PlayerRoot.name}.{this.GetType().Name}] Detected nearby prompt source: {behaviour.gameObject.name}", behaviour);
 
             _nearbyPromptSourceBehaviours.Add(behaviour);
+
+            if (promptSource is IPlayerInteractionPromptRefreshNotifier refreshNotifier)
+            {
+                refreshNotifier.PromptRefreshRequested += this.HandlePromptRefreshRequested;
+            }
         }
         private void TryUnregisterNearbyPromptSource(Collider2D other)
         {
@@ -222,7 +223,13 @@ namespace FlameOfTheLost
             if (promptSource == null) return;
             if (promptSource is not MonoBehaviour behaviour) return;
 
-            _nearbyPromptSourceBehaviours.Remove(behaviour);
+            if (_nearbyPromptSourceBehaviours.Remove(behaviour))
+            {
+                if (promptSource is IPlayerInteractionPromptRefreshNotifier refreshNotifier)
+                {
+                    refreshNotifier.PromptRefreshRequested -= this.HandlePromptRefreshRequested;
+                }
+            }
         }
 
         //  4. Refresh Prompt
@@ -244,7 +251,7 @@ namespace FlameOfTheLost
                 return;
             }
 
-            IPlayerInteractionPromptSource nearestPromptSource = this.FindNearestPromptSource();
+            IPlayerInteractionPromptSource nearestPromptSource = this.FindBestPromptSource();
             if (nearestPromptSource != null)
             {
                 this.ShowPromptSourcePrompt(nearestPromptSource);
@@ -300,13 +307,14 @@ namespace FlameOfTheLost
             return nearestInteractable;
         }
 
-        private IPlayerInteractionPromptSource FindNearestPromptSource()
+        private IPlayerInteractionPromptSource FindBestPromptSource()
         {
             GameObject interactor = this.ResolveInteractor();
             Vector3 origin = interactor != null ? interactor.transform.position : this.transform.position;
 
-            IPlayerInteractionPromptSource nearestPromptSource = null;
-            float nearestSqrDistance = float.MaxValue;
+            IPlayerInteractionPromptSource bestPromptSource = null;
+            int bestPriority = int.MinValue;
+            float bestSqrDistance = float.MaxValue; // Nearest
 
             for (int i = 0; i < this.NearbyPromptSourceBehaviours.Count; i++)
             {
@@ -316,14 +324,20 @@ namespace FlameOfTheLost
                 if (behaviour is not IPlayerInteractionPromptSource promptSource) continue;
                 if (!promptSource.CanShowInteractionPrompt(interactor)) continue;
 
+                int priority = promptSource.InteractionPromptPriority;
                 float sqrDistance = (behaviour.transform.position - origin).sqrMagnitude;
-                if (sqrDistance >= nearestSqrDistance) continue;
 
-                nearestSqrDistance = sqrDistance;
-                nearestPromptSource = promptSource;
+                bool isHigherPriority = priority > bestPriority;
+                bool isSamePriorityButCloser = priority == bestPriority && sqrDistance < bestSqrDistance;
+
+                if (!isHigherPriority && !isSamePriorityButCloser) continue;
+
+                bestPriority = priority;
+                bestSqrDistance = sqrDistance;
+                bestPromptSource = promptSource;
             }
 
-            return nearestPromptSource;
+            return bestPromptSource;
         }
 
         //  7. Cleanup
@@ -361,8 +375,6 @@ namespace FlameOfTheLost
         }
         private void RemoveInvalidPromptSources()
         {
-            GameObject interactor = this.ResolveInteractor();
-
             for (int i = this.NearbyPromptSourceBehaviours.Count - 1; i >= 0; i--)
             {
                 MonoBehaviour behaviour = this.NearbyPromptSourceBehaviours[i];
@@ -375,24 +387,40 @@ namespace FlameOfTheLost
 
                 if (!behaviour.gameObject.activeInHierarchy)
                 {
+                    if (behaviour is IPlayerInteractionPromptRefreshNotifier refreshNotifier)
+                    {
+                        refreshNotifier.PromptRefreshRequested -= this.HandlePromptRefreshRequested;
+                    }
+
                     _nearbyPromptSourceBehaviours.RemoveAt(i);
                     continue;
                 }
 
                 if (behaviour is not IPlayerInteractionPromptSource promptSource)
                 {
+                    if (behaviour is IPlayerInteractionPromptRefreshNotifier refreshNotifier)
+                    {
+                        refreshNotifier.PromptRefreshRequested -= this.HandlePromptRefreshRequested;
+                    }
+
                     _nearbyPromptSourceBehaviours.RemoveAt(i);
                     continue;
-                }
-
-                if (!promptSource.CanShowInteractionPrompt(interactor))
-                {
-                    _nearbyPromptSourceBehaviours.RemoveAt(i);
                 }
             }
         }
         private void ClearNearbyInteractionState()
         {
+            for (int i = 0; i < this.NearbyPromptSourceBehaviours.Count; i++)
+            {
+                MonoBehaviour behaviour = this.NearbyPromptSourceBehaviours[i];
+                if (behaviour == null) continue;
+
+                if (behaviour is IPlayerInteractionPromptRefreshNotifier refreshNotifier)
+                {
+                    refreshNotifier.PromptRefreshRequested -= this.HandlePromptRefreshRequested;
+                }
+            }
+
             _nearbyInteractableBehaviours.Clear();
             _nearbyPromptSourceBehaviours.Clear();
         }
@@ -452,6 +480,17 @@ namespace FlameOfTheLost
             if (blocker == null) return;
 
             _activePromptBlockers.Remove(blocker);
+            this.RefreshPrompt();
+        }
+
+        private void HandlePromptRefreshRequested()
+        {
+            if (this.IsDeathDisabled)
+            {
+                this.HidePrompt();
+                return;
+            }
+
             this.RefreshPrompt();
         }
 

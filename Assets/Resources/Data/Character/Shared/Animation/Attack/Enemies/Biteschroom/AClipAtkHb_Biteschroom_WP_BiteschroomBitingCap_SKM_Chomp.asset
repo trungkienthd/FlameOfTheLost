@@ -58,3 +58,4 @@ MonoBehaviour:
         _points: []
         _offset: {x: 0, y: 0}
   _attackWindowDuration: 0.5
+  _hitboxActivationDelay: 0.4

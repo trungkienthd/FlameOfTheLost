@@ -27,27 +27,40 @@ namespace FlameOfTheLost
         //  3. Attack Window
         [Header("Attack Window")]
         [SerializeField, Min(0f)] private float _attackWindowDuration = 0.5f;
+        [SerializeField, Min(0f)] private float _hitboxActivationDelay = 0f;
         public float AttackWindowDuration => _attackWindowDuration;
+        public float HitboxActivationDelay => _hitboxActivationDelay;
 
         // --- Unity Methods ---
 #if UNITY_EDITOR
         private void OnValidate()
         {
+            if (this.HitboxActivationDelay > this.AttackWindowDuration)
+            {
+                Debug.LogWarning
+                (
+                    $"[{this.name}.{nameof(CharacterAttackAnimationClipHitboxSetProfile)}] " +
+                    $"{nameof(this.HitboxActivationDelay)} is longer than {nameof(this.AttackWindowDuration)}. " +
+                    "The melee hitbox may never become active.",
+                    this
+                );
+            }
+
             if (this.CharacterType == CharacterType.Default) return;
 
             if (this.Skills == null || this.Skills.Count == 0)
             {
-                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Missing Skills list.", this);
+                Debug.LogWarning($"[{this.name}.{nameof(CharacterAttackAnimationClipHitboxSetProfile)}] Missing Skills list.", this);
                 return;
             }
 
             if (this.Weapon == null)
             {
-                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Missing Weapon reference.", this);
+                Debug.LogWarning($"[{this.name}.{nameof(CharacterAttackAnimationClipHitboxSetProfile)}] Missing Weapon reference.", this);
             }
             else if (this.Weapon.Id <= 0)
             {
-                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Weapon '{this.Weapon.name}' has invalid ID.", this);
+                Debug.LogWarning($"[{this.name}.{nameof(CharacterAttackAnimationClipHitboxSetProfile)}] Weapon '{this.Weapon.name}' has invalid ID.", this);
             }
 
             bool hasValidSkill = false;
@@ -58,13 +71,13 @@ namespace FlameOfTheLost
                 SkillProfile skill = this.Skills[i];
                 if (skill == null)
                 {
-                    Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Null Skill reference found in Skills list.", this);
+                    Debug.LogWarning($"[{this.name}.{nameof(CharacterAttackAnimationClipHitboxSetProfile)}] Null Skill reference found in Skills list.", this);
                     continue;
                 }
 
                 if (skill.Id <= 0)
                 {
-                    Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Skill '{skill.name}' has invalid ID.", this);
+                    Debug.LogWarning($"[{this.name}.{nameof(CharacterAttackAnimationClipHitboxSetProfile)}] Skill '{skill.name}' has invalid ID.", this);
                     continue;
                 }
 
@@ -72,13 +85,13 @@ namespace FlameOfTheLost
 
                 if (!ids.Add(skill.Id))
                 {
-                    Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Duplicate Skill '{skill.name}' (ID: {skill.Id}) found in Skills list.", this);
+                    Debug.LogWarning($"[{this.name}.{nameof(CharacterAttackAnimationClipHitboxSetProfile)}] Duplicate Skill '{skill.name}' (ID: {skill.Id}) found in Skills list.", this);
                 }
             }
 
             if (!hasValidSkill)
             {
-                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Skills list contains no valid Skill references.", this);
+                Debug.LogWarning($"[{this.name}.{nameof(CharacterAttackAnimationClipHitboxSetProfile)}] Skills list contains no valid Skill references.", this);
             }
 
             this.ValidateEntryPair(this.LeftSet.Down,   this.RightSet.Down, "Down");
@@ -154,14 +167,14 @@ namespace FlameOfTheLost
         {
             if (leftClip == null && rightClip == null)
             {
-                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Both Left and Right '{label}' are null. At least one must be assigned.", this);
+                Debug.LogWarning($"[{this.name}.{nameof(CharacterAttackAnimationClipHitboxSetProfile)}] Both Left and Right '{label}' are null. At least one must be assigned.", this);
             }
         }
         private void ValidatePolygonShapePair(PolygonColliderShapeEntry leftShape, PolygonColliderShapeEntry rightShape, string label)
         {
             if (!leftShape.IsValid && !rightShape.IsValid)
             {
-                Debug.LogWarning($"[{this.name}.SkillAnimationProfile] Both Left and Right '{label}' are null. At least one must be assigned.", this);
+                Debug.LogWarning($"[{this.name}.{nameof(CharacterAttackAnimationClipHitboxSetProfile)}] Both Left and Right '{label}' are null. At least one must be assigned.", this);
             }
         }
 
