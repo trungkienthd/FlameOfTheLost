@@ -16,6 +16,7 @@ namespace FlameOfTheLost
             this.CacheExternalReferences();
             this.ValidateExternalReferences();
             this.BindExternalReferences();
+            this.InitializeAfterBinding();
         }    
 
         protected virtual void CacheInternalReferences()
@@ -39,6 +40,10 @@ namespace FlameOfTheLost
         }
 
         protected virtual void BindExternalReferences()
+        {
+        }
+
+        protected virtual void InitializeAfterBinding()
         {
         }
     }

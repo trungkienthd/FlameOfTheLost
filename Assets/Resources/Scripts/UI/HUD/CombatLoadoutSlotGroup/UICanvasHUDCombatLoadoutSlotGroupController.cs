@@ -45,8 +45,10 @@ namespace FlameOfTheLost
         }
 
         // --- Unity Callbacks ---
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             this.RefreshAll();
         }
         private void Update()
@@ -175,22 +177,24 @@ namespace FlameOfTheLost
             this.ConsumableQuantityIconBackup.sprite = null;
         }
 
-        protected override void CacheInternalReferences()
+        protected override void CacheExternalReferences()
         {
-            base.CacheInternalReferences();
+            base.CacheExternalReferences();
 
-            if (this.PlayerCombatLoadoutController == null)
+            if (this.PlayerCombatLoadoutController != null) return;
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
             {
-                GameObject player = GameObject.Find("Player");
                 _playerCombatLoadoutController = player.GetComponentInChildren<CharacterCombatLoadoutController>();
             }
         }
 
-        protected override void ValidateInternalReferences()
+        protected override void ValidateExternalReferences()
         {
-            base.ValidateInternalReferences();
+            base.ValidateExternalReferences();
 
-            if (this.PlayerCombatLoadoutController == null) Debug.LogError("PlayerCombatLoadoutController reference is not set on " + this.name);
+            if (this.PlayerCombatLoadoutController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDCombatLoadoutSlotGroupController)}] Player's {nameof(CharacterCombatLoadoutController)} reference is not set on " + this.name);
         }
     }
 }

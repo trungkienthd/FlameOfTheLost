@@ -2,7 +2,13 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class DamageDealingHandler : FOTLMonoBehaviour, IDamager, IDamageConfigurator, IHitFilter, IHitPostProcessor, IStatusEffectStatModifierMultiplierConsumer, IStatusEffectStatModifierAdditiveConsumer
+    public class DamageDealingHandler : FOTLMonoBehaviour, 
+        IDamager, 
+        IDamageConfigurator, 
+        IHitFilter, 
+        IHitPostProcessor, 
+        IStatusEffectStatModifierMultiplierConsumer,
+        IStatusEffectStatModifierAdditiveConsumer
     {
         // --- State ---
         //  1. Data Fields (Base)
@@ -87,12 +93,6 @@ namespace FlameOfTheLost
         [Header("Hit Rules")]
         [SerializeField] private bool _ignoresSameFaction = true;
         private bool IgnoresSameFaction => _ignoresSameFaction;
-
-        // --- Unity Callbacks ---
-        private void Start()
-        {
-            this.RecomputePayload();
-        }
 
         // --- Public APIs ---
         //  1. IHitFilter implementation
@@ -185,8 +185,28 @@ namespace FlameOfTheLost
             if (this.OriginTransform == null) this.OriginTransform = this.transform;
 
             if (this.SourceCharacterRootController == null) this.SourceCharacterRootController = this.GetComponentInParent<CharacterRootController>();
-            
+        }
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.OriginTransform == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(DamageDealingHandler)}] {nameof(OriginTransform)} reference is missing.", this);
+            }
+
+            if (this.SourceCharacterRootController == null)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(DamageDealingHandler)}] {nameof(SourceCharacterRootController)} reference is missing. Source faction will stay as {this.SourceCharacterFaction}.", this);
+            }
+        }
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
             if (this.SourceCharacterRootController != null) this.SourceCharacterFaction = this.SourceCharacterRootController.IdentityController.Faction;
+            
+            this.RecomputePayload();
         }
     }
 }

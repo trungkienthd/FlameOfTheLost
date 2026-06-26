@@ -41,25 +41,28 @@ namespace FlameOfTheLost
 
         //  5. Runtime State
         private Vector3 _currentVelocity;
+        private Vector3 CurrentVelocity
+        {
+            get => _currentVelocity;
+            set => _currentVelocity = value;
+        }
 
         // --- Unity Callbacks ---
-        private void Start()
+        protected override void Start()
         {
-            if (this.Target == null) return;
+            base.Start();
 
-            Vector3 targetPosition = this.Target.position + this.Offset;
-            Vector3 desiredPosition = this.ApplyAxisControl(targetPosition);
-            desiredPosition = this.ClampPositionToBoundary(desiredPosition);
+            Vector3 desiredPosition = this.GetDesiredCameraPosition();
 
             this.transform.position = desiredPosition;
+
+            this.CurrentVelocity = Vector3.zero;
         }
         private void LateUpdate()
         {
             if (this.Target == null) return;
 
-            Vector3 targetPosition = this.Target.position + this.Offset;
-            Vector3 desiredPosition = this.ApplyAxisControl(targetPosition);
-            desiredPosition = this.ClampPositionToBoundary(desiredPosition);
+            Vector3 desiredPosition = this.GetDesiredCameraPosition();
 
             this.transform.position = Vector3.SmoothDamp
             (
@@ -105,7 +108,6 @@ namespace FlameOfTheLost
                 this.FollowZ ? targetPosition.z : currentPosition.z
             );
         }
-
         private Vector3 ClampPositionToBoundary(Vector3 position)
         {
             if (!this.UseBoundary) return position;
@@ -145,25 +147,43 @@ namespace FlameOfTheLost
 
             return position;
         }
+        private Vector3 GetDesiredCameraPosition()
+        {
+            Vector3 targetPosition = this.Target.position + this.Offset;
+            targetPosition = this.ApplyAxisControl(targetPosition);
+            targetPosition = this.ClampPositionToBoundary(targetPosition);
+
+            return targetPosition;
+        }
 
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
 
             if (this.Camera == null) _camera = this.GetComponent<Camera>();
-
-            if (this.Target == null)
-            {
-                Transform playerTransform = GameObject.Find("Player").transform;
-                if (playerTransform != null) _target = playerTransform;
-            }
         }
-
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
             if (this.Camera == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TopDownCameraFollowController)}] Camera reference is missing.");
+        }
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
+
+            if (this.Target != null) return;
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                _target = player.transform;
+            }
+        }
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
             if (this.Target == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TopDownCameraFollowController)}] Target reference is missing.");
         }
     }

@@ -36,8 +36,10 @@ namespace FlameOfTheLost
         private Color CarriedColor => _carriedColor;
 
         // --- Unity Callbacks ---
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             this.RefreshAll();
         }
         private void Update()
@@ -57,7 +59,6 @@ namespace FlameOfTheLost
             this.RefreshIcon();
             this.RefreshSlotColor();
         }
-
         private void RefreshIcon()
         {
             if (this.Icon == null) return;
@@ -77,7 +78,6 @@ namespace FlameOfTheLost
             this.Icon.enabled = true;
             this.Icon.sprite = carriableItem.Icon;
         }
-
         private void RefreshSlotColor()
         {
             if (this.SlotBackground == null) return;
@@ -90,12 +90,6 @@ namespace FlameOfTheLost
         {
             base.CacheInternalReferences();
 
-            if (this.PlayerCarryLoadoutController == null)
-            {
-                GameObject player = GameObject.Find("Player");
-                if (player != null) _playerCarryLoadoutController = player.GetComponent<PlayerCarryLoadoutController>();
-            }
-
             if (this.SlotBackground == null) _slotBackground = this.GetComponent<Image>();
             if (this.Icon == null)
             {
@@ -103,14 +97,39 @@ namespace FlameOfTheLost
                 if (iconTransform != null) _icon = iconTransform.GetComponent<Image>();
             }
         }
-
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
-            if (this.PlayerCarryLoadoutController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDActiveCarriableItemSlotController)}] PlayerCarryLoadoutController reference is missing.", this);
-            if (this.SlotBackground == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDActiveCarriableItemSlotController)}] SlotBackground Image reference is missing.", this);
-            if (this.Icon == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDActiveCarriableItemSlotController)}] Icon Image reference is missing.", this);
+            if (this.SlotBackground == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDActiveCarriableItemSlotController)}] SlotBackground Image reference is missing.", this);
+            }
+            if (this.Icon == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDActiveCarriableItemSlotController)}] Icon Image reference is missing.", this);
+            }
+        }
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
+
+            if (this.PlayerCarryLoadoutController != null) return;
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                _playerCarryLoadoutController = player.GetComponentInChildren<PlayerCarryLoadoutController>();
+            }
+        }
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
+            if (this.PlayerCarryLoadoutController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDActiveCarriableItemSlotController)}] {nameof(PlayerCarryLoadoutController)} reference is missing.", this);
+            }
         }
     }
 }

@@ -38,12 +38,14 @@ namespace FlameOfTheLost
         private CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController.CombatLoadoutController;
 
         // --- Events ---
-        public event Action ProgressionChanged;
+        public event Action OnProgressionChanged;
 
         // --- Unity Callbacks ---
-        private void Start()
+        protected override void Start()
         {
-            this.InitializeProgression();
+            base.Start();
+
+            this.ApplyDerivedStatsToCharacterSystems();
         }
 #if UNITY_EDITOR
         //private void OnValidate()
@@ -80,7 +82,7 @@ namespace FlameOfTheLost
 
             this.RecalculateAndApplyDerivedStats();
 
-            this.ProgressionChanged?.Invoke();
+            this.OnProgressionChanged?.Invoke();
         }
 
         //public void SetAttributeBaseValue(CharacterProgressionAttributeType attributeType, int value)
@@ -101,23 +103,19 @@ namespace FlameOfTheLost
 
             this.RecalculateAndApplyDerivedStats();
 
-            this.ProgressionChanged?.Invoke();
+            this.OnProgressionChanged?.Invoke();
         }
 
         //  3. ICharacterPlacementRefreshable implementation
         public int RefreshmentConfigurePriority => 20;
         public void RefreshCharacter(CharacterRefreshContext context)
         {
-            this.InitializeProgression();
+            this.RecalculateAndApplyDerivedStats();
+
+            this.OnProgressionChanged?.Invoke();
         }
 
         // --- Helpers ---
-        private void InitializeProgression()
-        {
-            this.InitializeRuntimeAttributesFromConfig();
-            this.RecalculateAndApplyDerivedStats();
-        }
-
         private void InitializeRuntimeAttributesFromConfig()
         {
             if (this.ProgressionConfig == null) return;
@@ -214,16 +212,22 @@ namespace FlameOfTheLost
 
             if (this.ProgressionConfig == null)
             {
-                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterProgressionUpgradeHandler)}] ProgressionConfig reference is not set on {this.gameObject.name}. Loading the default config from Resources.");
+                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterProgressionController)}] ProgressionConfig reference is not set on {this.gameObject.name}. Loading the default config from Resources.");
                 _progressionConfig = Resources.Load<CharacterProgressionConfig>("Data/Character/Shared/Progression/Prg_Generic");
             }
         }
-
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
             if (this.ProgressionConfig == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterProgressionController)}] ProgressionConfig reference is missing on {this.gameObject.name}");
+        }
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.InitializeRuntimeAttributesFromConfig();
+            this.RecalculateDerivedStats();
         }
 
 #if UNITY_EDITOR

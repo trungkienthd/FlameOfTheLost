@@ -5,7 +5,8 @@ namespace FlameOfTheLost
 {
     public class MeleeHitboxController : HitboxController
     {
-        // --- References
+        // --- States ---
+        //  1. References
         [Header("References")]
         [SerializeField] private PolygonCollider2D _polygonCollider2D;
         private PolygonCollider2D PolygonCollider2D
@@ -21,6 +22,7 @@ namespace FlameOfTheLost
             private set => _damager = value;
         }
 
+        //  2. Default hitbox shape
         [Header("Shapes")]
         [SerializeField] private MeleeHitboxShapeEntry _defaultMeleeHitbox;
         [SerializeField] private MeleeHitboxShapeEntry _overrideHitbox;
@@ -38,7 +40,7 @@ namespace FlameOfTheLost
             set => _hasOverrideMeleeHitboxShape = value;
         }
 
-        // --- Facing state
+        //  3. Facing state
         [Header("Facing Sync")]
         [SerializeField] private bool _autoSyncFromFacingProvider = true;
         private IFacingProvider _facingProvider; // usually the AnimationHandler
@@ -49,50 +51,29 @@ namespace FlameOfTheLost
             set => _facingProvider = value;
         }
 
-        // --- Other states
+        //  4. Other states
         protected override bool AllowMultipleTargetsPerEnableWindow => true; // Melee hitboxes always allow multiple targets
 
-        // --- Unity methods
-        protected override void Awake()
-        {
-            base.Awake();
-
-            // Setup Collider
-            if (this.PolygonCollider2D == null) this.PolygonCollider2D = this.GetComponent<PolygonCollider2D>();
-
-            // Require an IDamager on the same object (DamageDealingHandler implements it)
-            this.Damager = this.GetComponent<IDamager>();
-            if (this.Damager == null)
-            {
-                Debug.LogError("[MeleeHitboxController] Missing IDamager (e.g., DamageDealingHandler) on the same GameObject.", this);
-            }
-
-            // Setup FacingProvider (normally implemented in the CharacterAnimationHandler)
-            if (!this.AutoSyncFromFacingProvider) return;
-
-            // Look upward first
-            this.FacingProvider = this.GetComponentInParent<IFacingProvider>();
-            if (this.FacingProvider != null) return;
-
-            // Fallback: search from the root (Player) across ALL children (include inactive)
-            var root = this.transform.root; // 'Player'
-            this.FacingProvider = root.GetComponentInChildren<IFacingProvider>(true);
-            if (this.FacingProvider == null)
-            {
-                Debug.LogWarning("[MeleeHitboxHandler] AutoSyncFromFacingProvider enabled but no IFacingProvider found under root.", this);
-            }
-        }
-
-        // --- Public APIs
+        // --- Public APIs ---
         //      1.1. Enable the hitbox
         public override void EnableHitbox(HitboxActivationContext payload, AttackSide attackSideType)
         {
             base.EnableHitbox(payload, attackSideType);
 
             if (this.PolygonCollider2D) this.PolygonCollider2D.enabled = true;
-            if ((this.ActiveRuntimeSkill.Profile is MeleeSkillProfile meleeSkillProfile) && (this.ActiveRuntimeSkill.TryGetMeleeHitboxShape(attackSideType, out var meleeHitboxShape)))
+            if ((this.ActiveRuntimeSkill != null) && (this.ActiveRuntimeSkill.Profile is MeleeSkillProfile) && (this.ActiveRuntimeSkill.TryGetMeleeHitboxShape(attackSideType, out var meleeHitboxShape)))
             {
                 this.SetOverrideMeleeHitboxShape(meleeHitboxShape);   // Apply the melee hitbox shape
+            }
+            else
+            {
+                this.ClearOverrideMeleeHitboxShape();
+                this.SyncPolygonColliderShapeFromFacing();
+            }
+
+            if (this.PolygonCollider2D != null)
+            {
+                this.PolygonCollider2D.enabled = true;
             }
         }
 
@@ -119,13 +100,13 @@ namespace FlameOfTheLost
             this.HasOverrideMeleeHitboxShape = false;
         }
 
-        // --- Helpers
+        // --- Helpers ---
+        //  1. Sync the PolygonCollider2D shape from the current facing direction
         private void SyncPolygonColliderShapeFromFacing()
         {
-            if ((!this.PolygonCollider2D) || (this.FacingProvider == null)) return;
+            if ((this.PolygonCollider2D == null) || (this.FacingProvider == null)) return;
 
             CharacterFacingStatus facing = this.FacingProvider != null ? this.FacingProvider.FacingStatus : CharacterFacingStatus.Side;
-            bool isFacingRight = this.FacingProvider != null ? this.FacingProvider.IsFacingRight : true;
 
             PolygonColliderShapeEntry shape = facing switch
             {
@@ -135,15 +116,73 @@ namespace FlameOfTheLost
             };
 
             // Copy points so we can mutate safely
-            var pts = shape.Points != null ? new List<Vector2>(shape.Points) : new List<Vector2>();
-            var offset = shape.Offset;
+            List<Vector2> pts = shape.Points != null ? new List<Vector2>(shape.Points) : new List<Vector2>();
+            if (pts.Count < 3) return;
 
             // NOTE:
             // Left/right (during side-facing) mirroring is handled entirely by FlipGroup transform scaling, since this hitbox is a child of FlipGroup.
 
             this.PolygonCollider2D.pathCount = 1;
             this.PolygonCollider2D.SetPath(0, pts.ToArray());
-            this.PolygonCollider2D.offset = offset;
+            this.PolygonCollider2D.offset = shape.Offset;
+        }
+
+        //  2. FOTL Base Behaviour Overrides
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
+            if (this.PolygonCollider2D == null) this.PolygonCollider2D = this.GetComponent<PolygonCollider2D>();
+
+            if (this.Damager == null) this.Damager = this.GetComponent<IDamager>();
+        }
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.PolygonCollider2D == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(MeleeHitboxController)}] {nameof(PolygonCollider2D)} reference is missing.", this);
+            }
+
+            if (this.Damager == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(MeleeHitboxController)}] Missing {nameof(IDamager)} on the same GameObject.", this);
+            }
+        }
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.HasOverrideMeleeHitboxShape = false;
+
+            if (this.PolygonCollider2D != null)
+            {
+                this.PolygonCollider2D.enabled = false;
+                this.PolygonCollider2D.isTrigger = true;
+            }
+        }
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
+
+            if (!this.AutoSyncFromFacingProvider) return;
+
+            this.FacingProvider = this.GetComponentInParent<IFacingProvider>();
+            if (this.FacingProvider == null)
+            {
+                Transform root = this.transform.root;
+                this.FacingProvider = root.GetComponentInChildren<IFacingProvider>(true);
+            }
+        }
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
+            if (this.AutoSyncFromFacingProvider && this.FacingProvider == null)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(MeleeHitboxController)}] AutoSyncFromFacingProvider is enabled, but no {nameof(IFacingProvider)} was found under root.", this);
+            }
         }
     }
 }

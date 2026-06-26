@@ -30,12 +30,6 @@ namespace FlameOfTheLost
             private set => _isDeathDisabled = value;
         }
 
-        // --- Unity Callbacks ---
-        private void Start()
-        {
-            this.RebuildCostMap();
-        }
-
         // --- Public APIs ---
         //  1. Upgrade Handling
         public bool TryUpgrade(CharacterProgressionAttributeType attributeType)
@@ -116,8 +110,8 @@ namespace FlameOfTheLost
 
             if (this.UpgradeConfig == null)
             {
+                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterProgressionUpgradeHandler)}] UpgradeConfig reference is not set on {this.gameObject.name}. Attempting to load default config from Resources");
                 _upgradeConfig = Resources.Load<CharacterProgressionUpgradeConfig>("Data/Character/Shared/Progression/PrgUpgrade_Generic");
-                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterProgressionUpgradeHandler)}] UpgradeConfig reference is not set on {this.gameObject.name}. Attempting to load default config from Resources. Loaded: {(this.UpgradeConfig != null)}");
             }
         }
         protected override void ValidateInternalReferences()
@@ -125,6 +119,14 @@ namespace FlameOfTheLost
             base.ValidateInternalReferences();
 
             if (this.UpgradeConfig == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterProgressionUpgradeHandler)}] UpgradeConfig reference is missing on {this.gameObject.name}");
+        }
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.IsDeathDisabled = false;
+
+            this.RebuildCostMap();
         }
     }
 }

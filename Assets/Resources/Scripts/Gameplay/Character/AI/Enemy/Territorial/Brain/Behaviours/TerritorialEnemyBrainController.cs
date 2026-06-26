@@ -89,12 +89,9 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     private CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController.CombatLoadoutController;
 
     // --- Unity Callbacks ---
-    private void Start()
+    protected override void Start()
     {
-        this.ResetRoamingRuntime();
-        this.ResetAttackRuntime();
-
-        this.CombatLoadoutController?.TryQuickEquipWeapon();   
+        this.InitializeBrainRuntimeAfterBinding();
     }
     protected virtual void Update()
     {
@@ -410,7 +407,13 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         this.CombatLoadoutController?.TryQuickEquipWeapon();
     }
 
-    //  6. Cache & Validate References
+    //  6. Other Initializations 
+    private void InitializeBrainRuntimeAfterBinding()
+    {
+        this.CombatLoadoutController?.TryQuickEquipWeapon();
+    }
+
+    //  7. FOTL Base Behavior Overrides
     protected override void ValidateInternalReferences()
     {
         base.ValidateInternalReferences();
@@ -424,5 +427,13 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         {
             Debug.LogError($"[{this.CharacterName}.{nameof(TerritorialEnemyBrainController)}] Attack config is not assigned.", this);
         }
+    }
+    protected override void InitializeInternalState()
+    {
+        base.InitializeInternalState();
+
+        this.ResetRoamingRuntime();
+        this.ResetAttackRuntime();
+        this.SetAIState(TerritorialEnemyState.Roaming);
     }
 }

@@ -30,23 +30,18 @@ namespace FlameOfTheLost
         private bool IsSpawnedEnemiesOnStart => _isSpawnedEnemiesOnStart;
         private bool IsRespawnedEnemiesWhenPlayerSpawnsOrRespawns => _isRespawnedEnemiesWhenPlayerSpawnsOrRespawns;
 
-        // --- Unity Callbacks ---
-        private void Start()
+        private bool _hasBoundExternalReferences;
+        private bool HasBoundExternalReferences
         {
-            if (!this.IsSpawnedEnemiesOnStart) return;
+            get => _hasBoundExternalReferences;
+            set => _hasBoundExternalReferences = value;
+        }
 
-            this.SpawnEnemiesOnStart();
-        }
-        private void Reset()
-        {
-            this.CacheInternalReferences();
-        }
-        //private void OnValidate()
-        //{
-        //    this.CacheReferences();
-        //}
+        // --- Unity Callbacks ---
         private void OnEnable()
         {
+            if (!this.HasBoundExternalReferences) return;
+
             this.SubscribeToPlayerSpawner();
         }
         private void OnDisable()
@@ -219,10 +214,19 @@ namespace FlameOfTheLost
             this.PlayerSpawnerController.OnPlayerSpawnedOrRespawned -= this.HandlePlayerSpawnedOrRespawned;
         }
 
-        //  3. Cache & Validate References
-        protected override void CacheInternalReferences()
+        //  3. FOTL Base Behaviour Overrides
+        protected override void InitializeInternalState()
         {
-            base.CacheInternalReferences();
+            base.InitializeInternalState();
+
+            this.SpawnedEnemies.Clear();
+            _spawnedEnemiesByEntry.Clear();
+
+            this.HasBoundExternalReferences = false;
+        }
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
 
             if (this.PlayerSpawnerController == null)
             {
@@ -242,19 +246,34 @@ namespace FlameOfTheLost
                 _enemyGroupRoot = enemyGroupRoot != null ? enemyGroupRoot.transform : this.transform;
             }
         }
-        protected override void ValidateInternalReferences()
+        protected override void ValidateExternalReferences()
         {
-            base.ValidateInternalReferences();
+            base.ValidateExternalReferences();
 
             if (this.PlayerSpawnerController == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(EnemyGroupSpawnerController<T>)}] No PlayerSpawnerController assigned.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(EnemyGroupSpawnerController<T>)}] No {nameof(PlayerSpawnerController)} assigned.", this);
             }
 
             if (this.EnemyGroupRoot == null)
             {
                 Debug.LogWarning($"[{this.gameObject.name}.{nameof(EnemyGroupSpawnerController<T>)}] No EnemyGroupRoot assigned.", this);
             }
+        }
+        protected override void BindExternalReferences()
+        {
+            base.BindExternalReferences();
+
+            this.HasBoundExternalReferences = true;
+            this.SubscribeToPlayerSpawner();
+        }
+        protected override void InitializeAfterBinding()
+        {
+            base.InitializeAfterBinding();
+
+            if (!this.IsSpawnedEnemiesOnStart) return;
+
+            this.SpawnEnemiesOnStart();
         }
     }
 }

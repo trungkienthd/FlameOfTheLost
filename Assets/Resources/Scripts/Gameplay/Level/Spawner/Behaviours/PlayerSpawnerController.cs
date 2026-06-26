@@ -45,26 +45,6 @@ namespace FlameOfTheLost
         public event Action OnPlayerRespawned;
         public event Action OnPlayerSpawnedOrRespawned;
 
-        // --- Unity Callbacks ---
-        private void Reset()
-        {
-            this.CacheInternalReferences();
-        }
-
-        private void OnValidate()
-        {
-            this.CacheInternalReferences();
-        }
-        private void Start()
-        {
-            this.InitializeFirstDefaultSpawnPointIfNeeded();
-
-            if (this.SpawnPlayerOnStart)
-            {
-                this.SpawnPlayer();
-            }
-        }
-
         // --- Public APIs ---
         public void SpawnPlayer()
         {
@@ -252,9 +232,20 @@ namespace FlameOfTheLost
             return this.CheckpointCtrls.FirstOrDefault(checkpoint => checkpoint != null && checkpoint.CheckpointId == checkpointId);
         }
 
-        protected override void CacheInternalReferences()
+        protected override void InitializeInternalState()
         {
-            base.CacheInternalReferences();
+            base.InitializeInternalState();
+
+            this.IsRespawning = false;
+
+            if (this.PlayerSpawnRecord == null)
+            {
+                _spawnRecord = new PlayerSpawnRecord();
+            }
+        }
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
 
             if (this.PlayerRoot == null)
             {
@@ -274,6 +265,41 @@ namespace FlameOfTheLost
                 _checkpointCtrls = UnityEngine.Object.FindObjectsByType<CheckpointController>(FindObjectsSortMode.None)
                     .Where(checkpoint => checkpoint != null)
                     .ToList();
+            }
+        }
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
+            if (this.PlayerRoot == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] PlayerRoot reference is missing.", this);
+            }
+
+            if (this.PlayerRefreshHandler == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Player's {nameof(CharacterRefreshHandler)} reference is missing.", this);
+            }
+
+            if (this.PlayerInputHandler == null)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] {nameof(PlayerInputHandler)} reference is missing. Respawn input blocking will not work.", this);
+            }
+
+            if (this.DefaultSpawnPointCtrls == null || this.DefaultSpawnPointCtrls.Count == 0)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No default spawn points found.", this);
+            }
+        }
+        protected override void InitializeAfterBinding()
+        {
+            base.InitializeAfterBinding();
+
+            this.InitializeFirstDefaultSpawnPointIfNeeded();
+
+            if (this.SpawnPlayerOnStart)
+            {
+                this.SpawnPlayer();
             }
         }
     }

@@ -67,16 +67,11 @@ namespace FlameOfTheLost
         {
             base.Start();
 
-            this.SyncNextRuntimeID();
-
             // In case the runtime list was pre-seeded in editor/debug
             bool listChanged = this.EnforceImmunityRulesAndPurge();
 
             // Ensure VFX exists for any surviving pre-seeded runtime status effects
-            for (int i = 0; i < this.RuntimeStatusEffects.Count; i++)
-            {
-                this.EnsureStatusEffectVFX(this.RuntimeStatusEffects[i]);
-            }
+            this.EnsureStatusEffectVFXForAllRuntimeStatusEffects();
 
             this.ForceRecomputeAll();
 
@@ -235,7 +230,6 @@ namespace FlameOfTheLost
             };
             _runtimeStatusEffects.Add(newStatusEffect);
 
-            // New effect may be immunity => purge
             // New effect may be immunity => purge
             bool purgedNew = this.EnforceImmunityRulesAndPurge();
             if (purgedNew)
@@ -579,6 +573,13 @@ namespace FlameOfTheLost
 
             _runtimeVFXMap[runtimeStatusEffect.RuntimeID] = handler;
         }
+        private void EnsureStatusEffectVFXForAllRuntimeStatusEffects()
+        {
+            for (int i = 0; i < this.RuntimeStatusEffects.Count; i++)
+            {
+                this.EnsureStatusEffectVFX(this.RuntimeStatusEffects[i]);
+            }
+        }
 
         private void RemoveStatusEffectVFX(uint runtimeID)
         {
@@ -607,19 +608,33 @@ namespace FlameOfTheLost
             _runtimeVFXMap.Clear();
         }
 
-        protected override void CacheInternalReferences()
-        {
-            base.CacheInternalReferences();
-
-            if (this.StatusEffectVFXInstancePrefab == null) _statusEffectVFXInstancePrefab = UnityEngine.Resources.Load<GameObject>("Prefabs/StatusEffectVFXInstance");
-        }
-
+        //  1. FOTL Base Behaviour Overrides
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
             if (this.StatusEffectVFXHolder == null) Debug.LogError($"[{this.CharacterName}.{nameof(StatusEffectController)}] StatusEffectVFXHolder reference is missing. Status effect VFX will not be displayed.", this);
-            if (this.StatusEffectVFXInstancePrefab == null) Debug.LogError($"[{this.CharacterName}.{nameof(StatusEffectController)}] StatusEffectVFXInstancePrefab reference is missing. Status effect VFX will not be displayed.", this);
+        }
+
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.SyncNextRuntimeID();
+        }
+
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
+
+            if (this.StatusEffectVFXInstancePrefab == null) _statusEffectVFXInstancePrefab = UnityEngine.Resources.Load<GameObject>("Prefabs/StatusEffectVFXInstance");
+        }
+
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
+            if (this.StatusEffectVFXInstancePrefab == null) Debug.LogError($"[{this.CharacterName}.{nameof(StatusEffectController)}] {nameof(this.StatusEffectVFXInstancePrefab)} reference is missing. Status effect VFX will not be displayed.", this);
         }
 
         protected override void BindExternalReferences()

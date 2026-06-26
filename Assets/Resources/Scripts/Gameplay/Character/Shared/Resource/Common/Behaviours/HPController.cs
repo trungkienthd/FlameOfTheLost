@@ -67,15 +67,6 @@ namespace FlameOfTheLost
         public event Action<CharacterDeathCauseEntry> OnDeath;
         public event Action<int, int> OnVirtualHPChanged;
 
-        // --- Unity Callbacks ---
-        private void Start()
-        {
-            this.IsDead = false;
-
-            this.CurrentVirtualHP = Mathf.Max(0, this.CurrentVirtualHP);
-            this.OnVirtualHPChanged?.Invoke(this.CurrentVirtualHP, this.MaxVirtualHP);
-        }
-
         // --- Public APIs ---
         //  1. Primarily spend HP for damage taking (Virtual HP is considered first)
         public void TakeDamage(int damageAmount, CharacterDeathCauseEntry deathCause)
@@ -140,6 +131,9 @@ namespace FlameOfTheLost
         //  4. TrySpend override not to account for Virtual HP, but only Current HP (Value)
         public bool TrySpendCost(int baseCostValue, CharacterDeathCauseEntry deathCause)
         {
+            if (this.IsDead) return false;
+            if (this.IsDeathDisabled) return false;
+
             if (baseCostValue < 0) return false;
             if (baseCostValue == 0) return true;
 
@@ -154,7 +148,6 @@ namespace FlameOfTheLost
         }
         public override bool TrySpendCost(int baseCostValue)
         {
-            if (this.IsDead) return false;
             if (!this.CanSpendCost(baseCostValue)) return false;
 
             return this.TrySpendCost
@@ -356,7 +349,6 @@ namespace FlameOfTheLost
                     break;
             }
         }
-
         private CharacterDeathCauseEntry CreateDeathCauseFromStatusEffectSource(RuntimeStatusEffect source)
         {
             GameObject sourceObject = source != null ? source.Source : null;
@@ -374,6 +366,24 @@ namespace FlameOfTheLost
                     ? $"Status effect: {source.Profile.name}"
                     : "Status effect periodic"
             );
+        }
+
+        //  6. FOTL Base Behaviour Overrides
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.IsDead = false;
+            this.LastDeathCause = null;
+
+            _maxVirtualHP = Mathf.Clamp(_maxVirtualHP, 0, this.MaxValue);
+            _currentVirtualHP = Mathf.Clamp(_currentVirtualHP, 0, this.MaxVirtualHP);
+        }
+        protected override void InitializeAfterBinding()
+        {
+            base.InitializeAfterBinding();
+
+            this.OnVirtualHPChanged?.Invoke(this.CurrentVirtualHP, this.MaxVirtualHP);
         }
     }
 }

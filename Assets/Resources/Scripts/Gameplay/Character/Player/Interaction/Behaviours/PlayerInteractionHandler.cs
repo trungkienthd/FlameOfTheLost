@@ -56,17 +56,12 @@ namespace FlameOfTheLost
         }
 
         // --- Unity Callbacks ---
-        private void Start()
-        {
-            this.RegisterPromptBlocker(this.PlayerMenuManager);
-            this.RegisterPromptBlocker(this.PlayerInteractionPanelListManager);
-
-            this.HidePrompt();
-        }
         private void OnDestroy()
         {
             this.UnregisterPromptBlocker(this.PlayerMenuManager);
             this.UnregisterPromptBlocker(this.PlayerInteractionPanelListManager);
+
+            this.ClearNearbyInteractionState();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -425,19 +420,19 @@ namespace FlameOfTheLost
             _nearbyPromptSourceBehaviours.Clear();
         }
 
-        //  8. Others
+        //  8. Resolve Interactor
         private GameObject ResolveInteractor()
         {
             return this.PlayerRoot;
         }
 
+        //  9. Prompt Display (Show/Hide)
         private void ShowPrompt(string text)
         {
             if (this.PromptPanelController == null) return;
 
             this.PromptPanelController.Show(text);
         }
-
         private void HidePrompt()
         {
             if (this.PromptPanelController == null) return;
@@ -445,6 +440,7 @@ namespace FlameOfTheLost
             this.PromptPanelController.Hide();
         }
 
+        //  10. Get Interact Input Display Name
         private string GetInteractInputDisplayName()
         {
             InputAction interactAction = this.InteractAction;
@@ -467,6 +463,7 @@ namespace FlameOfTheLost
             return "I";
         }
 
+        //  11. Handler Events 
         private void HandlePromptBlockStarted(IPlayerInteractionPromptBlocker blocker)
         {
             if (blocker == null) return;
@@ -474,7 +471,6 @@ namespace FlameOfTheLost
             _activePromptBlockers.Add(blocker);
             this.HidePrompt();
         }
-
         private void HandlePromptBlockEnded(IPlayerInteractionPromptBlocker blocker)
         {
             if (blocker == null) return;
@@ -482,7 +478,6 @@ namespace FlameOfTheLost
             _activePromptBlockers.Remove(blocker);
             this.RefreshPrompt();
         }
-
         private void HandlePromptRefreshRequested()
         {
             if (this.IsDeathDisabled)
@@ -494,46 +489,70 @@ namespace FlameOfTheLost
             this.RefreshPrompt();
         }
 
+        //  12. FOTL Base Behaviour Overrides 
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
 
             if (this.PlayerRoot == null) _playerRoot = this.transform.root.gameObject;
+        }
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.PlayerRoot == null) Debug.LogError($"[{this.CharacterName}.{nameof(PlayerInteractionHandler)}] PlayerRoot reference is not assigned.", this);
+        }
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.IsDeathDisabled = false;
+
+            _nearbyInteractableBehaviours.Clear();
+            _nearbyPromptSourceBehaviours.Clear();
+            _activePromptBlockers.Clear();
+        }
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
 
             GameObject canvas = GameObject.Find("Canvas");
-            if (this.PromptPanelController == null)
-            {
-                if (canvas != null) _promptPanelController = canvas.GetComponentInChildren<PlayerInteractionPromptPanelController>(true);
-            }
-            if (this.PlayerMenuManager == null)
-            {
-                if (canvas != null) _playerMenuManager = canvas.GetComponentInChildren<PlayerMenuManager>(true);
-            }
-            if (this.PlayerInteractionPanelListManager == null)
-            {
-                if (canvas != null) _playerInteractionPanelListManager = canvas.GetComponentInChildren<PlayerInteractionPanelListManager>(true);
-            }
+
+            if (this.PromptPanelController              == null && canvas != null) _promptPanelController               = canvas.GetComponentInChildren<PlayerInteractionPromptPanelController>(true);
+            if (this.PlayerMenuManager                  == null && canvas != null) _playerMenuManager                   = canvas.GetComponentInChildren<PlayerMenuManager>(true);
+            if (this.PlayerInteractionPanelListManager  == null && canvas != null) _playerInteractionPanelListManager   = canvas.GetComponentInChildren<PlayerInteractionPanelListManager>(true);
 
             if (this.InteractActionReference == null)
             {
                 PlayerInput playerInput = this.GetComponentInParent<PlayerInput>();
                 if (playerInput != null)
                 {
-                    InputAction interactAction = playerInput.actions.FindAction("Interact", true);
+                    InputAction interactAction = playerInput.actions.FindAction("Interact", false);
                     if (interactAction != null) _interactActionReference = InputActionReference.Create(interactAction);
                 }
             }
         }
-
-        protected override void ValidateInternalReferences()
+        protected override void ValidateExternalReferences()
         {
-            base.ValidateInternalReferences();
+            base.ValidateExternalReferences();
 
-            if (this.PlayerRoot == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Player Root reference is not assigned.", this);
-            if (this.PromptPanelController == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Prompt Panel Controller reference is not assigned.", this);
-            if (this.PlayerMenuManager == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Player Menu Manager reference is not assigned.", this);
-            if (this.PlayerInteractionPanelListManager == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Player Interaction Panel List Manager reference is not assigned.", this);
-            if (this.InteractActionReference == null || this.InteractActionReference.action == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Interact Action Reference is not assigned or has no action.", this);
+            if (this.PromptPanelController == null) Debug.LogError($"[{this.CharacterName}.{nameof(PlayerInteractionHandler)}] Prompt Panel Controller reference is not assigned.", this);
+            if (this.PlayerMenuManager == null) Debug.LogError($"[{this.CharacterName}.{nameof(PlayerInteractionHandler)}] Player Menu Manager reference is not assigned.", this);
+            if (this.PlayerInteractionPanelListManager == null) Debug.LogError($"[{this.CharacterName}.{nameof(PlayerInteractionHandler)}] Player Interaction Panel List Manager reference is not assigned.", this);
+            if (this.InteractActionReference == null || this.InteractActionReference.action == null) Debug.LogError($"[{this.CharacterName}.{nameof(PlayerInteractionHandler)}] Interact Action Reference is not assigned or has no action.", this);
+        }
+        protected override void BindExternalReferences()
+        {
+            base.BindExternalReferences();
+
+            this.RegisterPromptBlocker(this.PlayerMenuManager);
+            this.RegisterPromptBlocker(this.PlayerInteractionPanelListManager);
+        }
+        protected override void InitializeAfterBinding()
+        {
+            base.InitializeAfterBinding();
+
+            this.HidePrompt();
         }
     }
 }

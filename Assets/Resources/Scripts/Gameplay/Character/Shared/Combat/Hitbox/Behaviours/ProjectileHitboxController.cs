@@ -4,7 +4,7 @@ namespace FlameOfTheLost
 {
     public class ProjectileHitboxController : HitboxController
     {
-        // --- State
+        // --- States ---
         [Header("State")]
         [SerializeField] private float _lifetime = 1.5f;                    // in seconds
         [SerializeField] private bool _useUnscaledTime = false;
@@ -29,15 +29,6 @@ namespace FlameOfTheLost
         }
         protected override bool AllowMultipleTargetsPerEnableWindow => !this.DestroyOnHit;
 
-        // --- Unity methods
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-        private void Start()
-        {
-            this.TimeAlive = 0f;
-        }
         private void Update()
         {
             if (!this.IsActive) return;
@@ -53,14 +44,15 @@ namespace FlameOfTheLost
             }
         }
 
-        // --- Public APIs
+        // --- Public APIs ---
         public override void EnableHitbox(HitboxActivationContext payload, AttackSide attackSideType)
         {
             base.EnableHitbox(payload, attackSideType);
 
             // Reset states
             this.TimeAlive = 0f;
-            if (this.ActiveRuntimeSkill.Profile is RangedSkillProfile rangedSkillProfile)
+
+            if (this.ActiveRuntimeSkill != null && this.ActiveRuntimeSkill.Profile is RangedSkillProfile rangedSkillProfile)
             {
                 this.Lifetime = rangedSkillProfile.ProjectileLifetime;
                 this.DestroyOnHit = rangedSkillProfile.DestroyProjectileOnHit;
@@ -76,6 +68,15 @@ namespace FlameOfTheLost
                 this.DisableHitbox();
                 UnityEngine.Object.Destroy(this.gameObject);
             }
+        }
+
+        // --- Helpers ---
+        //  1. FOTL Base Behaviour Overrides
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.TimeAlive = 0f;
         }
     }
 }

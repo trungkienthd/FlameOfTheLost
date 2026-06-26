@@ -15,20 +15,11 @@ namespace FlameOfTheLost
 
         public int Priority => this.TerrainProfile != null ? this.TerrainProfile.Priority : 0;
 
-        private void Start()
+        protected override void Awake()
         {
-            //if (this.TilemapRenderer != null)
-            //{
-            //    this.TilemapRenderer.sortingOrder = this.Priority;
-            //}
-        }
-        private void Reset()
-        {
-            Collider2D collider = this.GetComponent<Collider2D>();
-            if (collider != null)
-            {
-                collider.isTrigger = true;
-            }
+            base.Awake();
+
+            this.ConfigureCollider();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -50,11 +41,36 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
+        //  1. FOTL Base Behaviour Overrides
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
 
             if (this.TilemapRenderer == null) _tilemapRenderer = this.GetComponent<TilemapRenderer>();
+        }
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.TilemapRenderer == null)
+            {
+                Debug.LogError($"[{nameof(TilemapTerrainController)}] TilemapRenderer reference is missing.", this);
+            }
+            if (this.TerrainProfile == null)
+            {
+                Debug.LogError($"[{nameof(TilemapTerrainController)}] {nameof(this.TerrainProfile)} reference is missing.", this);
+            }
+        }
+
+        //  2. Setup Collider's isTrigger
+        private void ConfigureCollider()
+        {
+            Collider2D collider = this.GetComponent<Collider2D>();
+
+            if (collider != null)
+            {
+                collider.isTrigger = true;
+            }
         }
     }
 }

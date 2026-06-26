@@ -28,13 +28,21 @@ namespace FlameOfTheLost
             set => _staminaBar = value;
         }
 
+        private bool _hasBoundExternalReferences;
+        private bool HasBoundExternalReferences
+        {
+            get => _hasBoundExternalReferences;
+            set => _hasBoundExternalReferences = value;
+        }
+
         // --- Unity Callbacks ---
         private void OnEnable()
         {
-            this.SendAll();
-            this.SubscribeAll();
-        }
+            if (!this.HasBoundExternalReferences) return;
 
+            this.SubscribeAll();
+            this.SendAll();
+        }
         private void OnDisable()
         {
             this.UnsubscribeAll();
@@ -44,26 +52,23 @@ namespace FlameOfTheLost
         {
             if (this.PlayerResourcesController != null)
             {
-                try
+                if (this.PlayerResourcesController.HP != null)
                 {
-                    this.PlayerResourcesController.HP.OnValueChanged -= this.HandleHealthChanged;
-                    this.PlayerResourcesController.HP.OnValueChanged += this.HandleHealthChanged;
+                    this.PlayerResourcesController.HP.OnValueChanged -= this.HandleHPChanged;
+                    this.PlayerResourcesController.HP.OnValueChanged += this.HandleHPChanged;
                 }
-                catch { /* Ignore if already subscribed */}
 
-                try
+                if (this.PlayerResourcesController.FP != null)
                 {
                     this.PlayerResourcesController.FP.OnValueChanged -= this.HandleFPChanged;
                     this.PlayerResourcesController.FP.OnValueChanged += this.HandleFPChanged;
                 }
-                catch { /* Ignore if already subscribed */ }
 
-                try
+                if (this.PlayerResourcesController.Stamina != null)
                 {
                     this.PlayerResourcesController.Stamina.OnValueChanged -= this.HandleStaminaChanged;
                     this.PlayerResourcesController.Stamina.OnValueChanged += this.HandleStaminaChanged;
                 }
-                catch { /* Ignore if already subscribed */ }
             }
         }
 
@@ -71,43 +76,31 @@ namespace FlameOfTheLost
         { 
             if (this.PlayerResourcesController != null)
             {
-                try
-                {
-                    this.PlayerResourcesController.HP.OnValueChanged -= this.HandleHealthChanged;
-                }
-                catch { /* Ignore if not subscribed */}
-
-                try
-                {
-                    this.PlayerResourcesController.FP.OnValueChanged -= this.HandleFPChanged;
-                }
-                catch { /* Ignore if not subscribed */ }
-
-                try
-                {
-                    this.PlayerResourcesController.Stamina.OnValueChanged -= this.HandleStaminaChanged;
-                }
-                catch { /* Ignore if not subscribed */ }
+                if (this.PlayerResourcesController.HP       != null) this.PlayerResourcesController.HP.OnValueChanged       -= this.HandleHPChanged;
+                if (this.PlayerResourcesController.FP       != null) this.PlayerResourcesController.FP.OnValueChanged       -= this.HandleFPChanged;
+                if (this.PlayerResourcesController.Stamina  != null) this.PlayerResourcesController.Stamina.OnValueChanged  -= this.HandleStaminaChanged;
             }
         }
 
         // --- Initial fill ---
         public void SendAll()
         {
+            if (this.PlayerResourcesController == null) return;
+
             // Read and push each bar (if possible)
-            if (this.HPBar != null && this.PlayerResourcesController != null)
+            if (this.HPBar != null && this.PlayerResourcesController.HP != null)
             {
                 this.ReadHealth(out int currentHP, out int maxHP);
                 UICanvasHUDResourceBarGroupController.PushToBar(this.HPBar, currentHP, maxHP);
             }
 
-            if (this.FPBar != null && this.PlayerResourcesController != null)
+            if (this.FPBar != null && this.PlayerResourcesController.FP != null)
             {
                 this.ReadFP(out int currentFP, out int maxFP);
                 UICanvasHUDResourceBarGroupController.PushToBar(this.FPBar, currentFP, maxFP);
             }
 
-            if (this.StaminaBar != null && this.PlayerResourcesController != null)
+            if (this.StaminaBar != null && this.PlayerResourcesController.Stamina != null)
             {
                 this.ReadStamina(out int currentStamina, out int maxStamina);
                 UICanvasHUDResourceBarGroupController.PushToBar(this.StaminaBar, currentStamina, maxStamina);
@@ -115,12 +108,12 @@ namespace FlameOfTheLost
         }
 
         // --- Event handlers (C# event path) ---
-        private void HandleHealthChanged(int currentValue, int maxValue) => UICanvasHUDResourceBarGroupController.PushToBar(this.HPBar, currentValue, maxValue);
+        private void HandleHPChanged(int currentValue, int maxValue) => UICanvasHUDResourceBarGroupController.PushToBar(this.HPBar, currentValue, maxValue);
         private void HandleFPChanged(int currentValue, int maxValue) => UICanvasHUDResourceBarGroupController.PushToBar(this.FPBar, currentValue, maxValue);
         private void HandleStaminaChanged(int currentValue, int maxValue) => UICanvasHUDResourceBarGroupController.PushToBar(this.StaminaBar, currentValue, maxValue);
 
         // --- Public hooks (for UnityEvent path) ---
-        public void OnHealthChanged(int currentValue, int maxValue) => this.HandleHealthChanged(currentValue, maxValue);
+        public void OnHealthChanged(int currentValue, int maxValue) => this.HandleHPChanged(currentValue, maxValue);
         public void OnFPChanged(int currentValue, int maxValue) => this.HandleFPChanged(currentValue, maxValue);
         public void OnStaminaChanged(int currentValue, int maxValue) => this.HandleStaminaChanged(currentValue, maxValue);
 
@@ -184,12 +177,6 @@ namespace FlameOfTheLost
         {
             base.CacheInternalReferences();
 
-            if (this.PlayerResourcesController == null)
-            {
-                GameObject player = GameObject.Find("Player");
-                if (player != null) _resources = player.GetComponentInChildren<CharacterResourcesController>();
-            }
-
             // Try to find bars by common names if not set
             if (this.HPBar == null)
             {
@@ -207,16 +194,43 @@ namespace FlameOfTheLost
                 if (staminaBar != null) this.StaminaBar = staminaBar.GetComponent<UICanvasHUDResourceBarController>();
             }
         }
-
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
-            if (this.PlayerResourcesController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarGroupController)}] Player's CharacterResourcesController reference is missing.");
-
             if (this.HPBar == null)         Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarGroupController)}] HPBar reference is missing.");
             if (this.FPBar == null)         Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarGroupController)}] FPBar reference is missing.");
             if (this.StaminaBar == null)    Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarGroupController)}] StaminaBar reference is missing.");
+        }
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
+
+            if (this.PlayerResourcesController == null)
+            {
+                GameObject player = GameObject.Find("Player");
+                if (player != null) _resources = player.GetComponentInChildren<CharacterResourcesController>();
+            }
+        }
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
+            if (this.PlayerResourcesController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarGroupController)}] Player's {nameof(CharacterResourcesController)} reference is missing.");
+        }
+        protected override void BindExternalReferences()
+        {
+            base.BindExternalReferences();
+
+            this.SubscribeAll();
+
+            this.HasBoundExternalReferences = true;
+        }
+        protected override void InitializeAfterBinding()
+        {
+            base.InitializeAfterBinding();
+
+            this.SendAll();
         }
     }
 }

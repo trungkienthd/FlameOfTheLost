@@ -49,18 +49,6 @@ namespace FlameOfTheLost
         public event Action<InventoryItemEntry> OnCarriableItemUnequipped;
         public event Action<bool> OnCarriableItemCarryingStateChanged;
 
-        // --- Unity Callbacks ---
-        protected override void Awake()
-        {
-            base.Awake();
-
-            this.SyncEquippedState();
-        }
-        private void Start()
-        {
-            this.TrySetCarriableItemCarryingState(false);
-        }
-
         // --- Public APIs ---
         //  1. Queries
         //      1.1. Equipped Item Type Queries
@@ -268,6 +256,31 @@ namespace FlameOfTheLost
 
             this.OnCarriableItemCarryingStateChanged?.Invoke(this.IsCarryingCarriableItem);
             return true;
+        }
+
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.IsDeathDisabled = false;
+
+            // Silent Awake-phase state normalization.
+            this.IsCarryingCarriableItem = false;
+        }
+        protected override void InitializeAfterBinding()
+        {
+            base.InitializeAfterBinding();
+
+            if (!this.IsCarriableItemEntryValid(this.EquippedCarriableItemEntry))
+            {
+                this.SetEquippedCarriableItemEntry(null);
+            }
+            else
+            {
+                this.SyncEquippedState();
+            }
+
+            this.SetCarriableItemCarryingStateInternal(false);
         }
     }
 }

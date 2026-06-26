@@ -71,12 +71,6 @@ namespace FlameOfTheLost
         public event Action<int, int> OnValueChanged;
 
         // --- Unity Callbacks ---
-        protected override void Awake()
-        {
-            base.Awake();
-
-            this.CurrentValue = this.MaxValue;
-        }
         protected virtual void Update()
         {
             if (this.IsDeathDisabled) return;
@@ -231,6 +225,24 @@ namespace FlameOfTheLost
             if (newValue == this.CurrentValue) return;
 
             this.CurrentValue = newValue;
+        }
+
+        //  4. FOTL Base Behaviour Overrides
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            _maxValue = Mathf.Max(1, _maxValue);
+
+            // Initial spawn/scene-load behaviour: resource starts full.
+            // Use backing field directly to avoid firing OnValueChanged during Awake.
+            _currentValue = _maxValue;
+        }
+        protected override void InitializeAfterBinding()
+        {
+            base.InitializeAfterBinding();
+
+            this.OnValueChanged?.Invoke(this.CurrentValue, this.MaxValue);
         }
     }
 }

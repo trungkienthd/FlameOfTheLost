@@ -35,7 +35,7 @@ namespace FlameOfTheLost
 
         // --- State
         [Header("State (Runtime)")]
-        [SerializeField] private bool _isActive = true;
+        [SerializeField] private bool _isActive = false;
         [SerializeField] private bool _hasConfirmedHit = false;             // only confirm once per enable window
         [SerializeField] private bool _hasDisabledWithoutHit = false;        // expired without ever confirming a hit
         protected bool IsActive
@@ -61,19 +61,6 @@ namespace FlameOfTheLost
         // --- Hit registry (per enable window)
         private readonly HashSet<int> _hitTargetIds = new();
         protected HashSet<int> HitTargetIDs => _hitTargetIds;
-
-        // Boolean: whether to allow multiple targets to be hit during the same enable window.
-        //      If false: first valid target consumes this hitbox (your current behavior).
-        //      If true: allow multiple targets, but still only once per target per enable window.
-
-        // --- Unity Callbacks ---
-        protected override void Awake()
-        {
-            base.Awake();
-
-            var collider = this.GetComponent<Collider2D>();
-            if (collider) collider.isTrigger = true;
-        }
 
         // --- Public APIs ---
         //      1.1 Binding Context
@@ -208,12 +195,23 @@ namespace FlameOfTheLost
             if (this.DamageConfiguratorSource != null) this.DamageConfigurator = this.DamageConfiguratorSource as IDamageConfigurator;
             if (this.DamageConfigurator == null) this.DamageConfigurator = this.GetComponent<IDamageConfigurator>(); // DamageDealingHandler
         }
-
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
             if (this.DamageConfigurator == null) Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] Missing {nameof(IDamageConfigurator)} on the same GameObject.", this);
+        }
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.IsActive = false;
+            this.HasConfirmedHit = false;
+            this.HasDisabledWithoutHit = false;
+            this.HitTargetIDs.Clear();
+
+            var collider = this.GetComponent<Collider2D>();
+            if (collider) collider.isTrigger = true;
         }
     }
 }

@@ -14,19 +14,6 @@ namespace FlameOfTheLost
             set => _slider = value;
         }
 
-        private void Start()
-        {
-            if (this.Slider)
-            {
-                this.Slider.minValue = 0f;
-                this.Slider.maxValue = 1f;
-                this.Slider.interactable = false;
-                this.Slider.transition = Selectable.Transition.None;
-            }
-
-            this.SetNormalized(1f);
-        }
-
         public void Set(int currentValue, int maxValue)
         {
             this.SetNormalized(maxValue > 0f ? Mathf.Clamp01((float)currentValue / maxValue) : 0f);
@@ -43,12 +30,24 @@ namespace FlameOfTheLost
 
             if (!this.Slider) this.Slider = this.GetComponent<Slider>();
         }
-
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
             if (this.Slider ==  null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarController)}] Slider reference is missing.");
+        }
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            if (this.Slider == null) return;
+
+            this.Slider.minValue = 0f;
+            this.Slider.maxValue = 1f;
+            this.Slider.interactable = false;
+            this.Slider.transition = Selectable.Transition.None;
+
+            this.SetNormalized(1f);
         }
     }
 }

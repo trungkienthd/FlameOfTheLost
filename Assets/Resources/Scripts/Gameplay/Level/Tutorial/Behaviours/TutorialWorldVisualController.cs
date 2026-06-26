@@ -25,8 +25,10 @@ namespace FlameOfTheLost
         [SerializeField] private bool _visibleOnStart = true;
         private bool VisibleOnStart => _visibleOnStart;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             this.SetVisible(this.VisibleOnStart);
         }
 
@@ -64,6 +66,19 @@ namespace FlameOfTheLost
                 {
                     _instructionText = this.InstructionVisual.transform.Find("InstructionText")?.GetComponent<TMP_Text>();
                 }
+            }
+        }
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.InstructionVisual == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialWorldVisualController)}] InstructionVisual reference is missing.", this);
+            }
+            if (this.InstructionText == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialWorldVisualController)}] InstructionText reference is missing.", this);
             }
         }
     }
