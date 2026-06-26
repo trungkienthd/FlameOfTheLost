@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -40,10 +41,13 @@ namespace FlameOfTheLost
             set => _hasDistributedReward = value;
         }
 
+        // --- Events ---
+        public event Action<CharacterDeathContext> OnTechnicalDeath;
+
         // --- Unity Callbacks ---
         private void OnEnable()
         {
-            this.CacheReferences();
+            this.CacheInternalReferences();
             this.BindEvents();
         }
         private void OnDisable()
@@ -95,6 +99,14 @@ namespace FlameOfTheLost
             if (this.HasHandledTechnicalDeath) return;
             this.HasHandledTechnicalDeath = true;
 
+            CharacterDeathContext context = new CharacterDeathContext
+            (
+                character: this.CharacterRootController,
+                deathCause: deathCause
+            );
+
+            this.OnTechnicalDeath?.Invoke(context);
+
             Debug.Log
             (
                 $"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Character is technically dead. " +
@@ -103,18 +115,12 @@ namespace FlameOfTheLost
                 this
             );
 
-            this.DisableDeathDisableableSystems(deathCause);
+            this.DisableDeathDisableableSystems(context);
         }
 
-        private void DisableDeathDisableableSystems(CharacterDeathCauseEntry deathCause)
+        private void DisableDeathDisableableSystems(CharacterDeathContext context)
         {
             if (this.CharacterRootController == null) return;
-
-            CharacterDeathContext context = new CharacterDeathContext
-            (
-                character: this.CharacterRootController,
-                deathCause: deathCause
-            );
 
             IEnumerable<ICharacterDeathDisableable> disableableSystems = this.CharacterRootController
                 .GetComponentsInChildren<MonoBehaviour>(true)
@@ -219,16 +225,16 @@ namespace FlameOfTheLost
         }
 
         //  3. Cache & Validate References
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlayerSpawnerController == null) _playerSpawnerController = UnityEngine.Object.FindFirstObjectByType<PlayerSpawnerController>();
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.IdentityController == null)
             {

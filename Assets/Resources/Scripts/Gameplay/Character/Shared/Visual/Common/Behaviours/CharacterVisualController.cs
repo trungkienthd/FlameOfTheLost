@@ -325,9 +325,9 @@ namespace FlameOfTheLost
             this.Animator.Update(0f);
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.SpriteRenderer == null) _spriteRenderer = this.GetComponent<SpriteRenderer>();
             if (this.Animator == null) _animator = this.GetComponent<Animator>();

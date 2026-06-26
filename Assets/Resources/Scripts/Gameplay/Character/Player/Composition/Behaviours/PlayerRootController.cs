@@ -12,17 +12,17 @@ namespace FlameOfTheLost
 
         public PlayerInputHandler PlayerInputHandler => base.InputHandler as PlayerInputHandler;
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlayerCarryLoadoutController   == null) _playerCarryLoadoutController  = this.GetComponentInChildren<PlayerCarryLoadoutController>(true);
             if (this.PlayerInteractionHandler       == null) _playerInteractionHandler      = this.GetComponentInChildren<PlayerInteractionHandler>(true);
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.PlayerInputHandler == null)
             {

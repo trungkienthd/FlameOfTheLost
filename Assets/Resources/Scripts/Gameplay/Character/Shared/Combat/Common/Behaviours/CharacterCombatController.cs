@@ -581,9 +581,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.MeleeHitboxController == null) _meleeHitboxController = this.GetComponentInChildren<MeleeHitboxController>(true);
 
@@ -592,9 +592,9 @@ namespace FlameOfTheLost
             if (this.RangedAnchorUp     == null) _rangedAnchorUp    = this.transform.Find("RangedAnchors/RangedAnchor_Up");
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.MeleeHitboxController == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] MeleeHitboxController reference is missing. Expected to find a child with a MeleeHitboxController component.", this);
 

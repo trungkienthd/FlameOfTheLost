@@ -67,9 +67,9 @@ namespace FlameOfTheLost
             return $"Open {this.DisplayName}";
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>();
 

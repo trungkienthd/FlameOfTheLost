@@ -86,9 +86,9 @@ namespace FlameOfTheLost
             this.SlotBackground.color = isCarrying ? this.CarriedColor : this.NormalColor;
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlayerCarryLoadoutController == null)
             {
@@ -104,9 +104,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.PlayerCarryLoadoutController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDActiveCarriableItemSlotController)}] PlayerCarryLoadoutController reference is missing.", this);
             if (this.SlotBackground == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDActiveCarriableItemSlotController)}] SlotBackground Image reference is missing.", this);

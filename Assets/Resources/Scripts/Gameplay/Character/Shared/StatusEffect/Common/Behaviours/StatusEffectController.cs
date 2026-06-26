@@ -62,13 +62,11 @@ namespace FlameOfTheLost
         protected override void Awake()
         {
             base.Awake();
-
-            this.FlagHandler?.Bind(this);
-            this.StatModifierHandler?.Bind(this);
-            this.StatPeriodicHandler?.Bind(this);
         }
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             this.SyncNextRuntimeID();
 
             // In case the runtime list was pre-seeded in editor/debug
@@ -609,19 +607,28 @@ namespace FlameOfTheLost
             _runtimeVFXMap.Clear();
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.StatusEffectVFXInstancePrefab == null) _statusEffectVFXInstancePrefab = UnityEngine.Resources.Load<GameObject>("Prefabs/StatusEffectVFXInstance");
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.StatusEffectVFXHolder == null) Debug.LogError($"[{this.CharacterName}.{nameof(StatusEffectController)}] StatusEffectVFXHolder reference is missing. Status effect VFX will not be displayed.", this);
             if (this.StatusEffectVFXInstancePrefab == null) Debug.LogError($"[{this.CharacterName}.{nameof(StatusEffectController)}] StatusEffectVFXInstancePrefab reference is missing. Status effect VFX will not be displayed.", this);
+        }
+
+        protected override void BindExternalReferences()
+        {
+            base.BindExternalReferences();
+
+            this.FlagHandler?.Bind(this);
+            this.StatModifierHandler?.Bind(this);
+            this.StatPeriodicHandler?.Bind(this);
         }
     }
 }

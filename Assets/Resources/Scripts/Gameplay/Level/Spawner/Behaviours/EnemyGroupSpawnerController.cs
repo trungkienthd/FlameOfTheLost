@@ -39,7 +39,7 @@ namespace FlameOfTheLost
         }
         private void Reset()
         {
-            this.CacheReferences();
+            this.CacheInternalReferences();
         }
         //private void OnValidate()
         //{
@@ -220,9 +220,9 @@ namespace FlameOfTheLost
         }
 
         //  3. Cache & Validate References
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlayerSpawnerController == null)
             {
@@ -242,9 +242,9 @@ namespace FlameOfTheLost
                 _enemyGroupRoot = enemyGroupRoot != null ? enemyGroupRoot.transform : this.transform;
             }
         }
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.PlayerSpawnerController == null)
             {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -12,7 +13,6 @@ namespace FlameOfTheLost
         [Header("References - Knockback")]
         [SerializeField] private KnockbackReceivingHandler _knockbackHandler;
         private KnockbackReceivingHandler KnockbackHandler => _knockbackHandler;
-
 
         [Header("References - Hit Invulnerability")]
         [SerializeField] private MonoBehaviour _hitInvulnerabilityProviderSource;
@@ -49,6 +49,9 @@ namespace FlameOfTheLost
             get => _lastDamager;
             set => _lastDamager = value;
         }
+
+        // --- Events ---
+        public event Action<DamageAppliedContext> OnDamageApplied;
 
         // --- Unity Callbacks ---
         private void OnTriggerEnter2D(Collider2D other)
@@ -90,8 +93,8 @@ namespace FlameOfTheLost
             this.LastDamager = damager;
 
             // Direction = from damager origin to this
-            Vector2 direction = damager.OriginTransform != null 
-                ? (this.transform.position - damager.OriginTransform.position).normalized 
+            Vector2 direction = damager.OriginTransform != null
+                ? (this.transform.position - damager.OriginTransform.position).normalized
                 : Vector2.zero;
 
             // Apply damage 
@@ -105,7 +108,18 @@ namespace FlameOfTheLost
                     reason: "Direct damage"
                 );
 
-                targetDamageable.TakeDamage(damager.EffectiveDamageAmount, deathCause);
+                int damageAmount = damager.EffectiveDamageAmount;
+                targetDamageable.TakeDamage(damageAmount, deathCause);
+
+                this.OnDamageApplied?.Invoke
+                (
+                    new DamageAppliedContext
+                    (
+                        attacker: damager.SourceCharacterRootController,
+                        victim: this.CharacterRootController,
+                        damageAmount: damageAmount
+                    )
+                );
             }
 
             // Apply knockback
@@ -153,9 +167,9 @@ namespace FlameOfTheLost
                    this.HitInvulnerabilityProvider.IsHitInvulnerable;
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (!this.KnockbackHandler) _knockbackHandler = this.GetComponent<KnockbackReceivingHandler>();
 

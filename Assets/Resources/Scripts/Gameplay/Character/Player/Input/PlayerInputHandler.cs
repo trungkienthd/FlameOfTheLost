@@ -288,9 +288,9 @@ namespace FlameOfTheLost
             return direction;
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlayerMenuManager == null)
             {
@@ -307,9 +307,9 @@ namespace FlameOfTheLost
             if (this.PlayerInput == null) _playerInput = this.GetComponent<PlayerInput>();
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.PlayerInput == null)
             {

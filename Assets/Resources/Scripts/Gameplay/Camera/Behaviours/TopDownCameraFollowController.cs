@@ -146,9 +146,9 @@ namespace FlameOfTheLost
             return position;
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.Camera == null) _camera = this.GetComponent<Camera>();
 
@@ -159,9 +159,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.Camera == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TopDownCameraFollowController)}] Camera reference is missing.");
             if (this.Target == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TopDownCameraFollowController)}] Target reference is missing.");

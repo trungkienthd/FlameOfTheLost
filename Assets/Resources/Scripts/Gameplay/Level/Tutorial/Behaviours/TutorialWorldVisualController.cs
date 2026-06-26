@@ -53,9 +53,9 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.InstructionVisual == null) _instructionVisual = this.transform.Find("WorldSpaceTutorialVisual")?.gameObject;
             if (this.InstructionText == null)

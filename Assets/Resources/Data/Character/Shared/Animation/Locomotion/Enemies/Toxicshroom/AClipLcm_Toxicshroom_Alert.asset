@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65163b05174bdc4694637d6b2cc914f, type: 3}
+  m_Name: AClipLcm_Toxicshroom_Alert
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterLocomotionClipSetProfile
+  _locomotionMode: 2
+  _carryItemType: 0
+  _lightSourceType: 0
+  _idleClipSet:
+    _down: {fileID: 7400000, guid: eb77534dab8e7b84f9c66bef3e926032, type: 2}
+    _side: {fileID: 7400000, guid: 4fe4a866a753ce5428de89283b70882d, type: 2}
+    _up: {fileID: 7400000, guid: 6b810ca27cac5a9469aee87eeddc6d84, type: 2}
+  _walkClipSet:
+    _down: {fileID: 7400000, guid: 4265c6c0639abbe41a32b48152b4c0a6, type: 2}
+    _side: {fileID: 7400000, guid: 753533d4cbb16e94484cd4bc44b0db81, type: 2}
+    _up: {fileID: 7400000, guid: d4a2c3a38d0700d4bb6f0f3fcb7b9abf, type: 2}

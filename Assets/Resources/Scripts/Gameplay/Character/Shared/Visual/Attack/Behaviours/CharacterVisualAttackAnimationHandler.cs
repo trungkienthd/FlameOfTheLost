@@ -19,7 +19,7 @@ namespace FlameOfTheLost
         public void Initialize(CharacterVisualController visualController)
         {
             _visualController = visualController;
-            this.CacheReferences();
+            this.CacheInternalReferences();
         }
 
         public void ApplyAttackOverridesTo(AnimatorOverrideController overrideController, RuntimeSkill runtimeSkill, WeaponProfile weapon, AttackSide attackSideType)
@@ -56,9 +56,9 @@ namespace FlameOfTheLost
             );
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlaceholderProfile == null) _placeholderProfile = Resources.Load<CharacterAttackAnimationProfile>("Data/Animations/Characters/Attack/Generic/AniAtk_Generic");
         }

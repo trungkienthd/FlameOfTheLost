@@ -132,9 +132,9 @@ namespace FlameOfTheLost
             _spawnedSlots.Clear();
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlayerStatusEffectController == null)
             {
@@ -149,9 +149,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.PlayerStatusEffectController == null)
             {

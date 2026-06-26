@@ -110,9 +110,9 @@ namespace FlameOfTheLost
         }
 
         //  2. Cache and Validate References
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.UpgradeConfig == null)
             {
@@ -120,9 +120,9 @@ namespace FlameOfTheLost
                 Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterProgressionUpgradeHandler)}] UpgradeConfig reference is not set on {this.gameObject.name}. Attempting to load default config from Resources. Loaded: {(this.UpgradeConfig != null)}");
             }
         }
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.UpgradeConfig == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterProgressionUpgradeHandler)}] UpgradeConfig reference is missing on {this.gameObject.name}");
         }

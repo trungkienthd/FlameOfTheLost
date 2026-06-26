@@ -6,15 +6,39 @@ namespace FlameOfTheLost
     {
         protected virtual void Awake()
         {
-            this.CacheReferences();
-            this.ValidateReferences();
+            this.CacheInternalReferences();
+            this.ValidateInternalReferences();
+            this.InitializeInternalState();
         }
 
-        protected virtual void CacheReferences()
+        protected virtual void Start()
+        {
+            this.CacheExternalReferences();
+            this.ValidateExternalReferences();
+            this.BindExternalReferences();
+        }    
+
+        protected virtual void CacheInternalReferences()
         {
         }
 
-        protected virtual void ValidateReferences()
+        protected virtual void ValidateInternalReferences()
+        {
+        }
+
+        protected virtual void InitializeInternalState()
+        {
+        }
+
+        protected virtual void CacheExternalReferences()
+        {
+        }
+
+        protected virtual void ValidateExternalReferences()
+        {
+        }
+
+        protected virtual void BindExternalReferences()
         {
         }
     }

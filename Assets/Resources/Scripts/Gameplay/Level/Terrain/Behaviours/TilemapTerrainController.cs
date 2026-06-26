@@ -50,9 +50,9 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.TilemapRenderer == null) _tilemapRenderer = this.GetComponent<TilemapRenderer>();
         }

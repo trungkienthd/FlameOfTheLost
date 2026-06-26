@@ -48,12 +48,12 @@ namespace FlameOfTheLost
         // --- Unity Callbacks ---
         private void Reset()
         {
-            this.CacheReferences();
+            this.CacheInternalReferences();
         }
 
         private void OnValidate()
         {
-            this.CacheReferences();
+            this.CacheInternalReferences();
         }
         private void Start()
         {
@@ -252,9 +252,9 @@ namespace FlameOfTheLost
             return this.CheckpointCtrls.FirstOrDefault(checkpoint => checkpoint != null && checkpoint.CheckpointId == checkpointId);
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlayerRoot == null)
             {

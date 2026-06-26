@@ -12,9 +12,9 @@ namespace FlameOfTheLost
 
         public bool HasReward => this.RewardAmount > 0;
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.DropProfile == null)
             {
@@ -23,9 +23,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.DropProfile == null) Debug.LogError($"[{this.CharacterName}.{this.GetType().Name}] No Drop Profile assigned. Please assign a valid Drop Profile.", this);
         }

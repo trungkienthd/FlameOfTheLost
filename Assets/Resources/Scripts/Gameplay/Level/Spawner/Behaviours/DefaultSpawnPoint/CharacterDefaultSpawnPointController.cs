@@ -44,7 +44,7 @@ namespace FlameOfTheLost
         // --- Unity Callbacks ---
         protected virtual void Reset()
         {
-            this.CacheReferences();
+            this.CacheInternalReferences();
         }
 
         //protected virtual void OnValidate()
@@ -53,9 +53,9 @@ namespace FlameOfTheLost
         //}
 
         // --- Helpers ---
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.SpawnAnchor != null) return;
 
@@ -67,9 +67,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.SpawnAnchor == null)
             {

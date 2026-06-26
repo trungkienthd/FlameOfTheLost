@@ -130,9 +130,9 @@ namespace FlameOfTheLost
             this.VisualController.RebuildBaseAnimationOverride();
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlaceholderProfile == null) _placeholderProfile = Resources.Load<CharacterLocomotionAnimationProfile>("Data/Animations/Locomotion/Generic/AniLcm_Generic");
         }

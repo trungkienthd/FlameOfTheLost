@@ -178,9 +178,9 @@ namespace FlameOfTheLost
             this.EffectiveKnockbackForce = finalKb;
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.OriginTransform == null) this.OriginTransform = this.transform;
 

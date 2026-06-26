@@ -45,7 +45,7 @@ namespace FlameOfTheLost
         public void Initialize(CharacterVisualController visualController)
         {
             _visualController = visualController;
-            this.CacheReferences();
+            this.CacheInternalReferences();
         }
 
         public void ApplyOverridesTo(AnimatorOverrideController overrideController)
@@ -196,9 +196,9 @@ namespace FlameOfTheLost
             return this.ActiveProfile.DeathAnimationClipSet.GetClip(facingStatus);
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlaceholderProfile == null) _placeholderProfile = Resources.Load<CharacterHitDeathAnimationProfile>("Data/Animations/Characters/HitDeath/Generic/AniHD_Generic");
         }

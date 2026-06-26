@@ -171,9 +171,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.AimingProviderBehaviour == null)
             {

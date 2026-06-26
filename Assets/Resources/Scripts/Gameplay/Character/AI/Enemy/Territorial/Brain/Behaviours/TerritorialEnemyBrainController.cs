@@ -411,9 +411,9 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     }
 
     //  6. Cache & Validate References
-    protected override void ValidateReferences()
+    protected override void ValidateInternalReferences()
     {
-        base.ValidateReferences();
+        base.ValidateInternalReferences();
 
         if (this.RoamingConfig == null)
         {

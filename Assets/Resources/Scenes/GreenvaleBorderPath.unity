@@ -46501,7 +46501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: _id
-      value: 4103
+      value: 4104
       objectReference: {fileID: 0}
     - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: _key
@@ -46515,9 +46515,37 @@ PrefabInstance:
       propertyPath: _displayName
       value: Dodge Input
       objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _conditionCombinationType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _interactionPromptPriority
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _conditionEntries.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _conditionEntries.Array.data[0]._conditionKey
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _conditionEntries.Array.data[1]._conditionKey
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _conditionEntries.Array.data[0]._requiredValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _conditionEntries.Array.data[1]._requiredValue
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7445347965315535678, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_Name
-      value: InputPromptTrigger_4103_DODGE
+      value: PromptTrigger_4104_DODGE
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -51012,7 +51040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7445347965315535678, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_Name
-      value: InputPromptTrigger_4102_EQUIP
+      value: PromptTrigger_4102_EQUIP
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -82528,6 +82556,7 @@ MonoBehaviour:
   _description: This contains Gold only
   _inventoryController: {fileID: 1286221470}
   _itemContainerPanelController: {fileID: 2053664939}
+  _interactionPromptPriority: 100
 --- !u!1 &1043804203
 GameObject:
   m_ObjectHideFlags: 0
@@ -93915,6 +93944,88 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c4021cea9e4c414ab9a4a765d797c79, type: 3}
+--- !u!1001 &1206506607
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1628331949}
+    m_Modifications:
+    - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.63289
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.56473
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _id
+      value: 4103
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _key
+      value: TUTORIAL_PROMPT_ATTACK_NORMAL
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _description
+      value: Use [LMB] for Left Attack, or [RMB] for Right Attack.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _displayName
+      value: (Normal) Attack Tutorial Prompt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1245526795946096561, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: _interactionPromptPriority
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445347965315535678, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+      propertyPath: m_Name
+      value: PromptTrigger_4103_ATTACK_NORMAL
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+--- !u!4 &1206506608 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
+  m_PrefabInstance: {fileID: 1206506607}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1218967708
 GameObject:
   m_ObjectHideFlags: 0
@@ -97889,7 +98000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1628331949}
   m_Layer: 0
-  m_Name: InputPromptTriggers
+  m_Name: PromptTriggers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97910,6 +98021,7 @@ Transform:
   m_Children:
   - {fileID: 1252133227}
   - {fileID: 1244134771}
+  - {fileID: 1206506608}
   - {fileID: 218470044}
   m_Father: {fileID: 848360175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -98944,6 +99056,7 @@ MonoBehaviour:
   _description: This contains Dagger
   _inventoryController: {fileID: 1860808633}
   _itemContainerPanelController: {fileID: 2053664939}
+  _interactionPromptPriority: 100
 --- !u!50 &1673055940
 Rigidbody2D:
   serializedVersion: 5
@@ -104706,7 +104819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7445347965315535678, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_Name
-      value: InputPromptTrigger_4101_MOVEMENT
+      value: PromptTrigger_4101_MOVEMENT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

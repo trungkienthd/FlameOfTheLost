@@ -494,9 +494,9 @@ namespace FlameOfTheLost
             this.RefreshPrompt();
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlayerRoot == null) _playerRoot = this.transform.root.gameObject;
 
@@ -525,9 +525,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.PlayerRoot == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Player Root reference is not assigned.", this);
             if (this.PromptPanelController == null) Debug.LogError($"[{this.PlayerRoot.name}.{nameof(PlayerInteractionHandler)}] Prompt Panel Controller reference is not assigned.", this);

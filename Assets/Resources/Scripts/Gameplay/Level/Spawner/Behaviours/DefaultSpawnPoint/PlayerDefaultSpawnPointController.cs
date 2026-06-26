@@ -20,7 +20,7 @@ namespace FlameOfTheLost
         {
             base.Reset();
             this.ConfigureColliderAsTrigger();
-            this.CacheReferences();
+            this.CacheInternalReferences();
         }
 
         //protected override void OnValidate()
@@ -57,18 +57,18 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlayerSpawnerController != null) return;
 
             _playerSpawnerController = Object.FindFirstObjectByType<PlayerSpawnerController>();
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.PlayerSpawnerController == null)
             {

@@ -33,9 +33,9 @@ namespace FlameOfTheLost
         public bool IsAlly => this.Faction == CharacterFaction.Ally;
 
         // --- Helpers ---
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.IdentityProfile == null)
             {

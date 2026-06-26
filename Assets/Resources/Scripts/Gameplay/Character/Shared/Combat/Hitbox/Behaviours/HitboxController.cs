@@ -200,18 +200,18 @@ namespace FlameOfTheLost
             this.AttackerCombatController.OnHitboxDisabledWithoutHit(runtimeSkill: this.ActiveRuntimeSkill);
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             // Cache configurator from same GO
             if (this.DamageConfiguratorSource != null) this.DamageConfigurator = this.DamageConfiguratorSource as IDamageConfigurator;
             if (this.DamageConfigurator == null) this.DamageConfigurator = this.GetComponent<IDamageConfigurator>(); // DamageDealingHandler
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.DamageConfigurator == null) Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] Missing {nameof(IDamageConfigurator)} on the same GameObject.", this);
         }

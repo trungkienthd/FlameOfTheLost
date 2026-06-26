@@ -106,9 +106,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.Icon == null)
             {
@@ -129,9 +129,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.Icon == null)          Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDAppliedStatusEffectSlotController)}] Icon reference is not set on " + this.name);
             if (this.CooldownFill == null)  Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDAppliedStatusEffectSlotController)}] CooldownFill reference is not set on " + this.name);

@@ -11,18 +11,18 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterRewardDropProvider _rewardDropProvider;
         public CharacterRewardDropProvider RewardDropProvider => _rewardDropProvider;
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.TargetDetectionHandler == null) _targetDetectionHandler = this.GetComponentInChildren<CharacterAITargetDetectionHandler>(true);
 
             if (this.RewardDropProvider == null) _rewardDropProvider = this.GetComponentInChildren<CharacterRewardDropProvider>(true);
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.TargetDetectionHandler == null)
             {

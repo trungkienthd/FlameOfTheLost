@@ -180,9 +180,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlayerResourcesController == null)
             {
@@ -208,9 +208,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.PlayerResourcesController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarGroupController)}] Player's CharacterResourcesController reference is missing.");
 

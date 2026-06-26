@@ -39,9 +39,9 @@ namespace FlameOfTheLost
             this.Animator.SetTrigger(CharacterRewardVFXHandler.ReleaseTrigger);
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.Animator == null) _animator = this.GetComponent<Animator>();
         }

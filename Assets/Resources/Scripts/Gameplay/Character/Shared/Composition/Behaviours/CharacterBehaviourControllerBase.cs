@@ -10,15 +10,15 @@ namespace FlameOfTheLost
 
         public string CharacterName => this.CharacterRootController.gameObject.name;
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.CharacterRootController == null) _characterRootController = this.GetComponentInParent<CharacterRootController>();
         }
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.CharacterRootController == null) Debug.LogError($"[{this.CharacterName}.{this.GetType().Name}] {nameof(CharacterRootController)} reference is not set in the inspector and could not be found via GetComponentInParent.", this);
         }

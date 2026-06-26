@@ -63,6 +63,8 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterCombatAimingHandler _combatAimingHandler;
         [SerializeField] private CharacterCombatResourcesHandler _combatResourcesHandler;
         [SerializeField] private CharacterCombatStatusEffectApplicationHandler _combatStatusEffectApplicationHandler;
+        [SerializeField] private DamageReceivingHandler _damageReceivingHandler;
+        [SerializeField] private KnockbackReceivingHandler _knockbackReceivingHandler;
         public CharacterCombatController CombatController => _combatController;
         public CharacterCombatLoadoutController CombatLoadoutController => _combatLoadoutController;
         public CharacterCombatLoadoutWeaponHandler CombatLoadoutWeaponHandler => _combatLoadoutWeaponHandler;
@@ -71,6 +73,8 @@ namespace FlameOfTheLost
         public CharacterCombatAimingHandler CombatAimingHandler => _combatAimingHandler;
         public CharacterCombatResourcesHandler CombatResourcesHandler => _combatResourcesHandler;
         public CharacterCombatStatusEffectApplicationHandler CombatStatusEffectApplicationHandler => _combatStatusEffectApplicationHandler;
+        public DamageReceivingHandler DamageReceivingHandler => _damageReceivingHandler;
+        public KnockbackReceivingHandler KnockbackReceivingHandler => _knockbackReceivingHandler;
 
         [Header("References - Resources")]
         [SerializeField] private CharacterResourcesController _resourcesController;
@@ -109,9 +113,9 @@ namespace FlameOfTheLost
         [SerializeField] private InventoryController _inventoryController;
         public InventoryController InventoryController => _inventoryController;
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.IdentityController == null) _identityController = this.GetComponentInChildren<CharacterIdentityController>(true);
 
@@ -150,6 +154,9 @@ namespace FlameOfTheLost
             if (this.CombatAimingHandler                    == null) _combatAimingHandler                   = this.GetComponentInChildren<CharacterCombatAimingHandler>(true);
             if (this.CombatResourcesHandler                 == null) _combatResourcesHandler                = this.GetComponentInChildren<CharacterCombatResourcesHandler>(true);
             if (this.CombatStatusEffectApplicationHandler   == null) _combatStatusEffectApplicationHandler  = this.GetComponentInChildren<CharacterCombatStatusEffectApplicationHandler>(true);
+
+            if (this.DamageReceivingHandler == null) _damageReceivingHandler = this.GetComponentInChildren<DamageReceivingHandler>(true);
+            if (this.KnockbackReceivingHandler == null) _knockbackReceivingHandler = this.GetComponentInChildren<KnockbackReceivingHandler>(true);
 
             if (this.ResourcesController    == null) _resourcesController   = this.GetComponentInChildren<CharacterResourcesController>(true);
             if (this.HPController           == null) _hpController          = this.GetComponentInChildren<HPController>(true);

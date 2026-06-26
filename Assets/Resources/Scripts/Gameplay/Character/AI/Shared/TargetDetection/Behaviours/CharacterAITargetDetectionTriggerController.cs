@@ -45,9 +45,9 @@ namespace FlameOfTheLost
             this.TargetDetectionHandler.UnregisterTarget(target, this.RangeType);
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.TriggerCollider == null) _triggerCollider = this.GetComponent<Collider2D>();
             this.TriggerCollider.isTrigger = true;

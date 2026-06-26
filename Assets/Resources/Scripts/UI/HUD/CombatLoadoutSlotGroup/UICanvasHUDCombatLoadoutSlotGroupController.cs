@@ -175,9 +175,9 @@ namespace FlameOfTheLost
             this.ConsumableQuantityIconBackup.sprite = null;
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlayerCombatLoadoutController == null)
             {
@@ -186,9 +186,9 @@ namespace FlameOfTheLost
             }
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.PlayerCombatLoadoutController == null) Debug.LogError("PlayerCombatLoadoutController reference is not set on " + this.name);
         }

@@ -37,16 +37,16 @@ namespace FlameOfTheLost
             if (this.Slider) this.Slider.value = Mathf.Clamp01(normalizedValue);
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (!this.Slider) this.Slider = this.GetComponent<Slider>();
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.Slider ==  null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDResourceBarController)}] Slider reference is missing.");
         }

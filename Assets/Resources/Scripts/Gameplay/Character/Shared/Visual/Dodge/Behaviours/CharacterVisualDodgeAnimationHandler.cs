@@ -20,7 +20,7 @@ namespace FlameOfTheLost
         public void Initialize(CharacterVisualController visualController)
         {
             _visualController = visualController;
-            this.CacheReferences();
+            this.CacheInternalReferences();
         }
 
         public void ApplyOverridesTo(AnimatorOverrideController overrideController)
@@ -64,9 +64,9 @@ namespace FlameOfTheLost
             this.TriggerDodge();
         }
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.PlaceholderProfile == null) _placeholderProfile = Resources.Load<CharacterDodgeAnimationProfile>("Data/Character/Shared/Animation/Dodge/Generic/AniDdg_Generic");
         }

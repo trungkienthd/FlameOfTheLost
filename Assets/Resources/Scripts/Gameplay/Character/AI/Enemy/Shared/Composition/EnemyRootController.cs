@@ -10,16 +10,16 @@ namespace FlameOfTheLost
 
         public EnemyInputHandler EnemyInputHandler => this.InputHandler as EnemyInputHandler;
 
-        protected override void CacheReferences()
+        protected override void CacheInternalReferences()
         {
-            base.CacheReferences();
+            base.CacheInternalReferences();
 
             if (this.EnemyBrainController == null) _enemyBrainController = this.GetComponentInChildren<EnemyBrainController>(true);
         }
 
-        protected override void ValidateReferences()
+        protected override void ValidateInternalReferences()
         {
-            base.ValidateReferences();
+            base.ValidateInternalReferences();
 
             if (this.EnemyInputHandler == null)
             {
