@@ -267,9 +267,9 @@ namespace FlameOfTheLost
             // Silent Awake-phase state normalization.
             this.IsCarryingCarriableItem = false;
         }
-        protected override void InitializeAfterBinding()
+        protected override void InitializePregameplayState()
         {
-            base.InitializeAfterBinding();
+            base.InitializePregameplayState();
 
             if (!this.IsCarriableItemEntryValid(this.EquippedCarriableItemEntry))
             {

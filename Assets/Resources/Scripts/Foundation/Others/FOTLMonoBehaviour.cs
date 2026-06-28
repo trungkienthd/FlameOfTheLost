@@ -8,6 +8,7 @@ namespace FlameOfTheLost
         {
             this.CacheInternalReferences();
             this.ValidateInternalReferences();
+            this.BindInternalReferences();
             this.InitializeInternalState();
         }
 
@@ -16,7 +17,8 @@ namespace FlameOfTheLost
             this.CacheExternalReferences();
             this.ValidateExternalReferences();
             this.BindExternalReferences();
-            this.InitializeAfterBinding();
+            this.InitializePregameplayState();
+            this.InitializeGameplay();
         }    
 
         protected virtual void CacheInternalReferences()
@@ -24,6 +26,10 @@ namespace FlameOfTheLost
         }
 
         protected virtual void ValidateInternalReferences()
+        {
+        }
+
+        protected virtual void BindInternalReferences()
         {
         }
 
@@ -43,7 +49,11 @@ namespace FlameOfTheLost
         {
         }
 
-        protected virtual void InitializeAfterBinding()
+        protected virtual void InitializePregameplayState()
+        {
+        }
+
+        protected virtual void InitializeGameplay()
         {
         }
     }

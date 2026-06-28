@@ -16,9 +16,13 @@ namespace FlameOfTheLost
 
         //  2. Configs
         [Header("Timing")]
+        [SerializeField] private float _hitCompletionFallbackDelay = 0.3f;
+        [SerializeField] private float _hitCompletionPadding = 0.03f;
         [SerializeField] private float _hitToDeathDelay = 0.15f;
         [SerializeField] private float _deathCompletionFallbackDelay = 1.0f;
         [SerializeField] private float _deathCompletionPadding = 0.03f;
+        public float HitCompletionFallbackDelay => _hitCompletionFallbackDelay;
+        public float HitCompletionPadding => _hitCompletionPadding;
         public float HitToDeathAnimationDelay => _hitToDeathDelay;
         public float DeathCompletionFallbackDelay => _deathCompletionFallbackDelay;
         public float DeathCompletionPadding => _deathCompletionPadding;
@@ -26,11 +30,22 @@ namespace FlameOfTheLost
         //  3. References
         private CharacterVisualController _visualController;
         private CharacterVisualController VisualController => _visualController;
+        private CharacterInputHandler InputHandler => this.VisualController != null
+            ? this.VisualController.GetCharacter().InputHandler
+            : null;
 
         //  4. Coroutine 
         private Coroutine _hitDeathSequenceCoroutine;
 
-        //  5. Event-related state
+        //  5. Input Block state
+        private bool _isBlockingInputForCurrentSequence;
+        private bool IsBlockingInputForCurrentSequence
+        {
+            get => _isBlockingInputForCurrentSequence;
+            set => _isBlockingInputForCurrentSequence = value;
+        }
+
+        //  6. Event-related state
         private bool _hasNotifiedDeathAnimationFinished = false;
         private bool HasNotifiedDeathAnimationFinished
         {
@@ -42,7 +57,7 @@ namespace FlameOfTheLost
         public event Action OnDeathAnimationFinished;
 
         // --- Public APIs ---
-        public void Initialize(CharacterVisualController visualController)
+        public void Bind(CharacterVisualController visualController)
         {
             _visualController = visualController;
             this.CacheInternalReferences();
@@ -115,19 +130,14 @@ namespace FlameOfTheLost
             this.OnDeathAnimationFinished?.Invoke();
         }
 
-        // --- Helpers ---
-        private void StopSequence()
-        {
-            if (_hitDeathSequenceCoroutine == null) return;
-
-            this.StopCoroutine(_hitDeathSequenceCoroutine);
-            _hitDeathSequenceCoroutine = null;
-        }
         public void ResetSequenceState()
         {
             this.StopSequence();
             this.ResetDeathAnimationFinishedNotification();
+            this.EndHitSequenceInputBlock();
         }
+
+        // --- Helpers ---
         private void RestartSequence(IEnumerator sequence)
         {
             if (this.VisualController == null) return;
@@ -136,13 +146,30 @@ namespace FlameOfTheLost
             this.StopSequence();
             _hitDeathSequenceCoroutine = this.StartCoroutine(sequence);
         }
+        private void StopSequence()
+        {
+            if (_hitDeathSequenceCoroutine != null)
+            {
+                this.StopCoroutine(_hitDeathSequenceCoroutine);
+                _hitDeathSequenceCoroutine = null;
+            }
+
+            this.EndHitSequenceInputBlock();
+        }
 
         private IEnumerator PlayHitSequenceCoroutine(bool shouldPlayDeathAfterHit)
         {
+            this.BeginHitSequenceInputBlock();
+
             this.TriggerHit();
 
             if (!shouldPlayDeathAfterHit)
             {
+                float hitCompletionDelay = this.GetHitCompletionDelay();
+                yield return new WaitForSeconds(hitCompletionDelay);
+
+                this.EndHitSequenceInputBlock();
+
                 _hitDeathSequenceCoroutine = null;
                 yield break;
             }
@@ -152,12 +179,30 @@ namespace FlameOfTheLost
             this.TriggerDeath();
 
             float deathCompletionDelay = this.GetDeathCompletionDelay();
-
             yield return new WaitForSeconds(deathCompletionDelay);
 
             this.NotifyDeathAnimationFinished();
 
+            // Safe to call even after death.
+            // CharacterInputHandler.IsDeathDisabled will keep input blocked permanently after death.
+            this.EndHitSequenceInputBlock();
+
             _hitDeathSequenceCoroutine = null;
+        }
+
+        private void BeginHitSequenceInputBlock()
+        {
+            if (this.InputHandler == null) return;
+
+            this.InputHandler.BlockInputForHitSequence();
+            this.IsBlockingInputForCurrentSequence = true;
+        }
+        private void EndHitSequenceInputBlock()
+        {
+            if (!this.IsBlockingInputForCurrentSequence) return;
+
+            this.InputHandler?.ClearHitSequenceInputBlock();
+            this.IsBlockingInputForCurrentSequence = false;
         }
 
         private void ResetDeathAnimationFinishedNotification()
@@ -165,35 +210,57 @@ namespace FlameOfTheLost
             this.HasNotifiedDeathAnimationFinished = false;
         }
 
+        private float GetHitCompletionDelay()
+        {
+            return this.GetAnimationCompletionDelay
+            (
+                clipSet: this.ActiveProfile.HitAnimationClipSet,
+                fallbackDelay: this.HitCompletionFallbackDelay,
+                padding: this.HitCompletionPadding
+            );
+        }
         private float GetDeathCompletionDelay()
         {
-            AnimationClip deathClip = this.GetCurrentFacingDeathAnimationClip();
-
-            float clipLength = deathClip != null
-                ? deathClip.length
-                : this.DeathCompletionFallbackDelay;
-
-            float animatorSpeed = this.VisualController != null && this.VisualController.Animator != null
-                ? Mathf.Abs(this.VisualController.Animator.speed)
-                : 1f;
-
-            if (animatorSpeed <= 0f)
-            {
-                animatorSpeed = 1f;
-            }
-
-            return Mathf.Max(0.01f, clipLength / animatorSpeed + this.DeathCompletionPadding);
+            return this.GetAnimationCompletionDelay
+            (
+                clipSet: this.ActiveProfile.DeathAnimationClipSet,
+                fallbackDelay: this.DeathCompletionFallbackDelay,
+                padding: this.DeathCompletionPadding
+            );
         }
-
-        private AnimationClip GetCurrentFacingDeathAnimationClip()
+        private float GetAnimationCompletionDelay(CharacterFacingAnimationClipSetEntry clipSet, float fallbackDelay, float padding)
         {
-            if (this.ActiveProfile == null) return null;
-            if (!this.ActiveProfile.DeathAnimationClipSet.IsValid) return null;
+            if (this.ActiveProfile == null) return 0f;
+
+            AnimationClip animationClip = this.GetCurrentFacingAnimationClip(clipSet);
+
+            float clipLength = animationClip != null
+                ? animationClip.length
+                : fallbackDelay;
+
+            float animatorSpeed = this.GetSafeAnimatorSpeed();
+
+            return Mathf.Max(0.01f, clipLength / animatorSpeed + padding);
+        }
+        private AnimationClip GetCurrentFacingAnimationClip(CharacterFacingAnimationClipSetEntry clipSet)
+        {
+            if (!clipSet.IsValid) return null;
             if (this.VisualController == null) return null;
 
             CharacterFacingStatus facingStatus = this.VisualController.FacingStatus;
 
-            return this.ActiveProfile.DeathAnimationClipSet.GetClip(facingStatus);
+            return clipSet.GetClip(facingStatus);
+        }
+        private float GetSafeAnimatorSpeed()
+        {
+            if (this.VisualController == null) return 1f;
+            if (this.VisualController.Animator == null) return 1f;
+
+            float animatorSpeed = Mathf.Abs(this.VisualController.Animator.speed);
+
+            return animatorSpeed > 0f
+                ? animatorSpeed
+                : 1f;
         }
 
         protected override void CacheInternalReferences()

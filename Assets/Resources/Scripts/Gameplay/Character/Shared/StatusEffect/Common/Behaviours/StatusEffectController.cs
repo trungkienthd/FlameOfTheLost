@@ -59,27 +59,6 @@ namespace FlameOfTheLost
         public event Action OnRuntimeValuesChanged;   // stacks/potency/duration refresh without list size change
 
         // --- Unity Callbacks ---
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-        protected override void Start()
-        {
-            base.Start();
-
-            // In case the runtime list was pre-seeded in editor/debug
-            bool listChanged = this.EnforceImmunityRulesAndPurge();
-
-            // Ensure VFX exists for any surviving pre-seeded runtime status effects
-            this.EnsureStatusEffectVFXForAllRuntimeStatusEffects();
-
-            this.ForceRecomputeAll();
-
-            if (listChanged)
-            {
-                this.OnRuntimeListChanged?.Invoke();
-            }
-        }
         private void Update()
         {
             if (this.IsDeathDisabled) return;
@@ -389,17 +368,17 @@ namespace FlameOfTheLost
             return true;
         }
 
-        private bool RemoveByRuntimeID(uint runtimeID)
-        {
-            int idx = _runtimeStatusEffects.FindIndex(se => se.RuntimeID == runtimeID);
-            if (idx < 0) return false;
+        //private bool RemoveByRuntimeID(uint runtimeID)
+        //{
+        //    int idx = _runtimeStatusEffects.FindIndex(se => se.RuntimeID == runtimeID);
+        //    if (idx < 0) return false;
 
-            if (!this.RemoveRuntimeStatusEffectAt(idx)) return false;
+        //    if (!this.RemoveRuntimeStatusEffectAt(idx)) return false;
 
-            this.OnRuntimeListChanged?.Invoke();
-            this.ForceRecomputeAll();
-            return true;
-        }
+        //    this.OnRuntimeListChanged?.Invoke();
+        //    this.ForceRecomputeAll();
+        //    return true;
+        //}
 
         private bool RemoveAllFromSource(GameObject source)
         {
@@ -615,35 +594,48 @@ namespace FlameOfTheLost
 
             if (this.StatusEffectVFXHolder == null) Debug.LogError($"[{this.CharacterName}.{nameof(StatusEffectController)}] StatusEffectVFXHolder reference is missing. Status effect VFX will not be displayed.", this);
         }
+        protected override void BindInternalReferences()
+        {
+            base.BindInternalReferences();
 
+            this.FlagHandler?.Bind(this);
+            this.StatModifierHandler?.Bind(this);
+            this.StatPeriodicHandler?.Bind(this);
+        }
         protected override void InitializeInternalState()
         {
             base.InitializeInternalState();
 
             this.SyncNextRuntimeID();
-        }
 
+            // In case the runtime list was pre-seeded in editor/debug
+            bool listChanged = this.EnforceImmunityRulesAndPurge();
+
+            this.ForceRecomputeAll();
+
+            if (listChanged)
+            {
+                this.OnRuntimeListChanged?.Invoke();
+            }
+        }
         protected override void CacheExternalReferences()
         {
             base.CacheExternalReferences();
 
             if (this.StatusEffectVFXInstancePrefab == null) _statusEffectVFXInstancePrefab = UnityEngine.Resources.Load<GameObject>("Prefabs/StatusEffectVFXInstance");
         }
-
         protected override void ValidateExternalReferences()
         {
             base.ValidateExternalReferences();
 
             if (this.StatusEffectVFXInstancePrefab == null) Debug.LogError($"[{this.CharacterName}.{nameof(StatusEffectController)}] {nameof(this.StatusEffectVFXInstancePrefab)} reference is missing. Status effect VFX will not be displayed.", this);
         }
-
-        protected override void BindExternalReferences()
+        protected override void InitializePregameplayState()
         {
-            base.BindExternalReferences();
+            base.InitializePregameplayState();
 
-            this.FlagHandler?.Bind(this);
-            this.StatModifierHandler?.Bind(this);
-            this.StatPeriodicHandler?.Bind(this);
+            // Ensure VFX exists for any surviving pre-seeded runtime status effects
+            this.EnsureStatusEffectVFXForAllRuntimeStatusEffects();
         }
     }
 }

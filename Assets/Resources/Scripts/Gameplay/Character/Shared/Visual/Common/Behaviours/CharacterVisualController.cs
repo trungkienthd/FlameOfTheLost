@@ -74,7 +74,7 @@ namespace FlameOfTheLost
         // --- Unity Callbacks ---
         private void OnEnable()
         {
-            this.InitializeHandlers();
+            this.BindHandlers();
             this.RebuildBaseAnimationOverride();
         }
 
@@ -282,31 +282,31 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        private void InitializeHandlers()
+        private void BindHandlers()
         {
             if (this.FacingHandler != null)
             {
-                this.FacingHandler.Initialize(this);
+                this.FacingHandler.Bind(this);
             }
 
             if (this.LocomotionAnimationHandler != null)
             {
-                this.LocomotionAnimationHandler.Initialize(this);
+                this.LocomotionAnimationHandler.Bind(this);
             }
 
             if (this.AttackAnimationHandler != null)
             {
-                this.AttackAnimationHandler.Initialize(this);
+                this.AttackAnimationHandler.Bind(this);
             }
 
             if (this.HitDeathAnimationHandler != null)
             {
-                this.HitDeathAnimationHandler.Initialize(this);
+                this.HitDeathAnimationHandler.Bind(this);
             }
 
             if (this.DodgeAnimationHandler != null)
             {
-                this.DodgeAnimationHandler.Initialize(this);
+                this.DodgeAnimationHandler.Bind(this);
             }
         }
 
@@ -334,6 +334,12 @@ namespace FlameOfTheLost
             if (this.CharacterFlipGroup == null) _characterFlipGroup = this.transform.parent;
 
             if (this.BaseAnimationController == null && this.Animator != null) _baseAnimationController = this.Animator.runtimeAnimatorController;
+        }
+        protected override void BindInternalReferences()
+        {
+            base.BindInternalReferences();
+
+            this.BindHandlers();
         }
 
         private void EnsureRuntimeOverrideController()

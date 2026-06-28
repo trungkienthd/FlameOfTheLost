@@ -49286,7 +49286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0963051e27d2e424ea11dfcaefcb4466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCombatLoadoutController: {fileID: 0}
+  _playerCombatLoadoutController: {fileID: 1267844716}
   _weaponIcon: {fileID: 1595549757}
   _activeSpecialSkillIcon: {fileID: 1447246181}
   _consumableItemIcon: {fileID: 348001887}
@@ -104478,6 +104478,8 @@ MonoBehaviour:
   _combatAimingHandler: {fileID: 1317997557}
   _combatResourcesHandler: {fileID: 557462170}
   _combatStatusEffectApplicationHandler: {fileID: 557462169}
+  _damageReceivingHandler: {fileID: 0}
+  _knockbackReceivingHandler: {fileID: 0}
   _resourcesController: {fileID: 1951002775}
   _hpController: {fileID: 1951002774}
   _fpController: {fileID: 1951002773}

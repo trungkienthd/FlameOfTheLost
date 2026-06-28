@@ -226,9 +226,9 @@ namespace FlameOfTheLost
 
             this.HasBoundExternalReferences = true;
         }
-        protected override void InitializeAfterBinding()
+        protected override void InitializePregameplayState()
         {
-            base.InitializeAfterBinding();
+            base.InitializePregameplayState();
 
             this.SendAll();
         }

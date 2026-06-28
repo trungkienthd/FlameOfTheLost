@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class KnockbackReceivingHandler : MonoBehaviour, IStatusEffectStatModifierMultiplierConsumer, IStatusEffectStatModifierAdditiveConsumer
+    public class KnockbackReceivingHandler : FOTLMonoBehaviour, IStatusEffectStatModifierMultiplierConsumer, IStatusEffectStatModifierAdditiveConsumer
     {
         // --- States ---
         //  1. References
@@ -38,13 +38,6 @@ namespace FlameOfTheLost
             private set => _knockbackTakenAdditiveFlat = value;
         }
 
-
-        // --- Unity Callbacks ---
-        private void Awake()
-        {
-            this.Rigidbody2D = this.GetComponentInParent<Rigidbody2D>();
-        }
-
         // --- Public APIs ---
         //  1. Apply knockback
         public void ApplyKnockback(Vector2 direction, float force)
@@ -76,6 +69,13 @@ namespace FlameOfTheLost
             {
                 this.KnockbackTakenAdditiveFlat = additiveFlat;
             }
+        }
+
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
+            this.Rigidbody2D = this.GetComponentInParent<Rigidbody2D>();
         }
     }
 }

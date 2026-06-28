@@ -238,9 +238,9 @@ namespace FlameOfTheLost
             // Use backing field directly to avoid firing OnValueChanged during Awake.
             _currentValue = _maxValue;
         }
-        protected override void InitializeAfterBinding()
+        protected override void InitializePregameplayState()
         {
-            base.InitializeAfterBinding();
+            base.InitializePregameplayState();
 
             this.OnValueChanged?.Invoke(this.CurrentValue, this.MaxValue);
         }

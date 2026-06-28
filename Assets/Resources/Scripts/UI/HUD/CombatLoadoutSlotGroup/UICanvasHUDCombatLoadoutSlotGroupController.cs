@@ -183,10 +183,10 @@ namespace FlameOfTheLost
 
             if (this.PlayerCombatLoadoutController != null) return;
 
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            GameObject player = GameObject.Find("Player");
             if (player != null)
             {
-                _playerCombatLoadoutController = player.GetComponentInChildren<CharacterCombatLoadoutController>();
+                _playerCombatLoadoutController = player.GetComponentInChildren<CharacterCombatLoadoutController>(true);
             }
         }
 

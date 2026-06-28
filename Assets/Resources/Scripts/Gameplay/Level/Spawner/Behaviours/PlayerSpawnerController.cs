@@ -91,7 +91,7 @@ namespace FlameOfTheLost
         {
             if (this.PlayerRefreshHandler == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No PlayerPlacementHandler assigned.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No {nameof(PlayerRefreshHandler)} assigned.", this);
                 return;
             }
 
@@ -291,11 +291,15 @@ namespace FlameOfTheLost
                 Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No default spawn points found.", this);
             }
         }
-        protected override void InitializeAfterBinding()
+        protected override void InitializePregameplayState()
         {
-            base.InitializeAfterBinding();
+            base.InitializePregameplayState();
 
             this.InitializeFirstDefaultSpawnPointIfNeeded();
+        }
+        protected override void InitializeGameplay()
+        {
+            base.InitializeGameplay();
 
             if (this.SpawnPlayerOnStart)
             {

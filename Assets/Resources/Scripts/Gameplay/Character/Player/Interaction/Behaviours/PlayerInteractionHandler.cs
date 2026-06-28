@@ -548,9 +548,9 @@ namespace FlameOfTheLost
             this.RegisterPromptBlocker(this.PlayerMenuManager);
             this.RegisterPromptBlocker(this.PlayerInteractionPanelListManager);
         }
-        protected override void InitializeAfterBinding()
+        protected override void InitializePregameplayState()
         {
-            base.InitializeAfterBinding();
+            base.InitializePregameplayState();
 
             this.HidePrompt();
         }

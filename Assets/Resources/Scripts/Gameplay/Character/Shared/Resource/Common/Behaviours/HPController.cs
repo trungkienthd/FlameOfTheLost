@@ -379,9 +379,9 @@ namespace FlameOfTheLost
             _maxVirtualHP = Mathf.Clamp(_maxVirtualHP, 0, this.MaxValue);
             _currentVirtualHP = Mathf.Clamp(_currentVirtualHP, 0, this.MaxVirtualHP);
         }
-        protected override void InitializeAfterBinding()
+        protected override void InitializePregameplayState()
         {
-            base.InitializeAfterBinding();
+            base.InitializePregameplayState();
 
             this.OnVirtualHPChanged?.Invoke(this.CurrentVirtualHP, this.MaxVirtualHP);
         }

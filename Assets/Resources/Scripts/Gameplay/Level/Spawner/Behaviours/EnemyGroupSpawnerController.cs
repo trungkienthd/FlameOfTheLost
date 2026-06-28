@@ -267,9 +267,9 @@ namespace FlameOfTheLost
             this.HasBoundExternalReferences = true;
             this.SubscribeToPlayerSpawner();
         }
-        protected override void InitializeAfterBinding()
+        protected override void InitializePregameplayState()
         {
-            base.InitializeAfterBinding();
+            base.InitializePregameplayState();
 
             if (!this.IsSpawnedEnemiesOnStart) return;
 

@@ -19,6 +19,7 @@ namespace FlameOfTheLost
             get
             {
                 if (this.IsDeathDisabled) return true;
+                if (this.IsHitSequenceInputBlocked) return true;
                 if (this.DodgeController != null && this.DodgeController.ShouldBlockOtherInputs) return true;
 
                 return false;
@@ -28,7 +29,16 @@ namespace FlameOfTheLost
         //  3. Movement Input
         public Vector2 MoveInput { get; private set; }
 
-        //  4. Death Disable state (Runtime)
+        //  4. Hit Sequence Input Block state (Runtime)
+        [Header("Hit Sequence Input Block (Runtime)")]
+        [SerializeField] private bool _isHitSequenceInputBlocked;
+        public bool IsHitSequenceInputBlocked
+        {
+            get => _isHitSequenceInputBlocked;
+            private set => _isHitSequenceInputBlocked = value;
+        }
+
+        //  5. Death Disable state (Runtime)
         [Header("Death Disable (Runtime)")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
@@ -38,7 +48,7 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs ---
-        //  1. ICharacterRefreshable implementation
+        //  0. ICharacterRefreshable implementation
         public virtual int RefreshmentConfigurePriority => 100;
         public virtual void RefreshCharacter(CharacterRefreshContext context)
         {
@@ -46,7 +56,7 @@ namespace FlameOfTheLost
             this.ClearMoveInput();
         }
 
-        //  2. ICharacterDeathDisableable implementation
+        //  1. ICharacterDeathDisableable implementation
         public virtual int DeathDisablePriority => 10;
         public virtual void DisableAfterCharacterDeath(CharacterDeathContext context)
         {
@@ -54,10 +64,21 @@ namespace FlameOfTheLost
             this.ClearMoveInput();
         }
 
+        //  2. Hit Sequence Input Block APIs
+        public void BlockInputForHitSequence()
+        {
+            this.IsHitSequenceInputBlocked = true;
+            this.ClearMoveInput();
+        }
+        public void ClearHitSequenceInputBlock()
+        {
+            this.IsHitSequenceInputBlocked = false;
+        }
+
         //  3. Movement Input APIs
         public void SetMoveInput(Vector2 moveInput)
         {
-            if (this.IsDeathDisabled)
+            if (this.IsDeathDisabled || this.IsHitSequenceInputBlocked)
             {
                 moveInput = Vector2.zero;
             }
@@ -68,7 +89,6 @@ namespace FlameOfTheLost
 
             this.MovementHandler.RawMovementInput = moveInput;
         }
-
         public void ClearMoveInput()
         {
             this.SetMoveInput(Vector2.zero);
@@ -78,7 +98,7 @@ namespace FlameOfTheLost
         public void RequestDodge()
         {
             //if (this.IsInputBlocked) return;
-            if (this.IsDeathDisabled) return;
+            if (this.IsDeathDisabled || this.IsHitSequenceInputBlocked) return;
 
             this.DodgeController?.TryDodge(this.MoveInput);
         }

@@ -10,6 +10,11 @@ namespace FlameOfTheLost
 
         public string CharacterName => this.CharacterRootController.gameObject.name;
 
+        public CharacterRootController GetCharacter()
+        {
+            return this.CharacterRootController;
+        }
+
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();

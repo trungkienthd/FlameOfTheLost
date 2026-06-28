@@ -29,7 +29,7 @@ namespace FlameOfTheLost
         private CharacterVisualController VisualController => _visualController;
 
         // --- Public APIs ---
-        public void Initialize(CharacterVisualController visualController)
+        public void Bind(CharacterVisualController visualController)
         {
             _visualController = visualController;
         }

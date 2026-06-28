@@ -9,6 +9,7 @@ namespace FlameOfTheLost
         // --- States ---
         //  1. References
         private HPController HPController => this.CharacterRootController.HPController;
+        private CharacterCombatController CombatController => this.CharacterRootController.CombatController;
 
         [Header("References - Knockback")]
         [SerializeField] private KnockbackReceivingHandler _knockbackHandler;
@@ -91,6 +92,11 @@ namespace FlameOfTheLost
 
             this.LastHitFrame = Time.frameCount;
             this.LastDamager = damager;
+
+            // Interrupt victim's active attack window.
+            // This happens only after the incoming hit has passed validation,
+            // invulnerability, duplicate-frame protection, and hitbox registration.
+            this.CombatController?.OnAttackWindowInterrupt();
 
             // Direction = from damager origin to this
             Vector2 direction = damager.OriginTransform != null
