@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65163b05174bdc4694637d6b2cc914f, type: 3}
+  m_Name: AClipLcm_Feralshroom_PreAttack
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterLocomotionClipSetProfile
+  _locomotionMode: 3
+  _carryItemType: 0
+  _lightSourceType: 0
+  _idleClipSet:
+    _down: {fileID: 7400000, guid: 6bc9980339c8a6b42a67856e00b817e0, type: 2}
+    _side: {fileID: 7400000, guid: c16ac1accb17f0e46ab9794f9a405af8, type: 2}
+    _up: {fileID: 7400000, guid: be874df8634e95145b18565e5a67b6b1, type: 2}
+  _walkClipSet:
+    _down: {fileID: 7400000, guid: 4265c6c0639abbe41a32b48152b4c0a6, type: 2}
+    _side: {fileID: 7400000, guid: 753533d4cbb16e94484cd4bc44b0db81, type: 2}
+    _up: {fileID: 7400000, guid: d4a2c3a38d0700d4bb6f0f3fcb7b9abf, type: 2}

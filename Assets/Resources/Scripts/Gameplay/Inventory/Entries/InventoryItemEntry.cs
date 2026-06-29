@@ -65,5 +65,19 @@ namespace FlameOfTheLost
             this.Quantity -= amount;
             return true;
         }
+
+        public static InventoryItemEntry CreateRuntimeCopy(InventoryItemEntry source, bool resetEquipped = true)
+        {
+            if (source == null) return null;
+            if (source.Item == null) return null;
+            if (source.Quantity <= 0) return null;
+
+            return new InventoryItemEntry
+            {
+                Item = source.Item,
+                Quantity = source.Quantity,
+                Equipped = resetEquipped ? false : source.Equipped
+            };
+        }
     }
 }

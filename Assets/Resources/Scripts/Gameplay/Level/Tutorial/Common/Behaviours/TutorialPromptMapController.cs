@@ -7,9 +7,9 @@ namespace FlameOfTheLost
         // --- States ---
         [Header("References - Characters")]
         [SerializeField] private CharacterRootController _player;
-        [SerializeField] private CharacterRootController _firstBiteshroom;
+        [SerializeField] private CharacterRootController _firstEnemy;
         private CharacterRootController Player => _player;
-        private CharacterRootController FirstBiteshroom => _firstBiteshroom;
+        private CharacterRootController FirstEnemy => _firstEnemy;
 
         [Header("References - Prompt Triggers")]
         [SerializeField] private PromptTriggerController _movementPromptTrigger;
@@ -33,17 +33,17 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs ---
-        public void MarkPlayerHitByFirstBiteshroom()
+        public void MarkPlayerHitByFirstEnemy()
         {
             if (this.DodgePromptTrigger == null) return;
 
-            this.DodgePromptTrigger.SatisfyCondition(PromptTriggerConditionKey.PlayerHitByFirstBiteshroom);
+            this.DodgePromptTrigger.SatisfyCondition(PromptTriggerConditionKey.PlayerHitByFirstEnemy);
         }
-        public void MarkFirstBiteshroomDefeated()
+        public void MarkFirstEnemyDefeated()
         {
             if (this.DodgePromptTrigger == null) return;
 
-            this.DodgePromptTrigger.SatisfyCondition(PromptTriggerConditionKey.FirstBiteshroomDefeated);
+            this.DodgePromptTrigger.SatisfyCondition(PromptTriggerConditionKey.FirstEnemyDefeated);
         }
 
         public void ResetTutorialPrompts()
@@ -65,11 +65,11 @@ namespace FlameOfTheLost
                 this.Player.DamageReceivingHandler.OnDamageApplied += this.HandleDamageApplied;
             }
 
-            if (this.FirstBiteshroom != null)
+            if (this.FirstEnemy != null)
             {
                 // Example only.
-                // Subscribe to the Biteshroom's death event.
-                this.FirstBiteshroom.DeathHandler.OnTechnicalDeath += this.HandleFirstBiteshroomDeathStarted;
+                // Subscribe to the First enemy's death event.
+                this.FirstEnemy.DeathHandler.OnTechnicalDeath += this.HandleFirstEnemyDeathStarted;
             }
         }
         private void UnsubscribeEvents()
@@ -79,26 +79,26 @@ namespace FlameOfTheLost
                 this.Player.DamageReceivingHandler.OnDamageApplied -= this.HandleDamageApplied;
             }
 
-            if (this.FirstBiteshroom != null)
+            if (this.FirstEnemy != null)
             {
-                this.FirstBiteshroom.DeathHandler.OnTechnicalDeath -= this.HandleFirstBiteshroomDeathStarted;
+                this.FirstEnemy.DeathHandler.OnTechnicalDeath -= this.HandleFirstEnemyDeathStarted;
             }
         }
 
         //  2. Event handlers
         private void HandleDamageApplied(DamageAppliedContext context)
         {
-            if (context.Attacker != this.FirstBiteshroom) return;
+            if (context.Attacker != this.FirstEnemy) return;
             if (context.Victim != this.Player) return;
             if (context.DamageAmount <= 0) return;
 
-            this.MarkPlayerHitByFirstBiteshroom();
+            this.MarkPlayerHitByFirstEnemy();
         }
-        private void HandleFirstBiteshroomDeathStarted(CharacterDeathContext context)
+        private void HandleFirstEnemyDeathStarted(CharacterDeathContext context)
         {
-            if (context.Character != this.FirstBiteshroom) return;
+            if (context.Character != this.FirstEnemy) return;
 
-            this.MarkFirstBiteshroomDefeated();
+            this.MarkFirstEnemyDefeated();
         }
 
         protected override void CacheInternalReferences()
@@ -111,13 +111,13 @@ namespace FlameOfTheLost
                 if (player != null) _player = player.GetComponent<CharacterRootController>();
             }
 
-            if (this.FirstBiteshroom == null)
+            if (this.FirstEnemy == null)
             {
                 GameObject enemyGroup = GameObject.Find("EnemyGroup");
                 if (enemyGroup != null)
                 {
-                    GameObject firstBiteshroom = enemyGroup.transform.GetChild(0)?.gameObject;
-                    if (firstBiteshroom != null) _firstBiteshroom = firstBiteshroom.GetComponent<CharacterRootController>();
+                    GameObject firstEnemy = enemyGroup.transform.GetChild(0)?.gameObject;
+                    if (firstEnemy != null) _firstEnemy = firstEnemy.GetComponent<CharacterRootController>();
                 }
             }
         }
@@ -131,9 +131,9 @@ namespace FlameOfTheLost
                 Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialPromptMapController)}] Player reference is not assigned.", this);
             }
 
-            if (this.FirstBiteshroom == null || this.FirstBiteshroom.IdentityController.CharacterType != CharacterType.Biteshroom)
+            if (this.FirstEnemy == null || this.FirstEnemy.IdentityController.CharacterType != CharacterType.Feralshroom)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialPromptMapController)}] {nameof(this.FirstBiteshroom)} reference is not assigned or incorrect.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialPromptMapController)}] {nameof(this.FirstEnemy)} reference is not assigned or incorrect.", this);
             }
         }
     }

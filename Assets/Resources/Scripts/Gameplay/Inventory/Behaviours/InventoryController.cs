@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class InventoryController : MonoBehaviour
+    public class InventoryController : FOTLMonoBehaviour
     {
         // --- States ---
         //  1. Inventory (Items)
@@ -88,18 +88,59 @@ namespace FlameOfTheLost
             return result;
         }
 
-        //  3. Events
+        // --- Events ---
         public event Action<ItemProfile, int> OnItemAdded;
         public event Action<ItemProfile, int> OnItemRemoved;
         public event Action<SkillProfile> OnLearnedSpecialSkillAdded;
         public event Action<SkillProfile> OnLearnedSpecialSkillRemoved;
 
-        // --- Unity methods ---
-        private void Awake()
-        {   
+        // --- Public APIs ---
+        public void InitializeInventoryEntries(IReadOnlyList<InventoryItemEntry> sourceEntries)
+        {
+            _items.Clear();
+
+            if (sourceEntries == null)
+            {
+                Debug.Log($"[{this.gameObject.name}.{nameof(InventoryController)}] Initialized inventory entries. Source entries are null.", this);
+                return;
+            }
+
+            for (int i = 0; i < sourceEntries.Count; i++)
+            {
+                InventoryItemEntry sourceEntry = sourceEntries[i];
+
+                if (sourceEntry == null)
+                {
+                    Debug.LogWarning($"[{this.gameObject.name}.{nameof(InventoryController)}] Initial inventory entry [{i}] is null.", this);
+                    continue;
+                }
+                if (sourceEntry.Item == null)
+                {
+                    Debug.LogWarning($"[{this.gameObject.name}.{nameof(InventoryController)}] Initial inventory entry [{i}] has no item assigned.", this);
+                    continue;
+                }
+                if (sourceEntry.Quantity <= 0)
+                {
+                    Debug.LogWarning($"[{this.gameObject.name}.{nameof(InventoryController)}] Initial inventory entry [{i}] has invalid quantity: {sourceEntry.Quantity}. Item: {sourceEntry.Item.name}", this);
+                    continue;
+                }
+
+                bool added = this.TryAddItemEntryInternal
+                (
+                    sourceEntry.Item,
+                    sourceEntry.Quantity,
+                    sourceEntry.Equipped,
+                    preserveEntryEquippedState: false
+                );
+
+                if (!added)
+                {
+                    Debug.LogWarning($"[{this.gameObject.name}.{nameof(InventoryController)}] Failed to initialize inventory entry [{i}]. Item: {sourceEntry.Item.name}, Quantity: {sourceEntry.Quantity}", this);
+                    continue;
+                }
+            }
         }
 
-        // --- Public APIs ---
         public int GetItemCount(ItemProfile item)
         {
             if (item == null) return 0;
@@ -276,6 +317,51 @@ namespace FlameOfTheLost
         private bool IsExcluded(SkillProfile skill, List<SkillProfile> excludedSkills)
         {
             return skill != null && excludedSkills != null && excludedSkills.Contains(skill);
+        }
+
+        private bool TryAddItemEntryInternal(ItemProfile item, int quantity, bool equipped = false, bool preserveEntryEquippedState = false)
+        {
+            if (item == null) return false;
+            if (quantity <= 0) return false;
+
+            int remainingQuantity = quantity;
+
+            if (item.IsStackable)
+            {
+                for (int i = 0; i < this.Items.Count; i++)
+                {
+                    InventoryItemEntry entry = this.Items[i];
+                    if (entry == null || entry.Item == null || !entry.CanMergeWith(item)) continue;
+
+                    int addableQuantity = Math.Min(entry.RemainingCapacity, remainingQuantity);
+                    if (addableQuantity <= 0) continue;
+
+                    entry.Quantity += addableQuantity;
+                    remainingQuantity -= addableQuantity;
+
+                    if (remainingQuantity <= 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            while (remainingQuantity > 0)
+            {
+                int entryQuantity = item.IsStackable ? Math.Min(item.MaxStackSize, remainingQuantity) : 1;
+
+                InventoryItemEntry newEntry = new InventoryItemEntry
+                {
+                    Item = item,
+                    Quantity = entryQuantity,
+                    Equipped = preserveEntryEquippedState ? equipped : false
+                };
+
+                _items.Add(newEntry);
+                remainingQuantity -= entryQuantity;
+            }
+
+            return true;
         }
     }
 }

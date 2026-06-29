@@ -107,6 +107,8 @@ namespace FlameOfTheLost
 
             this.RegisterSpawnedEnemy(spawnEntry, spawnedEnemy);
 
+            this.ConfigureSpawnedEnemy(spawnedEnemy, spawnEntry);
+
             CharacterRefreshHandler enemyRefreshHandler = spawnedEnemy.GetComponentInChildren<CharacterRefreshHandler>(true);
             if (enemyRefreshHandler == null)
             {
@@ -118,15 +120,36 @@ namespace FlameOfTheLost
             CharacterRefreshTarget spawnResult = spawnEntry.ResolveSpawnResult();
             enemyRefreshHandler.Refresh(spawnResult, CharacterRefreshOrigin.DefaultSpawnPoint);
 
-            this.ConfigureSpawnedEnemy(spawnedEnemy, spawnEntry);
-
             return spawnedEnemy;
         }
         protected virtual void ConfigureSpawnedEnemy(GameObject spawnedEnemy, T spawnEntry)
         {
-            // Base enemy spawner has no extra configuration.
-            // Subclasses can configure enemy-specific runtime data here.
+            if (spawnedEnemy == null) return;
+            if (spawnEntry == null) return;
+
+            this.ConfigureSpawnedEnemyInventory(spawnedEnemy, spawnEntry);
         }
+        private void ConfigureSpawnedEnemyInventory(GameObject spawnedEnemyGameObject, T spawnEntry)
+        {
+            EnemyRootController spawnedEnemy = spawnedEnemyGameObject.GetComponentInChildren<EnemyRootController>(true);
+
+            if (spawnedEnemy == null)
+            {
+                Debug.LogWarning($"[{spawnedEnemyGameObject.name}.{nameof(EnemyGroupSpawnerController<T>)}] Spawned enemy has no {nameof(EnemyRootController)}.", spawnedEnemyGameObject);
+                return;
+            }
+
+            InventoryController inventoryController = spawnedEnemy.InventoryController;
+
+            if (inventoryController == null)
+            {
+                Debug.LogWarning($"[{spawnedEnemyGameObject.name}.{nameof(EnemyGroupSpawnerController<T>)}] Spawned enemy has no {nameof(InventoryController)}.", spawnedEnemyGameObject);
+                return;
+            }
+
+            inventoryController.InitializeInventoryEntries(spawnEntry.InitialInventoryEntries);
+        }
+
         protected void ClearSpawnedEnemies()
         {
             for (int i = this.SpawnedEnemies.Count - 1; i >= 0; i--)

@@ -4,7 +4,7 @@ namespace FlameOfTheLost
     {
         None = 0,
 
-        PlayerHitByFirstBiteshroom = 100,
-        FirstBiteshroomDefeated = 101,
+        PlayerHitByFirstEnemy = 100,
+        FirstEnemyDefeated = 101,
     }
 }

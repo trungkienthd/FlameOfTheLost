@@ -4,8 +4,7 @@ namespace FlameOfTheLost
     {
         Default         = 0,
         Player          = 1,
-        Toxicshroom     = 2,
-        Biteshroom      = 3,
+        Feralshroom     = 2,
         Rattleblade     = 4,
     }
 }

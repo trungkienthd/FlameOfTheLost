@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507b2b395c74c5c42b09448764d6e972, type: 3}
+  m_Name: Prg_Feralshroom
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionConfig
+  _baseAttributeEntries:
+  - _attributeType: 0
+    _baseValue: 1
+  - _attributeType: 1
+    _baseValue: 1
+  - _attributeType: 2
+    _baseValue: 1
+  - _attributeType: 3
+    _baseValue: 1
+  _derivedStatEntries:
+  - _derivedStatType: 0
+    _baseValue: 30
+    _hasMaximumValue: 0
+    _maximumValue: 0
+    _contributions:
+    - _attributeType: 0
+      _valuePerStep: 0
+      _attributePointsPerStep: 1
+    - _attributeType: 3
+      _valuePerStep: 0
+      _attributePointsPerStep: 1
+  - _derivedStatType: 1
+    _baseValue: 1
+    _hasMaximumValue: 1
+    _maximumValue: 1
+    _contributions:
+    - _attributeType: 1
+      _valuePerStep: 0
+      _attributePointsPerStep: 1
+    - _attributeType: 3
+      _valuePerStep: 0
+      _attributePointsPerStep: 1
+  - _derivedStatType: 2
+    _baseValue: 50
+    _hasMaximumValue: 0
+    _maximumValue: 0
+    _contributions:
+    - _attributeType: 0
+      _valuePerStep: 0
+      _attributePointsPerStep: 1
+    - _attributeType: 2
+      _valuePerStep: 0
+      _attributePointsPerStep: 1
+  - _derivedStatType: 10
+    _baseValue: 1
+    _hasMaximumValue: 1
+    _maximumValue: 1
+    _contributions:
+    - _attributeType: 2
+      _valuePerStep: 0
+      _attributePointsPerStep: 1
+  - _derivedStatType: 11
+    _baseValue: 1
+    _hasMaximumValue: 1
+    _maximumValue: 1
+    _contributions:
+    - _attributeType: 2
+      _valuePerStep: 0
+      _attributePointsPerStep: 1

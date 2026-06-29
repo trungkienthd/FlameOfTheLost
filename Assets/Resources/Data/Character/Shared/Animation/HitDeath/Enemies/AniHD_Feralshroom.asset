@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af94ae79a7b556d4ba94ea40f2f70883, type: 3}
+  m_Name: AniHD_Feralshroom
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterHitDeathAnimationProfile
+  _characterType: 2
+  _hitAnimationClipSet:
+    _down: {fileID: 7400000, guid: 779790187aacc094daffe833cd9428db, type: 2}
+    _side: {fileID: 7400000, guid: 9222fede3171704458f32245c15cca42, type: 2}
+    _up: {fileID: 7400000, guid: a1e2ee33a3972a742950243469951d6c, type: 2}
+  _deathAnimationClipSet:
+    _down: {fileID: 7400000, guid: 29a453bf0a4113242ac6e8aec5a69574, type: 2}
+    _side: {fileID: 7400000, guid: 29a453bf0a4113242ac6e8aec5a69574, type: 2}
+    _up: {fileID: 7400000, guid: 29a453bf0a4113242ac6e8aec5a69574, type: 2}

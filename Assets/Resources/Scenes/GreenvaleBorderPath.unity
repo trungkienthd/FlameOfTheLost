@@ -49219,6 +49219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualHitDeathAnimationHandler
   _placeholderProfile: {fileID: 11400000, guid: cba0c4783b92dc34295f5a1cb5341fa0, type: 2}
   _activeProfile: {fileID: 11400000, guid: e71a8942c889d4c418673e1d862790e5, type: 2}
+  _hitCompletionFallbackDelay: 0.3
+  _hitCompletionPadding: 0.03
   _hitToDeathDelay: 0.5
   _deathCompletionFallbackDelay: 1
   _deathCompletionPadding: 0.03
@@ -95321,12 +95323,18 @@ MonoBehaviour:
   _playerSpawnerController: {fileID: 331205190}
   _enemyGroupRoot: {fileID: 625036373}
   _spawnEntries:
-  - _enemyPrefab: {fileID: 7730519756982016145, guid: 0e3ca8f0a83f5944aa24450754ae83b4, type: 3}
+  - _enemyPrefab: {fileID: 2810860427036246779, guid: 2cf69941bf2d26947a773c321d00d5ba, type: 3}
     _spawnPoint: {fileID: 957075723}
     _spawnCount: 1
     _spawnOnStart: 1
     _spawnWhenPlayerRespawns: 1
+    _initialInventoryEntries:
+    - _item: {fileID: 11400000, guid: 0a6af31139b4477468a9317b38295408, type: 2}
+      _quantity: 1
+      _equipped: 0
     _randomSpawnOffsetRadius: 0
+    _roamingConfig: {fileID: 11400000, guid: 000c4860f7a515747ac9664d03c92793, type: 2}
+    _attackConfig: {fileID: 11400000, guid: 17d68dd4bc4fe0644b4b14a56230971a, type: 2}
     _homeAreaEntry:
       _bottomLeftPosition: {x: 4, y: 17}
       _topRightPosition: {x: 6, y: 21}
@@ -103853,6 +103861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterRootController: {fileID: 2107461207}
+  _isHitSequenceInputBlocked: 0
   _isDeathDisabled: 0
   _playerMenuManager: {fileID: 1043804205}
   _playerInteractionPanelListManager: {fileID: 1947496558}

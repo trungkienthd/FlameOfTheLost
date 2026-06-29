@@ -8,8 +8,16 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     [Header("Territorial Config (Data)")]
     [SerializeField] private TerritorialEnemyRoamingConfig _roamingConfig;
     [SerializeField] private TerritorialEnemyAttackConfig _attackConfig;
-    private TerritorialEnemyRoamingConfig RoamingConfig => _roamingConfig;
-    private TerritorialEnemyAttackConfig AttackConfig => _attackConfig;
+    public TerritorialEnemyRoamingConfig RoamingConfig
+    { 
+        get => _roamingConfig;
+        private set => _roamingConfig = value;
+    }
+    public TerritorialEnemyAttackConfig AttackConfig
+    {
+        get => _attackConfig;
+        private set => _attackConfig = value;
+    }
 
     //  2. Runtime AI State
     [Header("AI State (Runtime)")]
@@ -89,10 +97,6 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     private CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController.CombatLoadoutController;
 
     // --- Unity Callbacks ---
-    protected override void Start()
-    {
-        this.InitializeBrainRuntimeAfterBinding();
-    }
     protected virtual void Update()
     {
         if (this.IsDeathDisabled) return;
@@ -101,6 +105,30 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     }
 
     // --- Public APIs ---
+    public void ConfigureTerritorialAI(TerritorialEnemyRoamingConfig roamingConfig, TerritorialEnemyAttackConfig attackConfig, TerritorialEnemyHomeAreaEntry homeAreaEntry)
+    {
+        if (roamingConfig == null)
+        {
+            Debug.LogWarning($"[{this.CharacterName}.{nameof(TerritorialEnemyBrainController)}] Missing roaming config. Loading the default roaming config.", this);
+            this.RoamingConfig = Resources.Load<TerritorialEnemyRoamingConfig>("Data/Character/AI/Territorial/Generic/AI_Enm_Trt_Roam_Generic");
+        }
+
+        if (attackConfig == null)
+        {
+            Debug.LogWarning($"[{this.CharacterName}.{nameof(TerritorialEnemyBrainController)}] Missing attack config. Loading the default attack config.", this);
+            this.AttackConfig = Resources.Load<TerritorialEnemyAttackConfig>("Data/Character/AI/Territorial/Generic/AI_Enm_Trt_Attack_Generic");
+        }
+
+        if (!homeAreaEntry.HasValidArea())
+        {
+            Debug.LogError($"[{this.CharacterName}.{nameof(TerritorialEnemyBrainController)}] Invalid home area entry provided.", this);
+            return;
+        }
+
+        this.RoamingConfig = roamingConfig;
+        this.AttackConfig = attackConfig;
+        this.HomeAreaEntry = homeAreaEntry;
+    }
     public void ConfigureHomeArea(TerritorialEnemyHomeAreaEntry homeAreaEntry)
     {
         if (!homeAreaEntry.HasValidArea())
@@ -352,7 +380,15 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     {
         this.IsRoamWalking = false;
         this.RoamMoveDirection = Vector2.zero;
-        this.NextRoamPhaseTime = Time.time + this.RoamingConfig.GetRandomIdleDuration();
+
+        if (this.RoamingConfig != null)
+        {
+            this.NextRoamPhaseTime = Time.time + this.RoamingConfig.GetRandomIdleDuration();
+        }
+        else
+        {
+            this.NextRoamPhaseTime = 0f;
+        }
 
         this.HasHomeReturnPoint = false;
         this.HomeReturnPoint = Vector2.zero;
@@ -404,30 +440,10 @@ public class TerritorialEnemyBrainController : EnemyBrainController
 
         this.EnemyInputHandler?.ClearMoveInput();
 
-        this.CombatLoadoutController?.TryQuickEquipWeapon();
-    }
-
-    //  6. Other Initializations 
-    private void InitializeBrainRuntimeAfterBinding()
-    {
-        this.CombatLoadoutController?.TryQuickEquipWeapon();
+        //this.CombatLoadoutController?.TryQuickEquipWeapon();
     }
 
     //  7. FOTL Base Behavior Overrides
-    protected override void ValidateInternalReferences()
-    {
-        base.ValidateInternalReferences();
-
-        if (this.RoamingConfig == null)
-        {
-            Debug.LogError($"[{this.CharacterName}.{nameof(TerritorialEnemyBrainController)}] Roaming config is not assigned.", this);
-        }
-
-        if (this.AttackConfig == null)
-        {
-            Debug.LogError($"[{this.CharacterName}.{nameof(TerritorialEnemyBrainController)}] Attack config is not assigned.", this);
-        }
-    }
     protected override void InitializeInternalState()
     {
         base.InitializeInternalState();
@@ -435,5 +451,11 @@ public class TerritorialEnemyBrainController : EnemyBrainController
         this.ResetRoamingRuntime();
         this.ResetAttackRuntime();
         this.SetAIState(TerritorialEnemyState.Roaming);
+    }
+    protected override void InitializeGameplay()
+    {
+        base.InitializeGameplay();
+
+        this.CombatLoadoutController?.TryQuickEquipWeapon();
     }
 }

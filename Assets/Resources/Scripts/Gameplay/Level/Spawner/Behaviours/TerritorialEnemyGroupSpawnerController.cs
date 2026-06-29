@@ -22,6 +22,12 @@ namespace FlameOfTheLost
                 return;
             }
 
+            if (!spawnEntry.HasValidTerritorialAIConfig)
+            {
+                Debug.LogWarning($"[{spawnedEnemy.name}.{nameof(TerritorialEnemyGroupSpawnerController)}] Territorial AI config is not valid.", spawnedEnemy);
+                return;
+            }
+
             TerritorialEnemyBrainController territorialBrainController = spawnedEnemy.GetComponentInChildren<TerritorialEnemyBrainController>(true);
             if (territorialBrainController == null)
             {
@@ -29,7 +35,12 @@ namespace FlameOfTheLost
                 return;
             }
 
-            territorialBrainController.ConfigureHomeArea(spawnEntry.HomeAreaEntry);
+            territorialBrainController.ConfigureTerritorialAI
+            (
+                spawnEntry.RoamingConfig,
+                spawnEntry.AttackConfig,
+                spawnEntry.HomeAreaEntry
+            );
         }
     }
 }

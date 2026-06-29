@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -20,6 +21,10 @@ namespace FlameOfTheLost
         public int SpawnCount => Mathf.Max(1, _spawnCount);
         public bool SpawnOnStart => _spawnOnStart;
         public bool SpawnWhenPlayerRespawns => _spawnWhenPlayerRespawns;
+
+        [Header("Initial Inventory")]
+        [SerializeField] private List<InventoryItemEntry> _initialInventoryEntries = new();
+        public IReadOnlyList<InventoryItemEntry> InitialInventoryEntries => _initialInventoryEntries;
 
         [Header("Optional Position Offset")]
         [SerializeField] private float _randomSpawnOffsetRadius = 0f;
