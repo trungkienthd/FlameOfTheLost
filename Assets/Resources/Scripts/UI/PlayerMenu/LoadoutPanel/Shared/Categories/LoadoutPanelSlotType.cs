@@ -2,10 +2,11 @@ namespace FlameOfTheLost
 {
     public enum LoadoutPanelSlotType
     {
-        None = 0,
-        Weapon = 1,
-        Consumable = 2,
-        CarriableItem = 3,
-        SpecialSkillCandidate = 4,
+        None                        = 0,
+        Weapon                      = 1,
+        Projectile                  = 2,
+        Consumable                  = 3,
+        CarriableItem               = 4,
+        SpecialSkillCandidate       = 5,
     }
 }

@@ -417,7 +417,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: F_U_ObjectIcon Tile Map 22x22 1_13
+      name: BAPQ3UI_F_U_ObjectIconTileMap_22x22_1_13
       rect:
         serializedVersion: 2
         x: 286
@@ -4500,6 +4500,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      BAPQ3UI_F_U_ObjectIconTileMap_22x22_1_13: 1925712005
       BAPQ3UI_F_U_ObjectIconTileMap_22x22_1_14: -2124923615
       BAPQ3UI_F_U_ObjectIconTileMap_22x22_1_166: -882108025
       BAPQ3UI_F_U_ObjectIconTileMap_22x22_1_18: -1957476201
@@ -4539,7 +4540,6 @@ TextureImporter:
       F_U_ObjectIcon Tile Map 22x22 1_127: -648727613
       F_U_ObjectIcon Tile Map 22x22 1_128: -2101342345
       F_U_ObjectIcon Tile Map 22x22 1_129: -1502427725
-      F_U_ObjectIcon Tile Map 22x22 1_13: 1925712005
       F_U_ObjectIcon Tile Map 22x22 1_130: -917680709
       F_U_ObjectIcon Tile Map 22x22 1_131: -112744653
       F_U_ObjectIcon Tile Map 22x22 1_132: 1939961351

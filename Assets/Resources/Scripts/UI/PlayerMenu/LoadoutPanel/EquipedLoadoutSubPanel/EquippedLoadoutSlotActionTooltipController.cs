@@ -158,6 +158,11 @@ namespace FlameOfTheLost
                         ? slot.BoundWeaponEntry.Item.DisplayName
                         : "Empty Weapon Slot";
 
+                case LoadoutPanelSlotType.Projectile:
+                    return slot.BoundProjectileEntry != null && slot.BoundProjectileEntry.Item != null
+                        ? $"{slot.BoundProjectileEntry.Item.DisplayName} ({slot.BoundProjectileEntry.Quantity})"
+                        : "Empty Projectile Slot";
+
                 case LoadoutPanelSlotType.Consumable:
                     return slot.BoundConsumableEntry != null && slot.BoundConsumableEntry.Item != null
                         ? $"{slot.BoundConsumableEntry.Item.DisplayName} ({slot.BoundConsumableEntry.Quantity})"

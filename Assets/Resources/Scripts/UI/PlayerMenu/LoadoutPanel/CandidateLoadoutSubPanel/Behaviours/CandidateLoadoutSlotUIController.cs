@@ -32,6 +32,7 @@ namespace FlameOfTheLost
 
         //      2.2. Bound Content
         public InventoryItemEntry BoundWeaponEntry { get; private set; }
+        public InventoryItemEntry BoundProjectileEntry { get; private set; }
         public InventoryItemEntry BoundConsumableEntry { get; private set; }
         public InventoryItemEntry BoundCarriableItem { get; private set; }
         public SkillProfile BoundSpecialSkill { get; private set; }
@@ -71,6 +72,28 @@ namespace FlameOfTheLost
             bool hasContent = weaponEntry != null && weaponEntry.Item != null;
             this.SetMainIcon(hasContent ? weaponEntry.Item.Icon : null, hasContent);
             this.SetSubSlotVisible(false);
+        }
+
+        public void BindProjectile(InventoryItemEntry projectileEntry)
+        {
+            this.Clear();
+
+            this.SlotType = LoadoutPanelSlotType.Projectile;
+            this.BoundProjectileEntry = projectileEntry;
+
+            bool hasContent =
+                projectileEntry != null &&
+                projectileEntry.Item != null &&
+                projectileEntry.Quantity > 0;
+
+            this.SetMainIcon(hasContent ? projectileEntry.Item.Icon : null, hasContent);
+
+            this.SetSubSlotVisible(true);
+            this.ConfigureConsumableQuantitySubSlot
+            (
+                quantity: hasContent ? Mathf.Clamp(projectileEntry.Quantity, 0, 99) : 0,
+                hasContent: hasContent
+            );
         }
 
         public void BindConsumableItem(InventoryItemEntry consumableEntry)
@@ -115,6 +138,7 @@ namespace FlameOfTheLost
             this.SlotType = LoadoutPanelSlotType.None;
 
             this.BoundWeaponEntry = null;
+            this.BoundProjectileEntry = null;
             this.BoundConsumableEntry = null;
             this.BoundCarriableItem = null;
             this.BoundSpecialSkill = null;

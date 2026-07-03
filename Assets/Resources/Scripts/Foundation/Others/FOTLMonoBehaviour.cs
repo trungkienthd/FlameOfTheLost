@@ -19,7 +19,12 @@ namespace FlameOfTheLost
             this.BindExternalReferences();
             this.InitializePregameplayState();
             this.InitializeGameplay();
-        }    
+        }
+
+        private void OnDestroy()
+        {
+            this.UnbindInternalReferences();
+        }
 
         protected virtual void CacheInternalReferences()
         {
@@ -54,6 +59,10 @@ namespace FlameOfTheLost
         }
 
         protected virtual void InitializeGameplay()
+        {
+        }
+
+        protected virtual void UnbindInternalReferences()
         {
         }
     }

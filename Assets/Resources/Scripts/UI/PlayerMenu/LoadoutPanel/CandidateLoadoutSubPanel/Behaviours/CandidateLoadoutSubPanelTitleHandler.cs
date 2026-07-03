@@ -6,10 +6,12 @@ namespace FlameOfTheLost
     {
         [Header("Titles")]
         [SerializeField] private GameObject _titleReplaceWeapon;
+        [SerializeField] private GameObject _titleReplaceProjectile;
         [SerializeField] private GameObject _titleReplaceConsumableItem;
         [SerializeField] private GameObject _titleReplaceCarriableItem;
         [SerializeField] private GameObject _titleReplaceSpecialSkill;
         private GameObject TitleReplaceWeapon => _titleReplaceWeapon;
+        private GameObject TitleReplaceProjectile => _titleReplaceProjectile;
         private GameObject TitleReplaceConsumableItem => _titleReplaceConsumableItem;
         private GameObject TitleReplaceCarriableItem => _titleReplaceCarriableItem;
         private GameObject TitleReplaceSpecialSkill => _titleReplaceSpecialSkill;
@@ -25,6 +27,11 @@ namespace FlameOfTheLost
             if (this.TitleReplaceWeapon != null)
             {
                 this.TitleReplaceWeapon.SetActive(mode == CandidateLoadoutSelectionModeType.ReplaceWeapon);
+            }
+
+            if (this.TitleReplaceProjectile != null)
+            {
+                this.TitleReplaceProjectile.SetActive(mode == CandidateLoadoutSelectionModeType.ReplaceProjectile);
             }
 
             if (this.TitleReplaceConsumableItem != null)
@@ -45,10 +52,11 @@ namespace FlameOfTheLost
 
         public void HideAll()
         {
-            if (this.TitleReplaceWeapon != null)            this.TitleReplaceWeapon.SetActive(false);
-            if (this.TitleReplaceConsumableItem != null)    this.TitleReplaceConsumableItem.SetActive(false);
-            if (this.TitleReplaceCarriableItem != null)  this.TitleReplaceCarriableItem.SetActive(false);
-            if (this.TitleReplaceSpecialSkill != null)      this.TitleReplaceSpecialSkill.SetActive(false);
+            if (this.TitleReplaceWeapon         != null) this.TitleReplaceWeapon.SetActive(false);
+            if (this.TitleReplaceProjectile     != null) this.TitleReplaceProjectile.SetActive(false);
+            if (this.TitleReplaceConsumableItem != null) this.TitleReplaceConsumableItem.SetActive(false);
+            if (this.TitleReplaceCarriableItem  != null) this.TitleReplaceCarriableItem.SetActive(false);
+            if (this.TitleReplaceSpecialSkill   != null) this.TitleReplaceSpecialSkill.SetActive(false);
         }
 
         private void CacheReferences()
@@ -57,6 +65,12 @@ namespace FlameOfTheLost
             {
                 Transform found = this.transform.Find("Title_ReplaceWeapon");
                 if (found != null) _titleReplaceWeapon = found.gameObject;
+            }
+
+            if (this.TitleReplaceProjectile == null)
+            {
+                Transform found = this.transform.Find("Title_ReplaceProjectile");
+                if (found != null) _titleReplaceProjectile = found.gameObject;
             }
 
             if (this.TitleReplaceConsumableItem == null)

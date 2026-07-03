@@ -44,14 +44,21 @@ namespace FlameOfTheLost
         public IReadOnlyList<InventoryItemEntry> AllConsumableItemEntries => this.GetEntriesOfType<ConsumableItemProfile>();
         public IReadOnlyList<InventoryItemEntry> AvailableConsumableItemEntries => this.GetEntriesOfType<ConsumableItemProfile>(availableOnly: true);
 
-        public IReadOnlyList<InventoryItemEntry> AllInteractableItemEntries => this.GetEntriesOfType<CarriableItemProfile>();
+        public IReadOnlyList<InventoryItemEntry> AllProjectileEntries => this.GetEntriesOfType<ProjectileProfile>();
+        public IReadOnlyList<InventoryItemEntry> AvailableProjectileEntries => this.GetEntriesOfType<ProjectileProfile>(availableOnly: true);
+
+        public IReadOnlyList<InventoryItemEntry> AllCarriableItemEntries => this.GetEntriesOfType<CarriableItemProfile>();
         public IReadOnlyList<InventoryItemEntry> AvailableCarriableItemEntries => this.GetEntriesOfType<CarriableItemProfile>(availableOnly: true);
 
         public IReadOnlyList<InventoryItemEntry> AllLightSourceEntries => this.GetEntriesOfType<LightSourceProfile>();
+        public IReadOnlyList<InventoryItemEntry> AvailableLightSourceEntries => this.GetEntriesOfType<LightSourceProfile>(availableOnly: true);
+
         public IReadOnlyList<InventoryItemEntry> AllKeyItemEntries => this.GetEntriesOfType<KeyItemProfile>();
+        public IReadOnlyList<InventoryItemEntry> AvailableKeyItemEntries => this.GetEntriesOfType<KeyItemProfile>(availableOnly: true);
 
         public bool TryGetWeaponFromEntry(InventoryItemEntry weaponEntry, out WeaponProfile weapon) => this.TryGetItemFromEntry(weaponEntry, out weapon);
         public bool TryGetConsumableItemFromEntry(InventoryItemEntry consumableEntry, out ConsumableItemProfile consumable) => this.TryGetItemFromEntry(consumableEntry, out consumable);
+        public bool TryGetProjectileFromEntry(InventoryItemEntry projectileEntry, out ProjectileProfile projectile) => this.TryGetItemFromEntry(projectileEntry, out projectile);
         public bool TryGetCarriableItemFromEntry(InventoryItemEntry interactableEntry, out CarriableItemProfile interactable) => this.TryGetItemFromEntry(interactableEntry, out interactable);
 
         //  2. (Learned) Special Skills
@@ -167,14 +174,15 @@ namespace FlameOfTheLost
             return total >= requiredQuantity;
         }
 
-        public bool TryAddItem(ItemProfile item, int quantity = 1)
+        public bool TryAddItemAndGetFirstAffectedEntry(ItemProfile item, int quantity, out InventoryItemEntry addedEntry)
         {
+            addedEntry = null;
+
             if (item == null) return false;
             if (quantity <= 0) return false;
 
             int remainingQuantity = quantity;
 
-            // If possible, merge into existing entries first (only for stackable items, until reaching RemainingCapacity (= MaxStackSize - Current Quantity))
             if (item.IsStackable)
             {
                 for (int i = 0; i < this.Items.Count; i++)
@@ -182,23 +190,26 @@ namespace FlameOfTheLost
                     InventoryItemEntry entry = this.Items[i];
                     if (entry == null || entry.Item == null || !entry.CanMergeWith(item)) continue;
 
-                    int addableQuantity = Math.Min(entry.RemainingCapacity, remainingQuantity);
+                    int addableQuantity = Mathf.Min(entry.RemainingCapacity, remainingQuantity);
                     if (addableQuantity <= 0) continue;
 
                     entry.Quantity += addableQuantity;
                     remainingQuantity -= addableQuantity;
 
-                    if (remainingQuantity <= 0)
-                    {
-                        this.OnItemAdded?.Invoke(item, quantity);
-                        return true;
-                    }
+                    addedEntry ??= entry;
+                }
+
+                if (remainingQuantity <= 0)
+                {
+                    this.OnItemAdded?.Invoke(item, quantity);
+                    return true;
                 }
             }
 
             while (remainingQuantity > 0)
             {
                 int entryQuantity = item.IsStackable ? Math.Min(item.MaxStackSize, remainingQuantity) : 1;
+
                 InventoryItemEntry newEntry = new InventoryItemEntry
                 {
                     Item = item,
@@ -206,11 +217,18 @@ namespace FlameOfTheLost
                 };
 
                 _items.Add(newEntry);
+
+                addedEntry ??= newEntry;
                 remainingQuantity -= entryQuantity;
             }
 
             this.OnItemAdded?.Invoke(item, quantity);
             return true;
+        }
+
+        public bool TryAddItem(ItemProfile item, int quantity = 1)
+        {
+            return this.TryAddItemAndGetFirstAffectedEntry(item, quantity, out InventoryItemEntry _);
         }
 
         public bool TryRemoveItem(ItemProfile item, int quantity = 1)

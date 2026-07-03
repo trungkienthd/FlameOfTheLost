@@ -124,6 +124,10 @@ namespace FlameOfTheLost
                     slot.BindWeapon(candidate as InventoryItemEntry);
                     break;
 
+                case CandidateLoadoutSelectionModeType.ReplaceProjectile:
+                    slot.BindProjectile(candidate as InventoryItemEntry);
+                    break;
+
                 case CandidateLoadoutSelectionModeType.ReplaceConsumableItem:
                     slot.BindConsumableItem(candidate as InventoryItemEntry);
                     break;

@@ -33,9 +33,11 @@ MonoBehaviour:
     _blockedBySilence: 1
     _allowSelfKillWithHPCost: 0
   _statusEffectApplications: []
-  _arrowPrefab: {fileID: 1925744174769983495, guid: a566a4409481c424ea1498371d763b2c, type: 3}
-  _arrowSpeed: 25
-  _arrowLifetime: 5
-  _destroyArrowOnHit: 1
+  _requiredProjectileType: 1
+  _costProjectile: 1
+  _defaultProjectile: {fileID: 11400000, guid: e3f2367d6724ced468c2cdf9e43748e3, type: 2}
+  _projectileSpeed: 25
+  _projectileLifetime: 3
+  _destroyProjectileOnHit: 1
   _projectileCount: 1
   _projectileAngleStep: 0

@@ -40,6 +40,7 @@ namespace FlameOfTheLost
         public int SlotIndex { get; private set; } = -1;
 
         public InventoryItemEntry BoundWeaponEntry { get; private set; }
+        public InventoryItemEntry BoundProjectileEntry { get; private set; }
         public InventoryItemEntry BoundConsumableEntry { get; private set; }
         public InventoryItemEntry BoundCarriableItemEntry { get; private set; }
         public SkillProfile BoundWeaponSpecialSkill { get; private set; }
@@ -119,6 +120,37 @@ namespace FlameOfTheLost
             this.RefreshSlotColor();
         }
 
+        public void BindProjectileItem(InventoryItemEntry projectileEntry, int slotIndex, bool isSelected, bool isMainButtonInteractable)
+        {
+            this.ResetBindings();
+
+            this.SlotType = LoadoutPanelSlotType.Projectile;
+            this.SlotIndex = slotIndex;
+            this.BoundProjectileEntry = projectileEntry;
+
+            this.IsActive = false;
+            this.IsSelected = isSelected;
+
+            bool hasContent =
+                projectileEntry != null &&
+                projectileEntry.Item != null &&
+                projectileEntry.Quantity > 0;
+
+            this.SetMainIcon(hasContent ? projectileEntry.Icon : null, hasContent);
+
+            this.SetSubSlotVisible(true);
+            this.ConfigureQuantitySubSlot
+            (
+                quantity: hasContent ? Mathf.Clamp(projectileEntry.Quantity, 0, 99) : 0,
+                hasContent: hasContent
+            );
+
+            this.SetMainButtonInteractable(isMainButtonInteractable);
+            this.SetSubSlotButtonInteractable(false);
+
+            this.RefreshSlotColor();
+        }
+
         public void BindConsumableItem(InventoryItemEntry consumableEntry, int slotIndex, bool isActive, bool isSelected, bool isMainButtonInteractable)
         {
             this.ResetBindings();
@@ -134,7 +166,11 @@ namespace FlameOfTheLost
             this.SetMainIcon(hasContent ? consumableEntry.Icon : null, hasContent);
 
             this.SetSubSlotVisible(true);
-            this.ConfigureConsumableQuantitySubSlot(hasContent ? Mathf.Clamp(consumableEntry.Quantity, 0, 99) : 0, hasContent);
+            this.ConfigureQuantitySubSlot
+            (
+                quantity: hasContent ? Mathf.Clamp(consumableEntry.Quantity, 0, 99) : 0,
+                hasContent: hasContent
+            );
 
             this.SetMainButtonInteractable(isMainButtonInteractable);
             this.SetSubSlotButtonInteractable(false);
@@ -171,6 +207,11 @@ namespace FlameOfTheLost
                     this.BoundWeaponEntry != null &&
                     this.BoundWeaponEntry.Item != null,
 
+                LoadoutPanelSlotType.Projectile =>
+                    this.BoundProjectileEntry != null &&
+                    this.BoundProjectileEntry.Item != null &&
+                    this.BoundProjectileEntry.Quantity > 0,
+
                 LoadoutPanelSlotType.Consumable =>
                     this.BoundConsumableEntry != null &&
                     this.BoundConsumableEntry.Item != null &&
@@ -203,6 +244,7 @@ namespace FlameOfTheLost
             this.SlotIndex = -1;
 
             this.BoundWeaponEntry = null;
+            this.BoundProjectileEntry = null;
             this.BoundConsumableEntry = null;
             this.BoundCarriableItemEntry = null;
             this.BoundWeaponSpecialSkill = null;
@@ -259,7 +301,7 @@ namespace FlameOfTheLost
             }
         }
 
-        private void ConfigureConsumableQuantitySubSlot(int quantity, bool hasContent)
+        private void ConfigureQuantitySubSlot(int quantity, bool hasContent)
         {
             if (!hasContent)
             {

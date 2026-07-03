@@ -37,28 +37,6 @@ namespace FlameOfTheLost
         protected CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController != null ? this.CharacterRootController.CombatLoadoutController : null;
         protected InventoryController InventoryController => this.CharacterRootController != null ? this.CharacterRootController.InventoryController : null;
 
-        // --- Unity Callbacks ---
-        protected override void Awake()
-        {
-            base.Awake();
-
-            this.ClampMaxEquippedEntries();
-            this.ClampEquippedEntriesToCapacity();
-            this.RemoveInvalidEquippedEntries();
-            this.SyncEquippedStates();
-            this.EnsureActiveEntryIsValid();
-        }
-        protected virtual void Reset()
-        {
-            this.MaxEquippedEntries = this.DefaultEquippedEntryCapacity;
-            this.ClampEquippedEntriesToCapacity();
-        }
-        protected virtual void OnValidate()
-        {
-            this.ClampMaxEquippedEntries();
-            this.ClampEquippedEntriesToCapacity();
-        }
-
         // --- Public APIs ---
         public void SetMaxEquippedEntriesFromProgression(int amount)
         {
@@ -485,7 +463,28 @@ namespace FlameOfTheLost
 
         private void ClampMaxEquippedEntries()
         {
-            this.MaxEquippedEntries = Mathf.Clamp( this.MaxEquippedEntries, this.MinEquippedEntryCapacity, this.MaxEquippedEntryCapacity);
+            this.MaxEquippedEntries = Mathf.Clamp(this.MaxEquippedEntries, this.MinEquippedEntryCapacity, this.MaxEquippedEntryCapacity);
+        }
+
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.MaxEquippedEntries = this.DefaultEquippedEntryCapacity;
+
+            this.ClampMaxEquippedEntries();
+            this.ClampEquippedEntriesToCapacity();
+
+            // Do not call RemoveInvalidEquippedEntries() or EnsureActiveEntryIsValid() here.
+            // Those depend on IsEntryValid(), and derived handlers may need external references
+            // such as InventoryController through CharacterRootController.
+        }
+
+        protected override void InitializePregameplayState()
+        {
+            base.InitializePregameplayState();
+
+            this.RefreshLoadoutAfterCharacterRefreshment();
         }
     }
 }

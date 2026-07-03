@@ -39,9 +39,11 @@ MonoBehaviour:
     _receiver: 0
     _trigger: 1
     _limit: 0
-  _arrowPrefab: {fileID: 3043559614890823337, guid: c9d10330d54c80842816a01efac41c94, type: 3}
-  _arrowSpeed: 0.5
-  _arrowLifetime: 0.75
+  _requiredProjectileType: 2
+  _costProjectile: 0
+  _defaultProjectile: {fileID: 11400000, guid: 66f641b6fed2a504ebd09596fdaf2275, type: 2}
+  _projectileSpeed: 0.5
+  _projectileLifetime: 0.75
   _destroyArrowOnHit: 0
   _projectileCount: 1
   _projectileAngleStep: 0

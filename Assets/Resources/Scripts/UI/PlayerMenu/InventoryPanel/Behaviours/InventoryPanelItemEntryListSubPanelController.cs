@@ -175,6 +175,9 @@ namespace FlameOfTheLost
                 case ItemType.Weapon:
                     result.AddRange(this.PlayerInventoryController.AllWeaponEntries);
                     break;
+                case ItemType.Projectile:
+                    result.AddRange(this.PlayerInventoryController.AllProjectileEntries);
+                    break;
                 case ItemType.ConsumableItem:
                     result.AddRange(this.PlayerInventoryController.AllConsumableItemEntries);
                     break;
@@ -186,7 +189,7 @@ namespace FlameOfTheLost
                     break;
             }
 
-            Debug.Log($"[{this.gameObject.name}.InventoryPanelItemEntryListSubPanelController] Retrieved {result.Count} entries for item type {itemType}", this);
+            Debug.Log($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] Retrieved {result.Count} entries for item type {itemType}", this);
             return result;
         }
 
@@ -205,7 +208,7 @@ namespace FlameOfTheLost
             if (this.SlotControllers.Count > 0) return;
             if (this.PaginationHandler == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.InventoryPanelItemEntryListSubPanelController] PaginationHandler is required", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] PaginationHandler is required", this);
                 return;
             }
 

@@ -36,15 +36,8 @@ namespace FlameOfTheLost
             get => _isInAttackWindow;
             private set => _isInAttackWindow = value;
         }
-        
-        private RuntimeSkill _activeRuntimeSkill;
-        private RuntimeSkill ActiveRuntimeSkill
-        {
-            get => _activeRuntimeSkill;
-            set => _activeRuntimeSkill = value;
-        }
 
-        //  3. Status Effects states
+        //  3. Status Effects Flags states
         [Header("Status Effects Flags (Runtime)")]
         [SerializeField] private bool _cannotAttack;
         [SerializeField] private bool _cannotCastSpecialSkill;
@@ -67,12 +60,33 @@ namespace FlameOfTheLost
         public bool IsAttackLocked => this.CannotAttack && !this.IgnoreAttackLock;
         public bool IsSpecialAttackLocked => (this.CannotAttack || this.CannotCastSpecialSkill) && !this.IgnoreAttackLock;
 
-        //  4. Last states
+        //  4. Last caching states
         private AttackSide _lastAttackSide;
         public AttackSide LastAttackSide
         {
             get => _lastAttackSide;
             private set => _lastAttackSide = value;
+        }
+
+        private RuntimeSkill _activeRuntimeSkill;
+        private RuntimeSkill ActiveRuntimeSkill
+        {
+            get => _activeRuntimeSkill;
+            set => _activeRuntimeSkill = value;
+        }
+
+        private ProjectileProfile _activeRuntimeProjectile;
+        private ProjectileProfile ActiveRuntimeProjectile
+        {
+            get => _activeRuntimeProjectile;
+            set => _activeRuntimeProjectile = value;
+        }
+
+        private ProjectileCostRecord _activeRuntimeProjectileCostRecord;
+        private ProjectileCostRecord ActiveRuntimeProjectileCostRecord
+        {
+            get => _activeRuntimeProjectileCostRecord;
+            set => _activeRuntimeProjectileCostRecord = value;
         }
 
         //  5. Attack Coroutine
@@ -167,7 +181,7 @@ namespace FlameOfTheLost
                     // Ranged projectile will be spawned at OnAttackWindowEnd()
                     break;
                 default:
-                    Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(OnAttackWindowStart)}: Unsupported skill style {this.ActiveRuntimeSkill.Style}.");
+                    Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(this.OnAttackWindowStart)}: Unsupported skill style {this.ActiveRuntimeSkill.Style}.");
                     break;
             }
 
@@ -200,7 +214,7 @@ namespace FlameOfTheLost
                     this.FireRangedProjectile(runtimeSkill);
                     break;
                 default:
-                    Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(OnAttackWindowEnd)}: Unsupported skill style {activeSkillStyle}.");
+                    Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(this.OnAttackWindowEnd)}: Unsupported skill style {activeSkillStyle}.");
                     break;
             }
 
@@ -213,7 +227,7 @@ namespace FlameOfTheLost
             // Resolve aiming state at attack window end
             this.CombatAimingHandler?.ResolveOnAttackWindowEnd();
 
-            this.ActiveRuntimeSkill = null;
+            this.ClearActiveAttackRuntimeState();
         }
 
         //      2.3. Attack window interruption
@@ -237,6 +251,16 @@ namespace FlameOfTheLost
             if (wasInAttackWindow)
             {
                 this.CombatResourcesHandler?.ResolveOnAttackWindowInterrupt(skillStyle: interruptedSkillStyle);
+            }
+
+            // Resolve projectile refund (if ranged skill)
+            ProjectileCostRecord interruptedProjectileCostRecord = this.ActiveRuntimeProjectileCostRecord;
+            if (wasInAttackWindow && interruptedSkillStyle == SkillStyle.Ranged)
+            {
+                if (this.ActiveRuntimeSkill.Profile is RangedSkillProfile rangedSkill && rangedSkill.CostProjectile)
+                {
+                    this.CombatLoadoutController?.RefundProjectileCost(interruptedProjectileCostRecord);
+                }
             }
 
             this.CancelAttackWindowRuntimeState(resolveAiming: true);
@@ -333,7 +357,7 @@ namespace FlameOfTheLost
         // --- Helpers ---
         private bool DoAttack(SkillProfile skill, AttackSide attackSideType)
         {
-            this.ActiveRuntimeSkill = null;
+            this.ClearActiveAttackRuntimeState();
 
             WeaponProfile weapon = this.CombatLoadoutController.ActiveEquippedRuntimeWeapon?.Profile;
 
@@ -356,14 +380,50 @@ namespace FlameOfTheLost
                 return false;
             }
 
-            // Resource gate (pay/reserve). You already have reserve/refund logic in handler.
-            if (this.CombatResourcesHandler != null)
+            ProjectileProfile resolvedProjectile = null;
+            ProjectileCostRecord projectileCostRecord = null;
+
+            // Projectile gate.
+            // For consuming ranged skills, this validates the active projectile slot.
+            // For free ranged skills, this resolves the skill's default projectile item.
+            if (skill is RangedSkillProfile rangedSkill)
             {
-                if (!this.CombatResourcesHandler.TryPaySkillCost(runtimeSkill, reservationID: out int reservationID)) return false;
+                if (!this.CombatLoadoutController.TryResolveProjectileForRangedSkill(rangedSkill, out resolvedProjectile))
+                {
+                    return false;
+                }
             }
 
-            // Cache for animation events
+            // Projectile cost.
+            // Deduct before resource payment so projectile-consume failure cannot leave resource costs spent/reserved. If resource payment fails, refund the projectile.
+            if (skill is RangedSkillProfile costRangedSkill && costRangedSkill.CostProjectile)
+            {
+                if (!this.CombatLoadoutController.TryConsumeProjectileForRangedSkill(costRangedSkill, out projectileCostRecord))
+                {
+                    return false;
+                }
+
+                resolvedProjectile = projectileCostRecord.Projectile;
+            }
+
+            // Resource gate.
+            if (this.CombatResourcesHandler != null)
+            {
+                if (!this.CombatResourcesHandler.TryPaySkillCost(runtimeSkill, reservationID: out int reservationID))
+                {
+                    if (projectileCostRecord != null)
+                    {
+                        this.CombatLoadoutController?.RefundProjectileCost(projectileCostRecord);
+                    }
+
+                    return false;
+                }
+            }
+
+            // Cache (e.g., for animation events)
             this.ActiveRuntimeSkill = runtimeSkill;
+            this.ActiveRuntimeProjectile = resolvedProjectile;
+            this.ActiveRuntimeProjectileCostRecord = projectileCostRecord;
 
             // Aim + face BEFORE animation starts
             this.CombatAimingHandler?.PrepareAimingForAttack();
@@ -438,6 +498,13 @@ namespace FlameOfTheLost
             this.AttackRoutine = null;
         }
 
+        private void ClearActiveAttackRuntimeState()
+        {
+            this.ActiveRuntimeSkill = null;
+            this.ActiveRuntimeProjectile = null;
+            this.ActiveRuntimeProjectileCostRecord = null;
+        }
+
         private void CancelAttackWindowRuntimeState(bool resolveAiming = true)
         {
             this.IsInAttackWindow = false;
@@ -449,7 +516,7 @@ namespace FlameOfTheLost
                 this.CombatAimingHandler?.ResolveOnAttackWindowEnd();
             }
 
-            this.ActiveRuntimeSkill = null;
+            this.ClearActiveAttackRuntimeState();
         }
 
         private void EnableMeleeHitboxForActiveSkill()
@@ -482,8 +549,19 @@ namespace FlameOfTheLost
         private void FireRangedProjectile(RuntimeSkill runtimeSkill)
         {
             if (runtimeSkill == null) return;
-            if (!(runtimeSkill.Profile is RangedSkillProfile rangedSkill)) return;
-            if (!rangedSkill.ProjectilePrefab) return;
+            if (runtimeSkill.Profile is not RangedSkillProfile rangedSkill) return;
+
+            ProjectileProfile projectile = this.ActiveRuntimeProjectile;
+            if (projectile == null)
+            {
+                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(this.FireRangedProjectile)} failed: active runtime projectile is null.", this);
+                return;
+            }
+            if (projectile.ProjectilePrefab == null)
+            {
+                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(this.FireRangedProjectile)} failed: projectile '{projectile.name}' has no projectile prefab.", this);
+                return;
+            }
 
             Transform rangedAnchor = this.GetCurrentRangedAnchor();
             if (rangedAnchor == null) return;
@@ -497,6 +575,12 @@ namespace FlameOfTheLost
             baselineDirection.Normalize();
 
             int projectileCount = rangedSkill.ProjectileCount;
+            if (projectileCount <= 0)
+            {
+                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(this.FireRangedProjectile)} failed: ranged skill '{rangedSkill.name}' has invalid ProjectileCount: {projectileCount}.", this);
+                return;
+            }
+
             float angleStep = rangedSkill.ProjectileAngleStep;
 
             // Symmetric fan around base direction
@@ -507,7 +591,7 @@ namespace FlameOfTheLost
                 float angleOffset = startAngleOffset + (i * angleStep);
                 Vector2 projectileDirection = baselineDirection.Rotate(angleOffset);
 
-                this.SpawnSingleProjectile(runtimeSkill, rangedSkill, projectileDirection, rangedAnchor);
+                this.SpawnSingleProjectile(runtimeSkill, rangedSkill, projectile, projectileDirection, rangedAnchor);
             }
         }
         private Transform GetCurrentRangedAnchor()
@@ -537,19 +621,20 @@ namespace FlameOfTheLost
                     return this.transform;
             }
         }
-        private void SpawnSingleProjectile(RuntimeSkill runtimeSkill, RangedSkillProfile rangedSkill, Vector2 direction, Transform rangedAnchor)
+        private void SpawnSingleProjectile(RuntimeSkill runtimeSkill, RangedSkillProfile rangedSkill, ProjectileProfile projectile, Vector2 direction, Transform rangedAnchor)
         {
-            if (runtimeSkill == null || rangedSkill == null) return;
-            if (!rangedSkill.ProjectilePrefab) return;
+            if (runtimeSkill == null || rangedSkill == null || projectile == null) return;
+            if (projectile.ProjectilePrefab == null) return;
             if (rangedAnchor == null) return;
 
             direction.Normalize();
 
             var projectileObj = UnityEngine.Object.Instantiate
             (
-                rangedSkill.ProjectilePrefab,
-                rangedAnchor.position,
-                Quaternion.identity
+                original: projectile.ProjectilePrefab,
+                position: rangedAnchor.position,
+                rotation: Quaternion.identity,
+                parent: rangedAnchor
             );
 
             // Rotation assignment

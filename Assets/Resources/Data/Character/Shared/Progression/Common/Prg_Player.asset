@@ -58,12 +58,20 @@ MonoBehaviour:
   - _derivedStatType: 10
     _baseValue: 1
     _hasMaximumValue: 1
-    _maximumValue: 3
+    _maximumValue: 1
     _contributions:
     - _attributeType: 2
       _valuePerStep: 1
-      _attributePointsPerStep: 5
+      _attributePointsPerStep: 10
   - _derivedStatType: 11
+    _baseValue: 1
+    _hasMaximumValue: 1
+    _maximumValue: 1
+    _contributions:
+    - _attributeType: 2
+      _valuePerStep: 1
+      _attributePointsPerStep: 3
+  - _derivedStatType: 12
     _baseValue: 2
     _hasMaximumValue: 1
     _maximumValue: 6

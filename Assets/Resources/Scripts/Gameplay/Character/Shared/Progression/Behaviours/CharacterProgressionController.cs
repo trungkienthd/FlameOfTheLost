@@ -193,13 +193,17 @@ namespace FlameOfTheLost
             if (this.CombatLoadoutController == null) return;
 
             int maxEquippedWeapons = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_WEAPONS);
+            int maxEquippedProjectiles = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_PROJECTILES);
             int maxEquippedConsumableItems = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_CONSUMABLE_ITEMS);
 
             if (maxEquippedWeapons > 0)
             {
                 this.CombatLoadoutController.SetMaxEquippedWeaponsFromProgression(maxEquippedWeapons);
             }
-
+            if (maxEquippedProjectiles > 0)
+            {
+                this.CombatLoadoutController.SetMaxEquippedProjectilesFromProgression(maxEquippedProjectiles);
+            }
             if (maxEquippedConsumableItems > 0)
             {
                 this.CombatLoadoutController.SetMaxEquippedConsumableItemsFromProgression(maxEquippedConsumableItems);

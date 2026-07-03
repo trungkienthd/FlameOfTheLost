@@ -89,6 +89,18 @@ namespace FlameOfTheLost
             this.ShowCandidates(targetSlot, CandidateLoadoutSelectionModeType.ReplaceWeapon, weaponEntries);
         }
 
+        public void ShowProjectileCandidates(EquippedLoadoutSlotUIController targetSlot)
+        {
+            if (targetSlot == null || this.PlayerInventoryController == null)
+            {
+                this.HidePanel();
+                return;
+            }
+
+            IReadOnlyList<InventoryItemEntry> projectileEntries = this.PlayerInventoryController.AvailableProjectileEntries;
+            this.ShowCandidates(targetSlot, CandidateLoadoutSelectionModeType.ReplaceProjectile, projectileEntries);
+        }
+
         public void ShowConsumableCandidates(EquippedLoadoutSlotUIController targetSlot)
         {
             if (targetSlot == null || this.PlayerInventoryController == null)
@@ -246,6 +258,9 @@ namespace FlameOfTheLost
                 case CandidateLoadoutSelectionModeType.ReplaceWeapon:
                     return this.TryApplyWeaponCandidate(slot.BoundWeaponEntry);
 
+                case CandidateLoadoutSelectionModeType.ReplaceProjectile:
+                    return this.TryApplyProjectileCandidate(slot.BoundProjectileEntry);
+
                 case CandidateLoadoutSelectionModeType.ReplaceConsumableItem:
                     return this.TryApplyConsumableCandidate(slot.BoundConsumableEntry);
 
@@ -265,6 +280,14 @@ namespace FlameOfTheLost
             if (this.TargetSlot.SlotType != LoadoutPanelSlotType.Weapon) return false;
 
             return this.PlayerCombatLoadoutController.TryReplaceEquippedWeaponEntry(this.TargetSlot.SlotIndex, weaponEntry, out _);
+        }
+
+        private bool TryApplyProjectileCandidate(InventoryItemEntry projectileEntry)
+        {
+            if (projectileEntry == null || this.TargetSlot == null || this.PlayerCombatLoadoutController == null) return false;
+            if (this.TargetSlot.SlotType != LoadoutPanelSlotType.Projectile) return false;
+
+            return this.PlayerCombatLoadoutController.TryReplaceEquippedProjectileEntry(this.TargetSlot.SlotIndex, projectileEntry, out _);
         }
 
         private bool TryApplyConsumableCandidate(InventoryItemEntry consumableEntry)

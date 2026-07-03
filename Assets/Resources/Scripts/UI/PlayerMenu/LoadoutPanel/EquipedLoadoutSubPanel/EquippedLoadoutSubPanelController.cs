@@ -24,9 +24,11 @@ namespace FlameOfTheLost
         //      1.3. Refs - Child Section Controllers
         [Header("References (Child Sections)")]
         [SerializeField] private EquippedLoadoutSubPanelWeaponListSectionController _weaponListSection;
+        [SerializeField] private EquippedLoadoutSubPanelProjectileListSectionController _projectileListSection;
         [SerializeField] private EquippedLoadoutSubPanelConsumableItemListSectionController _consumableItemListSection;
         [SerializeField] private EquippedLoadoutSubPanelCarriableItemSectionController _carriableItemSection;
         private EquippedLoadoutSubPanelWeaponListSectionController WeaponListSection => _weaponListSection;
+        private EquippedLoadoutSubPanelProjectileListSectionController ProjectileListSection => _projectileListSection;
         private EquippedLoadoutSubPanelConsumableItemListSectionController ConsumableItemListSection => _consumableItemListSection;
         private EquippedLoadoutSubPanelCarriableItemSectionController CarriableItemSection => _carriableItemSection;
 
@@ -80,6 +82,7 @@ namespace FlameOfTheLost
         public void RefreshAll()
         {
             this.WeaponListSection?.Refresh(this.SelectedSlot);
+            this.ProjectileListSection?.Refresh(this.SelectedSlot);
             this.ConsumableItemListSection?.Refresh(this.SelectedSlot);
             this.CarriableItemSection?.Refresh(this.SelectedSlot);
         }
@@ -102,9 +105,10 @@ namespace FlameOfTheLost
                 if (this.PlayerInteractionLoadoutController == null) _playerInteractionLoadoutController = player.GetComponent<PlayerCarryLoadoutController>();
             }
 
-            if (this.WeaponListSection == null)         _weaponListSection          = this.GetComponentInChildren<EquippedLoadoutSubPanelWeaponListSectionController>(true);
-            if (this.ConsumableItemListSection == null) _consumableItemListSection  = this.GetComponentInChildren<EquippedLoadoutSubPanelConsumableItemListSectionController>(true);
-            if (this.CarriableItemSection == null)   _carriableItemSection    = this.GetComponentInChildren<EquippedLoadoutSubPanelCarriableItemSectionController>(true);
+            if (this.WeaponListSection          == null) _weaponListSection         = this.GetComponentInChildren<EquippedLoadoutSubPanelWeaponListSectionController>(true);
+            if (this.ProjectileListSection      == null) _projectileListSection     = this.GetComponentInChildren<EquippedLoadoutSubPanelProjectileListSectionController>(true);
+            if (this.ConsumableItemListSection  == null) _consumableItemListSection = this.GetComponentInChildren<EquippedLoadoutSubPanelConsumableItemListSectionController>(true);
+            if (this.CarriableItemSection       == null) _carriableItemSection      = this.GetComponentInChildren<EquippedLoadoutSubPanelCarriableItemSectionController>(true);
 
             if (this.SlotActionTooltip == null)
             {
@@ -119,6 +123,7 @@ namespace FlameOfTheLost
         private void InitializeSections()
         {
             this.WeaponListSection?.Initialize(this.PlayerCombatLoadoutController);
+            this.ProjectileListSection?.Initialize(this.PlayerCombatLoadoutController);
             this.ConsumableItemListSection?.Initialize(this.PlayerCombatLoadoutController);
             this.CarriableItemSection?.Initialize(this.PlayerInteractionLoadoutController);
         }
@@ -132,6 +137,12 @@ namespace FlameOfTheLost
 
                 this.WeaponListSection.OnSubSlotClicked -= this.HandleWeaponSubSlotClicked;
                 this.WeaponListSection.OnSubSlotClicked += this.HandleWeaponSubSlotClicked;
+            }
+
+            if (this.ProjectileListSection != null)
+            {
+                this.ProjectileListSection.OnSlotClicked -= this.HandleSlotClicked;
+                this.ProjectileListSection.OnSlotClicked += this.HandleSlotClicked;
             }
 
             if (this.ConsumableItemListSection != null)
@@ -152,6 +163,11 @@ namespace FlameOfTheLost
             {
                 this.WeaponListSection.OnSlotClicked -= this.HandleSlotClicked;
                 this.WeaponListSection.OnSubSlotClicked -= this.HandleWeaponSubSlotClicked;
+            }
+
+            if (this.ProjectileListSection != null)
+            {
+                this.ProjectileListSection.OnSlotClicked -= this.HandleSlotClicked;
             }
 
             if (this.ConsumableItemListSection != null)
@@ -292,6 +308,7 @@ namespace FlameOfTheLost
             bool success = slot.SlotType switch
             {
                 LoadoutPanelSlotType.Weapon => this.TryUnequipWeapon(slot),
+                LoadoutPanelSlotType.Projectile => this.TryUnequipProjectile(slot),
                 LoadoutPanelSlotType.Consumable => this.TryUnequipConsumable(slot),
                 LoadoutPanelSlotType.CarriableItem => this.TryUnequipCarriable(slot),
                 _ => false
@@ -309,6 +326,13 @@ namespace FlameOfTheLost
 
             // Replace this with your real API name if needed.
             return this.PlayerCombatLoadoutController.TryUnequipWeaponEntry(slot.BoundWeaponEntry);
+        }
+
+        private bool TryUnequipProjectile(EquippedLoadoutSlotUIController slot)
+        {
+            if (slot == null || this.PlayerCombatLoadoutController == null) return false;
+
+            return this.PlayerCombatLoadoutController.TryUnequipEquippedProjectileEntry(slot.BoundProjectileEntry);
         }
 
         private bool TryUnequipConsumable(EquippedLoadoutSlotUIController slot)
@@ -339,6 +363,10 @@ namespace FlameOfTheLost
             {
                 case LoadoutPanelSlotType.Weapon:
                     this.CandidateLoadoutSubPanelController.ShowWeaponCandidates(slot);
+                    break;
+
+                case LoadoutPanelSlotType.Projectile:
+                    this.CandidateLoadoutSubPanelController.ShowProjectileCandidates(slot);
                     break;
 
                 case LoadoutPanelSlotType.Consumable:

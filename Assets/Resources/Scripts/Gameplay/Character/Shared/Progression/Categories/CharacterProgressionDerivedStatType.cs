@@ -7,6 +7,7 @@ namespace FlameOfTheLost
         MAX_STAMINA = 2,
 
         MAX_EQUIPPED_WEAPONS = 10,
-        MAX_EQUIPPED_CONSUMABLE_ITEMS = 11
+        MAX_EQUIPPED_PROJECTILES = 11,
+        MAX_EQUIPPED_CONSUMABLE_ITEMS = 12,
     }
 }

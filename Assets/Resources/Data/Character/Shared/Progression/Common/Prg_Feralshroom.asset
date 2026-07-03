@@ -71,3 +71,11 @@ MonoBehaviour:
     - _attributeType: 2
       _valuePerStep: 0
       _attributePointsPerStep: 1
+  - _derivedStatType: 12
+    _baseValue: 1
+    _hasMaximumValue: 1
+    _maximumValue: 1
+    _contributions:
+    - _attributeType: 2
+      _valuePerStep: 0
+      _attributePointsPerStep: 1
