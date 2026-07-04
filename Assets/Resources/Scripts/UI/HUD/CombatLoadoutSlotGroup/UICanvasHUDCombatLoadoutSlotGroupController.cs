@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
@@ -11,29 +10,17 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterCombatLoadoutController _playerCombatLoadoutController;
         private CharacterCombatLoadoutController PlayerCombatLoadoutController => _playerCombatLoadoutController;
 
-        //  2. Display
-        //      2.1. Weapon
-        [Header("Weapon")]
-        [SerializeField] private Image _weaponIcon;
-        private Image ActiveEquippedWeaponIcon  => _weaponIcon;
-
-        //      2.2. Active Skill
-        [Header("Special Skills")]
-        [SerializeField] private Image _activeSpecialSkillIcon;
-        private Image ActiveSpecialSkillIcon => _activeSpecialSkillIcon;
-
-        //      2.3. Consumable Item
-        [Header("Consumable Item")]
-        [SerializeField] private Image _consumableItemIcon;
-        [SerializeField] private Image _consumableQuantityIcon;
-        [SerializeField] private Image _consumableQuantityIconBackup;
-        private Image ConsumableItemIcon => _consumableItemIcon;
-        private Image ConsumableQuantityIcon => _consumableQuantityIcon;
-        private Image ConsumableQuantityIconBackup => _consumableQuantityIconBackup;
+        //  2. References - Slot Handlers
+        [Header("References - Slot Handlers")]
+        [SerializeField] private UICanvasHUDCombatLoadoutWeaponSlotHandler _weaponSlotHandler;
+        [SerializeField] private UICanvasHUDCombatLoadoutProjectileSlotHandler _projectileSlotHandler;
+        [SerializeField] private UICanvasHUDCombatLoadoutConsumableItemSlotHandler _consumableItemSlotHandler;
+        private UICanvasHUDCombatLoadoutWeaponSlotHandler WeaponSlotHandler => _weaponSlotHandler;
+        private UICanvasHUDCombatLoadoutProjectileSlotHandler ProjectileSlotHandler => _projectileSlotHandler;
+        private UICanvasHUDCombatLoadoutConsumableItemSlotHandler ConsumableItemSlotHandler => _consumableItemSlotHandler;
 
         //  3. Refresh
         [Header("Refresh")]
-        [Tooltip("If you don't have events yet, a very light polling is fine.")]
         [SerializeField] private float _refreshInterval = 0.1f;
         private float RefreshInterval => _refreshInterval;
 
@@ -44,21 +31,23 @@ namespace FlameOfTheLost
             set => _time = value;
         }
 
-        // --- Unity Callbacks ---
-        protected override void Start()
+        private bool _isGameplayInitialized;
+        private bool IsGameplayInitialized
         {
-            base.Start();
-
-            this.RefreshAll();
+            get => _isGameplayInitialized;
+            set => _isGameplayInitialized = value;
         }
+
+        // --- Unity Callbacks ---
         private void Update()
         {
+            if (!this.IsGameplayInitialized) return;
+
             this.TimeData += Time.unscaledDeltaTime;
-            if (this.TimeData >= this.RefreshInterval)
-            {
-                this.TimeData = 0f;
-                this.RefreshAll();
-            }
+            if (this.TimeData < this.RefreshInterval) return;
+
+            this.TimeData = 0f;
+            this.RefreshAll();
         }
 
         // --- Helpers ---
@@ -66,117 +55,45 @@ namespace FlameOfTheLost
         {
             if (!this.PlayerCombatLoadoutController) return;
 
-            this.RefreshWeaponIcon();
-            this.RefreshActiveSpecialSkillIcon();
-            this.RefreshConsumableItemIcon();
-            this.RefreshConsumableQuantity();
-        }
-
-        private void RefreshWeaponIcon()
-        {
-            if (!this.ActiveEquippedWeaponIcon) return;
-
-            Sprite weaponIcon = this.PlayerCombatLoadoutController.GetActiveEquippedWeaponIcon();
-            bool hasWeaponIcon = weaponIcon != null;
-
-            this.ActiveEquippedWeaponIcon.enabled = hasWeaponIcon;
-            this.ActiveEquippedWeaponIcon.sprite = weaponIcon;
-        }
-
-        private void RefreshActiveSpecialSkillIcon()
-        {
-            if (!this.ActiveSpecialSkillIcon) return;
-
-            Sprite skillIcon = this.PlayerCombatLoadoutController.GetActiveSpecialSkillIcon();
-            bool hasSkillIcon = skillIcon != null;
-
-            this.ActiveSpecialSkillIcon.enabled = hasSkillIcon;
-            this.ActiveSpecialSkillIcon.sprite = skillIcon;
-        }
-
-        private void RefreshConsumableItemIcon()
-        {
-            if (!this.ConsumableItemIcon) return;
-
-            Sprite consumableIcon = this.PlayerCombatLoadoutController.GetActiveConsumableItemIcon();
-            bool hasConsumableIcon = consumableIcon != null;
-
-            this.ConsumableItemIcon.enabled = hasConsumableIcon;
-            this.ConsumableItemIcon.sprite = consumableIcon;
-        }
-
-        private void RefreshConsumableQuantity()
-        {
-            if (!this.ConsumableQuantityIcon || !this.ConsumableQuantityIconBackup) return;
-
-            InventoryItemEntry consumableEntry = this.PlayerCombatLoadoutController.ActiveEquippedConsumableItemEntry;
-            if (consumableEntry == null) return;
-
-            int quantity = consumableEntry.Quantity;
-
-            if (quantity < 0) quantity = 0;
-            if (quantity > 99) quantity = 99;
-
-            bool hasConsumable = this.PlayerCombatLoadoutController.GetActiveConsumableItemIcon() != null;
-
-            if (!hasConsumable)
+            if (this.WeaponSlotHandler != null)
             {
-                this.DisableConsumableQuantityDigits();
-                return;
+                this.WeaponSlotHandler.RefreshSlot(this.PlayerCombatLoadoutController);
             }
 
-            if (quantity <= 9)
+            if (this.ProjectileSlotHandler != null)
             {
-                this.SetupSingleDigitQuantity(quantity);
+                this.ProjectileSlotHandler.RefreshSlot(this.PlayerCombatLoadoutController);
             }
-            else
+
+            if (this.ConsumableItemSlotHandler != null)
             {
-                this.SetupDoubleDigitQuantity(quantity);
+                this.ConsumableItemSlotHandler.RefreshSlot(this.PlayerCombatLoadoutController);
             }
         }
 
-        private void SetupSingleDigitQuantity(int quantity)
+        protected override void CacheInternalReferences()
         {
-            this.ConsumableQuantityIcon.enabled = true;
-            this.ConsumableQuantityIconBackup.enabled = false;
+            base.CacheInternalReferences();
 
-            this.ConsumableQuantityIcon.sprite = SharedSpritesUIUtility.GetDigitSprite(quantity);
-            this.ConsumableQuantityIconBackup.sprite = null;
-
-            RectTransform iconRect = this.ConsumableQuantityIcon.rectTransform;
-            iconRect.sizeDelta = new Vector2(20f, 20f);
-            iconRect.anchoredPosition = Vector2.zero;
+            if (this.WeaponSlotHandler          == null) _weaponSlotHandler         = this.GetComponentInChildren<UICanvasHUDCombatLoadoutWeaponSlotHandler>(true);
+            if (this.ProjectileSlotHandler      == null) _projectileSlotHandler     = this.GetComponentInChildren<UICanvasHUDCombatLoadoutProjectileSlotHandler>(true);
+            if (this.ConsumableItemSlotHandler  == null) _consumableItemSlotHandler = this.GetComponentInChildren<UICanvasHUDCombatLoadoutConsumableItemSlotHandler>(true);
         }
-
-        private void SetupDoubleDigitQuantity(int quantity)
+        protected override void ValidateInternalReferences()
         {
-            int tensDigit = quantity / 10;
-            int onesDigit = quantity % 10;
+            base.ValidateInternalReferences();
 
-            this.ConsumableQuantityIcon.enabled = true;
-            this.ConsumableQuantityIconBackup.enabled = true;
-
-            this.ConsumableQuantityIcon.sprite = SharedSpritesUIUtility.GetDigitSprite(tensDigit);
-            this.ConsumableQuantityIconBackup.sprite = SharedSpritesUIUtility.GetDigitSprite(onesDigit);
-
-            RectTransform iconRect = this.ConsumableQuantityIcon.rectTransform;
-            iconRect.sizeDelta = new Vector2(12f, 18f);
-            iconRect.anchoredPosition = new Vector2(-8f, 0f);
-
-            RectTransform backupRect = this.ConsumableQuantityIconBackup.rectTransform;
-            backupRect.sizeDelta = new Vector2(12f, 18f);
-            backupRect.anchoredPosition = new Vector2(8f, 0f);
+            if (this.WeaponSlotHandler          == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDCombatLoadoutSlotGroupController)}] Weapon Slot Handler is not set.");
+            if (this.ProjectileSlotHandler      == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDCombatLoadoutSlotGroupController)}] Projectile Slot Handler is not set.");
+            if (this.ConsumableItemSlotHandler  == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDCombatLoadoutSlotGroupController)}] Consumable Item Slot Handler is not set.");
         }
-
-        private void DisableConsumableQuantityDigits()
+        protected override void InitializeInternalState()
         {
-            this.ConsumableQuantityIcon.enabled = false;
-            this.ConsumableQuantityIconBackup.enabled = false;
+            base.InitializeInternalState();
 
-            this.ConsumableQuantityIcon.sprite = null;
-            this.ConsumableQuantityIconBackup.sprite = null;
+            this.TimeData = 0f;
+            this.IsGameplayInitialized = false;
         }
-
         protected override void CacheExternalReferences()
         {
             base.CacheExternalReferences();
@@ -184,17 +101,22 @@ namespace FlameOfTheLost
             if (this.PlayerCombatLoadoutController != null) return;
 
             GameObject player = GameObject.Find("Player");
-            if (player != null)
-            {
-                _playerCombatLoadoutController = player.GetComponentInChildren<CharacterCombatLoadoutController>(true);
-            }
-        }
+            if (player == null) return;
 
+            _playerCombatLoadoutController = player.GetComponentInChildren<CharacterCombatLoadoutController>(true);
+        }
         protected override void ValidateExternalReferences()
         {
             base.ValidateExternalReferences();
 
             if (this.PlayerCombatLoadoutController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(UICanvasHUDCombatLoadoutSlotGroupController)}] Player's {nameof(CharacterCombatLoadoutController)} reference is not set on " + this.name);
+        }
+        protected override void InitializeGameplay()
+        {
+            base.InitializeGameplay();
+
+            this.IsGameplayInitialized = true;
+            this.RefreshAll();
         }
     }
 }
