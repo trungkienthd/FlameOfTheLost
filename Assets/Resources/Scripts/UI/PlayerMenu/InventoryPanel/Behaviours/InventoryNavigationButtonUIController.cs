@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class InventoryNavigationButtonUIController : MonoBehaviour
+    public class InventoryNavigationButtonUIController : FOTLMonoBehaviour
     {
         [SerializeField] private ItemType _category;
         public ItemType Category => _category;
@@ -19,20 +19,6 @@ namespace FlameOfTheLost
         private Sprite SelectedSprite => _selectedSprite;
 
         public event Action<InventoryNavigationButtonUIController> OnClicked;
-
-        private void Awake()
-        {
-            if (this.Button == null) _button = this.GetComponent<Button>();
-            if (this.Button != null) this.Button.onClick.AddListener(this.HandleClick);
-
-            if (this.ButtonBackground == null) _buttonBackground = this.GetComponent<Image>();
-            if (this.NormalSprite == null) _normalSprite = SharedSpritesUIUtility.GetSprite("NRBGUI_Button_Rectangle_3");
-            if (this.SelectedSprite == null) _selectedSprite = SharedSpritesUIUtility.GetSprite("NRBGUI_Button_Rectangle_3_Selected");
-        }
-        private void OnDestroy()
-        {
-            if (this.Button != null) this.Button.onClick.RemoveListener(this.HandleClick);
-        }
 
         public void SetSelected(bool selected)
         {
@@ -49,6 +35,43 @@ namespace FlameOfTheLost
         private void HandleClick()
         {
             this.OnClicked?.Invoke(this);
+        }
+
+        protected override void CacheInternalReferences()
+        {
+            if (this.Button == null)
+            {
+                _button = this.GetComponent<Button>();
+            }
+
+            if (this.ButtonBackground == null)
+            {
+                _buttonBackground = this.GetComponent<Image>();
+            }
+
+            if (this.NormalSprite == null)
+            {
+                _normalSprite = SharedSpritesUIUtility.GetSprite("NRBGUI_Button_Rectangle_3");
+            }
+
+            if (this.SelectedSprite == null)
+            {
+                _selectedSprite = SharedSpritesUIUtility.GetSprite("NRBGUI_Button_Rectangle_3_Selected");
+            }
+        }
+        protected override void BindInternalReferences()
+        {
+            if (this.Button != null)
+            {
+                this.Button.onClick.AddListener(this.HandleClick);
+            }
+        }
+        protected override void UnbindInternalReferences()
+        {
+            if (this.Button != null)
+            {
+                this.Button.onClick.RemoveListener(this.HandleClick);
+            }
         }
     }
 }

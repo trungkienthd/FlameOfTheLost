@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class InventoryPanelItemEntryListSubPanelController : MonoBehaviour
+    public class InventoryPanelItemEntryListSubPanelController : FOTLMonoBehaviour
     {
         [Header("References")]
         [SerializeField] private InventoryController _inventoryController;
@@ -34,78 +34,31 @@ namespace FlameOfTheLost
         private IReadOnlyList<InventoryItemEntry> FilteredItemEntries => _filteredItemEntries;
 
         private ItemType _currentItemType = ItemType.Weapon;
-        private string _currentSearchKeyword = string.Empty;
         private ItemType CurrentItemType
         {
             get => _currentItemType;
             set => _currentItemType = value;
         }
+
+        private string _currentSearchKeyword = string.Empty;
         private string CurrentSearchKeyword
         {
             get => _currentSearchKeyword;
             set => _currentSearchKeyword = value ?? string.Empty;
         }
 
-        private void Awake()
+        private bool _hasInitializedGameplay;
+        private bool HasInitializedGameplay
         {
-            if (this.PlayerInventoryController == null)
-            {
-                GameObject player = GameObject.Find("Player");
-                if (player != null) _inventoryController = player.GetComponentInChildren<InventoryController>();  
-            }
-            if (this.NavigationSubPanelController == null)
-            {
-                Transform inventoryNavigationSubPanel = this.transform.parent.Find("InventoryNavigationSubPanel");
-                if (inventoryNavigationSubPanel != null) _navigationSubPanelController = inventoryNavigationSubPanel.GetComponent<InventoryNavigationSubPanelController>();
-            }
-            if (this.SearchBarHandler == null)
-            {
-                Transform searchBar = this.transform.Find("SearchBar");
-                if (searchBar != null) _searchBarHandler = searchBar.GetComponent<InventoryItemEntrySubPanelSearchBarHandler>();
-            }
-            if (this.PaginationHandler == null)
-            {
-                Transform pagination = this.transform.Find("Pagination");
-                if (pagination != null) _paginationHandler = pagination.GetComponent<ItemEntryListPaginationHandler>();
-            }
-            if (this.SelectedDisplayHandler == null)
-            {
-                Transform selectedItemEntryDisplay = this.transform.Find("SelectedItemEntryDisplay");
-                if (selectedItemEntryDisplay != null) _selectedDisplayHandler = selectedItemEntryDisplay.GetComponent<InventoryPanelSelectedItemEntryDisplayHandler>();
-            }
-
-            if (this.ItemEntryListRoot == null)
-            {
-                Transform itemEntriesParent = this.transform.Find("ItemEntryList");
-                if (itemEntriesParent != null) _itemEntryListRoot = itemEntriesParent.GetComponent<RectTransform>();
-            }
-            if (this.SlotPrefab == null) _slotPrefab = Resources.Load<GameObject>("Prefabs/UI/InventoryItemEntrySubPanelSlot");
-
-            this.CreateSlots();
-
-            if (this.NavigationSubPanelController != null) this.NavigationSubPanelController.OnSelectedItemTypeChanged += this.HandleSelectedItemTypeChanged;
-            if (this.SearchBarHandler != null) this.SearchBarHandler.OnSearchValueChanged += this.HandleSearchKeywordChanged;
-            if (this.PaginationHandler != null) this.PaginationHandler.OnCurrentPageChanged += this.HandleCurrentPageChanged;
+            get => _hasInitializedGameplay;
+            set => _hasInitializedGameplay = value;
         }
 
         private void OnEnable()
         {
+            if (!this.HasInitializedGameplay) return;
+
             this.RebuildAndRefresh();
-        }
-
-        private void OnDestroy()
-        {
-            if (this.NavigationSubPanelController != null) this.NavigationSubPanelController.OnSelectedItemTypeChanged -= this.HandleSelectedItemTypeChanged;
-            if (this.SearchBarHandler != null) this.SearchBarHandler.OnSearchValueChanged -= this.HandleSearchKeywordChanged;
-            if (this.PaginationHandler != null) this.PaginationHandler.OnCurrentPageChanged -= this.HandleCurrentPageChanged;
-            
-            for (int i = 0; i < this.SlotControllers.Count; i++)
-            {
-                ItemEntrySlotController slot = this.SlotControllers[i];
-                if (slot == null) continue;
-
-                slot.OnClicked -= this.HandleSlotClicked;
-            }
         }
 
         private void HandleSelectedItemTypeChanged(ItemType itemType)
@@ -189,7 +142,7 @@ namespace FlameOfTheLost
                     break;
             }
 
-            Debug.Log($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] Retrieved {result.Count} entries for item type {itemType}", this);
+            //Debug.Log($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] Retrieved {result.Count} entries for item type {itemType}", this);
             return result;
         }
 
@@ -204,13 +157,10 @@ namespace FlameOfTheLost
 
         private void CreateSlots()
         {
-            if (this.SlotPrefab == null || this.ItemEntryListRoot == null) return;
+            if (this.SlotPrefab == null) return;
+            if (this.ItemEntryListRoot == null) return;
+            if (this.PaginationHandler == null) return;
             if (this.SlotControllers.Count > 0) return;
-            if (this.PaginationHandler == null)
-            {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] PaginationHandler is required", this);
-                return;
-            }
 
             for (int i = 0; i < this.PaginationHandler.SlotsPerPage; i++)
             {
@@ -229,17 +179,23 @@ namespace FlameOfTheLost
                     rectTransform.anchoredPosition = new Vector2(posX, posY);
                 }
 
-                slotController.OnClicked += this.HandleSlotClicked;
-                slotController.ResetBindings();
+                if (slotController != null)
+                {
+                    slotController.OnClicked += this.HandleSlotClicked;
+                    slotController.ResetBindings();
 
-                _slotControllers.Add(slotController);
+                    _slotControllers.Add(slotController);
+                }
             }
         }
 
         private void RefreshVisibleSlots()
         {
-            int currentPage = this.PaginationHandler != null ? this.PaginationHandler.CurrentPageNumber : 1;
+            if (this.PaginationHandler == null) return;
+
+            int currentPage = this.PaginationHandler.CurrentPageNumber;
             int startIndex = (currentPage - 1) * this.PaginationHandler.SlotsPerPage;
+
             InventoryItemEntry selectedEntry = this.SelectedDisplayHandler != null
                 ? this.SelectedDisplayHandler.CurrentSelectedEntry
                 : null;
@@ -263,6 +219,169 @@ namespace FlameOfTheLost
                 {
                     slot.ResetBindings();
                 }
+            }
+        }
+
+        protected override void CacheInternalReferences()
+        {
+            if (this.NavigationSubPanelController == null)
+            {
+                Transform inventoryNavigationSubPanel = this.transform.parent != null
+                    ? this.transform.parent.Find("InventoryNavigationSubPanel")
+                    : null;
+
+                if (inventoryNavigationSubPanel != null)
+                {
+                    _navigationSubPanelController = inventoryNavigationSubPanel.GetComponent<InventoryNavigationSubPanelController>();
+                }
+            }
+
+            if (this.SearchBarHandler == null)
+            {
+                Transform searchBar = this.transform.Find("SearchBar");
+                if (searchBar != null)
+                {
+                    _searchBarHandler = searchBar.GetComponent<InventoryItemEntrySubPanelSearchBarHandler>();
+                }
+            }
+
+            if (this.PaginationHandler == null)
+            {
+                Transform pagination = this.transform.Find("Pagination");
+                if (pagination != null)
+                {
+                    _paginationHandler = pagination.GetComponent<ItemEntryListPaginationHandler>();
+                }
+            }
+
+            if (this.SelectedDisplayHandler == null)
+            {
+                Transform selectedItemEntryDisplay = this.transform.Find("SelectedItemEntryDisplay");
+                if (selectedItemEntryDisplay != null)
+                {
+                    _selectedDisplayHandler = selectedItemEntryDisplay.GetComponent<InventoryPanelSelectedItemEntryDisplayHandler>();
+                }
+            }
+
+            if (this.ItemEntryListRoot == null)
+            {
+                Transform itemEntriesParent = this.transform.Find("ItemEntryList");
+                if (itemEntriesParent != null)
+                {
+                    _itemEntryListRoot = itemEntriesParent.GetComponent<RectTransform>();
+                }
+            }
+
+            if (this.SlotPrefab == null)
+            {
+                _slotPrefab = Resources.Load<GameObject>("Prefabs/UI/InventoryPanelItemEntryListSubPanelSlot");
+            }
+        }
+
+        protected override void ValidateInternalReferences()
+        {
+            if (this.NavigationSubPanelController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] NavigationSubPanelController is missing.", this);
+            }
+
+            if (this.SearchBarHandler == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] SearchBarHandler is missing.", this);
+            }
+
+            if (this.PaginationHandler == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] PaginationHandler is missing.", this);
+            }
+
+            if (this.SelectedDisplayHandler == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] SelectedDisplayHandler is missing.", this);
+            }
+
+            if (this.ItemEntryListRoot == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] ItemEntryListRoot is missing.", this);
+            }
+
+            if (this.SlotPrefab == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] SlotPrefab is missing.", this);
+            }
+        }
+
+        protected override void BindInternalReferences()
+        {
+            if (this.NavigationSubPanelController != null)
+            {
+                this.NavigationSubPanelController.OnSelectedItemTypeChanged += this.HandleSelectedItemTypeChanged;
+            }
+
+            if (this.SearchBarHandler != null)
+            {
+                this.SearchBarHandler.OnSearchValueChanged += this.HandleSearchKeywordChanged;
+            }
+
+            if (this.PaginationHandler != null)
+            {
+                this.PaginationHandler.OnCurrentPageChanged += this.HandleCurrentPageChanged;
+            }
+        }
+
+        protected override void InitializeInternalState()
+        {
+            this.CreateSlots();
+        }
+
+        protected override void CacheExternalReferences()
+        {
+            if (this.PlayerInventoryController != null) return;
+
+            GameObject player = GameObject.Find("Player");
+            if (player != null)
+            {
+                _inventoryController = player.GetComponentInChildren<InventoryController>();
+            }
+        }
+
+        protected override void ValidateExternalReferences()
+        {
+            if (this.PlayerInventoryController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelItemEntryListSubPanelController)}] PlayerInventoryController is missing.", this);
+            }
+        }
+
+        protected override void InitializeGameplay()
+        {
+            this.HasInitializedGameplay = true;
+            this.RebuildAndRefresh();
+        }
+
+        protected override void UnbindInternalReferences()
+        {
+            if (this.NavigationSubPanelController != null)
+            {
+                this.NavigationSubPanelController.OnSelectedItemTypeChanged -= this.HandleSelectedItemTypeChanged;
+            }
+
+            if (this.SearchBarHandler != null)
+            {
+                this.SearchBarHandler.OnSearchValueChanged -= this.HandleSearchKeywordChanged;
+            }
+
+            if (this.PaginationHandler != null)
+            {
+                this.PaginationHandler.OnCurrentPageChanged -= this.HandleCurrentPageChanged;
+            }
+
+            for (int i = 0; i < this.SlotControllers.Count; i++)
+            {
+                ItemEntrySlotController slot = this.SlotControllers[i];
+                if (slot == null) continue;
+
+                slot.OnClicked -= this.HandleSlotClicked;
             }
         }
     }

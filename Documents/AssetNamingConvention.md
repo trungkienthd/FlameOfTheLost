@@ -1,6 +1,5 @@
 # Asset Naming Convention  
 **Project:** FlameOfTheLost  
-**Version:** 1.0  
 **Scope:** All assets moved into `Assets/Resources/`
 
 ---

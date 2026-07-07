@@ -1,10 +1,11 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class ItemEntrySlotController : MonoBehaviour
+    public class ItemEntrySlotController : FOTLMonoBehaviour
     {
         [Header("References (Main)")]
         [SerializeField] private Button _button;
@@ -17,15 +18,18 @@ namespace FlameOfTheLost
         [Header("References (Sub Slot)")]
         [SerializeField] private GameObject _subSlotRoot;
         [SerializeField] private Image _subSlotIcon;
-        [SerializeField] private Image _subSlotIconBackup;
-        [SerializeField] private RectTransform _subSlotIconRect;
-        [SerializeField] private RectTransform _subSlotIconBackupRect;
+        [SerializeField] private TMP_Text _subSlotQuantityText;
         private GameObject SubSlotRoot => _subSlotRoot;
         private Image SubSlotIcon => _subSlotIcon;
-        private Image SubSlotIconBackup => _subSlotIconBackup;
-        private RectTransform SubSlotIconRectTransform => _subSlotIconRect;
-        private RectTransform SubSlotIconBackupRectTransform => _subSlotIconBackupRect;
+        private TMP_Text SubSlotQuantityText => _subSlotQuantityText;
 
+        [Header("Quantity Text")]
+        [SerializeField] private float _singleDigitQuantityFontSize = 26f;
+        [SerializeField] private float _doubleDigitQuantityFontSize = 20f;
+        private float SingleDigitQuantityFontSize => _singleDigitQuantityFontSize;
+        private float DoubleDigitQuantityFontSize => _doubleDigitQuantityFontSize;
+
+        [Header("Selection")]
         [SerializeField] private Color _normalColor = Color.white;
         [SerializeField] private Color _selectedColor = Color.red;
         private Color NormalColor => _normalColor;
@@ -34,50 +38,6 @@ namespace FlameOfTheLost
         public event Action<ItemEntrySlotController> OnClicked;
 
         public InventoryItemEntry BoundEntry { get; private set; }
-
-        private void Awake()
-        {
-            if (this.BackgroundImage == null)_backgroundImage = this.GetComponent<Image>();
-            
-            if (this.MainIcon == null)
-            {
-                Transform mainIconTransform = this.transform.Find("MainIcon");
-                if (mainIconTransform != null) _mainIcon = mainIconTransform.GetComponent<Image>();
-            }
-
-            if (this.Button == null) _button = this.GetComponent<Button>();
-            if (this.Button != null) this.Button.onClick.AddListener(this.HandleClick);
-
-            if (this.SubSlotRoot == null)
-            {
-                Transform subSlotTransform = this.transform.Find("SubSlot");
-                if (subSlotTransform != null) _subSlotRoot = subSlotTransform.gameObject;
-            }
-            if (this.SubSlotIcon == null && this.SubSlotRoot != null)
-            {
-                Transform iconTransform = this.SubSlotRoot.transform.Find("Icon");
-                if (iconTransform != null) _subSlotIcon = iconTransform.GetComponent<Image>();
-            }
-            if (this.SubSlotIconBackup == null && this.SubSlotRoot != null)
-            {
-                Transform iconBackupTransform = this.SubSlotRoot.transform.Find("Icon_Backup");
-                if (iconBackupTransform != null) _subSlotIconBackup = iconBackupTransform.GetComponent<Image>();
-            }
-
-            if (this.SubSlotIconRectTransform == null && this.SubSlotIcon != null) _subSlotIconRect = this.SubSlotIcon.rectTransform;
-            if (this.SubSlotIconBackupRectTransform == null && this.SubSlotIconBackup != null) _subSlotIconBackupRect = this.SubSlotIconBackup.rectTransform;
-        }
-
-        private void OnDestroy()
-        {
-            if (this.Button != null) this.Button.onClick.RemoveListener(this.HandleClick);
-        }
-
-        private void HandleClick()
-        {
-            if (this.BoundEntry == null) return;
-            this.OnClicked?.Invoke(this);
-        }
 
         public void Bind(InventoryItemEntry entry)
         {
@@ -99,15 +59,19 @@ namespace FlameOfTheLost
 
             switch (entry.Item.ItemType)
             {
-                case ItemType.ConsumableItem:
-                    this.SetSubSlotVisible(true);
-                    this.ConfigureQuantitySubSlot(Mathf.Clamp(entry.Quantity, 0, 99), hasContent);
+                case ItemType.Weapon:
+                    this.ConfigureWeaponSubSlot(entry);
                     break;
 
-                case ItemType.Weapon:
+                case ItemType.Projectile:
+                case ItemType.ConsumableItem:
+                    this.ConfigureQuantitySubSlot(entry.Quantity);
+                    break;
+
                 case ItemType.LightSource:
                 case ItemType.KeyItem:
                 default:
+                    this.ClearSubSlot();
                     this.SetSubSlotVisible(false);
                     break;
             }
@@ -126,24 +90,29 @@ namespace FlameOfTheLost
 
             this.SetMainIcon(null, false);
             this.SetSelected(false);
+            this.ClearSubSlot();
             this.SetSubSlotVisible(false);
-
-            if (this.SubSlotIcon != null)
-            {
-                this.SubSlotIcon.sprite = null;
-                this.SubSlotIcon.enabled = false;
-            }
-            if (this.SubSlotIconBackup != null)
-            {
-                this.SubSlotIconBackup.sprite = null;
-                this.SubSlotIconBackup.enabled = false;
-            }
         }
 
         public void SetSelected(bool selected)
         {
             if (this.BackgroundImage == null) return;
             this.BackgroundImage.color = selected ? this.SelectedColor : this.NormalColor;
+        }
+
+        private void ClearSubSlot()
+        {
+            if (this.SubSlotIcon != null)
+            {
+                this.SubSlotIcon.sprite = null;
+                this.SubSlotIcon.enabled = false;
+            }
+
+            if (this.SubSlotQuantityText != null)
+            {
+                this.SubSlotQuantityText.text = string.Empty;
+                this.SubSlotQuantityText.enabled = false;
+            }
         }
 
         private void SetMainIcon(Sprite sprite, bool enabled)
@@ -163,68 +132,119 @@ namespace FlameOfTheLost
             }
         }
 
-        private void ConfigureQuantitySubSlot(int quantity, bool hasContent)
+        private void HandleClick()
         {
-            if (!hasContent)
+            if (this.BoundEntry == null) return;
+            this.OnClicked?.Invoke(this);
+        }
+
+        private void ConfigureWeaponSubSlot(InventoryItemEntry entry)
+        {
+            this.ClearSubSlot();
+
+            if (entry == null || entry.Item is not WeaponProfile weaponProfile)
             {
-                if (this.SubSlotIcon != null)
-                {
-                    this.SubSlotIcon.sprite = null;
-                    this.SubSlotIcon.enabled = false;
-                }
-
-                if (this.SubSlotIconBackup != null)
-                {
-                    this.SubSlotIconBackup.sprite = null;
-                    this.SubSlotIconBackup.enabled = false;
-                }
-
+                this.SetSubSlotVisible(false);
                 return;
             }
+
+            Sprite innateSpecialSkillIcon = weaponProfile.InnateSpecialSkill != null
+                ? weaponProfile.InnateSpecialSkill.Icon
+                : null;
+
+            if (innateSpecialSkillIcon == null)
+            {
+                this.SetSubSlotVisible(false);
+                return;
+            }
+
+            this.SetSubSlotVisible(true);
+
+            if (this.SubSlotIcon != null)
+            {
+                this.SubSlotIcon.sprite = innateSpecialSkillIcon;
+                this.SubSlotIcon.enabled = true;
+            }
+        }
+
+        private void ConfigureQuantitySubSlot(int quantity)
+        {
+            this.ClearSubSlot();
+            this.SetSubSlotVisible(true);
 
             quantity = Mathf.Clamp(quantity, 0, 99);
-            if (quantity <= 9)
+
+            if (this.SubSlotQuantityText == null) return;
+
+            this.SubSlotQuantityText.text = quantity.ToString();
+            this.SubSlotQuantityText.fontSize = quantity <= 9
+                ? this.SingleDigitQuantityFontSize
+                : this.DoubleDigitQuantityFontSize;
+
+            this.SubSlotQuantityText.enabled = true;
+        }
+
+        protected override void CacheInternalReferences()
+        {
+            if (this.BackgroundImage == null) _backgroundImage = this.GetComponent<Image>();
+
+            if (this.Button == null) _button = this.GetComponent<Button>();
+
+            if (this.MainIcon == null)
             {
-                if (this.SubSlotIconRectTransform != null)
+                Transform mainIconTransform = this.transform.Find("Icon");
+                if (mainIconTransform != null)
                 {
-                    this.SubSlotIconRectTransform.sizeDelta = new Vector2(18f, 18f);
-                    this.SubSlotIconRectTransform.anchoredPosition = Vector2.zero;
+                    _mainIcon = mainIconTransform.GetComponent<Image>();
                 }
+            }
 
-                this.SubSlotIcon.sprite = SharedSpritesUIUtility.GetDigitSprite(quantity);
-                this.SubSlotIcon.enabled = true;
-
-                if (this.SubSlotIconBackup != null)
+            if (this.SubSlotRoot == null)
+            {
+                Transform subSlotTransform = this.transform.Find("SubSlot");
+                if (subSlotTransform != null)
                 {
-                    this.SubSlotIconBackup.sprite = null;
-                    this.SubSlotIconBackup.enabled = false;
+                    _subSlotRoot = subSlotTransform.gameObject;
                 }
-
-                return;
             }
 
-            int firstDigit = quantity / 10;
-            int secondDigit = quantity % 10;
-
-            if (this.SubSlotIconRectTransform != null)
+            if (this.SubSlotIcon == null && this.SubSlotRoot != null)
             {
-                this.SubSlotIconRectTransform.sizeDelta = new Vector2(12f, 12f);
-                this.SubSlotIconRectTransform.anchoredPosition = new Vector2(-7.5f, 0f);
+                Transform iconTransform = this.SubSlotRoot.transform.Find("Icon");
+                if (iconTransform != null)
+                {
+                    _subSlotIcon = iconTransform.GetComponent<Image>();
+                }
             }
 
-            if (this.SubSlotIconBackupRectTransform != null)
+            if (this.SubSlotQuantityText == null && this.SubSlotRoot != null)
             {
-                this.SubSlotIconBackupRectTransform.sizeDelta = new Vector2(12f, 12f);
-                this.SubSlotIconBackupRectTransform.anchoredPosition = new Vector2(7.5f, 0f);
+                Transform quantityTextTransform = this.SubSlotRoot.transform.Find("QuantityText");
+                if (quantityTextTransform != null)
+                {
+                    _subSlotQuantityText = quantityTextTransform.GetComponent<TMP_Text>();
+                }
             }
+        }
 
-            this.SubSlotIcon.sprite = SharedSpritesUIUtility.GetDigitSprite(firstDigit);
-            this.SubSlotIcon.enabled = true;
-
-            if (this.SubSlotIconBackup != null)
+        protected override void BindInternalReferences()
+        {
+            if (this.Button != null)
             {
-                this.SubSlotIconBackup.sprite = SharedSpritesUIUtility.GetDigitSprite(secondDigit);
-                this.SubSlotIconBackup.enabled = true;
+                this.Button.onClick.AddListener(this.HandleClick);
+            }
+        }
+
+        protected override void InitializeInternalState()
+        {
+            this.ResetBindings();
+        }
+
+        protected override void UnbindInternalReferences()
+        {
+            if (this.Button != null)
+            {
+                this.Button.onClick.RemoveListener(this.HandleClick);
             }
         }
     }

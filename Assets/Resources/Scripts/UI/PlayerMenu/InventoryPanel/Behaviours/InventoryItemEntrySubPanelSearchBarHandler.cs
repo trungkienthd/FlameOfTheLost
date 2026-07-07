@@ -5,42 +5,16 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class InventoryItemEntrySubPanelSearchBarHandler : MonoBehaviour
+    public class InventoryItemEntrySubPanelSearchBarHandler : FOTLMonoBehaviour
     {
         [SerializeField] private TMP_InputField _inputField;
         [SerializeField] private Button _clearButton;
-
         private TMP_InputField InputField => _inputField;
         private Button ClearButton => _clearButton;
 
         public event Action<string> OnSearchValueChanged;
 
         public string CurrentKeyword { get; private set; } = string.Empty;
-
-        private void Awake()
-        {
-            if (this.InputField != null)
-            {
-                this.InputField.onValueChanged.AddListener(this.HandleInputChanged);
-            }
-
-            if (this.ClearButton != null)
-            {
-                this.ClearButton.onClick.AddListener(this.HandleClearClicked);
-            }
-        }
-        private void OnDestroy()
-        {
-            if (this.InputField != null)
-            {
-                this.InputField.onValueChanged.RemoveListener(this.HandleInputChanged);
-            }
-
-            if (this.ClearButton != null)
-            {
-                this.ClearButton.onClick.RemoveListener(this.HandleClearClicked);
-            }
-        }
 
         public void SetKeywordWithoutNotify(string keyword)
         {
@@ -68,6 +42,47 @@ namespace FlameOfTheLost
             }
 
             this.OnSearchValueChanged?.Invoke(this.CurrentKeyword);
+        }
+
+        protected override void CacheInternalReferences()
+        {
+            if (this.InputField == null)
+            {
+                _inputField = this.GetComponentInChildren<TMP_InputField>();
+            }
+
+            if (this.ClearButton == null)
+            {
+                Transform clearButtonTransform = this.transform.Find("ClearButton");
+                if (clearButtonTransform != null)
+                {
+                    _clearButton = clearButtonTransform.GetComponent<Button>();
+                }
+            }
+        }
+        protected override void BindInternalReferences()
+        {
+            if (this.InputField != null)
+            {
+                this.InputField.onValueChanged.AddListener(this.HandleInputChanged);
+            }
+
+            if (this.ClearButton != null)
+            {
+                this.ClearButton.onClick.AddListener(this.HandleClearClicked);
+            }
+        }
+        protected override void UnbindInternalReferences()
+        {
+            if (this.InputField != null)
+            {
+                this.InputField.onValueChanged.RemoveListener(this.HandleInputChanged);
+            }
+
+            if (this.ClearButton != null)
+            {
+                this.ClearButton.onClick.RemoveListener(this.HandleClearClicked);
+            }
         }
     }
 }
