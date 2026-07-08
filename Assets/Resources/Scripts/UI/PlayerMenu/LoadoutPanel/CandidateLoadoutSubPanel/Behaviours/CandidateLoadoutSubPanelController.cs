@@ -35,8 +35,8 @@ namespace FlameOfTheLost
         private IReadOnlyList<object> CurrentCandidates => _currentCandidates;
 
         //      4.2. Target Slot (Controller)
-        private EquippedLoadoutSlotUIController _targetSlot;
-        private EquippedLoadoutSlotUIController TargetSlot
+        private EquippedLoadoutSlotController _targetSlot;
+        private EquippedLoadoutSlotController TargetSlot
         {
             get => _targetSlot;
             set => _targetSlot = value;
@@ -77,7 +77,7 @@ namespace FlameOfTheLost
             this.gameObject.SetActive(false);
         }
 
-        public void ShowWeaponCandidates(EquippedLoadoutSlotUIController targetSlot)
+        public void ShowWeaponCandidates(EquippedLoadoutSlotController targetSlot)
         {
             if (targetSlot == null || this.PlayerInventoryController == null)
             {
@@ -89,7 +89,7 @@ namespace FlameOfTheLost
             this.ShowCandidates(targetSlot, CandidateLoadoutSelectionModeType.ReplaceWeapon, weaponEntries);
         }
 
-        public void ShowProjectileCandidates(EquippedLoadoutSlotUIController targetSlot)
+        public void ShowProjectileCandidates(EquippedLoadoutSlotController targetSlot)
         {
             if (targetSlot == null || this.PlayerInventoryController == null)
             {
@@ -101,7 +101,7 @@ namespace FlameOfTheLost
             this.ShowCandidates(targetSlot, CandidateLoadoutSelectionModeType.ReplaceProjectile, projectileEntries);
         }
 
-        public void ShowConsumableCandidates(EquippedLoadoutSlotUIController targetSlot)
+        public void ShowConsumableCandidates(EquippedLoadoutSlotController targetSlot)
         {
             if (targetSlot == null || this.PlayerInventoryController == null)
             {
@@ -113,7 +113,7 @@ namespace FlameOfTheLost
             this.ShowCandidates(targetSlot, CandidateLoadoutSelectionModeType.ReplaceConsumableItem, consumableEntries);
         }
 
-        public void ShowCarriableCandidates(EquippedLoadoutSlotUIController targetSlot)
+        public void ShowCarriableCandidates(EquippedLoadoutSlotController targetSlot)
         {
             if (targetSlot == null || this.PlayerInventoryController == null)
             {
@@ -125,7 +125,7 @@ namespace FlameOfTheLost
             this.ShowCandidates(targetSlot, CandidateLoadoutSelectionModeType.ReplaceCarriableItem, carriableEntries);
         }
 
-        public void ShowSpecialSkillCandidates(EquippedLoadoutSlotUIController targetSlot)
+        public void ShowSpecialSkillCandidates(EquippedLoadoutSlotController targetSlot)
         {
             if (targetSlot == null || targetSlot.BoundWeaponEntry == null || this.PlayerInventoryController == null)
             {
@@ -193,7 +193,7 @@ namespace FlameOfTheLost
         }
 
         //  2. Display
-        private void ShowCandidates<TCandidate>(EquippedLoadoutSlotUIController targetSlot, CandidateLoadoutSelectionModeType mode, IReadOnlyList<TCandidate> candidates)
+        private void ShowCandidates<TCandidate>(EquippedLoadoutSlotController targetSlot, CandidateLoadoutSelectionModeType mode, IReadOnlyList<TCandidate> candidates)
         {
             this.TargetSlot = targetSlot;
             this.CurrentMode = mode;

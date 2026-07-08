@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 1799121282472352539}
   - component: {fileID: 6190272038796867758}
   m_Layer: 0
-  m_Name: PlayerDefaultSpawnPoint
+  m_Name: Prefab_PlayerDefaultSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

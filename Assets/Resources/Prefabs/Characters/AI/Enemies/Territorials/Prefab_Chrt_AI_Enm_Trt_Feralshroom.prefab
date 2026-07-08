@@ -1451,7 +1451,7 @@ GameObject:
   - component: {fileID: 4017276766413093160}
   - component: {fileID: 138990756075370264}
   m_Layer: 9
-  m_Name: Feralshroom
+  m_Name: Prefab_Chrt_AI_Enm_Trt_Feralshroom
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

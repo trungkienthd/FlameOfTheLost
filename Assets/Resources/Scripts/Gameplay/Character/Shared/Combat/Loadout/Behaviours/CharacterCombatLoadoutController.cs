@@ -40,17 +40,20 @@ namespace FlameOfTheLost
         public bool IsAttackLocked => (this.CombatController != null && this.CombatController.IsAttackLocked);
 
         //  4. Weapon APIs
+        public int MaxEquippedWeaponCapacity => this.WeaponHandler.MaxEquippedEntryCapacity;
         public int MaxEquippedWeapons => this.WeaponHandler.MaxEquippedEntries;
         public IReadOnlyList<InventoryItemEntry> EquippedWeaponEntries => this.WeaponHandler.EquippedEntries;
         public InventoryItemEntry ActiveEquippedWeaponEntry => this.WeaponHandler.ActiveEquippedEntry;
         public RuntimeWeapon ActiveEquippedRuntimeWeapon => this.WeaponHandler.ActiveEquippedRuntimeWeapon;
 
         //  5. Projectile APIs
+        public int MaxEquippedProjectileCapacity => this.ProjectileHandler.MaxEquippedEntryCapacity;
         public int MaxEquippedProjectiles => this.ProjectileHandler.MaxEquippedEntries;
         public IReadOnlyList<InventoryItemEntry> EquippedProjectileEntries => this.ProjectileHandler.EquippedEntries;
         public InventoryItemEntry ActiveEquippedProjectileEntry => this.ProjectileHandler.ActiveEquippedEntry;
 
         //  6. Consumable item APIs
+        public int MaxEquippedConsumableCapacity => this.ConsumableItemHandler.MaxEquippedEntryCapacity;
         public int MaxEquippedConsumables => this.ConsumableItemHandler.MaxEquippedEntries;
         public IReadOnlyList<InventoryItemEntry> EquippedConsumableItemEntries => this.ConsumableItemHandler.EquippedEntries;
         public InventoryItemEntry ActiveEquippedConsumableItemEntry => this.ConsumableItemHandler.ActiveEquippedEntry;
@@ -78,7 +81,7 @@ namespace FlameOfTheLost
         }
         public void SetMaxEquippedProjectilesFromProgression(int amount)
         {
-            this.ConsumableItemHandler.SetMaxEquippedEntriesFromProgression(amount);
+            this.ProjectileHandler.SetMaxEquippedEntriesFromProgression(amount);
         }
         public void SetMaxEquippedConsumableItemsFromProgression(int amount)
         {

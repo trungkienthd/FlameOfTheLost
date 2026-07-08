@@ -19,12 +19,12 @@ namespace FlameOfTheLost
         private Button ReplaceButton => _replaceButton;
         private Button ChangeSkillButton => _changeSkillButton;
 
-        private EquippedLoadoutSlotUIController _boundSlot;
-        public EquippedLoadoutSlotUIController BoundSlot => _boundSlot;
+        private EquippedLoadoutSlotController _boundSlot;
+        public EquippedLoadoutSlotController BoundSlot => _boundSlot;
 
-        public event Action<EquippedLoadoutSlotUIController> OnUnequipClicked;
-        public event Action<EquippedLoadoutSlotUIController> OnReplaceClicked;
-        public event Action<EquippedLoadoutSlotUIController> OnChangeSkillClicked;
+        public event Action<EquippedLoadoutSlotController> OnUnequipClicked;
+        public event Action<EquippedLoadoutSlotController> OnReplaceClicked;
+        public event Action<EquippedLoadoutSlotController> OnChangeSkillClicked;
 
         private void Awake()
         {
@@ -72,7 +72,7 @@ namespace FlameOfTheLost
             if (this.ChangeSkillButton != null) this.ChangeSkillButton.onClick.RemoveListener(this.HandleChangeSkillClicked);
         }
 
-        public void ShowForSlotAtScreenPosition(EquippedLoadoutSlotUIController slot, RectTransform tooltipParent, Vector2 screenPosition, Vector2 offset, bool changeSkillBtnIsActive = false)
+        public void ShowForSlotAtScreenPosition(EquippedLoadoutSlotController slot, RectTransform tooltipParent, Vector2 screenPosition, Vector2 offset, bool changeSkillBtnIsActive = false)
         {
             _boundSlot = slot;
 
@@ -127,14 +127,15 @@ namespace FlameOfTheLost
             this.gameObject.SetActive(false);
         }
 
-        private void RefreshTexts(EquippedLoadoutSlotUIController slot)
+        // --- Helpers ---
+        private void RefreshTexts(EquippedLoadoutSlotController slot)
         {
             if (this.HeaderText == null) return;
 
             this.HeaderText.text = this.GetHeaderText(slot);
         }
 
-        private void RefreshButtons(EquippedLoadoutSlotUIController slot, bool changeSkillBtnIsActive)
+        private void RefreshButtons(EquippedLoadoutSlotController slot, bool changeSkillBtnIsActive)
         {
             bool hasContent = slot != null && slot.HasContent();
 
@@ -147,7 +148,7 @@ namespace FlameOfTheLost
             if (this.ChangeSkillButton != null) this.ChangeSkillButton.gameObject.SetActive(changeSkillBtnIsActive);
         }
 
-        private string GetHeaderText(EquippedLoadoutSlotUIController slot)
+        private string GetHeaderText(EquippedLoadoutSlotController slot)
         {
             if (slot == null) return string.Empty;
 

@@ -4,41 +4,36 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EquippedLoadoutSubPanelWeaponListSectionController : MonoBehaviour
+    public class EquippedLoadoutSubPanelWeaponListSectionController : FOTLMonoBehaviour
     {
         // --- States ---
         //  1. References
         //      1.1. Refs - Weapons Section
         [Header("References")]
-        [SerializeField] private List<EquippedLoadoutSlotUIController> _weaponSlots = new List<EquippedLoadoutSlotUIController>(4);
-        private IReadOnlyList<EquippedLoadoutSlotUIController> WeaponSlots => _weaponSlots;
+        [SerializeField] private List<EquippedLoadoutSubIconSlotController> _weaponSlots;
+        private IReadOnlyList<EquippedLoadoutSubIconSlotController> WeaponSlots => _weaponSlots;
 
         //      1.2. Refs - Player
         private CharacterCombatLoadoutController _playerCombatLoadoutController;
         private CharacterCombatLoadoutController PlayerCombatLoadoutController => _playerCombatLoadoutController;
 
-        //  2. Events
-        public event Action<EquippedLoadoutSlotUIController> OnSlotClicked;
-        public event Action<EquippedLoadoutSlotUIController> OnSubSlotClicked;
-
-        // --- Unity Callbacks ---
-        private void Awake()
-        {
-            this.BindSlotEvents();
-        }
-
-        private void OnDestroy()
-        {
-            this.UnbindSlotEvents();
-        }
+        // --- Events ---
+        public event Action<EquippedLoadoutSlotController> OnSlotClicked;
+        public event Action<EquippedLoadoutSlotController> OnSubSlotClicked;
 
         // --- Public APIs ---
         public void Initialize(CharacterCombatLoadoutController playerCombatLoadoutController)
         {
             _playerCombatLoadoutController = playerCombatLoadoutController;
+
+            if (this.PlayerCombatLoadoutController != null && _weaponSlots == null)
+            {
+                int maxEntryCapacity = this.PlayerCombatLoadoutController.MaxEquippedWeaponCapacity;
+                _weaponSlots = new List<EquippedLoadoutSubIconSlotController>(maxEntryCapacity);
+            }
         }
 
-        public void Refresh(EquippedLoadoutSlotUIController selectedSlot)
+        public void Refresh(EquippedLoadoutSlotController selectedSlot)
         {
             IReadOnlyList<InventoryItemEntry> equippedWeaponEntries = this.PlayerCombatLoadoutController != null
                 ? this.PlayerCombatLoadoutController.EquippedWeaponEntries
@@ -51,7 +46,7 @@ namespace FlameOfTheLost
 
             for (int i = 0; i < this.WeaponSlots.Count; i++)
             {
-                EquippedLoadoutSlotUIController slot = this.WeaponSlots[i];
+                EquippedLoadoutSubIconSlotController slot = this.WeaponSlots[i];
                 if (slot == null) continue;
 
                 InventoryItemEntry weaponEntry = equippedWeaponEntries != null && i < equippedWeaponEntries.Count
@@ -89,7 +84,7 @@ namespace FlameOfTheLost
             }
         }
 
-        public bool ContainsSlot(EquippedLoadoutSlotUIController slot)
+        public bool ContainsSlot(EquippedLoadoutSubIconSlotController slot)
         {
             return slot != null && _weaponSlots.Contains(slot);
         }
@@ -98,7 +93,7 @@ namespace FlameOfTheLost
         // --- Helpers ---
         private void BindSlotEvents()
         {
-            foreach (EquippedLoadoutSlotUIController slot in this.WeaponSlots)
+            foreach (EquippedLoadoutSubIconSlotController slot in this.WeaponSlots)
             {
                 if (slot == null) continue;
 
@@ -111,7 +106,7 @@ namespace FlameOfTheLost
         }
         private void UnbindSlotEvents()
         {
-            foreach (EquippedLoadoutSlotUIController slot in this.WeaponSlots)
+            foreach (EquippedLoadoutSubIconSlotController slot in this.WeaponSlots)
             {
                 if (slot == null) continue;
 
@@ -120,13 +115,26 @@ namespace FlameOfTheLost
             }
         }
 
-        private void HandleSlotClicked(EquippedLoadoutSlotUIController slot)
+        private void HandleSlotClicked(EquippedLoadoutSlotController slot)
         {
             this.OnSlotClicked?.Invoke(slot);
         }
-        private void HandleSubSlotClicked(EquippedLoadoutSlotUIController slot)
+        private void HandleSubSlotClicked(EquippedLoadoutSlotController slot)
         {
             this.OnSubSlotClicked?.Invoke(slot);
+        }
+
+        protected override void BindInternalReferences()
+        {
+            base.BindInternalReferences();
+
+            this.BindSlotEvents();
+        }
+        protected override void UnbindInternalReferences()
+        {
+            base.UnbindInternalReferences();
+
+            this.UnbindSlotEvents();
         }
     }
 }

@@ -3,34 +3,21 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EquippedLoadoutSubPanelCarriableItemSectionController : MonoBehaviour
+    public class EquippedLoadoutSubPanelCarriableItemSectionController : FOTLMonoBehaviour
     {
         // --- States ---
         //  1. References
-        //      1.1. Refs - Interactable Section
+        //      1.1. Refs - Carriable Section
         [Header("References")]
-        [SerializeField] private EquippedLoadoutSlotUIController _interactableSlot;
-        private EquippedLoadoutSlotUIController InteractableItemSlot => _interactableSlot;
+        [SerializeField] private EquippedLoadoutSlotController _carriableSlot;
+        private EquippedLoadoutSlotController CarriableSlot => _carriableSlot;
 
         //      1.2. Refs - Player
         private PlayerCarryLoadoutController _playerInteractionLoadoutController;
         private PlayerCarryLoadoutController PlayerInteractionLoadoutController => _playerInteractionLoadoutController;
 
-        //  2. Events
-        public event Action<EquippedLoadoutSlotUIController> OnSlotClicked;
-
-        // --- Unity Callbacks ---
-        private void Awake()
-        {
-            this.CacheReferences();
-
-            this.BindSlotEvents();
-        }
-
-        private void OnDestroy()
-        {
-            this.UnbindSlotEvents();
-        }
+        // --- Events ---
+        public event Action<EquippedLoadoutSlotController> OnSlotClicked;
 
         // --- Public APIs ---
         public void Initialize(PlayerCarryLoadoutController playerInteractionLoadoutController)
@@ -38,16 +25,16 @@ namespace FlameOfTheLost
             _playerInteractionLoadoutController = playerInteractionLoadoutController;
         }
 
-        public void Refresh(EquippedLoadoutSlotUIController selectedSlot)
+        public void Refresh(EquippedLoadoutSlotController selectedSlot)
         {
-            if (this.InteractableItemSlot == null) return;
+            if (this.CarriableSlot == null) return;
 
             InventoryItemEntry interactableEntry = this.PlayerInteractionLoadoutController != null
                 ? this.PlayerInteractionLoadoutController.EquippedCarriableItemEntry
                 : null;
 
-            bool isSelected = selectedSlot == this.InteractableItemSlot;
-            this.InteractableItemSlot.BindCarriableItem
+            bool isSelected = selectedSlot == this.CarriableSlot;
+            this.CarriableSlot.BindCarriableItem
             (
                 carriableEntry: interactableEntry,
                 isSelected: isSelected,
@@ -55,35 +42,50 @@ namespace FlameOfTheLost
             );
         }
 
-        public bool ContainsSlot(EquippedLoadoutSlotUIController slot)
+        public bool ContainsSlot(EquippedLoadoutSlotController slot)
         {
-            return slot != null && this.InteractableItemSlot == slot;
+            return slot != null && this.CarriableSlot == slot;
         }
 
         // --- Helpers ---
-        private void CacheReferences()
-        {
-            if (this.InteractableItemSlot == null)
-            {
-                _interactableSlot = this.GetComponentInChildren<EquippedLoadoutSlotUIController>(true);
-            }
-        }
         private void BindSlotEvents()
         {
-            if (this.InteractableItemSlot == null) return;
+            if (this.CarriableSlot == null) return;
 
-            this.InteractableItemSlot.OnClicked -= this.HandleSlotClicked;
-            this.InteractableItemSlot.OnClicked += this.HandleSlotClicked;
+            this.CarriableSlot.OnClicked -= this.HandleSlotClicked;
+            this.CarriableSlot.OnClicked += this.HandleSlotClicked;
         }
         private void UnbindSlotEvents()
         {
-            if (this.InteractableItemSlot == null) return;
+            if (this.CarriableSlot == null) return;
 
-            this.InteractableItemSlot.OnClicked -= this.HandleSlotClicked;
+            this.CarriableSlot.OnClicked -= this.HandleSlotClicked;
         }
-        private void HandleSlotClicked(EquippedLoadoutSlotUIController slot)
+        private void HandleSlotClicked(EquippedLoadoutSlotController slot)
         {
             this.OnSlotClicked?.Invoke(slot);
+        }
+
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
+            if (this.CarriableSlot == null)
+            {
+                _carriableSlot = this.GetComponentInChildren<EquippedLoadoutSlotController>(true);
+            }
+        }
+        protected override void BindInternalReferences()
+        {
+            base.BindInternalReferences();
+
+            this.BindSlotEvents();
+        }
+        protected override void UnbindInternalReferences()
+        {
+            base.UnbindInternalReferences();
+
+            this.UnbindSlotEvents();
         }
     }
 }

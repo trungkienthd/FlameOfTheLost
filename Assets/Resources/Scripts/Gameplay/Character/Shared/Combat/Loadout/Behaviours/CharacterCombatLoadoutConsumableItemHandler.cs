@@ -7,7 +7,7 @@ namespace FlameOfTheLost
     {
         // --- States ---
         //  1. Equipped Consumable Items
-        protected override int MaxEquippedEntryCapacity => 8;
+        public override int MaxEquippedEntryCapacity => 8;
         protected override int DefaultEquippedEntryCapacity => 2;
         protected override string EntryDisplayName => "Consumable Item";
 

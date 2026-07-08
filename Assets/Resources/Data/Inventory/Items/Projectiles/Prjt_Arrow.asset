@@ -16,7 +16,7 @@ MonoBehaviour:
   _key: 
   _displayName: 
   _description: 
-  _icon: {fileID: 634078785, guid: 2882a7b13ceda2344bf5af18db155a88, type: 3}
+  _icon: {fileID: 21300000, guid: 9c404df72e8c2b343932c19ab856cf5e, type: 3}
   _isStackable: 1
   _maxStackSize: 99
   _projectileType: 1

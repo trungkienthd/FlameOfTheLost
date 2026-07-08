@@ -7,7 +7,7 @@ namespace FlameOfTheLost
     {
         // --- States ---
         //  1. Equipped Weapons
-        protected override int MaxEquippedEntryCapacity => 4;
+        public override int MaxEquippedEntryCapacity => 3;
         protected override int DefaultEquippedEntryCapacity => 1;
         protected override string EntryDisplayName => "Weapon";
 

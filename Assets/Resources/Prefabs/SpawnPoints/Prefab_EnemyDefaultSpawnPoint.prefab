@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 7590202456247389573}
   - component: {fileID: 4077684651782746106}
   m_Layer: 0
-  m_Name: EnemyDefaultSpawnPoint
+  m_Name: Prefab_EnemyDefaultSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

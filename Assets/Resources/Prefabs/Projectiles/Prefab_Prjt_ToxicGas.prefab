@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1731339921200444562}
   - component: {fileID: 5454329711124102394}
   m_Layer: 0
-  m_Name: ToxicGas
+  m_Name: Prefab_Prjt_ToxicGas
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

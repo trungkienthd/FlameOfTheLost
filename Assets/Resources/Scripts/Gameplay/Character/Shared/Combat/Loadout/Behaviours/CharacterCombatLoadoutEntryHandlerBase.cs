@@ -29,7 +29,7 @@ namespace FlameOfTheLost
 
         //  2. Config
         protected virtual int MinEquippedEntryCapacity => 1;
-        protected abstract int MaxEquippedEntryCapacity { get; }
+        public abstract int MaxEquippedEntryCapacity { get; }
         protected abstract int DefaultEquippedEntryCapacity { get; }
         protected abstract string EntryDisplayName { get; }
 
