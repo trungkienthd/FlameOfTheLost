@@ -29,6 +29,8 @@ namespace FlameOfTheLost
         protected Color ActiveColor => _activeColor;
         protected Color SelectedColor => _selectedColor;
 
+        private ColorBlock _cachedSubSlotButtonColorBlock;
+
         public LoadoutPanelSlotType SlotType { get; protected set; } = LoadoutPanelSlotType.None;
         public int SlotIndex { get; protected set; } = -1;
 
@@ -115,6 +117,13 @@ namespace FlameOfTheLost
             this.SetMainIcon(null, false);
             this.SetSubSlotVisible(false);
             this.ClearSubSlotContent();
+
+            this.SetSubSlotButtonInteractable
+             (
+                 value: false,
+                 keepDisabledVisualAsNormal: false
+             );
+
             this.RefreshSlotColor();
         }
 
@@ -142,15 +151,29 @@ namespace FlameOfTheLost
             this.Button.interactable = value;
         }
 
-        protected void SetSubSlotButtonInteractable(bool value)
+        protected void SetSubSlotButtonInteractable(bool value, bool keepDisabledVisualAsNormal)
         {
             if (this.SubSlotButton == null) return;
 
+            this.ApplySubSlotButtonDisabledVisualMode(keepDisabledVisualAsNormal);
             this.SubSlotButton.interactable = value;
+        }
+        private void ApplySubSlotButtonDisabledVisualMode(bool keepDisabledVisualAsNormal)
+        {
+            if (this.SubSlotButton == null) return;
 
-            // Important:
-            // SubSlot can be non-interactable, but it should not visually fade.
-            this.KeepDisabledButtonVisualAsNormal(this.SubSlotButton);
+            ColorBlock colors = this.SubSlotButton.colors;
+
+            if (keepDisabledVisualAsNormal)
+            {
+                colors.disabledColor = colors.normalColor;
+            }
+            else
+            {
+                colors.disabledColor = _cachedSubSlotButtonColorBlock.disabledColor;
+            }
+
+            this.SubSlotButton.colors = colors;
         }
 
         protected void RefreshSlotColor()
@@ -169,15 +192,6 @@ namespace FlameOfTheLost
             {
                 this.SlotImage.color = this.NormalColor;
             }
-        }
-
-        protected void KeepDisabledButtonVisualAsNormal(Button button)
-        {
-            if (button == null) return;
-
-            ColorBlock colors = button.colors;
-            colors.disabledColor = colors.normalColor;
-            button.colors = colors;
         }
 
         protected virtual bool CanSubmitSubSlotClick()
@@ -254,7 +268,6 @@ namespace FlameOfTheLost
         {
             base.InitializeInternalState();
 
-            this.KeepDisabledButtonVisualAsNormal(this.SubSlotButton);
             this.ResetBindings();
         }
         protected override void UnbindInternalReferences()

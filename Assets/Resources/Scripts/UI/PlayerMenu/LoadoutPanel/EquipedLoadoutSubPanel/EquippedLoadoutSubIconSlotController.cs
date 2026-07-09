@@ -43,10 +43,11 @@ namespace FlameOfTheLost
 
             this.SetMainButtonInteractable(isMainButtonInteractable);
 
+            bool subSlotInteractable = hasWeapon && isSubSlotButtonInteractable;
             this.SetSubSlotButtonInteractable
             (
-                hasWeapon &&
-                isSubSlotButtonInteractable
+                value: subSlotInteractable,
+                keepDisabledVisualAsNormal: isMainButtonInteractable
             );
 
             this.RefreshSlotColor();

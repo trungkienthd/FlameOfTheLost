@@ -49,7 +49,13 @@ namespace FlameOfTheLost
             this.SetMainButtonInteractable(isMainButtonInteractable);
 
             // Quantity SubSlot is display-only.
-            this.SetSubSlotButtonInteractable(false);
+            // If the main slot is interactable, keep the display visually normal.
+            // If the main slot is locked, allow the disabled visual.
+            this.SetSubSlotButtonInteractable
+            (
+                value: false,
+                keepDisabledVisualAsNormal: isMainButtonInteractable
+            );
 
             this.RefreshSlotColor();
         }
@@ -86,8 +92,11 @@ namespace FlameOfTheLost
 
             this.SetMainButtonInteractable(isMainButtonInteractable);
 
-            // Quantity SubSlot is display-only.
-            this.SetSubSlotButtonInteractable(false);
+            this.SetSubSlotButtonInteractable
+            (
+                value: false,
+                keepDisabledVisualAsNormal: isMainButtonInteractable
+            );
 
             this.RefreshSlotColor();
         }
