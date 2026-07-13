@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AClip_Player_WP_Dagger_SKM_Slash_Right_Down
+  m_Name: AClip_Player_WP_Dagger_Sword_SKM_Slash_Left_Down
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1922476699, guid: d64fdee322d99594386840d1d5369625, type: 3}
+      value: {fileID: -1833786707, guid: d64fdee322d99594386840d1d5369625, type: 3}
     - time: 0.16666667
-      value: {fileID: -263085591, guid: d64fdee322d99594386840d1d5369625, type: 3}
+      value: {fileID: 8562968, guid: d64fdee322d99594386840d1d5369625, type: 3}
     - time: 0.33333334
-      value: {fileID: -2131178552, guid: d64fdee322d99594386840d1d5369625, type: 3}
+      value: {fileID: -2035248887, guid: d64fdee322d99594386840d1d5369625, type: 3}
     - time: 0.5
-      value: {fileID: 1024091575, guid: d64fdee322d99594386840d1d5369625, type: 3}
+      value: {fileID: -951766822, guid: d64fdee322d99594386840d1d5369625, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +50,10 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 1922476699, guid: d64fdee322d99594386840d1d5369625, type: 3}
-    - {fileID: -263085591, guid: d64fdee322d99594386840d1d5369625, type: 3}
-    - {fileID: -2131178552, guid: d64fdee322d99594386840d1d5369625, type: 3}
-    - {fileID: 1024091575, guid: d64fdee322d99594386840d1d5369625, type: 3}
+    - {fileID: -1833786707, guid: d64fdee322d99594386840d1d5369625, type: 3}
+    - {fileID: 8562968, guid: d64fdee322d99594386840d1d5369625, type: 3}
+    - {fileID: -2035248887, guid: d64fdee322d99594386840d1d5369625, type: 3}
+    - {fileID: -951766822, guid: d64fdee322d99594386840d1d5369625, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

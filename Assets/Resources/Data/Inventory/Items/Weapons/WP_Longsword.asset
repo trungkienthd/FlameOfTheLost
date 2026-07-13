@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7287a1f981554f14f988778fed0a6c5c, type: 3}
   m_Name: WP_Longsword
   m_EditorClassIdentifier: 
-  _id: 71201
+  _id: 71202
   _key: LONGSWORD
   _displayName: Longsword
   _description: 
