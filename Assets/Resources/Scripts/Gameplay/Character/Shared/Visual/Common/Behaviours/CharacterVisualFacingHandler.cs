@@ -14,6 +14,7 @@ namespace FlameOfTheLost
         [Header("Runtime State")]
         [SerializeField] private Vector2 _lastDirection = Vector2.down;
         [SerializeField] private int _facingSignX = +1;
+        [SerializeField] private bool _isFacingLocked;
         public Vector2 LastDirection
         {
             get => _lastDirection;
@@ -23,6 +24,11 @@ namespace FlameOfTheLost
         {
             get => _facingSignX;
             private set => _facingSignX = value;
+        }
+        public bool IsFacingLocked
+        {
+            get => _isFacingLocked;
+            private set => _isFacingLocked = value;
         }
 
         private CharacterVisualController _visualController;
@@ -54,16 +60,24 @@ namespace FlameOfTheLost
         {
             if (this.VisualController == null || this.VisualController.Animator == null) return;
 
-            if (worldVelocity.sqrMagnitude > 0.0001f)
-            {
-                this.LastDirection = worldVelocity.normalized;
-            }
-
             float speed01 = this.SpeedForOne > 0f
                 ? Mathf.Clamp01(worldVelocity.magnitude / this.SpeedForOne)
                 : 0f;
 
             this.VisualController.Animator.SetFloat(CharacterVisualController.SpeedID, speed01, this.SpeedDampTime, Time.deltaTime);
+
+            // Movement may continue during an attack, but it must not replace
+            // the facing direction selected by the combat aiming system.
+            if (this.IsFacingLocked)
+            {
+                return;
+            }
+
+            if (worldVelocity.sqrMagnitude > 0.0001f)
+            {
+                this.LastDirection = worldVelocity.normalized;
+            }
+
             this.ApplyDirectionToAnimatorAndFlip(this.LastDirection);
         }
 
@@ -80,7 +94,6 @@ namespace FlameOfTheLost
 
             this.VisualController.Animator.SetInteger(CharacterVisualController.FacingID, facing);
         }
-
         public void SetFacingParameter(CharacterFacingStatus facingStatus)
         {
             this.SetFacingParameter((int)facingStatus);
@@ -94,8 +107,21 @@ namespace FlameOfTheLost
             this.ApplyDirectionToAnimatorAndFlip(this.LastDirection);
         }
 
-        public void SetRespawnFacing(CharacterFacingStatus facingStatus)
+        //  5. Facing Lock
+        public void LockFacing()
         {
+            this.IsFacingLocked = true;
+        }
+        public void UnlockFacing()
+        {
+            this.IsFacingLocked = false;
+        }
+
+        //  6. Character Refresh
+        public void SetFacingDuringRefresh(CharacterFacingStatus facingStatus)
+        {
+            this.UnlockFacing();
+
             Vector2 direction = facingStatus switch
             {
                 CharacterFacingStatus.Up => Vector2.up,
@@ -105,7 +131,7 @@ namespace FlameOfTheLost
             };
 
             this.LastDirection = direction;
-            this.SetFacingParameter(facingStatus);
+
             this.ApplyDirectionToAnimatorAndFlip(this.LastDirection, forceFacingRightForNonSide: true);
         }
 
@@ -127,10 +153,6 @@ namespace FlameOfTheLost
                     this.FacingSignX = direction.x >= 0f ? +1 : -1;
                 }
                 else if (forceFacingRightForNonSide)
-                {
-                    this.FacingSignX = +1;
-                }
-                else
                 {
                     this.FacingSignX = +1;
                 }

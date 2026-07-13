@@ -105,7 +105,7 @@ namespace FlameOfTheLost
 
             if (this.FacingHandler != null)
             {
-                this.FacingHandler.SetRespawnFacing(context.RefreshTarget.Facing);
+                this.FacingHandler.SetFacingDuringRefresh(context.RefreshTarget.Facing);
                 this.FacingHandler.SetSpeedImmediate(0f);
             }
 
@@ -142,6 +142,19 @@ namespace FlameOfTheLost
             if (this.FacingHandler == null) return;
 
             this.FacingHandler.ForceFacing(direction);
+        }
+
+        public void LockFacing()
+        {
+            if (this.FacingHandler == null) return;
+
+            this.FacingHandler.LockFacing();
+        }
+        public void UnlockFacing()
+        {
+            if (this.FacingHandler == null) return;
+
+            this.FacingHandler.UnlockFacing();
         }
 
         //  4. Locomotion-related

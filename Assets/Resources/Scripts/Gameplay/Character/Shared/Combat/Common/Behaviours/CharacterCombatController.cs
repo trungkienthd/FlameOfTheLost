@@ -329,7 +329,7 @@ namespace FlameOfTheLost
             this.CancelAttackWindowRuntimeState(resolveAiming: false);
 
             this.CombatLoadoutController?.RefreshLoadoutAfterCharacterRefreshment();
-            this.CombatAimingHandler?.ClearAimingStateAfterCharacterRefreshment();
+            this.CombatAimingHandler?.ClearAimingStateAfterCharacterRefresh();
             this.CombatResourcesHandler?.ClearCombatReservationsAfterCharacterRefreshment();
             this.CombatStatusEffectHandler?.ClearRuntimeTrackingAfterCharacterRefreshment();
         }
