@@ -29,6 +29,7 @@ namespace FlameOfTheLost
         }
         protected override bool AllowMultipleTargetsPerEnableWindow => !this.DestroyOnHit;
 
+        // --- Unity Callbacks ---
         private void Update()
         {
             if (!this.IsActive) return;
@@ -59,19 +60,19 @@ namespace FlameOfTheLost
             }
         }
 
-        public override void NotifyHitConfirmed(CharacterRootController target)
+        public override void NotifyHitConfirmed(UnityEngine.Object target, CharacterRootController characterTarget)
         {
-            base.NotifyHitConfirmed(target);
+            if (!this.IsActive) return;
 
-            if (this.DestroyOnHit)
-            {
-                this.DisableHitbox();
-                UnityEngine.Object.Destroy(this.gameObject);
-            }
+            base.NotifyHitConfirmed(target, characterTarget);
+
+            if (!this.DestroyOnHit) return;
+
+            this.DisableHitbox();
+            UnityEngine.Object.Destroy(this.gameObject);
         }
 
-        // --- Helpers ---
-        //  1. FOTL Base Behaviour Overrides
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void InitializeInternalState()
         {
             base.InitializeInternalState();

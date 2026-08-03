@@ -22,6 +22,13 @@ MonoBehaviour:
   _requirements: []
   _damageAmount: 15
   _knockbackForce: 2
+  _harvestDamage:
+    _isEnabled: 1
+    _impactType: 0
+    _combatDamageMultiplier: 0
+    _flatHarvestDamage: 1
+    _minimumHarvestDamage: 1
+    _triggerSelfOnHitStatusEffects: 0
   _resourceCost:
     _hp: 0
     _fp: 0

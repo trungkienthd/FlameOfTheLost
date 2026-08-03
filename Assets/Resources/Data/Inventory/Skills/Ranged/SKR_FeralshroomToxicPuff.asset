@@ -22,6 +22,13 @@ MonoBehaviour:
   _requirements: []
   _damageAmount: 2
   _knockbackForce: 0
+  _harvestDamage:
+    _isEnabled: 0
+    _impactType: 0
+    _combatDamageMultiplier: 0
+    _flatHarvestDamage: 1
+    _minimumHarvestDamage: 1
+    _triggerSelfOnHitStatusEffects: 0
   _resourceCost:
     _hp: 0
     _fp: 0
@@ -44,6 +51,6 @@ MonoBehaviour:
   _defaultProjectile: {fileID: 11400000, guid: 66f641b6fed2a504ebd09596fdaf2275, type: 2}
   _projectileSpeed: 0.5
   _projectileLifetime: 0.75
-  _destroyArrowOnHit: 0
+  _destroyProjectileOnHit: 1
   _projectileCount: 1
   _projectileAngleStep: 0

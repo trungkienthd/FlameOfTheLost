@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0cab8679280d941b73444642356f58, type: 3}
+  m_Name: Hvtb_OakTree
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableObjectProfile
+  _id: 1
+  _key: OAK_TREE
+  _displayName: Oak Tree
+  _description: 
+  _icon: {fileID: -1198562835, guid: 94ff3b01f7317c243a29213d03ca7285, type: 3}
+  _maximumDurability: 5
+  _acceptedImpactTypes: -1
+  _breakBehaviour: 0
+  _harvestedSprite: {fileID: -2091055549, guid: 94ff3b01f7317c243a29213d03ca7285, type: 3}

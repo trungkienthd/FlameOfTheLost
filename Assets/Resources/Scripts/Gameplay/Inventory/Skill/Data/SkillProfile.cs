@@ -5,7 +5,7 @@ namespace FlameOfTheLost
 {
     public abstract class SkillProfile : ScriptableObject, IIdentityProvider, IIconProvider
     {
-        // --- States ---
+        // --- Data ---
         //  1. Identity
         [Header("Identity")]
         [SerializeField] private int _id;
@@ -53,6 +53,12 @@ namespace FlameOfTheLost
         [SerializeField, Min(0f)] private float _knockbackForce = 5f;
         public int DamageAmount => _damageAmount;
         public float KnockbackForce => _knockbackForce;
+
+        //      7.1. Harvest (Damage) Properties
+        [Header("Harvest Properties")]
+        [SerializeField]
+        private HarvestDamageEntry _harvestDamage = new();
+        public HarvestDamageEntry HarvestDamage => _harvestDamage;
 
         //  8. Resource Cost
         [Header("Resource Cost")]

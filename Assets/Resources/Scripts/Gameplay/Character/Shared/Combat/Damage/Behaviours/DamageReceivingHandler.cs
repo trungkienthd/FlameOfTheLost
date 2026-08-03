@@ -109,7 +109,7 @@ namespace FlameOfTheLost
                 CharacterDeathCauseEntry deathCause = CharacterDeathCauseGenerationUtility.FromDamageSource
                 (
                     victim: this.CharacterRootController,
-                    sourceCharacter: damager.SourceCharacterRootController,
+                    sourceCharacter: damager.SourceCharacter,
                     sourceObject: other.gameObject,
                     reason: "Direct damage"
                 );
@@ -121,7 +121,7 @@ namespace FlameOfTheLost
                 (
                     new DamageAppliedContext
                     (
-                        attacker: damager.SourceCharacterRootController,
+                        attacker: damager.SourceCharacter,
                         victim: this.CharacterRootController,
                         damageAmount: damageAmount
                     )
@@ -140,7 +140,11 @@ namespace FlameOfTheLost
             // Notify resource-resolution & skill status effect application handlers on the ATTACK collider (melee/projectile hitbox)
             if (hitboxController != null)
             {
-                hitboxController.NotifyHitConfirmed(target);
+                hitboxController.NotifyHitConfirmed
+                (
+                    target: target, 
+                    characterTarget: target
+                );
             }
 
             // Notify damager

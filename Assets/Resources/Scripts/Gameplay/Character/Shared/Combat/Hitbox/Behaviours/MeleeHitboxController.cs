@@ -5,8 +5,7 @@ namespace FlameOfTheLost
 {
     public class MeleeHitboxController : HitboxController
     {
-        // --- States ---
-        //  1. References
+        // --- References ---
         [Header("References")]
         [SerializeField] private PolygonCollider2D _polygonCollider2D;
         private PolygonCollider2D PolygonCollider2D
@@ -22,7 +21,8 @@ namespace FlameOfTheLost
             private set => _damager = value;
         }
 
-        //  2. Default hitbox shape
+        // --- Runtime States ---
+        //  1. Default hitbox shape
         [Header("Shapes")]
         [SerializeField] private MeleeHitboxShapeEntry _defaultMeleeHitbox;
         [SerializeField] private MeleeHitboxShapeEntry _overrideHitbox;
@@ -40,7 +40,7 @@ namespace FlameOfTheLost
             set => _hasOverrideMeleeHitboxShape = value;
         }
 
-        //  3. Facing state
+        //  2. Facing state
         [Header("Facing Sync")]
         [SerializeField] private bool _autoSyncFromFacingProvider = true;
         private IFacingProvider _facingProvider; // usually the AnimationHandler
@@ -51,7 +51,7 @@ namespace FlameOfTheLost
             set => _facingProvider = value;
         }
 
-        //  4. Other states
+        //  3. Other states
         protected override bool AllowMultipleTargetsPerEnableWindow => true; // Melee hitboxes always allow multiple targets
 
         // --- Public APIs ---
@@ -60,7 +60,6 @@ namespace FlameOfTheLost
         {
             base.EnableHitbox(payload, attackSideType);
 
-            if (this.PolygonCollider2D) this.PolygonCollider2D.enabled = true;
             if ((this.ActiveRuntimeSkill != null) && (this.ActiveRuntimeSkill.Profile is MeleeSkillProfile) && (this.ActiveRuntimeSkill.TryGetMeleeHitboxShape(attackSideType, out var meleeHitboxShape)))
             {
                 this.SetOverrideMeleeHitboxShape(meleeHitboxShape);   // Apply the melee hitbox shape
@@ -127,7 +126,7 @@ namespace FlameOfTheLost
             this.PolygonCollider2D.offset = shape.Offset;
         }
 
-        //  2. FOTL Base Behaviour Overrides
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();

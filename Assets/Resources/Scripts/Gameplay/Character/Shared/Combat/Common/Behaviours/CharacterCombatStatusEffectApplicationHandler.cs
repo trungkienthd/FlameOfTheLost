@@ -10,13 +10,18 @@ namespace FlameOfTheLost
         private StatusEffectController StatusEffectController => this.CharacterRootController.StatusEffectController;
 
         //  2. Limit tracking (per attack-instance = hitboxObject)
-        // hitboxId -> firstHitApplied (for FirstHitOnly)
-        private readonly Dictionary<int, HashSet<StatusEffectProfile>> _firstHitAppliedMap = new();
-        private IReadOnlyDictionary<int, HashSet<StatusEffectProfile>> FirstHitAppliedMap => _firstHitAppliedMap;
+        // hitboxID
+        //     → receiver type
+        //         → applied status-effect profiles
+        private readonly Dictionary<int, Dictionary<SkillStatusEffectReceiverType, HashSet<StatusEffectProfile>>> _firstHitAppliedMap = new();
+        private IReadOnlyDictionary<int, Dictionary<SkillStatusEffectReceiverType, HashSet<StatusEffectProfile>>> FirstHitAppliedMap => _firstHitAppliedMap;
 
-        // hitboxId -> (targetInstanceId -> applied profiles) (for OncePerTargetPerAttack)
-        private readonly Dictionary<int, Dictionary<int, HashSet<StatusEffectProfile>>> _oncePerTargetMap = new();
-        private IReadOnlyDictionary<int, Dictionary<int, HashSet<StatusEffectProfile>>> OncePerTargetMap => _oncePerTargetMap;
+        // hitboxID
+        //     → receiver type
+        //         → target ID
+        //             → applied status-effect profiles
+        private readonly Dictionary<int, Dictionary<SkillStatusEffectReceiverType, Dictionary<int, HashSet<StatusEffectProfile>>>> _oncePerTargetMap = new();
+        private IReadOnlyDictionary<int, Dictionary<SkillStatusEffectReceiverType, Dictionary<int, HashSet<StatusEffectProfile>>>> OncePerTargetMap => _oncePerTargetMap;
 
         // --- Public APIs ---
         //  1. Generic apply-to-self for non-skill systems (e.g. ConsumableItem, Terrain)
@@ -82,20 +87,40 @@ namespace FlameOfTheLost
         }
 
         //  3. Apply when the hit is confirmed: SkillStatusEffectApplication (OnHitConfirmed)
-        public void ApplySkillStatusEffectsOnHitConfirmed(RuntimeSkill runtimeSkill, CharacterRootController target, GameObject hitboxGameObject)
+        public void ApplySkillStatusEffectsToSelfOnHitConfirmed(RuntimeSkill runtimeSkill, GameObject hitboxGameObject, int hitTargetID)
         {
             if (runtimeSkill == null) return;
-            if (target == null) return;
             if (hitboxGameObject == null) return;
+            if (this.StatusEffectController == null) return;
 
-            int hitboxId = hitboxGameObject.GetInstanceID();
-            int targetId = target.GetInstanceID();
+            int hitboxID = hitboxGameObject.GetInstanceID();
 
-            // Apply to TARGET
-            var receiver = target.StatusEffectController;
             this.ApplyToReceiverOnHitConfirmed
             (
-                receiverStatusEffectController: receiver,
+                receiverStatusEffectController: this.StatusEffectController,
+                receiverType: SkillStatusEffectReceiverType.Self,
+                runtimeSkill: runtimeSkill,
+                hitboxID: hitboxID,
+                targetID: hitTargetID
+            );
+        }
+        public void ApplySkillStatusEffectsToTargetOnHitConfirmed(RuntimeSkill runtimeSkill, CharacterRootController characterTarget, GameObject hitboxGameObject)
+        {
+            if (runtimeSkill == null) return;
+            if (characterTarget == null) return;
+            if (hitboxGameObject == null) return;
+
+            // Apply to TARGET
+            StatusEffectController receiverStatusEffectController = characterTarget.StatusEffectController;
+
+            if (receiverStatusEffectController == null) return;
+
+            int hitboxId = hitboxGameObject.GetInstanceID();
+            int targetId = characterTarget.GetInstanceID();
+
+            this.ApplyToReceiverOnHitConfirmed
+            (
+                receiverStatusEffectController: receiverStatusEffectController,
                 receiverType: SkillStatusEffectReceiverType.Target,
                 runtimeSkill: runtimeSkill,
                 hitboxID: hitboxId,
@@ -133,13 +158,14 @@ namespace FlameOfTheLost
         private void ApplyToReceiverOnHitConfirmed(StatusEffectController receiverStatusEffectController, SkillStatusEffectReceiverType receiverType, RuntimeSkill runtimeSkill, int hitboxID, int targetID)
         {
             if (receiverStatusEffectController == null) return;
+            if (runtimeSkill == null) return;
 
             foreach (var application in runtimeSkill.EnumerateStatusEffectApplications(SkillStatusEffectTriggerType.OnHitConfirmed, receiverType))
             {
                 if (application == null || !application.IsValid) continue;
 
                 // Limits
-                if (!this.PassesLimit(application.Limit, application.StatusEffect, hitboxID, targetID)) continue;
+                if (!this.PassesLimit(application.Limit, receiverType, application.StatusEffect, hitboxID, targetID)) continue;
 
                 // Chance
                 float chance = Mathf.Clamp01(application.Chance);
@@ -149,7 +175,7 @@ namespace FlameOfTheLost
                 receiverStatusEffectController.ApplyStatusEffect(application.StatusEffect, this.CharacterRootController.gameObject, application.Potency);
             }
         }   
-        private bool PassesLimit(SkillStatusEffectApplicationLimitType limit, StatusEffectProfile statusEffect, int hitboxID, int targetID)
+        private bool PassesLimit(SkillStatusEffectApplicationLimitType limit, SkillStatusEffectReceiverType receiverType, StatusEffectProfile statusEffect, int hitboxID, int targetID)
         {
             if (statusEffect == null) return false;
 
@@ -159,40 +185,60 @@ namespace FlameOfTheLost
                     return true;
 
                 case SkillStatusEffectApplicationLimitType.FirstHitOnly:
-                    if (!this.FirstHitAppliedMap.TryGetValue(hitboxID, out var firstHitAppliedSet))
-                    { 
-                        firstHitAppliedSet = new HashSet<StatusEffectProfile>();
-                        _firstHitAppliedMap[hitboxID] = firstHitAppliedSet;
-                    }
-
-                    // FirstHitOnly can still mean "first time for this statusEffect". This lets multiple FirstHitOnly effects each apply once.
-                    if (firstHitAppliedSet.Contains(statusEffect)) return false;
-
-                    firstHitAppliedSet.Add(statusEffect);
-                    return true;
+                    return this.TryRegisterFirstHitApplication(hitboxID, receiverType, statusEffect);
 
                 case SkillStatusEffectApplicationLimitType.OncePerTargetPerAttack:
-                    if (!this.OncePerTargetMap.TryGetValue(hitboxID, out var perTarget))
-                    {
-                        perTarget = new Dictionary<int, HashSet<StatusEffectProfile>>();
-                        _oncePerTargetMap[hitboxID] = perTarget;
-                    }
-
-                    if (!perTarget.TryGetValue(targetID, out var oncePerTargetSet))
-                    {
-                        oncePerTargetSet = new HashSet<StatusEffectProfile>();
-                        perTarget[targetID] = oncePerTargetSet;
-                    }
-
-                    if (oncePerTargetSet.Contains(statusEffect)) return false;
-
-                    oncePerTargetSet.Add(statusEffect);
-                    return true;
+                    return this.TryRegisterOncePerTargetApplication(hitboxID, receiverType, targetID, statusEffect);
 
                 default:
-                    Debug.LogWarning($"[{this.gameObject.name}.CharacterCombatStatusEffectHandler] PassesLimit: Unhandled limit type {limit}");
+                    Debug.LogWarning
+                    (
+                        $"[{this.gameObject.name}." +
+                        $"{nameof(CharacterCombatStatusEffectApplicationHandler)}] " +
+                        $"{nameof(PassesLimit)}: " +
+                        $"Unhandled limit type {limit}.",
+                        this
+                    );
                     return false;
             }
+        }
+        private bool TryRegisterFirstHitApplication(int hitboxID, SkillStatusEffectReceiverType receiverType, StatusEffectProfile statusEffect)
+        {
+            if (!this.FirstHitAppliedMap.TryGetValue(hitboxID, out Dictionary<SkillStatusEffectReceiverType, HashSet<StatusEffectProfile>> receiverMap))
+            {
+                receiverMap = new Dictionary<SkillStatusEffectReceiverType, HashSet<StatusEffectProfile>>();
+                _firstHitAppliedMap[hitboxID] = receiverMap;
+            }
+
+            if (!receiverMap.TryGetValue(receiverType, out HashSet<StatusEffectProfile> appliedSet))
+            {
+                appliedSet = new HashSet<StatusEffectProfile>();
+                receiverMap[receiverType] = appliedSet;
+            }
+
+            return appliedSet.Add(statusEffect);
+        }
+
+        private bool TryRegisterOncePerTargetApplication(int hitboxID, SkillStatusEffectReceiverType receiverType, int targetID, StatusEffectProfile statusEffect)
+        {
+            if (!this.OncePerTargetMap.TryGetValue(hitboxID, out Dictionary<SkillStatusEffectReceiverType, Dictionary<int, HashSet<StatusEffectProfile>>> receiverMap))
+            {
+                receiverMap = new Dictionary<SkillStatusEffectReceiverType, Dictionary<int, HashSet<StatusEffectProfile>>>();
+                _oncePerTargetMap[hitboxID] = receiverMap;
+            }
+
+            if (!receiverMap.TryGetValue(receiverType, out Dictionary<int, HashSet<StatusEffectProfile>> targetMap))
+            {
+                targetMap = new Dictionary<int, HashSet<StatusEffectProfile>>();
+                receiverMap[receiverType] = targetMap;
+            }
+
+            if (!targetMap.TryGetValue(targetID, out HashSet<StatusEffectProfile> appliedSet))
+            {
+                appliedSet = new HashSet<StatusEffectProfile>();
+                targetMap[targetID] = appliedSet;
+            }
+            return appliedSet.Add(statusEffect);
         }
     }
 }

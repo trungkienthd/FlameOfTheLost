@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 936577731621106367}
   - component: {fileID: 1731339921200444562}
   - component: {fileID: 5454329711124102394}
+  - component: {fileID: 2035615031154836419}
   m_Layer: 0
   m_Name: Prefab_Prjt_ToxicGas
   m_TagString: Projectile
@@ -126,6 +127,7 @@ MonoBehaviour:
   _activeRuntimeSkill:
     _profile: {fileID: 0}
     _provisionType: 0
+  _harvestDamageSourceProvider: {fileID: 0}
   _isActive: 1
   _hasConfirmedHit: 0
   _hasDisabledWithoutHit: 0
@@ -154,8 +156,20 @@ MonoBehaviour:
   _knockbackDealtAddFlat: 0
   _sourceCharacterFaction: 0
   _originTransform: {fileID: 0}
-  _destroyOnHit: 0
+  _sourceCharacterRootController: {fileID: 0}
   _ignoresSameFaction: 1
+--- !u!114 &2035615031154836419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3043559614890823337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b27cf3ec05310428bf26a28159694a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestDamageSourceProvider
 --- !u!1 &8674926287107048069
 GameObject:
   m_ObjectHideFlags: 0

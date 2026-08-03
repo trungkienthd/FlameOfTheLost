@@ -4,6 +4,8 @@ namespace FlameOfTheLost
 {
     public abstract class CharacterRootController : FOTLMonoBehaviour
     {
+        public GameObject CharacterRoot => this.gameObject;
+
         [Header("References - Identity")]
         [SerializeField] private CharacterIdentityController _identityController;
         public CharacterIdentityController IdentityController => _identityController;

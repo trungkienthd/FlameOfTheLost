@@ -267,15 +267,46 @@ namespace FlameOfTheLost
         }
 
         //  3. Hitbox Events
-        public void OnHitConfirmedFromHitbox(RuntimeSkill runtimeSkill, CharacterRootController target, GameObject hitboxGameObject)
+        public void OnHitConfirmedFromHitbox(RuntimeSkill runtimeSkill, UnityEngine.Object hitTarget, CharacterRootController characterTarget, GameObject hitboxGameObject)
         {
             if (runtimeSkill == null) return;
+            if (hitTarget == null) return;
+            if (hitboxGameObject == null) return;
 
             // a) Resource resolution
             this.CombatResourcesHandler?.ResolveOnHitConfirmed(skillStyle: runtimeSkill.Style);
 
-            // b) Apply skill status effects on hit (self + target), respecting limits
-            this.CombatStatusEffectHandler.ApplySkillStatusEffectsOnHitConfirmed(runtimeSkill, target, hitboxGameObject);
+            int hitTargetID = hitTarget.GetInstanceID();
+
+            bool shouldApplySelfOnHitEffects = characterTarget != null;
+
+            if (characterTarget == null)
+            {
+                HarvestDamageEntry harvestDamage = runtimeSkill.Profile.HarvestDamage;
+                RuntimeHarvestDamage runtimeHarvestDamage = new RuntimeHarvestDamage(harvestDamage);
+
+                shouldApplySelfOnHitEffects = runtimeHarvestDamage.TriggerSelfOnHitStatusEffects;
+            }
+
+            if (shouldApplySelfOnHitEffects)
+            {
+                this.CombatStatusEffectHandler?.ApplySkillStatusEffectsToSelfOnHitConfirmed
+                (
+                    runtimeSkill: runtimeSkill,
+                    hitboxGameObject: hitboxGameObject,
+                    hitTargetID: hitTargetID
+                );
+            }
+
+            if (characterTarget == null) return;
+
+            // b) Apply skill status effects on hit (to Target), respecting limits
+            this.CombatStatusEffectHandler.ApplySkillStatusEffectsToTargetOnHitConfirmed
+            (
+                runtimeSkill: runtimeSkill,
+                characterTarget: characterTarget,
+                hitboxGameObject: hitboxGameObject
+            );
         }
 
         public void OnHitboxDisabledWithoutHit(RuntimeSkill runtimeSkill)
@@ -535,6 +566,11 @@ namespace FlameOfTheLost
 
             this.MeleeHitboxController.BindHitContext(this, this.ActiveRuntimeSkill);
 
+            HarvestDamageEntry harvestDamageEntry = this.ActiveRuntimeSkill.Profile.HarvestDamage;
+            RuntimeHarvestDamage runtimeHarvestDamage = new RuntimeHarvestDamage(harvestDamageEntry);
+
+            this.MeleeHitboxController.ConfigureHarvestDamage(runtimeHarvestDamage);
+
             HitboxActivationContext meleeHitboxDamagePayload = new HitboxActivationContext()
             {
                 DamageAmount = meleeSkill.DamageAmount,
@@ -646,6 +682,10 @@ namespace FlameOfTheLost
             if (projectileHitbox != null)
             {
                 projectileHitbox.BindHitContext(this, runtimeSkill);
+
+                HarvestDamageEntry harvestDamageEntry = runtimeSkill.Profile.HarvestDamage;
+                RuntimeHarvestDamage runtimeHarvestDamage = new RuntimeHarvestDamage(harvestDamageEntry);
+                projectileHitbox.ConfigureHarvestDamage(runtimeHarvestDamage);
 
                 HitboxActivationContext projectileHitboxDamagePayload = new HitboxActivationContext()
                 {

@@ -229,12 +229,12 @@ namespace FlameOfTheLost
 
             this.EnsureStatusEffectVFX(newStatusEffect);
 
-            Debug.Log
-            (
-                $"[{this.CharacterName}.{nameof(StatusEffectController)}] FINAL (NEW applied) '{profile.name}' | " +
-                $"(RuntimeID={newStatusEffect.RuntimeID}) | " +
-                $"Stacks=1 | Duration={profile.Duration:F2} | Potency={newStatusEffect.Potency:F2}"
-            );
+            //Debug.Log
+            //(
+            //    $"[{this.CharacterName}.{nameof(StatusEffectController)}] FINAL (NEW applied) '{profile.name}' | " +
+            //    $"(RuntimeID={newStatusEffect.RuntimeID}) | " +
+            //    $"Stacks=1 | Duration={profile.Duration:F2} | Potency={newStatusEffect.Potency:F2}"
+            //);
 
             return newStatusEffect.RuntimeID;
         }

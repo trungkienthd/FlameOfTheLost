@@ -8,7 +8,9 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterRootController _characterRootController;
         protected CharacterRootController CharacterRootController => _characterRootController;
 
-        public string CharacterName => this.CharacterRootController.gameObject.name;
+        public string CharacterName => this.CharacterRootController != null
+            ? this.CharacterRootController.gameObject.name
+            : this.gameObject.name;
 
         public CharacterRootController GetCharacter()
         {
@@ -25,7 +27,7 @@ namespace FlameOfTheLost
         {
             base.ValidateInternalReferences();
 
-            if (this.CharacterRootController == null) Debug.LogError($"[{this.CharacterName}.{this.GetType().Name}] {nameof(CharacterRootController)} reference is not set in the inspector and could not be found via GetComponentInParent.", this);
+            if (this.CharacterRootController == null) Debug.LogError($"[{this.CharacterName}.{this.GetType().Name}] {nameof(this.CharacterRootController)} reference is not set in the inspector and could not be found via GetComponentInParent.", this);
         }
     }
 }

@@ -83,7 +83,7 @@ namespace FlameOfTheLost
             get => _originTransform;
             private set => _originTransform = value;
         }
-        public CharacterRootController SourceCharacterRootController
+        public CharacterRootController SourceCharacter
         {
             get => _sourceCharacterRootController;
             private set => _sourceCharacterRootController = value;
@@ -128,7 +128,7 @@ namespace FlameOfTheLost
         }
         public void SetSourceCharacterRootController(CharacterRootController sourceCharacterRootController)
         {
-            this.SourceCharacterRootController = sourceCharacterRootController;
+            this.SourceCharacter = sourceCharacterRootController;
         }
 
         //  4. IStatusEffectStatModifierMultiplierConsumer & IStatusEffectStatModifierAdditiveConsumer implementation
@@ -184,7 +184,7 @@ namespace FlameOfTheLost
 
             if (this.OriginTransform == null) this.OriginTransform = this.transform;
 
-            if (this.SourceCharacterRootController == null) this.SourceCharacterRootController = this.GetComponentInParent<CharacterRootController>();
+            if (this.SourceCharacter == null) this.SourceCharacter = this.GetComponentInParent<CharacterRootController>();
         }
         protected override void ValidateInternalReferences()
         {
@@ -195,16 +195,16 @@ namespace FlameOfTheLost
                 Debug.LogError($"[{this.gameObject.name}.{nameof(DamageDealingHandler)}] {nameof(OriginTransform)} reference is missing.", this);
             }
 
-            if (this.SourceCharacterRootController == null)
+            if (this.SourceCharacter == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(DamageDealingHandler)}] {nameof(SourceCharacterRootController)} reference is missing. Source faction will stay as {this.SourceCharacterFaction}.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(DamageDealingHandler)}] {nameof(SourceCharacter)} reference is missing. Source faction will stay as {this.SourceCharacterFaction}.", this);
             }
         }
         protected override void InitializeInternalState()
         {
             base.InitializeInternalState();
 
-            if (this.SourceCharacterRootController != null) this.SourceCharacterFaction = this.SourceCharacterRootController.IdentityController.Faction;
+            if (this.SourceCharacter != null) this.SourceCharacterFaction = this.SourceCharacter.IdentityController.Faction;
             
             this.RecomputePayload();
         }

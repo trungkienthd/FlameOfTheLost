@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ba1ae50026d434c9fbe62d12c59dbc, type: 3}
   m_Name: Prjt_Arrow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ProjectileProfile
-  _id: 0
+  _id: 73001
   _key: 
   _displayName: 
   _description: 
