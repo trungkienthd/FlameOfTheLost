@@ -1,6 +1,6 @@
 # ID Attribute Convention
 **Project:** FlameOfTheLost  
-**Version:** 1.0  
+**Version:** 1.1  
 **Scope:** ID attributes used by project-owned GameObjects, Behaviours, and ScriptableObjects
 
 ---
@@ -27,8 +27,9 @@ All manually assigned ID attributes should follow this convention.
 
 ID attributes are stored as integers.
 
-Each major system category owns a dedicated numeric range.  
-The first digit, or first few digits, identify the category or subcategory.
+Each major system category owns a dedicated numeric range.
+
+The first two digits identify the major gameplay system. Additional digits identify subcategories where applicable.
 
 Do not assign IDs randomly.
 
@@ -40,7 +41,7 @@ Do not reuse the same ID for different assets, GameObjects, Behaviours, or Scrip
 
 ### 3.1 Character Identities
 
-**Range:** `1xxx`  
+**Range:** `10xxx`  
 **Asset Type:** ScriptableObject  
 **Profile Type:** `CharacterIdentityProfile`
 
@@ -54,30 +55,30 @@ Do not reuse the same ID for different assets, GameObjects, Behaviours, or Scrip
 ### Examples
 
 ```text
-1001    Player
-1101    Toxicschroom
+10001   Player
+10101   Toxicschroom
 ```
 
 ---
 
 ### 3.2 Default Spawn Points
 
-**Range:** `2xxx`  
+**Range:** `20xxx`  
 **Object Type:** GameObject / Behaviour  
 **Base Behaviour:** `CharacterDefaultSpawnPointController`
 
 ### Sub-Ranges
 
 ```text
-20xx    Player default spawn points
-21xx    Enemy-only default spawn points
+200xx   Player default spawn points
+201xx   Enemy-only default spawn points
 ```
 
 ### Behaviour Mapping
 
 ```text
-20xx    PlayerDefaultSpawnPointController
-21xx    CharacterDefaultSpawnPointController used by enemy-only spawn points
+200xx   PlayerDefaultSpawnPointController
+201xx   CharacterDefaultSpawnPointController used by enemy-only spawn points
 ```
 
 ### Usage Scope
@@ -89,15 +90,15 @@ Do not reuse the same ID for different assets, GameObjects, Behaviours, or Scrip
 ### Examples
 
 ```text
-2001    Player default spawn point - Tutorial Area 1
-2101    Enemy default spawn point - Tutorial Area 3
+20001   Player default spawn point - Tutorial Area 1
+20101   Enemy default spawn point - Tutorial Area 3
 ```
 
 ---
 
 ### 3.3 Death Triggers
 
-**Range:** `3xxx`  
+**Range:** `30xxx`  
 **Object Type:** GameObject / Behaviour  
 **Behaviour Type:** `DeathTriggerController`
 
@@ -111,15 +112,15 @@ Do not reuse the same ID for different assets, GameObjects, Behaviours, or Scrip
 ### Examples
 
 ```text
-3001    Tutorial pitfall death trigger
-3002    Tutorial water death trigger
+30001   Tutorial pitfall death trigger
+30002   Tutorial water death trigger
 ```
 
 ---
 
 ### 3.4 Tutorial World Visuals
 
-**Range:** `4xxx`  
+**Range:** `40xxx`  
 **Object Type:** GameObject / Behaviour  
 **Behaviour Type:** `TutorialWorldVisualController`
 
@@ -133,32 +134,32 @@ Do not reuse the same ID for different assets, GameObjects, Behaviours, or Scrip
 ### Examples
 
 ```text
-4001    Tutorial Area 1 visual controller
-4002    Tutorial Area 2 visual controller
+40001   Tutorial Area 1 visual controller
+40002   Tutorial Area 2 visual controller
 ```
 
 ---
 
 ### 3.5 Status Effects
 
-**Range:** `5xxxx`  
+**Range:** `50xxx`  
 **Asset Type:** ScriptableObject  
 **Profile Type:** `StatusEffectProfile`
 
 ### Sub-Ranges
 
 ```text
-50xxx   Status effects from terrains
-51xxx   Status effects from character skill applications
-52xxx   Status effects from consumable items
+500xx   Status effects from terrains
+510xx   Status effects from character skill applications
+520xx   Status effects from consumable items
 ```
 
 ### Future Expansion
 
 ```text
-53xxx   Reserved for future status effect source
-54xxx   Reserved for future status effect source
-55xxx   Reserved for future status effect source
+530xx   Reserved for future status effect source
+540xx   Reserved for future status effect source
+550xx   Reserved for future status effect source
 ```
 
 ### Usage Scope
@@ -181,7 +182,7 @@ Do not reuse the same ID for different assets, GameObjects, Behaviours, or Scrip
 
 ### 3.6 Terrains
 
-**Range:** `6xxx`  
+**Range:** `60xxx`  
 **Asset Type:** ScriptableObject  
 **Profile Type:** `TerrainProfile`
 
@@ -196,34 +197,34 @@ Do not reuse the same ID for different assets, GameObjects, Behaviours, or Scrip
 ### Examples
 
 ```text
-6001    Grass terrain
-6002    Water terrain
+60001   Grass terrain
+60002   Water terrain
 ```
 
 ---
 
 ### 3.7 Items
 
-**Range:** `7xxxx`  
+**Range:** `70xxx`  
 **Asset Type:** ScriptableObject  
 **Base Profile Type:** `ItemProfile`
 
 ### Sub-Ranges
 
 ```text
-70xxx   Light sources
-71xxx   Weapons
-72xxx   Consumable items
-73xxx   Projectiles
-74xxx   Key items
-75xxx   Materials
+700xx   Light sources
+710xx   Weapons
+720xx   Consumable items
+730xx   Projectiles
+740xx   Key items
+750xx   Materials
 ```
 
 ---
 
 #### 3.7.1 Light Sources
 
-**Range:** `70xxx`  
+**Range:** `700xx`  
 **Profile Type:** `LightSourceProfile`  
 **Base Type:** `ItemProfile`
 
@@ -245,28 +246,28 @@ Do not reuse the same ID for different assets, GameObjects, Behaviours, or Scrip
 
 #### 3.7.2 Weapons
 
-**Range:** `71xxx`  
+**Range:** `710xx`  
 **Profile Type:** `WeaponProfile`  
 **Base Type:** `ItemProfile`
 
 ### Weapon Sub-Ranges
 
 ```text
-710xx   Special weapons
-711xx   Daggers
-712xx   Swords
-713xx   Axes
-714xx   Bows
+7100x   Special weapons
+7110x   Daggers
+7120x   Swords
+7130x   Axes
+7140x   Bows
 ```
 
 ### Future Expansion
 
 ```text
-715xx   Reserved for future weapon type
-716xx   Reserved for future weapon type
-717xx   Reserved for future weapon type
-718xx   Reserved for future weapon type
-719xx   Reserved for future weapon type
+7150x   Reserved for future weapon type
+7160x   Reserved for future weapon type
+7170x   Reserved for future weapon type
+7180x   Reserved for future weapon type
+7190x   Reserved for future weapon type
 ```
 
 ### Usage Scope
@@ -292,7 +293,7 @@ Do not reuse the same ID for different assets, GameObjects, Behaviours, or Scrip
 
 #### 3.7.3 Consumable Items
 
-**Range:** `72xxx`  
+**Range:** `720xx`  
 **Profile Type:** `ConsumableItemProfile`  
 **Base Type:** `ItemProfile`
 
@@ -315,15 +316,15 @@ Do not reuse the same ID for different assets, GameObjects, Behaviours, or Scrip
 
 ## 3.8 Skills
 
-**Range:** `8xxxx`  
+**Range:** `80xxx`  
 **Asset Type:** ScriptableObject  
 **Base Profile Type:** `SkillProfile`
 
 ### Skill Type Sub-Ranges
 
 ```text
-81xxx   Melee skills
-82xxx   Ranged skills
+810xx   Melee skills
+820xx   Ranged skills
 ```
 
 ### Third Digit Rule
@@ -340,7 +341,7 @@ The third digit identifies how the skill is obtained or used.
 
 #### 3.8.1 Melee Skills
 
-**Range:** `81xxx`  
+**Range:** `810xx`  
 **Profile Type:** `MeleeSkillProfile`  
 **Base Type:** `SkillProfile`
 
@@ -364,7 +365,7 @@ The third digit identifies how the skill is obtained or used.
 
 #### 3.8.2 Ranged Skills
 
-**Range:** `82xxx`  
+**Range:** `820xx`  
 **Profile Type:** `RangedSkillProfile`  
 **Base Type:** `SkillProfile`
 
@@ -386,44 +387,119 @@ The third digit identifies how the skill is obtained or used.
 
 ---
 
+### 3.9 Harvestable Objects
+
+**Range:** `90xxx`  
+**Object Type:** GameObject / Behaviour  
+**Behaviour Type:** `HarvestableObjectController`
+
+### Harvestable Type Sub-Ranges
+
+```text
+900xx   Trees
+901xx   Bushes
+902xx   Tall Grass
+903xx   Rocks / Ore Deposits
+904xx   Mushrooms
+905xx   Crops / Plants
+906xx   Crystals
+907xx   Special Harvestables
+908xx   Quest Harvestables
+909xx   Reserved
+```
+
+### Usage Scope
+
+- Trees that can be harvested
+- Bushes that can be harvested
+- Tall grass
+- Ore deposits
+- Crystal deposits
+- Mushroom patches
+- Harvestable plants
+- Special harvestable world objects
+- Quest-related harvestable objects
+
+### ID Placement Rule
+
+The ID identifies the **harvestable archetype (prefab/content)** rather than an individual scene instance.
+
+Multiple placed instances of the same harvestable prefab should share the same ID.
+
+Scene objects do **not** require unique IDs unless a future save system introduces persistent per-instance world state.
+
+### Examples
+
+```text
+90001   Oak Tree
+90002   Pine Tree
+90003   Dead Tree
+
+90101   Berry Bush
+90102   Thorn Bush
+
+90201   Tall Grass
+90202   Wheat Grass
+
+90301   Stone Deposit
+90302   Copper Ore Deposit
+
+90401   Common Mushroom
+90402   Glowing Mushroom
+
+90501   Herb Plant
+
+90601   Blue Crystal Deposit
+
+90701   Ancient Vine
+
+90801   Ancient Sacred Tree
+```
+
+---
+
 ## 4. Summary Table
 
 ```text
-1xxx    Character identities
-2xxx    Default spawn points
-3xxx    Death triggers
-4xxx    Tutorial world visuals
-5xxxx   Status effects
-6xxx    Terrains
-7xxxx   Items
-8xxxx   Skills
+10xxx   Character identities
+20xxx   Default spawn points
+30xxx   Death triggers
+40xxx   Tutorial world visuals
+50xxx   Status effects
+60xxx   Terrains
+70xxx   Items
+80xxx   Skills
+90xxx   Harvestable objects
 ```
 
 ### Detailed Summary
 
 ```text
-1xxx    CharacterIdentityProfile
+10xxx   CharacterIdentityProfile
 
-20xx    PlayerDefaultSpawnPointController
-21xx    Enemy-only CharacterDefaultSpawnPointController
+200xx   PlayerDefaultSpawnPointController
+201xx   Enemy-only CharacterDefaultSpawnPointController
 
-3xxx    DeathTriggerController
+30xxx   DeathTriggerController
 
-4xxx    TutorialWorldVisualController
+40xxx   TutorialWorldVisualController
 
-50xxx   Terrain status effects
-51xxx   Character skill application status effects
-52xxx   Consumable item status effects
+500xx   Terrain status effects
+510xx   Character skill application status effects
+520xx   Consumable item status effects
 
-6xxx    TerrainProfile
+60xxx   TerrainProfile
 
-70xxx   LightSourceProfile
-710xx   Special WeaponProfile
-711xx   Dagger WeaponProfile
-712xx   Sword WeaponProfile
-713xx   Axe WeaponProfile
-714xx   Bow WeaponProfile
-72xxx   ConsumableItemProfile
+700xx   LightSourceProfile
+7100x   Special WeaponProfile
+7110x   Dagger WeaponProfile
+7120x   Sword WeaponProfile
+7130x   Axe WeaponProfile
+7140x   Bow WeaponProfile
+720xx   ConsumableItemProfile
+730xx   ProjectileProfile
+740xx   KeyItemProfile
+750xx   MaterialProfile
 
 810xx   Melee weapon normal attacks
 811xx   Melee weapon innate skills
@@ -432,6 +508,18 @@ The third digit identifies how the skill is obtained or used.
 820xx   Ranged weapon normal attacks
 821xx   Ranged weapon innate skills
 822xx   Ranged character-learned special skills
+
+90xxx   HarvestableObjectController
+
+900xx   Trees
+901xx   Bushes
+902xx   Tall Grass
+903xx   Rocks / Ore Deposits
+904xx   Mushrooms
+905xx   Crops / Plants
+906xx   Crystals
+907xx   Special Harvestables
+908xx   Quest Harvestables
 ```
 
 ---
@@ -454,7 +542,7 @@ If creating a new bow weapon:
 Major category: Items
 Item category: Weapons
 Weapon category: Bows
-Range: 714xx
+Range: 7140x
 Next available ID: 71401
 ```
 
@@ -466,6 +554,15 @@ Skill category: Ranged skills
 Skill usage type: Weapon normal attack
 Range: 820xx
 Next available ID: 82001
+```
+
+If creating a new harvestable oak tree:
+
+```text
+Major category: Harvestable Objects
+Harvestable category: Trees
+Range: 900xx
+Next available ID: 90001
 ```
 
 ---
@@ -489,13 +586,13 @@ The following are not permitted:
 The following values are reserved:
 
 ```text
-0       None / Unassigned / Invalid
+00000   None / Unassigned / Invalid
 -1      Runtime-only invalid value if needed by code
 ```
 
-`0` should not be used for real content.
+`00000` should not be used for real content.
 
-If an enum, profile, or behaviour needs a default invalid ID, use `0` unless the code has a specific reason to distinguish between `0` and `-1`.
+If an enum, profile, or behaviour needs a default invalid ID, use `00000` unless the code has a specific reason to distinguish between `00000` and `-1`.
 
 ---
 
@@ -511,13 +608,13 @@ When adding a new ID category or subcategory:
 
 ### Example
 
-If projectile items are later separated from consumable items:
+If a new category is introduced for environmental objects:
 
 ```text
-73xxx   Projectile items
+91xxx   Environmental objects
 ```
 
-The new range should be documented before any projectile item profiles are assigned IDs.
+The new range should be documented before any corresponding assets or behaviours are assigned IDs.
 
 ---
 
