@@ -21,3 +21,8 @@ MonoBehaviour:
   _acceptedImpactTypes: -1
   _breakBehaviour: 0
   _harvestedSprite: {fileID: -2091055549, guid: 94ff3b01f7317c243a29213d03ca7285, type: 3}
+  _dropEntries:
+  - _collectiblePrefab: {fileID: 911403449981665168, guid: aed8e95019f6d744ba96282cc9f3fba2, type: 3}
+    _minimumSpawnCount: 1
+    _maximumSpawnCount: 2
+    _dropChance: 1

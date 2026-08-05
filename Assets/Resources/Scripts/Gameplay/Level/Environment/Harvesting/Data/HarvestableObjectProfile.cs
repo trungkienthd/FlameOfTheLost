@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -13,7 +14,7 @@ namespace FlameOfTheLost
         [SerializeField, Min(1)] private int _id = 1;
         [SerializeField] private string _key;
         [SerializeField] private string _displayName;
-        [SerializeField, TextArea] private string _description;
+        [SerializeField, TextArea(5, 5)] private string _description;
         public int Id => Mathf.Max(1, _id);
         public string Key => _key;
         public string DisplayName => _displayName;
@@ -42,5 +43,14 @@ namespace FlameOfTheLost
         [SerializeField] private Sprite _harvestedSprite;
         public HarvestableBreakBehaviour BreakBehaviour => _breakBehaviour;
         public Sprite HarvestedSprite => _harvestedSprite;
+
+        //      3.4. Drops
+        [Header("Drops")]
+        [SerializeField]
+        private List<HarvestableDropEntry> _dropEntries = new();
+        public IReadOnlyList<HarvestableDropEntry> DropEntries => _dropEntries;
+
+        [SerializeField, Min(0f)] private float _randomPositionRadius = 0.35f;
+        public float RandomPositionRadius => Mathf.Max(0f, _randomPositionRadius);
     }
 }

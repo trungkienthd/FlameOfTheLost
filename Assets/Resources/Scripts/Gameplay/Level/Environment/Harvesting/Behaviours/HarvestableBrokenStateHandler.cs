@@ -2,18 +2,10 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class HarvestableBrokenStateHandler : FOTLMonoBehaviour
+    public class HarvestableBrokenStateHandler : HarvestableObjectSubHandlerBase
     {
         // --- References ---
-        //  1. Brain Controller
-        private HarvestableObjectController _harvestableObjectController;
-        private HarvestableObjectController HarvestableObjectController
-        {
-            get => _harvestableObjectController;
-            set => _harvestableObjectController = value;
-        }
-
-        //  2. State References
+        //  1. State References
         [Header("References")]
         [SerializeField] private SpriteRenderer _visualSpriteRenderer;
         [SerializeField] private Collider2D _activeCollider;
@@ -22,15 +14,9 @@ namespace FlameOfTheLost
         private Collider2D ActiveCollider => _activeCollider;
         private Collider2D BrokenColliderPreset => _brokenColliderPreset;
 
-        // --- Configs ---
-        private HarvestableObjectProfile Profile => this.HarvestableObjectController?.Profile;
-
-        private HarvestableBreakBehaviour BreakBehaviour => this.Profile != null
-            ? this.Profile.BreakBehaviour
-            : HarvestableBreakBehaviour.ReplaceVisual;
-        private Sprite HarvestedSprite => this.Profile != null
-            ? this.Profile.HarvestedSprite
-            : null;
+        // --- Data / Configs ---
+        private HarvestableBreakBehaviour BreakBehaviour    => this.Profile != null ? this.Profile.BreakBehaviour : HarvestableBreakBehaviour.ReplaceVisual;
+        private Sprite HarvestedSprite                      => this.Profile != null ? this.Profile.HarvestedSprite : null;
 
         // --- Runtime States ---
         private Sprite _defaultSprite;
@@ -46,52 +32,8 @@ namespace FlameOfTheLost
             set => _defaultColliderSnapshot = value;
         }
 
-        public bool IsBound => this.HarvestableObjectController != null;
-
         // --- Public APIs ---
-        //  1. Brain Binding
-        public void Bind(HarvestableObjectController controller)
-        {
-            if (controller == null)
-            {
-                Debug.LogError
-                (
-                    $"[{this.gameObject.name}." +
-                    $"{nameof(HarvestableBrokenStateHandler)}] " +
-                    $"Cannot bind a null " +
-                    $"{nameof(HarvestableObjectController)}.",
-                    this
-                );
-
-                return;
-            }
-
-            if (this.HarvestableObjectController == controller) return;
-
-            if (this.HarvestableObjectController != null)
-            {
-                Debug.LogWarning
-                (
-                    $"[{this.gameObject.name}." +
-                    $"{nameof(HarvestableBrokenStateHandler)}] " +
-                    $"Replacing the currently bound " +
-                    $"{nameof(HarvestableObjectController)}.",
-                    this
-                );
-            }
-
-            this.HarvestableObjectController = controller;
-        }
-        public void Unbind(HarvestableObjectController controller)
-        {
-            if (controller == null) return;
-
-            if (this.HarvestableObjectController != controller) return;
-
-            this.HarvestableObjectController = null;
-        }
-
-        //  2. State Application
+        //  1. State Application
         public void ApplyBrokenState()
         {
             if (!this.EnsureBound()) return;
@@ -134,24 +76,7 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        //  1. Binding
-        private bool EnsureBound()
-        {
-            if (this.IsBound) return true;
-
-            Debug.LogError
-            (
-                $"[{this.gameObject.name}." +
-                $"{nameof(HarvestableBrokenStateHandler)}] " +
-                $"Handler is not bound to a " +
-                $"{nameof(HarvestableObjectController)}.",
-                this
-            );
-
-            return false;
-        }
-
-        //  2. Visual
+        //  1. Visual
         private void ApplyHarvestedVisual()
         {
             if (this.VisualSpriteRenderer == null) return;
@@ -167,7 +92,7 @@ namespace FlameOfTheLost
             this.VisualSpriteRenderer.sprite = this.DefaultSprite;
         }
 
-        //  3. Collider
+        //  2. Collider
         private void ApplyBrokenCollider()
         {
             if (this.ActiveCollider == null) return;
@@ -279,12 +204,6 @@ namespace FlameOfTheLost
             {
                 this.DefaultColliderSnapshot = defaultState;
             }
-        }
-        protected override void UnbindInternalReferences()
-        {
-            this.HarvestableObjectController = null;
-
-            base.UnbindInternalReferences();
         }
     }
 }

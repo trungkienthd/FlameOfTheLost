@@ -4,13 +4,11 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [RequireComponent(typeof(HarvestableObjectController))]
-    public sealed class HarvestableDropHandler : FOTLMonoBehaviour
+    public sealed class HarvestableDropHandler : HarvestableObjectSubHandlerBase
     {
         // --- References ---
+        //  1. Drop References
         [Header("References")]
-        [SerializeField] private HarvestableObjectController _harvestableObjectController;
-        private HarvestableObjectController HarvestableObjectController => _harvestableObjectController;
-
         [SerializeField] private Transform _defaultDropOrigin;
         private Transform DefaultDropOrigin => _defaultDropOrigin != null
             ? _defaultDropOrigin
@@ -19,13 +17,9 @@ namespace FlameOfTheLost
         [SerializeField] private List<Transform> _dropAnchors = new();
         private IReadOnlyList<Transform> DropAnchors => _dropAnchors;
 
-        // --- Configs ---
-        [Header("Drops")]
-        [SerializeField] private List<HarvestableDropEntry> _dropEntries = new();
-        private IReadOnlyList<HarvestableDropEntry> DropEntries => _dropEntries;
-
-        [SerializeField, Min(0f)] private float _randomPositionRadius = 0.35f;
-        private float RandomPositionRadius => Mathf.Max(0f, _randomPositionRadius);
+        // --- Data / Configs ---
+        private IReadOnlyList<HarvestableDropEntry> DropEntries => this.Profile?.DropEntries;
+        private float RandomPositionRadius                      => this.Profile != null ? this.Profile.RandomPositionRadius : 0.35f;
 
         // --- Helpers ---
         //  1. Drop Spawn
@@ -102,76 +96,19 @@ namespace FlameOfTheLost
             this.SpawnDrops(context);
         }
 
-        // --- FOTLMonoBehaviour Overrides ---
-        protected override void CacheInternalReferences()
+        // --- Binding Hooks ---
+        protected override void OnBound(HarvestableObjectController controller)
         {
-            base.CacheInternalReferences();
+            base.OnBound(controller);
 
-            if (this.HarvestableObjectController == null) _harvestableObjectController = this.GetComponent<HarvestableObjectController>();
+            controller.Broken += this.HandleBroken;
         }
-        protected override void ValidateInternalReferences()
+
+        protected override void OnUnbinding(HarvestableObjectController controller)
         {
-            base.ValidateInternalReferences();
+            controller.Broken -= this.HandleBroken;
 
-            if (this.HarvestableObjectController == null)
-            {
-                Debug.LogError
-                (
-                    $"[{this.gameObject.name}." +
-                    $"{nameof(HarvestableDropHandler)}] " +
-                    $"{nameof(HarvestableObjectController)} " +
-                    $"reference is not assigned.",
-                    this
-                );
-            }
-
-            for (int i = 0; i < this.DropEntries.Count; i++)
-            {
-                HarvestableDropEntry entry =
-                    this.DropEntries[i];
-
-                if (entry == null)
-                {
-                    Debug.LogWarning
-                    (
-                        $"[{this.gameObject.name}." +
-                        $"{nameof(HarvestableDropHandler)}] " +
-                        $"Drop entry [{i}] is null.",
-                        this
-                    );
-
-                    continue;
-                }
-
-                if (entry.CollectiblePrefab == null)
-                {
-                    Debug.LogWarning
-                    (
-                        $"[{this.gameObject.name}." +
-                        $"{nameof(HarvestableDropHandler)}] " +
-                        $"Drop entry [{i}] has no collectible prefab.",
-                        this
-                    );
-                }
-            }
-        }
-        protected override void BindInternalReferences()
-        {
-            base.BindInternalReferences();
-
-            if (this.HarvestableObjectController != null)
-            {
-                this.HarvestableObjectController.Broken += this.HandleBroken;
-            }
-        }
-        protected override void UnbindInternalReferences()
-        {
-            if (this.HarvestableObjectController != null)
-            {
-                this.HarvestableObjectController.Broken -= this.HandleBroken;
-            }
-
-            base.UnbindInternalReferences();
+            base.OnUnbinding(controller);
         }
     }
 }

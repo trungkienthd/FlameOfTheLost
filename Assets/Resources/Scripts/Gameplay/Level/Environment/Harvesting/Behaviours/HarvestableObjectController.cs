@@ -4,6 +4,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [RequireComponent(typeof(HarvestableBrokenStateHandler))]
+    [RequireComponent(typeof(HarvestableDropHandler))]
     public class HarvestableObjectController : FOTLMonoBehaviour
     {
         // --- Data ---
@@ -16,7 +17,9 @@ namespace FlameOfTheLost
         [Header("References")]
         [SerializeField]
         private HarvestableBrokenStateHandler _brokenStateHandler;
+        [SerializeField] private HarvestableDropHandler _dropHandler;
         private HarvestableBrokenStateHandler BrokenStateHandler => _brokenStateHandler;
+        private HarvestableDropHandler DropHandler => _dropHandler;
 
         // --- Configs ---
         //  1. Durability
@@ -131,7 +134,8 @@ namespace FlameOfTheLost
         {
             base.CacheInternalReferences();
 
-            if (this.BrokenStateHandler == null) _brokenStateHandler = this.GetComponent<HarvestableBrokenStateHandler>();
+            if (this.BrokenStateHandler == null) _brokenStateHandler    = this.GetComponent<HarvestableBrokenStateHandler>();
+            if (this.DropHandler        == null) _dropHandler           = this.GetComponent<HarvestableDropHandler>();
         }
         protected override void ValidateInternalReferences()
         {
@@ -160,12 +164,25 @@ namespace FlameOfTheLost
                     this
                 );
             }
+
+            if (this.DropHandler == null)
+            {
+                Debug.LogError
+                (
+                    $"[{this.gameObject.name}." +
+                    $"{nameof(HarvestableObjectController)}] " +
+                    $"{nameof(HarvestableDropHandler)} " +
+                    $"reference is not assigned.",
+                    this
+                );
+            }
         }
         protected override void BindInternalReferences()
         {
             base.BindInternalReferences();
 
             this.BrokenStateHandler?.Bind(this);
+            this.DropHandler?.Bind(this);
         }
         protected override void InitializeInternalState()
         {
@@ -183,6 +200,7 @@ namespace FlameOfTheLost
         protected override void UnbindInternalReferences()
         {
             this.BrokenStateHandler?.Unbind(this);
+            this.DropHandler?.Unbind(this);
 
             base.UnbindInternalReferences();
         }
