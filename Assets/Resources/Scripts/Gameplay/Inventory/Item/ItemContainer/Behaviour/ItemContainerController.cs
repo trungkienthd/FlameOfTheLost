@@ -4,32 +4,46 @@ namespace FlameOfTheLost
 {
     public class ItemContainerController : FOTLMonoBehaviour,
         IIdentityProvider,
+        IIconProvider,
         IPlayerInteractable,
         IPlayerInteractionPromptSource
     {
-        // --- States ---
-        //  1. Identity
-        [Header("Identity")]
-        [SerializeField] private int _id;
-        [SerializeField] private string _key;
-        [SerializeField] private string _displayName = "Chest";
-        [SerializeField, TextArea(5, 5)] private string _description;
-        public int Id => _id;
-        public string Key => _key;
-        public string DisplayName => _displayName;
-        public string Description => _description;
+        // --- Data / Configs ---
+        [Header("Data / Configs")]
+        //  1. Profile
+        [SerializeField] private ItemContainerProfile _profile;
+        public ItemContainerProfile Profile => _profile;
 
-        //  2. References
-        [Header("References")]
-        [SerializeField] private InventoryController _inventoryController;
-        [SerializeField] private ItemContainerPanelController _itemContainerPanelController;
-        private InventoryController InventoryController => _inventoryController;
-        private ItemContainerPanelController ItemContainerPanelController => _itemContainerPanelController;
+        //  2. Identity & Icon
+        public int Id => this.Profile != null
+            ? this.Profile.Id
+            : 0;
+        public string Key => this.Profile != null
+            ? this.Profile.Key
+            : string.Empty;
+        public string DisplayName => this.Profile != null
+            ? this.Profile.DisplayName
+            : string.Empty;
+        public string Description => this.Profile != null
+            ? this.Profile.Description
+            : string.Empty;
+        public Sprite Icon => this.Profile != null
+            ? this.Profile.Icon
+            : null;
 
         //  3. Prompt Settings
         [Header("Prompt Settings")]
         [SerializeField] private int _interactionPromptPriority = 100;
         public int InteractionPromptPriority => _interactionPromptPriority;
+
+        // --- References ---
+        [Header("References")]
+        [SerializeField] private InventoryController _inventoryController;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private ItemContainerPanelController _itemContainerPanelController;
+        private InventoryController InventoryController => _inventoryController;
+        private SpriteRenderer SpriteRenderer => _spriteRenderer;
+        private ItemContainerPanelController ItemContainerPanelController => _itemContainerPanelController;
 
         public bool CanInteract(GameObject interactor)
         {
@@ -67,17 +81,69 @@ namespace FlameOfTheLost
             return $"Open {this.DisplayName}";
         }
 
+        private void InitializeInventory()
+        {
+            if (this.InventoryController == null) return;
+
+            this.InventoryController.InitializeInventory
+            (
+                maximumEntryCount: this.Profile.MaximumEntryCount,
+                sourceEntries: this.Profile.InitialItems
+            );
+        }
+
+        private void InitializeVisual()
+        {
+            if (this.SpriteRenderer == null) return;
+
+            if (this.SpriteRenderer.sprite == null) this.SpriteRenderer.sprite = this.Profile.Icon;
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
 
             if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>();
+            if (this.SpriteRenderer == null) _spriteRenderer = this.GetComponentInChildren<SpriteRenderer>(true);
+        }
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.Profile == null)
+            {
+                Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}] " + $"requires an {nameof(ItemContainerProfile)}.", this);
+            }
+
+            if (this.InventoryController == null)
+            {
+                Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}]" + $"requires an {nameof(InventoryController)}.", this);
+            }
+
+            if (this.SpriteRenderer == null)
+            {
+                Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}] " + $"requires a {nameof(SpriteRenderer)}.", this);
+            }
+        }
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
 
             if (this.ItemContainerPanelController == null)
             {
                 GameObject canvas = GameObject.Find("Canvas");
                 if (canvas != null) _itemContainerPanelController = canvas.GetComponentInChildren<ItemContainerPanelController>(true);
             }
+        }
+        protected override void InitializePregameplayState()
+        {
+            base.InitializePregameplayState();
+
+            if (this.Profile == null) return;
+
+            this.InitializeInventory();
+            this.InitializeVisual();
         }
     }
 }

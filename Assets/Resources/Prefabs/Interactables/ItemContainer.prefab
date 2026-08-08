@@ -117,13 +117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d40cace0e810041965f5825fef5316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerController
-  _id: 1
-  _key: 
-  _displayName: Chest
-  _description: This contains the first Weapon
-  _inventoryController: {fileID: 8783154537871620081}
-  _itemContainerPanelController: {fileID: 0}
+  _enableDebugLogs: 0
+  _profile: {fileID: 0}
   _interactionPromptPriority: 100
+  _inventoryController: {fileID: 8783154537871620081}
+  _spriteRenderer: {fileID: 5580176976726055852}
+  _itemContainerPanelController: {fileID: 0}
 --- !u!50 &2487970832899567984
 Rigidbody2D:
   serializedVersion: 5
@@ -241,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9244e1e84e48be488b4521ffd2d14d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.InventoryController
+  _enableDebugLogs: 0
   _items: []
   _maximumEntryCount: 20
   _learnedSpecialSkills: []

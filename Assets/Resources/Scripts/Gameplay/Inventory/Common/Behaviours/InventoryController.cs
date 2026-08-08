@@ -111,6 +111,13 @@ namespace FlameOfTheLost
         public event Action<SkillProfile> OnLearnedSpecialSkillRemoved;
 
         // --- Public APIs ---
+        public void InitializeInventory(int maximumEntryCount, IReadOnlyList<InventoryItemEntry> sourceEntries)
+        {
+            _maximumEntryCount = Mathf.Max(1, maximumEntryCount);
+
+            this.InitializeInventoryEntries(sourceEntries);
+        }
+
         public void InitializeInventoryEntries(IReadOnlyList<InventoryItemEntry> sourceEntries)
         {
             _items.Clear();
@@ -143,9 +150,9 @@ namespace FlameOfTheLost
 
                 bool added = this.TryAddItemEntryInternal
                 (
-                    sourceEntry.Item,
-                    sourceEntry.Quantity,
-                    sourceEntry.Equipped,
+                    item: sourceEntry.Item,
+                    quantity: sourceEntry.Quantity,
+                    equipped: sourceEntry.Equipped,
                     preserveEntryEquippedState: false
                 );
 
