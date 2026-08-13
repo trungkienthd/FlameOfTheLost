@@ -39,7 +39,7 @@ namespace FlameOfTheLost
 
             if (this.PlayerSpawnerController == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerDefaultSpawnPointController)}] No PlayerSpawnerController assigned.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerDefaultSpawnPointController)}] No {nameof(this.PlayerSpawnerController)} assigned.", this);
                 return;
             }
 
@@ -63,7 +63,7 @@ namespace FlameOfTheLost
 
             if (this.PlayerSpawnerController != null) return;
 
-            _playerSpawnerController = Object.FindFirstObjectByType<PlayerSpawnerController>();
+            _playerSpawnerController = UnityEngine.Object.FindFirstObjectByType<PlayerSpawnerController>();
         }
 
         protected override void ValidateInternalReferences()
@@ -72,7 +72,7 @@ namespace FlameOfTheLost
 
             if (this.PlayerSpawnerController == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerDefaultSpawnPointController)}] Missing reference to {nameof(PlayerSpawnerController)}.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerDefaultSpawnPointController)}] Missing reference to {nameof(this.PlayerSpawnerController)}.", this);
             }
         }
     }

@@ -1,0 +1,221 @@
+# Data ID Convention
+
+**Project:** FlameOfTheLost  
+**Version:** 3.0  
+**Scope:** ID attributes assigned to project-owned **ScriptableObject** assets.
+
+---
+
+# 1. Purpose
+
+This document defines the ID convention used by ScriptableObject data assets throughout **FlameOfTheLost**.
+
+The convention groups IDs by gameplay system to keep them:
+
+- Predictable
+- Searchable
+- Maintainable
+- Easy to expand
+
+Each major gameplay system owns a dedicated numeric range.
+
+Detailed allocation rules are documented in the corresponding category document.
+
+---
+
+# 2. Objectives
+
+This convention aims to:
+
+- Keep IDs readable and traceable.
+- Prevent ID collisions.
+- Organize data assets by gameplay system.
+- Keep IDs stable throughout development.
+- Support future project expansion.
+
+---
+
+# 3. Core Rules
+
+## 3.1 Data Ownership
+
+Only project-owned **ScriptableObject** assets own IDs.
+
+Runtime `MonoBehaviour` components do **not** own independent IDs.
+
+Runtime objects should reference their associated data asset when an ID is required.
+
+---
+
+## 3.2 Integer IDs
+
+All IDs are stored as integers.
+
+Do not use strings or GUIDs as gameplay content identifiers.
+
+---
+
+## 3.3 Major Categories
+
+The **first two digits** identify the major gameplay system.
+
+Example:
+
+```text
+10xxx   Characters
+20xxx   Spawning
+30xxx   Environment
+50xxx   Status Effects
+70xxx   Items
+80xxx   Skills
+```
+
+---
+
+## 3.4 Stability
+
+Once assigned and referenced by gameplay content, an ID should never change.
+
+Changing IDs may invalidate:
+
+- Scene references
+- ScriptableObject references
+- Save data
+- Runtime lookups
+
+---
+
+## 3.5 Uniqueness
+
+Each ScriptableObject asset owns exactly one ID.
+
+IDs must never be reused by unrelated assets.
+
+---
+
+# 4. Major Category Registry
+
+| Range | Gameplay System | Documentation |
+|--------|-----------------|---------------|
+| **10xxx** | Characters | Characters.md |
+| **20xxx** | Spawning | Spawning.md |
+| **30xxx** | Environment | Environment.md |
+| **50xxx** | Status Effects | StatusEffects.md |
+| **70xxx** | Items | Items.md |
+| **80xxx** | Skills | Skills.md |
+
+---
+
+# 5. Summary Table
+
+```text
+10xxx   Character Data
+
+20xxx   Spawning Data
+200xx   Player Default Spawn Points
+201xx   Enemy Default Spawn Points
+210xx   Death Trigger Data
+
+30xxx   Environment Data
+
+300xx   Terrain Profiles
+
+310xx   Tutorial Object Profiles
+311xx   Tutorial Prompt Trigger Profiles
+
+320xx   Item Container Profiles
+321xx   Obstacle Profiles
+322xx   Harvestable Object Profiles
+
+33xxx   Reserved
+34xxx   Reserved
+35xxx   Reserved
+36xxx   Reserved
+37xxx   Reserved
+38xxx   Reserved
+39xxx   Reserved
+
+50xxx   Status Effect Data
+
+70xxx   Item Data
+
+80xxx   Skill Data
+```
+
+---
+
+# 6. Assignment Workflow
+
+When creating a new ScriptableObject asset:
+
+1. Identify its gameplay system.
+2. Open the corresponding category document.
+3. Select the correct sub-range.
+4. Assign the next available ID.
+5. Verify the ID is unused.
+6. Commit the asset with the assigned ID.
+
+---
+
+# 7. Restrictions
+
+The following are **not permitted**:
+
+- Reusing IDs.
+- Assigning IDs outside approved ranges.
+- Mixing unrelated gameplay systems.
+- Changing IDs after assets have been referenced.
+- Using temporary IDs in committed assets.
+- Using negative IDs as valid content.
+- Using `00000` for real gameplay assets.
+
+---
+
+# 8. Reserved Values
+
+```text
+00000   None / Unassigned / Invalid
+-1      Runtime-only invalid value
+```
+
+`00000` must never be assigned to gameplay content.
+
+---
+
+# 9. Future Expansion
+
+When introducing a new gameplay system:
+
+1. Allocate an unused major range.
+2. Create a corresponding category document.
+3. Update this document.
+4. Add the new range to the summary table.
+5. Document all sub-ranges before assigning IDs.
+
+---
+
+# 10. Governance
+
+- Every new ID range must be documented before use.
+- Contributors should consult the corresponding category document before creating new assets.
+- ID collisions must be resolved before merging.
+- Deprecated IDs should not be reused unless the original asset was never committed or referenced.
+
+---
+
+# 11. Related Documents
+
+```text
+Characters.md
+Spawning.md
+Environment.md
+StatusEffects.md
+Items.md
+Skills.md
+```
+
+Each document contains the detailed allocation rules, sub-ranges, assignment rules, and examples for its gameplay system.
+
+---
+
+**End of Document**
