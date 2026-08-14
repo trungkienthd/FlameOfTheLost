@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a599b2e386c8c8c4b8c8146546145acc, type: 3}
   m_Name: ItmCtn_StartWeaponChest
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerProfile
-  _id: 0
+  _id: 32001
   _key: START_WEAPON_CHEST
   _displayName: Start Weapon Chest
   _description: 

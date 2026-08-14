@@ -10,7 +10,7 @@ namespace FlameOfTheLost
         // --- Data / Configs ---
         //  1. Identity
         [Header("Identity")]
-        [SerializeField] private int _id;
+        [SerializeField] private int _id = 20000;
         [SerializeField] private string _key;
         [SerializeField] private string _displayName = "Default Spawn Point";
         [SerializeField, TextArea(5, 5)] private string _description;

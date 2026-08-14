@@ -4,42 +4,46 @@ namespace FlameOfTheLost
 {
     public class CharacterDefaultSpawnPointController : FOTLMonoBehaviour, IIdentityProvider
     {
-        // --- States ---
-        //  1. Identity
-        [Header("Identity")]
-        [SerializeField] private int _id = 1;
-        [SerializeField] private string _key = "MAIN_ENTRANCE";
-        [SerializeField] private string _displayName = "Main Entrance";
-        [SerializeField, TextArea(5, 5)] private string _description = "Spawn point for the main entrance of the level.";
-        public int Id => _id;
-        public string Key => _key;
-        public string DisplayName => _displayName;
-        public string Description => _description;
+        // --- Data / Configs ---
+        //  1. Profile
+        [Header("Data / Configs")]
+        [SerializeField] private CharacterDefaultSpawnPointProfile _profile;
+        public CharacterDefaultSpawnPointProfile Profile => _profile;
 
-        //  2. Anchor
+        //  2. Identity & Icon
+        public int Id => this.Profile != null
+            ? this.Profile.Id
+            : 0;
+        public string Key => this.Profile != null
+            ? this.Profile.Key
+            : string.Empty;
+        public string DisplayName => this.Profile != null
+            ? this.Profile.DisplayName
+            : string.Empty;
+        public string Description => this.Profile != null
+            ? this.Profile.Description
+            : string.Empty;
+        public Sprite Icon => this.Profile != null
+            ? this.Profile.Icon
+            : null;
+
+        //  3. Spawn Settings
+        public CharacterFacingStatus DefaultFacing => this.Profile != null
+            ? this.Profile.DefaultFacing
+            : CharacterFacingStatus.Down;
+
+        // --- References ---
+        //  1. Anchor
         [Header("Anchor")]
         [SerializeField] private Transform _spawnAnchor;
         protected Transform SpawnAnchor => _spawnAnchor;
 
-        public Vector3 SpawnPosition
-        {
-            get
-            {
-                return this.SpawnAnchor != null ? this.SpawnAnchor.position : this.transform.position;
-            }
-        }
-        public Quaternion SpawnRotation
-        {
-            get
-            {
-                return this.SpawnAnchor != null ? this.SpawnAnchor.rotation : this.transform.rotation;
-            }
-        }
-
-        //  3. Spawn Settings
-        [Header("Spawn Settings")]
-        [SerializeField] private CharacterFacingStatus _defaultFacing = CharacterFacingStatus.Down;
-        public CharacterFacingStatus DefaultFacing => _defaultFacing;
+        public Vector3 SpawnPosition => this.SpawnAnchor != null 
+            ? this.SpawnAnchor.position 
+            : this.transform.position;
+        public Quaternion SpawnRotation => this.SpawnAnchor != null 
+            ? this.SpawnAnchor.rotation 
+            : this.transform.rotation;
 
         // --- Unity Callbacks ---
         protected virtual void Reset()
@@ -71,9 +75,14 @@ namespace FlameOfTheLost
         {
             base.ValidateInternalReferences();
 
+            if (this.Profile == null)
+            {
+                Debug.LogError($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + $"requires a {nameof(CharacterDefaultSpawnPointProfile)}.", this);
+            }
+
             if (this.SpawnAnchor == null)
             {
-                Debug.LogWarning($"No spawn anchor found for {this.name}. Defaulting to self transform.");
+                Debug.LogWarning($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + "No spawn anchor found for {this.name}. Defaulting to self transform.");
             }
         }
     }

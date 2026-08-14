@@ -4,31 +4,26 @@ namespace FlameOfTheLost
 {
     public class PlayerDefaultSpawnPointController : CharacterDefaultSpawnPointController
     {
-        // --- States ---
-        //  1. References
+        // --- Data / Configs ---
+        //  1. Profile
+        public PlayerDefaultSpawnPointProfile PlayerProfile => this.Profile as PlayerDefaultSpawnPointProfile;
+
+        //  2. Activation Settings
+        private bool ActivateOnPlayerEnter => this.PlayerProfile != null && this.PlayerProfile.ActivateOnPlayerEnter;
+
+        // --- References --- 
         [Header("References")]
         [SerializeField] private PlayerSpawnerController _playerSpawnerController;
         private PlayerSpawnerController PlayerSpawnerController => _playerSpawnerController;
-
-        //  2. Activation Settings
-        [Header("Activation Settings")]
-        [SerializeField] private bool _activateOnPlayerEnter = true;
-        private bool ActivateOnPlayerEnter => _activateOnPlayerEnter;
 
         // --- Unity Callbacks ---
         protected override void Reset()
         {
             base.Reset();
+
             this.ConfigureColliderAsTrigger();
             this.CacheInternalReferences();
         }
-
-        //protected override void OnValidate()
-        //{
-        //    base.OnValidate();
-        //    this.ConfigureColliderAsTrigger();
-        //    this.CacheReferences();
-        //}
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -61,18 +56,31 @@ namespace FlameOfTheLost
         {
             base.CacheInternalReferences();
 
-            if (this.PlayerSpawnerController != null) return;
-
-            _playerSpawnerController = UnityEngine.Object.FindFirstObjectByType<PlayerSpawnerController>();
+            if (this.PlayerSpawnerController == null) _playerSpawnerController = UnityEngine.Object.FindFirstObjectByType<PlayerSpawnerController>();
         }
 
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
+            if (this.Profile != null && this.PlayerProfile == null)
+            {
+                Debug.LogError
+                (
+                    $"[{this.name}.{nameof(PlayerDefaultSpawnPointController)}] " +
+                    $"requires its Profile to be a {nameof(PlayerDefaultSpawnPointProfile)}.",
+                    this
+                );
+            }
+
             if (this.PlayerSpawnerController == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerDefaultSpawnPointController)}] Missing reference to {nameof(this.PlayerSpawnerController)}.", this);
+                Debug.LogError
+                (
+                    $"[{this.gameObject.name}.{nameof(PlayerDefaultSpawnPointController)}] " +
+                    $"Missing reference to {nameof(PlayerSpawnerController)}.",
+                    this
+                );
             }
         }
     }

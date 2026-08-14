@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590a3b116cd151943b5db3a6ad3a56a6, type: 3}
+  m_Name: DSp_Player_GreenvaleEntrance
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerDefaultSpawnPointProfile
+  _id: 20001
+  _key: GREENVALE_ENTRANCE
+  _displayName: Greenvale Entrance
+  _description: 
+  _icon: {fileID: 0}
+  _defaultFacing: 0
+  _activateOnPlayerEnter: 1
