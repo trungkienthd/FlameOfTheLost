@@ -45,32 +45,30 @@ namespace FlameOfTheLost
             ? this.SpawnAnchor.rotation 
             : this.transform.rotation;
 
+        //  2. Visual
+        [Header("Visual")]
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        protected SpriteRenderer SpriteRenderer => _spriteRenderer;
+
         // --- Unity Callbacks ---
         protected virtual void Reset()
         {
             this.CacheInternalReferences();
         }
 
-        //protected virtual void OnValidate()
-        //{
-        //    this.CacheReferences();
-        //}
-
-        // --- Helpers ---
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
 
-            if (this.SpawnAnchor != null) return;
-
-            Transform anchor = this.transform.Find("SpawnAnchor");
-
-            if (anchor != null)
+            if (this.SpawnAnchor == null)
             {
-                _spawnAnchor = anchor;
+                Transform anchor = this.transform.Find("SpawnAnchor");
+                if (anchor != null) _spawnAnchor = anchor;
             }
-        }
 
+            if (this.SpriteRenderer == null) _spriteRenderer = this.GetComponentInChildren<SpriteRenderer>(true);
+        }
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
@@ -84,6 +82,22 @@ namespace FlameOfTheLost
             {
                 Debug.LogWarning($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + "No spawn anchor found for {this.name}. Defaulting to self transform.");
             }
+
+            if (this.SpriteRenderer == null)
+            {
+                Debug.LogWarning($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + "No SpriteRenderer found under Visual.", this);
+            }
+        }
+
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            if (this.SpriteRenderer == null) return;
+            if (this.SpriteRenderer.sprite != null) return;
+            if (this.Icon == null) return;
+
+            this.SpriteRenderer.sprite = this.Icon;
         }
     }
 }
