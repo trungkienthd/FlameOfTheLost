@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterDefaultSpawnPointController : FOTLMonoBehaviour, IIdentityProvider
+    public class CharacterDefaultSpawnPointController : FOTLMonoBehaviour
     {
         // --- Data / Configs ---
         //  1. Profile
@@ -10,22 +10,8 @@ namespace FlameOfTheLost
         [SerializeField] private CharacterDefaultSpawnPointProfile _profile;
         public CharacterDefaultSpawnPointProfile Profile => _profile;
 
-        //  2. Identity & Icon
-        public int Id => this.Profile != null
-            ? this.Profile.Id
-            : 0;
-        public string Key => this.Profile != null
-            ? this.Profile.Key
-            : string.Empty;
-        public string DisplayName => this.Profile != null
-            ? this.Profile.DisplayName
-            : string.Empty;
-        public string Description => this.Profile != null
-            ? this.Profile.Description
-            : string.Empty;
-        public Sprite Icon => this.Profile != null
-            ? this.Profile.Icon
-            : null;
+        //  2. Identity
+        public int Id => this.Profile != null ? this.Profile.Id : 0;
 
         //  3. Spawn Settings
         public CharacterFacingStatus DefaultFacing => this.Profile != null
@@ -34,7 +20,7 @@ namespace FlameOfTheLost
 
         // --- References ---
         //  1. Anchor
-        [Header("Anchor")]
+        [Header("References")]
         [SerializeField] private Transform _spawnAnchor;
         protected Transform SpawnAnchor => _spawnAnchor;
 
@@ -46,7 +32,6 @@ namespace FlameOfTheLost
             : this.transform.rotation;
 
         //  2. Visual
-        [Header("Visual")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
         protected SpriteRenderer SpriteRenderer => _spriteRenderer;
 
@@ -95,9 +80,9 @@ namespace FlameOfTheLost
 
             if (this.SpriteRenderer == null) return;
             if (this.SpriteRenderer.sprite != null) return;
-            if (this.Icon == null) return;
+            if (this.Profile.Icon == null) return;
 
-            this.SpriteRenderer.sprite = this.Icon;
+            this.SpriteRenderer.sprite = this.Profile.Icon;
         }
     }
 }

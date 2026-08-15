@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 1799121282472352539}
   - component: {fileID: 6190272038796867758}
   m_Layer: 0
-  m_Name: Prefab_PlayerDefaultSpawnPoint
+  m_Name: Prefab_DSP_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,10 +183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b569abdf9375849b6e339efb03e265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerSpawnPointController
-  _id: 001_MAIN_ENTRANCE
+  _enableDebugLogs: 0
+  _profile: {fileID: 0}
   _spawnAnchor: {fileID: 5457502540746387508}
-  _defaultFacing: 1
-  _activateOnPlayerEnter: 1
+  _spriteRenderer: {fileID: 5336768015768600978}
+  _playerSpawnerController: {fileID: 0}
 --- !u!58 &6190272038796867758
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "DSp_Generic_New", menuName = "Data/FlameOfTheLost/Level/Spawning/DefaultSpawnPoints/CharacterDefaultSpawnPointProfile")]
+    [CreateAssetMenu(fileName = "DSP_Generic_New", menuName = "Data/FlameOfTheLost/Level/Spawning/DefaultSpawnPoints/CharacterDefaultSpawnPointProfile")]
     public class CharacterDefaultSpawnPointProfile : ScriptableObject,
         IIdentityProvider,
         IIconProvider

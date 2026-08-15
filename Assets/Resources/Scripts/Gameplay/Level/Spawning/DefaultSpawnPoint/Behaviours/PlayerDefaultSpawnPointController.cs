@@ -12,7 +12,7 @@ namespace FlameOfTheLost
         private bool ActivateOnPlayerEnter => this.PlayerProfile != null && this.PlayerProfile.ActivateOnPlayerEnter;
 
         // --- References --- 
-        [Header("References")]
+        [Header("References (Player-related)")]
         [SerializeField] private PlayerSpawnerController _playerSpawnerController;
         private PlayerSpawnerController PlayerSpawnerController => _playerSpawnerController;
 

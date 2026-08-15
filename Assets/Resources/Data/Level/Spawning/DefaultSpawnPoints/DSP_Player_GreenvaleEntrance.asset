@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 590a3b116cd151943b5db3a6ad3a56a6, type: 3}
-  m_Name: DSp_Player_GreenvaleLedge
+  m_Name: DSP_Player_GreenvaleEntrance
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerDefaultSpawnPointProfile
-  _id: 20002
-  _key: GREENVALE_LEDGE
-  _displayName: Greenvale Ledge
+  _id: 20001
+  _key: GREENVALE_ENTRANCE
+  _displayName: Greenvale Entrance
   _description: 
   _icon: {fileID: -1678536130, guid: ed26a618e3ead734889f0fdcd174e4a9, type: 3}
-  _defaultFacing: 1
+  _defaultFacing: 0
   _activateOnPlayerEnter: 1
