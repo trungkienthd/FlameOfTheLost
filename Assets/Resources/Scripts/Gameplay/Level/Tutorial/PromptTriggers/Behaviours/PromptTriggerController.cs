@@ -29,7 +29,8 @@ namespace FlameOfTheLost
 
         // --- Runtime State ---
         //  1. Condition States
-        private readonly Dictionary<PromptTriggerConditionKey, bool> _conditionStateMap = new();
+        [Header("Condition State (Runtime)")]
+        [SerializeField] private PromptTriggerConditionStateMap _conditionStateMap = new();
         private IReadOnlyDictionary<PromptTriggerConditionKey, bool> ConditionStateMap => _conditionStateMap;
 
         //  2. Runtime State
