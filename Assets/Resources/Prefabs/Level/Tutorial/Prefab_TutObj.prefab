@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7169060159948760592}
   - component: {fileID: 902215287030758171}
   m_Layer: 7
-  m_Name: Prefab_Obst_TutorialWorldVisual
+  m_Name: Prefab_TutObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

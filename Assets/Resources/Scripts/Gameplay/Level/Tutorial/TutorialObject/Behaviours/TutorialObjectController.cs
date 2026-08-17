@@ -3,45 +3,37 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class TutorialWorldVisualController : FOTLMonoBehaviour, IIdentityProvider
+    public class TutorialObjectController : FOTLMonoBehaviour
     {
-        [Header("Identity")]
-        [SerializeField] private int _id = 4000;
-        [SerializeField] private string _key = "TUTORIAL_WORLD_VISUAL";
-        [SerializeField] private string _displayName = "Tutorial World Visual";
-        [SerializeField, TextArea(5, 5)] private string _description = "Tutorial world visual.";
-        public int Id => _id;
-        public string Key => _key;
-        public string DisplayName => _displayName;
-        public string Description => _description;
+        // --- Data / Configs ---
+        [Header("Data / Configs")]
 
+        //  1. Profile
+        [SerializeField] private TutorialObjectProfile _profile;
+        private TutorialObjectProfile Profile => _profile;
+
+        //  2. Identity
+        private string Description => this.Profile != null ? this.Profile.Description : "";
+
+        //  3. Settings
+        private bool VisibleOnStart => this.Profile != null ? this.Profile.VisibleOnStart : true;
+
+        // --- References ---
         [Header("References")]
         [SerializeField] private GameObject _instructionVisual;
         [SerializeField] private TMP_Text _instructionText;
         private GameObject InstructionVisual => _instructionVisual;
         private TMP_Text InstructionText => _instructionText;
 
-        [Header("Settings")]
-        [SerializeField] private bool _visibleOnStart = true;
-        private bool VisibleOnStart => _visibleOnStart;
-
-        protected override void Start()
-        {
-            base.Start();
-
-            this.SetVisible(this.VisibleOnStart);
-        }
-
+        // --- Public APIs ---
         public void Show()
         {
             this.SetVisible(true);
         }
-
         public void Hide()
         {
             this.SetVisible(false);
         }
-
         public void SetVisible(bool isVisible)
         {
             if (this.InstructionVisual == null) return;
@@ -54,7 +46,7 @@ namespace FlameOfTheLost
             }
         }
 
-        // --- Helpers ---
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
@@ -72,14 +64,24 @@ namespace FlameOfTheLost
         {
             base.ValidateInternalReferences();
 
+            if (this.Profile == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialObjectController)}] " + $"requires a {nameof(TutorialObjectProfile)}.", this);
+            }
             if (this.InstructionVisual == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialWorldVisualController)}] InstructionVisual reference is missing.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialObjectController)}] InstructionVisual reference is missing.", this);
             }
             if (this.InstructionText == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialWorldVisualController)}] InstructionText reference is missing.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialObjectController)}] InstructionText reference is missing.", this);
             }
+        }
+        protected override void InitializePregameplayState()
+        {
+            base.InitializePregameplayState();
+
+            this.SetVisible(this.VisibleOnStart);
         }
     }
 }
