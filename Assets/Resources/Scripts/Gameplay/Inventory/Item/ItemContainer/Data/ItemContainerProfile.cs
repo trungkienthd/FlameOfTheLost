@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "ItmCtn_New", menuName = "Data/FlameOfTheLost/Level/Interactable/ItemContainerProfile")]
+    [CreateAssetMenu(fileName = "ItmCtn_New", menuName = "Data/FlameOfTheLost/Level/Environment/Interactable/ItemContainerProfile")]
     public class ItemContainerProfile : ScriptableObject,
         IIdentityProvider,
         IIconProvider

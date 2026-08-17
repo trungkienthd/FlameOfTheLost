@@ -4,43 +4,35 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class PromptTriggerController : FOTLMonoBehaviour, 
-        IIdentityProvider, 
+    public class PromptTriggerController : FOTLMonoBehaviour,
         IPlayerInteractionPromptSource,
         IPlayerInteractionPromptRefreshNotifier
     {
-        // --- States ---
-        //  1. Identity
-        [Header("Identity")]
-        [SerializeField] private int _id = 4100;
-        [SerializeField] private string _key = "TUTORIAL_PROMPT";
-        [SerializeField] private string _displayName = "Tutorial Prompt";
-        [SerializeField, TextArea(5, 5)] private string _description = "Tutorial prompt.";
-        public int Id => _id;
-        public string Key => _key;
-        public string DisplayName => _displayName;
-        public string Description => _description;
+        // --- Data / Configs ---
+        [Header("Data / Configs")]
 
-        //  2. Prompt Settings
-        [Header("Prompt Settings")]
-        [SerializeField] private int _interactionPromptPriority = 0;
-        [SerializeField] private bool _startEnabled = true;
-        [SerializeField] private bool _hideAfterCompleted = true;
-        public int InteractionPromptPriority => _interactionPromptPriority;
-        private bool StartEnabled => _startEnabled;
-        private bool HideAfterCompleted => _hideAfterCompleted;
+        //  1. Profile
+        [SerializeField] private PromptTriggerProfile _profile;
+        private PromptTriggerProfile Profile => _profile;
 
-        //  3. Trigger Conditions
-        [Header("Trigger Conditions")]
-        [SerializeField] private PromptTriggerConditionCombinationType _conditionCombinationType = PromptTriggerConditionCombinationType.All;
-        [SerializeField] private List<PromptTriggerConditionEntry> _conditionEntries = new();
-        private PromptTriggerConditionCombinationType ConditionCombinationType => _conditionCombinationType;
-        private IReadOnlyList<PromptTriggerConditionEntry> ConditionEntries => _conditionEntries;
+        //  2. Identity
+        public string Description => this.Profile != null ? this.Profile.Description : "";
 
+        //  3. Prompt Settings
+        public int InteractionPromptPriority => this.Profile != null ? this.Profile.InteractionPromptPriority : 0;
+        private bool StartEnabled => this.Profile != null ? this.Profile.StartEnabled : true;
+        private bool HideAfterCompleted => this.Profile != null ? this.Profile.HideAfterCompleted : true;
+
+        //  4. Trigger Conditions
+        private PromptTriggerConditionCombinationType ConditionCombinationType => this.Profile != null ? this.Profile.ConditionCombinationType : PromptTriggerConditionCombinationType.All;
+        private IReadOnlyList<PromptTriggerConditionEntry> ConditionEntries => this.Profile != null ? this.Profile.ConditionEntries : Array.Empty<PromptTriggerConditionEntry>();
+
+        // --- Runtime State ---
+        //  1. Condition States
         private readonly Dictionary<PromptTriggerConditionKey, bool> _conditionStateMap = new();
         private IReadOnlyDictionary<PromptTriggerConditionKey, bool> ConditionStateMap => _conditionStateMap;
 
-        //  4. Runtime State
+        //  2. Runtime State
         [Header("Prompt State (Runtime)")]
         [SerializeField] private bool _isPromptEnabled;
         [SerializeField] private bool _isCompleted;

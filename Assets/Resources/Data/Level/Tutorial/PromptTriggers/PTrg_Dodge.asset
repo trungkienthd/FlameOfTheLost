@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c01bafebdd5164c8d460b437566872, type: 3}
+  m_Name: PTrg_Dodge
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PromptTriggerProfile
+  _id: 41004
+  _key: TUTORIAL_PROMPT_DODGE
+  _displayName: Dodge Tutorial Prompt
+  _description: Press [Space] to dodge through enemy attacks.
+  _icon: {fileID: 0}
+  _interactionPromptPriority: 20
+  _startEnabled: 1
+  _hideAfterCompleted: 1
+  _conditionCombinationType: 1
+  _conditionEntries:
+  - _conditionKey: 100
+    _requiredValue: 1
+    _startValue: 0
+  - _conditionKey: 101
+    _requiredValue: 1
+    _startValue: 0

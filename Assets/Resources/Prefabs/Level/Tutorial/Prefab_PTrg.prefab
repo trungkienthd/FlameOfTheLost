@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1156913040774449775}
   - component: {fileID: 1245526795946096561}
   m_Layer: 18
-  m_Name: Prefab_Itrt_PromptTrigger
+  m_Name: Prefab_PTrg
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

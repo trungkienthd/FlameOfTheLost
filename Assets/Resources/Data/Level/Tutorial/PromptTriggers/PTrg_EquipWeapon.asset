@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c01bafebdd5164c8d460b437566872, type: 3}
+  m_Name: PTrg_EquipWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PromptTriggerProfile
+  _id: 41002
+  _key: TUTORIAL_PROMPT_EQUIP_WEAPON
+  _displayName: Equip Weapon Tutorial Prompt
+  _description: Use [Tab] to open the Loadout panel and equip a weapon.
+  _icon: {fileID: 0}
+  _interactionPromptPriority: 0
+  _startEnabled: 1
+  _hideAfterCompleted: 1
+  _conditionCombinationType: 0
+  _conditionEntries: []

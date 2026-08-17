@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "Hvtb_New", menuName = "Data/FlameOfTheLost/Level/Harvesting/HarvestableObjectProfile")]
+    [CreateAssetMenu(fileName = "Hvtb_New", menuName = "Data/FlameOfTheLost/Level/Environment/Harvesting/HarvestableObjectProfile")]
     public class HarvestableObjectProfile : ScriptableObject,
         IIdentityProvider,
         IIconProvider

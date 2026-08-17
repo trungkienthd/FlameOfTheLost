@@ -8,8 +8,9 @@ namespace FlameOfTheLost
     public class DeathTriggerController : FOTLMonoBehaviour
     {
         // --- Data / Configs ---
-        //  1. Profile
         [Header("Data / Configs")]
+
+        //  1. Profile
         [SerializeField] private DeathTriggerProfile _profile;
         public DeathTriggerProfile Profile => _profile;
 
@@ -42,8 +43,6 @@ namespace FlameOfTheLost
 
             CharacterIdentityController identityCtrl = characterRoot.IdentityController;
             if (!this.CanAffectCharacter(identityCtrl)) return;
-
-            if (this.Profile.TriggerOnceUntilExit && this.TriggeredHPControllers.Contains(hpCtrl)) return;
 
             _triggeredHPControllers.Add(hpCtrl);
 
