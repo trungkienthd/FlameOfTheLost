@@ -1,6 +1,6 @@
 # Environment
 
-**Major Range:** `30xxx`
+**Major Range:** `3xxxx`
 
 ---
 
@@ -15,9 +15,6 @@
 ```text
 300xx   TerrainProfile
 
-310xx   TutorialObjectProfile
-311xx   TutorialPromptTriggerProfile
-
 320xx   ItemContainerProfile
 321xx   ObstacleProfile
 322xx   HarvestableObjectProfile
@@ -30,8 +27,17 @@
 ```text
 300xx   Terrain Profiles
 
-310xx   Tutorial Object Profiles
-311xx   Tutorial Prompt Trigger Profiles
+301xx   Reserved
+302xx   Reserved
+303xx   Reserved
+304xx   Reserved
+305xx   Reserved
+306xx   Reserved
+307xx   Reserved
+308xx   Reserved
+309xx   Reserved
+
+31xxx   Reserved
 
 320xx   Item Container Profiles
 321xx   Obstacle Profiles
@@ -60,19 +66,13 @@
 
 ### Terrain Profiles
 
-The ID identifies a terrain type.
-
----
-
-### Tutorial Profiles
-
-The ID identifies a reusable tutorial object or tutorial prompt trigger.
+The ID identifies a **terrain type**.
 
 ---
 
 ### Environment Object Profiles
 
-The ID identifies an environment object archetype.
+The ID identifies an **environment object archetype**.
 
 All instances using the same profile share the same ID.
 
@@ -84,13 +84,7 @@ All instances using the same profile share the same ID.
 30001   Grass
 30002   Water
 
-31001   Movement Tutorial Object
-31002   Combat Tutorial Object
-
-31101   Movement Tutorial Prompt
-31102   Attack Tutorial Prompt
-
-32001   Tutorial Starting Weapon Chest
+32001   Starting Weapon Chest
 32002   Basic Supply Chest
 
 32101   Small Rock

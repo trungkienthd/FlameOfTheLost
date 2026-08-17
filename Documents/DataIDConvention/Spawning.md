@@ -1,18 +1,18 @@
 # Spawning
 
-**Major Range:** `20xxx`
+**Major Range:** `2xxxx`
 
 ---
 
 ## Asset Type
 
--   ScriptableObject
+- ScriptableObject
 
 ---
 
 ## Profile Types
 
-``` text
+```text
 200xx   PlayerDefaultSpawnPointProfile
 201xx   EnemyDefaultSpawnPointProfile
 
@@ -23,7 +23,7 @@
 
 ## Sub-Ranges
 
-``` text
+```text
 200xx   Player Default Spawn Point Profiles
 201xx   Enemy Default Spawn Point Profiles
 

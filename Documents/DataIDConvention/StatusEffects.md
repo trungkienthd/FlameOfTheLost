@@ -1,6 +1,6 @@
 # Status Effects
 
-**Major Range:** `50xxx`
+**Major Range:** `5xxxx`
 
 ---
 

@@ -1,6 +1,6 @@
 # Skills
 
-**Major Range:** `80xxx`
+**Major Range:** `8xxxx`
 
 ---
 
@@ -19,8 +19,8 @@
 ## Skill Type Sub-Ranges
 
 ```text
-810xx   Melee Skills
-820xx   Ranged Skills
+81xxx   Melee Skills
+82xxx   Ranged Skills
 
 83xxx   Reserved
 84xxx   Reserved
@@ -35,7 +35,7 @@
 
 ## Skill Usage Sub-Ranges
 
-The third digit identifies how the skill is obtained or used.
+Within each skill type, the third digit identifies how the skill is obtained or used.
 
 ```text
 8x0xx   Weapon Normal Attacks
@@ -47,7 +47,7 @@ The third digit identifies how the skill is obtained or used.
 
 ## Melee Skills
 
-**Range:** `810xx`  
+**Range:** `81xxx`  
 **Profile Type:** `MeleeSkillProfile`
 
 ```text
@@ -60,7 +60,7 @@ The third digit identifies how the skill is obtained or used.
 
 ## Ranged Skills
 
-**Range:** `820xx`  
+**Range:** `82xxx`  
 **Profile Type:** `RangedSkillProfile`
 
 ```text

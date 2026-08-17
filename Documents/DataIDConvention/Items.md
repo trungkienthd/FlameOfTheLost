@@ -1,6 +1,6 @@
 # Items
 
-**Major Range:** `70xxx`
+**Major Range:** `7xxxx`
 
 ---
 
