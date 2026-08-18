@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "PTrg_New", menuName = "Data/FlameOfTheLost/Level/Tutorial/PromptTriggerProfile")]
-    public class PromptTriggerProfile : ScriptableObject,
+    [CreateAssetMenu(fileName = "TutPTrg_New", menuName = "Data/FlameOfTheLost/Level/Tutorial/TutorialPromptTriggerProfile")]
+    public class TutorialPromptTriggerProfile : ScriptableObject,
         IIdentityProvider,
         IIconProvider
     {
@@ -36,10 +36,9 @@ namespace FlameOfTheLost
 
         //  4. Trigger Conditions
         [Header("Trigger Conditions")]
-        [SerializeField] private PromptTriggerConditionCombinationType _conditionCombinationType = PromptTriggerConditionCombinationType.All;
-        [SerializeField] private List<PromptTriggerConditionEntry> _conditionEntries = new();
-        public PromptTriggerConditionCombinationType ConditionCombinationType => _conditionCombinationType;
-        public IReadOnlyList<PromptTriggerConditionEntry> ConditionEntries => _conditionEntries;
-
+        [SerializeField] private TutorialPromptTriggerConditionCombinationType _conditionCombinationType = TutorialPromptTriggerConditionCombinationType.All;
+        [SerializeField] private List<TutorialPromptTriggerConditionEntry> _conditionEntries = new();
+        public TutorialPromptTriggerConditionCombinationType ConditionCombinationType => _conditionCombinationType;
+        public IReadOnlyList<TutorialPromptTriggerConditionEntry> ConditionEntries => _conditionEntries;
     }
 }

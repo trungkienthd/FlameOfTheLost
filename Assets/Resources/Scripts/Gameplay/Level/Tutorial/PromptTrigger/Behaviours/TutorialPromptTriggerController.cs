@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class PromptTriggerController : FOTLMonoBehaviour,
+    public class TutorialPromptTriggerController : FOTLMonoBehaviour,
         IPlayerInteractionPromptSource,
         IPlayerInteractionPromptRefreshNotifier
     {
@@ -12,8 +12,8 @@ namespace FlameOfTheLost
         [Header("Data / Configs")]
 
         //  1. Profile
-        [SerializeField] private PromptTriggerProfile _profile;
-        private PromptTriggerProfile Profile => _profile;
+        [SerializeField] private TutorialPromptTriggerProfile _profile;
+        private TutorialPromptTriggerProfile Profile => _profile;
 
         //  2. Identity
         public string Description => this.Profile != null ? this.Profile.Description : "";
@@ -24,14 +24,14 @@ namespace FlameOfTheLost
         private bool HideAfterCompleted => this.Profile != null ? this.Profile.HideAfterCompleted : true;
 
         //  4. Trigger Conditions
-        private PromptTriggerConditionCombinationType ConditionCombinationType => this.Profile != null ? this.Profile.ConditionCombinationType : PromptTriggerConditionCombinationType.All;
-        private IReadOnlyList<PromptTriggerConditionEntry> ConditionEntries => this.Profile != null ? this.Profile.ConditionEntries : Array.Empty<PromptTriggerConditionEntry>();
+        private TutorialPromptTriggerConditionCombinationType ConditionCombinationType => this.Profile != null ? this.Profile.ConditionCombinationType : TutorialPromptTriggerConditionCombinationType.All;
+        private IReadOnlyList<TutorialPromptTriggerConditionEntry> ConditionEntries => this.Profile != null ? this.Profile.ConditionEntries : Array.Empty<TutorialPromptTriggerConditionEntry>();
 
         // --- Runtime State ---
         //  1. Condition States
         [Header("Condition State (Runtime)")]
         [SerializeField] private PromptTriggerConditionStateMap _conditionStateMap = new();
-        private IReadOnlyDictionary<PromptTriggerConditionKey, bool> ConditionStateMap => _conditionStateMap;
+        private IReadOnlyDictionary<TutorialPromptTriggerConditionKey, bool> ConditionStateMap => _conditionStateMap;
 
         //  2. Runtime State
         [Header("Prompt State (Runtime)")]
@@ -112,9 +112,9 @@ namespace FlameOfTheLost
         }
 
         //  4. Condition APIs
-        public void SetConditionState(PromptTriggerConditionKey conditionKey, bool value)
+        public void SetConditionState(TutorialPromptTriggerConditionKey conditionKey, bool value)
         {
-            if (conditionKey == PromptTriggerConditionKey.None) return;
+            if (conditionKey == TutorialPromptTriggerConditionKey.None) return;
 
             bool oldValue = this.GetConditionState(conditionKey);
             if (oldValue == value) return;
@@ -123,19 +123,19 @@ namespace FlameOfTheLost
             this.RequestPromptRefresh();
         }
 
-        public void SatisfyCondition(PromptTriggerConditionKey conditionKey)
+        public void SatisfyCondition(TutorialPromptTriggerConditionKey conditionKey)
         {
             this.SetConditionState(conditionKey, true);
         }
 
-        public void UnsatisfyCondition(PromptTriggerConditionKey conditionKey)
+        public void UnsatisfyCondition(TutorialPromptTriggerConditionKey conditionKey)
         {
             this.SetConditionState(conditionKey, false);
         }
 
-        public bool GetConditionState(PromptTriggerConditionKey conditionKey)
+        public bool GetConditionState(TutorialPromptTriggerConditionKey conditionKey)
         {
-            if (conditionKey == PromptTriggerConditionKey.None) return false;
+            if (conditionKey == TutorialPromptTriggerConditionKey.None) return false;
 
             return this.ConditionStateMap.TryGetValue(conditionKey, out bool value) && value;
         }
@@ -157,9 +157,9 @@ namespace FlameOfTheLost
 
             for (int i = 0; i < this.ConditionEntries.Count; i++)
             {
-                PromptTriggerConditionEntry entry = this.ConditionEntries[i];
+                TutorialPromptTriggerConditionEntry entry = this.ConditionEntries[i];
                 if (entry == null) continue;
-                if (entry.ConditionKey == PromptTriggerConditionKey.None) continue;
+                if (entry.ConditionKey == TutorialPromptTriggerConditionKey.None) continue;
 
                 _conditionStateMap[entry.ConditionKey] = entry.StartValue;
             }
@@ -172,7 +172,7 @@ namespace FlameOfTheLost
                 return true;
             }
 
-            if (this.ConditionCombinationType == PromptTriggerConditionCombinationType.Any)
+            if (this.ConditionCombinationType == TutorialPromptTriggerConditionCombinationType.Any)
             {
                 return this.IsAnyTriggerConditionSatisfied();
             }
@@ -184,9 +184,9 @@ namespace FlameOfTheLost
         {
             for (int i = 0; i < this.ConditionEntries.Count; i++)
             {
-                PromptTriggerConditionEntry entry = this.ConditionEntries[i];
+                TutorialPromptTriggerConditionEntry entry = this.ConditionEntries[i];
                 if (entry == null) continue;
-                if (entry.ConditionKey == PromptTriggerConditionKey.None) continue;
+                if (entry.ConditionKey == TutorialPromptTriggerConditionKey.None) continue;
 
                 bool currentValue = this.GetConditionState(entry.ConditionKey);
                 if (currentValue != entry.RequiredValue)
@@ -204,9 +204,9 @@ namespace FlameOfTheLost
 
             for (int i = 0; i < this.ConditionEntries.Count; i++)
             {
-                PromptTriggerConditionEntry entry = this.ConditionEntries[i];
+                TutorialPromptTriggerConditionEntry entry = this.ConditionEntries[i];
                 if (entry == null) continue;
-                if (entry.ConditionKey == PromptTriggerConditionKey.None) continue;
+                if (entry.ConditionKey == TutorialPromptTriggerConditionKey.None) continue;
 
                 hasValidCondition = true;
 

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6c01bafebdd5164c8d460b437566872, type: 3}
-  m_Name: PTrg_Movement
+  m_Name: TutPTrg_NormalAttack
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PromptTriggerProfile
-  _id: 41001
-  _key: TUTORIAL_PROMPT_MOVEMENT
-  _displayName: Movement Tutorial Prompt
-  _description: Use [WASD] or Arrow Keys to move.
+  _id: 41003
+  _key: TUTORIAL_PROMPT_NORMAL_ATTACK
+  _displayName: Normal Attack Tutorial Prompt
+  _description: Use [LMB] for Left Attack, or [RMB] for Right Attack.
   _icon: {fileID: 0}
-  _interactionPromptPriority: 0
+  _interactionPromptPriority: 10
   _startEnabled: 1
   _hideAfterCompleted: 1
   _conditionCombinationType: 0

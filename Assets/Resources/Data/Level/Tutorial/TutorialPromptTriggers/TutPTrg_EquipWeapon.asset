@@ -10,21 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6c01bafebdd5164c8d460b437566872, type: 3}
-  m_Name: PTrg_Dodge
+  m_Name: TutPTrg_EquipWeapon
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PromptTriggerProfile
-  _id: 41004
-  _key: TUTORIAL_PROMPT_DODGE
-  _displayName: Dodge Tutorial Prompt
-  _description: Press [Space] to dodge through enemy attacks.
+  _id: 41002
+  _key: TUTORIAL_PROMPT_EQUIP_WEAPON
+  _displayName: Equip Weapon Tutorial Prompt
+  _description: Use [Tab] to open the Loadout panel and equip a weapon.
   _icon: {fileID: 0}
-  _interactionPromptPriority: 20
+  _interactionPromptPriority: 0
   _startEnabled: 1
   _hideAfterCompleted: 1
-  _conditionCombinationType: 1
-  _conditionEntries:
-  - _conditionKey: 100
-    _requiredValue: 1
-    _startValue: 0
-  - _conditionKey: 101
-    _requiredValue: 1
-    _startValue: 0
+  _conditionCombinationType: 0
+  _conditionEntries: []

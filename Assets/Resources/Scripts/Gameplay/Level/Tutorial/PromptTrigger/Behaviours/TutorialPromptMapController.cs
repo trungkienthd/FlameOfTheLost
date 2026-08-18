@@ -12,14 +12,14 @@ namespace FlameOfTheLost
         private CharacterRootController FirstEnemy => _firstEnemy;
 
         [Header("References - Prompt Triggers")]
-        [SerializeField] private PromptTriggerController _movementPromptTrigger;
-        [SerializeField] private PromptTriggerController _equipPromptTrigger;
-        [SerializeField] private PromptTriggerController _normalAttackPromptTrigger;
-        [SerializeField] private PromptTriggerController _dodgePromptTrigger;
-        private PromptTriggerController MovementPromptTrigger => _movementPromptTrigger;
-        private PromptTriggerController EquipPromptTrigger => _equipPromptTrigger;
-        private PromptTriggerController NormalAttackPromptTrigger => _normalAttackPromptTrigger;
-        private PromptTriggerController DodgePromptTrigger => _dodgePromptTrigger;
+        [SerializeField] private TutorialPromptTriggerController _movementPromptTrigger;
+        [SerializeField] private TutorialPromptTriggerController _equipPromptTrigger;
+        [SerializeField] private TutorialPromptTriggerController _normalAttackPromptTrigger;
+        [SerializeField] private TutorialPromptTriggerController _dodgePromptTrigger;
+        private TutorialPromptTriggerController MovementPromptTrigger => _movementPromptTrigger;
+        private TutorialPromptTriggerController EquipPromptTrigger => _equipPromptTrigger;
+        private TutorialPromptTriggerController NormalAttackPromptTrigger => _normalAttackPromptTrigger;
+        private TutorialPromptTriggerController DodgePromptTrigger => _dodgePromptTrigger;
 
         // --- Unity Callbacks ---
         private void OnEnable()
@@ -37,13 +37,13 @@ namespace FlameOfTheLost
         {
             if (this.DodgePromptTrigger == null) return;
 
-            this.DodgePromptTrigger.SatisfyCondition(PromptTriggerConditionKey.PlayerHitByFirstEnemy);
+            this.DodgePromptTrigger.SatisfyCondition(TutorialPromptTriggerConditionKey.PlayerHitByFirstEnemy);
         }
         public void MarkFirstEnemyDefeated()
         {
             if (this.DodgePromptTrigger == null) return;
 
-            this.DodgePromptTrigger.SatisfyCondition(PromptTriggerConditionKey.FirstEnemyDefeated);
+            this.DodgePromptTrigger.SatisfyCondition(TutorialPromptTriggerConditionKey.FirstEnemyDefeated);
         }
 
         public void ResetTutorialPrompts()

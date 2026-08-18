@@ -1,6 +1,6 @@
 namespace FlameOfTheLost
 {
-    public enum PromptTriggerConditionKey
+    public enum TutorialPromptTriggerConditionKey
     {
         None = 0,
 

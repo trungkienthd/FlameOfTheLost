@@ -1,6 +1,6 @@
 namespace FlameOfTheLost
 {
-    public enum PromptTriggerConditionCombinationType
+    public enum TutorialPromptTriggerConditionCombinationType
     {
         All = 0,
         Any = 1,
