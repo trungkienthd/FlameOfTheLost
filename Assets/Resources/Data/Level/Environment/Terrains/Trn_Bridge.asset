@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebaee3e0c17e91345a066e53fa55a538, type: 3}
-  m_Name: Terrain_Bridge
+  m_Name: Trn_Bridge
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerrainProfile
-  _id: 6004
+  _id: 30004
   _key: BRIDGE
   _displayName: Bridge
   _description: A bridge terrain area. Humanoid characters can move normally while

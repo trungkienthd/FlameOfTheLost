@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "Terrain_New", menuName = "Data/FlameOfTheLost/Level/Environment/TerrainProfile")]
+    [CreateAssetMenu(fileName = "Trn_New", menuName = "Data/FlameOfTheLost/Level/Environment/TerrainProfile")]
     public class TerrainProfile : ScriptableObject, IIdentityProvider
     {
         [Header("Identity")]
-        [SerializeField] private int _id;
+        [SerializeField] private int _id = 30000;
         [SerializeField] private string _key;
         [SerializeField] private string _displayName;
         [SerializeField, TextArea(5, 5)] private string _description;

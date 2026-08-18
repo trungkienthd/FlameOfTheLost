@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1846988642530310887}
   - component: {fileID: 9141785919580951797}
   m_Layer: 0
-  m_Name: TilemapTerrain_Base
+  m_Name: Prefab_Trn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

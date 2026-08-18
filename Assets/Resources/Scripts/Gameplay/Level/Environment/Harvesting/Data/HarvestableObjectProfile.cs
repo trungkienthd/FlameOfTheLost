@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "Hvtb_New", menuName = "Data/FlameOfTheLost/Level/Environment/Harvesting/HarvestableObjectProfile")]
+    [CreateAssetMenu(fileName = "Hvt_New", menuName = "Data/FlameOfTheLost/Level/Environment/Harvesting/HarvestableObjectProfile")]
     public class HarvestableObjectProfile : ScriptableObject,
         IIdentityProvider,
         IIconProvider
@@ -11,7 +11,7 @@ namespace FlameOfTheLost
         // --- States ---
         //  1. Identity
         [Header("Identity")]
-        [SerializeField, Min(1)] private int _id = 1;
+        [SerializeField, Min(1)] private int _id = 32200;
         [SerializeField] private string _key;
         [SerializeField] private string _displayName;
         [SerializeField, TextArea(5, 5)] private string _description;

@@ -48,14 +48,6 @@ namespace FlameOfTheLost
         public event Action<HarvestDamageAppliedContext> HarvestDamageApplied;
         public event Action<HarvestDamageAppliedContext> Broken;
 
-        // --- Unity Callbacks ---
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            _currentDurability = Mathf.Clamp(this.CurrentDurability, 0, this.MaximumDurability);
-        }
-#endif
-
         // --- Public APIs ---
         public bool AcceptsImpactType(HarvestImpactType impactType)
         {
