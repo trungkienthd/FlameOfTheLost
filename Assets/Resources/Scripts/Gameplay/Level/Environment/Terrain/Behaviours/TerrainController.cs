@@ -3,17 +3,15 @@ using UnityEngine.Tilemaps;
 
 namespace FlameOfTheLost
 {
-    public class TilemapTerrainController : FOTLMonoBehaviour
+    public class TerrainController : FOTLWorldObjectProfileBehaviour<TerrainProfile>
     {
+        // --- Data / Configs ---
+        public int Priority => this.Profile != null ? this.Profile.Priority : 0;
+
+        // --- References ---
         [Header("References")]
         [SerializeField] private TilemapRenderer _tilemapRenderer;
         private TilemapRenderer TilemapRenderer => _tilemapRenderer;
-
-        [Header("Data")]
-        [SerializeField] private TerrainProfile _profile;
-        public TerrainProfile TerrainProfile => _profile;
-
-        public int Priority => this.TerrainProfile != null ? this.TerrainProfile.Priority : 0;
 
         protected override void Awake()
         {
@@ -41,7 +39,18 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        //  1. FOTL Base Behaviour Overrides
+        //  1. Setup Collider's isTrigger
+        private void ConfigureCollider()
+        {
+            Collider2D collider = this.GetComponent<Collider2D>();
+
+            if (collider != null)
+            {
+                collider.isTrigger = true;
+            }
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
@@ -54,22 +63,7 @@ namespace FlameOfTheLost
 
             if (this.TilemapRenderer == null)
             {
-                Debug.LogError($"[{nameof(TilemapTerrainController)}] TilemapRenderer reference is missing.", this);
-            }
-            if (this.TerrainProfile == null)
-            {
-                Debug.LogError($"[{nameof(TilemapTerrainController)}] {nameof(this.TerrainProfile)} reference is missing.", this);
-            }
-        }
-
-        //  2. Setup Collider's isTrigger
-        private void ConfigureCollider()
-        {
-            Collider2D collider = this.GetComponent<Collider2D>();
-
-            if (collider != null)
-            {
-                collider.isTrigger = true;
+                Debug.LogError($"[{this.gameObject.name}{nameof(TerrainController)}] {nameof(UnityEngine.Tilemaps.TilemapRenderer)} reference is missing.", this);
             }
         }
     }

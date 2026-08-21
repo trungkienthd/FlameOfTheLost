@@ -274,7 +274,7 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _profile: {fileID: 11400000, guid: bb3903adf0b3ee244818d403c4dbbbca, type: 2}
   _brokenStateHandler: {fileID: 4187473113774351543}
-  _dropHandler: {fileID: 0}
+  _dropHandler: {fileID: 8483016149196059644}
   _currentDurability: 0
   _isBroken: 0
 --- !u!114 &8483016149196059644

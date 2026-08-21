@@ -21,10 +21,10 @@ namespace FlameOfTheLost
         public float TerrainStatusEffectRefreshInterval => _terrainStatusEffectRefreshInterval;
 
         //  4. Runtime
-        private readonly HashSet<TilemapTerrainController> _touchingTerrains = new();
+        private readonly HashSet<TerrainController> _touchingTerrains = new();
 
-        private TilemapTerrainController _currentTerrainCtrl;
-        private TilemapTerrainController CurrentTerrainCtrl => _currentTerrainCtrl;
+        private TerrainController _currentTerrainCtrl;
+        private TerrainController CurrentTerrainCtrl => _currentTerrainCtrl;
 
         private float _nextTerrainStatusEffectRefreshTime;
         private float NextTerrainStatusEffectRefreshTime => _nextTerrainStatusEffectRefreshTime;
@@ -48,16 +48,16 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs ---
-        public void RegisterTerrain(TilemapTerrainController terrainCtrl)
+        public void RegisterTerrain(TerrainController terrainCtrl)
         {
             if (terrainCtrl == null) return;
-            if (terrainCtrl.TerrainProfile == null) return;
+            if (terrainCtrl.Profile == null) return;
 
             _touchingTerrains.Add(terrainCtrl);
             this.RefreshCurrentTerrain();
         }
 
-        public void UnregisterTerrain(TilemapTerrainController terrainCtrl)
+        public void UnregisterTerrain(TerrainController terrainCtrl)
         {
             if (terrainCtrl == null) return;
 
@@ -75,7 +75,7 @@ namespace FlameOfTheLost
         // --- Helpers ---
         private void RefreshCurrentTerrain()
         {
-            TilemapTerrainController bestTerrainCtrl = this.GetHighestPriorityTerrainController();
+            TerrainController bestTerrainCtrl = this.GetHighestPriorityTerrainController();
 
             if (bestTerrainCtrl == this.CurrentTerrainCtrl) return;
 
@@ -88,15 +88,15 @@ namespace FlameOfTheLost
             this.ApplyCurrentTerrainStatusEffects();
         }
 
-        private TilemapTerrainController GetHighestPriorityTerrainController()
+        private TerrainController GetHighestPriorityTerrainController()
         {
-            TilemapTerrainController bestTerrainCtrl = null;
+            TerrainController bestTerrainCtrl = null;
             int bestPriority = int.MinValue;
 
-            foreach (TilemapTerrainController terrainCtrl in _touchingTerrains)
+            foreach (TerrainController terrainCtrl in _touchingTerrains)
             {
                 if (terrainCtrl == null) continue;
-                if (terrainCtrl.TerrainProfile == null) continue;
+                if (terrainCtrl.Profile == null) continue;
 
                 int priority = terrainCtrl.Priority;
 
@@ -113,10 +113,10 @@ namespace FlameOfTheLost
         private void ApplyCurrentTerrainStatusEffects()
         {
             if (this.CurrentTerrainCtrl == null) return;
-            if (this.CurrentTerrainCtrl.TerrainProfile == null) return;
+            if (this.CurrentTerrainCtrl.Profile == null) return;
             if (this.StatusEffectApplicationHandler == null) return;
 
-            TerrainProfile terrainProfile = this.CurrentTerrainCtrl.TerrainProfile;
+            TerrainProfile terrainProfile = this.CurrentTerrainCtrl.Profile;
 
             if (!terrainProfile.TryGetRule(this.TraversalType, out TerrainStatusEffectRuleEntry rule)) return;
             if (rule == null) return;

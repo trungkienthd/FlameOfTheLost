@@ -2,35 +2,11 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class ItemContainerController : FOTLMonoBehaviour,
-        IIdentityProvider,
-        IIconProvider,
+    public class ItemContainerController : FOTLWorldObjectProfileBehaviour<ItemContainerProfile>,
         IPlayerInteractable,
         IPlayerInteractionPromptSource
     {
-        // --- Data / Configs ---
-        [Header("Data / Configs")]
-        //  1. Profile
-        [SerializeField] private ItemContainerProfile _profile;
-        public ItemContainerProfile Profile => _profile;
-
-        //  2. Identity & Icon
-        public int Id => this.Profile != null
-            ? this.Profile.Id
-            : 0;
-        public string Key => this.Profile != null
-            ? this.Profile.Key
-            : string.Empty;
-        public string DisplayName => this.Profile != null
-            ? this.Profile.DisplayName
-            : string.Empty;
-        public string Description => this.Profile != null
-            ? this.Profile.Description
-            : string.Empty;
-        public Sprite Icon => this.Profile != null
-            ? this.Profile.Icon
-            : null;
-
+        // --- Data / Configs
         //  3. Prompt Settings
         [Header("Prompt Settings")]
         [SerializeField] private int _interactionPromptPriority = 100;
@@ -111,19 +87,13 @@ namespace FlameOfTheLost
         {
             base.ValidateInternalReferences();
 
-            if (this.Profile == null)
-            {
-                Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}] " + $"requires an {nameof(ItemContainerProfile)}.", this);
-            }
-
             if (this.InventoryController == null)
             {
-                Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}]" + $"requires an {nameof(InventoryController)}.", this);
+                Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}]" + $"requires an {nameof(FlameOfTheLost.InventoryController)}.", this);
             }
-
             if (this.SpriteRenderer == null)
             {
-                Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}] " + $"requires a {nameof(SpriteRenderer)}.", this);
+                Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}] " + $"requires a {nameof(UnityEngine.SpriteRenderer)}.", this);
             }
         }
         protected override void CacheExternalReferences()

@@ -4,18 +4,10 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [CreateAssetMenu(fileName = "Trn_New", menuName = "Data/FlameOfTheLost/Level/Environment/TerrainProfile")]
-    public class TerrainProfile : ScriptableObject, IIdentityProvider
+    public class TerrainProfile : FOTLWorldObjectProfile
     {
-        [Header("Identity")]
-        [SerializeField] private int _id = 30000;
-        [SerializeField] private string _key;
-        [SerializeField] private string _displayName;
-        [SerializeField, TextArea(5, 5)] private string _description;
+        [Header("Classification")]
         [SerializeField] private TerrainType _terrainType = TerrainType.Path;
-        public int Id => _id;
-        public string Key => _key;
-        public string DisplayName => _displayName;
-        public string Description => _description;
         public TerrainType TerrainType => _terrainType;
 
         [Header("Priority")]

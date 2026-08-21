@@ -5,14 +5,8 @@ namespace FlameOfTheLost
 {
     [RequireComponent(typeof(HarvestableBrokenStateHandler))]
     [RequireComponent(typeof(HarvestableDropHandler))]
-    public class HarvestableObjectController : FOTLMonoBehaviour
+    public class HarvestableObjectController : FOTLWorldObjectProfileBehaviour<HarvestableObjectProfile>
     {
-        // --- Data ---
-        [Header("Data")]
-        [SerializeField]
-        private HarvestableObjectProfile _profile;
-        public HarvestableObjectProfile Profile => _profile;
-
         // --- References ---
         [Header("References")]
         [SerializeField]
@@ -132,18 +126,6 @@ namespace FlameOfTheLost
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
-
-            if (this.Profile == null)
-            {
-                Debug.LogError
-                (
-                    $"[{this.gameObject.name}." +
-                    $"{nameof(HarvestableObjectController)}] " +
-                    $"{nameof(HarvestableObjectProfile)} reference " +
-                    $"is not assigned.",
-                    this
-                );
-            }
 
             if (this.BrokenStateHandler == null)
             {

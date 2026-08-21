@@ -3,19 +3,10 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class TutorialObjectController : FOTLMonoBehaviour
+    public class TutorialObjectController : FOTLWorldObjectProfileBehaviour<TutorialObjectProfile>
     {
         // --- Data / Configs ---
-        [Header("Data / Configs")]
-
-        //  1. Profile
-        [SerializeField] private TutorialObjectProfile _profile;
-        private TutorialObjectProfile Profile => _profile;
-
-        //  2. Identity
-        private string Description => this.Profile != null ? this.Profile.Description : "";
-
-        //  3. Settings
+        //  1. Settings
         private bool VisibleOnStart => this.Profile != null ? this.Profile.VisibleOnStart : true;
 
         // --- References ---
@@ -64,10 +55,6 @@ namespace FlameOfTheLost
         {
             base.ValidateInternalReferences();
 
-            if (this.Profile == null)
-            {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialObjectController)}] " + $"requires a {nameof(TutorialObjectProfile)}.", this);
-            }
             if (this.InstructionVisual == null)
             {
                 Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialObjectController)}] InstructionVisual reference is missing.", this);

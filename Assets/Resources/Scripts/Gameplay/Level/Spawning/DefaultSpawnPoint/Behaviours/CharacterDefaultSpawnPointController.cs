@@ -2,18 +2,10 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterDefaultSpawnPointController : FOTLMonoBehaviour
+    public class CharacterDefaultSpawnPointController : FOTLWorldObjectProfileBehaviour<CharacterDefaultSpawnPointProfile>
     {
         // --- Data / Configs ---
-        //  1. Profile
-        [Header("Data / Configs")]
-        [SerializeField] private CharacterDefaultSpawnPointProfile _profile;
-        public CharacterDefaultSpawnPointProfile Profile => _profile;
-
-        //  2. Identity
-        public int Id => this.Profile != null ? this.Profile.Id : 0;
-
-        //  3. Spawn Settings
+        //  1. Spawn Settings
         public CharacterFacingStatus DefaultFacing => this.Profile != null
             ? this.Profile.DefaultFacing
             : CharacterFacingStatus.Down;
@@ -58,19 +50,14 @@ namespace FlameOfTheLost
         {
             base.ValidateInternalReferences();
 
-            if (this.Profile == null)
-            {
-                Debug.LogError($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + $"requires a {nameof(CharacterDefaultSpawnPointProfile)}.", this);
-            }
-
             if (this.SpawnAnchor == null)
             {
-                Debug.LogWarning($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + "No spawn anchor found for {this.name}. Defaulting to self transform.");
+                Debug.LogWarning($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + $"No spawn anchor found for {this.name}. Defaulting to self transform.");
             }
 
             if (this.SpriteRenderer == null)
             {
-                Debug.LogWarning($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + "No SpriteRenderer found under Visual.", this);
+                Debug.LogWarning($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + $"No {nameof(UnityEngine.SpriteRenderer)} found under Visual.", this);
             }
         }
 
@@ -80,9 +67,9 @@ namespace FlameOfTheLost
 
             if (this.SpriteRenderer == null) return;
             if (this.SpriteRenderer.sprite != null) return;
-            if (this.Profile.Icon == null) return;
+            if (this.Icon == null) return;
 
-            this.SpriteRenderer.sprite = this.Profile.Icon;
+            this.SpriteRenderer.sprite = this.Icon;
         }
     }
 }

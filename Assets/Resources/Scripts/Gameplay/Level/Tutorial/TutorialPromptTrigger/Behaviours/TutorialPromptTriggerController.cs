@@ -4,26 +4,17 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class TutorialPromptTriggerController : FOTLMonoBehaviour,
+    public class TutorialPromptTriggerController : FOTLWorldObjectProfileBehaviour<TutorialPromptTriggerProfile>,
         IPlayerInteractionPromptSource,
         IPlayerInteractionPromptRefreshNotifier
     {
         // --- Data / Configs ---
-        [Header("Data / Configs")]
-
-        //  1. Profile
-        [SerializeField] private TutorialPromptTriggerProfile _profile;
-        private TutorialPromptTriggerProfile Profile => _profile;
-
-        //  2. Identity
-        public string Description => this.Profile != null ? this.Profile.Description : "";
-
-        //  3. Prompt Settings
+        //  1. Prompt Settings
         public int InteractionPromptPriority => this.Profile != null ? this.Profile.InteractionPromptPriority : 0;
         private bool StartEnabled => this.Profile != null ? this.Profile.StartEnabled : true;
         private bool HideAfterCompleted => this.Profile != null ? this.Profile.HideAfterCompleted : true;
 
-        //  4. Trigger Conditions
+        //  2. Trigger Conditions
         private TutorialPromptTriggerConditionCombinationType ConditionCombinationType => this.Profile != null ? this.Profile.ConditionCombinationType : TutorialPromptTriggerConditionCombinationType.All;
         private IReadOnlyList<TutorialPromptTriggerConditionEntry> ConditionEntries => this.Profile != null ? this.Profile.ConditionEntries : Array.Empty<TutorialPromptTriggerConditionEntry>();
 

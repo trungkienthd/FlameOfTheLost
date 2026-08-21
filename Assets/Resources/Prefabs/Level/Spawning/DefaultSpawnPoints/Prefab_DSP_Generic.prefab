@@ -80,7 +80,7 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _profile: {fileID: 0}
   _spawnAnchor: {fileID: 7340919082135302459}
-  _spriteRenderer: {fileID: 0}
+  _spriteRenderer: {fileID: 5165766568723357902}
 --- !u!1 &9029168243350123571
 GameObject:
   m_ObjectHideFlags: 0

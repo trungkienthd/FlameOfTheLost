@@ -5,15 +5,8 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [RequireComponent(typeof(Collider2D))]
-    public class DeathTriggerController : FOTLMonoBehaviour
+    public class DeathTriggerController : FOTLWorldObjectProfileBehaviour<DeathTriggerProfile>
     {
-        // --- Data / Configs ---
-        [Header("Data / Configs")]
-
-        //  1. Profile
-        [SerializeField] private DeathTriggerProfile _profile;
-        public DeathTriggerProfile Profile => _profile;
-
         // --- Runtime State ---
         private readonly HashSet<HPController> _triggeredHPControllers = new();
         private IReadOnlyCollection<HPController> TriggeredHPControllers => _triggeredHPControllers;
@@ -94,17 +87,6 @@ namespace FlameOfTheLost
             if (triggerCollider != null)
             {
                 triggerCollider.isTrigger = true;
-            }
-        }
-
-        // --- FOTLMonoBehaviour Overrides ---
-        protected override void ValidateInternalReferences()
-        {
-            base.ValidateInternalReferences();
-
-            if (this.Profile == null)
-            {
-                Debug.LogError($"[{this.name}.{nameof(DeathTriggerController)}] " + $"requires a {nameof(DeathTriggerProfile)}.", this);
             }
         }
     }
