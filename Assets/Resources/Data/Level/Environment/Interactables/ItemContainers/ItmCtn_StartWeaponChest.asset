@@ -17,6 +17,10 @@ MonoBehaviour:
   _displayName: Start Weapon Chest
   _description: 
   _icon: {fileID: 337032105, guid: 0fb3e78572f02624ab8a9ca0db2921d9, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: -2.4, y: -1, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
   _initialItems:
   - _item: {fileID: 11400000, guid: 8b948c2a241ff674a9fd13df467bb762, type: 2}
     _quantity: 1

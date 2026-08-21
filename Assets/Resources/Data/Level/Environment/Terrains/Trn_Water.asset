@@ -17,6 +17,11 @@ MonoBehaviour:
   _displayName: Water
   _description: A water terrain area. Humanoid characters move heavily slower while
     standing in water.
+  _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 0
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
   _terrainType: 5
   _priority: 10
   _rules:

@@ -17,6 +17,11 @@ MonoBehaviour:
   _displayName: Bridge
   _description: A bridge terrain area. Humanoid characters can move normally while
     standing on bridges. Bridge terrain overrides a special terrain below it.
+  _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 0
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
   _terrainType: 7
   _priority: 100
   _rules:

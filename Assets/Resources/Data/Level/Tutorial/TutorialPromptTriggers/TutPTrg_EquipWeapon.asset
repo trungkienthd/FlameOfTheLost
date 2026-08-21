@@ -17,6 +17,10 @@ MonoBehaviour:
   _displayName: Equip Weapon Tutorial Prompt
   _description: Use [Tab] to open the Loadout panel and equip a weapon.
   _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: -6.5, y: 5, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
   _interactionPromptPriority: 0
   _startEnabled: 1
   _hideAfterCompleted: 1

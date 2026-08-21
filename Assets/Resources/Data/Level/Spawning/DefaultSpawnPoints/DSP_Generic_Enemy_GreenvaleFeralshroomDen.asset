@@ -17,4 +17,8 @@ MonoBehaviour:
   _displayName: Greenvale Feralshroom Den
   _description: 
   _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 5, y: 19, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
   _defaultFacing: 1

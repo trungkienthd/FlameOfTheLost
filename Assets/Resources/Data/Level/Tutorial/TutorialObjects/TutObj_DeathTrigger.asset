@@ -17,4 +17,8 @@ MonoBehaviour:
   _displayName: 'Tutorial Object: Death Trigger'
   _description: "Falling into this hole \nwill kill you."
   _icon: {fileID: 527407256, guid: ed26a618e3ead734889f0fdcd174e4a9, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 9.3, y: -8, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
   _visibleOnStart: 1

@@ -17,6 +17,10 @@ MonoBehaviour:
   _displayName: Oak Tree
   _description: 
   _icon: {fileID: -1198562835, guid: 94ff3b01f7317c243a29213d03ca7285, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 0, y: 15, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
   _maximumDurability: 5
   _acceptedImpactTypes: -1
   _breakBehaviour: 0

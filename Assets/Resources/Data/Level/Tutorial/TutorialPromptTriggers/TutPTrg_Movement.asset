@@ -17,6 +17,10 @@ MonoBehaviour:
   _displayName: Movement Tutorial Prompt
   _description: Use [WASD] or Arrow Keys to move.
   _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: -12, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
   _interactionPromptPriority: 0
   _startEnabled: 1
   _hideAfterCompleted: 1

@@ -17,5 +17,9 @@ MonoBehaviour:
   _displayName: Greenvale Ledge
   _description: 
   _icon: {fileID: -1678536130, guid: ed26a618e3ead734889f0fdcd174e4a9, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 8, y: -5.4, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
   _defaultFacing: 1
   _activateOnPlayerEnter: 1

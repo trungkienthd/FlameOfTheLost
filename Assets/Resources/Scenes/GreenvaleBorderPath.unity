@@ -46713,11 +46713,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.66
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.79
+      value: 18.5
       objectReference: {fileID: 0}
     - target: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -105602,17 +105602,65 @@ PrefabInstance:
       propertyPath: m_Name
       value: GO_DTrg_WaysidePit_21001
       objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].y
+      value: -0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 7490314327664070869, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
       propertyPath: _profile
       value: 
       objectReference: {fileID: 11400000, guid: 77b7d96e00e999243b9bc38dbcd9bbb3, type: 2}
     - target: {fileID: 9206673644905209065, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 11.5
       objectReference: {fileID: 0}
     - target: {fileID: 9206673644905209065, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 9206673644905209065, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
       propertyPath: m_LocalPosition.z

@@ -17,6 +17,11 @@ MonoBehaviour:
   _displayName: Grass
   _description: A normal grass terrain area. Humanoid characters move slightly slower
     while standing on grass.
+  _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 0
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
   _terrainType: 1
   _priority: 20
   _rules:

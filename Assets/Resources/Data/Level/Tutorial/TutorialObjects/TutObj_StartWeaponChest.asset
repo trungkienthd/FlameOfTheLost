@@ -17,4 +17,8 @@ MonoBehaviour:
   _displayName: 'Tutorial Object: Start Weapon Chest'
   _description: Open this chest to collect your first weapon.
   _icon: {fileID: 527407256, guid: ed26a618e3ead734889f0fdcd174e4a9, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: -2, y: 0.75, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
   _visibleOnStart: 1
