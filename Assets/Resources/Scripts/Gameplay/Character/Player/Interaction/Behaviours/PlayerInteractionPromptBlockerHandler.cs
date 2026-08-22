@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class PlayerInteractionPromptBlockerHandler : FOTLMonoBehaviour
+    public class PlayerInteractionPromptBlockerHandler : PlayerInteractionSubHandlerBase
     {
         // --- Events ---
         public event Action<bool> PromptBlockingStateChanged;
@@ -16,10 +16,7 @@ namespace FlameOfTheLost
         private PlayerMenuManager PlayerMenuManager => _playerMenuManager;
         private PlayerInteractionPanelListManager PlayerInteractionPanelListManager => _playerInteractionPanelListManager;
 
-        private PlayerInteractionHandler _interactionHandler;
-        private PlayerInteractionHandler InteractionHandler => _interactionHandler;
-
-        // --- States ---
+        // --- Runtime ---
         private readonly HashSet<IPlayerInteractionPromptBlocker> _registeredPromptBlockers = new();
         private readonly HashSet<IPlayerInteractionPromptBlocker> _activePromptBlockers = new();
         private IReadOnlyCollection<IPlayerInteractionPromptBlocker> RegisteredPromptBlockers => _registeredPromptBlockers;
@@ -27,12 +24,6 @@ namespace FlameOfTheLost
         public bool IsPromptBlocked => this.ActivePromptBlockers.Count > 0;
 
         // --- Public APIs ---
-        //  0. Initialization
-        public void Initialize(PlayerInteractionHandler interactionHandler)
-        {
-            _interactionHandler = interactionHandler;
-        }
-
         //  1. Prompt Blocker Registration
         public void RegisterPromptBlocker(IPlayerInteractionPromptBlocker blocker)
         {

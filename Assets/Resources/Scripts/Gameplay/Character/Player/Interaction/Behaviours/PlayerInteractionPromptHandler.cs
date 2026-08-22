@@ -3,17 +3,16 @@ using UnityEngine.InputSystem;
 
 namespace FlameOfTheLost
 {
-    public class PlayerInteractionPromptHandler : FOTLMonoBehaviour
+    public class PlayerInteractionPromptHandler : PlayerInteractionSubHandlerBase
     {
         // --- References ---
-        private PlayerInteractionHandler _interactionHandler;
-        private PlayerInteractionHandler InteractionHandler => _interactionHandler;
-        private PlayerInteractionTargetHandler TargetHandler => this.InteractionHandler.TargetHandler;
-
         [SerializeField] private PlayerInteractionPromptPanelController _promptPanelController;
         private PlayerInteractionPromptPanelController PromptPanelController => _promptPanelController;
 
-        // --- States ---
+        private PlayerInteractionInteractableTargetHandler InteractableTargetHandler => this.InteractionHandler?.InteractableTargetHandler;
+        private PlayerInteractionPromptSourceTargetHandler PromptSourceTargetHandler => this.InteractionHandler?.PromptSourceTargetHandler;
+
+        // --- Runtime ---
         [SerializeField] private InputActionReference _interactActionReference;
         private InputActionReference InteractActionReference => _interactActionReference;
         private InputAction InteractAction => this.InteractActionReference != null ? this.InteractActionReference.action : null;
@@ -24,16 +23,10 @@ namespace FlameOfTheLost
         private string FallbackInteractPromptText => _fallbackInteractPromptText;
 
         // --- Public APIs ---
-        //  0. Initialization
-        public void Initialize(PlayerInteractionHandler interactionHandler)
-        {
-            _interactionHandler = interactionHandler;
-        }
-
         //  1. Prompt Display
         public void RefreshPrompt()
         {
-            if (this.InteractionHandler == null || this.TargetHandler == null)
+            if (this.InteractionHandler == null)
             {
                 this.HidePrompt();
                 return;
@@ -41,14 +34,14 @@ namespace FlameOfTheLost
 
             GameObject interactor = this.InteractionHandler.GetInteractor();
 
-            IPlayerInteractable nearestInteractable = this.TargetHandler.GetNearestInteractable(interactor);
+            IPlayerInteractable nearestInteractable = this.InteractableTargetHandler?.GetNearestInteractable(interactor);
             if (nearestInteractable != null)
             {
                 this.ShowInteractablePrompt(interactor, nearestInteractable);
                 return;
             }
 
-            IPlayerInteractionPromptSource bestPromptSource = this.TargetHandler.GetBestPromptSource(interactor);
+            IPlayerInteractionPromptSource bestPromptSource = this.PromptSourceTargetHandler?.GetBestPromptSource(interactor);
             if (bestPromptSource != null)
             {
                 this.ShowStandalonePromptSource(interactor, bestPromptSource);

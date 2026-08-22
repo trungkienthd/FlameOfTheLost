@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [RequireComponent(typeof(PlayerInteractionTargetHandler))]
+    [RequireComponent(typeof(PlayerInteractionInteractableTargetHandler))]
+    [RequireComponent(typeof(PlayerInteractionPromptSourceTargetHandler))]
     [RequireComponent(typeof(PlayerInteractionPromptHandler))]
     [RequireComponent(typeof(PlayerInteractionPromptBlockerHandler))]
     public class PlayerInteractionHandler : CharacterBehaviourControllerBase, 
@@ -11,16 +12,21 @@ namespace FlameOfTheLost
     {
         // --- References ---
         [Header("References")]
-        [SerializeField] private PlayerInteractionTargetHandler _targetHandler;
+
+        //  1. Sub-handlers
+        [SerializeField] private PlayerInteractionInteractableTargetHandler _interactableTargetHandler;
+        [SerializeField] private PlayerInteractionPromptSourceTargetHandler _promptSourceTargetHandler;
         [SerializeField] private PlayerInteractionPromptHandler _promptHandler;
         [SerializeField] private PlayerInteractionPromptBlockerHandler _promptBlockerHandler;
-        public PlayerInteractionTargetHandler TargetHandler => _targetHandler;
+        public PlayerInteractionInteractableTargetHandler InteractableTargetHandler => _interactableTargetHandler;
+        public PlayerInteractionPromptSourceTargetHandler PromptSourceTargetHandler => _promptSourceTargetHandler;
         private PlayerInteractionPromptHandler PromptHandler => _promptHandler;
         private PlayerInteractionPromptBlockerHandler PromptBlockerHandler => _promptBlockerHandler;
 
+        //  2. Player-related
         private GameObject PlayerRoot => this.CharacterRootController.CharacterRoot;
 
-        // --- States ---
+        // --- Runtime ---
         //  1. Death Disable State (Runtime)
         [Header("Death Disable (Runtime)")]
         [SerializeField] private bool _isDeathDisabled;
@@ -39,17 +45,18 @@ namespace FlameOfTheLost
         {
             if (this.IsDeathDisabled) return;
             if (other == null || !other.isTrigger) return;
-            if (this.TargetHandler == null) return;
 
-            this.TargetHandler.RegisterNearbyCollider(other);
+            this.InteractableTargetHandler?.RegisterNearbyCollider(other);
+            this.PromptSourceTargetHandler?.RegisterNearbyCollider(other);
+
             this.RefreshPrompt();
         }
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other == null || !other.isTrigger) return;
-            if (this.TargetHandler == null) return;
 
-            this.TargetHandler.UnregisterNearbyCollider(other);
+            this.InteractableTargetHandler?.UnregisterNearbyCollider(other);
+            this.PromptSourceTargetHandler?.UnregisterNearbyCollider(other);
 
             if (!this.IsDeathDisabled)
             {
@@ -95,7 +102,7 @@ namespace FlameOfTheLost
                 return false;
             }
 
-            if (this.TargetHandler == null)
+            if (this.InteractableTargetHandler == null)
             {
                 this.PromptHandler?.HidePrompt();
                 return false;
@@ -103,7 +110,7 @@ namespace FlameOfTheLost
 
             GameObject interactor = this.GetInteractor();
 
-            IPlayerInteractable nearestInteractable = this.TargetHandler.GetNearestInteractable(interactor);
+            IPlayerInteractable nearestInteractable = this.InteractableTargetHandler.GetNearestInteractable(interactor);
             if (nearestInteractable == null)
             {
                 this.RefreshPrompt();
@@ -112,7 +119,9 @@ namespace FlameOfTheLost
 
             bool didInteract = nearestInteractable.TryInteract(interactor);
 
-            this.TargetHandler.RemoveInvalidTargets(); 
+            this.InteractableTargetHandler.RemoveInvalidTargets();
+            this.PromptSourceTargetHandler?.RemoveInvalidTargets();
+
             this.RefreshPrompt();
 
             return didInteract;
@@ -133,7 +142,8 @@ namespace FlameOfTheLost
 
         public void ClearInteractionState() 
         {
-            this.TargetHandler?.ClearNearbyTargets(); 
+            this.InteractableTargetHandler?.ClearNearbyTargets();
+            this.PromptSourceTargetHandler?.ClearNearbyTargets();
             this.PromptHandler?.HidePrompt(); 
         }
 
@@ -159,54 +169,42 @@ namespace FlameOfTheLost
         {
             base.CacheInternalReferences();
 
-            if (this.TargetHandler          == null) _targetHandler         = this.GetComponent<PlayerInteractionTargetHandler>(); 
-            if (this.PromptHandler          == null) _promptHandler         = this.GetComponent<PlayerInteractionPromptHandler>(); 
-            if (this.PromptBlockerHandler   == null) _promptBlockerHandler  = this.GetComponent<PlayerInteractionPromptBlockerHandler>(); 
+            if (this.InteractableTargetHandler  == null) _interactableTargetHandler = this.GetComponent<PlayerInteractionInteractableTargetHandler>();
+            if (this.PromptSourceTargetHandler  == null) _promptSourceTargetHandler = this.GetComponent<PlayerInteractionPromptSourceTargetHandler>();
+            if (this.PromptHandler              == null) _promptHandler             = this.GetComponent<PlayerInteractionPromptHandler>(); 
+            if (this.PromptBlockerHandler       == null) _promptBlockerHandler      = this.GetComponent<PlayerInteractionPromptBlockerHandler>(); 
         }
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
-            if (this.TargetHandler == null)
+            if (this.InteractableTargetHandler == null)
             {
-                Debug.LogError
-                (
-                    $"[{this.GetType().Name}] " + 
-                    $"{nameof(PlayerInteractionTargetHandler)} " + 
-                    $"reference is not assigned.", 
-                    this
-                );
+                Debug.LogError($"[{this.GetType().Name}] " + $"{nameof(PlayerInteractionInteractableTargetHandler)} " + $"reference is not assigned.", this);
+            }
+            if (this.PromptSourceTargetHandler == null)
+            {
+                Debug.LogError($"[{this.GetType().Name}] " + $"{nameof(PlayerInteractionPromptSourceTargetHandler)} " + $"reference is not assigned.", this);
             }
             if (this.PromptHandler == null)
             {
-                Debug.LogError
-                (
-                    $"[{this.GetType().Name}] " + 
-                    $"{nameof(PlayerInteractionPromptHandler)} " + 
-                    $"reference is not assigned.", 
-                    this
-                );
+                Debug.LogError($"[{this.GetType().Name}] " + $"{nameof(PlayerInteractionPromptHandler)} " + $"reference is not assigned.",  this);
             }
             if (this.PromptBlockerHandler   == null)
             {
-                Debug.LogError
-                (
-                    $"[{this.GetType().Name}] " + 
-                    $"{nameof(PlayerInteractionPromptBlockerHandler)} " + 
-                    $"reference is not assigned.", 
-                    this
-                );
+                Debug.LogError($"[{this.GetType().Name}] " + $"{nameof(PlayerInteractionPromptBlockerHandler)} " + $"reference is not assigned.",  this);
             }
         }
         protected override void BindInternalReferences()
         {
             base.BindInternalReferences();
 
-            this.TargetHandler?.Initialize(this);
-            this.PromptHandler?.Initialize(this);
-            this.PromptBlockerHandler?.Initialize(this);
+            this.InteractableTargetHandler?.Bind(this);
+            this.PromptSourceTargetHandler?.Bind(this);
+            this.PromptHandler?.Bind(this);
+            this.PromptBlockerHandler?.Bind(this);
 
-            if (this.TargetHandler != null) this.TargetHandler.PromptRefreshRequested += this.HandlePromptRefreshRequested; 
+            if (this.PromptSourceTargetHandler != null) this.PromptSourceTargetHandler.PromptRefreshRequested += this.HandlePromptRefreshRequested; 
 
             if (this.PromptBlockerHandler != null) this.PromptBlockerHandler.PromptBlockingStateChanged += this.HandlePromptBlockingStateChanged; 
         }
@@ -224,9 +222,14 @@ namespace FlameOfTheLost
         }
         protected override void UnbindInternalReferences()
         {
-            if (this.TargetHandler != null) this.TargetHandler.PromptRefreshRequested -= this.HandlePromptRefreshRequested;
+            if (this.PromptSourceTargetHandler != null) this.PromptSourceTargetHandler.PromptRefreshRequested -= this.HandlePromptRefreshRequested;
 
             if (this.PromptBlockerHandler != null) this.PromptBlockerHandler.PromptBlockingStateChanged -= this.HandlePromptBlockingStateChanged;
+
+            this.InteractableTargetHandler?.Unbind(this);
+            this.PromptSourceTargetHandler?.Unbind(this);
+            this.PromptHandler?.Unbind(this);
+            this.PromptBlockerHandler?.Unbind(this);
 
             base.UnbindInternalReferences();
         }
