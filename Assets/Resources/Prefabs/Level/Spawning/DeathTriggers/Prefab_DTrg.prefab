@@ -48,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.RespawnTriggerController
   _enableDebugLogs: 1
   _profile: {fileID: 0}
+  _visualTransform: {fileID: 4497563653263657513}
+  _visualSpriteRenderer: {fileID: 5749519420570276577}
+  _polygonCollider: {fileID: 5662903946719793613}
 --- !u!60 &5662903946719793613
 PolygonCollider2D:
   m_ObjectHideFlags: 0

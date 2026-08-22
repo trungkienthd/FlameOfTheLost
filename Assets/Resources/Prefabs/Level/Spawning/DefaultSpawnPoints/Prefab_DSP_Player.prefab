@@ -185,8 +185,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerSpawnPointController
   _enableDebugLogs: 0
   _profile: {fileID: 0}
+  _visualTransform: {fileID: 4078217485608386885}
+  _visualSpriteRenderer: {fileID: 5336768015768600978}
   _spawnAnchor: {fileID: 5457502540746387508}
-  _spriteRenderer: {fileID: 5336768015768600978}
   _playerSpawnerController: {fileID: 0}
 --- !u!58 &6190272038796867758
 CircleCollider2D:

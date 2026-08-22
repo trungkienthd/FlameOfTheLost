@@ -48,13 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b90340796b7e090499f648ad3342edc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TutorialWorldVisualController
-  _id: 4000
-  _key: TUTORIAL_WORLD_VISUAL
-  _displayName: Tutorial World Visual
-  _description: Tutorial world visual.
+  _enableDebugLogs: 0
+  _profile: {fileID: 0}
+  _visualTransform: {fileID: 1449838527064477310}
+  _visualSpriteRenderer: {fileID: 195056985002367712}
   _instructionVisual: {fileID: 4609753798660336678}
   _instructionText: {fileID: 6970610019680808802}
-  _visibleOnStart: 1
 --- !u!50 &7169060159948760592
 Rigidbody2D:
   serializedVersion: 5

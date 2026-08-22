@@ -14,7 +14,14 @@ namespace FlameOfTheLost
         [SerializeField] private bool _triggerOnceUntilExit = true;
         public bool TriggerOnceUntilExit => _triggerOnceUntilExit;
 
-        //  2. Affected Factions
+        //  2. Collider
+        [Header("Collider")]
+        [SerializeField] private bool _isTrigger = true;
+        [SerializeField] private List<Vector2> _colliderPoints = new();
+        public bool IsTrigger => _isTrigger;
+        public IReadOnlyList<Vector2> ColliderPoints => _colliderPoints;
+
+        //  3. Affected Factions
         [Header("Affected Factions")]
         [SerializeField] private bool _useFactionFilter = true;
         [SerializeField] private List<CharacterFaction> _affectedFactions = new()
@@ -24,7 +31,7 @@ namespace FlameOfTheLost
         public bool UseFactionFilter => _useFactionFilter;
         public IReadOnlyList<CharacterFaction> AffectedFactions => _affectedFactions;
 
-        //  3. Affected Traversal Types
+        //  4. Affected Traversal Types
         [Header("Affected Traversal Types")]
         [SerializeField] private bool _useTraversalTypeFilter = false;
         [SerializeField] private List<CharacterTraversalType> _affectedTraversalTypes = new()
@@ -35,7 +42,7 @@ namespace FlameOfTheLost
         public bool UseTraversalTypeFilter => _useTraversalTypeFilter;
         public IReadOnlyList<CharacterTraversalType> AffectedTraversalTypes => _affectedTraversalTypes;
 
-        //  4. Affected Enemy Types
+        //  5. Affected Enemy Types
         [Header("Affected Enemy Types")]
         [SerializeField] private bool _useEnemyTypeFilter = false;
         public bool UseEnemyTypeFilter => _useEnemyTypeFilter;

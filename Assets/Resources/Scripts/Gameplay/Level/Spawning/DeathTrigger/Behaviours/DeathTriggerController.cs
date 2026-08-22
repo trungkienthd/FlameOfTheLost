@@ -7,19 +7,14 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(Collider2D))]
     public class DeathTriggerController : FOTLWorldObjectProfileBehaviour<DeathTriggerProfile>
     {
-        // --- Runtime State ---
+        // --- References ---
+        //  1. Collider
+        [SerializeField] private PolygonCollider2D _polygonCollider;
+        private PolygonCollider2D PolygonCollider => _polygonCollider;
+
+        // --- Runtime ---
         private readonly HashSet<HPController> _triggeredHPControllers = new();
         private IReadOnlyCollection<HPController> TriggeredHPControllers => _triggeredHPControllers;
-
-        // --- Unity Callbacks ---
-        private void Reset()
-        {
-            this.ConfigureColliderAsTrigger();
-        }
-        private void OnValidate()
-        {
-            this.ConfigureColliderAsTrigger();
-        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -80,14 +75,47 @@ namespace FlameOfTheLost
             return true;
         }
 
-        private void ConfigureColliderAsTrigger()
+        private void ConfigureColliderPoints()
         {
-            Collider2D triggerCollider = this.GetComponent<Collider2D>();
+            if (this.PolygonCollider == null) return;
+            if (this.Profile == null) return;
+            
+            this.PolygonCollider.isTrigger = this.Profile.IsTrigger;
 
-            if (triggerCollider != null)
+            if (this.Profile.ColliderPoints == null) return;
+            if (this.Profile.ColliderPoints.Count < 3) return;
+
+            this.PolygonCollider.pathCount = 1;
+            this.PolygonCollider.SetPath
+            (
+                index: 0,
+                points: this.Profile.ColliderPoints.ToArray()
+            );
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
+            if (this.PolygonCollider == null) _polygonCollider = this.GetComponent<PolygonCollider2D>();
+        }
+
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.PolygonCollider == null)
             {
-                triggerCollider.isTrigger = true;
+                Debug.LogError($"[{this.gameObject.name}.{nameof(DeathTriggerController)}] " + $"{nameof(PolygonCollider2D)} reference is missing.", this);
             }
+        }
+
+        protected override void InitializePregameplayState()
+        {
+            base.InitializePregameplayState();
+
+            this.ConfigureColliderPoints();
         }
     }
 }

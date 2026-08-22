@@ -23,14 +23,20 @@ namespace FlameOfTheLost
             ? this.SpawnAnchor.rotation 
             : this.transform.rotation;
 
-        //  2. Visual
-        [SerializeField] private SpriteRenderer _spriteRenderer;
-        protected SpriteRenderer SpriteRenderer => _spriteRenderer;
-
-        // --- Unity Callbacks ---
-        protected virtual void Reset()
+        // --- Helpers ---
+        private void ConfigureSpawnAnchorTransform()
         {
-            this.CacheInternalReferences();
+            if (this.Profile == null) return;
+            if (!this.Profile.ConfigureSpawnAnchorTransformAtStart) return;
+            if (this.SpawnAnchor == null) return;
+
+            this.SpawnAnchor.SetLocalPositionAndRotation
+            (
+                localPosition: this.Profile.InitialSpawnAnchorLocalPosition,
+                localRotation: Quaternion.Euler(this.Profile.InitialSpawnAnchorLocalEulerAngles)
+            );
+
+            this.SpawnAnchor.localScale = this.Profile.InitialSpawnAnchorLocalScale;
         }
 
         // --- FOTLMonoBehaviour Overrides ---
@@ -43,8 +49,6 @@ namespace FlameOfTheLost
                 Transform anchor = this.transform.Find("SpawnAnchor");
                 if (anchor != null) _spawnAnchor = anchor;
             }
-
-            if (this.SpriteRenderer == null) _spriteRenderer = this.GetComponentInChildren<SpriteRenderer>(true);
         }
         protected override void ValidateInternalReferences()
         {
@@ -54,22 +58,17 @@ namespace FlameOfTheLost
             {
                 Debug.LogWarning($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + $"No spawn anchor found for {this.name}. Defaulting to self transform.");
             }
-
-            if (this.SpriteRenderer == null)
-            {
-                Debug.LogWarning($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + $"No {nameof(UnityEngine.SpriteRenderer)} found under Visual.", this);
-            }
         }
 
         protected override void InitializeInternalState()
         {
             base.InitializeInternalState();
+        }
+        protected override void InitializePregameplayState()
+        {
+            base.InitializePregameplayState();
 
-            if (this.SpriteRenderer == null) return;
-            if (this.SpriteRenderer.sprite != null) return;
-            if (this.Icon == null) return;
-
-            this.SpriteRenderer.sprite = this.Icon;
+            this.ConfigureSpawnAnchorTransform();
         }
     }
 }

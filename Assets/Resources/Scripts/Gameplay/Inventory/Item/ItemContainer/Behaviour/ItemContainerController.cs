@@ -15,10 +15,8 @@ namespace FlameOfTheLost
         // --- References ---
         [Header("References")]
         [SerializeField] private InventoryController _inventoryController;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private ItemContainerPanelController _itemContainerPanelController;
         private InventoryController InventoryController => _inventoryController;
-        private SpriteRenderer SpriteRenderer => _spriteRenderer;
         private ItemContainerPanelController ItemContainerPanelController => _itemContainerPanelController;
 
         public bool CanInteract(GameObject interactor)
@@ -60,6 +58,7 @@ namespace FlameOfTheLost
         private void InitializeInventory()
         {
             if (this.InventoryController == null) return;
+            if (this.Profile == null) return;
 
             this.InventoryController.InitializeInventory
             (
@@ -68,20 +67,12 @@ namespace FlameOfTheLost
             );
         }
 
-        private void InitializeVisual()
-        {
-            if (this.SpriteRenderer == null) return;
-
-            if (this.SpriteRenderer.sprite == null) this.SpriteRenderer.sprite = this.Profile.Icon;
-        }
-
         // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
 
             if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>();
-            if (this.SpriteRenderer == null) _spriteRenderer = this.GetComponentInChildren<SpriteRenderer>(true);
         }
         protected override void ValidateInternalReferences()
         {
@@ -90,10 +81,6 @@ namespace FlameOfTheLost
             if (this.InventoryController == null)
             {
                 Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}]" + $"requires an {nameof(FlameOfTheLost.InventoryController)}.", this);
-            }
-            if (this.SpriteRenderer == null)
-            {
-                Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}] " + $"requires a {nameof(UnityEngine.SpriteRenderer)}.", this);
             }
         }
         protected override void CacheExternalReferences()
@@ -110,10 +97,7 @@ namespace FlameOfTheLost
         {
             base.InitializePregameplayState();
 
-            if (this.Profile == null) return;
-
             this.InitializeInventory();
-            this.InitializeVisual();
         }
     }
 }

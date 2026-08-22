@@ -21,4 +21,12 @@ MonoBehaviour:
   _initialPosition: {x: 5, y: 19, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
   _defaultFacing: 1
+  _configureSpawnAnchorTransformAtStart: 1
+  _initialSpawnAnchorLocalPosition: {x: 0, y: 0, z: 0}
+  _initialSpawnAnchorLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialSpawnAnchorLocalScale: {x: 1, y: 1, z: 1}

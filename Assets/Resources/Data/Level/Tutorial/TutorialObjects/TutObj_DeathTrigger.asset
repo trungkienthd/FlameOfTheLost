@@ -21,4 +21,7 @@ MonoBehaviour:
   _initialPosition: {x: 9.3, y: -8, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1.2, y: 1.5, z: 1}
   _visibleOnStart: 1

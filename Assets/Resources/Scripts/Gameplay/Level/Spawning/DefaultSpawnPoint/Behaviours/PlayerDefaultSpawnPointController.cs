@@ -16,15 +16,6 @@ namespace FlameOfTheLost
         [SerializeField] private PlayerSpawnerController _playerSpawnerController;
         private PlayerSpawnerController PlayerSpawnerController => _playerSpawnerController;
 
-        // --- Unity Callbacks ---
-        protected override void Reset()
-        {
-            base.Reset();
-
-            this.ConfigureColliderAsTrigger();
-            this.CacheInternalReferences();
-        }
-
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!this.ActivateOnPlayerEnter) return;
@@ -39,17 +30,6 @@ namespace FlameOfTheLost
             }
 
             this.PlayerSpawnerController.ActivateSpawnPoint(this);
-        }
-
-        // --- Helpers ---
-        private void ConfigureColliderAsTrigger()
-        {
-            Collider2D triggerCollider = this.GetComponent<Collider2D>();
-
-            if (triggerCollider != null)
-            {
-                triggerCollider.isTrigger = true;
-            }
         }
 
         protected override void CacheInternalReferences()
@@ -67,7 +47,7 @@ namespace FlameOfTheLost
             {
                 Debug.LogError
                 (
-                    $"[{this.name}.{nameof(PlayerDefaultSpawnPointController)}] " +
+                    $"[{this.gameObject.name}.{nameof(PlayerDefaultSpawnPointController)}] " +
                     $"requires its Profile to be a {nameof(PlayerDefaultSpawnPointProfile)}.",
                     this
                 );

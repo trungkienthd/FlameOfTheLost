@@ -21,7 +21,19 @@ MonoBehaviour:
   _initialPosition: {x: 11.5, y: -5, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
   _triggerOnceUntilExit: 1
+  _isTrigger: 1
+  _colliderPoints:
+  - {x: 1.6, y: 0}
+  - {x: 1.6, y: 0.95}
+  - {x: -1.5, y: 0.95}
+  - {x: -1.5, y: -1}
+  - {x: 0.4, y: -1}
+  - {x: 0.8, y: -0.35}
   _useFactionFilter: 1
   _affectedFactions: 01000000000000000200000003000000
   _useTraversalTypeFilter: 1
