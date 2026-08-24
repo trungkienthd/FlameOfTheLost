@@ -9,9 +9,11 @@ namespace FlameOfTheLost
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private PlayerCarryLoadoutController _playerCarryLoadoutController;
         [SerializeField] private PlayerInteractionHandler _playerInteractionHandler;
+        [SerializeField] private PlayerCraftingController _playerCraftingController;
         public PlayerInput PlayerInput => _playerInput;
         public PlayerCarryLoadoutController PlayerCarryLoadoutController => _playerCarryLoadoutController;
         public PlayerInteractionHandler PlayerInteractionHandler => _playerInteractionHandler;
+        public PlayerCraftingController PlayerCraftingController => _playerCraftingController;
 
         public PlayerInputHandler PlayerInputHandler => base.InputHandler as PlayerInputHandler;
 
@@ -22,6 +24,7 @@ namespace FlameOfTheLost
             if (this.PlayerInput                    == null) _playerInput                   = this.GetComponentInChildren<PlayerInput>(true);
             if (this.PlayerCarryLoadoutController   == null) _playerCarryLoadoutController  = this.GetComponentInChildren<PlayerCarryLoadoutController>(true);
             if (this.PlayerInteractionHandler       == null) _playerInteractionHandler      = this.GetComponentInChildren<PlayerInteractionHandler>(true);
+            if (this.PlayerCraftingController       == null) _playerCraftingController      = this.GetComponentInChildren<PlayerCraftingController>(true);
         }
 
         protected override void ValidateInternalReferences()
@@ -46,6 +49,11 @@ namespace FlameOfTheLost
             if (this.PlayerInteractionHandler == null)
             {
                 Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No {nameof(FlameOfTheLost.PlayerInteractionHandler)} assigned.", this);
+            }
+
+            if (this.PlayerCraftingController == null)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No {nameof(FlameOfTheLost.PlayerCraftingController)} assigned.", this);
             }
         }
     }
