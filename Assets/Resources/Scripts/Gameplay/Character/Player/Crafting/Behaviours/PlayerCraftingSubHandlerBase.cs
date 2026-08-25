@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class PlayerCraftingSubHandlerBase : FOTLMonoBehaviour
+    public abstract class PlayerCraftingSubHandlerBase : FOTLMonoBehaviour
     {
         // --- References ---
         //  1. Brain Controller

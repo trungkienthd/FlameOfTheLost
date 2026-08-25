@@ -114,7 +114,7 @@ namespace FlameOfTheLost
         {
             base.InitializePregameplayState();
 
-            this.ConfigureInitialTransform();
+            //this.ConfigureInitialTransform();
             this.ConfigureInitialVisual();
         }
     }

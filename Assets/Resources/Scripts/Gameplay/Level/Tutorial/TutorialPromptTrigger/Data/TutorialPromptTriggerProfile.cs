@@ -16,6 +16,11 @@ namespace FlameOfTheLost
         public bool StartEnabled => _startEnabled;
         public bool HideAfterCompleted => _hideAfterCompleted;
 
+        //  2. Interaction Trigger Area
+        [Header("Interaction Trigger Area")]
+        [SerializeField] private ColliderConfigurationEntry _interactionTriggerColliderConfiguration = new();
+        public ColliderConfigurationEntry InteractionTriggerColliderConfiguration => _interactionTriggerColliderConfiguration;
+
         //  2. Trigger Conditions
         [Header("Trigger Conditions")]
         [SerializeField] private TutorialPromptTriggerConditionCombinationType _conditionCombinationType = TutorialPromptTriggerConditionCombinationType.All;

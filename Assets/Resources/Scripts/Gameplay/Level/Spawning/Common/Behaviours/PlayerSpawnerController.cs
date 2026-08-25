@@ -91,7 +91,7 @@ namespace FlameOfTheLost
         {
             if (this.PlayerRefreshHandler == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No {nameof(PlayerRefreshHandler)} assigned.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No {nameof(this.PlayerRefreshHandler)} assigned.", this);
                 return;
             }
 

@@ -46,15 +46,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TutorialPromptTriggerController
   _enableDebugLogs: 0
-  _id: 4100
-  _key: 
-  _displayName: 
-  _description: 
-  _interactionPromptPriority: 0
-  _startEnabled: 1
-  _hideAfterCompleted: 1
-  _conditionCombinationType: 0
-  _conditionEntries: []
+  _profile: {fileID: 0}
+  _visualTransform: {fileID: 0}
+  _visualSpriteRenderer: {fileID: 0}
+  _interactionTriggerArea: {fileID: 8576418517268496398}
+  _conditionStateMap:
+    _keys: 
+    _values: 
   _isPromptEnabled: 0
   _isCompleted: 0
 --- !u!1 &8576418517268496398

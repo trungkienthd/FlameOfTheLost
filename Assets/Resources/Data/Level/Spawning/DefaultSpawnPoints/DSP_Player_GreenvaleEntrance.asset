@@ -27,7 +27,7 @@ MonoBehaviour:
   _configureIconAtStart: 0
   _defaultFacing: 0
   _configureSpawnAnchorTransformAtStart: 1
-  _initialSpawnAnchorLocalPosition: {x: 0, y: 0, z: 0}
+  _initialSpawnAnchorLocalPosition: {x: 2.1, y: -0.25, z: 0}
   _initialSpawnAnchorLocalEulerAngles: {x: 0, y: 0, z: 0}
   _initialSpawnAnchorLocalScale: {x: 1, y: 1, z: 1}
   _activateOnPlayerEnter: 1

@@ -44,7 +44,7 @@ namespace FlameOfTheLost
                 context.Character.transform.SetPositionAndRotation(context.RefreshTarget.Position, context.RefreshTarget.Rotation);
             }
 
-            //Debug.Log($"[{context.Character.name}.{nameof(CharacterRefreshmentHandler)}] Placed at position {context.PlacementPosition} with rotation {context.PlacementRotation.eulerAngles.z}.");
+            //Debug.Log($"[{context.Character.name}.{nameof(CharacterRefreshHandler)}] Placed at position {context.RefreshTarget.Position} with rotation {context.RefreshTarget.Rotation.eulerAngles.z}.");
         }
 
         private static void RefreshCharacterSystems(CharacterRefreshContext context)
@@ -54,7 +54,7 @@ namespace FlameOfTheLost
                 .OfType<ICharacterRefreshable>()
                 .OrderBy(system => system.RefreshmentConfigurePriority);
 
-            //Debug.Log($"[{context.Character.name}.{nameof(CharacterRefreshmentHandler)}] Found { refreshableSystems.Count()} refreshable systems to refresh");
+            //Debug.Log($"[{context.Character.name}.{nameof(CharacterRefreshHandler)}] Found { refreshableSystems.Count()} refreshable systems to refresh");
 
             foreach (ICharacterRefreshable refreshableSystem in refreshableSystems)
             {

@@ -8,13 +8,21 @@ namespace FlameOfTheLost
         IPlayerInteractionPromptSource,
         IPlayerInteractionPromptRefreshNotifier
     {
+        // --- Internal References ---
+        [Header("Internal References")]
+        [SerializeField] private GameObject _interactionTriggerArea;
+        private GameObject InteractionTriggerArea => _interactionTriggerArea;
+
         // --- Data / Configs ---
         //  1. Prompt Settings
         public int InteractionPromptPriority => this.Profile != null ? this.Profile.InteractionPromptPriority : 0;
         private bool StartEnabled => this.Profile != null ? this.Profile.StartEnabled : true;
         private bool HideAfterCompleted => this.Profile != null ? this.Profile.HideAfterCompleted : true;
 
-        //  2. Trigger Conditions
+        //  2. Interaction Trigger Area
+        private ColliderConfigurationEntry InteractionTriggerColliderConfiguration => this.Profile != null ? this.Profile.InteractionTriggerColliderConfiguration : null;
+
+        //  3. Trigger Conditions
         private TutorialPromptTriggerConditionCombinationType ConditionCombinationType => this.Profile != null ? this.Profile.ConditionCombinationType : TutorialPromptTriggerConditionCombinationType.All;
         private IReadOnlyList<TutorialPromptTriggerConditionEntry> ConditionEntries => this.Profile != null ? this.Profile.ConditionEntries : Array.Empty<TutorialPromptTriggerConditionEntry>();
 
@@ -41,17 +49,6 @@ namespace FlameOfTheLost
 
         // --- Events ---
         public event Action PromptRefreshRequested;
-
-        // --- Unity Callbacks ---
-        protected override void Awake()
-        {
-            base.Awake();
-
-            this.IsPromptEnabled = this.StartEnabled;
-            this.IsCompleted = false;
-
-            this.InitializeConditionStates();
-        }
 
         // --- Public APIs ---
         //  1. IPlayerInteractionPromptSource implementation
@@ -142,6 +139,23 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
+        private void InitializeInteractionTriggerArea()
+        {
+            if (this.InteractionTriggerArea == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialPromptTriggerController)}] " + $"Interaction Trigger Area is not assigned.", this);
+                return;
+            }
+
+            if (this.InteractionTriggerColliderConfiguration == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialPromptTriggerController)}] " + $"Interaction Trigger Collider Configuration is not assigned.", this);
+                return;
+            }
+
+            this.InteractionTriggerColliderConfiguration.ConfigureCollider(this.InteractionTriggerArea);
+        }
+
         private void InitializeConditionStates()
         {
             _conditionStateMap.Clear();
@@ -214,6 +228,29 @@ namespace FlameOfTheLost
         private void RequestPromptRefresh()
         {
             this.PromptRefreshRequested?.Invoke();
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
+            if (this.InteractionTriggerArea == null)
+            {
+                Transform interactionTriggerAreaTransform = this.transform.Find("InteractionTriggerArea");
+                if (interactionTriggerAreaTransform != null) _interactionTriggerArea = interactionTriggerAreaTransform.gameObject;
+            }
+        }
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.InitializeInteractionTriggerArea();
+
+            this.IsPromptEnabled = this.StartEnabled;
+            this.IsCompleted = false;
+
+            this.InitializeConditionStates();
         }
     }
 }

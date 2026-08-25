@@ -3,139 +3,42 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class ItemContainerPanelItemEntryListSubPanelController : MonoBehaviour
+    public class ItemContainerPanelItemEntryListSubPanelController : ItemContainerPanelSubHandlerBase
     {
-        [Header("References")]
+        // --- References ---
+        //  1. Pagination
+        [Header("References (Pagination)")]
         [SerializeField] private ItemEntryListPaginationHandler _paginationHandler;
-        [SerializeField] private ItemContainerPanelSelectedItemEntryDisplayHandler _selectedDisplayHandler;
         private ItemEntryListPaginationHandler PaginationHandler => _paginationHandler;
-        private ItemContainerPanelSelectedItemEntryDisplayHandler SelectedEntryDisplayHandler => _selectedDisplayHandler;
 
-        [Header("Entry List")]
+        //  2. Entry List
+        [Header("References (Entry List)")]
         [SerializeField] private RectTransform _itemEntryListParent;
         [SerializeField] private GameObject _slotPrefab;
-        [SerializeField] private Vector2 _startPosition = new(-450f, 200f);
-        [SerializeField] private Vector2 _step = new(150f, 150f);
         private RectTransform ItemEntryListParent => _itemEntryListParent;
         private GameObject SlotPrefab => _slotPrefab;
+
+        // --- Configs ---
+        [SerializeField] private Vector2 _startPosition = new(-450f, 200f);
+        [SerializeField] private Vector2 _step = new(150f, 150f);
         private Vector2 StartPosition => _startPosition;
         private Vector2 Step => _step;
 
+        // --- Runtime ---
         private readonly List<ItemEntrySlotController> _slotControllers = new();
         private readonly List<InventoryItemEntry> _visibleEntries = new();
         private IReadOnlyList<ItemEntrySlotController> SlotControllers => _slotControllers;
         private IReadOnlyList<InventoryItemEntry> VisibleEntries => _visibleEntries;
 
-        private InventoryController _sourceInventoryController;
-        private InventoryController _playerInventoryController;
-        private InventoryController SourceInventoryController => _sourceInventoryController;
-        private InventoryController PlayerInventoryController => _playerInventoryController;
-
-        private void Awake()
+        // --- Public APIs ---
+        public void ResetPagination()
         {
-            this.CacheReferences();
-            this.CreateSlots();
+            if (this.PaginationHandler == null) return;
 
-            if (this.PaginationHandler != null)
-            {
-                this.PaginationHandler.OnCurrentPageChanged += this.HandleCurrentPageChanged;
-            }
-
-            if (this.SelectedEntryDisplayHandler != null)
-            {
-                this.SelectedEntryDisplayHandler.OnPickUpClicked += this.HandlePickUpClicked;
-            }
+            this.PaginationHandler.SetCurrentPageWithoutNotify(1);
         }
 
-        private void OnDestroy()
-        {
-            if (this.PaginationHandler != null)
-            {
-                this.PaginationHandler.OnCurrentPageChanged -= this.HandleCurrentPageChanged;
-            }
-
-            if (this.SelectedEntryDisplayHandler != null)
-            {
-                this.SelectedEntryDisplayHandler.OnPickUpClicked -= this.HandlePickUpClicked;
-            }
-
-            for (int i = 0; i < _slotControllers.Count; i++)
-            {
-                ItemEntrySlotController slot = this.SlotControllers[i];
-                if (slot == null) continue;
-
-                slot.OnClicked -= this.HandleSlotClicked;
-            }
-        }
-
-        public void Bind(InventoryController sourceInventoryController, InventoryController playerInventoryController)
-        {
-            _sourceInventoryController = sourceInventoryController;
-            _playerInventoryController = playerInventoryController;
-
-            if (this.PaginationHandler != null)
-            {
-                this.PaginationHandler.SetCurrentPageWithoutNotify(1);
-            }
-
-            this.RebuildAndRefresh();
-        }
-
-        public void Clear()
-        {
-            _sourceInventoryController = null;
-            _playerInventoryController = null;
-
-            _visibleEntries.Clear();
-
-            if (this.SelectedEntryDisplayHandler != null)
-            {
-                this.SelectedEntryDisplayHandler.ClearSelectedEntry();
-            }
-
-            this.RefreshVisibleSlots();
-        }
-
-        private void HandleCurrentPageChanged(int pageNumber)
-        {
-            this.RefreshVisibleSlots();
-        }
-
-        private void HandleSlotClicked(ItemEntrySlotController clickedSlot)
-        {
-            if (clickedSlot == null) return;
-            if (this.SelectedEntryDisplayHandler == null) return;
-
-            this.SelectedEntryDisplayHandler.SetSelectedEntry(clickedSlot.BoundEntry, _visibleEntries);
-            this.RefreshVisibleSlots();
-        }
-
-        private void HandlePickUpClicked(InventoryItemEntry selectedEntry)
-        {
-            if (selectedEntry == null) return;
-            if (this.SourceInventoryController == null) return;
-            if (this.PlayerInventoryController == null) return;
-            if (selectedEntry.Item == null) return;
-            if (selectedEntry.Quantity <= 0) return;
-
-            ItemProfile item = selectedEntry.Item;
-            int quantity = selectedEntry.Quantity;
-
-            bool removedFromSource = this.SourceInventoryController.TryRemoveFromEntry(selectedEntry, quantity);
-            if (!removedFromSource) return;
-
-            bool addedToPlayer = this.PlayerInventoryController.TryAddItem(item, quantity);
-
-            if (!addedToPlayer)
-            {
-                this.SourceInventoryController.TryAddItem(item, quantity);
-                return;
-            }
-
-            this.RebuildAndRefresh();
-        }
-
-        private void RebuildAndRefresh()
+        public void RefreshEntries()
         {
             this.RebuildVisibleEntries();
 
@@ -146,24 +49,47 @@ namespace FlameOfTheLost
                 pageChanged = this.PaginationHandler.TrySetTotalEntryCount(this.VisibleEntries.Count);
             }
 
-            if (this.SelectedEntryDisplayHandler != null)
-            {
-                this.SelectedEntryDisplayHandler.ValidateSelection(_visibleEntries);
-            }
-
             if (!pageChanged)
             {
                 this.RefreshVisibleSlots();
             }
         }
 
+        public void RefreshSelection()
+        {
+            this.RefreshVisibleSlots();
+        }
+
+        public void Clear()
+        {
+            _visibleEntries.Clear();
+
+            if (this.PaginationHandler != null)
+            {
+                this.PaginationHandler.SetCurrentPageWithoutNotify(1);
+                this.PaginationHandler.TrySetTotalEntryCount(0);
+            }
+
+            this.RefreshVisibleSlots();
+        }
+
+        public bool ContainsEntry(InventoryItemEntry entry)
+        {
+            return entry != null && _visibleEntries.Contains(entry);
+        }
+
+        // --- Helpers ---
         private void RebuildVisibleEntries()
         {
             _visibleEntries.Clear();
 
-            if (this.SourceInventoryController == null) return;
+            if (!this.EnsureBound()) return;
 
-            IReadOnlyList<InventoryItemEntry> sourceEntries = this.SourceInventoryController.Items;
+            InventoryController sourceInventoryController = this.ItemContainerPanelController.SourceInventoryController;
+
+            if (sourceInventoryController == null) return;
+
+            IReadOnlyList<InventoryItemEntry> sourceEntries = sourceInventoryController.Items;
 
             for (int i = 0; i < sourceEntries.Count; i++)
             {
@@ -184,7 +110,7 @@ namespace FlameOfTheLost
 
             for (int i = 0; i < this.PaginationHandler.SlotsPerPage; i++)
             {
-                GameObject slotObject = Object.Instantiate(this.SlotPrefab, this.ItemEntryListParent);
+                GameObject slotObject = UnityEngine.Object.Instantiate(this.SlotPrefab, this.ItemEntryListParent);
 
                 ItemEntrySlotController slotController = slotObject.GetComponent<ItemEntrySlotController>();
                 RectTransform rectTransform = slotObject.transform as RectTransform;
@@ -204,6 +130,7 @@ namespace FlameOfTheLost
                 {
                     slotController.OnClicked += this.HandleSlotClicked;
                     slotController.ResetBindings();
+
                     _slotControllers.Add(slotController);
                 }
             }
@@ -215,8 +142,8 @@ namespace FlameOfTheLost
             int slotsPerPage = this.PaginationHandler != null ? this.PaginationHandler.SlotsPerPage : this.SlotControllers.Count;
             int startIndex = (currentPage - 1) * slotsPerPage;
 
-            InventoryItemEntry selectedEntry = this.SelectedEntryDisplayHandler != null
-                ? this.SelectedEntryDisplayHandler.CurrentSelectedEntry
+            InventoryItemEntry selectedEntry = this.IsBound
+                ? this.ItemContainerPanelController.CurrentSelectedEntry
                 : null;
 
             for (int i = 0; i < this.SlotControllers.Count; i++)
@@ -242,19 +169,66 @@ namespace FlameOfTheLost
             }
         }
 
-        private void CacheReferences()
+        private void HandleCurrentPageChanged(int pageNumber)
         {
+            this.RefreshVisibleSlots();
+        }
+
+        private void HandleSlotClicked(ItemEntrySlotController clickedSlot)
+        {
+            if (!this.EnsureBound()) return;
+            if (clickedSlot == null) return;
+            if (clickedSlot.BoundEntry == null) return;
+
+            this.ItemContainerPanelController.SelectEntry(clickedSlot.BoundEntry);
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
             if (this.PaginationHandler == null) _paginationHandler = this.GetComponentInChildren<ItemEntryListPaginationHandler>(true);
-            if (this.SelectedEntryDisplayHandler == null) _selectedDisplayHandler = this.GetComponentInChildren<ItemContainerPanelSelectedItemEntryDisplayHandler>(true);
 
             if (this.ItemEntryListParent == null)
             {
-                Transform itemEntries = this.transform.Find("ItemEntryList");
-                if (itemEntries != null)
-                {
-                    _itemEntryListParent = itemEntries.GetComponent<RectTransform>();
-                }
+                Transform itemEntryListTransform = this.transform.Find("ItemEntryList");
+                if (itemEntryListTransform != null) _itemEntryListParent = itemEntryListTransform.GetComponent<RectTransform>();
+             }
+        }
+        protected override void BindInternalReferences()
+        {
+            base.BindInternalReferences();
+
+            if (this.PaginationHandler != null)
+            {
+                this.PaginationHandler.OnCurrentPageChanged += this.HandleCurrentPageChanged;
             }
+        }
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.CreateSlots();
+            this.Clear();
+        }
+        protected override void UnbindInternalReferences()
+        {
+            if (this.PaginationHandler != null)
+            {
+                this.PaginationHandler.OnCurrentPageChanged -= this.HandleCurrentPageChanged;
+            }
+
+            for (int i = 0; i < this.SlotControllers.Count; i++)
+            {
+                ItemEntrySlotController slot = this.SlotControllers[i];
+
+                if (slot == null) continue;
+
+                slot.OnClicked -= this.HandleSlotClicked;
+            }
+
+            base.UnbindInternalReferences();
         }
     }
 }
