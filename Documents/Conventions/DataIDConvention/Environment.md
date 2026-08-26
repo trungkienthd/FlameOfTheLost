@@ -18,6 +18,27 @@
 320xx   ItemContainerProfile
 321xx   ObstacleProfile
 322xx   HarvestableObjectProfile
+323xx   CraftingStationProfile
+```
+
+---
+
+## Category Structure
+
+```text
+Environment
+├─ Terrain
+│  └─ TerrainProfile
+│
+├─ Interactable
+│  ├─ ItemContainerProfile
+│  └─ CraftingStationProfile
+│
+├─ Obstacle
+│  └─ ObstacleProfile
+│
+└─ Harvestable Object
+   └─ HarvestableObjectProfile
 ```
 
 ---
@@ -42,8 +63,8 @@
 320xx   Item Container Profiles
 321xx   Obstacle Profiles
 322xx   Harvestable Object Profiles
+323xx   Crafting Station Profiles
 
-323xx   Reserved
 324xx   Reserved
 325xx   Reserved
 326xx   Reserved
@@ -70,9 +91,32 @@ The ID identifies a **terrain type**.
 
 ---
 
-### Environment Object Profiles
+### Interactable Environment Object Profiles
 
-The ID identifies an **environment object archetype**.
+The ID identifies an **interactable environment object archetype**.
+
+Current interactable environment object profile types include:
+
+```text
+320xx   ItemContainerProfile
+323xx   CraftingStationProfile
+```
+
+All instances using the same profile share the same ID.
+
+---
+
+### Obstacle Profiles
+
+The ID identifies an **obstacle archetype**.
+
+All instances using the same profile share the same ID.
+
+---
+
+### Harvestable Object Profiles
+
+The ID identifies a **harvestable environment object archetype**.
 
 All instances using the same profile share the same ID.
 
@@ -93,6 +137,8 @@ All instances using the same profile share the same ID.
 32201   Oak Tree
 32202   Berry Bush
 32203   Copper Ore Deposit
+
+32301   Makeshift Workbench
 ```
 
 ---

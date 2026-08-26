@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 1871264865254106975}
   - component: {fileID: 911403449981665168}
   m_Layer: 18
-  m_Name: CollectibleItem_PlantFibre
+  m_Name: CollectibleItem_ReedStalk
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa36882cd9ed8e4ebb1c22a92103a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CollectibleItemController
+  _enableDebugLogs: 0
   _item: {fileID: 11400000, guid: 64127e18f3906764b8b893d8ef8925bf, type: 2}
   _quantity: 1
   _spriteRenderer: {fileID: 4503067659639655067}
@@ -215,7 +216,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -1768000699, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -223,5 +224,5 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0

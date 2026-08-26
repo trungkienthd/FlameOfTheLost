@@ -8,6 +8,12 @@ namespace FlameOfTheLost
         IPlayerInteractionPromptSource,
         ICraftingRecipeProvider
     {
+        // --- References ---
+        //  1. UI
+        [Header("References (UI)")]
+        [SerializeField] private CraftingPanelController _craftingPanelController;
+        private CraftingPanelController CraftingPanelController => _craftingPanelController;
+
         // --- Data / Configs ---
         //  1. Prompt
         public int InteractionPromptPriority => this.Profile != null ? this.Profile.InteractionPromptPriority : 100;
@@ -32,12 +38,19 @@ namespace FlameOfTheLost
 
             PlayerCraftingController craftingController = player.PlayerCraftingController;
 
-            if (craftingController == null)
+            if (craftingController == null || this.CraftingPanelController == null)
             {
                 return false;
             }
 
-            return craftingController.TryBeginCrafting(this);
+            if (!craftingController.TryBeginCrafting(this))
+            {
+                return false;
+            }
+
+            this.CraftingPanelController.Open(craftingController);
+
+            return true;
         }
 
         //  2. IPlayerInteractionPromptSource implementation
@@ -58,10 +71,7 @@ namespace FlameOfTheLost
         //  3. ICraftingRecipeProvider implementation
         public IReadOnlyList<CraftingRecipeProfile> GetAvailableCraftingRecipes(CharacterRootController crafter)
         {
-            if (this.Profile == null)
-            {
-                return System.Array.Empty<CraftingRecipeProfile>();
-            }
+            if (this.Profile == null) return System.Array.Empty<CraftingRecipeProfile>();
 
             return this.Profile.CraftingRecipes;
         }
@@ -69,11 +79,20 @@ namespace FlameOfTheLost
         // --- Helpers ---
         private bool TryGetPlayer(GameObject interactor, out PlayerRootController player)
         {
-            player = interactor != null
-                ? interactor.GetComponentInParent<PlayerRootController>()
-                : null;
+            player = interactor != null ? interactor.GetComponentInParent<PlayerRootController>() : null;
 
             return player != null;
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
+            if (this.CraftingPanelController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] " + $"{nameof(CraftingPanelController)} reference is missing.", this);
+            }
         }
     }
 }

@@ -10,15 +10,20 @@
 
 ---
 
-## Profile Type
+## Profile Types
 
-- `CharacterIdentityProfile`
+```text
+10xxx   CharacterIdentityProfile
+110xx   CraftingRecipeProfile
+```
 
 ---
 
 ## Sub-Ranges
 
 ```text
+10xxx   Character Identity Data
+
 100xx   Player Characters
 101xx   Mushroom Enemies
 102xx   Humanoid Enemies
@@ -31,7 +36,20 @@
 108xx   Reserved
 109xx   Reserved
 
-11xxx   Reserved
+11xxx   Character Crafting Data
+
+110xx   Crafting Recipe Profiles
+
+111xx   Reserved
+112xx   Reserved
+113xx   Reserved
+114xx   Reserved
+115xx   Reserved
+116xx   Reserved
+117xx   Reserved
+118xx   Reserved
+119xx   Reserved
+
 12xxx   Reserved
 13xxx   Reserved
 14xxx   Reserved
@@ -44,11 +62,27 @@
 
 ---
 
-## Assignment Rule
+## Assignment Rules
+
+### Character Identity Profiles
 
 A Character Identity ID represents a **character archetype**.
 
 All instances of the same character share the same ID.
+
+---
+
+### Crafting Recipe Profiles
+
+A Crafting Recipe ID represents a **crafting recipe definition** associated with character crafting.
+
+A crafting recipe defines:
+
+- The resulting item.
+- The resulting quantity.
+- The materials required to craft it.
+
+Crafting stations may reference these recipe profiles to determine which recipes they provide to the player.
 
 ---
 
@@ -67,6 +101,8 @@ All instances of the same character share the same ID.
 10401   Village Merchant
 
 10501   Ancient Guardian
+
+11001   Arrow
 ```
 
 ---

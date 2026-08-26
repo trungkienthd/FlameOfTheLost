@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "CftStn_New", menuName = "Data/FlameOfTheLost/Environment/Crafting Station")]
+    [CreateAssetMenu(fileName = "CftStn_New", menuName = "Data/FlameOfTheLost/Level/Environment/Interactable/CraftingStation")]
     public class CraftingStationProfile : FOTLWorldObjectProfile
     {
         // --- Data / Configs ---

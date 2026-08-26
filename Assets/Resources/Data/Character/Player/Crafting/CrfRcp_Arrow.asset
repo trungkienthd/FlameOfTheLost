@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859e09abb74d36a44b1468e4a4821a45, type: 3}
+  m_Name: CrfRcp_Arrow
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingRecipeProfile
+  _id: 11001
+  _key: CRAFTING_RECIPE_ARROW
+  _displayName: Arrow's Crafting Recipe
+  _description: 
+  _icon: {fileID: 0}
+  _resultItem: {fileID: 11400000, guid: e3f2367d6724ced468c2cdf9e43748e3, type: 2}
+  _resultQuantity: 3
+  _materialRequirements:
+  - _material: {fileID: 11400000, guid: 64127e18f3906764b8b893d8ef8925bf, type: 2}
+    _quantity: 1
+  _lostEmbersCost: 5

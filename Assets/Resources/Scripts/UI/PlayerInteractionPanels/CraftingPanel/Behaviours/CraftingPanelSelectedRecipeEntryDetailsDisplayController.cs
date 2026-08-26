@@ -25,11 +25,11 @@ namespace FlameOfTheLost
         //  3. Craft Quantity
         [Header("References (Craft Quantity)")]
         [SerializeField] private Button _buttonDecrease;
-        [SerializeField] private TMP_Text _quantityText;
         [SerializeField] private Button _buttonIncrease;
+        [SerializeField] private TMP_Text _quantityText;
         private Button ButtonDecrease => _buttonDecrease;
-        private TMP_Text QuantityText => _quantityText;
         private Button ButtonIncrease => _buttonIncrease;
+        private TMP_Text QuantityText => _quantityText;
 
         //  4. Craft
         [Header("References (Craft)")]
