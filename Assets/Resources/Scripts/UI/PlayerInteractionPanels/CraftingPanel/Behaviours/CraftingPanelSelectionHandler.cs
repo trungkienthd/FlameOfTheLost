@@ -4,10 +4,13 @@ namespace FlameOfTheLost
 {
     public class CraftingPanelSelectionHandler : CraftingPanelSubHandlerBase
     {
+        // --- Constants ---
+        private const int INITIAL_CRAFT_COUNT = 1;
+
         // --- Runtime ---
         internal CraftingRecipeProfile CurrentSelectedRecipe { get; private set; }
 
-        [SerializeField] private int _currentCraftCount = 1;
+        [SerializeField, Min(1)] private int _currentCraftCount = CraftingPanelSelectionHandler.INITIAL_CRAFT_COUNT;
         internal int CurrentCraftCount 
         { 
             get => _currentCraftCount; 
@@ -33,7 +36,7 @@ namespace FlameOfTheLost
             }
 
             this.CurrentSelectedRecipe = recipe;
-            this.CurrentCraftCount = 1;
+            this.CurrentCraftCount = CraftingPanelSelectionHandler.INITIAL_CRAFT_COUNT;
 
             this.CraftingPanelController.RefreshSelectionVisuals();
         }
@@ -42,7 +45,7 @@ namespace FlameOfTheLost
         internal void Clear()
         {
             this.CurrentSelectedRecipe = null;
-            this.CurrentCraftCount = 1;
+            this.CurrentCraftCount = CraftingPanelSelectionHandler.INITIAL_CRAFT_COUNT;
 
             if (!this.IsBound) return;
 
@@ -94,7 +97,7 @@ namespace FlameOfTheLost
         }
         internal void ResetCraftCount()
         {
-            this.CurrentCraftCount = 1;
+            this.CurrentCraftCount = CraftingPanelSelectionHandler.INITIAL_CRAFT_COUNT;
 
             if (!this.IsBound) return;
 
@@ -107,12 +110,12 @@ namespace FlameOfTheLost
             base.InitializeInternalState();
 
             this.CurrentSelectedRecipe = null;
-            this.CurrentCraftCount = 1;
+            this.CurrentCraftCount = CraftingPanelSelectionHandler.INITIAL_CRAFT_COUNT;
         }
         protected override void OnUnbinding(CraftingPanelController craftingPanelController)
         {
             this.CurrentSelectedRecipe = null;
-            this.CurrentCraftCount = 1;
+            this.CurrentCraftCount = CraftingPanelSelectionHandler.INITIAL_CRAFT_COUNT;
 
             base.OnUnbinding(craftingPanelController);
         }

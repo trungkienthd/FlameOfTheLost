@@ -42,7 +42,7 @@ namespace FlameOfTheLost
 
             this.DetailsDisplayController.DecreaseCraftCount();
         }
-        private void HandleIncreaseClicked()
+        public void HandleIncreaseClicked()
         {
             if (!this.EnsureBound()) return;
 

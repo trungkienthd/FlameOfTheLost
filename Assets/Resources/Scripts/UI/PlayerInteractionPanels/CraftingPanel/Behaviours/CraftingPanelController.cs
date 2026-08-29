@@ -75,7 +75,6 @@ namespace FlameOfTheLost
         }
         public void IncreaseCraftCount()
         {
-            Debug.Log($"Increased Craft Count to {this.SelectionHandler.CurrentCraftCount}");
             this.SelectionHandler?.IncreaseCraftCount();
         }
         public void DecreaseCraftCount()
