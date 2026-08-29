@@ -24,6 +24,8 @@ namespace FlameOfTheLost
         }
         public static CraftingEvaluationRecord Failure(CraftingFailureReason reason)
         {
+            //Debug.Log($"Crafting evaluation failed. Reason: {reason}");
+
             return new CraftingEvaluationRecord
             (
                 canCraft: false,

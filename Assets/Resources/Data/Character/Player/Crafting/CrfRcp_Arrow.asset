@@ -16,7 +16,7 @@ MonoBehaviour:
   _key: CRAFTING_RECIPE_ARROW
   _displayName: Arrow's Crafting Recipe
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 9c404df72e8c2b343932c19ab856cf5e, type: 3}
   _resultItem: {fileID: 11400000, guid: e3f2367d6724ced468c2cdf9e43748e3, type: 2}
   _resultQuantity: 3
   _materialRequirements:

@@ -36,11 +36,11 @@ namespace FlameOfTheLost
             if (playerCraftingController == null) return;
             if (!playerCraftingController.IsCrafting) return;
 
+            base.Open();
+
             _playerCraftingController = playerCraftingController;
 
             this.ClearSelection();
-
-            base.Open();
 
             if (this.RecipeEntryListSubPanelController != null)
             {
@@ -75,6 +75,7 @@ namespace FlameOfTheLost
         }
         public void IncreaseCraftCount()
         {
+            Debug.Log($"Increased Craft Count to {this.SelectionHandler.CurrentCraftCount}");
             this.SelectionHandler?.IncreaseCraftCount();
         }
         public void DecreaseCraftCount()

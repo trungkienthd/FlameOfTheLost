@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Prjt_Arrow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ProjectileProfile
   _id: 73001
-  _key: 
-  _displayName: 
+  _key: ARROW
+  _displayName: Arrow
   _description: 
   _icon: {fileID: 21300000, guid: 9c404df72e8c2b343932c19ab856cf5e, type: 3}
   _isStackable: 1

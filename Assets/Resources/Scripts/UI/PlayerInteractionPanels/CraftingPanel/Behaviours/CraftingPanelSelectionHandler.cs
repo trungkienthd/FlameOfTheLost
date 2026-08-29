@@ -6,7 +6,13 @@ namespace FlameOfTheLost
     {
         // --- Runtime ---
         internal CraftingRecipeProfile CurrentSelectedRecipe { get; private set; }
-        internal int CurrentCraftCount { get; private set; } = 1;
+
+        [SerializeField] private int _currentCraftCount = 1;
+        internal int CurrentCraftCount 
+        { 
+            get => _currentCraftCount; 
+            private set => _currentCraftCount = value; 
+        }
 
         // --- Internal APIs ---
         //  1. Select Crafting Recipe

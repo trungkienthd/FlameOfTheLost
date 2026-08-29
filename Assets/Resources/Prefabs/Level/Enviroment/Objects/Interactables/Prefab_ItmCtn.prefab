@@ -77,9 +77,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 438042356008047694}
-  - component: {fileID: 1933743043678913655}
   - component: {fileID: 2487970832899567984}
   - component: {fileID: 4626889292913281473}
+  - component: {fileID: 1933743043678913655}
   m_Layer: 18
   m_Name: Prefab_ItmCtn
   m_TagString: Interactable
@@ -105,25 +105,6 @@ Transform:
   - {fileID: 992179162254841918}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1933743043678913655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1389214061073505002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4d40cace0e810041965f5825fef5316, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerController
-  _enableDebugLogs: 0
-  _profile: {fileID: 0}
-  _visualTransform: {fileID: 4102794323715351277}
-  _visualSpriteRenderer: {fileID: 5580176976726055852}
-  _interactionPromptPriority: 100
-  _inventoryController: {fileID: 8783154537871620081}
-  _itemContainerPanelController: {fileID: 0}
 --- !u!50 &2487970832899567984
 Rigidbody2D:
   serializedVersion: 5
@@ -197,6 +178,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.9}
   m_EdgeRadius: 0
+--- !u!114 &1933743043678913655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389214061073505002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d40cace0e810041965f5825fef5316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerController
+  _enableDebugLogs: 0
+  _profile: {fileID: 0}
+  _visualTransform: {fileID: 4102794323715351277}
+  _visualSpriteRenderer: {fileID: 5580176976726055852}
+  _interactionPromptPriority: 100
+  _inventoryController: {fileID: 8783154537871620081}
+  _itemContainerPanelController: {fileID: 0}
 --- !u!1 &3009779040277109259
 GameObject:
   m_ObjectHideFlags: 0

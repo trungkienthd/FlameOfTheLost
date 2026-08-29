@@ -34,13 +34,13 @@ namespace FlameOfTheLost
             if (sourceInventoryController == null) return;
             if (playerInventoryController == null) return;
 
+            base.Open();
+
             this.CurrentContainerCtrl = sourceContainer;
             this.SourceInventoryController = sourceInventoryController;
             this.PlayerInventoryController = playerInventoryController;
 
             this.ClearSelection();
-
-            base.Open();
 
             if (this.ItemEntryListSubPanelController != null)
             {

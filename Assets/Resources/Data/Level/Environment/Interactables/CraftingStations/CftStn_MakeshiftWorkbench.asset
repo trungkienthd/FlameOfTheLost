@@ -12,19 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a26f609448bcdf44d8355f9a477814b1, type: 3}
   m_Name: CftStn_MakeshiftWorkbench
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingStationProfile
-  _id: 32301
+  _id: 32302
   _key: MAKESHIFT_WORKBENCH
   _displayName: Makeshift Workbench
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 1622224342, guid: ed26a618e3ead734889f0fdcd174e4a9, type: 3}
   _configureInitialTransformAtStart: 1
-  _initialPosition: {x: 4.9, y: 23.5, z: 0}
+  _initialPosition: {x: 104.9, y: 23.5, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
   _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
   _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
   _initialVisualLocalScale: {x: 1, y: 1, z: 1}
   _configureIconAtStart: 1
-  _craftingRecipes:
-  - {fileID: 11400000, guid: 7cfd33d43ae324e47a6a422654d29ee9, type: 2}
+  _craftingRecipes: []
   _interactionPromptPriority: 100
