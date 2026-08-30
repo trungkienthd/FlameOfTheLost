@@ -21,7 +21,7 @@ namespace FlameOfTheLost
                 return;
             }
 
-            CraftingEvaluationRecord evaluation = this.DetailsDisplayController.EvaluateCrafting(recipe, craftCount);
+            CraftingEvaluationRecord evaluation = this.RecipeDisplayController.EvaluateCrafting(recipe, craftCount);
 
             this.ButtonCraft.interactable = evaluation.CanCraft;
         }
@@ -38,7 +38,7 @@ namespace FlameOfTheLost
         {
             if (!this.EnsureBound()) return;
 
-            this.DetailsDisplayController.TryCraftSelectedRecipe();
+            this.RecipeDisplayController.TryCraftSelectedRecipe();
         }
 
         // --- FOTLMonoBehaviour Overrides ---

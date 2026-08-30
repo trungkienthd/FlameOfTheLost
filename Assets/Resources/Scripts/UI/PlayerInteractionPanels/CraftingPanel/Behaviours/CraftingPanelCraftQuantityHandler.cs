@@ -40,13 +40,13 @@ namespace FlameOfTheLost
         {
             if (!this.EnsureBound()) return;
 
-            this.DetailsDisplayController.DecreaseCraftCount();
+            this.RecipeDisplayController.DecreaseCraftCount();
         }
         public void HandleIncreaseClicked()
         {
             if (!this.EnsureBound()) return;
 
-            this.DetailsDisplayController.IncreaseCraftCount();
+            this.RecipeDisplayController.IncreaseCraftCount();
         }
         // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()

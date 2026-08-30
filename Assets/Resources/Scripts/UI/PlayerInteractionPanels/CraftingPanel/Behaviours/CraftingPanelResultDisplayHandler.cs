@@ -22,7 +22,7 @@ namespace FlameOfTheLost
                 return;
             }
 
-            int totalResultQuantity = this.DetailsDisplayController.GetScaledQuantity(recipe.ResultQuantity, craftCount);
+            int totalResultQuantity = this.RecipeDisplayController.GetScaledQuantity(recipe.ResultQuantity, craftCount);
 
             if (this.ResultIcon != null)
             {

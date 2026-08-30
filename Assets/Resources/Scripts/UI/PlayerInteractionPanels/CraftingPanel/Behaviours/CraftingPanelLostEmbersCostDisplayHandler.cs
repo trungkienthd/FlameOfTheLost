@@ -22,7 +22,7 @@ namespace FlameOfTheLost
                 return;
             }
 
-            int totalCost = this.DetailsDisplayController.GetScaledQuantity(recipe.LostEmbersCost, craftCount);
+            int totalCost = this.RecipeDisplayController.GetScaledQuantity(recipe.LostEmbersCost, craftCount);
 
             if (this.QuantityText != null)
             {

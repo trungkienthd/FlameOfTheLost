@@ -26,7 +26,7 @@ namespace FlameOfTheLost
 
             if (requirements == null) return;
 
-            InventoryController inventoryController = this.DetailsDisplayController.InventoryController;
+            InventoryController inventoryController = this.RecipeDisplayController.InventoryController;
 
             int displayCount = Mathf.Min(requirements.Count, CraftingPanelMaterialRequirementListHandler.MAX_MATERIAL_SLOT_COUNT);
             for (int i = 0; i < displayCount; i++)
@@ -35,7 +35,7 @@ namespace FlameOfTheLost
 
                 if (requirement == null || requirement.Material == null) continue;
 
-                int requiredQuantity = this.DetailsDisplayController.GetScaledQuantity(requirement.Quantity, craftCount);
+                int requiredQuantity = this.RecipeDisplayController.GetScaledQuantity(requirement.Quantity, craftCount);
 
                 int ownedQuantity = inventoryController != null
                     ? inventoryController.GetItemCount(requirement.Material)
