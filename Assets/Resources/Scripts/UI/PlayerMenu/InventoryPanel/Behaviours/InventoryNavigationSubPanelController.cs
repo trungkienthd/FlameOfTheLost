@@ -4,15 +4,19 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class InventoryNavigationSubPanelController : FOTLMonoBehaviour
+    public class InventoryNavigationSubPanelController : InventoryPanelSubBehaviourBase
     {
+        // --- References ---
         [SerializeField] private List<InventoryNavigationButtonUIController> _buttons = new();
         private IReadOnlyList<InventoryNavigationButtonUIController> ButtonControllers => _buttons;
 
+        // --- Runtime ---
         public ItemType CurrentSelectedItemType { get; private set; } = ItemType.Weapon;
 
+        // --- Events ---
         public event Action<ItemType> OnSelectedItemTypeChanged;
 
+        // --- Public APIs ---
         public void SetSelectedItemType(ItemType itemType, bool notify = false)
         {
             this.CurrentSelectedItemType = itemType;
@@ -24,6 +28,8 @@ namespace FlameOfTheLost
             }
         }
 
+        // --- Helpers ---
+        //  1. Event Handling
         private void HandleButtonClicked(InventoryNavigationButtonUIController clickedButton)
         {
             if (clickedButton == null) return;
@@ -34,6 +40,7 @@ namespace FlameOfTheLost
             this.OnSelectedItemTypeChanged?.Invoke(this.CurrentSelectedItemType);
         }
 
+        //  2. Refresh
         private void RefreshButtonStates()
         {
             for (int i = 0; i < this.ButtonControllers.Count; i++)
@@ -45,8 +52,11 @@ namespace FlameOfTheLost
             }
         }
 
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void BindInternalReferences()
         {
+            base.BindInternalReferences();
+
             for (int i = 0; i < this.ButtonControllers.Count; i++)
             {
                 InventoryNavigationButtonUIController button = this.ButtonControllers[i];
@@ -57,6 +67,8 @@ namespace FlameOfTheLost
         }
         protected override void InitializeGameplay()
         {
+            base.InitializeGameplay();
+
             this.RefreshButtonStates();
         }
         protected override void UnbindInternalReferences()
@@ -68,6 +80,8 @@ namespace FlameOfTheLost
 
                 button.OnClicked -= this.HandleButtonClicked;
             }
+
+            base.UnbindInternalReferences();
         }
     }
 }

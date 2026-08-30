@@ -7,10 +7,12 @@ namespace FlameOfTheLost
     {
         // --- References ---
         //  1. Sub-Behaviours
+        [SerializeField] private InventoryNavigationSubPanelController _navigationSubPanelController;
         [SerializeField] private InventoryPanelItemEntryListSubPanelController _itemEntryListSubPanelController;
         [SerializeField] private InventoryPanelSelectedItemEntryDisplayHandler _selectedItemEntryDisplayHandler;
-        private InventoryPanelItemEntryListSubPanelController ItemEntryListSubPanelController => _itemEntryListSubPanelController;
-        private InventoryPanelSelectedItemEntryDisplayHandler SelectedItemEntryDisplayHandler => _selectedItemEntryDisplayHandler;
+        internal InventoryNavigationSubPanelController NavigationSubPanelController => _navigationSubPanelController;
+        internal InventoryPanelItemEntryListSubPanelController ItemEntryListSubPanelController => _itemEntryListSubPanelController;
+        internal InventoryPanelSelectedItemEntryDisplayHandler SelectedItemEntryDisplayHandler => _selectedItemEntryDisplayHandler;
 
         // --- Runtime ---
         public InventoryItemEntry CurrentSelectedEntry { get; private set; }
@@ -70,6 +72,11 @@ namespace FlameOfTheLost
         {
             base.CacheInternalReferences();
 
+            if (this.NavigationSubPanelController == null)
+            {
+                Transform navigationSubPanel = this.transform.Find("InventoryNavigationSubPanel");
+                if (navigationSubPanel != null) _navigationSubPanelController = navigationSubPanel.GetComponent<InventoryNavigationSubPanelController>();
+            }
             if (this.ItemEntryListSubPanelController == null)
             {
                 Transform itemEntryListSubPanel = this.transform.Find("ItemEntryListSubPanel");
@@ -85,13 +92,15 @@ namespace FlameOfTheLost
         {
             base.ValidateInternalReferences();
 
-            if (this.ItemEntryListSubPanelController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelController)}] {nameof(this.ItemEntryListSubPanelController)} is missing.", this);
-            if (this.SelectedItemEntryDisplayHandler == null) Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelController)}] {nameof(this.SelectedItemEntryDisplayHandler)} is missing.", this);
+            if (this.NavigationSubPanelController       == null) Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelController)}] {nameof(this.NavigationSubPanelController)} is missing.", this);
+            if (this.ItemEntryListSubPanelController    == null) Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelController)}] {nameof(this.ItemEntryListSubPanelController)} is missing.", this);
+            if (this.SelectedItemEntryDisplayHandler    == null) Debug.LogError($"[{this.gameObject.name}.{nameof(InventoryPanelController)}] {nameof(this.SelectedItemEntryDisplayHandler)} is missing.", this);
         }
         protected override void BindInternalReferences()
         {
             base.BindInternalReferences();
 
+            this.NavigationSubPanelController?.Bind(this);
             this.ItemEntryListSubPanelController?.Bind(this);
             this.SelectedItemEntryDisplayHandler?.Bind(this);
         }
@@ -109,6 +118,7 @@ namespace FlameOfTheLost
         }
         protected override void UnbindInternalReferences()
         {
+            this.NavigationSubPanelController?.Unbind(this);
             this.ItemEntryListSubPanelController?.Unbind(this);
             this.SelectedItemEntryDisplayHandler?.Unbind(this);
 
