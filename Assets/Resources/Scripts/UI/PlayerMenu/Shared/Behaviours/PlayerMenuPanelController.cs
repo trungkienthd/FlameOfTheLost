@@ -1,8 +1,6 @@
-using UnityEngine;
-
 namespace FlameOfTheLost
 {
-    public abstract class PlayerMenuPanelController : MonoBehaviour
+    public abstract class PlayerMenuPanelController : FOTLMonoBehaviour
     {
         public virtual void ShowPanel()
         {
