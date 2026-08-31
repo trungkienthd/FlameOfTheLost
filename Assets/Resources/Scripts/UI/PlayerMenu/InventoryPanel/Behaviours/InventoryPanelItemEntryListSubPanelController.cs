@@ -50,7 +50,7 @@ namespace FlameOfTheLost
 
         // --- Helpers ---
         //  1. Event Handling
-        private void HandleSelectedItemTypeChanged(ItemType itemType)
+        private void HandleSelectedItemTypeChanged(ItemType? itemType)
         {
             if (this.FilterHandler == null) return;
 

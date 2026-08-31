@@ -16,6 +16,6 @@ MonoBehaviour:
   _key: WOOD
   _displayName: Wood
   _description: 
-  _icon: {fileID: -1768000699, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
+  _icon: {fileID: -1287321996, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
   _isStackable: 1
   _maxStackSize: 99

@@ -11,10 +11,10 @@ namespace FlameOfTheLost
         private IReadOnlyList<InventoryNavigationButtonUIController> ButtonControllers => _buttons;
 
         // --- Runtime ---
-        public ItemType CurrentSelectedItemType { get; private set; } = ItemType.Weapon;
+        public ItemType? CurrentSelectedItemType { get; private set; }
 
         // --- Events ---
-        public event Action<ItemType> OnSelectedItemTypeChanged;
+        public event Action<ItemType?> OnSelectedItemTypeChanged;
 
         // --- Public APIs ---
         public void SetSelectedItemType(ItemType itemType, bool notify = false)
@@ -33,9 +33,11 @@ namespace FlameOfTheLost
         private void HandleButtonClicked(InventoryNavigationButtonUIController clickedButton)
         {
             if (clickedButton == null) return;
-            if (this.CurrentSelectedItemType == clickedButton.Category) return;
 
-            this.CurrentSelectedItemType = clickedButton.Category;
+            this.CurrentSelectedItemType = this.CurrentSelectedItemType == clickedButton.Category
+                ? null
+                : clickedButton.Category;
+
             this.RefreshButtonStates();
             this.OnSelectedItemTypeChanged?.Invoke(this.CurrentSelectedItemType);
         }
@@ -48,7 +50,7 @@ namespace FlameOfTheLost
                 InventoryNavigationButtonUIController button = this.ButtonControllers[i];
                 if (button == null) continue;
 
-                button.SetSelected(button.Category == this.CurrentSelectedItemType);
+                button.SetSelected(this.CurrentSelectedItemType.HasValue && button.Category == this.CurrentSelectedItemType);
             }
         }
 
@@ -64,6 +66,12 @@ namespace FlameOfTheLost
 
                 button.OnClicked += this.HandleButtonClicked;
             }
+        }
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.CurrentSelectedItemType = null;
         }
         protected override void InitializeGameplay()
         {
