@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EquippedLoadoutSubPanelCarriableItemSectionController : FOTLMonoBehaviour
+    public class EquippedLoadoutSubPanelCarriableItemSectionController : EquippedLoadoutSubPanelSubBehaviourBase
     {
         // --- States ---
         //  1. References
@@ -12,33 +12,25 @@ namespace FlameOfTheLost
         [SerializeField] private EquippedLoadoutSlotController _carriableSlot;
         private EquippedLoadoutSlotController CarriableSlot => _carriableSlot;
 
-        //      1.2. Refs - Player
-        private PlayerCarryLoadoutController _playerInteractionLoadoutController;
-        private PlayerCarryLoadoutController PlayerInteractionLoadoutController => _playerInteractionLoadoutController;
-
         // --- Events ---
         public event Action<EquippedLoadoutSlotController> OnSlotClicked;
 
         // --- Public APIs ---
-        public void Initialize(PlayerCarryLoadoutController playerInteractionLoadoutController)
-        {
-            _playerInteractionLoadoutController = playerInteractionLoadoutController;
-        }
-
         public void Refresh(EquippedLoadoutSlotController selectedSlot)
         {
+            if (!this.EnsureBound()) return;
             if (this.CarriableSlot == null) return;
 
-            InventoryItemEntry interactableEntry = this.PlayerInteractionLoadoutController != null
-                ? this.PlayerInteractionLoadoutController.EquippedCarriableItemEntry
+            InventoryItemEntry carriableEntry = this.PlayerCarryLoadoutController != null
+                ? this.PlayerCarryLoadoutController.EquippedCarriableItemEntry
                 : null;
 
             bool isSelected = selectedSlot == this.CarriableSlot;
             this.CarriableSlot.BindCarriableItem
             (
-                carriableEntry: interactableEntry,
+                carriableEntry: carriableEntry,
                 isSelected: isSelected,
-                isMainButtonInteractable: this.PlayerInteractionLoadoutController != null
+                isMainButtonInteractable: this.PlayerCarryLoadoutController != null
             );
         }
 
@@ -61,19 +53,18 @@ namespace FlameOfTheLost
 
             this.CarriableSlot.OnClicked -= this.HandleSlotClicked;
         }
+
         private void HandleSlotClicked(EquippedLoadoutSlotController slot)
         {
             this.OnSlotClicked?.Invoke(slot);
         }
 
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
 
-            if (this.CarriableSlot == null)
-            {
-                _carriableSlot = this.GetComponentInChildren<EquippedLoadoutSlotController>(true);
-            }
+            if (this.CarriableSlot == null) _carriableSlot = this.GetComponentInChildren<EquippedLoadoutSlotController>(true);
         }
         protected override void BindInternalReferences()
         {
@@ -83,9 +74,9 @@ namespace FlameOfTheLost
         }
         protected override void UnbindInternalReferences()
         {
-            base.UnbindInternalReferences();
-
             this.UnbindSlotEvents();
+
+            base.UnbindInternalReferences();
         }
     }
 }

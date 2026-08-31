@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class EquippedLoadoutSlotActionTooltipController : FOTLMonoBehaviour
+    public class EquippedLoadoutSlotActionTooltipController : EquippedLoadoutSubPanelSubBehaviourBase
     {
         [Header("References")]
         [SerializeField] private RectTransform _rectTransform;
@@ -36,6 +36,9 @@ namespace FlameOfTheLost
                 return;
             }
 
+            // Activating the object allows its FOTL Awake lifecycle to cache and bind its internal references if this is the first time it has ever been shown.
+            this.gameObject.SetActive(true);
+
             if (this.RectTransform == null)
             {
                 this.Hide();
@@ -48,13 +51,6 @@ namespace FlameOfTheLost
             if (this.RectTransform.parent != tooltipParent)
             {
                 this.RectTransform.SetParent(tooltipParent, worldPositionStays: false);
-            }
-
-            this.gameObject.SetActive(true);
-            if (!this.gameObject.activeInHierarchy)
-            {
-                Debug.LogWarning($"{nameof(EquippedLoadoutSlotActionTooltipController)} could not be shown because one of its parent GameObjects is inactive. Try again...");
-                this.gameObject.SetActive(true);
             }
 
             this.RectTransform.SetAsLastSibling();
@@ -139,92 +135,53 @@ namespace FlameOfTheLost
             if (this.BoundSlot == null) return;
             this.OnUnequipClicked?.Invoke(this.BoundSlot);
         }
-
         private void HandleReplaceClicked()
         {
             if (this.BoundSlot == null) return;
             this.OnReplaceClicked?.Invoke(this.BoundSlot);
         }
-
         private void HandleChangeSkillClicked()
         {
             if (this.BoundSlot == null) return;
             this.OnChangeSkillClicked?.Invoke(this.BoundSlot);
         }
 
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
 
-            if (this.RectTransform == null)
-            {
-                _rectTransform = this.GetComponent<RectTransform>();
-            }
+            if (this.RectTransform == null) _rectTransform = this.GetComponent<RectTransform>();
 
             if (this.HeaderText == null)
             {
                 GameObject headerText = this.transform.Find("HeaderText")?.gameObject;
-                if (headerText != null)
-                {
-                    _headerText = headerText.GetComponent<TMP_Text>();
-                }
+                if (headerText != null) _headerText = headerText.GetComponent<TMP_Text>();
             }
 
             if (this.UnequipButton == null || this.ReplaceButton == null || this.ChangeSkillButton == null)
             {
                 GameObject buttonListRoot = this.transform.Find("ButtonListRoot")?.gameObject;
 
-                GameObject unequipButton = buttonListRoot?.transform.Find("UnequipButton")?.gameObject;
-                GameObject replaceButton = buttonListRoot?.transform.Find("ReplaceButton")?.gameObject;
-                GameObject changeSkillButton = buttonListRoot?.transform.Find("ChangeSkillButton")?.gameObject;
+                GameObject unequipButton        = buttonListRoot?.transform.Find("UnequipButton")?.gameObject;
+                GameObject replaceButton        = buttonListRoot?.transform.Find("ReplaceButton")?.gameObject;
+                GameObject changeSkillButton    = buttonListRoot?.transform.Find("ChangeSkillButton")?.gameObject;
 
-                if (this.UnequipButton == null && unequipButton != null)
-                {
-                    _unequipButton = unequipButton.GetComponent<Button>();
-                }
-
-                if (this.ReplaceButton == null && replaceButton != null)
-                {
-                    _replaceButton = replaceButton.GetComponent<Button>();
-                }
-
-                if (this.ChangeSkillButton == null && changeSkillButton != null)
-                {
-                    _changeSkillButton = changeSkillButton.GetComponent<Button>();
-                }
+                if (this.UnequipButton      == null && unequipButton        != null) _unequipButton     = unequipButton.GetComponent<Button>();
+                if (this.ReplaceButton      == null && replaceButton        != null) _replaceButton     = replaceButton.GetComponent<Button>();
+                if (this.ChangeSkillButton  == null && changeSkillButton    != null) _changeSkillButton = changeSkillButton.GetComponent<Button>();
             }
         }
-
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
-            if (this.RectTransform == null)
-            {
-                Debug.LogError($"{nameof(EquippedLoadoutSlotActionTooltipController)} requires a {nameof(RectTransform)}.", this);
-            }
-
-            if (this.HeaderText == null)
-            {
-                Debug.LogError($"{nameof(EquippedLoadoutSlotActionTooltipController)} requires a HeaderText TMP_Text reference.", this);
-            }
-
-            if (this.UnequipButton == null)
-            {
-                Debug.LogError($"{nameof(EquippedLoadoutSlotActionTooltipController)} requires an UnequipButton reference.", this);
-            }
-
-            if (this.ReplaceButton == null)
-            {
-                Debug.LogError($"{nameof(EquippedLoadoutSlotActionTooltipController)} requires a ReplaceButton reference.", this);
-            }
-
-            if (this.ChangeSkillButton == null)
-            {
-                Debug.LogError($"{nameof(EquippedLoadoutSlotActionTooltipController)} requires a ChangeSkillButton reference.", this);
-            }
+            if (this.RectTransform      == null) Debug.LogError($"{nameof(EquippedLoadoutSlotActionTooltipController)} requires a {nameof(UnityEngine.RectTransform)}.", this);
+            if (this.HeaderText         == null) Debug.LogError($"{nameof(EquippedLoadoutSlotActionTooltipController)} requires a HeaderText TMP_Text reference.", this);
+            if (this.UnequipButton      == null) Debug.LogError($"{nameof(EquippedLoadoutSlotActionTooltipController)} requires an UnequipButton reference.", this);
+            if (this.ReplaceButton      == null) Debug.LogError($"{nameof(EquippedLoadoutSlotActionTooltipController)} requires a ReplaceButton reference.", this);
+            if (this.ChangeSkillButton  == null) Debug.LogError($"{nameof(EquippedLoadoutSlotActionTooltipController)} requires a ChangeSkillButton reference.", this);
         }
-
         protected override void BindInternalReferences()
         {
             base.BindInternalReferences();
@@ -247,32 +204,13 @@ namespace FlameOfTheLost
                 this.ChangeSkillButton.onClick.AddListener(this.HandleChangeSkillClicked);
             }
         }
-
-        protected override void InitializeInternalState()
-        {
-            base.InitializeInternalState();
-
-            this.Hide();
-        }
-
         protected override void UnbindInternalReferences()
         {
             base.UnbindInternalReferences();
 
-            if (this.UnequipButton != null)
-            {
-                this.UnequipButton.onClick.RemoveListener(this.HandleUnequipClicked);
-            }
-
-            if (this.ReplaceButton != null)
-            {
-                this.ReplaceButton.onClick.RemoveListener(this.HandleReplaceClicked);
-            }
-
-            if (this.ChangeSkillButton != null)
-            {
-                this.ChangeSkillButton.onClick.RemoveListener(this.HandleChangeSkillClicked);
-            }
+            if (this.UnequipButton      != null) this.UnequipButton.onClick.RemoveListener(this.HandleUnequipClicked);
+            if (this.ReplaceButton      != null) this.ReplaceButton.onClick.RemoveListener(this.HandleReplaceClicked);
+            if (this.ChangeSkillButton  != null) this.ChangeSkillButton.onClick.RemoveListener(this.HandleChangeSkillClicked);
         }
     }
 }

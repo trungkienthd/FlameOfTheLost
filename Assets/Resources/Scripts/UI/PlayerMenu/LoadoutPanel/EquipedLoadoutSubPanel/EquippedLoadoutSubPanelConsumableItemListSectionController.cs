@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EquippedLoadoutSubPanelConsumableItemListSectionController : FOTLMonoBehaviour
+    public class EquippedLoadoutSubPanelConsumableItemListSectionController : EquippedLoadoutSubPanelSubBehaviourBase
     {
         // --- States ---
         //  1. References
@@ -13,27 +13,15 @@ namespace FlameOfTheLost
         [SerializeField] private List<EquippedLoadoutQuantityTextSlotController> _consumableSlots;
         private IReadOnlyList<EquippedLoadoutQuantityTextSlotController> ConsumableItemSlots => _consumableSlots;
 
-        //      1.2. Refs - Player
-        private CharacterCombatLoadoutController _playerCombatLoadoutController;
-        private CharacterCombatLoadoutController PlayerCombatLoadoutController => _playerCombatLoadoutController;
-
         // --- Events ---
         public event Action<EquippedLoadoutSlotController> OnSlotClicked;
 
         // --- Public APIs ---
-        public void Initialize(CharacterCombatLoadoutController playerCombatLoadoutController)
-        {
-            _playerCombatLoadoutController = playerCombatLoadoutController;
-
-            if (this.PlayerCombatLoadoutController != null && _consumableSlots == null)
-            {
-                int maxConsumableCapacity = this.PlayerCombatLoadoutController.MaxEquippedConsumableCapacity;
-                _consumableSlots = new List<EquippedLoadoutQuantityTextSlotController>(maxConsumableCapacity);
-            }
-        }
-
         public void Refresh(EquippedLoadoutSlotController selectedSlot)
         {
+            if (!this.EnsureBound()) return;
+            if (this.ConsumableItemSlots == null) return;
+
             IReadOnlyList<InventoryItemEntry> equippedConsumables = this.PlayerCombatLoadoutController != null
                 ? this.PlayerCombatLoadoutController.EquippedConsumableItemEntries
                 : null;
@@ -54,8 +42,8 @@ namespace FlameOfTheLost
 
                 bool isSelected = selectedSlot == slot;
 
-                bool slotInteractable =
-                    this.PlayerCombatLoadoutController != null &&
+                bool slotInteractable = 
+                    this.PlayerCombatLoadoutController != null && 
                     i < this.PlayerCombatLoadoutController.MaxEquippedConsumables;
 
                 slot.BindConsumableItem
@@ -69,11 +57,12 @@ namespace FlameOfTheLost
             }
         }
 
-        // --- Helpers ---
         public bool ContainsSlot(EquippedLoadoutQuantityTextSlotController slot)
         {
             return slot != null && _consumableSlots.Contains(slot);
         }
+
+        // --- Helpers ---
         private void BindSlotEvents()
         {
             foreach (EquippedLoadoutQuantityTextSlotController slot in this.ConsumableItemSlots)
@@ -84,7 +73,6 @@ namespace FlameOfTheLost
                 slot.OnClicked += this.HandleSlotClicked;
             }
         }
-
         private void UnbindSlotEvents()
         {
             foreach (EquippedLoadoutQuantityTextSlotController slot in this.ConsumableItemSlots)
@@ -100,6 +88,13 @@ namespace FlameOfTheLost
             this.OnSlotClicked?.Invoke(slot);
         }
 
+        // --- FOTLMonoBehaviour Overrides ---
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
+            if (_consumableSlots == null || this.ConsumableItemSlots.Count > 0) _consumableSlots = new List<EquippedLoadoutQuantityTextSlotController>(this.GetComponentsInChildren<EquippedLoadoutQuantityTextSlotController>(true));
+        }
         protected override void BindInternalReferences()
         {
             base.BindInternalReferences();
@@ -108,9 +103,9 @@ namespace FlameOfTheLost
         }
         protected override void UnbindInternalReferences()
         {
-            base.UnbindInternalReferences();
-
             this.UnbindSlotEvents();
+
+            base.UnbindInternalReferences();
         }
     }
 }

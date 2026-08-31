@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EquippedLoadoutSubPanelProjectileListSectionController : FOTLMonoBehaviour
+    public class EquippedLoadoutSubPanelProjectileListSectionController : EquippedLoadoutSubPanelSubBehaviourBase
     {
         // --- States ---
         //  1. References
@@ -13,27 +13,15 @@ namespace FlameOfTheLost
         [SerializeField] private List<EquippedLoadoutQuantityTextSlotController> _projectileSlots;
         private IReadOnlyList<EquippedLoadoutQuantityTextSlotController> ProjectileSlots => _projectileSlots;
 
-        //  2. Player's References
-        private CharacterCombatLoadoutController _playerCombatLoadoutController;
-        private CharacterCombatLoadoutController PlayerCombatLoadoutController => _playerCombatLoadoutController;
-
         // --- Events ---
         public event Action<EquippedLoadoutSlotController> OnSlotClicked;
 
         // --- Public APIs ---
-        public void Initialize(CharacterCombatLoadoutController playerCombatLoadoutController)
-        {
-            _playerCombatLoadoutController = playerCombatLoadoutController;
-
-            if (this.PlayerCombatLoadoutController != null && _projectileSlots == null)
-            {
-                int maxProjectileCapacity = this.PlayerCombatLoadoutController.MaxEquippedProjectileCapacity;
-                _projectileSlots = new List<EquippedLoadoutQuantityTextSlotController>(maxProjectileCapacity);
-            }
-        }
-
         public void Refresh(EquippedLoadoutSlotController selectedSlot)
         {
+            if (!this.EnsureBound()) return;
+            if (this.ProjectileSlots == null) return;
+
             IReadOnlyList<InventoryItemEntry> equippedProjectiles = this.PlayerCombatLoadoutController != null
                 ? this.PlayerCombatLoadoutController.EquippedProjectileEntries
                 : null;
@@ -41,6 +29,7 @@ namespace FlameOfTheLost
             for (int i = 0; i < this.ProjectileSlots.Count; i++)
             {
                 EquippedLoadoutQuantityTextSlotController slot = this.ProjectileSlots[i];
+
                 if (slot == null) continue;
 
                 InventoryItemEntry entry = equippedProjectiles != null && i < equippedProjectiles.Count
@@ -49,8 +38,8 @@ namespace FlameOfTheLost
 
                 bool isSelected = selectedSlot == slot;
 
-                bool slotInteractable =
-                    this.PlayerCombatLoadoutController != null &&
+                bool slotInteractable = 
+                    this.PlayerCombatLoadoutController != null && 
                     i < this.PlayerCombatLoadoutController.MaxEquippedProjectiles;
 
                 slot.BindProjectileItem
@@ -94,6 +83,13 @@ namespace FlameOfTheLost
             this.OnSlotClicked?.Invoke(slot);
         }
 
+        // --- FOTLMonoBehaviour Overrides ---
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
+            if (_projectileSlots == null || this.ProjectileSlots.Count <= 0) _projectileSlots = new List<EquippedLoadoutQuantityTextSlotController>(this.GetComponentsInChildren<EquippedLoadoutQuantityTextSlotController>(true));
+        }
         protected override void BindInternalReferences()
         {
             base.BindInternalReferences();
@@ -102,9 +98,9 @@ namespace FlameOfTheLost
         }
         protected override void UnbindInternalReferences()
         {
-            base.UnbindInternalReferences();
-
             this.UnbindSlotEvents();
+
+            base.UnbindInternalReferences();
         }
     }
 }
