@@ -10,8 +10,7 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(CharacterCombatLoadoutConsumableItemHandler))]
     public class CharacterCombatLoadoutController : CharacterBehaviourControllerBase, IStatusEffectFlagConsumer, ICharacterDeathDisableable
     {
-        // --- States ---
-        //  1. References
+        // --- Referneces ---
         private CharacterCombatController CombatController => this.CharacterRootController.CombatController;
 
         private CharacterCombatLoadoutWeaponHandler WeaponHandler => this.CharacterRootController.CombatLoadoutWeaponHandler;
@@ -19,8 +18,9 @@ namespace FlameOfTheLost
         private CharacterCombatLoadoutSpecialSkillHandler SpecialSkillHandler => this.CharacterRootController.CombatLoadoutSpecialSkillHandler;
         private CharacterCombatLoadoutConsumableItemHandler ConsumableItemHandler => this.CharacterRootController.CombatLoadoutConsumableItemHandler;
 
-        //  2. Status Effects states
-        [Header("Status Effects Flags (Runtime)")]
+        // --- Runtime ---
+        //  1. Status Effects states
+        [Header("Runtime - Status Effects Flags")]
         [SerializeField] private bool _cannotSwapLoadout;
         [SerializeField] private bool _ignoreSwapLock;
         private bool CannotSwapLoadout
@@ -35,31 +35,31 @@ namespace FlameOfTheLost
         }
         public bool IsLoadoutSwapLocked => this.CannotSwapLoadout && !this.IgnoreSwapLoadoutLock;
 
-        //  3. Combat attack state
+        //  2. Combat attack state
         public bool IsInAttackWindow => (this.CombatController != null && this.CombatController.IsInAttackWindow);
         public bool IsAttackLocked => (this.CombatController != null && this.CombatController.IsAttackLocked);
 
-        //  4. Weapon APIs
+        //  3. Weapon APIs
         public int MaxEquippedWeaponCapacity => this.WeaponHandler.MaxEquippedEntryCapacity;
         public int MaxEquippedWeapons => this.WeaponHandler.MaxEquippedEntries;
         public IReadOnlyList<InventoryItemEntry> EquippedWeaponEntries => this.WeaponHandler.EquippedEntries;
         public InventoryItemEntry ActiveEquippedWeaponEntry => this.WeaponHandler.ActiveEquippedEntry;
         public RuntimeWeapon ActiveEquippedRuntimeWeapon => this.WeaponHandler.ActiveEquippedRuntimeWeapon;
 
-        //  5. Projectile APIs
+        //  4. Projectile APIs
         public int MaxEquippedProjectileCapacity => this.ProjectileHandler.MaxEquippedEntryCapacity;
         public int MaxEquippedProjectiles => this.ProjectileHandler.MaxEquippedEntries;
         public IReadOnlyList<InventoryItemEntry> EquippedProjectileEntries => this.ProjectileHandler.EquippedEntries;
         public InventoryItemEntry ActiveEquippedProjectileEntry => this.ProjectileHandler.ActiveEquippedEntry;
 
-        //  6. Consumable item APIs
+        //  5. Consumable item APIs
         public int MaxEquippedConsumableCapacity => this.ConsumableItemHandler.MaxEquippedEntryCapacity;
         public int MaxEquippedConsumables => this.ConsumableItemHandler.MaxEquippedEntries;
         public IReadOnlyList<InventoryItemEntry> EquippedConsumableItemEntries => this.ConsumableItemHandler.EquippedEntries;
         public InventoryItemEntry ActiveEquippedConsumableItemEntry => this.ConsumableItemHandler.ActiveEquippedEntry;
 
-        //  7. Death Disable State (Runtime)
-        [Header("Death Disable")]
+        //  6. Death Disable State (Runtime)
+        [Header("Runtime - Death Disable")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
         {
@@ -68,6 +68,7 @@ namespace FlameOfTheLost
         }
 
         // --- Events ---
+        public event Action OnEquippedWeaponEntriesChanged;
         public event Action<InventoryItemEntry> OnActiveEquippedWeaponChanged;
         public event Action<InventoryItemEntry> OnActiveEquippedProjectileChanged;
         public event Action<SkillProfile> OnActiveSpecialSkillChanged;
@@ -78,6 +79,8 @@ namespace FlameOfTheLost
         public void SetMaxEquippedWeaponsFromProgression(int amount)
         {
             this.WeaponHandler.SetMaxEquippedEntriesFromProgression(amount);
+
+            this.NotifyEquippedWeaponEntriesChanged();
         }
         public void SetMaxEquippedProjectilesFromProgression(int amount)
         {
@@ -288,6 +291,10 @@ namespace FlameOfTheLost
         }
 
         //  7. Event Notifiers
+        public void NotifyEquippedWeaponEntriesChanged()
+        {
+            this.OnEquippedWeaponEntriesChanged?.Invoke();
+        }
         public void NotifyActiveEquippedWeaponChanged(InventoryItemEntry activeWeaponEntry)
         {
             this.OnActiveEquippedWeaponChanged?.Invoke(activeWeaponEntry);

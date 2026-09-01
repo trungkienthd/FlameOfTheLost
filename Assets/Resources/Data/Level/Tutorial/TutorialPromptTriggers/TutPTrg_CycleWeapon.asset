@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c01bafebdd5164c8d460b437566872, type: 3}
   m_Name: TutPTrg_CycleWeapon
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TutorialPromptTriggerProfile
-  _id: 41005
+  _id: 41000
   _key: TUTORIAL_PROMPT_CYCLE_WEAPON
   _displayName: Cycle Weapon Tutorial Prompt
   _description: Press [1] to switch to your next weapon.
@@ -25,7 +25,7 @@ MonoBehaviour:
   _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
   _initialVisualLocalScale: {x: 1, y: 1, z: 1}
   _configureIconAtStart: 0
-  _interactionPromptPriority: 15
+  _interactionPromptPriority: 20
   _startEnabled: 1
   _hideAfterCompleted: 1
   _interactionTriggerColliderConfiguration:

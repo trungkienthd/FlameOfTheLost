@@ -5,7 +5,8 @@ namespace FlameOfTheLost
         None = 0,
 
         // --- Tutorial: Equipment ---
-        PlayerReadyToCycleWeapons = 100,
+        PlayerHasMultipleWeapons = 100,
+        PlayerReadyToCycleWeapons = 101,
 
         // --- Tutorial: Combat ---
         PlayerHitByFirstEnemy = 200,

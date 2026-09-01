@@ -53,12 +53,13 @@ namespace FlameOfTheLost
 
             this.GameConditionController.ResetConditions();
 
+            this.RefreshPlayerHasMultipleWeaponsCondition();
             this.RefreshPlayerReadyToCycleWeaponsCondition();
         }
 
         // --- Helpers ---
         //  1. Player Equipment Progress
-        private void RefreshPlayerReadyToCycleWeaponsCondition()
+        private void RefreshPlayerHasMultipleWeaponsCondition()
         {
             if (this.GameConditionController == null) return;
             if (this.Player == null) return;
@@ -66,25 +67,42 @@ namespace FlameOfTheLost
 
             IReadOnlyList<InventoryItemEntry> weaponEntries = this.Player.InventoryController.AllWeaponEntries;
 
-            bool hasAtLeastTwoWeapons = weaponEntries != null && weaponEntries.Count >= 2;
+            bool playerHasMultipleWeapons = weaponEntries != null && weaponEntries.Count >= 2;
 
-            bool hasEquippedWeapon = false;
+            this.GameConditionController.SetConditionState(GameConditionKey.PlayerHasMultipleWeapons, playerHasMultipleWeapons);
+        }
+        private void RefreshPlayerReadyToCycleWeaponsCondition()
+        {
+            if (this.GameConditionController == null) return;
+            if (this.Player == null) return;
+            if (this.Player.CombatLoadoutController == null) return;
 
-            if (hasAtLeastTwoWeapons)
+            CharacterCombatLoadoutController combatLoadoutController = this.Player.CombatLoadoutController;
+
+            IReadOnlyList<InventoryItemEntry> equippedWeaponEntries = combatLoadoutController.EquippedWeaponEntries;
+            InventoryItemEntry activeWeaponEntry = combatLoadoutController.ActiveEquippedWeaponEntry;
+
+            int equippedWeaponCount = 0;
+            bool activeWeaponIsEquipped = false;
+
+            if (equippedWeaponEntries != null)
             {
-                for (int i = 0; i < weaponEntries.Count; i++)
+                for (int i = 0; i < equippedWeaponEntries.Count; i++)
                 {
-                    InventoryItemEntry weaponEntry = weaponEntries[i];
+                    InventoryItemEntry equippedWeaponEntry = equippedWeaponEntries[i];
 
-                    if (weaponEntry == null) continue;
-                    if (!weaponEntry.Equipped) continue;
+                    if (equippedWeaponEntry == null) continue;
 
-                    hasEquippedWeapon = true;
-                    break;
+                    equippedWeaponCount++;
+
+                    if (UnityEngine.Object.ReferenceEquals(equippedWeaponEntry, activeWeaponEntry))
+                    {
+                        activeWeaponIsEquipped = true;
+                    }
                 }
             }
 
-            bool playerReadyToCycleWeapons = hasAtLeastTwoWeapons && hasEquippedWeapon;
+            bool playerReadyToCycleWeapons = equippedWeaponCount >= 2 && activeWeaponEntry != null && activeWeaponIsEquipped;
 
             this.GameConditionController.SetConditionState(GameConditionKey.PlayerReadyToCycleWeapons, playerReadyToCycleWeapons);
         }
@@ -163,12 +181,20 @@ namespace FlameOfTheLost
         {
             if (item is not WeaponProfile) return;
 
-            this.RefreshPlayerReadyToCycleWeaponsCondition();
+            this.RefreshPlayerHasMultipleWeaponsCondition();
         }
         private void HandlePlayerItemRemoved(ItemProfile item, int quantity)
         {
             if (item is not WeaponProfile) return;
 
+            this.RefreshPlayerHasMultipleWeaponsCondition();
+        }
+        private void HandleEquippedWeaponEntriesChanged()
+        {
+            this.RefreshPlayerReadyToCycleWeaponsCondition();
+        }
+        private void HandleActiveEquippedWeaponChanged(InventoryItemEntry activeWeaponEntry)
+        {
             this.RefreshPlayerReadyToCycleWeaponsCondition();
         }
         private void HandleEnemySpawned(EnemySpawnEntry spawnEntry, CharacterRootController character)
@@ -235,6 +261,7 @@ namespace FlameOfTheLost
             {
                 if (this.Player.DamageReceivingHandler  == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressController)}] {nameof(this.Player)} has no {nameof(DamageReceivingHandler)}.", this);
                 if (this.Player.InventoryController     == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressController)}] {nameof(this.Player)} has no {nameof(InventoryController)}.", this);
+                if (this.Player.CombatLoadoutController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressController)}] {nameof(this.Player)} has no {nameof(CharacterCombatLoadoutController)}.", this);
             }
 
             if (this.FirstEnemySpawner == null)
@@ -254,13 +281,19 @@ namespace FlameOfTheLost
             if (this.Player?.DamageReceivingHandler != null) this.Player.DamageReceivingHandler.OnDamageApplied += this.HandleDamageApplied;
             if (this.Player?.InventoryController != null)
             {
-                this.Player.InventoryController.OnItemAdded += this.HandlePlayerItemAdded;
-                this.Player.InventoryController.OnItemRemoved +=this.HandlePlayerItemRemoved;
+                this.Player.InventoryController.OnItemAdded     += this.HandlePlayerItemAdded;
+                this.Player.InventoryController.OnItemRemoved   += this.HandlePlayerItemRemoved;
+            }
+            if (this.Player?.CombatLoadoutController != null)
+            {
+                this.Player.CombatLoadoutController.OnEquippedWeaponEntriesChanged  += this.HandleEquippedWeaponEntriesChanged;
+                this.Player.CombatLoadoutController.OnActiveEquippedWeaponChanged   += this.HandleActiveEquippedWeaponChanged;
             }
             if (this.FirstEnemySpawner != null) this.FirstEnemySpawner.EnemySpawned += this.HandleEnemySpawned;
 
             this.TryBindExistingFirstEnemy();
 
+            this.RefreshPlayerHasMultipleWeaponsCondition();
             this.RefreshPlayerReadyToCycleWeaponsCondition();
         }
         protected override void UnbindExternalReferences()
@@ -268,8 +301,13 @@ namespace FlameOfTheLost
             if (this.Player?.DamageReceivingHandler != null) this.Player.DamageReceivingHandler.OnDamageApplied -= this.HandleDamageApplied;
             if (this.Player?.InventoryController != null)
             {
-                this.Player.InventoryController.OnItemAdded -= this.HandlePlayerItemAdded;
-                this.Player.InventoryController.OnItemRemoved -= this.HandlePlayerItemRemoved;
+                this.Player.InventoryController.OnItemAdded     -= this.HandlePlayerItemAdded;
+                this.Player.InventoryController.OnItemRemoved   -= this.HandlePlayerItemRemoved;
+            }
+            if (this.Player?.CombatLoadoutController != null)
+            {
+                this.Player.CombatLoadoutController.OnEquippedWeaponEntriesChanged  -= this.HandleEquippedWeaponEntriesChanged;
+                this.Player.CombatLoadoutController.OnActiveEquippedWeaponChanged   -= this.HandleActiveEquippedWeaponChanged;
             }
             if (this.FirstEnemySpawner != null) this.FirstEnemySpawner.EnemySpawned -= this.HandleEnemySpawned;
 

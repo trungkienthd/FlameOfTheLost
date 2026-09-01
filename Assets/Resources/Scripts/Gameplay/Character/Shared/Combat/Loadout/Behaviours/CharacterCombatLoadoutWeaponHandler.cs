@@ -86,6 +86,11 @@ namespace FlameOfTheLost
             {
                 this.RuntimeWeaponMap.Remove(oldEntry);
             }
+
+            if (this.CombatLoadoutController != null)
+            {
+                this.CombatLoadoutController.NotifyEquippedWeaponEntriesChanged();
+            }
         }
 
         protected override void OnEntryReplaced(int slotIndex, InventoryItemEntry oldEntry, InventoryItemEntry newEntry)
