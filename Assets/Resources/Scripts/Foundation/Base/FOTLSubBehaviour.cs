@@ -6,7 +6,7 @@ namespace FlameOfTheLost
     {
         // --- References ---
         //  1. Brain Behaviour
-        [Header("References (FOTLSubBehaviour - Brian Behaviour")]
+        [Header("References (FOTLSubBehaviour) - Brian Behaviour")]
         [SerializeField] private TBrainBehaviour _brainBehaviour;
         protected TBrainBehaviour BrainBehaviour
         {

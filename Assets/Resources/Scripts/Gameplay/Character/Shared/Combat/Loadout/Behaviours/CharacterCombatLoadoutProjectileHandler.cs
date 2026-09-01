@@ -5,28 +5,13 @@ namespace FlameOfTheLost
 {
     public class CharacterCombatLoadoutProjectileHandler : CharacterCombatLoadoutEntryHandlerBase
     {
-        // --- States ---
+        // --- Configs ---
         //  1. Equipped Projectile
         public override int MaxEquippedEntryCapacity => 1;
         protected override int DefaultEquippedEntryCapacity => 1;
         protected override string EntryDisplayName => "Projectile";
 
         // --- Public APIs ---
-        private int GetEquippedEntryIndex(InventoryItemEntry entry)
-        {
-            if (entry == null) return -1;
-
-            for (int i = 0; i < this.EquippedEntries.Count; i++)
-            {
-                if (UnityEngine.Object.ReferenceEquals(this.EquippedEntries[i], entry))
-                {
-                    return i;
-                }
-            }
-
-            return -1;
-        }
-
         public bool TryGetItemFromEntry(InventoryItemEntry projectileEntry, out ProjectileProfile projectile)
         {
             projectile = null;
@@ -151,7 +136,6 @@ namespace FlameOfTheLost
                 return false;
             }
 
-
             projectileCostRecord = new ProjectileCostRecord
             (
                 projectile: consumedProjectile,
@@ -195,6 +179,7 @@ namespace FlameOfTheLost
             if (!this.InventoryController.TryAddItemAndGetFirstAffectedEntry(projectileCostRecord.Projectile, projectileCostRecord.Quantity, out InventoryItemEntry refundedEntry))
             {
                 Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutProjectileHandler)}] {nameof(this.RefundProjectileCost)} failed: could not refund projectile '{projectileCostRecord.Projectile.name}' x{projectileCostRecord.Quantity}.", this);
+                
                 this.RefreshLoadoutAfterCharacterRefreshment();
                 return;
             }
@@ -223,6 +208,21 @@ namespace FlameOfTheLost
             if (this.CombatLoadoutController == null) return;
 
             this.CombatLoadoutController.NotifyActiveEquippedProjectileChanged(activeEntry);
+        }
+
+        private int GetEquippedEntryIndex(InventoryItemEntry entry)
+        {
+            if (entry == null) return -1;
+
+            for (int i = 0; i < this.EquippedEntries.Count; i++)
+            {
+                if (UnityEngine.Object.ReferenceEquals(this.EquippedEntries[i], entry))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
 
         private void RefreshConsumedEntryState(InventoryItemEntry consumedEntry)

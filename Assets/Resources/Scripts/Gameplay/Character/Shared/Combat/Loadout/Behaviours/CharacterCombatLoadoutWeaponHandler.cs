@@ -5,7 +5,7 @@ namespace FlameOfTheLost
 {
     public class CharacterCombatLoadoutWeaponHandler : CharacterCombatLoadoutEntryHandlerBase
     {
-        // --- States ---
+        // --- Configs ---
         //  1. Equipped Weapons
         public override int MaxEquippedEntryCapacity => 3;
         protected override int DefaultEquippedEntryCapacity => 1;
@@ -13,13 +13,11 @@ namespace FlameOfTheLost
 
         public RuntimeWeapon ActiveEquippedRuntimeWeapon => this.GetOrCreateRuntimeInstance(this.ActiveEquippedEntry);
 
-        //  2. Runtime Weapon Instances
-        [Header("Weapon Map Config (Runtime)")]
+        // --- Runtime --- 
+        //  1. Runtime Weapon Instances
+        [Header("Runtime - Weapon Map Config")]
         [SerializeField] private RuntimeWeaponDictionary _runtimeWeaponMap = new();
         private RuntimeWeaponDictionary RuntimeWeaponMap => _runtimeWeaponMap;
-
-        //  3. References
-        private CharacterProgressionController ProgressionController => this.CharacterRootController.ProgressionController;
 
         // --- Public APIs ---
         public RuntimeWeapon GetOrCreateRuntimeInstance(InventoryItemEntry weaponEntry)
@@ -87,10 +85,7 @@ namespace FlameOfTheLost
                 this.RuntimeWeaponMap.Remove(oldEntry);
             }
 
-            if (this.CombatLoadoutController != null)
-            {
-                this.CombatLoadoutController.NotifyEquippedWeaponEntriesChanged();
-            }
+            this.CombatLoadoutController?.NotifyEquippedWeaponEntriesChanged();
         }
 
         protected override void OnEntryReplaced(int slotIndex, InventoryItemEntry oldEntry, InventoryItemEntry newEntry)

@@ -4,19 +4,45 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
+    [RequireComponent(typeof(CharacterCombatLoadoutCapacityHandler))]
     [RequireComponent(typeof(CharacterCombatLoadoutWeaponHandler))]
     [RequireComponent(typeof(CharacterCombatLoadoutProjectileHandler))]
     [RequireComponent(typeof(CharacterCombatLoadoutSpecialSkillHandler))]
     [RequireComponent(typeof(CharacterCombatLoadoutConsumableItemHandler))]
-    public class CharacterCombatLoadoutController : CharacterBehaviourControllerBase, IStatusEffectFlagConsumer, ICharacterDeathDisableable
+    public class CharacterCombatLoadoutController : CharacterBehaviourControllerBase, 
+        IStatusEffectFlagConsumer, 
+        ICharacterDeathDisableable
     {
         // --- Referneces ---
-        private CharacterCombatController CombatController => this.CharacterRootController.CombatController;
+        //  1. Character
+        private CharacterCombatController CombatController => this.CharacterRootController != null
+            ? this.CharacterRootController.CombatController
+            : null;
+        internal InventoryController InventoryController => this.CharacterRootController != null
+            ? this.CharacterRootController.InventoryController
+            : null;
+        internal CharacterProgressionController ProgressionController => this.CharacterRootController != null
+            ? this.CharacterRootController.ProgressionController
+            : null;
+        internal CharacterCombatResourcesHandler CombatResourcesHandler => this.CharacterRootController != null
+            ? this.CharacterRootController.CombatResourcesHandler
+            : null;
+        internal CharacterCombatStatusEffectApplicationHandler CombatStatusEffectApplicationHandler => this.CharacterRootController != null
+            ? this.CharacterRootController.CombatStatusEffectApplicationHandler
+            : null;
 
-        private CharacterCombatLoadoutWeaponHandler WeaponHandler => this.CharacterRootController.CombatLoadoutWeaponHandler;
-        private CharacterCombatLoadoutProjectileHandler ProjectileHandler => this.CharacterRootController.CombatLoadoutProjectileHandler;
-        private CharacterCombatLoadoutSpecialSkillHandler SpecialSkillHandler => this.CharacterRootController.CombatLoadoutSpecialSkillHandler;
-        private CharacterCombatLoadoutConsumableItemHandler ConsumableItemHandler => this.CharacterRootController.CombatLoadoutConsumableItemHandler;
+        //  2. Sub-Behaviours
+        [Header("References - Sub Behaviours")]
+        [SerializeField] private CharacterCombatLoadoutCapacityHandler _capacityHandler;
+        [SerializeField] private CharacterCombatLoadoutWeaponHandler _weaponHandler;
+        [SerializeField] private CharacterCombatLoadoutProjectileHandler _projectileHandler;
+        [SerializeField] private CharacterCombatLoadoutSpecialSkillHandler _specialSkillHandler;
+        [SerializeField] private CharacterCombatLoadoutConsumableItemHandler _consumableItemHandler;
+        internal CharacterCombatLoadoutCapacityHandler CapacityHandler => _capacityHandler;
+        internal CharacterCombatLoadoutWeaponHandler WeaponHandler => _weaponHandler;
+        internal CharacterCombatLoadoutProjectileHandler ProjectileHandler => _projectileHandler;
+        internal CharacterCombatLoadoutSpecialSkillHandler SpecialSkillHandler => _specialSkillHandler;
+        internal CharacterCombatLoadoutConsumableItemHandler ConsumableItemHandler => _consumableItemHandler;
 
         // --- Runtime ---
         //  1. Status Effects states
@@ -36,29 +62,10 @@ namespace FlameOfTheLost
         public bool IsLoadoutSwapLocked => this.CannotSwapLoadout && !this.IgnoreSwapLoadoutLock;
 
         //  2. Combat attack state
-        public bool IsInAttackWindow => (this.CombatController != null && this.CombatController.IsInAttackWindow);
-        public bool IsAttackLocked => (this.CombatController != null && this.CombatController.IsAttackLocked);
+        public bool IsInAttackWindow    => (this.CombatController != null && this.CombatController.IsInAttackWindow);
+        public bool IsAttackLocked      => (this.CombatController != null && this.CombatController.IsAttackLocked);
 
-        //  3. Weapon APIs
-        public int MaxEquippedWeaponCapacity => this.WeaponHandler.MaxEquippedEntryCapacity;
-        public int MaxEquippedWeapons => this.WeaponHandler.MaxEquippedEntries;
-        public IReadOnlyList<InventoryItemEntry> EquippedWeaponEntries => this.WeaponHandler.EquippedEntries;
-        public InventoryItemEntry ActiveEquippedWeaponEntry => this.WeaponHandler.ActiveEquippedEntry;
-        public RuntimeWeapon ActiveEquippedRuntimeWeapon => this.WeaponHandler.ActiveEquippedRuntimeWeapon;
-
-        //  4. Projectile APIs
-        public int MaxEquippedProjectileCapacity => this.ProjectileHandler.MaxEquippedEntryCapacity;
-        public int MaxEquippedProjectiles => this.ProjectileHandler.MaxEquippedEntries;
-        public IReadOnlyList<InventoryItemEntry> EquippedProjectileEntries => this.ProjectileHandler.EquippedEntries;
-        public InventoryItemEntry ActiveEquippedProjectileEntry => this.ProjectileHandler.ActiveEquippedEntry;
-
-        //  5. Consumable item APIs
-        public int MaxEquippedConsumableCapacity => this.ConsumableItemHandler.MaxEquippedEntryCapacity;
-        public int MaxEquippedConsumables => this.ConsumableItemHandler.MaxEquippedEntries;
-        public IReadOnlyList<InventoryItemEntry> EquippedConsumableItemEntries => this.ConsumableItemHandler.EquippedEntries;
-        public InventoryItemEntry ActiveEquippedConsumableItemEntry => this.ConsumableItemHandler.ActiveEquippedEntry;
-
-        //  6. Death Disable State (Runtime)
+        //  3. Death Disable State (Runtime)
         [Header("Runtime - Death Disable")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
@@ -75,34 +82,38 @@ namespace FlameOfTheLost
         public event Action<InventoryItemEntry> OnActiveEquippedConsumableItemChanged;
 
         // --- Public APIs ---
-        //  1. Progression-affected Loadout Max Capacity
-        public void SetMaxEquippedWeaponsFromProgression(int amount)
-        {
-            this.WeaponHandler.SetMaxEquippedEntriesFromProgression(amount);
+        //  0. Properties
+        //      0.1. Weapon APIs
+        public int MaxEquippedWeaponCapacity                            => this.WeaponHandler.MaxEquippedEntryCapacity;
+        public int MaxEquippedWeapons                                   => this.WeaponHandler.MaxEquippedEntries;
+        public IReadOnlyList<InventoryItemEntry> EquippedWeaponEntries  => this.WeaponHandler.EquippedEntries;
+        public InventoryItemEntry ActiveEquippedWeaponEntry             => this.WeaponHandler.ActiveEquippedEntry;
+        public RuntimeWeapon ActiveEquippedRuntimeWeapon                => this.WeaponHandler.ActiveEquippedRuntimeWeapon;
 
-            this.NotifyEquippedWeaponEntriesChanged();
-        }
-        public void SetMaxEquippedProjectilesFromProgression(int amount)
-        {
-            this.ProjectileHandler.SetMaxEquippedEntriesFromProgression(amount);
-        }
-        public void SetMaxEquippedConsumableItemsFromProgression(int amount)
-        {
-            this.ConsumableItemHandler.SetMaxEquippedEntriesFromProgression(amount);
-        }
+        //      0.2. Projectile APIs
+        public int MaxEquippedProjectileCapacity                            => this.ProjectileHandler.MaxEquippedEntryCapacity;
+        public int MaxEquippedProjectiles                                   => this.ProjectileHandler.MaxEquippedEntries;
+        public IReadOnlyList<InventoryItemEntry> EquippedProjectileEntries  => this.ProjectileHandler.EquippedEntries;
+        public InventoryItemEntry ActiveEquippedProjectileEntry             => this.ProjectileHandler.ActiveEquippedEntry;
+
+        //      0.3. Consumable item APIs
+        public int MaxEquippedConsumableCapacity                                => this.ConsumableItemHandler.MaxEquippedEntryCapacity;
+        public int MaxEquippedConsumables                                       => this.ConsumableItemHandler.MaxEquippedEntries;
+        public IReadOnlyList<InventoryItemEntry> EquippedConsumableItemEntries  => this.ConsumableItemHandler.EquippedEntries;
+        public InventoryItemEntry ActiveEquippedConsumableItemEntry             => this.ConsumableItemHandler.ActiveEquippedEntry;
+
+        //  1. Progression-affected Loadout Max Capacity
+        public void SetMaxEquippedWeaponsFromProgression(int amount)            => this.CapacityHandler.SetMaxEquippedWeaponsFromProgression(amount);
+        public void SetMaxEquippedProjectilesFromProgression(int amount)        => this.CapacityHandler.SetMaxEquippedProjectilesFromProgression(amount);
+        public void SetMaxEquippedConsumableItemsFromProgression(int amount)    => this.CapacityHandler.SetMaxEquippedConsumableItemsFromProgression(amount);
 
         //  2. Weapon Management
-        //      2.1. Cycle Weapon Entry in the equipped list: Step:
-        //          PositiveValue = Next,
-        //          NegativeValue = Previous
         public bool TryCycleWeaponEntry(int step)
         {
             if (this.IsDeathDisabled) return false;
 
             return this.WeaponHandler.TryCycleEquippedEntry(step);
         }
-
-        //      2.2. Replace Equipped Weapon at specific slot index, returning removed weapon if any
         public bool TryReplaceEquippedWeaponEntry(int slotIndex, InventoryItemEntry newWeaponEntry, out InventoryItemEntry removedWeaponEntry)
         {
             if (this.IsDeathDisabled)
@@ -113,16 +124,12 @@ namespace FlameOfTheLost
 
             return this.WeaponHandler.TryReplaceEquippedEntry(slotIndex, newWeaponEntry, out removedWeaponEntry);
         }
-
-        //      2.3. Unequip Weapon
         public bool TryUnequipWeaponEntry(InventoryItemEntry weaponEntry)
         {
             if (this.IsDeathDisabled) return false;
 
             return this.WeaponHandler.TryUnequipEntry(weaponEntry);
         }
-
-        //      2.4. Quick equip weapon
         public bool TryQuickEquipWeapon()
         {
             if (this.IsDeathDisabled) return false;
@@ -131,17 +138,12 @@ namespace FlameOfTheLost
         }
 
         //  3. Projectile Management
-        //      3.1. Cycle Projectile Entry in the equipped list. Step:
-        //          PositiveValue = Next,
-        //          NegativeValue = Previous
         public bool TryCycleProjectileEntry(int step)
         {
             if (this.IsDeathDisabled) return false;
 
             return this.ProjectileHandler.TryCycleEquippedEntry(step);
         }
-
-        //      3.2. Replace Equipped Projectile at specific slot index, returning removed projectile if any
         public bool TryReplaceEquippedProjectileEntry(int slotIndex, InventoryItemEntry newProjectileEntry, out InventoryItemEntry removedProjectileEntry)
         {
             if (this.IsDeathDisabled)
@@ -152,24 +154,18 @@ namespace FlameOfTheLost
 
             return this.ProjectileHandler.TryReplaceEquippedEntry(slotIndex, newProjectileEntry, out removedProjectileEntry);
         }
-
-        //      3.3. Unequip Projectile
         public bool TryUnequipEquippedProjectileEntry(InventoryItemEntry projectileEntry)
         {
             if (this.IsDeathDisabled) return false;
 
             return this.ProjectileHandler.TryUnequipEntry(projectileEntry);
         }
-
-        //     3.4. Quick equip projectile
         public bool TryQuickEquipProjectile()
         {
             if (this.IsDeathDisabled) return false;
 
             return this.ProjectileHandler.TryQuickEquip();
         }
-
-        //      3.5. Resolve Projectile from Entry
         public bool TryResolveProjectileForRangedSkill(RangedSkillProfile rangedSkill, out ProjectileProfile projectileItem)
         {
             projectileItem = null;
@@ -177,8 +173,6 @@ namespace FlameOfTheLost
 
             return this.ProjectileHandler.TryResolveProjectileForRangedSkill(rangedSkill, out projectileItem);
         }
-
-        //      3.6. Consume Projectile from (Equipped) Entry
         public bool TryConsumeProjectileForRangedSkill(RangedSkillProfile rangedSkill, out ProjectileCostRecord projectileCostReceipt)
         {
             projectileCostReceipt = null;
@@ -186,57 +180,42 @@ namespace FlameOfTheLost
 
             return this.ProjectileHandler.TryConsumeProjectileForRangedSkill(rangedSkill, out projectileCostReceipt);
         }
-
-        //      3.7. Refund Projectile to (Equipped) Entry
         public void RefundProjectileCost(ProjectileCostRecord projectileCostRecord)
         {
             this.ProjectileHandler.RefundProjectileCost(projectileCostRecord);
         }
 
         //  4. Active Special Skill handling
-        //      4.1. Attach / Replace runtime active special skill on an equipped weapon
         public bool TrySetEquippedWeaponActiveSpecialSkill(InventoryItemEntry weaponEntry, SkillProfile specialSkill)
         {
             if (this.IsDeathDisabled) return false;
 
             return this.SpecialSkillHandler.TrySetEquippedWeaponActiveSpecialSkill(weaponEntry, specialSkill);
         }
-
-        //      4.2. Quick set active equipped weapon's active special skill
         public bool TrySetActiveEquippedWeaponActiveSpecialSkill(SkillProfile specialSkill)
         {
             if (this.IsDeathDisabled) return false;
 
             return this.SpecialSkillHandler.TrySetActiveEquippedWeaponActiveSpecialSkill(specialSkill);
         }
-
-        //      4.3. Clear runtime active special skill so resolution falls back to innate special skill
         public bool TryClearWeaponActiveSpecialSkill(InventoryItemEntry weaponEntry)
         {
             if (this.IsDeathDisabled) return false;
 
             return this.SpecialSkillHandler.TryClearWeaponActiveSpecialSkill(weaponEntry);
         }
-
-        //      4.4. Get runtime active special skill directly (not resolved fallback)
         public SkillProfile GetWeaponActiveSpecialSkill(InventoryItemEntry weaponEntry)
         {
             return this.SpecialSkillHandler.GetWeaponActiveSpecialSkill(weaponEntry);
         }
 
         //  5. Consumable Item Management
-        //      5.1. Cycle through equipped consumable items in a specified direction (step: +1 for next, -1 for previous),
-        //          with optional wrapping around the list, and set the next valid consumable item as active.
         public bool TryCycleConsumableItemEntry(int step)
         {
             if (this.IsDeathDisabled) return false;
 
             return this.ConsumableItemHandler.TryCycleEquippedEntry(step);
         }
-
-        //      5.2. Try to replace an equipped consumable item entry at a specified slot index with a new entry,
-        //          with validation and checks to ensure the new entry is valid and not already equipped in another slot,
-        //          and update the active entry reference if necessary.
         public bool TryReplaceEquippedConsumableItemEntry(int slotIndex, InventoryItemEntry newConsumableEntry, out InventoryItemEntry removedConsumableEntry)
         {
             if (this.IsDeathDisabled)
@@ -247,17 +226,12 @@ namespace FlameOfTheLost
 
             return this.ConsumableItemHandler.TryReplaceEquippedEntry(slotIndex, newConsumableEntry, out removedConsumableEntry);
         }
-
-        //      5.3. Try to unequip an equipped consumable item entry, with checks to ensure the entry is currently equipped,
-        //          and update the active entry reference if necessary.
         public bool TryUnequipEquippedConsumableItemEntry(InventoryItemEntry consumableEntry)
         {
             if (this.IsDeathDisabled) return false;
 
             return this.ConsumableItemHandler.TryUnequipEntry(consumableEntry);
         }
-
-        //      5.4. Try to consume the active equipped consumable item, applying its effects and reducing quantity,
         public bool TryConsumeConsumableItem()
         {
             if (this.IsDeathDisabled) return false;
@@ -266,51 +240,18 @@ namespace FlameOfTheLost
         }
 
         //  6. UI APIs
-        //      6.1. Get Equipped Weapon (Active) Icon
-        public Sprite GetActiveEquippedWeaponIcon()
-        {
-            return this.WeaponHandler.GetActiveEntryIcon();
-        }
+        public Sprite GetActiveEquippedWeaponIcon()     => this.WeaponHandler.GetActiveEntryIcon();
+        public Sprite GetActiveEquippedProjectileIcon() => this.ProjectileHandler.GetActiveEntryIcon();
+        public Sprite GetActiveSpecialSkillIcon()       => this.SpecialSkillHandler.GetActiveSpecialSkillIcon();
+        public Sprite GetActiveConsumableItemIcon()     => this.ConsumableItemHandler.GetActiveEntryIcon();
 
-        //      6.2. Get Equipped Projectile (Active) Icon
-        public Sprite GetActiveEquippedProjectileIcon()
-        {
-            return this.ProjectileHandler.GetActiveEntryIcon();
-        }
-
-        //      6.3. Get Current Special Skill (Active) Icon
-        public Sprite GetActiveSpecialSkillIcon()
-        {
-            return this.SpecialSkillHandler.GetActiveSpecialSkillIcon();
-        }
-
-        //      6.4. Get Equipped Consumable Item (Active) Icon
-        public Sprite GetActiveConsumableItemIcon()
-        {
-            return this.ConsumableItemHandler.GetActiveEntryIcon();
-        }
 
         //  7. Event Notifiers
-        public void NotifyEquippedWeaponEntriesChanged()
-        {
-            this.OnEquippedWeaponEntriesChanged?.Invoke();
-        }
-        public void NotifyActiveEquippedWeaponChanged(InventoryItemEntry activeWeaponEntry)
-        {
-            this.OnActiveEquippedWeaponChanged?.Invoke(activeWeaponEntry);
-        }
-        public void NotifyActiveEquippedProjectileChanged(InventoryItemEntry activeProjectileEntry)
-        {
-            this.OnActiveEquippedProjectileChanged?.Invoke(activeProjectileEntry);
-        }
-        public void NotifyActiveSpecialSkillChanged(SkillProfile activeSpecialSkill)
-        {
-            this.OnActiveSpecialSkillChanged?.Invoke(activeSpecialSkill);
-        }
-        public void NotifyActiveEquippedConsumableItemChanged(InventoryItemEntry activeConsumableItemEntry)
-        {
-            this.OnActiveEquippedConsumableItemChanged?.Invoke(activeConsumableItemEntry);
-        }
+        internal void NotifyEquippedWeaponEntriesChanged()                                                    => this.OnEquippedWeaponEntriesChanged?.Invoke();
+        internal void NotifyActiveEquippedWeaponChanged(InventoryItemEntry activeWeaponEntry)                 => this.OnActiveEquippedWeaponChanged?.Invoke(activeWeaponEntry);
+        internal void NotifyActiveEquippedProjectileChanged(InventoryItemEntry activeProjectileEntry)         => this.OnActiveEquippedProjectileChanged?.Invoke(activeProjectileEntry);
+        internal void NotifyActiveSpecialSkillChanged(SkillProfile activeSpecialSkill)                        => this.OnActiveSpecialSkillChanged?.Invoke(activeSpecialSkill);
+        internal void NotifyActiveEquippedConsumableItemChanged(InventoryItemEntry activeConsumableItemEntry) => this.OnActiveEquippedConsumableItemChanged?.Invoke(activeConsumableItemEntry);
 
         //  8. IStatusEffectFlagConsumer implementation
         public void SetStatusEffectFlag(StatusEffectFlagTarget flagType, bool value)
@@ -346,6 +287,50 @@ namespace FlameOfTheLost
         public void DisableAfterCharacterDeath(CharacterDeathContext context)
         {
             this.IsDeathDisabled = true;
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
+            if (this.CapacityHandler        == null) _capacityHandler       = this.GetComponent<CharacterCombatLoadoutCapacityHandler>();
+            if (this.WeaponHandler          == null) _weaponHandler         = this.GetComponent<CharacterCombatLoadoutWeaponHandler>();
+            if (this.ProjectileHandler      == null) _projectileHandler     = this.GetComponent<CharacterCombatLoadoutProjectileHandler>();
+            if (this.SpecialSkillHandler    == null) _specialSkillHandler   = this.GetComponent<CharacterCombatLoadoutSpecialSkillHandler>();
+            if (this.ConsumableItemHandler  == null) _consumableItemHandler = this.GetComponent<CharacterCombatLoadoutConsumableItemHandler>();
+        }
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.CapacityHandler        == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] {nameof(this.CapacityHandler)} reference is missing.", this);
+            if (this.WeaponHandler          == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] {nameof(this.WeaponHandler)} reference is missing.", this);
+            if (this.ProjectileHandler      == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] " + $"{nameof(this.ProjectileHandler)} reference is missing.", this);
+            if (this.SpecialSkillHandler    == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] {nameof(this.SpecialSkillHandler)} reference is missing.", this);
+            if (this.ConsumableItemHandler  == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] {nameof(this.ConsumableItemHandler)} reference is missing.", this);
+        }
+        protected override void BindInternalReferences()
+        {
+            base.BindInternalReferences();
+
+            this.CapacityHandler?.Bind(this);
+
+            this.WeaponHandler?.Bind(this);
+            this.ProjectileHandler?.Bind(this);
+            this.SpecialSkillHandler?.Bind(this);
+            this.ConsumableItemHandler?.Bind(this);
+        }
+        protected override void UnbindInternalReferences()
+        {
+            this.ConsumableItemHandler?.Unbind(this);
+            this.SpecialSkillHandler?.Unbind(this);
+            this.ProjectileHandler?.Unbind(this);
+            this.WeaponHandler?.Unbind(this);
+
+            this.CapacityHandler?.Unbind(this);
+
+            base.UnbindInternalReferences();
         }
     }
 }

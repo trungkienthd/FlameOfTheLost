@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class CharacterCombatLoadoutEntryHandlerBase : CharacterBehaviourControllerBase
+    public abstract class CharacterCombatLoadoutEntryHandlerBase : CharacterCombatLoadoutSubBehaviourBase
     {
-        // --- States ---
-        //  1. Runtime
-        [Header("Loadout Capacity")]
+        // --- Runtime ---
+        //  1. Capacity
+        [Header("Runtime (Inherited) - Loadout Capacity")]
         [SerializeField, Min(1)] private int _maxEquippedEntries = 1;
         public int MaxEquippedEntries
         {
@@ -16,7 +16,8 @@ namespace FlameOfTheLost
             private set => _maxEquippedEntries = Mathf.Clamp(value, this.MinEquippedEntryCapacity, this.MaxEquippedEntryCapacity);
         }
 
-        [Header("Equipped Entries")]
+        //  2. Equipped Entries
+        [Header("Runtime (Inherited) - Equipped Entries")]
         [SerializeField] private List<InventoryItemEntry> _equippedEntries = new();
         [SerializeField] private InventoryItemEntry _activeEquippedEntry;
         public IReadOnlyList<InventoryItemEntry> EquippedEntries => _equippedEntries;
@@ -27,15 +28,11 @@ namespace FlameOfTheLost
             private set => _activeEquippedEntry = value;
         }
 
-        //  2. Config
+        // --- Configs ---
         protected virtual int MinEquippedEntryCapacity => 1;
         public abstract int MaxEquippedEntryCapacity { get; }
         protected abstract int DefaultEquippedEntryCapacity { get; }
         protected abstract string EntryDisplayName { get; }
-
-        // 3. References
-        protected CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController != null ? this.CharacterRootController.CombatLoadoutController : null;
-        protected InventoryController InventoryController => this.CharacterRootController != null ? this.CharacterRootController.InventoryController : null;
 
         // --- Public APIs ---
         public void SetMaxEquippedEntriesFromProgression(int amount)
@@ -51,7 +48,7 @@ namespace FlameOfTheLost
             this.SyncEquippedStates();
             this.EnsureActiveEntryIsValid();
 
-            this.NotifyActiveEntryChanged(this.ActiveEquippedEntry);
+            //this.NotifyActiveEntryChanged(this.ActiveEquippedEntry);
         }
 
         public bool EquippedEntryListIsValid()
@@ -61,7 +58,7 @@ namespace FlameOfTheLost
 
         public bool IsEquippedEntry(InventoryItemEntry entry)
         {
-            return entry != null && _equippedEntries != null && _equippedEntries.Contains(entry);
+            return entry != null && _equippedEntries != null && this.EquippedEntries.Contains(entry);
         }
 
         public bool TryCycleEquippedEntry(int step)
@@ -99,7 +96,7 @@ namespace FlameOfTheLost
 
             InventoryItemEntry nextEntry = this.GetNextValidEntry(currentIndex, step);
             if (nextEntry == null) return false;
-            if (ReferenceEquals(nextEntry, this.ActiveEquippedEntry)) return false;
+            if (UnityEngine.Object.ReferenceEquals(nextEntry, this.ActiveEquippedEntry)) return false;
 
             this.SetActiveEntry(nextEntry);
             return true;
@@ -210,35 +207,28 @@ namespace FlameOfTheLost
             this.SyncEquippedStates();
             this.EnsureActiveEntryIsValid();
 
-            this.NotifyActiveEntryChanged(this.ActiveEquippedEntry);
+            //this.NotifyActiveEntryChanged(this.ActiveEquippedEntry);
         }
 
         // --- Helpers ---
         public abstract bool IsEntryValid(InventoryItemEntry entry);
-
         protected abstract void NotifyActiveEntryChanged(InventoryItemEntry activeEntry);
-
         protected virtual IReadOnlyList<InventoryItemEntry> GetQuickEquipCandidateEntries()
         {
             return null;
         }
-
         protected virtual void OnEntryReplaced(int slotIndex, InventoryItemEntry oldEntry, InventoryItemEntry newEntry)
         {
         }
-
         protected virtual void OnEntryUnequipped(int slotIndex, InventoryItemEntry removedEntry)
         {
         }
-
         protected virtual void OnEntryQuickEquipped(int slotIndex, InventoryItemEntry equippedEntry)
         {
         }
-
         protected virtual void OnEquippedEntryChanged(int slotIndex, InventoryItemEntry oldEntry, InventoryItemEntry newEntry)
         {
         }
-
         protected virtual void OnActiveEntryChanged(InventoryItemEntry oldEntry, InventoryItemEntry newEntry)
         {
         }
@@ -363,16 +353,20 @@ namespace FlameOfTheLost
 
             if (currentCount > max)
             {
-                for (int i = max; i < currentCount; i++)
+                for (int i = currentCount - 1; i >= max; i--)
                 {
                     InventoryItemEntry removedEntry = _equippedEntries[i];
+
                     if (removedEntry != null)
                     {
                         removedEntry.Equipped = false;
                     }
+
+                    _equippedEntries.RemoveAt(i);
+
+                    this.OnEquippedEntryChanged(i, removedEntry,null);
                 }
 
-                _equippedEntries.RemoveRange(max, currentCount - max);
                 return;
             }
 
@@ -443,7 +437,9 @@ namespace FlameOfTheLost
             if (!this.EquippedEntryListIsValid()) return null;
 
             int count = this.EquippedEntries.Count;
+
             step = (int)Mathf.Sign(step);
+
             if (step == 0) return null;
 
             int index = currentIndex;
@@ -466,6 +462,7 @@ namespace FlameOfTheLost
             this.MaxEquippedEntries = Mathf.Clamp(this.MaxEquippedEntries, this.MinEquippedEntryCapacity, this.MaxEquippedEntryCapacity);
         }
 
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void InitializeInternalState()
         {
             base.InitializeInternalState();
@@ -474,12 +471,7 @@ namespace FlameOfTheLost
 
             this.ClampMaxEquippedEntries();
             this.ClampEquippedEntriesToCapacity();
-
-            // Do not call RemoveInvalidEquippedEntries() or EnsureActiveEntryIsValid() here.
-            // Those depend on IsEntryValid(), and derived handlers may need external references
-            // such as InventoryController through CharacterRootController.
         }
-
         protected override void InitializePregameplayState()
         {
             base.InitializePregameplayState();

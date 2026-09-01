@@ -59,10 +59,6 @@ namespace FlameOfTheLost
         [Header("References - Combat")]
         [SerializeField] private CharacterCombatController _combatController;
         [SerializeField] private CharacterCombatLoadoutController _combatLoadoutController;
-        [SerializeField] private CharacterCombatLoadoutWeaponHandler _combatLoadoutWeaponHandler;
-        [SerializeField] private CharacterCombatLoadoutProjectileHandler _combatLoadoutProjectileHandler;
-        [SerializeField] private CharacterCombatLoadoutSpecialSkillHandler _combatLoadoutSpecialSkillHandler;
-        [SerializeField] private CharacterCombatLoadoutConsumableItemHandler _combatLoadoutConsumableItemHandler;
         [SerializeField] private CharacterCombatAimingHandler _combatAimingHandler;
         [SerializeField] private CharacterCombatResourcesHandler _combatResourcesHandler;
         [SerializeField] private CharacterCombatStatusEffectApplicationHandler _combatStatusEffectApplicationHandler;
@@ -70,10 +66,6 @@ namespace FlameOfTheLost
         [SerializeField] private KnockbackReceivingHandler _knockbackReceivingHandler;
         public CharacterCombatController CombatController => _combatController;
         public CharacterCombatLoadoutController CombatLoadoutController => _combatLoadoutController;
-        public CharacterCombatLoadoutWeaponHandler CombatLoadoutWeaponHandler => _combatLoadoutWeaponHandler;
-        public CharacterCombatLoadoutProjectileHandler CombatLoadoutProjectileHandler => _combatLoadoutProjectileHandler;
-        public CharacterCombatLoadoutSpecialSkillHandler CombatLoadoutSpecialSkillHandler => _combatLoadoutSpecialSkillHandler;
-        public CharacterCombatLoadoutConsumableItemHandler CombatLoadoutConsumableItemHandler => _combatLoadoutConsumableItemHandler;
         public CharacterCombatAimingHandler CombatAimingHandler => _combatAimingHandler;
         public CharacterCombatResourcesHandler CombatResourcesHandler => _combatResourcesHandler;
         public CharacterCombatStatusEffectApplicationHandler CombatStatusEffectApplicationHandler => _combatStatusEffectApplicationHandler;
@@ -152,10 +144,6 @@ namespace FlameOfTheLost
 
             if (this.CombatController                       == null) _combatController                      = this.GetComponentInChildren<CharacterCombatController>(true);
             if (this.CombatLoadoutController                == null) _combatLoadoutController               = this.GetComponentInChildren<CharacterCombatLoadoutController>(true);
-            if (this.CombatLoadoutWeaponHandler             == null) _combatLoadoutWeaponHandler            = this.GetComponentInChildren<CharacterCombatLoadoutWeaponHandler>(true);
-            if (this.CombatLoadoutProjectileHandler         == null) _combatLoadoutProjectileHandler        = this.GetComponentInChildren<CharacterCombatLoadoutProjectileHandler>(true);
-            if (this.CombatLoadoutSpecialSkillHandler       == null) _combatLoadoutSpecialSkillHandler      = this.GetComponentInChildren<CharacterCombatLoadoutSpecialSkillHandler>(true);
-            if (this.CombatLoadoutConsumableItemHandler     == null) _combatLoadoutConsumableItemHandler    = this.GetComponentInChildren<CharacterCombatLoadoutConsumableItemHandler>(true);
             if (this.CombatAimingHandler                    == null) _combatAimingHandler                   = this.GetComponentInChildren<CharacterCombatAimingHandler>(true);
             if (this.CombatResourcesHandler                 == null) _combatResourcesHandler                = this.GetComponentInChildren<CharacterCombatResourcesHandler>(true);
             if (this.CombatStatusEffectApplicationHandler   == null) _combatStatusEffectApplicationHandler  = this.GetComponentInChildren<CharacterCombatStatusEffectApplicationHandler>(true);

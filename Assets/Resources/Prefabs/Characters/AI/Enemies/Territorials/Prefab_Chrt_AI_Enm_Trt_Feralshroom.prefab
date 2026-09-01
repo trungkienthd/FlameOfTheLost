@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4cfcba1a24c6f54bb83c69710584918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyTargetDetectionTriggerController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _rangeType: 1
   _triggerCollider: {fileID: 7296007160329736246}
@@ -190,11 +191,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f666612ca95027c44ab011d72111c4fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableDebugLogs: 0
   _damageConfiguratorSource: {fileID: 0}
   _attackerCombatController: {fileID: 0}
   _activeRuntimeSkill:
     _profile: {fileID: 0}
     _provisionType: 0
+  _harvestDamageSourceProvider: {fileID: 0}
   _isActive: 1
   _hasConfirmedHit: 0
   _hasDisabledWithoutHit: 0
@@ -233,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d5bda84988be749b0a7cc28c1537b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableDebugLogs: 0
   _baseDamageAmount: 0
   _baseKnockbackForce: 0
   _damageAmount: 0
@@ -396,6 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3be7c147ae834f4389bb0ba1b4422d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _spriteRenderer: {fileID: 6084845536400234014}
   _animator: {fileID: 100178451394550758}
@@ -417,6 +422,7 @@ MonoBehaviour:
   _speedDampTime: 0.05
   _lastDirection: {x: 0, y: -1}
   _facingSignX: 1
+  _isFacingLocked: 0
 --- !u!114 &8471074619670850254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5197c307f864ae64aa50185a9389d3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualLocomotionAnimationHandler
+  _enableDebugLogs: 0
   _placeholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
   _activeProfile: {fileID: 11400000, guid: fb951246804cd704387ca8a631bcae2c, type: 2}
   _locomotionModeProviderBehaviour: {fileID: 8619395251524575671}
@@ -445,6 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84015ce7e66d7e3479c05c6195a55f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ToxicschroomLocomotionVisualModeProvider
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _roamingMode: 0
   _alertMode: 2
@@ -466,6 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f7a3181543f8549960792c643674cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualCombatAnimationHandler
+  _enableDebugLogs: 0
   _placeholderProfile: {fileID: 11400000, guid: 96e91b24bb5929445b608c7fb8251e81, type: 2}
   _activeProfile: {fileID: 11400000, guid: f0e51d36e48ee4e43998ded6f8841cdc, type: 2}
 --- !u!114 &391864750833664329
@@ -480,6 +489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 715e41325612da24eab2c65bacad6902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualHitDeathAnimationHandler
+  _enableDebugLogs: 0
   _placeholderProfile: {fileID: 11400000, guid: cba0c4783b92dc34295f5a1cb5341fa0, type: 2}
   _activeProfile: {fileID: 11400000, guid: 374684fe68157104fb4be74de54fa19a, type: 2}
   _hitCompletionFallbackDelay: 0.3
@@ -499,6 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19cd58fe1fa00d24b9450c5fd9a56a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualDodgeAnimationHandler
+  _enableDebugLogs: 0
   _placeholderProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
   _activeProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
 --- !u!1 &546589716473818984
@@ -548,6 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c83575119cac444f9feb63169496edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _guardConfig: {fileID: 11400000, guid: af619af4a1df1ff4b87877e5452c7a03, type: 2}
   _statusEffectVFXInstancePrefab: {fileID: 8740500497781535910, guid: 89762261fcc319e49b11d0bfb94586a9, type: 3}
@@ -564,6 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3856fe2f0cbb174ba7e9ca16f14e016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectFlagHandler
+  _enableDebugLogs: 0
   _statusEffectController: {fileID: 5925318029874374298}
   _flagActiveMap:
     _keys: 
@@ -580,6 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b788ad3d3335f9c45af726061e9dc18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectStatModifierHandler
+  _enableDebugLogs: 0
   _statusEffectController: {fileID: 5925318029874374298}
   _modifierAggregateMap:
     _keys: 
@@ -888,7 +902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ComponentVersion: 2
+  m_ComponentVersion: 3
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
@@ -1042,6 +1056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3987b8e9da6e478a0f1ca7ff8f508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _knockbackHandler: {fileID: 4182638521067918659}
   _hitInvulnerabilityProviderSource: {fileID: 0}
@@ -1059,6 +1074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64d0d6442beb8f4db6cb3582001107d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableDebugLogs: 0
   _rigidbody2D: {fileID: 8000788421409976908}
   _massScale: 1
   _knockbackTakenMultiplier: 1
@@ -1111,6 +1127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f16d8fbe85dc14facfe9596e3a9e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterResourcesController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _isDeathDisabled: 0
 --- !u!114 &5982666654865387023
@@ -1125,6 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eaf33970510987489772aa2f6f8a3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HPController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _currentValue: 0
   _maxValue: 50
@@ -1154,6 +1172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a461e7c8b584ac479ca3e01b4c82837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterDeathHandler
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _playerSpawnerController: {fileID: 0}
 --- !u!114 &5142835455269067001
@@ -1168,6 +1187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f739629e628eda04fb6abe156f8bd0d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.FPController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _currentValue: 0
   _maxValue: 50
@@ -1188,6 +1208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ffcbe0c7ea03aa47b17e3b29e59e57a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StaminaController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _currentValue: 0
   _maxValue: 50
@@ -1247,6 +1268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c037b53ade72324885b81e82a003e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAimingHandler
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _aimingProviderBehaviour: {fileID: 7605741533168208685}
   _aimingConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
@@ -1262,6 +1284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aababe3952f09684eab6a1e2197e51c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TargetCombatAimingProvider
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
 --- !u!1 &2120747869877153457
 GameObject:
@@ -1338,6 +1361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eaffaf94557d8e449c131f0baf56405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterIdentityController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _identityProfile: {fileID: 11400000, guid: 70715efd35b3ad34e92b4d4964035fb5, type: 2}
 --- !u!1 &2217864604805964580
@@ -1431,6 +1455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4cfcba1a24c6f54bb83c69710584918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyTargetDetectionTriggerController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _rangeType: 0
   _triggerCollider: {fileID: 2824026965855872081}
@@ -1496,6 +1521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c09f90e37654d442a4285a5516ffb37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyRootController
+  _enableDebugLogs: 0
   _identityController: {fileID: 7856838754344447587}
   _rigidbody2D: {fileID: 8000788421409976908}
   _mainCollider2D: {fileID: 6947550545768482147}
@@ -1514,10 +1540,6 @@ MonoBehaviour:
   _rewardVFXHandler: {fileID: 2103957974545232575}
   _combatController: {fileID: 2103035301200508583}
   _combatLoadoutController: {fileID: 1967698609657820187}
-  _combatLoadoutWeaponHandler: {fileID: 7713573844728834922}
-  _combatLoadoutProjectileHandler: {fileID: 0}
-  _combatLoadoutSpecialSkillHandler: {fileID: 8004577590191508396}
-  _combatLoadoutConsumableItemHandler: {fileID: 835810724065106510}
   _combatAimingHandler: {fileID: 7605741533168208685}
   _combatResourcesHandler: {fileID: 783385799977608782}
   _combatStatusEffectApplicationHandler: {fileID: 5725249818390235073}
@@ -1551,6 +1573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e9451721c12af4a8b7dae3e494dfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyInputHandler
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _isHitSequenceInputBlocked: 0
   _isDeathDisabled: 0
@@ -1630,6 +1653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1998d8867a8952e4b8cbdb709e0d855c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _movementSpeed: 1.45
   _accel: 16
@@ -1650,6 +1674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded66bad28df0864fadc0b30250aeb41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterDodgeController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _config: {fileID: 11400000, guid: c8c205336bbc80c4c820e4c00b8c8748, type: 2}
   _dodgeState: 0
@@ -1671,6 +1696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 021f985d802a54d489f415007dcd1f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterTerrainContactHandler
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _statusEffectController: {fileID: 5925318029874374298}
   _statusEffectApplicationHandler: {fileID: 5725249818390235073}
@@ -1719,7 +1745,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9244e1e84e48be488b4521ffd2d14d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.InventoryController
+  _enableDebugLogs: 0
   _items: []
+  _maximumEntryCount: 20
   _learnedSpecialSkills: []
 --- !u!1 &4059974587800146057
 GameObject:
@@ -1766,6 +1794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b302a3f522db43a4381bf9ab0fd75a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _progressionConfig: {fileID: 11400000, guid: 13e8895b8b3489342b82009b5cfbb868, type: 2}
   _runtimeAttributeEntries: []
@@ -1784,6 +1813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 492e64d8f2cfff6488659ee9b5f72306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionUpgradeHandler
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _upgradeConfig: {fileID: 11400000, guid: ff4c70972face4742860645c5ab2826c, type: 2}
   _isDeathDisabled: 0
@@ -1797,6 +1827,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2837309253236570061}
   - component: {fileID: 1967698609657820187}
+  - component: {fileID: 328600274967116897}
   - component: {fileID: 7713573844728834922}
   - component: {fileID: 4316985856783768584}
   - component: {fileID: 8004577590191508396}
@@ -1835,10 +1866,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7923366f865bed049afe59470bced360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
+  _capacityHandler: {fileID: 328600274967116897}
+  _weaponHandler: {fileID: 7713573844728834922}
+  _projectileHandler: {fileID: 4316985856783768584}
+  _specialSkillHandler: {fileID: 8004577590191508396}
+  _consumableItemHandler: {fileID: 835810724065106510}
   _cannotSwapLoadout: 0
   _ignoreSwapLock: 0
   _isDeathDisabled: 0
+--- !u!114 &328600274967116897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4083793858068222385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 869e5ec37b3bca443bc9b698b43e6c61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutCapacityHandler
+  _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 1967698609657820187}
 --- !u!114 &7713573844728834922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1851,7 +1902,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bafbe0cdb0d29a4799ee60634bb9445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutWeaponHandler
-  _characterRootController: {fileID: 5013856377803996316}
+  _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 1967698609657820187}
   _maxEquippedEntries: 1
   _equippedEntries:
   - _item: {fileID: 0}
@@ -1876,7 +1928,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a1e78adc7835e4aaeb3d8b3a2ec9d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutProjectileHandler
-  _characterRootController: {fileID: 5013856377803996316}
+  _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 1967698609657820187}
   _maxEquippedEntries: 1
   _equippedEntries:
   - _item: {fileID: 0}
@@ -1898,7 +1951,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d308567992dd904ca51a20c458f7884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutSpecialSkillHandler
-  _characterRootController: {fileID: 5013856377803996316}
+  _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 1967698609657820187}
 --- !u!114 &835810724065106510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1911,7 +1965,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912c447cd5d0719429dfa75f3981786e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutConsumableItemHandler
-  _characterRootController: {fileID: 5013856377803996316}
+  _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 1967698609657820187}
   _maxEquippedEntries: 1
   _equippedEntries:
   - _item: {fileID: 0}
@@ -1966,6 +2021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53bb9daedba2ea4bb1a336946f40dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardWalletController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _currentAmount: 0
 --- !u!114 &5302589758685020755
@@ -1980,6 +2036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392eab3779a951d40b66aa8cc9f935cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardDropProvider
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _dropProfile: {fileID: 11400000, guid: 0155129f0eff00a40aaa6e7cc5d0b95e, type: 2}
 --- !u!1 &4581592430822712175
@@ -2033,6 +2090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c0d74169e1c2041abe696648a98db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAttackController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _meleeHitboxController: {fileID: 356123139692388542}
   _rangedAnchorDown: {fileID: 2655965795720615346}
@@ -2055,6 +2113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d15acfc029cbb74e99f995d8d755ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatResourcesHandler
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
 --- !u!114 &5725249818390235073
 MonoBehaviour:
@@ -2068,6 +2127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 872f8d35f206e0645b6a8996a4886332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatStatusEffectHandler
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
 --- !u!1 &5186114499527197336
 GameObject:
@@ -2113,6 +2173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d56898b4b429a5488909f12798e857e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyRespawnHandler
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
 --- !u!1 &5378954984517638078
 GameObject:
@@ -2195,6 +2256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da41aea3899ee814c9a0b7e9cf7c897d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToxicschroomBrainController
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _isDeathDisabled: 0
   _roamingConfig: {fileID: 11400000, guid: 494268d088d2f2d4793cff779c3aa119, type: 2}
@@ -2224,6 +2286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a9d2dc120c467489deb2f69925fd24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyTargetDetectionHandler
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _isDeathDisabled: 0
 --- !u!1 &6460524695558877784
@@ -2367,6 +2430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692050e6fe29ca443b25aba9e91f9bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardVFXHandler
+  _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _animator: {fileID: 8094952317328987354}
   _gainColor: {r: 1, g: 0.95, b: 0.75, a: 1}

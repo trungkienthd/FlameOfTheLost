@@ -3,36 +3,37 @@ using System.Collections.Generic;
 
 namespace FlameOfTheLost
 {
-    public class CharacterCombatLoadoutSpecialSkillHandler : CharacterBehaviourControllerBase
+    public class CharacterCombatLoadoutSpecialSkillHandler : CharacterCombatLoadoutSubBehaviourBase
     {
-        // --- States ---
-        //  1. References
-        private CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController.CombatLoadoutController;
-        private CharacterCombatLoadoutWeaponHandler CombatLoadoutWeaponHandler => this.CharacterRootController.CombatLoadoutWeaponHandler;
-        private CharacterProgressionController ProgressionController => this.CharacterRootController.ProgressionController;
-        private InventoryController InventoryController => this.CharacterRootController.InventoryController;
+        // --- References ---
+        private CharacterCombatLoadoutWeaponHandler CombatLoadoutWeaponHandler => this.CombatLoadoutController != null
+            ? this.CombatLoadoutController.WeaponHandler
+            : null;
 
         // --- Public APIs ---
         public bool TrySetEquippedWeaponActiveSpecialSkill(InventoryItemEntry weaponEntry, SkillProfile specialSkill)
         {
+            if (this.CombatLoadoutWeaponHandler == null) return false;
             if (!this.CombatLoadoutWeaponHandler.TryGetItemFromEntry(weaponEntry, out WeaponProfile weapon)) return false;
             if (specialSkill == null) return false;
 
             if (this.CombatLoadoutController.IsInAttackWindow) return false;
             if (this.CombatLoadoutController.IsLoadoutSwapLocked)
             {
-                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutSpecialSkillHandler)}] TrySetEquippedWeaponActiveSpecialSkill blocked: CannotSwapLoadout flag is active.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutSpecialSkillHandler)}] {nameof(this.TrySetEquippedWeaponActiveSpecialSkill)} blocked: CannotSwapLoadout flag is active.");
                 return false;
             }
 
             if (!this.CanEquipSkillByProgression(specialSkill))
             {
-                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutSpecialSkillHandler)}] TrySetEquippedWeaponActiveSpecialSkill blocked: Skill progression requirements not met.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutSpecialSkillHandler)}] {nameof(this.TrySetEquippedWeaponActiveSpecialSkill)} blocked: Skill progression requirements not met.");
                 return false;
             }
 
             if (!this.CombatLoadoutWeaponHandler.EquippedEntryListIsValid()) return false;
             if (!this.CombatLoadoutWeaponHandler.IsEquippedEntry(weaponEntry)) return false;
+
+            if (this.InventoryController == null) return false;
 
             List<SkillProfile> candidates = this.InventoryController.GetPossibleActiveSpecialSkillCandidates(weaponEntry);
             if (candidates == null || !candidates.Contains(specialSkill)) return false;
@@ -53,22 +54,44 @@ namespace FlameOfTheLost
 
         public bool TrySetActiveEquippedWeaponActiveSpecialSkill(SkillProfile specialSkill)
         {
+            if (this.CombatLoadoutWeaponHandler == null) return false;
             if (this.CombatLoadoutWeaponHandler.ActiveEquippedEntry == null) return false;
+
             return this.TrySetEquippedWeaponActiveSpecialSkill(this.CombatLoadoutWeaponHandler.ActiveEquippedEntry, specialSkill);
         }
 
         public bool TryClearWeaponActiveSpecialSkill(InventoryItemEntry weaponEntry)
         {
+            if (this.CombatLoadoutWeaponHandler == null) return false;
             if (!this.CombatLoadoutWeaponHandler.TryGetItemFromEntry(weaponEntry, out WeaponProfile weapon)) return false;
 
-            SkillProfile innateSkill = weapon.InnateSpecialSkill;
-            if (innateSkill == null) return false;
+            if (this.CombatLoadoutController.IsInAttackWindow) return false;
+            if (this.CombatLoadoutController.IsLoadoutSwapLocked)
+            {
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutSpecialSkillHandler)}] {nameof(this.TryClearWeaponActiveSpecialSkill)} blocked: CannotSwapLoadout flag is active.", this);
+                return false;
+            }
 
-            return this.TrySetEquippedWeaponActiveSpecialSkill(weaponEntry, innateSkill);
+            if (!this.CombatLoadoutWeaponHandler.EquippedEntryListIsValid()) return false;
+            if (!this.CombatLoadoutWeaponHandler.IsEquippedEntry(weaponEntry)) return false;
+
+            RuntimeWeapon runtimeWeapon = this.CombatLoadoutWeaponHandler.GetOrCreateRuntimeInstance(weaponEntry);
+
+            if (runtimeWeapon == null) return false;
+
+            runtimeWeapon.ActiveSpecialSkill = null;
+
+            if (UnityEngine.Object.ReferenceEquals(this.CombatLoadoutWeaponHandler.ActiveEquippedEntry, weaponEntry))
+            {
+                this.CombatLoadoutController.NotifyActiveSpecialSkillChanged(weapon.ResolveSpecialSkill(null));
+            }
+
+            return true;
         }
 
         public SkillProfile GetWeaponActiveSpecialSkill(InventoryItemEntry weaponEntry)
         {
+            if (this.CombatLoadoutWeaponHandler == null) return null;
             if (!this.CombatLoadoutWeaponHandler.IsEntryValid(weaponEntry)) return null;
 
             RuntimeWeapon runtimeWeapon = this.CombatLoadoutWeaponHandler.GetOrCreateRuntimeInstance(weaponEntry);
@@ -77,6 +100,8 @@ namespace FlameOfTheLost
 
         public Sprite GetActiveSpecialSkillIcon()
         {
+            if (this.CombatLoadoutWeaponHandler == null) return null;
+
             SkillProfile resolvedSkill = this.CombatLoadoutWeaponHandler.ResolveActiveSpecialSkill();
 
             return resolvedSkill != null ? resolvedSkill.Icon : null;
