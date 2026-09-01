@@ -30,6 +30,7 @@ namespace FlameOfTheLost
         {
             this.CleanupStates();
             this.UnbindInternalReferences();
+            this.UnbindExternalReferences();
         }
 
         // --- Helpers ---
@@ -71,6 +72,10 @@ namespace FlameOfTheLost
         }
 
         protected virtual void UnbindInternalReferences()
+        {
+        }
+
+        protected virtual void UnbindExternalReferences()
         {
         }
 

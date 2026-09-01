@@ -23,9 +23,9 @@ namespace FlameOfTheLost
 
         //  2. Trigger Conditions
         [Header("Trigger Conditions")]
-        [SerializeField] private TutorialPromptTriggerConditionCombinationType _conditionCombinationType = TutorialPromptTriggerConditionCombinationType.All;
-        [SerializeField] private List<TutorialPromptTriggerConditionEntry> _conditionEntries = new();
-        public TutorialPromptTriggerConditionCombinationType ConditionCombinationType => _conditionCombinationType;
-        public IReadOnlyList<TutorialPromptTriggerConditionEntry> ConditionEntries => _conditionEntries;
+        [SerializeField] private GameConditionCombinationType _conditionCombinationType = GameConditionCombinationType.All;
+        [SerializeField] private List<GameConditionRequirementEntry> _conditionEntries = new();
+        public GameConditionCombinationType ConditionCombinationType => _conditionCombinationType;
+        public IReadOnlyList<GameConditionRequirementEntry> ConditionEntries => _conditionEntries;
     }
 }

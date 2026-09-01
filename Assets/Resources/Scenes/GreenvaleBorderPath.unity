@@ -41822,6 +41822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingPanelSelectionHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _currentCraftCount: 2
 --- !u!114 &69788579
 MonoBehaviour:
@@ -42040,6 +42041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EquippedLoadoutSlotActionTooltipController
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 459125927}
   _rectTransform: {fileID: 92620987}
   _headerText: {fileID: 878921799}
   _unequipButton: {fileID: 708255616}
@@ -48083,6 +48085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingPanelLostEmbersCostDisplayHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _iconImage: {fileID: 1758812059}
   _quantityText: {fileID: 1480373945}
 --- !u!1 &331205188
@@ -48237,6 +48240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerPanelSelectedItemEntryDisplayHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _iconImage: {fileID: 462392912}
   _displayNameText: {fileID: 1134531618}
   _descriptionText: {fileID: 579122007}
@@ -48823,6 +48827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingPanelSelectedRecipeEntryDetailsDisplayController
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _resultDisplayHandler: {fileID: 1897782978}
   _materialRequirementListHandler: {fileID: 405543165}
   _lostEmbersCostDisplayHandler: {fileID: 327771741}
@@ -48880,6 +48885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingPanelMaterialRequirementListHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _materialSlots:
   - {fileID: 154594131477770243}
   - {fileID: 1552128000}
@@ -49241,6 +49247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EquippedLoadoutSubPanelWeaponListSectionController
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 459125927}
   _weaponSlots:
   - {fileID: 1589897162}
   - {fileID: 1452419446}
@@ -49298,6 +49305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EquippedLoadoutSubPanelController
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 1562472168}
   _playerCombatLoadoutController: {fileID: 1267844716}
   _playerCarryLoadoutController: {fileID: 2107461182}
   _weaponListSection: {fileID: 437503168}
@@ -49501,6 +49509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.InventoryNavigationSubPanelController
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 0}
   _buttons:
   - {fileID: 1761196479}
   - {fileID: 336251325}
@@ -50278,6 +50287,47 @@ MonoBehaviour:
   _projectileSlotHandler: {fileID: 119555242}
   _consumableItemSlotHandler: {fileID: 1823242778}
   _refreshInterval: 0.1
+--- !u!21 &536658159
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 29, g: 29, b: 9, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &541137758
 GameObject:
   m_ObjectHideFlags: 0
@@ -50405,6 +50455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingPanelRecipeEntryListSubPanelController
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _paginationHandler: {fileID: 53322372}
   _recipeEntryListParent: {fileID: 780716482}
   _slotPrefab: {fileID: 1884259308342736790, guid: df91494a2b6e67f4782c28b966473ad6, type: 3}
@@ -51574,6 +51625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItemEntrySubPanelController
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 0}
   _inventoryController: {fileID: 1123552228}
   _filterHandler: {fileID: 678936439}
   _searchBarHandler: {fileID: 1488304102}
@@ -51630,6 +51682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.InventoryPanelItemEntryListFilterHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
 --- !u!1 &687106423
 GameObject:
   m_ObjectHideFlags: 0
@@ -52317,6 +52370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerEntrySubPanelController
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _paginationHandler: {fileID: 1664970181}
   _itemEntryListParent: {fileID: 340634814}
   _slotPrefab: {fileID: 8645785651915983321, guid: 0aa3b8ff74a5f3e4ba4e38ffa9345898, type: 3}
@@ -52716,6 +52770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EquippedLoadoutSubPanelInteractableItemSectionController
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 459125927}
   _carriableSlot: {fileID: 749052587}
 --- !u!224 &754377607
 RectTransform:
@@ -53151,6 +53206,47 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771467553}
   m_CullTransparentMesh: 1
+--- !u!21 &776770237
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 24, g: 24, b: 7, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &780716481
 GameObject:
   m_ObjectHideFlags: 0
@@ -53369,6 +53465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingPanelCraftExecutionHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _buttonCraft: {fileID: 814809901}
 --- !u!1 &834274604
 GameObject:
@@ -54698,6 +54795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingPanelBackgroundClickClearAreaHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
 --- !u!1 &940470859
 GameObject:
   m_ObjectHideFlags: 0
@@ -85837,6 +85935,47 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134932332}
   m_CullTransparentMesh: 1
+--- !u!21 &1175026684
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 24, g: 24, b: 7, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &1189923551
 GameObject:
   m_ObjectHideFlags: 0
@@ -97332,6 +97471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerPanelBackgroundClickClearAreaHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
 --- !u!1 &1286973932
 GameObject:
   m_ObjectHideFlags: 0
@@ -97666,6 +97806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingPanelCraftQuantityHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _buttonDecrease: {fileID: 1072030851}
   _buttonIncrease: {fileID: 1721933300}
   _quantityText: {fileID: 971868629}
@@ -97815,6 +97956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EquippedLoadoutSubPanelConsumableItemListSectionController
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 459125927}
   _consumableSlots:
   - {fileID: 947258869}
   - {fileID: 1797735071}
@@ -98022,6 +98164,47 @@ MonoBehaviour:
   _spawnedEnemies: []
   _isSpawnedEnemiesOnStart: 1
   _isRespawnedEnemiesWhenPlayerSpawnsOrRespawns: 1
+--- !u!21 &1354935754
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 24, g: 24, b: 7, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!4 &1355743521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4467658726467793146, guid: 3c4021cea9e4c414ab9a4a765d797c79, type: 3}
@@ -98276,6 +98459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EquippedLoadoutSubPanelProjectileListSectionController
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 459125927}
   _projectileSlots:
   - {fileID: 11804562}
 --- !u!1 &1446283531
@@ -98327,6 +98511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.InventoryPanelItemEntryListDisplayHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _slotPrefab: {fileID: 8645785651915983321, guid: 6967e57239527514e91d387786b871e4, type: 3}
   _startPosition: {x: -225, y: 100}
   _step: {x: 150, y: 150}
@@ -98380,7 +98565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 1614861626}
+  m_Material: {fileID: 536658159}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -98940,6 +99125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.InventoryItemEntrySubPanelSearchBarHandler
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 0}
   _inputField: {fileID: 2016354318}
   _clearButton: {fileID: 294047587}
 --- !u!1 &1502838615
@@ -98993,6 +99179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadoutPanelBackgroundClickClearAreaHandler
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 0}
 --- !u!114 &1502838618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99965,7 +100152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1562472167
 RectTransform:
   m_ObjectHideFlags: 0
@@ -100001,7 +100188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.LoadoutPanelController
   _enableDebugLogs: 0
-  _backgroundClickClearAreaHandler: {fileID: 0}
+  _backgroundClickClearAreaHandler: {fileID: 1502838617}
   _equippedLoadoutSubPanelController: {fileID: 459125927}
   _candidateLoadoutSubPanelController: {fileID: 1547136688}
 --- !u!1 &1570935854
@@ -100751,47 +100938,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1602270356}
   m_CullTransparentMesh: 1
---- !u!21 &1614861626
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _WidthHeightRadius: {r: 29, g: 29, b: 9, a: 0}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1001 &1627050715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101243,6 +101389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SelectedInventoryItemEntryDisplayController
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _iconImage: {fileID: 871139878}
   _displayNameText: {fileID: 200905111}
   _descriptionText: {fileID: 1524482966}
@@ -101466,6 +101613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerCraftingExecutionHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
 --- !u!114 &1663374922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101479,6 +101627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerCraftingValidationHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
 --- !u!1 &1664970179
 GameObject:
   m_ObjectHideFlags: 0
@@ -104839,6 +104988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerInteractionPromptBlockerHandler
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 0}
   _playerMenuManager: {fileID: 1043804205}
   _playerInteractionPanelListManager: {fileID: 1947496558}
 --- !u!114 &1877115631
@@ -104854,6 +105004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerInteractionPromptHandler
   _enableDebugLogs: 1
+  _brainBehaviour: {fileID: 0}
   _promptPanelController: {fileID: 236950411}
   _interactActionReference: {fileID: 0}
   _fallbackInteractInputDisplayName: E
@@ -104871,6 +105022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerInteractionTargetHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
 --- !u!114 &1877115633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104884,6 +105036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerInteractionPromptSourceTargetHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
 --- !u!114 &1877115634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104897,6 +105050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerInteractionInteractableTargetHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
 --- !u!114 &1877115635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104910,6 +105064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerInteractionPromptSourceTargetHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
 --- !u!1 &1897782976
 GameObject:
   m_ObjectHideFlags: 0
@@ -104961,6 +105116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingPanelResultDisplayHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
   _resultIconImage: {fileID: 851324756}
   _resultNameAndQuantityText: {fileID: 1036792270}
 --- !u!1 &1898475259
@@ -105336,6 +105492,75 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.12}
   m_Size: {x: 0.7, y: 1.15}
   m_Direction: 0
+--- !u!1 &1925837245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1925837246}
+  - component: {fileID: 1925837248}
+  - component: {fileID: 1925837247}
+  m_Layer: 0
+  m_Name: ConditionSystems
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1925837246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925837245}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1360, y: 220, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1925837247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925837245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd75e396cd48dc641b18f9eed2fcc099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TutorialProgressController
+  _enableDebugLogs: 0
+  _gameConditionController: {fileID: 1925837248}
+  _player: {fileID: 2107461207}
+  _preferredFirstEnemySpawner: {fileID: 1334256574}
+  _firstEnemy: {fileID: 0}
+--- !u!114 &1925837248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925837245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12881ac6682c4084fa48dc96839039d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.GameConditionController
+  _enableDebugLogs: 0
+  _initialStateEntries:
+  - _conditionKey: 100
+    _initialValue: 0
+  - _conditionKey: 101
+    _initialValue: 0
+  _conditionStateEntries: []
 --- !u!1 &1945593793
 GameObject:
   m_ObjectHideFlags: 0
@@ -106768,6 +106993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerPanelSelectionHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 0}
 --- !u!1 &2058090546
 GameObject:
   m_ObjectHideFlags: 0
@@ -109095,6 +109321,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1784876781}
   - {fileID: 1797765460}
+  - {fileID: 1925837246}
   - {fileID: 630227076}
   - {fileID: 1098604925}
   - {fileID: 1681114750}

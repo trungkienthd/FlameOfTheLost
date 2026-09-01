@@ -8,10 +8,14 @@ namespace FlameOfTheLost
         IPlayerInteractionPromptSource,
         IPlayerInteractionPromptRefreshNotifier
     {
-        // --- Internal References ---
-        [Header("Internal References")]
+        // --- References ---
+        [Header("References (Internal - Trigger Area)")]
         [SerializeField] private GameObject _interactionTriggerArea;
         private GameObject InteractionTriggerArea => _interactionTriggerArea;
+
+        [Header("References (External - Game Condition")]
+        [SerializeField] private GameConditionController _gameConditionController;
+        private GameConditionController GameConditionController => _gameConditionController;
 
         // --- Data / Configs ---
         //  1. Prompt Settings
@@ -23,16 +27,11 @@ namespace FlameOfTheLost
         private ColliderConfigurationEntry InteractionTriggerColliderConfiguration => this.Profile != null ? this.Profile.InteractionTriggerColliderConfiguration : null;
 
         //  3. Trigger Conditions
-        private TutorialPromptTriggerConditionCombinationType ConditionCombinationType => this.Profile != null ? this.Profile.ConditionCombinationType : TutorialPromptTriggerConditionCombinationType.All;
-        private IReadOnlyList<TutorialPromptTriggerConditionEntry> ConditionEntries => this.Profile != null ? this.Profile.ConditionEntries : Array.Empty<TutorialPromptTriggerConditionEntry>();
+        private GameConditionCombinationType ConditionCombinationType => this.Profile != null ? this.Profile.ConditionCombinationType : GameConditionCombinationType.All;
+        private IReadOnlyList<GameConditionRequirementEntry> ConditionEntries => this.Profile != null ? this.Profile.ConditionEntries : Array.Empty<GameConditionRequirementEntry>();
 
-        // --- Runtime State ---
-        //  1. Condition States
-        [Header("Condition State (Runtime)")]
-        [SerializeField] private PromptTriggerConditionStateMap _conditionStateMap = new();
-        private IReadOnlyDictionary<TutorialPromptTriggerConditionKey, bool> ConditionStateMap => _conditionStateMap;
-
-        //  2. Runtime State
+        // --- Runtime ---
+        //  1. Runtime State
         [Header("Prompt State (Runtime)")]
         [SerializeField] private bool _isPromptEnabled;
         [SerializeField] private bool _isCompleted;
@@ -99,42 +98,12 @@ namespace FlameOfTheLost
             }
         }
 
-        //  4. Condition APIs
-        public void SetConditionState(TutorialPromptTriggerConditionKey conditionKey, bool value)
-        {
-            if (conditionKey == TutorialPromptTriggerConditionKey.None) return;
-
-            bool oldValue = this.GetConditionState(conditionKey);
-            if (oldValue == value) return;
-
-            _conditionStateMap[conditionKey] = value;
-            this.RequestPromptRefresh();
-        }
-
-        public void SatisfyCondition(TutorialPromptTriggerConditionKey conditionKey)
-        {
-            this.SetConditionState(conditionKey, true);
-        }
-
-        public void UnsatisfyCondition(TutorialPromptTriggerConditionKey conditionKey)
-        {
-            this.SetConditionState(conditionKey, false);
-        }
-
-        public bool GetConditionState(TutorialPromptTriggerConditionKey conditionKey)
-        {
-            if (conditionKey == TutorialPromptTriggerConditionKey.None) return false;
-
-            return this.ConditionStateMap.TryGetValue(conditionKey, out bool value) && value;
-        }
-
-        //  5. Reset
+        //  4. Reset
         public void ResetPrompt()
         {
             this.IsCompleted = false;
             this.IsPromptEnabled = this.StartEnabled;
 
-            this.InitializeConditionStates();
             this.RequestPromptRefresh();
         }
 
@@ -156,78 +125,36 @@ namespace FlameOfTheLost
             this.InteractionTriggerColliderConfiguration.ConfigureCollider(this.InteractionTriggerArea);
         }
 
-        private void InitializeConditionStates()
-        {
-            _conditionStateMap.Clear();
-
-            for (int i = 0; i < this.ConditionEntries.Count; i++)
-            {
-                TutorialPromptTriggerConditionEntry entry = this.ConditionEntries[i];
-                if (entry == null) continue;
-                if (entry.ConditionKey == TutorialPromptTriggerConditionKey.None) continue;
-
-                _conditionStateMap[entry.ConditionKey] = entry.StartValue;
-            }
-        }
-
         private bool AreTriggerConditionsSatisfied()
         {
-            if (this.ConditionEntries == null || this.ConditionEntries.Count == 0)
-            {
-                return true;
-            }
-
-            if (this.ConditionCombinationType == TutorialPromptTriggerConditionCombinationType.Any)
-            {
-                return this.IsAnyTriggerConditionSatisfied();
-            }
-
-            return this.AreAllTriggerConditionsSatisfied();
+            return GameConditionEvaluator.AreConditionsSatisfied(this.ConditionEntries, this.ConditionCombinationType, this.GameConditionController);
         }
 
-        private bool AreAllTriggerConditionsSatisfied()
+        private bool UsesCondition(GameConditionKey conditionKey)
         {
             for (int i = 0; i < this.ConditionEntries.Count; i++)
             {
-                TutorialPromptTriggerConditionEntry entry = this.ConditionEntries[i];
-                if (entry == null) continue;
-                if (entry.ConditionKey == TutorialPromptTriggerConditionKey.None) continue;
+                GameConditionRequirementEntry requirement = this.ConditionEntries[i];
 
-                bool currentValue = this.GetConditionState(entry.ConditionKey);
-                if (currentValue != entry.RequiredValue)
-                {
-                    return false;
-                }
+                if (requirement == null) continue;
+
+                if (requirement.ConditionKey == conditionKey) return true;
             }
 
-            return true;
-        }
-
-        private bool IsAnyTriggerConditionSatisfied()
-        {
-            bool hasValidCondition = false;
-
-            for (int i = 0; i < this.ConditionEntries.Count; i++)
-            {
-                TutorialPromptTriggerConditionEntry entry = this.ConditionEntries[i];
-                if (entry == null) continue;
-                if (entry.ConditionKey == TutorialPromptTriggerConditionKey.None) continue;
-
-                hasValidCondition = true;
-
-                bool currentValue = this.GetConditionState(entry.ConditionKey);
-                if (currentValue == entry.RequiredValue)
-                {
-                    return true;
-                }
-            }
-
-            return !hasValidCondition;
+            return false;
         }
 
         private void RequestPromptRefresh()
         {
             this.PromptRefreshRequested?.Invoke();
+        }
+
+        //  2. Event Handlers
+        private void HandleConditionStateChanged(GameConditionKey conditionKey, bool value)
+        {
+            if (!this.UsesCondition(conditionKey)) return;
+
+            this.RequestPromptRefresh();
         }
 
         // --- FOTLMonoBehaviour Overrides ---
@@ -249,8 +176,30 @@ namespace FlameOfTheLost
 
             this.IsPromptEnabled = this.StartEnabled;
             this.IsCompleted = false;
+        }
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
 
-            this.InitializeConditionStates();
+            if (this.GameConditionController == null) _gameConditionController = UnityEngine.Object.FindFirstObjectByType<GameConditionController>();
+        }
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
+            if (this.GameConditionController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialPromptTriggerController)}] {nameof(this.GameConditionController)} reference is not assigned.", this);
+        }
+        protected override void BindExternalReferences()
+        {
+            base.BindExternalReferences();
+
+            if (this.GameConditionController != null) this.GameConditionController.ConditionStateChanged += this.HandleConditionStateChanged;
+        }
+        protected override void UnbindExternalReferences()
+        {
+            if (this.GameConditionController != null) this.GameConditionController.ConditionStateChanged -= this.HandleConditionStateChanged;
+
+            base.UnbindExternalReferences();
         }
     }
 }
