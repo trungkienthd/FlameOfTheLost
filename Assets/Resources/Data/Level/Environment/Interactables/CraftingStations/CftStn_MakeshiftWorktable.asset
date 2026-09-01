@@ -18,7 +18,7 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: 429140136, guid: ed26a618e3ead734889f0fdcd174e4a9, type: 3}
   _configureInitialTransformAtStart: 1
-  _initialPosition: {x: 4, y: 24, z: 0}
+  _initialPosition: {x: 5, y: 14, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
   _initialVisualLocalPosition: {x: 0, y: 0, z: 0}

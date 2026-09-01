@@ -51,9 +51,7 @@ MonoBehaviour:
       _paths: []
   _conditionCombinationType: 1
   _conditionEntries:
-  - _conditionKey: 100
+  - _conditionKey: 200
     _requiredValue: 1
-    _startValue: 0
-  - _conditionKey: 101
+  - _conditionKey: 201
     _requiredValue: 1
-    _startValue: 0

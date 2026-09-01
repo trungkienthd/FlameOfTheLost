@@ -39,7 +39,7 @@ MonoBehaviour:
     _circleConfiguration:
       _offset: {x: 0, y: 0}
       _isTrigger: 1
-      _radius: 3.5
+      _radius: 3.25
     _capsuleConfiguration:
       _offset: {x: 0, y: 0}
       _isTrigger: 0

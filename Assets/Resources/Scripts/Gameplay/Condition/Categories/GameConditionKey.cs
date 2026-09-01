@@ -4,8 +4,11 @@ namespace FlameOfTheLost
     {
         None = 0,
 
+        // --- Tutorial: Equipment ---
+        PlayerReadyToCycleWeapons = 100,
+
         // --- Tutorial: Combat ---
-        PlayerHitByFirstEnemy = 100,
-        FirstEnemyDefeated = 101,
+        PlayerHitByFirstEnemy = 200,
+        FirstEnemyDefeated = 201,
     }
 }

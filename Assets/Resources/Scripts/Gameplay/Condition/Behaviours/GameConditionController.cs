@@ -94,8 +94,7 @@ namespace FlameOfTheLost
 
             for (int i = 0; i < this.InitialStateEntries.Count; i++)
             {
-                GameConditionInitialStateEntry initialStateEntry =
-                    this.InitialStateEntries[i];
+                GameConditionInitialStateEntry initialStateEntry = this.InitialStateEntries[i];
 
                 if (initialStateEntry == null) continue;
                 if (initialStateEntry.ConditionKey == GameConditionKey.None) continue;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -25,8 +26,10 @@ namespace FlameOfTheLost
         [Header("Runtime (First Enemy)")]
         [SerializeField] private CharacterRootController _firstEnemy;
         private CharacterRootController FirstEnemy => _firstEnemy;
+
         private EnemyGroupSpawnerController _firstEnemySpawner;
         private EnemySpawnEntry _firstEnemySpawnEntry;
+
         private EnemyGroupSpawnerController FirstEnemySpawner => _firstEnemySpawner;
         private EnemySpawnEntry FirstEnemySpawnEntry => _firstEnemySpawnEntry;
 
@@ -49,10 +52,44 @@ namespace FlameOfTheLost
             if (this.GameConditionController == null) return;
 
             this.GameConditionController.ResetConditions();
+
+            this.RefreshPlayerReadyToCycleWeaponsCondition();
         }
 
         // --- Helpers ---
-        //  1. First Enemy Source Resolution
+        //  1. Player Equipment Progress
+        private void RefreshPlayerReadyToCycleWeaponsCondition()
+        {
+            if (this.GameConditionController == null) return;
+            if (this.Player == null) return;
+            if (this.Player.InventoryController == null) return;
+
+            IReadOnlyList<InventoryItemEntry> weaponEntries = this.Player.InventoryController.AllWeaponEntries;
+
+            bool hasAtLeastTwoWeapons = weaponEntries != null && weaponEntries.Count >= 2;
+
+            bool hasEquippedWeapon = false;
+
+            if (hasAtLeastTwoWeapons)
+            {
+                for (int i = 0; i < weaponEntries.Count; i++)
+                {
+                    InventoryItemEntry weaponEntry = weaponEntries[i];
+
+                    if (weaponEntry == null) continue;
+                    if (!weaponEntry.Equipped) continue;
+
+                    hasEquippedWeapon = true;
+                    break;
+                }
+            }
+
+            bool playerReadyToCycleWeapons = hasAtLeastTwoWeapons && hasEquippedWeapon;
+
+            this.GameConditionController.SetConditionState(GameConditionKey.PlayerReadyToCycleWeapons, playerReadyToCycleWeapons);
+        }
+
+        //  2. First Enemy Source Resolution
         private void ResolveFirstEnemySource()
         {
             _firstEnemySpawner = null;
@@ -84,7 +121,7 @@ namespace FlameOfTheLost
             return true;
         }
 
-        //  2. First Enemy Binding
+        //  3. First Enemy Binding
         private void TryBindExistingFirstEnemy()
         {
             if (this.FirstEnemySpawner == null) return;
@@ -121,8 +158,20 @@ namespace FlameOfTheLost
             _firstEnemy = null;
         }
 
-        //  3. Event handling
-        private void HandleEnemySpawned( EnemySpawnEntry spawnEntry, CharacterRootController character)
+        //  4. Event handling
+        private void HandlePlayerItemAdded(ItemProfile item, int quantity)
+        {
+            if (item is not WeaponProfile) return;
+
+            this.RefreshPlayerReadyToCycleWeaponsCondition();
+        }
+        private void HandlePlayerItemRemoved(ItemProfile item, int quantity)
+        {
+            if (item is not WeaponProfile) return;
+
+            this.RefreshPlayerReadyToCycleWeaponsCondition();
+        }
+        private void HandleEnemySpawned(EnemySpawnEntry spawnEntry, CharacterRootController character)
         {
             if (spawnEntry != this.FirstEnemySpawnEntry) return;
             if (character == null) return;
@@ -182,9 +231,10 @@ namespace FlameOfTheLost
             {
                 Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressController)}] {nameof(this.Player)} reference is not assigned.", this);
             }
-            else if (this.Player.DamageReceivingHandler == null)
+            else
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressController)}] {nameof(this.Player)} has no {nameof(DamageReceivingHandler)}.", this);
+                if (this.Player.DamageReceivingHandler  == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressController)}] {nameof(this.Player)} has no {nameof(DamageReceivingHandler)}.", this);
+                if (this.Player.InventoryController     == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressController)}] {nameof(this.Player)} has no {nameof(InventoryController)}.", this);
             }
 
             if (this.FirstEnemySpawner == null)
@@ -202,13 +252,25 @@ namespace FlameOfTheLost
             base.BindExternalReferences();
 
             if (this.Player?.DamageReceivingHandler != null) this.Player.DamageReceivingHandler.OnDamageApplied += this.HandleDamageApplied;
+            if (this.Player?.InventoryController != null)
+            {
+                this.Player.InventoryController.OnItemAdded += this.HandlePlayerItemAdded;
+                this.Player.InventoryController.OnItemRemoved +=this.HandlePlayerItemRemoved;
+            }
             if (this.FirstEnemySpawner != null) this.FirstEnemySpawner.EnemySpawned += this.HandleEnemySpawned;
 
             this.TryBindExistingFirstEnemy();
+
+            this.RefreshPlayerReadyToCycleWeaponsCondition();
         }
         protected override void UnbindExternalReferences()
         {
             if (this.Player?.DamageReceivingHandler != null) this.Player.DamageReceivingHandler.OnDamageApplied -= this.HandleDamageApplied;
+            if (this.Player?.InventoryController != null)
+            {
+                this.Player.InventoryController.OnItemAdded -= this.HandlePlayerItemAdded;
+                this.Player.InventoryController.OnItemRemoved -= this.HandlePlayerItemRemoved;
+            }
             if (this.FirstEnemySpawner != null) this.FirstEnemySpawner.EnemySpawned -= this.HandleEnemySpawned;
 
             this.UnbindFirstEnemy();
