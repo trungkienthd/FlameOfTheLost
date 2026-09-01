@@ -18,12 +18,12 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: 429140136, guid: ed26a618e3ead734889f0fdcd174e4a9, type: 3}
   _configureInitialTransformAtStart: 1
-  _initialPosition: {x: 5, y: 14, z: 0}
+  _initialPosition: {x: 5.2, y: 14.3, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
   _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
   _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
-  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalScale: {x: 1.5, y: 1.5, z: 1}
   _configureIconAtStart: 1
   _craftingRecipes:
   - {fileID: 11400000, guid: 7cfd33d43ae324e47a6a422654d29ee9, type: 2}
