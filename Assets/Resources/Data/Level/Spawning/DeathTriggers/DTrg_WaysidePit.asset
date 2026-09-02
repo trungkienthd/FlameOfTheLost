@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331454382d42ed749804d0de3c2c83bc, type: 3}
   m_Name: DTrg_WaysidePit
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.DeathTriggerProfile
-  _id: 21001
+  _id: 29001
   _key: WAYSIDE_PIT
   _displayName: Wayside Pit
   _description: 

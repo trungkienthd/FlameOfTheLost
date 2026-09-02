@@ -1,7 +1,7 @@
 # Data ID Convention
 
 **Project:** FlameOfTheLost  
-**Version:** 3.3  
+**Version:** 3.4  
 **Scope:** ID attributes assigned to project-owned **ScriptableObject** assets.
 
 ---
@@ -130,9 +130,14 @@ IDs must never be reused by unrelated assets.
 
 2xxxx   Spawning Data
 
-200xx   Player Default Spawn Point Profiles
-201xx   Enemy Default Spawn Point Profiles
-210xx   Death Trigger Profiles
+20xxx   Player Default Spawn Point Profiles
+
+21xxx   Player Checkpoint Profiles
+
+22xxx   Enemy Default Spawn Point Profiles
+220xx   Territorial Enemy Default Spawn Point Profiles
+
+29xxx   Death Trigger Profiles
 
 3xxxx   Environment Data
 

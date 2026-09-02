@@ -13,10 +13,14 @@
 ## Profile Types
 
 ```text
-200xx   PlayerDefaultSpawnPointProfile
-201xx   EnemyDefaultSpawnPointProfile
+20xxx   PlayerDefaultSpawnPointProfile
 
-210xx   DeathTriggerProfile
+21xxx   CheckpointProfile
+
+22xxx   Enemy Default Spawn Point Profiles
+220xx   Territorial Enemy Default Spawn Point Profiles
+
+29xxx   DeathTriggerProfile
 ```
 
 ---
@@ -24,76 +28,107 @@
 ## Sub-Ranges
 
 ```text
-200xx   Player Default Spawn Point Profiles
-201xx   Enemy Default Spawn Point Profiles
+20xxx   Player Default Spawn Point Profiles
 
-202xx   Reserved
-203xx   Reserved
-204xx   Reserved
-205xx   Reserved
-206xx   Reserved
-207xx   Reserved
-208xx   Reserved
-209xx   Reserved
+21xxx   Player Checkpoint Profiles
 
-210xx   Death Trigger Profiles
+22xxx   Enemy Default Spawn Point Profiles
 
-211xx   Reserved
-212xx   Reserved
-213xx   Reserved
-214xx   Reserved
-215xx   Reserved
-216xx   Reserved
-217xx   Reserved
-218xx   Reserved
-219xx   Reserved
+220xx   Territorial Enemy Default Spawn Point Profiles
 
-22xxx   Reserved
+221xx   Reserved
+222xx   Reserved
+223xx   Reserved
+224xx   Reserved
+225xx   Reserved
+226xx   Reserved
+227xx   Reserved
+228xx   Reserved
+229xx   Reserved
+
 23xxx   Reserved
 24xxx   Reserved
 25xxx   Reserved
 26xxx   Reserved
 27xxx   Reserved
 28xxx   Reserved
-29xxx   Reserved
+
+29xxx   Death Trigger Profiles
 ```
 
 ---
 
 ## Assignment Rules
 
-### Default Spawn Points
+### Player Default Spawn Points
 
-The ID identifies a **default spawn point definition**.
+The ID identifies a **Player Default Spawn Point definition**.
 
-Runtime spawn point behaviours do not own independent IDs.
+Runtime Player Default Spawn Point behaviours do not own independent IDs.
 
-A runtime spawn point references its corresponding ScriptableObject profile when an ID is required.
+A runtime Player Default Spawn Point references its corresponding ScriptableObject profile when an ID is required.
+
+Player Default Spawn Points use the `20xxx` range.
+
+---
+
+### Player Checkpoints
+
+The ID identifies a **Player Checkpoint definition**.
+
+Runtime Checkpoint behaviours do not own independent IDs.
+
+A runtime Checkpoint references its corresponding ScriptableObject profile when an ID is required.
+
+Player Checkpoints use the `21xxx` range.
+
+---
+
+### Enemy Default Spawn Points
+
+The ID identifies an **Enemy Default Spawn Point definition**.
+
+Runtime Enemy Default Spawn Point behaviours do not own independent IDs.
+
+An Enemy Default Spawn Point references its corresponding ScriptableObject profile when an ID is required.
+
+Enemy Default Spawn Points use the `22xxx` range.
+
+The third digit further classifies Enemy Default Spawn Point types.
+
+```text
+220xx   Territorial Enemy Default Spawn Points
+221xx-229xx   Reserved for additional Enemy Default Spawn Point categories
+```
 
 ---
 
 ### Death Triggers
 
-The ID identifies a **death trigger definition**.
+The ID identifies a **Death Trigger definition**.
 
-Runtime death trigger behaviours do not own independent IDs.
+Runtime Death Trigger behaviours do not own independent IDs.
 
-A runtime death trigger references its corresponding ScriptableObject profile when an ID is required.
+A runtime Death Trigger references its corresponding ScriptableObject profile when an ID is required.
+
+Death Triggers use the `29xxx` range.
 
 ---
 
 ## Examples
 
 ```text
-20001   Tutorial Area 1 Player Spawn
-20002   Tutorial Area 2 Player Spawn
+20001   Tutorial Area 1 Player Default Spawn Point
+20002   Tutorial Area 2 Player Default Spawn Point
 
-20101   Tutorial Area 3 Enemy Spawn
-20102   Forest Enemy Spawn
+21001   Tutorial Area 2 Player Checkpoint
+21002   Tutorial Area 3 Player Checkpoint
 
-21001   Tutorial Pitfall
-21002   Deep Water
-21003   Lava
+22001   Greenvale Feralshroom Den Territorial Enemy Default Spawn Point
+
+29001   Tutorial Pitfall
+29002   Deep Water
+29003   Lava
 ```
 
 ---
