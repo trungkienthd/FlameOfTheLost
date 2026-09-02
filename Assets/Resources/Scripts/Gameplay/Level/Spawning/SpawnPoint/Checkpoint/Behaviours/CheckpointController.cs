@@ -1,0 +1,102 @@
+using System;
+using UnityEngine;
+
+namespace FlameOfTheLost
+{
+    public sealed class CheckpointController : CharacterSpawnPointController,
+        IPlayerInteractable,
+        IPlayerInteractionPromptSource
+    {
+        // --- Data / Configs ---
+        //  1. Profile
+        public CheckpointProfile CheckpointProfile => this.Profile as CheckpointProfile;
+
+        //  2. Interaction
+        public int InteractionPromptPriority => this.CheckpointProfile != null ? this.CheckpointProfile.InteractionPromptPriority : 0;
+
+        // --- References ---
+        [Header("References (Checkpoint) - Player Spawner")]
+        [SerializeField] private PlayerSpawnerController _playerSpawnerController;
+        private PlayerSpawnerController PlayerSpawnerController => _playerSpawnerController;
+
+        // --- Events ---
+        public event Action<CheckpointController, PlayerRootController> CheckpointInteracted;
+
+        // --- Public APIs ---
+        //  1. IPlayerInteractable
+        public bool CanInteract(GameObject interactor)
+        {
+            if (interactor == null) return false;
+
+            return interactor.GetComponentInParent<PlayerRootController>() != null;
+        }
+        public bool TryInteract(GameObject interactor)
+        {
+            if (!this.CanInteract(interactor)) return false;
+
+            PlayerRootController player = interactor.GetComponentInParent<PlayerRootController>();
+
+            if (player == null) return false;
+
+            if (this.PlayerSpawnerController == null)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(CheckpointController)}] No {nameof(PlayerSpawnerController)} assigned.", this);
+                return false;
+            }
+
+            this.PlayerSpawnerController.ActivateCheckpoint(this);
+
+            this.CheckpointInteracted?.Invoke(this, player);
+
+            return true;
+        }
+
+        //  2. IPlayerInteractionPromptSource
+        public bool CanShowInteractionPrompt(GameObject interactor)
+        {
+            return this.CanInteract(interactor);
+        }
+        public string GetInteractionPromptText(GameObject interactor)
+        {
+            if (!this.CanShowInteractionPrompt(interactor))
+            {
+                return string.Empty;
+            }
+
+            if (this.CheckpointProfile == null)
+            {
+                return "Rest";
+            }
+
+            return string.IsNullOrWhiteSpace(this.CheckpointProfile.InteractionPromptText)
+                ? "Rest"
+                : this.CheckpointProfile.InteractionPromptText;
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.Profile != null && this.CheckpointProfile == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(CheckpointController)}] requires its Profile to be a {nameof(CheckpointProfile)}.", this);
+            }
+        }
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
+
+            if (this.PlayerSpawnerController == null) _playerSpawnerController = UnityEngine.Object.FindFirstObjectByType<PlayerSpawnerController>();
+        }
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
+            if (this.PlayerSpawnerController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(CheckpointController)}] Missing reference to {nameof(PlayerSpawnerController)}.", this);
+            }
+        }
+    }
+}

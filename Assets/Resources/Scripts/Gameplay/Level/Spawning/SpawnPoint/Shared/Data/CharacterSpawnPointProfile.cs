@@ -2,8 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "DSP_Generic_New", menuName = "Data/FlameOfTheLost/Level/Spawning/DefaultSpawnPoints/CharacterDefaultSpawnPointProfile")]
-    public class CharacterDefaultSpawnPointProfile : FOTLWorldObjectProfile
+    public abstract class CharacterSpawnPointProfile : FOTLWorldObjectProfile
     {
         // --- Data / Configs ---
         //  1. Spawn Settings
@@ -17,7 +16,6 @@ namespace FlameOfTheLost
         [SerializeField] private Vector3 _initialSpawnAnchorLocalPosition;
         [SerializeField] private Vector3 _initialSpawnAnchorLocalEulerAngles;
         [SerializeField] private Vector3 _initialSpawnAnchorLocalScale = Vector3.one;
-
         public bool ConfigureSpawnAnchorTransformAtStart => _configureSpawnAnchorTransformAtStart;
         public Vector3 InitialSpawnAnchorLocalPosition => _initialSpawnAnchorLocalPosition;
         public Vector3 InitialSpawnAnchorLocalEulerAngles => _initialSpawnAnchorLocalEulerAngles;

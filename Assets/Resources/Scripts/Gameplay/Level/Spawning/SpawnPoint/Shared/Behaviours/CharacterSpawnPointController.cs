@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterDefaultSpawnPointController : FOTLWorldObjectProfileBehaviour<CharacterDefaultSpawnPointProfile>
+    public abstract class CharacterSpawnPointController : FOTLWorldObjectProfileBehaviour<CharacterSpawnPointProfile>
     {
         // --- Data / Configs ---
         //  1. Spawn Settings
@@ -11,19 +11,21 @@ namespace FlameOfTheLost
             : CharacterFacingStatus.Down;
 
         // --- References ---
-        //  1. Anchor
+        //  1. Spawn Anchor
         [Header("References")]
         [SerializeField] private Transform _spawnAnchor;
         protected Transform SpawnAnchor => _spawnAnchor;
 
-        public Vector3 SpawnPosition => this.SpawnAnchor != null 
-            ? this.SpawnAnchor.position 
+        public Vector3 SpawnPosition => this.SpawnAnchor != null
+            ? this.SpawnAnchor.position
             : this.transform.position;
-        public Quaternion SpawnRotation => this.SpawnAnchor != null 
-            ? this.SpawnAnchor.rotation 
+
+        public Quaternion SpawnRotation => this.SpawnAnchor != null
+            ? this.SpawnAnchor.rotation
             : this.transform.rotation;
 
         // --- Helpers ---
+        //  1. Spawn Anchor Configuration
         private void ConfigureSpawnAnchorTransform()
         {
             if (this.Profile == null) return;
@@ -46,8 +48,8 @@ namespace FlameOfTheLost
 
             if (this.SpawnAnchor == null)
             {
-                Transform anchor = this.transform.Find("SpawnAnchor");
-                if (anchor != null) _spawnAnchor = anchor;
+                Transform spawnAnchor = this.transform.Find("SpawnAnchor");
+                if (spawnAnchor != null) _spawnAnchor = spawnAnchor;
             }
         }
         protected override void ValidateInternalReferences()
@@ -56,13 +58,8 @@ namespace FlameOfTheLost
 
             if (this.SpawnAnchor == null)
             {
-                Debug.LogWarning($"[{this.name}.{nameof(CharacterDefaultSpawnPointController)}] " + $"No spawn anchor found for {this.name}. Defaulting to self transform.");
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(CharacterSpawnPointController)}] No SpawnAnchor found. Using root transform as the spawn transform.", this);
             }
-        }
-
-        protected override void InitializeInternalState()
-        {
-            base.InitializeInternalState();
         }
         protected override void InitializePregameplayState()
         {
