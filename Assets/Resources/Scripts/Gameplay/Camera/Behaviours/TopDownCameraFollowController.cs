@@ -31,8 +31,8 @@ namespace FlameOfTheLost
         //  4. Boundary
         [Header("Boundary")]
         [SerializeField] private bool _useBoundary = true;
-        [SerializeField] private Vector2 _minBoundary;                      // World-space minimum boundary of the camera center.
-        [SerializeField] private Vector2 _maxBoundary;                      // World-space maximum boundary of the camera center.
+        [SerializeField] private Vector2 _minBoundary;                     
+        [SerializeField] private Vector2 _maxBoundary;                      
         [SerializeField] private bool _clampUsingCameraViewSize = true;     // If true, the camera view size is considered, so the visible camera area never leaves the boundary.
         private bool UseBoundary => _useBoundary;
         private Vector2 MinBoundary => _minBoundary;

@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableDropHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 6244524684465928208}
   _defaultDropOrigin: {fileID: 0}
   _dropAnchors:
   - {fileID: 6463222146827986535}
@@ -310,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableBrokenStateHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 6244524684465928208}
   _visualSpriteRenderer: {fileID: 910537647476446899}
   _activeCollider: {fileID: 3781653710060801201}
   _brokenColliderPreset: {fileID: 3213249885053076553}
