@@ -6,6 +6,14 @@ namespace FlameOfTheLost
 {
     public class GameConditionController : FOTLMonoBehaviour
     {
+        // --- References ---
+        //  1. Sub-Behaviours
+        [Header("References (Sub-Behaviours)")]
+        [SerializeField] private TutorialProgressController _tutorialProgressController;
+        [SerializeField] private MilestoneProgressController _milestoneProgressController;
+        private TutorialProgressController TutorialProgressController => _tutorialProgressController;
+        private MilestoneProgressController MilestoneProgressController => _milestoneProgressController;
+
         // --- Data / Configs ---
         [Header("Initial Condition States")]
         [SerializeField] private List<GameConditionInitialStateEntry> _initialStateEntries = new();
@@ -105,11 +113,37 @@ namespace FlameOfTheLost
         }
 
         // --- FOTLMonoBehaviour Overrides ---
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
+            if (this.TutorialProgressController == null) _tutorialProgressController = this.GetComponentInChildren<TutorialProgressController>(true);
+        }
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.TutorialProgressController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] {nameof(this.TutorialProgressController)} reference is not assigned.", this);
+        }
+        protected override void BindInternalReferences()
+        {
+            base.BindInternalReferences();
+
+            this.TutorialProgressController?.Bind(this);
+            this.MilestoneProgressController?.Bind(this);
+        }
         protected override void InitializeInternalState()
         {
             base.InitializeInternalState();
 
             this.InitializeConditionStates();
+        }
+        protected override void UnbindInternalReferences()
+        {
+            this.TutorialProgressController?.Unbind(this);
+            this.MilestoneProgressController?.Unbind(this);
+
+            base.UnbindInternalReferences();
         }
     }
 }
