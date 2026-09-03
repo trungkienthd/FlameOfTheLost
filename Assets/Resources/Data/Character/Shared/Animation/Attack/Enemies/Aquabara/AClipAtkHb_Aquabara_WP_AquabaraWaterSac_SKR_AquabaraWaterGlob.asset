@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d3b9023c5dfeb499619f54ab1144a8, type: 3}
+  m_Name: AClipAtkHb_Aquabara_WP_AquabaraWaterSac_SKR_AquabaraWaterGlob
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterAttackAnimationClipHitboxSetProfile
+  _skills:
+  - {fileID: 11400000, guid: 169d3184cb416ab4aa671c137d6504b1, type: 2}
+  _weapon: {fileID: 11400000, guid: b22e53e2ad3aa3a458902b84802a1081, type: 2}
+  _characterType: 3
+  _left:
+    _down:
+      _animationClip: {fileID: 7400000, guid: 0ecbd7d3a0d3cce43a1d79d6c7bf2fa0, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0, y: 0}
+        _offset: {x: 0, y: 0}
+    _side:
+      _animationClip: {fileID: 7400000, guid: dc712e3461be170499efe2d432ed3053, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0, y: 0}
+        _offset: {x: 0, y: 0}
+    _up:
+      _animationClip: {fileID: 7400000, guid: 813a6b9a77542634ea8fc46e0f748532, type: 2}
+      _hitboxShape:
+        _points:
+        - {x: 0, y: 0}
+        _offset: {x: 0, y: 0}
+  _right:
+    _down:
+      _animationClip: {fileID: 0}
+      _hitboxShape:
+        _points: []
+        _offset: {x: 0, y: 0}
+    _side:
+      _animationClip: {fileID: 0}
+      _hitboxShape:
+        _points: []
+        _offset: {x: 0, y: 0}
+    _up:
+      _animationClip: {fileID: 0}
+      _hitboxShape:
+        _points: []
+        _offset: {x: 0, y: 0}
+  _attackWindowDuration: 0.75
+  _hitboxActivationDelay: 0

@@ -35,3 +35,9 @@ MonoBehaviour:
     - _statusEffect: {fileID: 11400000, guid: 78a203af6cb7be2468fb109b1c9ffe38, type: 2}
       _chance: 1
       _potency: 1
+  - _targetTraversalType: 2
+    _canEnter: 0
+    _applications:
+    - _statusEffect: {fileID: 11400000, guid: 78a203af6cb7be2468fb109b1c9ffe38, type: 2}
+      _chance: 1
+      _potency: 1

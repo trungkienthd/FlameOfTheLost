@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ad75085c63ca34fb95e550c543ce6f, type: 3}
   m_Name: CId_Player
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterIdentityProfile
-  _id: 1000
+  _id: 10000
   _key: PLAYER
   _displayName: Player
   _description: This is you - the Player

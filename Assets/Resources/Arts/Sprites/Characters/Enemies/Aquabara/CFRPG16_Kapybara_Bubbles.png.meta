@@ -1,0 +1,787 @@
+fileFormatVersion: 2
+guid: 295adac62b967c0408943d835db444e5
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295726
+  packageName: Cute Fantasy RPG - 16x16 top down pixel art asset pack
+  packageVersion: 1.0
+  assetPath: Assets/Kenmi/Cute Fantasy RPG - 16x16 top down pixel art asset pack/Sprites/Animals/Kapybara/Kapybara_Bubbles.png
+  uploadId: 694123
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 675a0a7317d2d2045bd69b38ec89dff0
+      internalID: -1259214800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8aed66fd054c00479766f501aa65322
+      internalID: -221143325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 029fdab845852e0459db581b88dc1c70
+      internalID: 1437651765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac56c004146fd0c4690df4007fd2c841
+      internalID: -1638484470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a53e90a0bad5b3a4e96789b1327ed811
+      internalID: 105359644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d81a171ba80f2e14f872a0e0e52be55a
+      internalID: 508712566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a706437c057fa9844a365999acd76e0b
+      internalID: 36904460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 970817cd3d4fb80468226e45455937dd
+      internalID: 790137932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6af4c0832984724f8c2377120bd7f92
+      internalID: 2803253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b902338058ccce4298bd6e6a6681e6b
+      internalID: -1979200637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2062f62c6c750947a2ed91a537d9207
+      internalID: 891151272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_11
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f746a6e173f68e4d9c8be1985961452
+      internalID: -791968316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_12
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: beb36eb23acd271438c440bbc29f28a4
+      internalID: 1595724287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_13
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3845da97498b0e9478674f5c235ad236
+      internalID: 545854434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_14
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4c021c018004024d81c5f022e5034f2
+      internalID: -484094007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_15
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cfc0bc0e15da4c4bb11a321e26abda3
+      internalID: -1267115862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_16
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81325bfe28690b54cbe9f63099087f0d
+      internalID: -645882897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_17
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e25c6664cc427b346907d7bc87231731
+      internalID: 172951820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_18
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4f2cdf7838e074439c62b16bd3c4444
+      internalID: 1518737146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_19
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ef3b6ebf8f218043814488cfab3b2ec
+      internalID: 116130624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_20
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac3bed48fd3d6bb4f8bc75484c3613c0
+      internalID: 1365146042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_21
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2272bcc0fadd3d4cbe570d94dcf69a5
+      internalID: 1658169719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_22
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b64f8947f74f60441ba4d7f97dcabe64
+      internalID: 849775162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_23
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 377411aca0341194786d2d1a9a263d22
+      internalID: -1779002353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Aquabara_Walk_Default_Side_24
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74b630d69e462344fab0591363680bb2
+      internalID: -1536997353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      CFRPG16_Aquabara_Walk_Default_Side_0: -1259214800
+      CFRPG16_Aquabara_Walk_Default_Side_1: -221143325
+      CFRPG16_Aquabara_Walk_Default_Side_10: 891151272
+      CFRPG16_Aquabara_Walk_Default_Side_11: -791968316
+      CFRPG16_Aquabara_Walk_Default_Side_12: 1595724287
+      CFRPG16_Aquabara_Walk_Default_Side_13: 545854434
+      CFRPG16_Aquabara_Walk_Default_Side_14: -484094007
+      CFRPG16_Aquabara_Walk_Default_Side_15: -1267115862
+      CFRPG16_Aquabara_Walk_Default_Side_16: -645882897
+      CFRPG16_Aquabara_Walk_Default_Side_17: 172951820
+      CFRPG16_Aquabara_Walk_Default_Side_18: 1518737146
+      CFRPG16_Aquabara_Walk_Default_Side_19: 116130624
+      CFRPG16_Aquabara_Walk_Default_Side_2: 1437651765
+      CFRPG16_Aquabara_Walk_Default_Side_20: 1365146042
+      CFRPG16_Aquabara_Walk_Default_Side_21: 1658169719
+      CFRPG16_Aquabara_Walk_Default_Side_22: 849775162
+      CFRPG16_Aquabara_Walk_Default_Side_23: -1779002353
+      CFRPG16_Aquabara_Walk_Default_Side_24: -1536997353
+      CFRPG16_Aquabara_Walk_Default_Side_3: -1638484470
+      CFRPG16_Aquabara_Walk_Default_Side_4: 105359644
+      CFRPG16_Aquabara_Walk_Default_Side_5: 508712566
+      CFRPG16_Aquabara_Walk_Default_Side_6: 36904460
+      CFRPG16_Aquabara_Walk_Default_Side_7: 790137932
+      CFRPG16_Aquabara_Walk_Default_Side_8: 2803253
+      CFRPG16_Aquabara_Walk_Default_Side_9: -1979200637
+      Kapybara_Bubbles_0: 1926332418
+      Kapybara_Bubbles_1: 2103475692
+      Kapybara_Bubbles_10: -1503018091
+      Kapybara_Bubbles_11: 807066237
+      Kapybara_Bubbles_12: -1934276440
+      Kapybara_Bubbles_13: 1028030094
+      Kapybara_Bubbles_14: -1886679253
+      Kapybara_Bubbles_15: -1463704262
+      Kapybara_Bubbles_16: 760648334
+      Kapybara_Bubbles_17: -1791251529
+      Kapybara_Bubbles_18: -703474479
+      Kapybara_Bubbles_19: -429926476
+      Kapybara_Bubbles_2: -1046675271
+      Kapybara_Bubbles_20: -1171234437
+      Kapybara_Bubbles_21: 909308285
+      Kapybara_Bubbles_22: 151306989
+      Kapybara_Bubbles_23: -824344949
+      Kapybara_Bubbles_24: 1245466913
+      Kapybara_Bubbles_25: 1089798275
+      Kapybara_Bubbles_26: -1711509175
+      Kapybara_Bubbles_27: 328889450
+      Kapybara_Bubbles_28: -383791181
+      Kapybara_Bubbles_29: 390424573
+      Kapybara_Bubbles_3: -1086470125
+      Kapybara_Bubbles_30: -649500477
+      Kapybara_Bubbles_31: -1759727559
+      Kapybara_Bubbles_32: 1192353663
+      Kapybara_Bubbles_33: -1265749696
+      Kapybara_Bubbles_34: -1138251113
+      Kapybara_Bubbles_35: 2133538975
+      Kapybara_Bubbles_36: -390990399
+      Kapybara_Bubbles_37: 319318796
+      Kapybara_Bubbles_38: 2033009001
+      Kapybara_Bubbles_39: 985152088
+      Kapybara_Bubbles_4: -626524530
+      Kapybara_Bubbles_40: -1909588853
+      Kapybara_Bubbles_41: 817259723
+      Kapybara_Bubbles_42: -962163453
+      Kapybara_Bubbles_43: -88905427
+      Kapybara_Bubbles_44: -1948617939
+      Kapybara_Bubbles_45: -89956372
+      Kapybara_Bubbles_46: -2143185467
+      Kapybara_Bubbles_47: 1195874278
+      Kapybara_Bubbles_48: 2042398907
+      Kapybara_Bubbles_49: 1108385159
+      Kapybara_Bubbles_5: -1034292716
+      Kapybara_Bubbles_51: 1920903263
+      Kapybara_Bubbles_53: -266420882
+      Kapybara_Bubbles_55: 161650783
+      Kapybara_Bubbles_57: 1176047437
+      Kapybara_Bubbles_59: 1730421090
+      Kapybara_Bubbles_6: -1375220482
+      Kapybara_Bubbles_61: 1118088124
+      Kapybara_Bubbles_63: -766027476
+      Kapybara_Bubbles_65: 21183296
+      Kapybara_Bubbles_67: -1756828303
+      Kapybara_Bubbles_69: 1754523813
+      Kapybara_Bubbles_7: 1144920892
+      Kapybara_Bubbles_71: -41000665
+      Kapybara_Bubbles_73: 1064772279
+      Kapybara_Bubbles_75: 1466988654
+      Kapybara_Bubbles_77: -1633722191
+      Kapybara_Bubbles_79: 2008296526
+      Kapybara_Bubbles_8: -512216590
+      Kapybara_Bubbles_81: -195584506
+      Kapybara_Bubbles_83: 792592734
+      Kapybara_Bubbles_85: -635336093
+      Kapybara_Bubbles_87: -571080332
+      Kapybara_Bubbles_89: -535375843
+      Kapybara_Bubbles_9: 416136087
+      Kapybara_Bubbles_91: 772006337
+      Kapybara_Bubbles_93: 766233820
+      Kapybara_Bubbles_95: -1489308412
+      Kapybara_Bubbles_97: -319511993
+      Kapybara_Bubbles_99: -994598886
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
