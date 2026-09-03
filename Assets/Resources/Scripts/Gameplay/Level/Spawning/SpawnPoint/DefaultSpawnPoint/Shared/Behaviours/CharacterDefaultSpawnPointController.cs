@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterDefaultSpawnPointController : CharacterSpawnPointController
+    public abstract class CharacterDefaultSpawnPointController : CharacterSpawnPointController
     {
         public CharacterDefaultSpawnPointProfile DefaultSpawnPointProfile => this.Profile as CharacterDefaultSpawnPointProfile;
 
@@ -13,7 +13,7 @@ namespace FlameOfTheLost
 
             if (this.Profile != null && this.DefaultSpawnPointProfile == null)
             {
-                UnityEngine.Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterDefaultSpawnPointController)}] requires its Profile to be a {nameof(CharacterDefaultSpawnPointProfile)}.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterDefaultSpawnPointController)}] requires its Profile to be a {nameof(CharacterDefaultSpawnPointProfile)}.", this);
             }
         }
     }

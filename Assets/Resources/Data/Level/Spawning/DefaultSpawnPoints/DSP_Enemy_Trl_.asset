@@ -9,24 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a69b10b99b32ad44bb5a04b88194d746, type: 3}
-  m_Name: DSP_Generic_Enemy_GreenvaleFeralshroomDen
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterDefaultSpawnPointProfile
-  _id: 22001
-  _key: GREENVALE_FERALSHROOM_DEN
-  _displayName: Greenvale Feralshroom Den
+  m_Script: {fileID: 11500000, guid: f3a28473c8bfa05409ff34fb4c2f1378, type: 3}
+  m_Name: DSP_Enemy_Trl_
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyDefaultSpawnPointProfile
+  _id: 22002
+  _key: 
+  _displayName: 
   _description: 
   _icon: {fileID: 0}
   _configureInitialTransformAtStart: 1
-  _initialPosition: {x: 5, y: 19, z: 0}
+  _initialPosition: {x: 0, y: 0, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
   _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
   _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
   _initialVisualLocalScale: {x: 1, y: 1, z: 1}
   _configureIconAtStart: 0
-  _defaultFacing: 1
+  _defaultFacing: 0
   _configureSpawnAnchorTransformAtStart: 1
   _initialSpawnAnchorLocalPosition: {x: 0, y: 0, z: 0}
   _initialSpawnAnchorLocalEulerAngles: {x: 0, y: 0, z: 0}
   _initialSpawnAnchorLocalScale: {x: 1, y: 1, z: 1}
+  _enemySpawnEntries: []

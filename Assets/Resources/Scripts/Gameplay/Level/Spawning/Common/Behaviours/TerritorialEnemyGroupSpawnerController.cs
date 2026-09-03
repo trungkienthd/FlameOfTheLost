@@ -4,11 +4,17 @@ namespace FlameOfTheLost
 {
     public class TerritorialEnemyGroupSpawnerController : EnemyGroupSpawnerController<TerritorialEnemySpawnEntry>
     {
-        protected override void ConfigureSpawnedEnemy(GameObject spawnedEnemy, TerritorialEnemySpawnEntry spawnEntry)
+        protected override void ConfigureSpawnedEnemy(GameObject spawnedEnemy, EnemyDefaultSpawnPointController spawnPoint, TerritorialEnemySpawnEntry spawnEntry)
         {
-            base.ConfigureSpawnedEnemy(spawnedEnemy, spawnEntry);
+            base.ConfigureSpawnedEnemy(spawnedEnemy, spawnPoint, spawnEntry);
 
             if (spawnedEnemy == null) return;
+
+            if (spawnPoint is not TerritorialEnemyDefaultSpawnPointController)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(TerritorialEnemyGroupSpawnerController)}] Spawn point is not a {nameof(TerritorialEnemyDefaultSpawnPointController)}.", this);
+                return;
+            }
 
             if (spawnEntry == null)
             {

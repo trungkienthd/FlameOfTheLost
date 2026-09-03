@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7590202456247389573}
-  - component: {fileID: 4077684651782746106}
+  - component: {fileID: 932458012224459112}
   m_Layer: 0
   m_Name: Prefab_DSP_Generic
   m_TagString: Untagged
@@ -65,7 +65,7 @@ Transform:
   - {fileID: 4638977974553220024}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4077684651782746106
+--- !u!114 &932458012224459112
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,9 +74,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8318813901453419445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9f43f4acc76243469f57703d846aa93, type: 3}
+  m_Script: {fileID: 11500000, guid: 026a14b5159fe444898325b49bfcee33, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterDefaultSpawnPointController
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyDefaultSpawnPointController
   _enableDebugLogs: 0
   _profile: {fileID: 0}
   _visualTransform: {fileID: 4638977974553220024}

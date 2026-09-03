@@ -6,16 +6,39 @@ namespace FlameOfTheLost
     [Serializable]
     public class TerritorialEnemySpawnEntry : EnemySpawnEntry
     {
-        [Header("Territorial AI Config")]
-        [SerializeField] private TerritorialEnemyRoamingConfig _roamingConfig;
-        [SerializeField] private TerritorialEnemyAttackConfig _attackConfig;
-        public TerritorialEnemyRoamingConfig RoamingConfig => _roamingConfig;
-        public TerritorialEnemyAttackConfig AttackConfig => _attackConfig;
+        // --- Data / Configs ---
+        //  1. Territorial Enemy Variant
+        public TerritorialEnemyVariantProfile TerritorialEnemyVariant => this.EnemyVariant as TerritorialEnemyVariantProfile;
 
-        public bool HasValidTerritorialAIConfig => this.RoamingConfig != null && this.AttackConfig != null;
-
-        [Header("Territorial Home Area")]
+        //  2. Territorial Home Area
+        [Header("Configs - Territorial Home Area")]
         [SerializeField] private TerritorialEnemyHomeAreaEntry _homeAreaEntry;
         public TerritorialEnemyHomeAreaEntry HomeAreaEntry => _homeAreaEntry;
+
+        //  3. Optional Territorial AI Overrides
+        [Header("Configs - Optional Territorial AI Overrides")]
+        [SerializeField] private TerritorialEnemyRoamingConfig _roamingConfigOverride;
+        public TerritorialEnemyRoamingConfig RoamingConfigOverride => _roamingConfigOverride;
+
+        // --- Resolved Data / Configs ---
+        public TerritorialEnemyRoamingConfig RoamingConfig => this.RoamingConfigOverride != null
+            ? this.RoamingConfigOverride
+            : this.TerritorialEnemyVariant != null ? this.TerritorialEnemyVariant.DefaultRoamingConfig : null;
+
+        public TerritorialEnemyAttackConfig AttackConfig => this.TerritorialEnemyVariant != null
+            ? this.TerritorialEnemyVariant.AttackConfig
+            : null;
+
+        // --- Public APIs ---
+        //  1. Validation
+        public bool HasValidTerritorialAIConfig =>
+            this.RoamingConfig != null &&
+            this.AttackConfig != null;
+
+        public override bool IsValid => 
+            base.IsValid && 
+            this.TerritorialEnemyVariant != null && 
+            this.HomeAreaEntry.HasValidArea() && 
+            this.HasValidTerritorialAIConfig;
     }
 }

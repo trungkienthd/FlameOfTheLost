@@ -109,14 +109,14 @@ public class TerritorialEnemyBrainController : EnemyBrainController
     {
         if (roamingConfig == null)
         {
-            Debug.LogWarning($"[{this.CharacterName}.{nameof(TerritorialEnemyBrainController)}] Missing roaming config. Loading the default roaming config.", this);
-            this.RoamingConfig = Resources.Load<TerritorialEnemyRoamingConfig>("Data/Character/AI/Territorial/Generic/AI_Enm_Trt_Roam_Generic");
+            Debug.LogError($"[{this.CharacterName}.{nameof(TerritorialEnemyBrainController)}] Missing {nameof(TerritorialEnemyRoamingConfig)}", this);
+            return;
         }
 
         if (attackConfig == null)
         {
-            Debug.LogWarning($"[{this.CharacterName}.{nameof(TerritorialEnemyBrainController)}] Missing attack config. Loading the default attack config.", this);
-            this.AttackConfig = Resources.Load<TerritorialEnemyAttackConfig>("Data/Character/AI/Territorial/Generic/AI_Enm_Trt_Attack_Generic");
+            Debug.LogError($"[{this.CharacterName}.{nameof(TerritorialEnemyBrainController)}] Missing {nameof(TerritorialEnemyAttackConfig)}.", this);
+            return;
         }
 
         if (!homeAreaEntry.HasValidArea())

@@ -7,17 +7,20 @@ namespace FlameOfTheLost
     public class EnemyGroupSpawnerController<T> : EnemyGroupSpawnerController where T : EnemySpawnEntry
     {
         // --- References ---
+        //  1. Player Spawner
         [Header("References - Player Spawner")]
         [SerializeField] private PlayerSpawnerController _playerSpawnerController;
         private PlayerSpawnerController PlayerSpawnerController => _playerSpawnerController;
 
+        //  2. Enemy Root
         [Header("References - Enemy Root")]
         [SerializeField] private Transform _enemyGroupRoot;
         protected Transform EnemyGroupRoot => _enemyGroupRoot;
 
-        [Header("References - Spawn Entries")]
-        [SerializeField] private List<T> _spawnEntries = new();
-        protected IReadOnlyList<T> EnemySpawnEntries => _spawnEntries;
+        //  3. Enemy Default Spawn Points
+        [Header("References - Enemy Default Spawn Points")]
+        [SerializeField] private List<EnemyDefaultSpawnPointController> _enemyDefaultSpawnPointControllers = new();
+        protected IReadOnlyList<EnemyDefaultSpawnPointController> EnemyDefaultSpawnPointControllers => _enemyDefaultSpawnPointControllers;
 
         // --- Configs ---
         [Header("Settings")]
@@ -27,13 +30,16 @@ namespace FlameOfTheLost
         private bool IsRespawnedEnemiesWhenPlayerSpawnsOrRespawns => _isRespawnedEnemiesWhenPlayerSpawnsOrRespawns;
 
         // --- Runtime ---
+        //  1. Spawned Enemies
         [Header("Runtime - Enemies (GameObject)")]
         [SerializeField] private List<GameObject> _spawnedEnemies = new();
         protected List<GameObject> SpawnedEnemies => _spawnedEnemies;
 
+        //  2. Spawned Enemies By Entry
         private readonly Dictionary<T, List<GameObject>> _spawnedEnemiesByEntry = new();
         private IReadOnlyDictionary<T, List<GameObject>> SpawnedEnemiesByEntry => _spawnedEnemiesByEntry;
 
+        //  3. External Binding State
         private bool _hasBoundExternalReferences;
         private bool HasBoundExternalReferences
         {
@@ -62,7 +68,7 @@ namespace FlameOfTheLost
         {
             spawnEntry = null;
 
-            if (!this.TryGetFirstSpawnEntryTyped(out T typedSpawnEntry)) return false;
+            if (!this.TryGetFirstSpawnEntryTyped(out _, out T typedSpawnEntry)) return false;
 
             spawnEntry = typedSpawnEntry;
             return true;
@@ -96,48 +102,90 @@ namespace FlameOfTheLost
         //  3. Enemy Spawning
         public void SpawnEnemiesOnStart()
         {
-            foreach (T spawnEntry in this.EnemySpawnEntries)
+            foreach (EnemyDefaultSpawnPointController spawnPoint in this.EnemyDefaultSpawnPointControllers)
             {
-                if (spawnEntry == null) continue;
-                if (!spawnEntry.SpawnOnStart) continue;
+                if (spawnPoint == null) continue;
 
-                this.SpawnFromEntry(spawnEntry);
+                foreach (T spawnEntry in this.GetSpawnEntries(spawnPoint))
+                {
+                    if (spawnEntry == null) continue;
+                    if (!spawnEntry.SpawnOnStart) continue;
+
+                    this.SpawnFromEntry(spawnPoint, spawnEntry);
+                }
             }
         }
         public void SpawnEnemiesAfterPlayerRespawn()
         {
             // this.ClearSpawnedEnemies();
 
-            foreach (T spawnEntry in this.EnemySpawnEntries)
+            foreach (EnemyDefaultSpawnPointController spawnPoint in this.EnemyDefaultSpawnPointControllers)
             {
-                if (spawnEntry == null) continue;
-                if (!spawnEntry.SpawnWhenPlayerRespawns) continue;
+                foreach (T spawnEntry in this.GetSpawnEntries(spawnPoint))
+                {
+                    if (spawnEntry == null) continue;
+                    if (!spawnEntry.SpawnWhenPlayerRespawns) continue;
 
-                this.SpawnFromEntry(spawnEntry);
+                    this.SpawnFromEntry(spawnPoint, spawnEntry);
+                }
             }
         }
 
         // --- Helpers ---
         //  1. Spawn Entry Queries
-        protected bool TryGetFirstSpawnEntryTyped(out T spawnEntry)
+        protected bool TryGetFirstSpawnEntryTyped(out EnemyDefaultSpawnPointController spawnPoint, out T spawnEntry)
         {
+            spawnPoint = null;
             spawnEntry = null;
 
-            if (this.EnemySpawnEntries == null) return false;
-            if (this.EnemySpawnEntries.Count <= 0) return false;
+            if (this.EnemyDefaultSpawnPointControllers == null) return false;
 
-            T firstEntry = this.EnemySpawnEntries[0];
+            for (int spawnPointIndex = 0; spawnPointIndex < this.EnemyDefaultSpawnPointControllers.Count; spawnPointIndex++)
+            {
+                EnemyDefaultSpawnPointController candidateSpawnPoint = this.EnemyDefaultSpawnPointControllers[spawnPointIndex];
 
-            if (firstEntry == null) return false;
-            if (!firstEntry.IsValid) return false;
+                if (candidateSpawnPoint == null) continue;
 
-            spawnEntry = firstEntry;
+                foreach (T candidateSpawnEntry in this.GetSpawnEntries(candidateSpawnPoint))
+                {
+                    if (candidateSpawnEntry == null) continue;
+                    if (!candidateSpawnEntry.IsValid) continue;
+
+                    spawnPoint = candidateSpawnPoint;
+                    spawnEntry = candidateSpawnEntry;
+
+                    return true;
+                }
+            }
+
             return true;
         }
 
-        //  2. Spawning
-        protected virtual void SpawnFromEntry(T spawnEntry)
+        protected IEnumerable<T> GetSpawnEntries(EnemyDefaultSpawnPointController spawnPoint)
         {
+            if (spawnPoint == null) yield break;
+            if (spawnPoint.EnemySpawnEntries == null) yield break;
+
+            IReadOnlyList<EnemySpawnEntry> enemySpawnEntries = spawnPoint.EnemySpawnEntries;
+
+            for (int i = 0; i < enemySpawnEntries.Count; i++)
+            {
+                EnemySpawnEntry enemySpawnEntry = enemySpawnEntries[i];
+
+                if (enemySpawnEntry is not T typedSpawnEntry) continue;
+
+                yield return typedSpawnEntry;
+            }
+        }
+
+        //  2. Spawning
+        protected virtual void SpawnFromEntry(EnemyDefaultSpawnPointController spawnPoint, T spawnEntry)
+        {
+            if (spawnPoint == null)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(EnemyGroupSpawnerController<T>)}] Enemy default spawn point is null.", this);
+                return;
+            }
             if (spawnEntry == null || !spawnEntry.IsValid)
             {
                 Debug.LogWarning($"[{this.gameObject.name}.{nameof(EnemyGroupSpawnerController<T>)}] Invalid enemy spawn entry.", this);
@@ -153,39 +201,48 @@ namespace FlameOfTheLost
 
             for (int i = 0; i < remainingSpawnCount; i++)
             {
-                this.SpawnSingleEnemy(spawnEntry);
+                this.SpawnSingleEnemy(spawnPoint, spawnEntry);
             }
         }
-        protected virtual GameObject SpawnSingleEnemy(T spawnEntry)
+        protected virtual GameObject SpawnSingleEnemy(EnemyDefaultSpawnPointController spawnPoint, T spawnEntry)
         {
-            GameObject spawnedEnemy = UnityEngine.Object.Instantiate(spawnEntry.EnemyPrefab, this.EnemyGroupRoot);
+            if (spawnPoint == null) return null;
+            if (spawnEntry == null) return null;
+
+            EnemyVariantProfile enemyVariant = spawnEntry.EnemyVariant;
+
+            if (enemyVariant == null) return null;
+            if (enemyVariant.EnemyPrefab == null) return null;
+
+            GameObject spawnedEnemy = UnityEngine.Object.Instantiate(enemyVariant.EnemyPrefab, this.EnemyGroupRoot);
 
             if (spawnedEnemy == null) return null;
 
             this.RegisterSpawnedEnemy(spawnEntry, spawnedEnemy);
 
-            this.ConfigureSpawnedEnemy(spawnedEnemy, spawnEntry);
+            this.ConfigureSpawnedEnemy(spawnedEnemy, spawnPoint, spawnEntry);
 
             CharacterRefreshHandler enemyRefreshHandler = spawnedEnemy.GetComponentInChildren<CharacterRefreshHandler>(true);
             if (enemyRefreshHandler == null)
             {
                 Debug.LogWarning($"[{spawnedEnemy.name}.{nameof(EnemyGroupSpawnerController<T>)}] Spawned enemy has no {nameof(CharacterRefreshHandler)}.", spawnedEnemy);
 
-                this.NotifyEnemySpawned(spawnEntry, spawnedEnemy);
+                this.NotifyEnemySpawned(spawnPoint, spawnEntry, spawnedEnemy);
 
                 return spawnedEnemy;
             }
 
-            CharacterRefreshTarget spawnResult = spawnEntry.ResolveSpawnResult();
+            CharacterRefreshTarget spawnResult = spawnEntry.ResolveSpawnResult(spawnPoint);
             enemyRefreshHandler.Refresh(spawnResult, CharacterRefreshOrigin.DefaultSpawnPoint);
 
-            this.NotifyEnemySpawned(spawnEntry, spawnedEnemy);
+            this.NotifyEnemySpawned(spawnPoint, spawnEntry, spawnedEnemy);
 
             return spawnedEnemy;
         }
-        protected virtual void ConfigureSpawnedEnemy(GameObject spawnedEnemy, T spawnEntry)
+        protected virtual void ConfigureSpawnedEnemy(GameObject spawnedEnemy, EnemyDefaultSpawnPointController spawnPoint, T spawnEntry)
         {
             if (spawnedEnemy == null) return;
+            if (spawnPoint == null) return;
             if (spawnEntry == null) return;
 
             this.ConfigureSpawnedEnemyInventory(spawnedEnemy, spawnEntry);
@@ -206,10 +263,15 @@ namespace FlameOfTheLost
                 return;
             }
 
-            inventoryController.InitializeInventoryEntries(spawnEntry.InitialInventoryEntries);
+            EnemyVariantProfile enemyVariant = spawnEntry.EnemyVariant;
+
+            if (enemyVariant == null) return;
+
+            inventoryController.InitializeInventoryEntries(enemyVariant.InitialInventoryEntries);
         }
-        private void NotifyEnemySpawned(T spawnEntry, GameObject spawnedEnemy)
+        private void NotifyEnemySpawned(EnemyDefaultSpawnPointController spawnPoint, T spawnEntry, GameObject spawnedEnemy)
         {
+            if (spawnPoint == null) return;
             if (spawnEntry == null) return;
             if (spawnedEnemy == null) return;
 
@@ -220,7 +282,7 @@ namespace FlameOfTheLost
                 return;
             }
 
-            this.TypedEnemySpawned?.Invoke(new EnemySpawnedContext<T>(spawnEntry, character));
+            this.TypedEnemySpawned?.Invoke(new EnemySpawnedContext<T>(spawnPoint, spawnEntry, character));
 
             this.NotifyEnemySpawnedBase(spawnEntry, character);
         }
