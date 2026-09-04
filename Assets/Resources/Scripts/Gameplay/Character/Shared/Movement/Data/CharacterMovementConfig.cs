@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [CreateAssetMenu(fileName = "Mm_New", menuName = "Data/FlameOfTheLost/Character/Shared/Movement/MovementConfig")]
-    public class CharacterMovementConfig : ScriptableObject
+    public class CharacterMovementConfig : CharacterDataAsset
     {
         [Header("Movement")]
         [SerializeField, Min(0f)] private float _movementSpeed = 6f;

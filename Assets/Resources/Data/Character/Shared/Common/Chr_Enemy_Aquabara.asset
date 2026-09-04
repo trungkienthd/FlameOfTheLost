@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3e8f60b018cd24288e5f0249df6b28, type: 3}
+  m_Name: Chr_Enemy_Aquabara
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyCharacterProfile
+  _id: 10301
+  _key: AQUABARA
+  _displayName: Aquabara
+  _description: 
+  _icon: {fileID: 0}
+  _characterType: 3
+  _faction: 2
+  _traversalType: 2
+  _movementConfig: {fileID: 11400000, guid: f9cdbf1c8b9c309498a5be3644112c80, type: 2}
+  _visualConfig: {fileID: 11400000, guid: 7d97a1d750fd68748a7aaeb290790542, type: 2}
+  _combatConfig: {fileID: 11400000, guid: 6159b19bff3602543ab87c4564e4afa2, type: 2}
+  _statusEffectGuardConfig: {fileID: 11400000, guid: af619af4a1df1ff4b87877e5452c7a03, type: 2}
+  _progressionConfig: {fileID: 11400000, guid: 950e8014d3cc28c4280e007e1bd86e3a, type: 2}
+  _rewardDropProfile: {fileID: 11400000, guid: 7d3b181ae1249cf45bb83711eaf62c69, type: 2}

@@ -5,20 +5,31 @@ namespace FlameOfTheLost
 {
     [RequireComponent(typeof(CharacterCombatResourcesHandler))]
     [RequireComponent(typeof(CharacterCombatStatusEffectApplicationHandler))]
-    public class CharacterCombatController : CharacterBehaviourControllerBase, 
+    public class CharacterCombatController : CharacterConfiguredBehaviourBase<CharacterCombatConfig>, 
         IStatusEffectFlagConsumer,
         ICharacterRefreshable,
         ICharacterDeathDisableable
     {
-        // --- States ---
-        //  1. References
+        // --- Data / Configs ---
+        //  1. Aiming
+        public bool AimingOverridesFacing => this.Config != null ? this.Config.AimingOverridesFacing : true;
+        public bool LockFacingDuringActiveFrames => this.Config != null ? this.Config.LockFacingDuringActiveFrames : true;
+        public FacingSnapType FacingSnapType => this.Config != null ? this.Config.FacingSnapType : FacingSnapType.FourWay;
+        public bool EightWaySnap => this.Config != null ? this.Config.EightWaySnap : false;
+        public float DeadzoneRadius => this.Config != null ? this.Config.DeadzoneRadius : 0.1f;
+        public float ComboTurnAllowanceDegree => this.Config != null ? this.Config.ComboTurnAllowanceDegree : 50f;
+        public float MaxAimVectorLength => this.Config != null ? this.Config.MaxAimVectorLength : 0;
+
+        // --- References ---
+        //  1. Sub-behaviours
         private CharacterCombatLoadoutController CombatLoadoutController => this.CharacterRootController.CombatLoadoutController;
         private CharacterCombatResourcesHandler CombatResourcesHandler => this.CharacterRootController.CombatResourcesHandler;
         private CharacterCombatAimingHandler CombatAimingHandler => this.CharacterRootController.CombatAimingHandler;
         public CharacterCombatStatusEffectApplicationHandler CombatStatusEffectHandler => this.CharacterRootController.CombatStatusEffectApplicationHandler;
         private CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
-        [Header("References (Combat)")]
+        //  2. Combat
+        [Header("References - Core")]
         [SerializeField] private MeleeHitboxController _meleeHitboxController;
         [SerializeField] private Transform _rangedAnchorDown;
         [SerializeField] private Transform _rangedAnchorSide;
@@ -28,8 +39,9 @@ namespace FlameOfTheLost
         private Transform RangedAnchorSide => _rangedAnchorSide;
         private Transform RangedAnchorUp => _rangedAnchorUp;
 
-        //  2. Attack State (Runtime)
-        [Header("Runtime State (Runtime)")]
+        // --- Runtime ---
+        //  1. Attack State (Runtime)
+        [Header("Runtime - Runtime State")]
         [SerializeField] private bool _isInAttackWindow = false;
         public bool IsInAttackWindow
         {
@@ -37,8 +49,8 @@ namespace FlameOfTheLost
             private set => _isInAttackWindow = value;
         }
 
-        //  3. Status Effects Flags states
-        [Header("Status Effects Flags (Runtime)")]
+        //  2. Status Effects Flags states
+        [Header("Runtime - Status Effects Flags")]
         [SerializeField] private bool _cannotAttack;
         [SerializeField] private bool _cannotCastSpecialSkill;
         [SerializeField] private bool _ignoreAttackLock;
@@ -60,7 +72,7 @@ namespace FlameOfTheLost
         public bool IsAttackLocked => this.CannotAttack && !this.IgnoreAttackLock;
         public bool IsSpecialAttackLocked => (this.CannotAttack || this.CannotCastSpecialSkill) && !this.IgnoreAttackLock;
 
-        //  4. Last caching states
+        //  3. Last caching states
         private AttackSide _lastAttackSide;
         public AttackSide LastAttackSide
         {
@@ -89,7 +101,7 @@ namespace FlameOfTheLost
             set => _activeRuntimeProjectileCostRecord = value;
         }
 
-        //  5. Attack Coroutine
+        //  4. Attack Coroutine
         private Coroutine _attackRoutine;
         private Coroutine AttackRoutine
         {
@@ -97,8 +109,8 @@ namespace FlameOfTheLost
             set => _attackRoutine = value;
         }
 
-        //  6. Death Disable State (Runtime)
-        [Header("Death Disable (Runtime)")]
+        //  5. Death Disable State (Runtime)
+        [Header("Runtime - Death Disable")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
         {
@@ -114,7 +126,7 @@ namespace FlameOfTheLost
 
             if (this.IsAttackLocked)
             {
-                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(TryDoNormalAttack)}: Attack is locked.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(this.TryDoNormalAttack)}: Attack is locked.");
                 return false;
             }
 
@@ -137,7 +149,7 @@ namespace FlameOfTheLost
 
             if (this.IsSpecialAttackLocked)
             {
-                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(TryDoSpecialAttack)}: Special attack is locked.");
+                Debug.Log($"[{this.CharacterName}.{nameof(CharacterCombatController)}] {nameof(this.TryDoSpecialAttack)}: Special attack is locked.");
                 return false;
             }
 
@@ -392,7 +404,7 @@ namespace FlameOfTheLost
 
             WeaponProfile weapon = this.CombatLoadoutController.ActiveEquippedRuntimeWeapon?.Profile;
 
-            CharacterType characterType = this.CharacterRootController.IdentityController.CharacterType;
+            CharacterType characterType = this.CharacterRootController.CharacterType;
 
             // Build runtime skill
             RuntimeSkill runtimeSkill = new RuntimeSkill
@@ -407,7 +419,7 @@ namespace FlameOfTheLost
 
             if (runtimeSkill.AttackAnimationClipHitboxSetProfile == null)
             {
-                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterCombatController)}] Missing CombatAnimationClipHitboxSetProfile for SkillID={runtimeSkill.SkillID} ('{skill.name}'), Tag={characterType}.", this);
+                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterCombatController)}] Missing {nameof(CharacterAttackAnimationClipHitboxSetProfile)} for SkillID={runtimeSkill.SkillID} ('{skill.name}'), Tag={characterType}.", this);
                 return false;
             }
 
@@ -576,7 +588,7 @@ namespace FlameOfTheLost
                 DamageAmount = meleeSkill.DamageAmount,
                 KnockbackForce = meleeSkill.KnockbackForce,
                 AttackOrigin = this.transform,
-                SourceFaction = this.CharacterRootController.IdentityController.Faction
+                SourceFaction = this.CharacterRootController.Faction
             };
 
             this.MeleeHitboxController.EnableHitbox(meleeHitboxDamagePayload, this.LastAttackSide);
@@ -692,7 +704,7 @@ namespace FlameOfTheLost
                     DamageAmount = rangedSkill.DamageAmount,
                     KnockbackForce = rangedSkill.KnockbackForce,
                     AttackOrigin = this.transform,
-                    SourceFaction = this.CharacterRootController.IdentityController.Faction
+                    SourceFaction = this.CharacterRootController.Faction
                 };
 
                 projectileHitbox.EnableHitbox(projectileHitboxDamagePayload, this.LastAttackSide);

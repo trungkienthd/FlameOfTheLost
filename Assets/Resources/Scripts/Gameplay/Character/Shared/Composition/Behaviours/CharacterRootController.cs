@@ -4,11 +4,29 @@ namespace FlameOfTheLost
 {
     public abstract class CharacterRootController : FOTLMonoBehaviour
     {
-        public GameObject CharacterRoot => this.gameObject;
+        // --- Data / Configs ---
+        [Header("Data")]
+        [SerializeField] private CharacterProfile _profile;
+        public CharacterProfile Profile => _profile;
 
-        [Header("References - Identity")]
-        [SerializeField] private CharacterIdentityController _identityController;
-        public CharacterIdentityController IdentityController => _identityController;
+        public int Id               => this.Profile != null ? this.Profile.Id           : 0;
+        public string Key           => this.Profile != null ? this.Profile.Key          : string.Empty;
+        public string DisplayName   => this.Profile != null ? this.Profile.DisplayName  : string.Empty;
+        public Sprite Icon          => this.Profile != null ? this.Profile.Icon         : null;
+
+        public CharacterType CharacterType => this.Profile != null
+            ? this.Profile.CharacterType
+            : CharacterType.Default;
+
+        public CharacterFaction Faction => this.Profile != null
+            ? this.Profile.Faction
+            : default;
+
+        public CharacterTraversalType TraversalType => this.Profile != null
+            ? this.Profile.TraversalType
+            : default;
+
+        public GameObject CharacterRoot => this.gameObject;
 
         [Header("References - Body")]
         [SerializeField] private Rigidbody2D _rigidbody2D;
@@ -109,11 +127,20 @@ namespace FlameOfTheLost
         [SerializeField] private InventoryController _inventoryController;
         public InventoryController InventoryController => _inventoryController;
 
+        private void CacheCharacterConfigs()
+        {
+            if (this.Profile == null) return;
+
+            this.MovementHandler?.CacheConfigIfNull(this.Profile.MovementConfig);
+            this.VisualController?.CacheConfigIfNull(this.Profile.VisualConfig);
+            this.CombatController?.CacheConfigIfNull(this.Profile.CombatConfig);
+            this.StatusEffectController?.CacheConfigIfNull(this.Profile.StatusEffectGuardConfig);
+            this.ProgressionController?.CacheConfigIfNull(this.Profile.ProgressionConfig);
+        }
+
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
-
-            if (this.IdentityController == null) _identityController = this.GetComponentInChildren<CharacterIdentityController>(true);
 
             if (this.Rigidbody2D == null) _rigidbody2D = this.GetComponent<Rigidbody2D>();
             if (this.MainCollider2D == null) _mainCollider2D = this.GetComponent<Collider2D>();
@@ -168,6 +195,8 @@ namespace FlameOfTheLost
             if (this.RewardWalletController == null) _rewardWalletController = this.GetComponentInChildren<CharacterRewardWalletController>(true);
 
             if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>(true);
+
+            this.CacheCharacterConfigs();
         }
     }
 }

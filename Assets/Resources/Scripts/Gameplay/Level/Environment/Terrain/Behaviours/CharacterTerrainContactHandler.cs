@@ -7,7 +7,7 @@ namespace FlameOfTheLost
     {
         // --- States ---
         //  1. Traversal type
-        public CharacterTraversalType TraversalType => this.CharacterRootController.IdentityController.TraversalType;
+        public CharacterTraversalType TraversalType => this.CharacterRootController.TraversalType;
 
         //  2. References 
         [Header("References")]

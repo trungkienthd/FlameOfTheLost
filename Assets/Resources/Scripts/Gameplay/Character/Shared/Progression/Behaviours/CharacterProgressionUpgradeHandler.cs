@@ -7,22 +7,20 @@ namespace FlameOfTheLost
         ICharacterRefreshable,
         ICharacterDeathDisableable
     {
-        // --- States ---
-        //  1. Data
-        [Header("Progression Upgrade Config")]
-        [SerializeField] private CharacterProgressionUpgradeConfig _upgradeConfig;
-        public CharacterProgressionUpgradeConfig UpgradeConfig => _upgradeConfig;
+        // --- Data / Configs ---
+        public CharacterProgressionUpgradeConfig UpgradeConfig => this.ProgressionController?.ProgressionConfig?.UpgradeConfig;
 
-        //  2. References
+        // --- References ---
         private CharacterProgressionController ProgressionController => this.CharacterRootController.ProgressionController;
         private CharacterRewardWalletController RewardWalletController => this.CharacterRootController.RewardWalletController;
 
-        //  3. Runtime Dictionary
+        // --- Runtime
+        //  1. Runtime Dictionary
         private readonly Dictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeUpgradeCostEntry> _upgradeCostMap = new();
         private IReadOnlyDictionary<CharacterProgressionAttributeType, CharacterProgressionAttributeUpgradeCostEntry> UpgradeCostMap => _upgradeCostMap;
 
-        //  4. Death Disable State (Runtime)
-        [Header("Death Disable (Runtime)")]
+        //  2. Death Disable State (Runtime)
+        [Header("Runtime - Death Disable")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
         {
@@ -67,6 +65,8 @@ namespace FlameOfTheLost
         {
             _upgradeCostMap.Clear();
 
+            if (this.UpgradeConfig == null) return;
+
             foreach (CharacterProgressionAttributeUpgradeCostEntry cost in this.UpgradeConfig.UpgradeCosts)
             {
                 if (cost == null) continue;
@@ -103,22 +103,15 @@ namespace FlameOfTheLost
             return -1;
         }
 
-        //  2. Cache and Validate References
-        protected override void CacheInternalReferences()
-        {
-            base.CacheInternalReferences();
-
-            if (this.UpgradeConfig == null)
-            {
-                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterProgressionUpgradeHandler)}] UpgradeConfig reference is not set on {this.gameObject.name}. Attempting to load default config from Resources");
-                _upgradeConfig = Resources.Load<CharacterProgressionUpgradeConfig>("Data/Character/Shared/Progression/PrgUpgrade_Generic");
-            }
-        }
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
-            if (this.UpgradeConfig == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterProgressionUpgradeHandler)}] UpgradeConfig reference is missing on {this.gameObject.name}");
+            if (this.UpgradeConfig == null)
+            {
+                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterProgressionUpgradeHandler)}] {nameof(this.UpgradeConfig)} could not be resolved from {nameof(CharacterProgressionController)}.{nameof(CharacterProgressionController.ProgressionConfig)}.", this);
+            }
         }
         protected override void InitializeInternalState()
         {

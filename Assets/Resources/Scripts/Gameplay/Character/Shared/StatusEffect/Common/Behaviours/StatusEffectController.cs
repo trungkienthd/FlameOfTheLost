@@ -8,23 +8,21 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(StatusEffectFlagHandler))]
     [RequireComponent(typeof(StatusEffectStatModifierHandler))]
     [RequireComponent(typeof(StatusEffectStatPeriodicHandler))]
-    public class StatusEffectController : CharacterBehaviourControllerBase,
+    public class StatusEffectController : CharacterConfiguredBehaviourBase<StatusEffectGuardConfig>,
         ICharacterRefreshable,
         ICharacterDeathDisableable
     {
-        // --- States ---
-        //  1. References
-        //      1.1. Guard Configuration
-        [Header("Data (SE Guard)")]
-        [SerializeField] private StatusEffectGuardConfig _guardConfig;
-        public StatusEffectGuardConfig GuardConfig => _guardConfig;
+        // --- Data / Configs ---
+        //  1. Guard Configuration
+        public StatusEffectGuardConfig GuardConfig => this.Config;
 
-        //      1.2. Component Handlers
-        private StatusEffectFlagHandler FlagHandler => this.CharacterRootController.StatusEffectFlagHandler;
+        // --- References
+        //  1. Sub-behaviours
+        private StatusEffectFlagHandler         FlagHandler         => this.CharacterRootController.StatusEffectFlagHandler;
         private StatusEffectStatModifierHandler StatModifierHandler => this.CharacterRootController.StatusEffectStatModifierHandler;
         private StatusEffectStatPeriodicHandler StatPeriodicHandler => this.CharacterRootController.StatusEffectStatPeriodicHandler;
 
-        //      1.3. VFX References
+        //  2. VFX References
         [Header("References (VFX)")]
         [SerializeField] private GameObject _statusEffectVFXInstancePrefab;
         private GameObject StatusEffectVFXInstancePrefab => _statusEffectVFXInstancePrefab;
@@ -33,8 +31,9 @@ namespace FlameOfTheLost
         private readonly Dictionary<uint, StatusEffectVFXHandler> _runtimeVFXMap = new();
         private IReadOnlyDictionary<uint, StatusEffectVFXHandler> RuntimeVFXMap => _runtimeVFXMap;
 
-        //  2. SE Lists (Runtime)
-        [Header("Runtime")]
+        // --- Runtime ---
+        //  2. SE Lists
+        [Header("Runtime - SE Instances")]
         [SerializeField] private List<RuntimeStatusEffect> _runtimeStatusEffects = new();
         public IReadOnlyList<RuntimeStatusEffect> RuntimeStatusEffects => _runtimeStatusEffects;
 
@@ -45,8 +44,8 @@ namespace FlameOfTheLost
             set => _nextRuntimeID = value;
         }
 
-        //  3. Death Disable State (Runtime)
-        [Header("Death Disable (Runtime)")]
+        //  3. Death Disable State
+        [Header("Runtime - Death Disable")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
         {

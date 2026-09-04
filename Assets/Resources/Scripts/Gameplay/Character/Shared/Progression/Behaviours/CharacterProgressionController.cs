@@ -5,30 +5,26 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterProgressionController : CharacterBehaviourControllerBase, ICharacterRefreshable
+    public class CharacterProgressionController : CharacterConfiguredBehaviourBase<CharacterProgressionConfig>, ICharacterRefreshable
     {
-        // --- States ---
-        [Header("Progression Initial Configurations")]
-        [SerializeField] private CharacterProgressionConfig _progressionConfig;
-        public CharacterProgressionConfig ProgressionConfig => _progressionConfig;
+        // --- Data / Configs ---
+        public CharacterProgressionConfig ProgressionConfig => this.Config;
 
-        [Header("Progression Attributes (Runtime)")]
+        // --- Runtime ---
+        [Header("Runtime - Progression Attributes")]
         [SerializeField] private List<RuntimeCharacterProgressionAttribute> _runtimeAttributeEntries = new();
         public IReadOnlyList<RuntimeCharacterProgressionAttribute> RuntimeAttributeEntries => _runtimeAttributeEntries;
         private IReadOnlyList<CharacterProgressionDerivedStatEntry> DerivedStatEntries
         {
             get
             {
-                if (this.ProgressionConfig == null)
-                {
-                    return Array.Empty<CharacterProgressionDerivedStatEntry>();
-                }
+                if (this.ProgressionConfig == null) return Array.Empty<CharacterProgressionDerivedStatEntry>();
 
                 return this.ProgressionConfig.DerivedStatEntries;
             }
         }
 
-        [Header("Progression Derived Stats (Runtime)")]
+        [Header("Runtime - Progression Derived Stats")]
         [SerializeField] private DerivedStatValueMap _derivedStatValueMap = new();
         private IReadOnlyDictionary<CharacterProgressionDerivedStatType, int> DerivedStatValueMap => _derivedStatValueMap;
 
@@ -47,12 +43,6 @@ namespace FlameOfTheLost
 
             this.ApplyDerivedStatsToCharacterSystems();
         }
-#if UNITY_EDITOR
-        //private void OnValidate()
-        //{
-        //    this.RemoveDuplicateAttributesInEditor();
-        //}
-#endif
 
         // --- Public APIs ---
         //  1. Getters for attributes and derived stats
@@ -120,8 +110,6 @@ namespace FlameOfTheLost
         {
             if (this.ProgressionConfig == null) return;
 
-            // Do not overwrite runtime attributes if they already exist.
-            // This keeps the system compatible with future save/load.
             if (_runtimeAttributeEntries != null && this.RuntimeAttributeEntries.Count > 0) return;
 
             _runtimeAttributeEntries = new List<RuntimeCharacterProgressionAttribute>();
@@ -179,52 +167,34 @@ namespace FlameOfTheLost
 
         private void ApplyResourceDerivedStats()
         {
-            int maxHP = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_HP);
-            int maxFP = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_FP);
-            int maxStamina = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_STAMINA);
+            int maxHP       = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_HP);
+            int maxFP       = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_FP);
+            int maxStamina  = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_STAMINA);
 
-            if (this.HPController != null && maxHP > 0) this.HPController.SetMaxValue(maxHP, true);
-            if (this.FPController != null && maxFP > 0) this.FPController.SetMaxValue(maxFP, true);
-            if (this.StaminaController != null && maxStamina > 0) this.StaminaController.SetMaxValue(maxStamina, true);
+            if (this.HPController       != null && maxHP        > 0) this.HPController.SetMaxValue(maxHP, true);
+            if (this.FPController       != null && maxFP        > 0) this.FPController.SetMaxValue(maxFP, true);
+            if (this.StaminaController  != null && maxStamina   > 0) this.StaminaController.SetMaxValue(maxStamina, true);
         }
 
         private void ApplyLoadoutDerivedStats()
         {
             if (this.CombatLoadoutController == null) return;
 
-            int maxEquippedWeapons = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_WEAPONS);
-            int maxEquippedProjectiles = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_PROJECTILES);
-            int maxEquippedConsumableItems = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_CONSUMABLE_ITEMS);
+            int maxEquippedWeapons          = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_WEAPONS);
+            int maxEquippedProjectiles      = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_PROJECTILES);
+            int maxEquippedConsumableItems  = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_EQUIPPED_CONSUMABLE_ITEMS);
 
-            if (maxEquippedWeapons > 0)
-            {
-                this.CombatLoadoutController.SetMaxEquippedWeaponsFromProgression(maxEquippedWeapons);
-            }
-            if (maxEquippedProjectiles > 0)
-            {
-                this.CombatLoadoutController.SetMaxEquippedProjectilesFromProgression(maxEquippedProjectiles);
-            }
-            if (maxEquippedConsumableItems > 0)
-            {
-                this.CombatLoadoutController.SetMaxEquippedConsumableItemsFromProgression(maxEquippedConsumableItems);
-            }
+            if (maxEquippedWeapons          > 0) this.CombatLoadoutController.SetMaxEquippedWeaponsFromProgression(maxEquippedWeapons);
+            if (maxEquippedProjectiles      > 0) this.CombatLoadoutController.SetMaxEquippedProjectilesFromProgression(maxEquippedProjectiles);
+            if (maxEquippedConsumableItems  > 0) this.CombatLoadoutController.SetMaxEquippedConsumableItemsFromProgression(maxEquippedConsumableItems);
         }
 
-        protected override void CacheInternalReferences()
-        {
-            base.CacheInternalReferences();
-
-            if (this.ProgressionConfig == null)
-            {
-                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterProgressionController)}] ProgressionConfig reference is not set on {this.gameObject.name}. Loading the default config from Resources.");
-                _progressionConfig = Resources.Load<CharacterProgressionConfig>("Data/Character/Shared/Progression/Prg_Generic");
-            }
-        }
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
-            if (this.ProgressionConfig == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterProgressionController)}] ProgressionConfig reference is missing on {this.gameObject.name}");
+            if (this.ProgressionConfig == null) Debug.LogError($"[{this.CharacterName}.{nameof(CharacterProgressionController)}] {nameof(CharacterProgressionConfig)} reference is missing on {this.gameObject.name}");
         }
         protected override void InitializeInternalState()
         {
@@ -233,28 +203,5 @@ namespace FlameOfTheLost
             this.InitializeRuntimeAttributesFromConfig();
             this.RecalculateDerivedStats();
         }
-
-#if UNITY_EDITOR
-        private void RemoveDuplicateAttributesInEditor()
-        {
-            if (_runtimeAttributeEntries == null) return;
-
-            HashSet<CharacterProgressionAttributeType> seen = new();
-
-            for (int i = this.RuntimeAttributeEntries.Count - 1; i >= 0; i--)
-            {
-                RuntimeCharacterProgressionAttribute entry = this.RuntimeAttributeEntries[i];
-                if (entry == null) continue;
-
-                if (seen.Contains(entry.AttributeType))
-                {
-                    _runtimeAttributeEntries.RemoveAt(i);
-                    continue;
-                }
-
-                seen.Add(entry.AttributeType);
-            }
-        }
-#endif
     }
 }

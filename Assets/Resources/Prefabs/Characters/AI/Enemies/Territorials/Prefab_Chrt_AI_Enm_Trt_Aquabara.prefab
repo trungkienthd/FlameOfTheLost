@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAttackController
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
+  _config: {fileID: 11400000, guid: 6159b19bff3602543ab87c4564e4afa2, type: 2}
   _meleeHitboxController: {fileID: 8542149623896850353}
   _rangedAnchorDown: {fileID: 6625062345588324113}
   _rangedAnchorSide: {fileID: 2089500968514906558}
@@ -342,53 +343,6 @@ MonoBehaviour:
   _characterRootController: {fileID: 2842159701441206635}
   _animator: {fileID: 3827105656323725561}
   _gainColor: {r: 1, g: 0.95, b: 0.75, a: 1}
---- !u!1 &931903858982738187
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3325076277422082342}
-  - component: {fileID: 2597100693888985049}
-  m_Layer: 9
-  m_Name: Identity
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3325076277422082342
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931903858982738187}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3031436592083108686}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2597100693888985049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931903858982738187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eaffaf94557d8e449c131f0baf56405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterIdentityController
-  _enableDebugLogs: 0
-  _characterRootController: {fileID: 2842159701441206635}
-  _identityProfile: {fileID: 11400000, guid: 0b2f477def594b24386b23495f090361, type: 2}
 --- !u!1 &1062086117060977983
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,7 +545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.StatusEffectController
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
-  _guardConfig: {fileID: 11400000, guid: af619af4a1df1ff4b87877e5452c7a03, type: 2}
+  _config: {fileID: 11400000, guid: af619af4a1df1ff4b87877e5452c7a03, type: 2}
   _statusEffectVFXInstancePrefab: {fileID: 8740500497781535910, guid: 89762261fcc319e49b11d0bfb94586a9, type: 3}
   _isDeathDisabled: 0
 --- !u!114 &5253677374941476452
@@ -943,7 +897,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3325076277422082342}
   - {fileID: 716256476128090928}
   - {fileID: 396655490343399122}
   - {fileID: 3708891282677836897}
@@ -970,7 +923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyRootController
   _enableDebugLogs: 0
-  _identityController: {fileID: 2597100693888985049}
+  _profile: {fileID: 11400000, guid: f81522b5ec002f04a9e38033d80b0e30, type: 2}
   _rigidbody2D: {fileID: 2414209636888704389}
   _mainCollider2D: {fileID: 5625700115418001106}
   _refreshHandler: {fileID: 4942635812869224109}
@@ -1103,9 +1056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
-  _movementSpeed: 2.5
-  _accel: 20
-  _decel: 30
+  _config: {fileID: 11400000, guid: f9cdbf1c8b9c309498a5be3644112c80, type: 2}
   _cannotMove: 0
   _ignoreMovementLock: 0
   _movementSpeedScale: 1
@@ -1709,6 +1660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
+  _config: {fileID: 11400000, guid: 7d97a1d750fd68748a7aaeb290790542, type: 2}
   _spriteRenderer: {fileID: 7600048867351805657}
   _animator: {fileID: 4076434700467451151}
   _characterFlipGroup: {fileID: 396655490343399122}
@@ -1818,7 +1770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualDodgeAnimationHandler
   _enableDebugLogs: 0
   _placeholderProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
-  _activeProfile: {fileID: 0}
+  _activeProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
 --- !u!1 &3827433088564941760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2782,7 +2734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionController
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
-  _progressionConfig: {fileID: 11400000, guid: 950e8014d3cc28c4280e007e1bd86e3a, type: 2}
+  _config: {fileID: 11400000, guid: 950e8014d3cc28c4280e007e1bd86e3a, type: 2}
   _runtimeAttributeEntries: []
   _derivedStatValueMap:
     _keys: 
@@ -2801,7 +2753,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionUpgradeHandler
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
-  _upgradeConfig: {fileID: 11400000, guid: ff4c70972face4742860645c5ab2826c, type: 2}
   _isDeathDisabled: 0
 --- !u!1 &6701913541024063028
 GameObject:
@@ -3060,7 +3011,6 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
   _aimingProviderBehaviour: {fileID: 8409896017933289271}
-  _aimingConfig: {fileID: 11400000, guid: 68a92cde217f9bc409bad2f76d7ff2fd, type: 2}
 --- !u!114 &1981644743018747951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3137,7 +3087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardDropProvider
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
-  _dropProfile: {fileID: 11400000, guid: 7d3b181ae1249cf45bb83711eaf62c69, type: 2}
+  _config: {fileID: 11400000, guid: 7d3b181ae1249cf45bb83711eaf62c69, type: 2}
 --- !u!1 &8944215951940931184
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,8 +29,7 @@ namespace FlameOfTheLost
 
             if (this.Profile.TriggerOnceUntilExit && this.TriggeredHPControllers.Contains(hpCtrl)) return;
 
-            CharacterIdentityController identityCtrl = characterRoot.IdentityController;
-            if (!this.CanAffectCharacter(identityCtrl)) return;
+            if (!this.CanAffectCharacter(characterRoot)) return;
 
             _triggeredHPControllers.Add(hpCtrl);
 
@@ -50,21 +49,21 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        private bool CanAffectCharacter(CharacterIdentityController identityController)
+        private bool CanAffectCharacter(CharacterRootController character)
         {
-            if (identityController == null) return false;
+            if (character == null) return false;
             if (this.Profile == null) return false;
 
             if (this.Profile.UseFactionFilter)
             {
                 if (this.Profile.AffectedFactions == null || this.Profile.AffectedFactions.Count == 0) return false;
-                if (!this.Profile.AffectedFactions.Contains(identityController.Faction)) return false;
+                if (!this.Profile.AffectedFactions.Contains(character.Faction)) return false;
             }
 
             if (this.Profile.UseTraversalTypeFilter)
             {
                 if (this.Profile.AffectedTraversalTypes == null || this.Profile.AffectedTraversalTypes.Count == 0) return false;
-                if (!this.Profile.AffectedTraversalTypes.Contains(identityController.TraversalType)) return false;
+                if (!this.Profile.AffectedTraversalTypes.Contains(character.TraversalType)) return false;
             }
 
             if (this.Profile.UseEnemyTypeFilter)

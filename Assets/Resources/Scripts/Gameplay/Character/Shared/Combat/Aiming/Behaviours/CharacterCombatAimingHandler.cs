@@ -3,9 +3,8 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     public class CharacterCombatAimingHandler : CharacterBehaviourControllerBase
-    {
-        // --- States ---
-        //  1. References
+    { 
+        // --- References ---
         [Header("References")]
         [SerializeField] private MonoBehaviour _aimingProviderBehaviour;
         private MonoBehaviour AimingProviderBehaviour => _aimingProviderBehaviour;
@@ -17,7 +16,9 @@ namespace FlameOfTheLost
             ? this.CharacterRootController.transform
             : this.transform;
 
-        //  2. Runtime State
+        private CharacterCombatController CharacterCombatController => this.CharacterRootController.CombatController;
+
+        // --- Runtime ---
         private bool _isFacingLocked = false;                 // Runtime aim/facing
         protected bool IsFacingLocked
         {
@@ -31,11 +32,6 @@ namespace FlameOfTheLost
             get => _attackSnapshotDir;
             private set => _attackSnapshotDir = value;
         }
-
-        //  3. Aiming Config
-        [Header("References (Aiming Config)")]
-        [SerializeField] private CombatAimingConfig _aimingConfig;
-        public CombatAimingConfig AimingConfig => _aimingConfig;
 
         // --- Public APIs ---
         //  1. Attack Window
@@ -141,7 +137,7 @@ namespace FlameOfTheLost
                 return false;
             }
 
-            float deadzone = this.AimingConfig != null ? this.AimingConfig.DeadzoneRadius : 0.1f;
+            float deadzone = this.CharacterCombatController != null ? this.CharacterCombatController.DeadzoneRadius : 0.1f;
             providerDirection = AimingUtility.ApplyDeadzone(providerDirection, deadzone);
 
             if (providerDirection.sqrMagnitude <= Mathf.Epsilon)
@@ -149,9 +145,9 @@ namespace FlameOfTheLost
                 return false;
             }
 
-            if (this.AimingConfig != null && this.AimingConfig.MaxAimVectorLength > 0f)
+            if (this.CharacterCombatController != null && this.CharacterCombatController.MaxAimVectorLength > 0f)
             {
-                providerDirection = AimingUtility.ClampLength(providerDirection, this.AimingConfig.MaxAimVectorLength);
+                providerDirection = AimingUtility.ClampLength(providerDirection, this.CharacterCombatController.MaxAimVectorLength);
             }
 
             aimDirection = providerDirection.normalized;
@@ -161,11 +157,11 @@ namespace FlameOfTheLost
         //  3. Apply Facing
         private void ApplyFacingFromAimDirection(Vector2 aimDirection)
         {
-            if (this.AimingConfig == null || !this.AimingConfig.AimingOverridesFacing) return;
+            if (this.CharacterCombatController == null || !this.CharacterCombatController.AimingOverridesFacing) return;
 
             if (aimDirection.sqrMagnitude <= Mathf.Epsilon) return;
 
-            Vector2 snappedDirection = AimingUtility.SnapDirection(aimDirection, this.AimingConfig.FacingSnapType);
+            Vector2 snappedDirection = AimingUtility.SnapDirection(aimDirection, this.CharacterCombatController.FacingSnapType);
 
             if (snappedDirection.sqrMagnitude <= Mathf.Epsilon) return;
 
@@ -211,6 +207,7 @@ namespace FlameOfTheLost
             }
         }
 
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
@@ -218,12 +215,6 @@ namespace FlameOfTheLost
             if (this.AimingProviderBehaviour == null)
             {
                 Debug.LogError($"[{this.CharacterName}.CharacterCombatAimingHandler] No AimingProvider assigned, aiming will not work!", this);
-            }
-
-            if (this.AimingConfig == null)
-            {
-                Debug.LogWarning($"[{this.CharacterName}.CharacterCombatAimingHandler] No AimingConfig assigned, generic config will be loaded instead.");
-                _aimingConfig = Resources.Load<CombatAimingConfig>("Data/Combat/GenericCombatAimingConfig");
             }
         }
     }

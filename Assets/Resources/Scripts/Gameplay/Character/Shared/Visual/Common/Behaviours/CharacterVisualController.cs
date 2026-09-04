@@ -9,12 +9,12 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(CharacterVisualLocomotionAnimationHandler))]
     [RequireComponent(typeof(CharacterVisualAttackAnimationHandler))]
     [RequireComponent(typeof(CharacterVisualHitDeathAnimationHandler))]
-    public class CharacterVisualController : CharacterBehaviourControllerBase,
+    public class CharacterVisualController : CharacterConfiguredBehaviourBase<CharacterVisualConfig>,
         IFacingProvider,
         ICharacterRefreshable
     {
-        // --- States ---
-        //  1. References
+        // --- References ---
+        //  1. Core
         [Header("References (Core)")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private Animator _animator;
@@ -23,18 +23,21 @@ namespace FlameOfTheLost
         public Animator Animator => _animator;
         public Transform CharacterFlipGroup => _characterFlipGroup;
 
+        //  2. Sub-behaviours
         private CharacterVisualFacingHandler FacingHandler => this.CharacterRootController.VisualFacingHandler;
         private CharacterVisualLocomotionAnimationHandler LocomotionAnimationHandler => this.CharacterRootController.VisualLocomotionAnimationHandler;
         private CharacterVisualAttackAnimationHandler AttackAnimationHandler => this.CharacterRootController.VisualAttackAnimationHandler;
         private CharacterVisualHitDeathAnimationHandler HitDeathAnimationHandler => this.CharacterRootController.VisualHitDeathAnimationHandler;
         private CharacterVisualDodgeAnimationHandler DodgeAnimationHandler => this.CharacterRootController.VisualDodgeAnimationHandler;
 
-        //  2. Color configuration
+        // --- Data & Configs ---
+        //  1. Color configuration
         [Header("Visual Color")]
         [SerializeField] private Color _normalColor = Color.white;
         public Color NormalColor => _normalColor;
 
-        //  3. Animation Controller
+        // --- Runtime ---
+        //  1. Animation Controller
         private RuntimeAnimatorController _baseAnimationController;
         private RuntimeAnimatorController BaseAnimationController => _baseAnimationController;
 
@@ -45,7 +48,8 @@ namespace FlameOfTheLost
             private set => _runtimeOverrideController = value;
         }
 
-        //  4. Animator Parameter IDs
+        // --- Statics ---
+        //  1. Animator Parameter IDs
         public static readonly int SpeedID = Animator.StringToHash("Speed");
         public static readonly int DirXID = Animator.StringToHash("DirX");
         public static readonly int DirYID = Animator.StringToHash("DirY");

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class MovementHandler : CharacterBehaviourControllerBase, 
+    public class MovementHandler : CharacterConfiguredBehaviourBase<CharacterMovementConfig>, 
         IStatusEffectFlagConsumer, 
         IStatusEffectStatModifierMultiplierConsumer,
         ICharacterRefreshable,
@@ -14,15 +14,14 @@ namespace FlameOfTheLost
         public CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
         // --- Data / Config ---
-        [Header("Config")]
-        [SerializeField] private CharacterMovementConfig _movementConfig;
-        public CharacterMovementConfig MovementConfig => _movementConfig;
+        public CharacterMovementConfig MovementConfig => this.Config;
         private float MovementSpeed => this.MovementConfig.MovementSpeed;
         private float Accel => this.MovementConfig.Accel;
         private float Decel => this.MovementConfig.Decel;
 
-        //  3. Status Effects states
-        [Header("Status Effects Flags (Runtime)")]
+        // --- Runtime ---
+        //  1. Status Effects states
+        [Header("Runtime - Status Effects Flags")]
         [SerializeField] private bool _cannotMove = false;
         [SerializeField] private bool _ignoreMovementLock = false;
         private bool CannotMove
@@ -37,7 +36,7 @@ namespace FlameOfTheLost
         }
         public bool MovementBlocked => this.CannotMove && !this.IgnoreMovementLock;
 
-        [Header("Status Effects Stat Modifier (Runtime)")]
+        [Header("Runtime - Status Effects Stat Modifier")]
         [SerializeField] private float _movementSpeedScale = 1f; // 1 = no change
         public float MovementSpeedScale
         {
@@ -45,7 +44,7 @@ namespace FlameOfTheLost
             private set => _movementSpeedScale = Mathf.Max(0f, value);
         }
 
-        //  4. Internal State
+        //  2. Internal State
         private Vector2 _raw;
         private Vector2 _desired;
         private Vector2 _vel;
@@ -65,8 +64,8 @@ namespace FlameOfTheLost
             set => _vel = value;
         }
 
-        //  5. Death Disable State (Runtime)
-        [Header("Death Disable (Runtime)")]
+        //  3. Death Disable State (Runtime)
+        [Header("Runtime - Death Disable")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
         {

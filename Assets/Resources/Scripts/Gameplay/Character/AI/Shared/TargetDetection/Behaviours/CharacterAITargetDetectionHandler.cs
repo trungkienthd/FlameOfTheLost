@@ -9,7 +9,7 @@ namespace FlameOfTheLost
     {
         // --- State ---
         //  1. Faction
-        private CharacterFaction Faction => this.CharacterRootController.IdentityController.Faction;
+        private CharacterFaction Faction => this.CharacterRootController.Faction;
 
         //  2. Detected Targets
         private readonly HashSet<CharacterRootController> _alertTargets = new();
@@ -130,7 +130,7 @@ namespace FlameOfTheLost
             if (target == null) return false;
             if (target == this.CharacterRootController) return false;
 
-            return CharacterAITargetValidationUtility.CanTarget(this.Faction, target.IdentityController.Faction);
+            return CharacterAITargetValidationUtility.CanTarget(this.Faction, target.Faction);
         }
     }
 }

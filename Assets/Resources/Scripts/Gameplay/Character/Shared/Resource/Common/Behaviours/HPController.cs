@@ -56,7 +56,7 @@ namespace FlameOfTheLost
         }
 
         //  4. Character Faction
-        public CharacterFaction CharacterFaction => this.CharacterRootController.IdentityController.Faction;
+        public CharacterFaction CharacterFaction => this.CharacterRootController.Faction;
 
         //  5. Status Effect Stat Periodic (Type)
         public override StatusEffectStatPeriodicTarget Target => StatusEffectStatPeriodicTarget.HP;

@@ -12,7 +12,6 @@ namespace FlameOfTheLost
         [Header("References - Player Spawner")]
         [SerializeField] private PlayerSpawnerController _playerSpawnerController;
         private PlayerSpawnerController PlayerSpawnerController => _playerSpawnerController;
-        private CharacterIdentityController IdentityController => this.CharacterRootController.IdentityController;
         private HPController HPController => this.CharacterRootController.HPController;
         private CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
@@ -141,16 +140,7 @@ namespace FlameOfTheLost
 
             CharacterDeathCauseEntry deathCause = this.LastDeathCause;
 
-            if (this.IdentityController == null)
-            {
-                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] No CharacterIdentityController found. Destroying character by fallback.", this);
-                
-                this.TryDistributeRewardAfterDeath(deathCause);
-                this.DestroyCharacter();
-                return;
-            }
-
-            switch (this.IdentityController.Faction)
+            switch (this.CharacterRootController.Faction)
             {
                 case CharacterFaction.Player:
                     this.RespawnPlayer();
@@ -206,7 +196,7 @@ namespace FlameOfTheLost
         {
             if (this.PlayerSpawnerController == null)
             {
-                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Player died, but no PlayerSpawnerController was found.", this);
+                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Player died, but no {nameof(PlayerSpawnerController)} was found.", this);
                 return;
             }
 
@@ -236,15 +226,9 @@ namespace FlameOfTheLost
         {
             base.ValidateInternalReferences();
 
-            if (this.IdentityController == null)
+            if (this.CharacterRootController is PlayerRootController && this.PlayerSpawnerController == null)
             {
-                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] No CharacterIdentityController reference found.", this);
-                return;
-            }
-
-            if (this.IdentityController.IsPlayer && this.PlayerSpawnerController == null)
-            {
-                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] No PlayerSpawnerController reference found. Player characters will not respawn on death.", this);
+                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] No {nameof(PlayerSpawnerController)} reference found. Player characters will not respawn on death.", this);
             }
         }
     }

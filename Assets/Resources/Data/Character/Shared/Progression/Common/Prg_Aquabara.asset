@@ -79,3 +79,4 @@ MonoBehaviour:
     - _attributeType: 2
       _valuePerStep: 0
       _attributePointsPerStep: 1
+  _upgradeConfig: {fileID: 11400000, guid: ff4c70972face4742860645c5ab2826c, type: 2}

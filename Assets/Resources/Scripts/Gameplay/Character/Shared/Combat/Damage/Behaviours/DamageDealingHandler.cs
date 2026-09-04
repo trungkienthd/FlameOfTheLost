@@ -192,19 +192,19 @@ namespace FlameOfTheLost
 
             if (this.OriginTransform == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(DamageDealingHandler)}] {nameof(OriginTransform)} reference is missing.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(DamageDealingHandler)}] {nameof(this.OriginTransform)} reference is missing.", this);
             }
 
             if (this.SourceCharacter == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(DamageDealingHandler)}] {nameof(SourceCharacter)} reference is missing. Source faction will stay as {this.SourceCharacterFaction}.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(DamageDealingHandler)}] {nameof(this.SourceCharacter)} reference is missing. Source faction will stay as {this.SourceCharacterFaction}.", this);
             }
         }
         protected override void InitializeInternalState()
         {
             base.InitializeInternalState();
 
-            if (this.SourceCharacter != null) this.SourceCharacterFaction = this.SourceCharacter.IdentityController.Faction;
+            if (this.SourceCharacter != null) this.SourceCharacterFaction = this.SourceCharacter.Faction;
             
             this.RecomputePayload();
         }
