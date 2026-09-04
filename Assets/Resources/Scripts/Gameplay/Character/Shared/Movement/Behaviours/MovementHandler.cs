@@ -9,19 +9,17 @@ namespace FlameOfTheLost
         ICharacterRefreshable,
         ICharacterDeathDisableable
     {
-        // --- States ---
-        //  1. References
+        // --- References ---
         public Rigidbody2D Rigidbody2D => this.CharacterRootController.Rigidbody2D;
         public CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
-        //  2. Tuning Config
-        [Header("Tuning")]
-        [SerializeField] private float _movementSpeed = 6f;
-        [SerializeField] private float _accel = 60f;
-        [SerializeField] private float _decel = 80f;
-        private float MovementSpeed => _movementSpeed;
-        private float Accel => _accel;
-        private float Decel => _decel;
+        // --- Data / Config ---
+        [Header("Config")]
+        [SerializeField] private CharacterMovementConfig _movementConfig;
+        public CharacterMovementConfig MovementConfig => _movementConfig;
+        private float MovementSpeed => this.MovementConfig.MovementSpeed;
+        private float Accel => this.MovementConfig.Accel;
+        private float Decel => this.MovementConfig.Decel;
 
         //  3. Status Effects states
         [Header("Status Effects Flags (Runtime)")]
@@ -183,6 +181,14 @@ namespace FlameOfTheLost
             }
 
             this.VisualController?.FeedMovement(Vector2.zero);
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.MovementConfig == null) Debug.LogError($"[{this.CharacterName}.{nameof(MovementHandler)}] {nameof(this.MovementConfig)} reference is not set.", this);
         }
     }
 }
