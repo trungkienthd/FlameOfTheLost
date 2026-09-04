@@ -1,7 +1,7 @@
 # Data ID Convention
 
 **Project:** FlameOfTheLost  
-**Version:** 3.4  
+**Version:** 3.5  
 **Scope:** ID attributes assigned to project-owned **ScriptableObject** assets.
 
 ---
@@ -39,11 +39,13 @@ This convention aims to:
 
 ## 3.1 Data Ownership
 
-Only project-owned **ScriptableObject** assets own IDs.
+IDs identify project-owned gameplay data definitions.
+
+For Characters specifically, the ID identifies the **Character archetype/type**, not the `CharacterProfile` asset as a separate entity. `CharacterProfile` stores and exposes the Character ID as part of the Character's fixed data.
 
 Runtime `MonoBehaviour` components do **not** own independent IDs.
 
-Runtime objects should reference their associated data asset when an ID is required.
+Runtime objects should reference their associated data definition when an ID is required.
 
 ---
 
@@ -90,9 +92,11 @@ Changing IDs may invalidate:
 
 ## 3.5 Uniqueness
 
-Each ScriptableObject asset owns exactly one ID.
+Each ID identifies exactly one gameplay data definition.
 
-IDs must never be reused by unrelated assets.
+For most data categories, that definition is represented directly by a ScriptableObject asset. For Characters, the ID identifies the Character itself and is stored by its `CharacterProfile`.
+
+IDs must never be reused by unrelated gameplay definitions.
 
 ---
 
@@ -115,7 +119,7 @@ IDs must never be reused by unrelated assets.
 ```text
 1xxxx   Character Data
 
-10xxx   Character Identity Data
+10xxx   Characters
 
 100xx   Player Characters
 101xx   Mushroom Enemies
@@ -180,14 +184,17 @@ IDs must never be reused by unrelated assets.
 
 # 6. Assignment Workflow
 
-When creating a new ScriptableObject asset:
+When creating a new ID-bearing gameplay data definition:
 
 1. Identify its gameplay system.
 2. Open the corresponding category document.
 3. Select the correct sub-range.
 4. Assign the next available ID.
 5. Verify the ID is unused.
-6. Commit the asset with the assigned ID.
+6. Store the ID in the corresponding data asset or profile.
+7. Commit the data with the assigned ID.
+
+For Characters, assign the ID to the Character definition and store it in the corresponding `CharacterProfile`.
 
 ---
 

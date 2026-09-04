@@ -6,14 +6,15 @@
 
 ## Asset Type
 
-- ScriptableObject
+- Character data represented by project-owned ScriptableObject assets.
+- The ID identifies the **Character**, not the `CharacterProfile` asset itself.
 
 ---
 
-## Profile Types
+## Data Types
 
 ```text
-10xxx   CharacterIdentityProfile
+10xxx   Characters
 110xx   CraftingRecipeProfile
 ```
 
@@ -22,7 +23,7 @@
 ## Sub-Ranges
 
 ```text
-10xxx   Character Identity Data
+10xxx   Character Data
 
 100xx   Player Characters
 101xx   Mushroom Enemies
@@ -64,11 +65,17 @@
 
 ## Assignment Rules
 
-### Character Identity Profiles
+### Characters
 
-A Character Identity ID represents a **character archetype**.
+A Character ID represents a **character archetype/type**.
 
-All instances of the same character share the same ID.
+The ID belongs conceptually to the Character itself.
+
+`CharacterProfile` stores and exposes this ID as the Character's fixed data definition, but the ID must not be interpreted as identifying the `CharacterProfile` asset independently.
+
+All runtime instances representing the same Character share the same Character ID.
+
+Different versions or variants of the same Character should not receive a new Character ID unless they are intentionally treated as a different Character definition.
 
 ---
 
@@ -93,6 +100,7 @@ Crafting stations may reference these recipe profiles to determine which recipes
 
 10101   Toxicschroom
 10102   Feralshroom
+10103   Aquabara
 
 10201   Bandit
 
