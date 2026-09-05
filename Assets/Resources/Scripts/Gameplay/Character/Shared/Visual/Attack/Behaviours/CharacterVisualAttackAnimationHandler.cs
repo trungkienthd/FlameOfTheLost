@@ -3,27 +3,21 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterVisualAttackAnimationHandler : FOTLMonoBehaviour
+    public class CharacterVisualAttackAnimationHandler : CharacterVisualSubBehaviourBase
     {
-        // --- States ---
-        [Header("Combat Animation Data")]
+        // --- Data ---
+        [Header("Placeholder Animation Data")]
         [SerializeField] private CharacterAttackAnimationProfile _placeholderProfile;
-        [SerializeField] private CharacterAttackAnimationProfile _activeProfile;
-        public CharacterAttackAnimationProfile PlaceholderProfile => _placeholderProfile;
-        public CharacterAttackAnimationProfile ActiveProfile => _activeProfile;
+        private CharacterAttackAnimationProfile PlaceholderProfile => _placeholderProfile;
 
-        private CharacterVisualController _visualController;
-        private CharacterVisualController VisualController => _visualController;
+        private CharacterAttackAnimationProfile ActiveProfile => this.VisualConfig != null
+            ? this.VisualConfig.AttackAnimationProfile
+            : null;
 
         // --- Public APIs ---
-        public void Bind(CharacterVisualController visualController)
-        {
-            _visualController = visualController;
-            this.CacheInternalReferences();
-        }
-
         public void ApplyAttackOverridesTo(AnimatorOverrideController overrideController, RuntimeSkill runtimeSkill, WeaponProfile weapon, AttackSide attackSideType)
         {
+            if (!this.EnsureBound()) return;
             if (overrideController == null) return;
             if (runtimeSkill == null) return;
             if (this.PlaceholderProfile == null) return;
@@ -34,7 +28,6 @@ namespace FlameOfTheLost
                 string skillName = runtimeSkill.Profile != null ? runtimeSkill.Profile.name : "NULL";
                 string weaponName = weapon != null ? weapon.name : "NULL";
                 Debug.LogWarning($"[{this.name}.{nameof(CharacterVisualAttackAnimationHandler)}] No combat animation entry found for skill '{skillName}' and weapon '{weaponName}'.", this);
-
                 return;
             }
 
@@ -44,18 +37,23 @@ namespace FlameOfTheLost
                 string skillName = runtimeSkill.Profile != null ? runtimeSkill.Profile.name : "NULL";
                 string weaponName = weapon != null ? weapon.name : "NULL";
                 Debug.LogWarning($"[{this.name}.{nameof(CharacterVisualAttackAnimationHandler)}] Combat animation clip set is invalid for skill '{skillName}' and weapon '{weaponName}'.", this);
-
                 return;
             }
+
+            if (this.PlaceholderProfile.Elements == null || this.PlaceholderProfile.Elements.Count == 0) return;
+
+            CharacterAttackAnimationClipHitboxSetProfile placeholderElement = this.PlaceholderProfile.Elements.FirstOrDefault();
+            if (placeholderElement == null) return;
 
             CharacterAnimationOverrideUtility.ApplyFacingClipSetOverride
             (
                 overrideController: overrideController,
-                placeholderSet: this.PlaceholderProfile.Elements.FirstOrDefault().GetFacingAnimationClipSet(),
+                placeholderSet: placeholderElement.GetFacingAnimationClipSet(),
                 targetSet: animationClipSet
             );
         }
 
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();

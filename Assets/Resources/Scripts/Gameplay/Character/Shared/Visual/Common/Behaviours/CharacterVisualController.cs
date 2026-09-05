@@ -9,6 +9,7 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(CharacterVisualLocomotionAnimationHandler))]
     [RequireComponent(typeof(CharacterVisualAttackAnimationHandler))]
     [RequireComponent(typeof(CharacterVisualHitDeathAnimationHandler))]
+    [RequireComponent(typeof(CharacterVisualDodgeAnimationHandler))]
     public class CharacterVisualController : CharacterConfiguredBehaviourBase<CharacterVisualConfig>,
         IFacingProvider,
         ICharacterRefreshable
@@ -24,17 +25,26 @@ namespace FlameOfTheLost
         public Transform CharacterFlipGroup => _characterFlipGroup;
 
         //  2. Sub-behaviours
-        private CharacterVisualFacingHandler FacingHandler => this.CharacterRootController.VisualFacingHandler;
-        private CharacterVisualLocomotionAnimationHandler LocomotionAnimationHandler => this.CharacterRootController.VisualLocomotionAnimationHandler;
-        private CharacterVisualAttackAnimationHandler AttackAnimationHandler => this.CharacterRootController.VisualAttackAnimationHandler;
-        private CharacterVisualHitDeathAnimationHandler HitDeathAnimationHandler => this.CharacterRootController.VisualHitDeathAnimationHandler;
-        private CharacterVisualDodgeAnimationHandler DodgeAnimationHandler => this.CharacterRootController.VisualDodgeAnimationHandler;
+        [Header("References (Sub-Behaviours)")]
+        [SerializeField] private CharacterVisualFacingHandler _facingHandler;
+        [SerializeField] private CharacterVisualLocomotionAnimationHandler _locomotionAnimationHandler;
+        [SerializeField] private CharacterVisualAttackAnimationHandler _attackAnimationHandler;
+        [SerializeField] private CharacterVisualHitDeathAnimationHandler _hitDeathAnimationHandler;
+        [SerializeField] private CharacterVisualDodgeAnimationHandler _dodgeAnimationHandler;
+        private CharacterVisualFacingHandler FacingHandler => _facingHandler;
+        private CharacterVisualLocomotionAnimationHandler LocomotionAnimationHandler => _locomotionAnimationHandler;
+        private CharacterVisualAttackAnimationHandler AttackAnimationHandler => _attackAnimationHandler;
+        private CharacterVisualHitDeathAnimationHandler HitDeathAnimationHandler => _hitDeathAnimationHandler;
+        private CharacterVisualDodgeAnimationHandler DodgeAnimationHandler => _dodgeAnimationHandler;
 
         // --- Data & Configs ---
-        //  1. Color configuration
-        [Header("Visual Color")]
-        [SerializeField] private Color _normalColor = Color.white;
-        public Color NormalColor => _normalColor;
+        public CharacterVisualConfig VisualConfig => this.Config;
+
+        private Color NormalColor => this.VisualConfig != null
+            ? this.VisualConfig.NormalColor
+            : Color.white;
+
+        public CharacterAttackAnimationProfile AttackAnimationProfile => this.VisualConfig != null ? this.VisualConfig.AttackAnimationProfile : null;
 
         // --- Runtime ---
         //  1. Animation Controller
@@ -73,13 +83,6 @@ namespace FlameOfTheLost
                 if (this.HitDeathAnimationHandler == null) return;
                 this.HitDeathAnimationHandler.OnDeathAnimationFinished -= value;
             }
-        }
-
-        // --- Unity Callbacks ---
-        private void OnEnable()
-        {
-            this.BindHandlers();
-            this.RebuildBaseAnimationOverride();
         }
 
         // --- Public APIs ---
@@ -182,7 +185,7 @@ namespace FlameOfTheLost
             if (runtimeSkill == null) return;
             if (this.Animator == null) return;
 
-            this.ApplyAttackAttackAnimationOverride(runtimeSkill, weapon, attackSideType);
+            this.ApplyAttackAnimationOverride(runtimeSkill, weapon, attackSideType);
             this.Animator.SetTrigger(CharacterVisualController.AttackID);
         }
 
@@ -240,48 +243,22 @@ namespace FlameOfTheLost
 
             this.EnsureRuntimeOverrideController();
 
-            if (this.LocomotionAnimationHandler != null)
-            {
-                this.LocomotionAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
-            }
-
-            if (this.HitDeathAnimationHandler != null)
-            {
-                this.HitDeathAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
-            }
-
-            if (this.DodgeAnimationHandler != null)
-            {
-                this.DodgeAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
-            }
+            if (this.LocomotionAnimationHandler != null) this.LocomotionAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
+            if (this.HitDeathAnimationHandler   != null) this.HitDeathAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
+            if (this.DodgeAnimationHandler      != null) this.DodgeAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
 
             this.Animator.runtimeAnimatorController = this.RuntimeOverrideController;
         }
-        public void ApplyAttackAttackAnimationOverride(RuntimeSkill runtimeSkill, WeaponProfile weapon, AttackSide attackSideType)
+        public void ApplyAttackAnimationOverride(RuntimeSkill runtimeSkill, WeaponProfile weapon, AttackSide attackSideType)
         {
             if (this.Animator == null || this.BaseAnimationController == null) return;
 
             this.EnsureRuntimeOverrideController();
 
-            if (this.LocomotionAnimationHandler != null)
-            {
-                this.LocomotionAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
-            }
-
-            if (this.HitDeathAnimationHandler != null)
-            {
-                this.HitDeathAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
-            }
-
-            if (this.DodgeAnimationHandler != null)
-            {
-                this.DodgeAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
-            }
-
-            if (this.AttackAnimationHandler != null)
-            {
-                this.AttackAnimationHandler.ApplyAttackOverridesTo(this.RuntimeOverrideController, runtimeSkill, weapon, attackSideType);
-            }
+            if (this.LocomotionAnimationHandler != null) this.LocomotionAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
+            if (this.HitDeathAnimationHandler   != null) this.HitDeathAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
+            if (this.DodgeAnimationHandler      != null) this.DodgeAnimationHandler.ApplyOverridesTo(this.RuntimeOverrideController);
+            if (this.AttackAnimationHandler     != null) this.AttackAnimationHandler.ApplyAttackOverridesTo(this.RuntimeOverrideController, runtimeSkill, weapon, attackSideType);
 
             this.Animator.runtimeAnimatorController = this.RuntimeOverrideController;
         }
@@ -299,34 +276,6 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        private void BindHandlers()
-        {
-            if (this.FacingHandler != null)
-            {
-                this.FacingHandler.Bind(this);
-            }
-
-            if (this.LocomotionAnimationHandler != null)
-            {
-                this.LocomotionAnimationHandler.Bind(this);
-            }
-
-            if (this.AttackAnimationHandler != null)
-            {
-                this.AttackAnimationHandler.Bind(this);
-            }
-
-            if (this.HitDeathAnimationHandler != null)
-            {
-                this.HitDeathAnimationHandler.Bind(this);
-            }
-
-            if (this.DodgeAnimationHandler != null)
-            {
-                this.DodgeAnimationHandler.Bind(this);
-            }
-        }
-
         private void ForceAnimatorRefreshAfterCharacterRefreshment()
         {
             if (this.Animator == null) return;
@@ -342,23 +291,6 @@ namespace FlameOfTheLost
             this.Animator.Update(0f);
         }
 
-        protected override void CacheInternalReferences()
-        {
-            base.CacheInternalReferences();
-
-            if (this.SpriteRenderer == null) _spriteRenderer = this.GetComponent<SpriteRenderer>();
-            if (this.Animator == null) _animator = this.GetComponent<Animator>();
-            if (this.CharacterFlipGroup == null) _characterFlipGroup = this.transform.parent;
-
-            if (this.BaseAnimationController == null && this.Animator != null) _baseAnimationController = this.Animator.runtimeAnimatorController;
-        }
-        protected override void BindInternalReferences()
-        {
-            base.BindInternalReferences();
-
-            this.BindHandlers();
-        }
-
         private void EnsureRuntimeOverrideController()
         {
             if (this.Animator == null || this.BaseAnimationController == null) return;
@@ -367,6 +299,69 @@ namespace FlameOfTheLost
 
             this.RuntimeOverrideController = new AnimatorOverrideController(this.BaseAnimationController);
             this.Animator.runtimeAnimatorController = this.RuntimeOverrideController;
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
+            if (this.SpriteRenderer == null) _spriteRenderer    = this.GetComponent<SpriteRenderer>();
+            if (this.Animator       == null) _animator          = this.GetComponent<Animator>();
+
+            if (this.CharacterFlipGroup == null) _characterFlipGroup = this.transform.parent;
+
+            if (this.FacingHandler              == null) _facingHandler                 = this.GetComponent<CharacterVisualFacingHandler>();
+            if (this.LocomotionAnimationHandler == null) _locomotionAnimationHandler    = this.GetComponent<CharacterVisualLocomotionAnimationHandler>();
+            if (this.AttackAnimationHandler     == null) _attackAnimationHandler        = this.GetComponent<CharacterVisualAttackAnimationHandler>();
+            if (this.HitDeathAnimationHandler   == null) _hitDeathAnimationHandler      = this.GetComponent<CharacterVisualHitDeathAnimationHandler>();
+            if (this.DodgeAnimationHandler      == null) _dodgeAnimationHandler         = this.GetComponent<CharacterVisualDodgeAnimationHandler>();
+
+            if (this.BaseAnimationController == null && this.Animator != null)
+            {
+                _baseAnimationController = this.Animator.runtimeAnimatorController;
+            }
+        }
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.SpriteRenderer == null) Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterVisualController)}] {nameof(SpriteRenderer)} is missing.", this);
+            if (this.Animator       == null) Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterVisualController)}] {nameof(Animator)} is missing.", this);
+            
+            if (this.CharacterFlipGroup == null) Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterVisualController)}] {nameof(CharacterFlipGroup)} is missing.", this);
+            
+            if (this.FacingHandler              == null) Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterVisualController)}] {nameof(CharacterVisualFacingHandler)} is missing.", this);
+            if (this.LocomotionAnimationHandler == null) Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterVisualController)}] {nameof(CharacterVisualLocomotionAnimationHandler)} is missing.", this);
+            if (this.AttackAnimationHandler     == null) Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterVisualController)}] {nameof(CharacterVisualAttackAnimationHandler)} is missing.", this);
+            if (this.HitDeathAnimationHandler   == null) Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterVisualController)}] {nameof(CharacterVisualHitDeathAnimationHandler)} is missing.", this);
+            if (this.DodgeAnimationHandler      == null) Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterVisualController)}] {nameof(CharacterVisualDodgeAnimationHandler)} is missing.", this);
+        }
+        protected override void BindInternalReferences()
+        {
+            base.BindInternalReferences();
+
+            this.FacingHandler?.Bind(this);
+            this.LocomotionAnimationHandler?.Bind(this);
+            this.AttackAnimationHandler?.Bind(this);
+            this.HitDeathAnimationHandler?.Bind(this);
+            this.DodgeAnimationHandler?.Bind(this);
+        }
+        protected override void UnbindInternalReferences()
+        {
+            this.FacingHandler?.Unbind(this);
+            this.LocomotionAnimationHandler?.Unbind(this);
+            this.AttackAnimationHandler?.Unbind(this);
+            this.HitDeathAnimationHandler?.Unbind(this);
+            this.DodgeAnimationHandler?.Unbind(this);
+
+            base.UnbindInternalReferences();
+        }
+        protected override void InitializeGameplay()
+        {
+            base.InitializeGameplay();
+
+            this.RebuildBaseAnimationOverride();
         }
     }
 }

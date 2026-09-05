@@ -56,17 +56,7 @@ namespace FlameOfTheLost
 
         [Header("References - Visual")]
         [SerializeField] private CharacterVisualController _visualController;
-        [SerializeField] private CharacterVisualFacingHandler _visualFacingHandler;
-        [SerializeField] private CharacterVisualLocomotionAnimationHandler _visualLocomotionAnimationHandler;
-        [SerializeField] private CharacterVisualAttackAnimationHandler _visualAttackAnimationHandler;
-        [SerializeField] private CharacterVisualHitDeathAnimationHandler _visualHitDeathAnimationHandler;
-        [SerializeField] private CharacterVisualDodgeAnimationHandler _visualDodgeAnimationHandler;
         public CharacterVisualController VisualController => _visualController;
-        public CharacterVisualFacingHandler VisualFacingHandler => _visualFacingHandler;
-        public CharacterVisualLocomotionAnimationHandler VisualLocomotionAnimationHandler => _visualLocomotionAnimationHandler;
-        public CharacterVisualAttackAnimationHandler VisualAttackAnimationHandler => _visualAttackAnimationHandler;
-        public CharacterVisualHitDeathAnimationHandler VisualHitDeathAnimationHandler => _visualHitDeathAnimationHandler;
-        public CharacterVisualDodgeAnimationHandler VisualDodgeAnimationHandler => _visualDodgeAnimationHandler;
 
         [Header("References - Visual/VFX")]
         [SerializeField] private Transform _statusEffectVFXHolder;
@@ -156,11 +146,6 @@ namespace FlameOfTheLost
             if (this.TerrainContactHandler == null) _terrainContactHandler = this.GetComponent<CharacterTerrainContactHandler>();
 
             if (this.VisualController                   == null) _visualController                  = this.GetComponentInChildren<CharacterVisualController>(true);
-            if (this.VisualFacingHandler                == null) _visualFacingHandler               = this.GetComponentInChildren<CharacterVisualFacingHandler>(true);
-            if (this.VisualLocomotionAnimationHandler   == null) _visualLocomotionAnimationHandler  = this.GetComponentInChildren<CharacterVisualLocomotionAnimationHandler>(true);
-            if (this.VisualAttackAnimationHandler       == null) _visualAttackAnimationHandler      = this.GetComponentInChildren<CharacterVisualAttackAnimationHandler>(true);
-            if (this.VisualHitDeathAnimationHandler     == null) _visualHitDeathAnimationHandler    = this.GetComponentInChildren<CharacterVisualHitDeathAnimationHandler>(true);
-            if (this.VisualDodgeAnimationHandler        == null) _visualDodgeAnimationHandler       = this.GetComponentInChildren<CharacterVisualDodgeAnimationHandler>(true);
 
             if (this.StatusEffectVFXHolder == null)
             {

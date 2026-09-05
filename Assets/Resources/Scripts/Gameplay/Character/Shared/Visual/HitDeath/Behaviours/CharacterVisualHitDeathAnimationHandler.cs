@@ -4,40 +4,46 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterVisualHitDeathAnimationHandler : FOTLMonoBehaviour
+    public class CharacterVisualHitDeathAnimationHandler : CharacterVisualSubBehaviourBase
     {
-        // --- States ---
-        //  1. Data
-        [Header("Hit / Death Animation Data")]
-        [SerializeField] private CharacterHitDeathAnimationProfile _placeholderProfile;
-        [SerializeField] private CharacterHitDeathAnimationProfile _activeProfile;
-        public CharacterHitDeathAnimationProfile PlaceholderProfile => _placeholderProfile;
-        public CharacterHitDeathAnimationProfile ActiveProfile => _activeProfile;
+        // --- Data / Configs ---
+        [Header("Placeholder Animation Data")] [SerializeField] private CharacterHitDeathAnimationProfile _placeholderProfile;
+        private CharacterHitDeathAnimationProfile PlaceholderProfile => _placeholderProfile;
 
-        //  2. Configs
-        [Header("Timing")]
-        [SerializeField] private float _hitCompletionFallbackDelay = 0.3f;
-        [SerializeField] private float _hitCompletionPadding = 0.03f;
-        [SerializeField] private float _hitToDeathDelay = 0.15f;
-        [SerializeField] private float _deathCompletionFallbackDelay = 1.0f;
-        [SerializeField] private float _deathCompletionPadding = 0.03f;
-        public float HitCompletionFallbackDelay => _hitCompletionFallbackDelay;
-        public float HitCompletionPadding => _hitCompletionPadding;
-        public float HitToDeathAnimationDelay => _hitToDeathDelay;
-        public float DeathCompletionFallbackDelay => _deathCompletionFallbackDelay;
-        public float DeathCompletionPadding => _deathCompletionPadding;
+        private CharacterHitDeathAnimationProfile ActiveProfile => this.VisualConfig != null
+            ? this.VisualConfig.HitDeathAnimationProfile
+            : null;
 
-        //  3. References
-        private CharacterVisualController _visualController;
-        private CharacterVisualController VisualController => _visualController;
+        private float HitCompletionFallbackDelay => this.VisualConfig != null
+            ? this.VisualConfig.HitCompletionFallbackDelay
+            : 0.3f;
+
+        private float HitCompletionPadding => this.VisualConfig != null
+            ? this.VisualConfig.HitCompletionPadding
+            : 0.03f;
+
+        private float HitToDeathAnimationDelay => this.VisualConfig != null
+            ? this.VisualConfig.HitToDeathAnimationDelay
+            : 0.15f;
+
+        private float DeathCompletionFallbackDelay => this.VisualConfig != null
+            ? this.VisualConfig.DeathCompletionFallbackDelay
+            : 1.0f;
+
+        private float DeathCompletionPadding => this.VisualConfig != null
+            ? this.VisualConfig.DeathCompletionPadding
+            : 0.03f;
+
+        // --- References ---
         private CharacterInputHandler InputHandler => this.VisualController != null
             ? this.VisualController.GetCharacter().InputHandler
             : null;
 
-        //  4. Coroutine 
+        // --- Runtime ---
+        //  1. Coroutine
         private Coroutine _hitDeathSequenceCoroutine;
 
-        //  5. Input Block state
+        //  2. Input Block state
         private bool _isBlockingInputForCurrentSequence;
         private bool IsBlockingInputForCurrentSequence
         {
@@ -45,7 +51,7 @@ namespace FlameOfTheLost
             set => _isBlockingInputForCurrentSequence = value;
         }
 
-        //  6. Event-related state
+        //  3. Event-related state
         private bool _hasNotifiedDeathAnimationFinished = false;
         private bool HasNotifiedDeathAnimationFinished
         {
@@ -57,14 +63,9 @@ namespace FlameOfTheLost
         public event Action OnDeathAnimationFinished;
 
         // --- Public APIs ---
-        public void Bind(CharacterVisualController visualController)
-        {
-            _visualController = visualController;
-            this.CacheInternalReferences();
-        }
-
         public void ApplyOverridesTo(AnimatorOverrideController overrideController)
         {
+            if (!this.EnsureBound()) return;
             if (overrideController == null) return;
             if (this.PlaceholderProfile == null) return;
             if (this.ActiveProfile == null) return;
@@ -86,11 +87,15 @@ namespace FlameOfTheLost
 
         public void PlayHitSequence(bool shouldPlayDeathAfterHit)
         {
+            if (!this.EnsureBound()) return;
+
             this.RestartSequence(this.PlayHitSequenceCoroutine(shouldPlayDeathAfterHit));
         }
 
         public void PlaySelfCostSequence(bool shouldPlayDeathAfterSelfCost)
         {
+            if (!this.EnsureBound()) return;
+
             // For now, self-cost reuses Hit visual.
             // Later this can be changed to a different flash/VFX without touching HPController.
             this.RestartSequence(this.PlayHitSequenceCoroutine(shouldPlayDeathAfterSelfCost));
@@ -98,7 +103,7 @@ namespace FlameOfTheLost
 
         public void TriggerHit()
         {
-            if (this.VisualController == null) return;
+            if (!this.EnsureBound()) return;
             if (this.VisualController.Animator == null) return;
 
             this.VisualController.Animator.SetTrigger(CharacterVisualController.HitID);
@@ -106,7 +111,7 @@ namespace FlameOfTheLost
 
         public void TriggerDeath()
         {
-            if (this.VisualController == null) return;
+            if (!this.EnsureBound()) return;
             if (this.VisualController.Animator == null) return;
 
             this.ResetDeathAnimationFinishedNotification();
@@ -212,6 +217,8 @@ namespace FlameOfTheLost
 
         private float GetHitCompletionDelay()
         {
+            if (this.ActiveProfile == null) return this.HitCompletionFallbackDelay;
+
             return this.GetAnimationCompletionDelay
             (
                 clipSet: this.ActiveProfile.HitAnimationClipSet,
@@ -221,6 +228,8 @@ namespace FlameOfTheLost
         }
         private float GetDeathCompletionDelay()
         {
+            if (this.ActiveProfile == null) return this.DeathCompletionFallbackDelay;
+
             return this.GetAnimationCompletionDelay
             (
                 clipSet: this.ActiveProfile.DeathAnimationClipSet,
@@ -230,8 +239,6 @@ namespace FlameOfTheLost
         }
         private float GetAnimationCompletionDelay(CharacterFacingAnimationClipSetEntry clipSet, float fallbackDelay, float padding)
         {
-            if (this.ActiveProfile == null) return 0f;
-
             AnimationClip animationClip = this.GetCurrentFacingAnimationClip(clipSet);
 
             float clipLength = animationClip != null
@@ -263,6 +270,15 @@ namespace FlameOfTheLost
                 : 1f;
         }
 
+        // --- FOTLSubBehaviour Overrides ---
+        protected override void OnUnbinding(CharacterVisualController visualController)
+        {
+            this.ResetSequenceState();
+
+            base.OnUnbinding(visualController);
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();

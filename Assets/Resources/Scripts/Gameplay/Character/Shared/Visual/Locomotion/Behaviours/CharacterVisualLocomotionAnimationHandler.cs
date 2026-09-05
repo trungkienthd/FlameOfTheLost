@@ -2,27 +2,28 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterVisualLocomotionAnimationHandler : FOTLMonoBehaviour
+    public class CharacterVisualLocomotionAnimationHandler : CharacterVisualSubBehaviourBase
     {
-        // --- States ---
-        [Header("Locomotion Animation Data")]
+        // --- Data / Configs ---
+        [Header("Placeholder Animation Data")]
         [SerializeField] private CharacterLocomotionAnimationProfile _placeholderProfile;
-        [SerializeField] private CharacterLocomotionAnimationProfile _activeProfile;
-        public CharacterLocomotionAnimationProfile PlaceholderProfile => _placeholderProfile;
-        public CharacterLocomotionAnimationProfile ActiveProfile => _activeProfile;
+        private CharacterLocomotionAnimationProfile PlaceholderProfile => _placeholderProfile;
 
+        private CharacterLocomotionAnimationProfile ActiveProfile => this.VisualConfig != null
+            ? this.VisualConfig.LocomotionAnimationProfile
+            : null;
+
+        // --- References ---
         [Header("Optional Mode Provider")]
         [SerializeField] private MonoBehaviour _locomotionModeProviderBehaviour;
         private MonoBehaviour LocomotionModeProviderBehavior => _locomotionModeProviderBehaviour;
         private ICharacterLocomotionVisualModeProvider _boundProvider;
         private ICharacterLocomotionVisualModeProvider LocomotionModeProvider => this.LocomotionModeProviderBehavior as ICharacterLocomotionVisualModeProvider;
 
+        // --- Runtime ---
         [Header("Manual Runtime State")]
         [SerializeField] private CharacterLocomotionMode _manualLocomotionMode = CharacterLocomotionMode.Default;
         private CharacterLocomotionMode ManualLocomotionMode => _manualLocomotionMode;
-
-        private CharacterVisualController _visualController;
-        private CharacterVisualController VisualController => _visualController;
 
         private CharacterLocomotionMode CurrentLocomotionMode => this.LocomotionModeProvider != null
             ? this.LocomotionModeProvider.GetLocomotionMode()
@@ -36,20 +37,7 @@ namespace FlameOfTheLost
             ? this.LocomotionModeProvider.GetLightSourceType()
             : LightSourceType.None;
 
-        // --- Unity Methods ---
-        private void OnDisable()
-        {
-            this.UnbindProvider();
-        }
-
         // --- Public APIs ---
-        public void Bind(CharacterVisualController visualController)
-        {
-            _visualController = visualController;
-
-            this.ResolveProvider();
-        }
-
         public void SetManualLocomotionMode(CharacterLocomotionMode locomotionMode)
         {
             if (_manualLocomotionMode == locomotionMode) return;
@@ -65,6 +53,7 @@ namespace FlameOfTheLost
 
         public void ApplyOverridesTo(AnimatorOverrideController overrideController)
         {
+            if (!this.EnsureBound()) return;
             if (overrideController == null) return;
             if (this.PlaceholderProfile == null) return;
             if (this.ActiveProfile == null) return;
@@ -125,11 +114,26 @@ namespace FlameOfTheLost
 
         private void RequestRebuild()
         {
-            if (this.VisualController == null) return;
+            if (!this.EnsureBound()) return;
 
             this.VisualController.RebuildBaseAnimationOverride();
         }
 
+        // --- FOTLSubBehaviour Overrides ---
+        protected override void OnBound(CharacterVisualController visualController)
+        {
+            base.OnBound(visualController);
+
+            this.ResolveProvider();
+        }
+        protected override void OnUnbinding(CharacterVisualController visualController)
+        {
+            this.UnbindProvider();
+
+            base.OnUnbinding(visualController);
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
