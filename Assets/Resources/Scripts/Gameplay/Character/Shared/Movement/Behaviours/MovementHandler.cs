@@ -181,13 +181,5 @@ namespace FlameOfTheLost
 
             this.VisualController?.FeedMovement(Vector2.zero);
         }
-
-        // --- FOTLMonoBehaviour Overrides ---
-        protected override void ValidateInternalReferences()
-        {
-            base.ValidateInternalReferences();
-
-            if (this.MovementConfig == null) Debug.LogError($"[{this.CharacterName}.{nameof(MovementHandler)}] {nameof(this.MovementConfig)} reference is not set.", this);
-        }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [CreateAssetMenu(fileName = "Ddg_New", menuName = "Data/FlameOfTheLost/Character/Shared/Dodge/CharacterDodgeConfig")]
-    public class CharacterDodgeConfig : ScriptableObject
+    public class CharacterDodgeConfig : CharacterDataAsset
     {
         [Header("Timing")]
         [SerializeField] private float _dodgeDuration = 0.25f;

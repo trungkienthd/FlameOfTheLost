@@ -3,26 +3,25 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterDodgeController : CharacterBehaviourControllerBase,
+    public class CharacterDodgeController : CharacterConfiguredBehaviourBase<CharacterDodgeConfig>,
         ICharacterHitInvulnerabilityProvider,
         IStatusEffectFlagConsumer,
         ICharacterRefreshable,
         ICharacterDeathDisableable
     {
-        // --- States ---
-        //  1. References
-        [Header("References - Config")]
-        [SerializeField] private CharacterDodgeConfig _config;
-        private CharacterDodgeConfig Config => _config;
-
+        // --- References ---
         private Rigidbody2D Rigidbody2D => this.CharacterRootController.Rigidbody2D;
         private Collider2D MainCollider2D => this.CharacterRootController.MainCollider2D;
         private IFacingProvider FacingProvider => this.CharacterRootController.VisualController;
         private CharacterResourcesController ResourcesController => this.CharacterRootController.ResourcesController;
         private CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
-        //  2. Dodge State
-        [Header("Dodge State (Runtime)")]
+        // --- Data / Config ---
+        public CharacterDodgeConfig DodgeConfig => this.Config;
+
+        // --- Runtime ---
+        //  1. Dodge State
+        [Header("Runtime - Dodge State")]
         [SerializeField] private CharacterDodgeState _dodgeState = CharacterDodgeState.None;
         [SerializeField] private Vector2 _currentDodgeDirection = Vector2.zero;
         public CharacterDodgeState DodgeState
@@ -38,8 +37,8 @@ namespace FlameOfTheLost
             set => _currentDodgeDirection = value;
         }
 
-        //  3. Collider Disable
-        [Header("Collider Disable (Runtime)")]
+        //  2. Collider Disable
+        [Header("Runtime - Collider Disable")]
         [SerializeField] private bool _isMainColliderDisabledByDodge;
         [SerializeField] private bool _mainColliderWasEnabledBeforeDodge;
         private bool IsMainColliderDisabledByDodge
@@ -54,15 +53,15 @@ namespace FlameOfTheLost
         }
         public bool ShouldBlockOtherInputs => this.IsDodging;
 
-        //  4. Last Resource Gate Result
+        //  3. Last Resource Gate Result
         public ResourceGateResponseRecord LastDodgeCostGateResponse
         {
             get;
             private set;
         }
 
-        //  5. Status Effects Flags
-        [Header("Status Effects Flags (Runtime)")]
+        //  4. Status Effects Flags
+        [Header("Runtime - Status Effects Flags")]
         [SerializeField] private bool _cannotDodge = false;
         [SerializeField] private bool _ignoreDodgeLock = false;
         private bool CannotDodge
@@ -77,28 +76,28 @@ namespace FlameOfTheLost
         }
         public bool DodgeBlocked => this.CannotDodge && !this.IgnoreDodgeLock;
 
-        //  6. ICharacterHitInvulnerabilityProvider implementation
+        //  5. ICharacterHitInvulnerabilityProvider implementation
         public bool IsHitInvulnerable
         {
             get
             {
-                if (this.Config == null) return false;
+                if (this.DodgeConfig == null) return false;
 
                 if (this.IsDodging)
                 {
-                    return this.Config.IsHitInvulnerableDuringDodge;
+                    return this.DodgeConfig.IsHitInvulnerableDuringDodge;
                 }
 
                 if (this.IsInRecovery)
                 {
-                    return this.Config.IsHitInvulnerableDuringRecovery;
+                    return this.DodgeConfig.IsHitInvulnerableDuringRecovery;
                 }
 
                 return false;
             }
         }
 
-        //  7. Coroutine
+        //  6. Coroutine
         private Coroutine _dodgeRoutine;
         private Coroutine DodgeRoutine
         {
@@ -106,8 +105,8 @@ namespace FlameOfTheLost
             set => _dodgeRoutine = value;
         }
 
-        //  8. Death Disable
-        [Header("Death Disable (Runtime)")]
+        //  7. Death Disable
+        [Header("Runtime - Death Disable")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
         {
@@ -121,7 +120,7 @@ namespace FlameOfTheLost
         {
             if (this.IsDeathDisabled) return false;
             if (this.DodgeBlocked) return false;
-            if (this.Config == null) return false;
+            if (this.DodgeConfig == null) return false;
             if (this.DodgeState != CharacterDodgeState.None) return false;
 
             Vector2 dodgeDirection = this.ResolveDodgeDirection(requestedDirection);
@@ -184,7 +183,7 @@ namespace FlameOfTheLost
         {
             this.LastDodgeCostGateResponse = default;
 
-            if (this.Config == null) return false;
+            if (this.DodgeConfig == null) return false;
 
             CharacterResourcesController resourcesController = this.ResourcesController;
             if (resourcesController == null)
@@ -193,7 +192,7 @@ namespace FlameOfTheLost
                 return false;
             }
 
-            ResourceGateResponseRecord response = resourcesController.TryPayCost(this.Config.DodgeCost);
+            ResourceGateResponseRecord response = resourcesController.TryPayCost(this.DodgeConfig.DodgeCost);
             this.LastDodgeCostGateResponse = response;
 
             return response.IsAccepted;
@@ -257,8 +256,8 @@ namespace FlameOfTheLost
         {
             //this.DodgeState = CharacterDodgeState.Dodging;
 
-            float dodgeDuration = this.Config != null ? this.Config.DodgeDuration : 0f;
-            float dodgeSpeed = this.Config != null ? this.Config.DodgeSpeed : 0f;
+            float dodgeDuration = this.DodgeConfig != null ? this.DodgeConfig.DodgeDuration : 0f;
+            float dodgeSpeed = this.DodgeConfig != null ? this.DodgeConfig.DodgeSpeed : 0f;
 
             if (this.Rigidbody2D != null)
             {
@@ -277,7 +276,7 @@ namespace FlameOfTheLost
 
             this.RestoreMainColliderAfterDodge();
 
-            float recoveryDuration = this.Config != null ? this.Config.RecoveryDuration : 0f;
+            float recoveryDuration = this.DodgeConfig != null ? this.DodgeConfig.RecoveryDuration : 0f;
 
             if (recoveryDuration > 0f)
             {
@@ -297,7 +296,7 @@ namespace FlameOfTheLost
                 return requestedDirection.normalized;
             }
 
-            if (this.Config == null || !this.Config.UseLastFacingDirectionWhenNoInput)
+            if (this.DodgeConfig == null || !this.DodgeConfig.UseLastFacingDirectionWhenNoInput)
             {
                 return Vector2.zero;
             }
@@ -351,27 +350,6 @@ namespace FlameOfTheLost
 
             this.StopCoroutine(this.DodgeRoutine);
             this.DodgeRoutine = null;
-        }
-
-        protected override void CacheInternalReferences()
-        {
-            base.CacheInternalReferences();
-
-            if (this.Config == null)
-            {
-                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterDodgeController)}] No dodge config assigned. Loading default config.", this);
-                _config = Resources.Load<CharacterDodgeConfig>("Data/Character/Shared/Dodge/Ddg_Generic");
-            }
-        }
-
-        protected override void ValidateInternalReferences()
-        {
-            base.ValidateInternalReferences();
-
-            if (this.Config == null)
-            {
-                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterDodgeController)}] No dodge config assigned.", this);
-            }
         }
     }
 }

@@ -21,8 +21,8 @@ MonoBehaviour:
   _faction: 1
   _traversalType: 0
   _movementConfig: {fileID: 11400000, guid: cfb03b0a1edd79a4db373e3cad81a39e, type: 2}
+  _dodgeConfig: {fileID: 11400000, guid: 198e41c6dc8d48b4d8f9fedc3c644bea, type: 2}
   _visualConfig: {fileID: 11400000, guid: 355dc0cbc06af80438d75abd2e01fbda, type: 2}
   _combatConfig: {fileID: 11400000, guid: ad2348199d3be984c9f8e86aeec56120, type: 2}
   _statusEffectGuardConfig: {fileID: 11400000, guid: e258a45908c1df341bb1a6d2734929bb, type: 2}
   _progressionConfig: {fileID: 11400000, guid: e0ad21b21291f254ab256c22ffcdd067, type: 2}
-  _rewardDropProfile: {fileID: 11400000, guid: 23e0b9f1995c5fe4da39a9817f05604e, type: 2}

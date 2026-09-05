@@ -113,6 +113,7 @@ namespace FlameOfTheLost
             if (this.Profile == null) return;
 
             this.MovementHandler?.CacheConfigIfNull(this.Profile.MovementConfig);
+            this.DodgeController?.CacheConfigIfNull(this.Profile.DodgeConfig);
             this.VisualController?.CacheConfigIfNull(this.Profile.VisualConfig);
             this.CombatController?.CacheConfigIfNull(this.Profile.CombatConfig);
             this.StatusEffectController?.CacheConfigIfNull(this.Profile.StatusEffectGuardConfig);
