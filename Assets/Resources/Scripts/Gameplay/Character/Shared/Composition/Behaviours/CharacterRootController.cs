@@ -5,26 +5,16 @@ namespace FlameOfTheLost
     public abstract class CharacterRootController : FOTLMonoBehaviour
     {
         // --- Data / Configs ---
-        [Header("Data")]
-        [SerializeField] private CharacterProfile _profile;
-        public CharacterProfile Profile => _profile;
+        public abstract CharacterProfile Profile { get; }
 
         public int Id               => this.Profile != null ? this.Profile.Id           : 0;
         public string Key           => this.Profile != null ? this.Profile.Key          : string.Empty;
         public string DisplayName   => this.Profile != null ? this.Profile.DisplayName  : string.Empty;
         public Sprite Icon          => this.Profile != null ? this.Profile.Icon         : null;
 
-        public CharacterType CharacterType => this.Profile != null
-            ? this.Profile.CharacterType
-            : CharacterType.Default;
-
-        public CharacterFaction Faction => this.Profile != null
-            ? this.Profile.Faction
-            : default;
-
-        public CharacterTraversalType TraversalType => this.Profile != null
-            ? this.Profile.TraversalType
-            : default;
+        public CharacterType CharacterType          => this.Profile != null ? this.Profile.CharacterType    : CharacterType.Default;
+        public CharacterFaction Faction             => this.Profile != null ? this.Profile.Faction          : default;
+        public CharacterTraversalType TraversalType => this.Profile != null ? this.Profile.TraversalType    : default;
 
         public GameObject CharacterRoot => this.gameObject;
 
@@ -117,7 +107,8 @@ namespace FlameOfTheLost
         [SerializeField] private InventoryController _inventoryController;
         public InventoryController InventoryController => _inventoryController;
 
-        private void CacheCharacterConfigs()
+        // --- Helpers ---
+        protected virtual void CacheCharacterConfigs()
         {
             if (this.Profile == null) return;
 
@@ -128,12 +119,13 @@ namespace FlameOfTheLost
             this.ProgressionController?.CacheConfigIfNull(this.Profile.ProgressionConfig);
         }
 
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
 
-            if (this.Rigidbody2D == null) _rigidbody2D = this.GetComponent<Rigidbody2D>();
-            if (this.MainCollider2D == null) _mainCollider2D = this.GetComponent<Collider2D>();
+            if (this.Rigidbody2D    == null) _rigidbody2D       = this.GetComponent<Rigidbody2D>();
+            if (this.MainCollider2D == null) _mainCollider2D    = this.GetComponent<Collider2D>();
 
             if (this.RefreshHandler == null) _refreshHandler = this.GetComponentInChildren<CharacterRefreshHandler>(true);
 
@@ -145,7 +137,7 @@ namespace FlameOfTheLost
 
             if (this.TerrainContactHandler == null) _terrainContactHandler = this.GetComponent<CharacterTerrainContactHandler>();
 
-            if (this.VisualController                   == null) _visualController                  = this.GetComponentInChildren<CharacterVisualController>(true);
+            if (this.VisualController == null) _visualController = this.GetComponentInChildren<CharacterVisualController>(true);
 
             if (this.StatusEffectVFXHolder == null)
             {
@@ -182,6 +174,12 @@ namespace FlameOfTheLost
             if (this.InventoryController == null) _inventoryController = this.GetComponentInChildren<InventoryController>(true);
 
             this.CacheCharacterConfigs();
+        }
+        protected override void ValidateInternalReferences()
+        {
+            base.ValidateInternalReferences();
+
+            if (this.Profile == null) Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] No Character Profile assigned.", this);
         }
     }
 }

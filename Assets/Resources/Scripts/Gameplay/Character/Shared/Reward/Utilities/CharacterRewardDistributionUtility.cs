@@ -12,7 +12,9 @@ namespace FlameOfTheLost
             CharacterAIRootController defeatedAICharacter = defeatedCharacter as CharacterAIRootController;
             if (defeatedAICharacter == null) return false;
 
-            CharacterRewardDropProvider defeatedRewardDropProvider = defeatedAICharacter.RewardDropProvider;
+            EnemyRootController defeatedEnemy = defeatedAICharacter as EnemyRootController;
+
+            CharacterRewardDropProvider defeatedRewardDropProvider = defeatedEnemy.RewardDropProvider;
             if (defeatedRewardDropProvider == null) return false;
 
             CharacterRewardWalletController receiverRewardWallet = receiverCharacter.RewardWalletController;

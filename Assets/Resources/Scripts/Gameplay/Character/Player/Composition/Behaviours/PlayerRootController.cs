@@ -3,8 +3,12 @@ using UnityEngine.InputSystem;
 
 namespace FlameOfTheLost
 {
-    public class PlayerRootController : CharacterRootController
+    public class PlayerRootController : CharacterRootController<PlayerCharacterProfile>
     {
+        // --- Data / Configs ---
+        public PlayerCharacterProfile PlayerProfile => this.TypedProfile;
+
+        // --- References ---
         [Header("References (Player-only)")]
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private PlayerCarryLoadoutController _playerCarryLoadoutController;
@@ -17,6 +21,7 @@ namespace FlameOfTheLost
 
         public PlayerInputHandler PlayerInputHandler => base.InputHandler as PlayerInputHandler;
 
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();

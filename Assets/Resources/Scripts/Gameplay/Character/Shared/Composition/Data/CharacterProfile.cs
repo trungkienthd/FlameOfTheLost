@@ -37,10 +37,5 @@ namespace FlameOfTheLost
         [Header("Progression")]
         [SerializeField] private CharacterProgressionConfig _progressionConfig;
         public CharacterProgressionConfig ProgressionConfig => _progressionConfig;
-
-        //  7. Reward
-        [Header("Reward")]
-        [SerializeField] private CharacterRewardDropProfile _rewardDropProfile;
-        public CharacterRewardDropProfile RewardDropProfile => _rewardDropProfile;
     }
 }
