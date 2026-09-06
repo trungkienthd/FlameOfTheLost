@@ -406,7 +406,11 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 6084845536400234014}
   _animator: {fileID: 100178451394550758}
   _characterFlipGroup: {fileID: 9065100916030918952}
-  _normalColor: {r: 1, g: 1, b: 1, a: 1}
+  _facingHandler: {fileID: 6836829972921874162}
+  _locomotionAnimationHandler: {fileID: 8471074619670850254}
+  _attackAnimationHandler: {fileID: 6819824635726035935}
+  _hitDeathAnimationHandler: {fileID: 391864750833664329}
+  _dodgeAnimationHandler: {fileID: 8086331531521290570}
 --- !u!114 &6836829972921874162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,8 +423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e7692ca62f06449b2a66f6f95bf12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualFacingHandler
-  _speedForOne: 10
-  _speedDampTime: 0.05
+  _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 584078816329254573}
   _lastDirection: {x: 0, y: -1}
   _facingSignX: 1
   _isFacingLocked: 0
@@ -437,8 +441,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualLocomotionAnimationHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 584078816329254573}
   _placeholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
-  _activeProfile: {fileID: 11400000, guid: fb951246804cd704387ca8a631bcae2c, type: 2}
   _locomotionModeProviderBehaviour: {fileID: 8619395251524575671}
   _manualLocomotionMode: 0
 --- !u!114 &8619395251524575671
@@ -476,8 +480,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualCombatAnimationHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 584078816329254573}
   _placeholderProfile: {fileID: 11400000, guid: 96e91b24bb5929445b608c7fb8251e81, type: 2}
-  _activeProfile: {fileID: 11400000, guid: f0e51d36e48ee4e43998ded6f8841cdc, type: 2}
 --- !u!114 &391864750833664329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,13 +495,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualHitDeathAnimationHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 584078816329254573}
   _placeholderProfile: {fileID: 11400000, guid: cba0c4783b92dc34295f5a1cb5341fa0, type: 2}
-  _activeProfile: {fileID: 11400000, guid: 374684fe68157104fb4be74de54fa19a, type: 2}
-  _hitCompletionFallbackDelay: 0.3
-  _hitCompletionPadding: 0.03
-  _hitToDeathDelay: 0.15
-  _deathCompletionFallbackDelay: 1
-  _deathCompletionPadding: 0.03
 --- !u!114 &8086331531521290570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,8 +510,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualDodgeAnimationHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 584078816329254573}
   _placeholderProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
-  _activeProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
 --- !u!1 &546589716473818984
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,7 +1473,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyRootController
   _enableDebugLogs: 0
-  _profile: {fileID: 11400000, guid: 72719f96bfd75ef4a9b7dd5945061fa8, type: 2}
   _rigidbody2D: {fileID: 8000788421409976908}
   _mainCollider2D: {fileID: 6947550545768482147}
   _refreshHandler: {fileID: 6031001468286940557}
@@ -1483,11 +1481,6 @@ MonoBehaviour:
   _dodgeController: {fileID: 4017276766413093160}
   _terrainContactHandler: {fileID: 138990756075370264}
   _visualController: {fileID: 584078816329254573}
-  _visualFacingHandler: {fileID: 6836829972921874162}
-  _visualLocomotionAnimationHandler: {fileID: 8471074619670850254}
-  _visualAttackAnimationHandler: {fileID: 6819824635726035935}
-  _visualHitDeathAnimationHandler: {fileID: 391864750833664329}
-  _visualDodgeAnimationHandler: {fileID: 8086331531521290570}
   _statusEffectVFXHolder: {fileID: 2170281567699780899}
   _rewardVFXHandler: {fileID: 2103957974545232575}
   _combatController: {fileID: 2103035301200508583}
@@ -1511,8 +1504,9 @@ MonoBehaviour:
   _rewardWalletController: {fileID: 1482769842203035230}
   _inventoryController: {fileID: 9039944795399646901}
   _targetDetectionHandler: {fileID: 8768203270480612390}
-  _rewardDropProvider: {fileID: 5302589758685020755}
+  _profile: {fileID: 11400000, guid: 4f61df02305fa58428490d75122ee4f0, type: 2}
   _enemyBrainController: {fileID: 285781198037708616}
+  _rewardDropProvider: {fileID: 5302589758685020755}
 --- !u!114 &5857655726257863253
 MonoBehaviour:
   m_ObjectHideFlags: 0

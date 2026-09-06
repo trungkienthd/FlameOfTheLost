@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c3e8f60b018cd24288e5f0249df6b28, type: 3}
+  m_Script: {fileID: 11500000, guid: 28c8803fbc3f20e4da52044a985c0fd2, type: 3}
   m_Name: Chr_Enemy_Feralshroom
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyCharacterProfile
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyProfile
   _id: 10101
-  _key: FERALSHRROM
+  _key: FERALSHROOM
   _displayName: Feralshroom
   _description: 
   _icon: {fileID: 0}
+  _prefab: {fileID: 2810860427036246779, guid: 2cf69941bf2d26947a773c321d00d5ba, type: 3}
   _characterType: 2
   _faction: 2
   _traversalType: 1

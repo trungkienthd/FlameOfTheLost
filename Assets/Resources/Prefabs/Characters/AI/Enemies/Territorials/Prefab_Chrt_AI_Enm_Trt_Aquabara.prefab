@@ -923,7 +923,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyRootController
   _enableDebugLogs: 0
-  _profile: {fileID: 11400000, guid: f81522b5ec002f04a9e38033d80b0e30, type: 2}
   _rigidbody2D: {fileID: 2414209636888704389}
   _mainCollider2D: {fileID: 5625700115418001106}
   _refreshHandler: {fileID: 4942635812869224109}
@@ -932,11 +931,6 @@ MonoBehaviour:
   _dodgeController: {fileID: 3120615532956235598}
   _terrainContactHandler: {fileID: 1071272051689670771}
   _visualController: {fileID: 3514649841480400991}
-  _visualFacingHandler: {fileID: 7229766183523963841}
-  _visualLocomotionAnimationHandler: {fileID: 9082241061396528582}
-  _visualAttackAnimationHandler: {fileID: 2725422489895556001}
-  _visualHitDeathAnimationHandler: {fileID: 3716082913574987073}
-  _visualDodgeAnimationHandler: {fileID: 1387649944271891799}
   _statusEffectVFXHolder: {fileID: 8409628597971232879}
   _rewardVFXHandler: {fileID: 2022825999008662908}
   _combatController: {fileID: 7447715351792679715}
@@ -960,8 +954,9 @@ MonoBehaviour:
   _rewardWalletController: {fileID: 8314437393201580078}
   _inventoryController: {fileID: 1733108875761501284}
   _targetDetectionHandler: {fileID: 7957198990621620823}
-  _rewardDropProvider: {fileID: 3836884899214401589}
+  _profile: {fileID: 11400000, guid: f81522b5ec002f04a9e38033d80b0e30, type: 2}
   _enemyBrainController: {fileID: 3180310569691770060}
+  _rewardDropProvider: {fileID: 3836884899214401589}
 --- !u!114 &287161610279351988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1664,7 +1659,11 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 7600048867351805657}
   _animator: {fileID: 4076434700467451151}
   _characterFlipGroup: {fileID: 396655490343399122}
-  _normalColor: {r: 1, g: 1, b: 1, a: 1}
+  _facingHandler: {fileID: 7229766183523963841}
+  _locomotionAnimationHandler: {fileID: 9082241061396528582}
+  _attackAnimationHandler: {fileID: 2725422489895556001}
+  _hitDeathAnimationHandler: {fileID: 3716082913574987073}
+  _dodgeAnimationHandler: {fileID: 1387649944271891799}
 --- !u!114 &7229766183523963841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,8 +1676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e7692ca62f06449b2a66f6f95bf12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualFacingHandler
-  _speedForOne: 10
-  _speedDampTime: 0.05
+  _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 3514649841480400991}
   _lastDirection: {x: 0, y: -1}
   _facingSignX: 1
   _isFacingLocked: 0
@@ -1695,8 +1694,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualLocomotionAnimationHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 3514649841480400991}
   _placeholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
-  _activeProfile: {fileID: 11400000, guid: 10845e79ef7c34c4fbaa2fad4909a87e, type: 2}
   _locomotionModeProviderBehaviour: {fileID: 7767229885116052750}
   _manualLocomotionMode: 0
 --- !u!114 &7767229885116052750
@@ -1734,8 +1733,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualCombatAnimationHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 3514649841480400991}
   _placeholderProfile: {fileID: 11400000, guid: 96e91b24bb5929445b608c7fb8251e81, type: 2}
-  _activeProfile: {fileID: 11400000, guid: ba3f7421c7aafe54dbb34871aff7b93a, type: 2}
 --- !u!114 &3716082913574987073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1749,13 +1748,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualHitDeathAnimationHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 3514649841480400991}
   _placeholderProfile: {fileID: 11400000, guid: cba0c4783b92dc34295f5a1cb5341fa0, type: 2}
-  _activeProfile: {fileID: 11400000, guid: 31a385ec50803814e884b94461a7c8fb, type: 2}
-  _hitCompletionFallbackDelay: 0.3
-  _hitCompletionPadding: 0.03
-  _hitToDeathDelay: 0.15
-  _deathCompletionFallbackDelay: 1
-  _deathCompletionPadding: 0.03
 --- !u!114 &1387649944271891799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1769,8 +1763,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualDodgeAnimationHandler
   _enableDebugLogs: 0
+  _brainBehaviour: {fileID: 3514649841480400991}
   _placeholderProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
-  _activeProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
 --- !u!1 &3827433088564941760
 GameObject:
   m_ObjectHideFlags: 0
