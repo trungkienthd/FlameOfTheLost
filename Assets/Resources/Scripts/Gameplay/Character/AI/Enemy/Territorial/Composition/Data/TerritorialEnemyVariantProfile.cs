@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "TerritorialEnemyVariantProfile", menuName = "Scriptable Objects/TerritorialEnemyVariantProfile")]
+    [CreateAssetMenu(fileName = "Variant_Enemy_Trl_New", menuName = "Data/FlameOfTheLost/Character/Enemy/Territorial/VariantProfile")]
     public sealed class TerritorialEnemyVariantProfile : EnemyVariantProfile
     {
         // --- Data / Configs ---

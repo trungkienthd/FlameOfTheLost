@@ -212,9 +212,9 @@ namespace FlameOfTheLost
             EnemyVariantProfile enemyVariant = spawnEntry.EnemyVariant;
 
             if (enemyVariant == null) return null;
-            if (enemyVariant.EnemyPrefab == null) return null;
+            if (enemyVariant.CharacterProfile.Prefab == null) return null;
 
-            GameObject spawnedEnemy = UnityEngine.Object.Instantiate(enemyVariant.EnemyPrefab, this.EnemyGroupRoot);
+            GameObject spawnedEnemy = UnityEngine.Object.Instantiate(enemyVariant.CharacterProfile.Prefab, this.EnemyGroupRoot);
 
             if (spawnedEnemy == null) return null;
 

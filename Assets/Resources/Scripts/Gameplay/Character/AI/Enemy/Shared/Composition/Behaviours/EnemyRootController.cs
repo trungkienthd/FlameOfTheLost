@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EnemyRootController : CharacterAIRootController<EnemyCharacterProfile>
+    public class EnemyRootController : CharacterAIRootController<EnemyProfile>
     {
         // --- Data / Configs ---
-        public EnemyCharacterProfile EnemyProfile => this.TypedProfile;
+        public EnemyProfile EnemyProfile => this.TypedProfile;
 
         // --- References ---
         [Header("References (Enemy-only)")]

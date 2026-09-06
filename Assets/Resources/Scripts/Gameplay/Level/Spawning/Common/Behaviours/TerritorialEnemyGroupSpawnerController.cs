@@ -43,7 +43,7 @@ namespace FlameOfTheLost
 
             territorialBrainController.ConfigureTerritorialAI
             (
-                spawnEntry.RoamingConfig,
+                spawnEntry.ResolvedRoamingConfig,
                 spawnEntry.AttackConfig,
                 spawnEntry.HomeAreaEntry
             );

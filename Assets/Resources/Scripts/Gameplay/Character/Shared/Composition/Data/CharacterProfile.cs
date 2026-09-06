@@ -4,6 +4,11 @@ namespace FlameOfTheLost
 {
     public abstract class CharacterProfile : FOTLScriptableObjectProfile
     {
+        //  0. Prefab
+        [Header("Prefab")]
+        [SerializeField] private GameObject _prefab;
+        public GameObject Prefab => _prefab;
+
         //  1. Classification
         [Header("Classification")]
         [SerializeField] private CharacterType _characterType;

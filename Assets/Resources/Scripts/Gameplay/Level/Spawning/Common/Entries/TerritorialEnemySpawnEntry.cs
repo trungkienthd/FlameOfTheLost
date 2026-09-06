@@ -16,12 +16,12 @@ namespace FlameOfTheLost
         public TerritorialEnemyHomeAreaEntry HomeAreaEntry => _homeAreaEntry;
 
         //  3. Optional Territorial AI Overrides
-        [Header("Configs - Optional Territorial AI Overrides")]
+        [Header("Configs - (Optional) Territorial AI Overrides")]
         [SerializeField] private TerritorialEnemyRoamingConfig _roamingConfigOverride;
         public TerritorialEnemyRoamingConfig RoamingConfigOverride => _roamingConfigOverride;
 
         // --- Resolved Data / Configs ---
-        public TerritorialEnemyRoamingConfig RoamingConfig => this.RoamingConfigOverride != null
+        public TerritorialEnemyRoamingConfig ResolvedRoamingConfig => this.RoamingConfigOverride != null
             ? this.RoamingConfigOverride
             : this.TerritorialEnemyVariant != null ? this.TerritorialEnemyVariant.DefaultRoamingConfig : null;
 
@@ -32,7 +32,7 @@ namespace FlameOfTheLost
         // --- Public APIs ---
         //  1. Validation
         public bool HasValidTerritorialAIConfig =>
-            this.RoamingConfig != null &&
+            this.ResolvedRoamingConfig != null &&
             this.AttackConfig != null;
 
         public override bool IsValid => 
