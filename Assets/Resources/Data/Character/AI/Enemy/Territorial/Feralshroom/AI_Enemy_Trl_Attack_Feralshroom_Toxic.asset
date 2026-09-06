@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: daee2ca9a9ac2454e96716b491cd9b69, type: 3}
-  m_Name: AI_Enm_Trt_Attack_AquabaraOcean
+  m_Name: AI_Enemy_Trl_Attack_Feralshroom_Toxic
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyAttackConfig
-  _idealAttackRange: 2.6
-  _preAttackDuration: 0.55
-  _attackDecisionCooldown: 2.5
+  _idealAttackRange: 1.8
+  _preAttackDuration: 0.45
+  _attackDecisionCooldown: 3
   _attackingStateDuration: 0.7
   _normalAttackSide: 0

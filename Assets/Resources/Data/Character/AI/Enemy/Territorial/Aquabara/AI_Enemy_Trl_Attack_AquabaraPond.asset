@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: daee2ca9a9ac2454e96716b491cd9b69, type: 3}
-  m_Name: AI_Enm_Trt_Attack_AquabaraPond
+  m_Name: AI_Enemy_Trl_Attack_AquabaraPond
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyAttackConfig
-  _idealAttackRange: 2.2
+  _idealAttackRange: 4
   _preAttackDuration: 0.55
   _attackDecisionCooldown: 3.5
   _attackingStateDuration: 0.8

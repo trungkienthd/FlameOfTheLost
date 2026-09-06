@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890ffac1f27b07d45a8b915e3bc22fe0, type: 3}
   m_Name: Mm_Enemy_Aquabara
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterMovementConfig
-  _movementSpeed: 3
-  _accel: 60
-  _decel: 80
+  _movementSpeed: 1
+  _accel: 10
+  _decel: 13

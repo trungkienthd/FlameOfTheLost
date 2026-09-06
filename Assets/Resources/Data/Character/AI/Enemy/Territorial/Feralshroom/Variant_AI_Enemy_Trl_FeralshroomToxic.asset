@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 181afeccca07db8438a0374f962778d1, type: 3}
-  m_Name: Variant_Enemy_Trl_FeralshroomToxic
+  m_Name: Variant_AI_Enemy_Trl_FeralshroomToxic
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyVariantProfile
-  _initialInventoryEntries: []
-  _characterProfile: {fileID: 0}
+  _initialInventoryEntries:
+  - _item: {fileID: 11400000, guid: 363524329bee2e5448ce96f08412d8f8, type: 2}
+    _quantity: 1
+    _equipped: 0
+  _characterProfile: {fileID: 11400000, guid: 4f61df02305fa58428490d75122ee4f0, type: 2}
   _defaultRoamingConfig: {fileID: 11400000, guid: 2169f9fea3c023d419e2f3b7ceda6517, type: 2}
   _attackConfig: {fileID: 11400000, guid: 9889e5b49170bfd47a1cee6a9bfd12fa, type: 2}
