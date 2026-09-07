@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890ffac1f27b07d45a8b915e3bc22fe0, type: 3}
   m_Name: Mm_Player
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterMovementConfig
-  _movementSpeed: 30.5
+  _movementSpeed: 3.5
   _accel: 35
   _decel: 45

@@ -43,8 +43,8 @@ MonoBehaviour:
   _requiredProjectileType: 102
   _costProjectile: 0
   _defaultProjectile: {fileID: 11400000, guid: 6e5295dd33cf13c4d9092c0dbf2f9ed2, type: 2}
-  _projectileSpeed: 5
-  _projectileLifetime: 3
+  _projectileSpeed: 3.5
+  _projectileLifetime: 1
   _destroyProjectileOnHit: 1
   _projectileCount: 1
   _projectileAngleStep: 0
