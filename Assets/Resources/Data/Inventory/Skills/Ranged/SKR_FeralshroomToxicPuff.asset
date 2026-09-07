@@ -51,6 +51,6 @@ MonoBehaviour:
   _defaultProjectile: {fileID: 11400000, guid: 66f641b6fed2a504ebd09596fdaf2275, type: 2}
   _projectileSpeed: 0.5
   _projectileLifetime: 0.75
-  _destroyProjectileOnHit: 1
+  _destroyProjectileOnHit: 0
   _projectileCount: 1
   _projectileAngleStep: 0

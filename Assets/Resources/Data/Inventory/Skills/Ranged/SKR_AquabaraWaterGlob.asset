@@ -21,7 +21,7 @@ MonoBehaviour:
   _attachableWeaponTypes: 06000000
   _requirements: []
   _damageAmount: 5
-  _knockbackForce: 1
+  _knockbackForce: 3
   _harvestDamage:
     _isEnabled: 0
     _impactType: 0
@@ -45,6 +45,6 @@ MonoBehaviour:
   _defaultProjectile: {fileID: 11400000, guid: 6e5295dd33cf13c4d9092c0dbf2f9ed2, type: 2}
   _projectileSpeed: 3.5
   _projectileLifetime: 1
-  _destroyProjectileOnHit: 1
+  _destroyProjectileOnHit: 0
   _projectileCount: 1
   _projectileAngleStep: 0
