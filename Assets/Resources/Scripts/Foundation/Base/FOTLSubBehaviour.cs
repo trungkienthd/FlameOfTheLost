@@ -4,17 +4,13 @@ namespace FlameOfTheLost
 {
     public abstract class FOTLSubBehaviour<TBrainBehaviour> : FOTLMonoBehaviour where TBrainBehaviour : FOTLMonoBehaviour
     {
-        // --- References ---
-        //  1. Brain Behaviour
-        [Header("References (FOTLSubBehaviour) - Brian Behaviour")]
-        [SerializeField] private TBrainBehaviour _brainBehaviour;
+        // --- Runtime ---
+        private TBrainBehaviour _brainBehaviour;
         protected TBrainBehaviour BrainBehaviour
         {
             get => _brainBehaviour;
             private set => _brainBehaviour = value;
         }
-
-        // --- Runtime ---
         public bool IsBound => (UnityEngine.Object)this.BrainBehaviour != null;
 
         // --- Public APIs ---

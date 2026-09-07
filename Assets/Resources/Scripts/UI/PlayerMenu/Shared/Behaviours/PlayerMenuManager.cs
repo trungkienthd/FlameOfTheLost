@@ -73,9 +73,9 @@ namespace FlameOfTheLost
         }
         private void Start()
         {
-            this.HideAllPanelsImmediate();
-            this.ResumeGameplay();
-            this.SwitchToPlayerActionMap();
+            //this.HideAllPanelsImmediate();
+            //this.ResumeGameplay();
+            //this.SwitchToPlayerActionMap();
         }
 
         // --- Public APIs ---
