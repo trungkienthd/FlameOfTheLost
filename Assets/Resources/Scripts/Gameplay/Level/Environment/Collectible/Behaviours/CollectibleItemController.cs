@@ -3,40 +3,31 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public sealed class CollectibleItemController : FOTLMonoBehaviour,
+    public sealed class CollectibleItemController : FOTLWorldObjectProfileBehaviour<CollectibleItemProfile>,
         IPlayerInteractable,
         IPlayerInteractionPromptSource,
         IPlayerInteractionPromptRefreshNotifier
     {
-        // --- States ---
+        // --- Data / Configs ---
         //  1. Item
-        [Header("Item")]
-        [SerializeField] private ItemProfile _item;
-        [SerializeField, Min(1)] private int _quantity = 1;
-        public ItemProfile Item => _item;
-        public int Quantity
-        {
-            get => _quantity;
-            private set => _quantity = Mathf.Max(1, value);
-        }
+        public ItemProfile Item => this.Profile != null
+            ? this.Profile.Item
+            : null;
 
-        //  2. References
-        [Header("References")]
-        [SerializeField] private SpriteRenderer _spriteRenderer;
-        private SpriteRenderer SpriteRenderer => _spriteRenderer;
+        public int Quantity => this.Profile != null
+            ? this.Profile.Quantity
+            : 1;
 
-        //  3. Prompt Settings
-        [Header("Prompt Settings")]
-        [SerializeField] private int _interactionPromptPriority = 100;
-        public int InteractionPromptPriority => _interactionPromptPriority;
+        //  2. Interaction
+        public int InteractionPromptPriority => this.Profile != null
+            ? this.Profile.InteractionPromptPriority
+            : 100;
 
-        //  4. Collection Settings
-        [Header("Collection Settings")]
-        [SerializeField] private bool _destroyAfterCollection = true;
-        private bool DestroyAfterCollection => _destroyAfterCollection;
+        //  3. Collection
+        private bool DestroyAfterCollection => this.Profile != null && this.Profile.DestroyAfterCollection;
 
-        //  5. Runtime State
-        [Header("Runtime State")]
+        // --- Runtime ---
+        [Header("Runtime")]
         [SerializeField] private bool _isCollected;
         public bool IsCollected
         {
@@ -47,20 +38,6 @@ namespace FlameOfTheLost
         // --- Events ---
         public event Action PromptRefreshRequested;
         public event Action<CollectibleItemController, GameObject> Collected;
-
-        // --- Unity Callbacks ---
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            if (this.SpriteRenderer != null && this.Item != null)
-            {
-                if (this.SpriteRenderer.sprite == null)
-                {
-                    this.SpriteRenderer.sprite = this.Item.Icon;
-                }
-            }
-        }
-#endif
 
         // --- Public APIs ---
         //  1. IPlayerInteractable
@@ -155,47 +132,18 @@ namespace FlameOfTheLost
             return inventoryController != null;
         }
 
-        //  3. Visual
-        private void ApplyItemVisual()
-        {
-            if (this.SpriteRenderer == null) return;
-            if (this.Item == null) return;
-
-            this.SpriteRenderer.sprite = this.Item.Icon;
-        }
-
-        //  4. FOTLMonoBehaviour overrides
-        protected override void CacheInternalReferences()
-        {
-            base.CacheInternalReferences();
-
-            if (this.SpriteRenderer == null) _spriteRenderer = this.GetComponentInChildren<SpriteRenderer>(true);
-        }
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
-            if (this.Item == null)
-            {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(CollectibleItemController)}] " + $"Item is not assigned.", this);
-            }
-
-            if (this.SpriteRenderer == null)
-            {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(CollectibleItemController)}] " + $"Sprite Renderer reference is not assigned.", this);
-            }
+            if (this.Item == null) Debug.LogError($"[{this.gameObject.name}.{nameof(CollectibleItemController)}] Item is not assigned.", this);
         }
         protected override void InitializeInternalState()
         {
             base.InitializeInternalState();
 
             this.IsCollected = false;
-        }
-        protected override void InitializePregameplayState()
-        {
-            base.InitializePregameplayState();
-
-            this.ApplyItemVisual();
         }
     }
 }

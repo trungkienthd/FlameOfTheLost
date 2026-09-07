@@ -1,7 +1,7 @@
 # Data ID Convention
 
 **Project:** FlameOfTheLost  
-**Version:** 3.5  
+**Version:** 3.6  
 **Scope:** ID attributes assigned to project-owned **ScriptableObject** assets.
 
 ---
@@ -153,6 +153,7 @@ IDs must never be reused by unrelated gameplay definitions.
 321xx   Obstacle Profiles
 322xx   Harvestable Object Profiles
 323xx   Crafting Station Profiles
+324xx   Collectible Item Profiles
 
 4xxxx   Tutorial Data
 

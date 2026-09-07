@@ -19,6 +19,7 @@
 321xx   ObstacleProfile
 322xx   HarvestableObjectProfile
 323xx   CraftingStationProfile
+324xx   CollectibleItemProfile
 ```
 
 ---
@@ -32,7 +33,8 @@ Environment
 │
 ├─ Interactable
 │  ├─ ItemContainerProfile
-│  └─ CraftingStationProfile
+│  ├─ CraftingStationProfile
+│  └─ CollectibleItemProfile
 │
 ├─ Obstacle
 │  └─ ObstacleProfile
@@ -64,8 +66,8 @@ Environment
 321xx   Obstacle Profiles
 322xx   Harvestable Object Profiles
 323xx   Crafting Station Profiles
+324xx   Collectible Item Profiles
 
-324xx   Reserved
 325xx   Reserved
 326xx   Reserved
 327xx   Reserved
@@ -100,9 +102,18 @@ Current interactable environment object profile types include:
 ```text
 320xx   ItemContainerProfile
 323xx   CraftingStationProfile
+324xx   CollectibleItemProfile
 ```
 
 All instances using the same profile share the same ID.
+
+---
+
+### Collectible Item Profiles
+
+The ID identifies a **collectible item world-object archetype**.
+
+All instances using the same profile share the same ID. The collected `ItemProfile` remains identified by the Item data convention (`7xxxx`); the `324xx` ID identifies the collectible world-object definition itself.
 
 ---
 
@@ -139,6 +150,8 @@ All instances using the same profile share the same ID.
 32203   Copper Ore Deposit
 
 32301   Makeshift Workbench
+
+32401   Collectible - Reed Stalk
 ```
 
 ---
