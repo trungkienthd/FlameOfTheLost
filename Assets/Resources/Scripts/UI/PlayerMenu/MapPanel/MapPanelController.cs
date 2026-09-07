@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace FlameOfTheLost
 {
-    public class MapPanelController : PlayerMenuPanelController
+    public class MapPanelController : PlayerMenuPanelControllerBase
     {
     }
 }

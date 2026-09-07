@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class InventoryPanelController : PlayerMenuPanelController
+    public class InventoryPanelController : PlayerMenuPanelControllerBase
     {
         // --- References ---
         //  1. Sub-Behaviours
@@ -18,6 +18,14 @@ namespace FlameOfTheLost
         public InventoryItemEntry CurrentSelectedEntry { get; private set; }
 
         // --- Public APIs ---
+        //  0. Panel
+        public override void ShowPanel()
+        {
+            base.ShowPanel();
+
+            this.RefreshSelectionPresentation();
+        }
+
         //  1. Selection
         public void SetSelectedEntry(InventoryItemEntry entry, IReadOnlyList<InventoryItemEntry> validEntries)
         {
@@ -109,12 +117,6 @@ namespace FlameOfTheLost
             base.InitializeInternalState();
 
             this.CurrentSelectedEntry = null;
-        }
-        protected override void InitializeGameplay()
-        {
-            base.InitializeGameplay();
-
-            this.RefreshSelectionPresentation();
         }
         protected override void UnbindInternalReferences()
         {

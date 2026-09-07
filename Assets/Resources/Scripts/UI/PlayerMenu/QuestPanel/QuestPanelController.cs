@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class QuestPanelController : PlayerMenuPanelController
+    public class QuestPanelController : PlayerMenuPanelControllerBase
     { 
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class LoadoutPanelController : PlayerMenuPanelController
+    public class LoadoutPanelController : PlayerMenuPanelControllerBase
     {
         // --- References ---
         [Header("References (Sub-Behaviours)")]
@@ -16,23 +16,24 @@ namespace FlameOfTheLost
         // --- Public APIs ---
         public override void ShowPanel()
         {
-            this.gameObject.SetActive(true);
+            base.ShowPanel();
 
             if (this.EquippedLoadoutSubPanelController != null)
             {
                 this.EquippedLoadoutSubPanelController.gameObject.SetActive(true);
                 this.EquippedLoadoutSubPanelController.ClearSelection();
-                this.EquippedLoadoutSubPanelController.RefreshAll();
             }
 
             this.CandidateLoadoutSubPanelController?.HidePanel();
         }
         public override void HidePanel()
         {
+            if (!this.IsPanelShown) return;
+
             this.EquippedLoadoutSubPanelController?.ClearSelection();
             this.CandidateLoadoutSubPanelController?.HidePanel();
 
-            this.gameObject.SetActive(false);
+            base.HidePanel();
         }
 
         // --- FOTLMonoBehaviour Overrides ---
