@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db0c80cd05b697b4094ceef064e716f6, type: 3}
-  m_Name: Mtr_AquamarineChunks
+  m_Name: 75206_Mtr_AmberBlock
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MaterialProfile
-  _id: 75201
-  _key: AQUAMARINE_CHUNKS
-  _displayName: Aquamarine Chunks
+  _id: 75206
+  _key: AMBER_BLOCK
+  _displayName: Amber Block
   _description: 
-  _icon: {fileID: 1969484138, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
+  _icon: {fileID: 2049519565, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
   _isStackable: 1
   _maxStackSize: 99

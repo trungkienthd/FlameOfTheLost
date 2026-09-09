@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db0c80cd05b697b4094ceef064e716f6, type: 3}
-  m_Name: Mtr_IronOre
+  m_Name: 75104_Mtr_CopperChunks
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MaterialProfile
-  _id: 75102
-  _key: IRON_ORE
-  _displayName: Iron Ore
+  _id: 75104
+  _key: COPPER_CHUNKS
+  _displayName: Copper Chunks
   _description: 
-  _icon: {fileID: 1528225356, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
+  _icon: {fileID: 1701592495, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
   _isStackable: 1
   _maxStackSize: 99

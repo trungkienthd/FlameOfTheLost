@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db0c80cd05b697b4094ceef064e716f6, type: 3}
-  m_Name: Mtr_AquamarineCrystal
+  m_Name: 75213_Mtr_AmethystChunks
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MaterialProfile
-  _id: 75202
-  _key: AQUAMARINE_CRYSTAL
-  _displayName: Aquamarine Crystal
+  _id: 75213
+  _key: AMETHYST_CHUNKS
+  _displayName: Amethyst Chunks
   _description: 
-  _icon: {fileID: -173592918, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
+  _icon: {fileID: -1928602271, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
   _isStackable: 1
   _maxStackSize: 99

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db0c80cd05b697b4094ceef064e716f6, type: 3}
-  m_Name: Mtr_AquamarineBar
+  m_Name: 75211_Mtr_EmeraldCrystal
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MaterialProfile
-  _id: 75203
-  _key: AQUAMARINE_BAR
-  _displayName: Aquamarine Bar
+  _id: 75211
+  _key: EMERALD_CRYSTAL
+  _displayName: Emerald Crystal
   _description: 
-  _icon: {fileID: 1815716156, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
+  _icon: {fileID: -1068647879, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
   _isStackable: 1
   _maxStackSize: 99

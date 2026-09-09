@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db0c80cd05b697b4094ceef064e716f6, type: 3}
-  m_Name: Mtr_IronBar
+  m_Name: 75003_Mtr_Twig
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MaterialProfile
-  _id: 75103
-  _key: IRON_BAR
-  _displayName: Iron Bar
+  _id: 75003
+  _key: TWIG
+  _displayName: Twig
   _description: 
-  _icon: {fileID: 1114872518, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
+  _icon: {fileID: -1768000699, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
   _isStackable: 1
   _maxStackSize: 99

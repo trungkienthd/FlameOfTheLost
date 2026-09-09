@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db0c80cd05b697b4094ceef064e716f6, type: 3}
-  m_Name: Mtr_IronChunks
+  m_Name: 75006_Mtr_PurpleOrb
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MaterialProfile
-  _id: 75101
-  _key: IRON_CHUNKS
-  _displayName: Iron Chunks
+  _id: 75006
+  _key: PURPLE_ORB
+  _displayName: Purple Orb
   _description: 
-  _icon: {fileID: -546202583, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
+  _icon: {fileID: 949228773, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
   _isStackable: 1
   _maxStackSize: 99
