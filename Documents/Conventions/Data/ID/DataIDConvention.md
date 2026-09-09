@@ -1,7 +1,7 @@
 # Data ID Convention
 
 **Project:** FlameOfTheLost  
-**Version:** 3.6  
+**Version:** 3.7  
 **Scope:** ID attributes assigned to project-owned **ScriptableObject** assets.
 
 ---
@@ -74,6 +74,10 @@ Example:
 7xxxx   Items
 8xxxx   Skills
 ```
+
+A category may reserve more than two trailing digits when additional internal grouping is required.
+
+For example, Materials use the full `75xxx` range and are further divided into `750xx`, `751xx`, and `752xx` sub-ranges.
 
 ---
 
@@ -173,7 +177,11 @@ IDs must never be reused by unrelated gameplay definitions.
 720xx   Consumable Items
 730xx   Projectiles
 740xx   Key Items
-750xx   Materials
+
+75xxx   Materials
+750xx   General / Natural Materials
+751xx   Metal Materials
+752xx   Crystal Materials
 
 8xxxx   Skill Data
 
@@ -190,7 +198,7 @@ When creating a new ID-bearing gameplay data definition:
 1. Identify its gameplay system.
 2. Open the corresponding category document.
 3. Select the correct sub-range.
-4. Assign the next available ID.
+4. Assign the next available ID according to that category's allocation rules.
 5. Verify the ID is unused.
 6. Store the ID in the corresponding data asset or profile.
 7. Commit the data with the assigned ID.
@@ -226,13 +234,13 @@ The following are **not permitted**:
 
 # 9. Future Expansion
 
-When introducing a new gameplay system:
+When introducing a new gameplay system or a new documented sub-range:
 
-1. Allocate an unused major range.
-2. Create a corresponding category document.
-3. Update this document.
-4. Add the new range to the summary table.
-5. Document all sub-ranges before assigning IDs.
+1. Allocate an unused range.
+2. Create or update the corresponding category document.
+3. Update this document when the top-level summary changes.
+4. Document the allocation before assigning IDs.
+5. Preserve existing IDs and reserved gaps.
 
 ---
 
@@ -242,6 +250,7 @@ When introducing a new gameplay system:
 - Contributors should consult the corresponding category document before creating new assets.
 - ID collisions must be resolved before merging.
 - Deprecated IDs should not be reused unless the original asset was never committed or referenced.
+- Intentional gaps in an allocated range may remain unused until suitable content is defined.
 
 ---
 

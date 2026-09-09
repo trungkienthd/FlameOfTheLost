@@ -2,25 +2,54 @@
 
 ## Purpose
 
-This document defines the current material catalogue for **FlameOfTheLost** and the harvestables that supply each material.
+This document defines the current material catalogue for **FlameOfTheLost**, including both materials already used in gameplay and material data prepared for later harvesting, processing, crafting, upgrading, trading, quests, or economy systems.
 
-Asset naming should follow the existing item convention:
+Materials are non-consumable item resources.
 
-`Mtr_<MaterialName>`
-
-Materials are non-consumable crafting resources. They may later participate in crafting, upgrading, trading, quest requirements, or other systems.
+This document focuses on **game content** rather than naming or Data ID conventions. Those conventions are documented separately under `Documents/Conventions/`.
 
 ---
 
-## 1. Natural Materials
+## 1. Natural / General Materials
+
+### Wood
+
+**Status:** Current
+
+Primary sources:
+
+- Oak Tree
+- Birch Tree
+- Spruce Tree
+
+Gameplay role:
+
+- Substantial timber resource.
+- Suitable for construction, weapon components, crafting stations, and ammunition crafting.
+
+Planned alternate Arrow recipe:
+
+`1 Wood -> 6 Arrows`
+
+This allows Wood to function as a higher-value alternative to Twig.
+
+### Bone
+
+**Status:** Data Created
+
+Source:
+
+- Not defined yet.
+
+Gameplay role:
+
+- Not defined yet.
+
+Bone has a material data asset, but it should not be assigned to a harvestable or enemy drop until its gameplay source is intentionally designed.
 
 ### Twig
 
 **Status:** Current
-
-Suggested asset:
-
-`Mtr_Twig`
 
 Primary sources:
 
@@ -44,184 +73,308 @@ Current Arrow recipe:
 
 `1 Twig -> 3 Arrows`
 
-This replaces the old semantic use of `ReedStalk` / `PlantFibre` for the existing early Arrow recipe.
+Twig replaces the earlier semantic use of `ReedStalk` / `PlantFibre` for the basic Arrow recipe.
 
-### Wood
+### Purple Orb
 
-**Status:** Current
-
-Asset:
-
-`Mtr_Wood`
-
-Primary sources:
-
-- Oak Tree
-- Birch Tree
-- Spruce Tree
-
-Gameplay role:
-
-- More substantial timber than Twig.
-- Less frequent per tree harvest.
-- Suitable for construction, weapon components, crafting stations, and efficient ammunition crafting.
-
-Planned alternate Arrow recipe:
-
-`1 Wood -> 6 Arrows`
-
-This allows Wood to function as a higher-value alternative to Twig without removing the basic Twig recipe.
-
----
-
-## 2. Mineral Materials
-
-The ore sprite set supports eight mineral families.
-
-These materials are **planned**. They are documented now so the available visual content has a clear gameplay destination; they do not all need to be introduced during Greenvale.
-
-### Iron
-
-Suggested asset:
-
-`Mtr_Iron`
+**Status:** Data Created
 
 Source:
 
+- Not defined yet.
+
+Gameplay role:
+
+- Not defined yet.
+
+The sprite and material data exist, but its actual gameplay identity should remain undefined until it is connected to a system, world source, recipe, progression mechanic, or other content.
+
+### Stone
+
+**Status:** Data Created
+
+Source:
+
+- Not defined yet.
+
+Gameplay role:
+
+- Candidate generic mineral/construction resource.
+- No harvestable source has been established yet.
+
+Stone should not automatically be assigned to a rock or mining node until that gameplay relationship is explicitly designed.
+
+---
+
+## 2. Metal Materials
+
+Metal resources are represented by three families:
+
+- Iron
+- Copper
+- Gold
+
+Each family contains three distinct material forms:
+
+`Chunks -> Ore -> Bar`
+
+The current intended interpretation is:
+
+- **Chunks** — raw material obtained from a mineral node.
+- **Ore** — processed or consolidated intermediate material.
+- **Bar** — refined material intended for later crafting, equipment, upgrades, or economy systems.
+
+The processing system that converts between these forms has not yet been implemented.
+
+### Iron
+
+**Status:** Data Created
+
+Materials:
+
+- Iron Chunks
+- Iron Ore
+- Iron Bar
+
+Primary harvestable:
+
 - Iron Node
+
+Current intended direct harvest drop:
+
+- Iron Chunks
 
 Role:
 
-- Common structural metal.
+- Common structural metal family.
 - Candidate for weapons, tools, armour, and upgrades.
 
 ### Copper
 
-Suggested asset:
+**Status:** Data Created
 
-`Mtr_Copper`
+Materials:
 
-Source:
+- Copper Chunks
+- Copper Ore
+- Copper Bar
+
+Primary harvestable:
 
 - Copper Node
 
+Current intended direct harvest drop:
+
+- Copper Chunks
+
 Role:
 
-- Early metal and component material.
-- Candidate for simple equipment or utility recipes.
+- Early metal and component family.
+- Candidate for simple equipment and utility recipes.
 
 ### Gold
 
-Suggested asset:
+**Status:** Data Created
 
-`Mtr_Gold`
+Materials:
 
-Source:
+- Gold Chunks
+- Gold Ore
+- Gold Bar
+
+Primary harvestable:
 
 - Gold Node
 
+Current intended direct harvest drop:
+
+- Gold Chunks
+
 Role:
 
-- Rare crafting/value material.
+- Rare crafting/value material family.
 - Distinct from the Lost Embers currency.
 
-### Emerald
+---
 
-Suggested asset:
+## 3. Crystal Materials
 
-`Mtr_Emerald`
+Crystal resources are represented by five families:
 
-Source:
+- Aquamarine
+- Amber
+- Ruby
+- Emerald
+- Amethyst
 
-- Emerald Node
+Each family contains three distinct material forms:
 
-Role:
+`Chunks -> Crystal -> Block`
 
-- Green crystal/gem material.
-- Future magical, nature, or poison-related recipes are possible.
+The current intended interpretation is:
+
+- **Chunks** — raw crystal fragments obtained from a mineral node.
+- **Crystal** — processed or consolidated crystal material.
+- **Block** — refined high-density material intended for later crafting, upgrading, magical systems, trading, or specialist recipes.
+
+The processing system that converts between these forms has not yet been implemented.
 
 ### Aquamarine
 
-Suggested asset:
+**Status:** Data Created
 
-`Mtr_Aquamarine`
+Materials:
 
-Source:
+- Aquamarine Chunks
+- Aquamarine Crystal
+- Aquamarine Block
+
+Primary harvestable:
 
 - Aquamarine Node
 
+Current intended direct harvest drop:
+
+- Aquamarine Chunks
+
 Role:
 
-- Cyan/blue crystal material.
+- Cyan/blue crystal family.
 - Future water or magical recipes are possible.
 
 ### Amber
 
-Suggested asset:
+**Status:** Data Created
 
-`Mtr_Amber`
+Materials:
 
-Source:
+- Amber Chunks
+- Amber Crystal
+- Amber Block
+
+Primary harvestable:
 
 - Amber Node
 
+Current intended direct harvest drop:
+
+- Amber Chunks
+
 Role:
 
-- Orange mineral/gem material.
+- Orange crystal family.
 - Future elemental or specialist recipes are possible.
 
 ### Ruby
 
-Suggested asset:
+**Status:** Data Created
 
-`Mtr_Ruby`
+Materials:
 
-Source:
+- Ruby Chunks
+- Ruby Crystal
+- Ruby Block
+
+Primary harvestable:
 
 - Ruby Node
 
+Current intended direct harvest drop:
+
+- Ruby Chunks
+
 Role:
 
-- Red crystal/gem material.
+- Red crystal family.
 - Future fire or offensive recipes are possible.
+
+### Emerald
+
+**Status:** Data Created
+
+Materials:
+
+- Emerald Chunks
+- Emerald Crystal
+- Emerald Block
+
+Primary harvestable:
+
+- Emerald Node
+
+Current intended direct harvest drop:
+
+- Emerald Chunks
+
+Role:
+
+- Green crystal family.
+- Future magical, nature, or poison-related recipes are possible.
 
 ### Amethyst
 
-Suggested asset:
+**Status:** Data Created
 
-`Mtr_Amethyst`
+Materials:
 
-Source:
+- Amethyst Chunks
+- Amethyst Crystal
+- Amethyst Block
+
+Primary harvestable:
 
 - Amethyst Node
 
+Current intended direct harvest drop:
+
+- Amethyst Chunks
+
 Role:
 
-- Purple crystal/gem material.
-- Future arcane/status-effect recipes are possible.
+- Purple crystal family.
+- Future arcane or status-effect recipes are possible.
 
 ---
 
-## 3. Material Catalogue
+## 4. Material Catalogue
 
-| Material | Suggested Asset | Status | Primary Harvestable |
+| Material | Status | Primary Source | Direct Harvest Drop? |
 |---|---|---|---|
-| Twig | `Mtr_Twig` | Current | Timber Trees |
-| Wood | `Mtr_Wood` | Current | Timber Trees |
-| Iron | `Mtr_Iron` | Planned | Iron Node |
-| Copper | `Mtr_Copper` | Planned | Copper Node |
-| Gold | `Mtr_Gold` | Planned | Gold Node |
-| Emerald | `Mtr_Emerald` | Planned | Emerald Node |
-| Aquamarine | `Mtr_Aquamarine` | Planned | Aquamarine Node |
-| Amber | `Mtr_Amber` | Planned | Amber Node |
-| Ruby | `Mtr_Ruby` | Planned | Ruby Node |
-| Amethyst | `Mtr_Amethyst` | Planned | Amethyst Node |
+| Wood | Current | Timber Trees | Yes |
+| Bone | Data Created | Not defined | Not defined |
+| Twig | Current | Timber Trees | Yes |
+| Purple Orb | Data Created | Not defined | Not defined |
+| Stone | Data Created | Not defined | Not defined |
+| Iron Chunks | Data Created | Iron Node | Yes |
+| Iron Ore | Data Created | Processing | No |
+| Iron Bar | Data Created | Processing | No |
+| Copper Chunks | Data Created | Copper Node | Yes |
+| Copper Ore | Data Created | Processing | No |
+| Copper Bar | Data Created | Processing | No |
+| Gold Chunks | Data Created | Gold Node | Yes |
+| Gold Ore | Data Created | Processing | No |
+| Gold Bar | Data Created | Processing | No |
+| Aquamarine Chunks | Data Created | Aquamarine Node | Yes |
+| Aquamarine Crystal | Data Created | Processing | No |
+| Aquamarine Block | Data Created | Processing | No |
+| Amber Chunks | Data Created | Amber Node | Yes |
+| Amber Crystal | Data Created | Processing | No |
+| Amber Block | Data Created | Processing | No |
+| Ruby Chunks | Data Created | Ruby Node | Yes |
+| Ruby Crystal | Data Created | Processing | No |
+| Ruby Block | Data Created | Processing | No |
+| Emerald Chunks | Data Created | Emerald Node | Yes |
+| Emerald Crystal | Data Created | Processing | No |
+| Emerald Block | Data Created | Processing | No |
+| Amethyst Chunks | Data Created | Amethyst Node | Yes |
+| Amethyst Crystal | Data Created | Processing | No |
+| Amethyst Block | Data Created | Processing | No |
 
 ---
 
-## 4. Materials Deliberately Not Added Yet
+## 5. Materials Deliberately Not Defined Yet
 
-The following should not be created only because an environmental sprite could support them:
+The following should not be created only because an environmental or resource sprite could visually support them:
 
 - Reed Stalk
 - Plant Fibre
@@ -231,7 +384,9 @@ The following should not be created only because an environmental sprite could s
 - Bark
 - Leaves
 - Spruce Needles
+- Unidentified feather / plant-like resource
+- Unidentified bark / wood-like resource
 
-These can be added later when a recipe or gameplay loop actually requires them.
+These can be added later when a recipe, harvesting loop, enemy drop, progression system, or economy role actually requires them.
 
-Keeping the material catalogue compact avoids inventory clutter and makes each new material mechanically meaningful.
+Keeping the material catalogue intentional avoids inventory clutter and prevents visual assets from defining gameplay content before the design is established.
