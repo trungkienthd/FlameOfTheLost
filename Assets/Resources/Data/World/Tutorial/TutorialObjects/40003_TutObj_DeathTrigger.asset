@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1534d8cae335ae045ad29f48dc355c53, type: 3}
+  m_Name: 40003_TutObj_DeathTrigger
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TutorialObjectProfile
+  _id: 40003
+  _key: TUTORIAL_OBJECT_DEATH_TRIGGER
+  _displayName: 'Tutorial Object: Death Trigger'
+  _description: "Falling into this hole \nwill kill you."
+  _icon: {fileID: 527407256, guid: ed26a618e3ead734889f0fdcd174e4a9, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 9.3, y: -8, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1.2, y: 1.5, z: 1}
+  _configureIconAtStart: 1
+  _visibleOnStart: 1

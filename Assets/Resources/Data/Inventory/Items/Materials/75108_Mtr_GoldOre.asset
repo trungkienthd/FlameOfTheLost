@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MaterialProfile
   _id: 75108
   _key: GOLD_ORE
-  _displayName: Copper Ore
+  _displayName: Gold Ore
   _description: 
   _icon: {fileID: -168566656, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
   _isStackable: 1

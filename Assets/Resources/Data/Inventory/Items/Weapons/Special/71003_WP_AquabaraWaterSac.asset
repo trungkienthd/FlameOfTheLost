@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7287a1f981554f14f988778fed0a6c5c, type: 3}
+  m_Name: 71003_WP_AquabaraWaterSac
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.WeaponProfile
+  _id: 71003
+  _key: WATER_SAC
+  _displayName: Water Sac
+  _description: Aquabara's Water Sac
+  _icon: {fileID: 0}
+  _isStackable: 0
+  _maxStackSize: 1
+  _type: 6
+  _normalSkill: {fileID: 11400000, guid: 169d3184cb416ab4aa671c137d6504b1, type: 2}
+  _innateSpecialSkill: {fileID: 0}
+  _requirements: []

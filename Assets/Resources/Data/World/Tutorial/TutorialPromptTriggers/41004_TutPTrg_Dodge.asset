@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c01bafebdd5164c8d460b437566872, type: 3}
+  m_Name: 41004_TutPTrg_Dodge
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PromptTriggerProfile
+  _id: 41004
+  _key: TUTORIAL_PROMPT_DODGE
+  _displayName: Dodge Tutorial Prompt
+  _description: Press [Space] to dodge through enemy attacks.
+  _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 2.5, y: 18.5, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
+  _interactionPromptPriority: 20
+  _startEnabled: 1
+  _hideAfterCompleted: 1
+  _interactionTriggerColliderConfiguration:
+    _colliderType: 0
+    _boxConfiguration:
+      _offset: {x: 0, y: 1}
+      _isTrigger: 1
+      _size: {x: 15, y: 3}
+      _edgeRadius: 0
+      _autoTiling: 0
+    _circleConfiguration:
+      _offset: {x: 0, y: 0}
+      _isTrigger: 0
+      _radius: 0.5
+    _capsuleConfiguration:
+      _offset: {x: 0, y: 0}
+      _isTrigger: 0
+      _size: {x: 1, y: 1}
+      _direction: 0
+    _polygonConfiguration:
+      _offset: {x: 0, y: 0}
+      _isTrigger: 0
+      _paths: []
+  _conditionCombinationType: 1
+  _conditionEntries:
+  - _conditionKey: 200
+    _requiredValue: 1
+  - _conditionKey: 201
+    _requiredValue: 1

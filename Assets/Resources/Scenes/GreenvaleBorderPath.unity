@@ -678,7 +678,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1419941061477991217, guid: 3c4021cea9e4c414ab9a4a765d797c79, type: 3}
       propertyPath: m_Name
-      value: GO_Trn_Water_30001
+      value: GO_Trn_Water
       objectReference: {fileID: 0}
     - target: {fileID: 1419941061477991217, guid: 3c4021cea9e4c414ab9a4a765d797c79, type: 3}
       propertyPath: m_Layer
@@ -58010,47 +58010,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestDamageSourceProvider
   _enableDebugLogs: 1
---- !u!21 &85979516
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _WidthHeightRadius: {r: 24, g: 24, b: 7, a: 0}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &92620985
 GameObject:
   m_ObjectHideFlags: 0
@@ -58118,7 +58077,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1419941061477991217, guid: 3c4021cea9e4c414ab9a4a765d797c79, type: 3}
       propertyPath: m_Name
-      value: GO_Trn_Bridge_30004
+      value: GO_Trn_Bridge
       objectReference: {fileID: 0}
     - target: {fileID: 1419941061477991217, guid: 3c4021cea9e4c414ab9a4a765d797c79, type: 3}
       propertyPath: m_Layer
@@ -64042,47 +64001,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!21 &105799675
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _WidthHeightRadius: {r: 29, g: 29, b: 9, a: 0}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &119555238
 GameObject:
   m_ObjectHideFlags: 0
@@ -65138,7 +65056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7445347965315535678, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_Name
-      value: GO_TutPTrg_Dodge_41004
+      value: GO_TutPTrg_Dodge
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5592425362205573105, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
@@ -65151,6 +65069,47 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1156913040774449775, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
   m_PrefabInstance: {fileID: 218470043}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &220600967
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 24, g: 24, b: 7, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &222077308
 GameObject:
   m_ObjectHideFlags: 0
@@ -65944,7 +65903,7 @@ PrefabInstance:
       objectReference: {fileID: 1925837248}
     - target: {fileID: 7445347965315535678, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_Name
-      value: GO_TutPTrg_LoadoutManagement_41005
+      value: GO_TutPTrg_LoadoutManagement
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -66263,47 +66222,6 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _iconImage: {fileID: 1758812059}
   _quantityText: {fileID: 1480373945}
---- !u!21 &330751808
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _WidthHeightRadius: {r: 24, g: 24, b: 7, a: 0}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &331205188
 GameObject:
   m_ObjectHideFlags: 0
@@ -66896,7 +66814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
-      value: GO_TutObj_LatestDefaultSpawnPoint_40004
+      value: GO_TutObj_LatestDefaultSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_IsActive
@@ -67539,7 +67457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_Name
-      value: GO_22003_DSP_Generic_Enemy_Trl_GreenvaleFeralshroomGrove
+      value: GO_DSP_Generic_Enemy_Trl_GreenvaleFeralshroomGrove
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -68566,7 +68484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
-      value: GO_TutObj_CraftingStation_40006
+      value: GO_TutObj_CraftingStation
       objectReference: {fileID: 0}
     - target: {fileID: 6970610019680808802, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_text
@@ -69239,47 +69157,6 @@ MonoBehaviour:
   _hpBar: {fileID: 1222258333}
   _fpBar: {fileID: 1555061067}
   _staminaBar: {fileID: 2032190786}
---- !u!21 &606982124
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _WidthHeightRadius: {r: 24, g: 24, b: 7, a: 0}
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1 &616692783
 GameObject:
   m_ObjectHideFlags: 0
@@ -69916,7 +69793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_Name
-      value: GO_22004_DSP_Generic_Enemy_Trl_GreenvaleAquabaraPond
+      value: GO_DSP_Generic_Enemy_Trl_GreenvaleAquabaraPond
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -70927,7 +70804,7 @@ PrefabInstance:
       objectReference: {fileID: 1925837248}
     - target: {fileID: 7445347965315535678, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_Name
-      value: GO_TutPTrg_QuickEquipWeapon_41002
+      value: GO_TutPTrg_QuickEquipWeapon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -72029,7 +71906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
-      value: GO_TutObj_StartWeaponChest_40002
+      value: GO_TutObj_StartWeaponChest
       objectReference: {fileID: 0}
     - target: {fileID: 5474480641570702319, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_SizeDelta.x
@@ -72200,7 +72077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
-      value: GO_TutObj_HarvestingInstruction_40005
+      value: GO_TutObj_HarvestingInstruction
       objectReference: {fileID: 0}
     - target: {fileID: 6970610019680808802, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_text
@@ -74107,7 +73984,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1419941061477991217, guid: 3c4021cea9e4c414ab9a4a765d797c79, type: 3}
       propertyPath: m_Name
-      value: GO_Trn_Grass_30002
+      value: GO_Trn_Grass
       objectReference: {fileID: 0}
     - target: {fileID: 1419941061477991217, guid: 3c4021cea9e4c414ab9a4a765d797c79, type: 3}
       propertyPath: m_Layer
@@ -121761,7 +121638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1389214061073505002, guid: 8606167bf9c05dd4b8a390d298280ff6, type: 3}
       propertyPath: m_Name
-      value: GO_ItmCtn_ArrowSupplyChest_32003
+      value: GO_ItmCtn_ArrowSupplyChest
       objectReference: {fileID: 0}
     - target: {fileID: 1389214061073505002, guid: 8606167bf9c05dd4b8a390d298280ff6, type: 3}
       propertyPath: m_IsActive
@@ -121814,7 +121691,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1419941061477991217, guid: 3c4021cea9e4c414ab9a4a765d797c79, type: 3}
       propertyPath: m_Name
-      value: GO_Trn_Path_30003
+      value: GO_Trn_Path
       objectReference: {fileID: 0}
     - target: {fileID: 1419941061477991217, guid: 3c4021cea9e4c414ab9a4a765d797c79, type: 3}
       propertyPath: m_Layer
@@ -138590,7 +138467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7445347965315535678, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_Name
-      value: GO_TutPTrg_NormalAttack_41003
+      value: GO_TutPTrg_NormalAttack
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -139075,7 +138952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1389214061073505002, guid: 8606167bf9c05dd4b8a390d298280ff6, type: 3}
       propertyPath: m_Name
-      value: GO_ItmCtn_RangedWeaponChest_32002
+      value: GO_ItmCtn_RangedWeaponChest
       objectReference: {fileID: 0}
     - target: {fileID: 1389214061073505002, guid: 8606167bf9c05dd4b8a390d298280ff6, type: 3}
       propertyPath: m_IsActive
@@ -139752,6 +139629,47 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!21 &1294220363
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 24, g: 24, b: 7, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &1306178434
 GameObject:
   m_ObjectHideFlags: 0
@@ -140245,6 +140163,47 @@ MonoBehaviour:
   _enableDebugLogs: 1
   _mainIcon: {fileID: 1595549757}
   _activeSpecialSkillIcon: {fileID: 1447246181}
+--- !u!21 &1396239598
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 24, g: 24, b: 7, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1 &1399067909
 GameObject:
   m_ObjectHideFlags: 0
@@ -140505,7 +140464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 105799675}
+  m_Material: {fileID: 1964125565}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -144659,7 +144618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_Name
-      value: GO_22002_DSP_Generic_Enemy_Trl_GreenvaleToxicFeralshroomGrove
+      value: GO_DSP_Generic_Enemy_Trl_GreenvaleToxicFeralshroomGrove
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -144861,7 +144820,7 @@ PrefabInstance:
       objectReference: {fileID: 1925837248}
     - target: {fileID: 7445347965315535678, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_Name
-      value: GO_TutPTrg_CycleWeapon_41000
+      value: GO_TutPTrg_CycleWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 7445347965315535678, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_IsActive
@@ -145143,7 +145102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
-      value: GO_TutObj_DeathTrigger_40003
+      value: GO_TutObj_DeathTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_IsActive
@@ -148344,6 +148303,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab70f7d32807b346957692513bc88bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EquippedLoadoutQuantityTextSlotController
+--- !u!21 &1964125565
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI/RoundedCorners/RoundedCorners
+  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UseUIAlphaClip: 0
+    m_Colors:
+    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
+    - _WidthHeightRadius: {r: 29, g: 29, b: 9, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &1967446210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150169,7 +150169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7918980327805844814, guid: 8178affb1a35d624aaf4d1b1bcc7c99f, type: 3}
       propertyPath: m_Name
-      value: GO_DSP_Player_GreenvaleLedge_20002
+      value: GO_DSP_Player_GreenvaleLedge
       objectReference: {fileID: 0}
     - target: {fileID: 8755880574245414522, guid: 8178affb1a35d624aaf4d1b1bcc7c99f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -150588,7 +150588,7 @@ PrefabInstance:
       objectReference: {fileID: 1925837248}
     - target: {fileID: 7445347965315535678, guid: 4c5cf3fff8cc2cb4e94ce9d685cd067d, type: 3}
       propertyPath: m_Name
-      value: GO_TutPTrg_Movement_41001
+      value: GO_TutPTrg_Movement
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -150662,7 +150662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527556847446198130, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_Name
-      value: GO_TutObj_DefaultSpawnPoint_40001
+      value: GO_TutObj_DefaultSpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 6970610019680808802, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
       propertyPath: m_text
@@ -150703,7 +150703,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3102520659608807503, guid: d191960824b1b2d4385289a311260f7c, type: 3}
       propertyPath: m_Name
-      value: GO_Hvt_OakTree_32201
+      value: GO_Hvt_OakTree
       objectReference: {fileID: 0}
     - target: {fileID: 4888823900987234911, guid: d191960824b1b2d4385289a311260f7c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -150764,7 +150764,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2259678806123107226, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
       propertyPath: m_Name
-      value: GO_DTrg_WaysidePit_29001
+      value: GO_DTrg_WaysidePit
       objectReference: {fileID: 0}
     - target: {fileID: 5662903946719793613, guid: 235912eb9e2534e4a818e3e01fcddb29, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
@@ -150877,7 +150877,7 @@ PrefabInstance:
       objectReference: {fileID: 69788579}
     - target: {fileID: 4761942909066715909, guid: b5b282c40e3cd9f46ae86a758d1425a3, type: 3}
       propertyPath: m_Name
-      value: GO_CftStn_MakeshiftWorkbench_32302
+      value: GO_CftStn_MakeshiftWorkbench
       objectReference: {fileID: 0}
     - target: {fileID: 4761942909066715909, guid: b5b282c40e3cd9f46ae86a758d1425a3, type: 3}
       propertyPath: m_IsActive
@@ -150959,7 +150959,7 @@ PrefabInstance:
       objectReference: {fileID: 331205190}
     - target: {fileID: 7918980327805844814, guid: 8178affb1a35d624aaf4d1b1bcc7c99f, type: 3}
       propertyPath: m_Name
-      value: GO_DSP_Player_GreenvaleEntrance_20001
+      value: GO_DSP_Player_GreenvaleEntrance
       objectReference: {fileID: 0}
     - target: {fileID: 8755880574245414522, guid: 8178affb1a35d624aaf4d1b1bcc7c99f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -151072,7 +151072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_Name
-      value: GO_22001_DSP_Generic_Enemy_Trl_GreenvaleFeralshroomDen
+      value: GO_DSP_Generic_Enemy_Trl_GreenvaleFeralshroomDen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -151140,7 +151140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1389214061073505002, guid: 8606167bf9c05dd4b8a390d298280ff6, type: 3}
       propertyPath: m_Name
-      value: GO_ItmCtn_StartWeaponChest_32001
+      value: GO_ItmCtn_StartWeaponChest
       objectReference: {fileID: 0}
     - target: {fileID: 1933743043678913655, guid: 8606167bf9c05dd4b8a390d298280ff6, type: 3}
       propertyPath: _id
@@ -151311,7 +151311,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3587659823894918960, guid: f6eac1fc54e2c24499f71357243f7ea3, type: 3}
       propertyPath: m_Name
-      value: GO_CftStn_MakeshiftWorktable_32301
+      value: GO_CftStn_MakeshiftWorktable
       objectReference: {fileID: 0}
     - target: {fileID: 3852314375682323651, guid: f6eac1fc54e2c24499f71357243f7ea3, type: 3}
       propertyPath: m_LocalPosition.x

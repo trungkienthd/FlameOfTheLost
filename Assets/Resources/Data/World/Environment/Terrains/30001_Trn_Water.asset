@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebaee3e0c17e91345a066e53fa55a538, type: 3}
+  m_Name: 30001_Trn_Water
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerrainProfile
+  _id: 30001
+  _key: WATER
+  _displayName: Water
+  _description: A water terrain area. Humanoid characters move heavily slower while
+    standing in water.
+  _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 0
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
+  _terrainType: 5
+  _priority: 10
+  _rules:
+  - _targetTraversalType: 0
+    _canEnter: 1
+    _applications:
+    - _statusEffect: {fileID: 11400000, guid: da7bb1d74ecc3d54597700bbd403e836, type: 2}
+      _chance: 1
+      _potency: 1
+  - _targetTraversalType: 1
+    _canEnter: 1
+    _applications:
+    - _statusEffect: {fileID: 11400000, guid: a330617c2e84db746b300c139bd2cbef, type: 2}
+      _chance: 1
+      _potency: 1
+  - _targetTraversalType: 2
+    _canEnter: 1
+    _applications: []

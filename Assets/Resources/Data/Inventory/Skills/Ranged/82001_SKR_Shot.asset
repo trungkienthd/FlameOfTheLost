@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc1fbdd3fd47a146b22544a6eae4a7d, type: 3}
+  m_Name: 82001_SKR_Shot
+  m_EditorClassIdentifier: 
+  _id: 82001
+  _key: SHOT
+  _displayName: Shot
+  _description: 
+  _icon: {fileID: 21300000, guid: 1ff9ebe7ddba3d14ebb37a1beb47409f, type: 3}
+  _defaultProvisionType: 0
+  _attachableWeaponTypes: 03000000
+  _requirements: []
+  _damageAmount: 8
+  _knockbackForce: 2
+  _harvestDamage:
+    _isEnabled: 1
+    _impactType: 0
+    _combatDamageMultiplier: 0
+    _flatHarvestDamage: 1
+    _minimumHarvestDamage: 1
+    _triggerSelfOnHitStatusEffects: 0
+  _resourceCost:
+    _hp: 0
+    _fp: 0
+    _stamina: 10
+    _hpPercentOfMax: 0
+    _fpPercentOfMax: 0
+    _staminaPercentOfMax: 0
+    _costType: 1
+    _blockedBySilence: 1
+    _allowSelfKillWithHPCost: 0
+  _statusEffectApplications: []
+  _requiredProjectileType: 1
+  _costProjectile: 1
+  _defaultProjectile: {fileID: 11400000, guid: e3f2367d6724ced468c2cdf9e43748e3, type: 2}
+  _projectileSpeed: 15
+  _projectileLifetime: 3
+  _destroyProjectileOnHit: 1
+  _projectileCount: 1
+  _projectileAngleStep: 0
