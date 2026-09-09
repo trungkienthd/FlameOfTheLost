@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Resources_Icons_NO_Outline_0
+      name: CFRPG16_Resources_Icons_NO_Outline_0_IronChunks
       rect:
         serializedVersion: 2
         x: 0
@@ -140,7 +140,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_NO_Outline_1
+      name: CFRPG16_Resources_Icons_NO_Outline_1_IronOre
       rect:
         serializedVersion: 2
         x: 16
@@ -162,7 +162,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_NO_Outline_2
+      name: CFRPG16_Resources_Icons_NO_Outline_2_IronBar
       rect:
         serializedVersion: 2
         x: 32
@@ -184,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_NO_Outline_3
+      name: CFRPG16_Resources_Icons_NO_Outline_3_AquamarineChunks
       rect:
         serializedVersion: 2
         x: 48
@@ -206,7 +206,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_NO_Outline_4
+      name: CFRPG16_Resources_Icons_NO_Outline_4_AquamarineCrystal
       rect:
         serializedVersion: 2
         x: 64
@@ -228,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_NO_Outline_5
+      name: CFRPG16_Resources_Icons_NO_Outline_5_AquamarineBar
       rect:
         serializedVersion: 2
         x: 80
@@ -813,10 +813,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      CFRPG16_Resources_Icons_NO_Outline_0_IronChunks: -546202583
+      CFRPG16_Resources_Icons_NO_Outline_1_IronOre: 1528225356
       CFRPG16_Resources_Icons_NO_Outline_24_Mtr_Wood: -1287321996
       CFRPG16_Resources_Icons_NO_Outline_26_Mtr_Twig: -1768000699
-      Resources_Icons_NO_Outline_0: -546202583
-      Resources_Icons_NO_Outline_1: 1528225356
+      CFRPG16_Resources_Icons_NO_Outline_2_IronBar: 1114872518
+      CFRPG16_Resources_Icons_NO_Outline_3_AquamarineChunks: 1969484138
+      CFRPG16_Resources_Icons_NO_Outline_4_AquamarineCrystal: -173592918
+      CFRPG16_Resources_Icons_NO_Outline_5_AquamarineBar: 1815716156
       Resources_Icons_NO_Outline_10: -1380559776
       Resources_Icons_NO_Outline_11: 2049519565
       Resources_Icons_NO_Outline_12: -1837760225
@@ -827,7 +831,6 @@ TextureImporter:
       Resources_Icons_NO_Outline_17: -1728429711
       Resources_Icons_NO_Outline_18: -618543655
       Resources_Icons_NO_Outline_19: -1068647879
-      Resources_Icons_NO_Outline_2: 1114872518
       Resources_Icons_NO_Outline_20: -612179951
       Resources_Icons_NO_Outline_21: -1928602271
       Resources_Icons_NO_Outline_22: -104276754
@@ -836,10 +839,7 @@ TextureImporter:
       Resources_Icons_NO_Outline_27: 34721501
       Resources_Icons_NO_Outline_28: -2361983
       Resources_Icons_NO_Outline_29: 949228773
-      Resources_Icons_NO_Outline_3: 1969484138
       Resources_Icons_NO_Outline_30: -367686186
-      Resources_Icons_NO_Outline_4: -173592918
-      Resources_Icons_NO_Outline_5: 1815716156
       Resources_Icons_NO_Outline_6: 1701592495
       Resources_Icons_NO_Outline_7: 1553041489
       Resources_Icons_NO_Outline_8: 2074832802
