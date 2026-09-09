@@ -645,7 +645,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_24_Wood
+      name: CFRPG16_Resources_Icons_Outline_24_Mtr_Wood
       rect:
         serializedVersion: 2
         x: 0
@@ -689,7 +689,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_26_PlantFibre
+      name: CFRPG16_Resources_Icons_Outline_26_Mtr_Twig
       rect:
         serializedVersion: 2
         x: 32
@@ -812,6 +812,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      CFRPG16_Resources_Icons_Outline_24_Mtr_Wood: 905117649
+      CFRPG16_Resources_Icons_Outline_26_Mtr_Twig: 821133075
       Resources_Icons_Outline_0: -2086938371
       Resources_Icons_Outline_1: 743018279
       Resources_Icons_Outline_10: -949073377
@@ -829,9 +831,7 @@ TextureImporter:
       Resources_Icons_Outline_21: -355790192
       Resources_Icons_Outline_22: -1151119310
       Resources_Icons_Outline_23: 492577825
-      Resources_Icons_Outline_24_Wood: 905117649
       Resources_Icons_Outline_25: 1457115570
-      Resources_Icons_Outline_26_PlantFibre: 821133075
       Resources_Icons_Outline_27: -22308795
       Resources_Icons_Outline_28: -516192905
       Resources_Icons_Outline_29: -192042698

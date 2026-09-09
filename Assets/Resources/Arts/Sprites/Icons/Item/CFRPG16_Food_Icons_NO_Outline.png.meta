@@ -1306,7 +1306,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_CsmItem_Cherry
+      name: CFRPG16_CsmItm_Cherry
       rect:
         serializedVersion: 2
         x: 96
@@ -1583,7 +1583,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CFRPG16_CsmItem_Cherry: 327035347
+      CFRPG16_CsmItm_Cherry: 327035347
       Food_Icons_NO_Outline_0: -682981757
       Food_Icons_NO_Outline_1: 2073215446
       Food_Icons_NO_Outline_10: 514300988

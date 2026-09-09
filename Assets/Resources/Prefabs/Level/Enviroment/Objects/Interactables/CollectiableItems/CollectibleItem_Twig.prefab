@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 1871264865254106975}
   - component: {fileID: 911403449981665168}
   m_Layer: 18
-  m_Name: CollectibleItem_ReedStalk
+  m_Name: CollectibleItem_Twig
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

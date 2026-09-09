@@ -27,4 +27,5 @@ MonoBehaviour:
   _configureIconAtStart: 1
   _craftingRecipes:
   - {fileID: 11400000, guid: 7cfd33d43ae324e47a6a422654d29ee9, type: 2}
+  - {fileID: 11400000, guid: 562f0cf84f34c4148ba32ccdf6b7c63e, type: 2}
   _interactionPromptPriority: 100
