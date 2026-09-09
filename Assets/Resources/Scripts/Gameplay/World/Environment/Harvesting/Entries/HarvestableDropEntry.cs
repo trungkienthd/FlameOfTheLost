@@ -6,8 +6,8 @@ namespace FlameOfTheLost
     [Serializable]
     public sealed class HarvestableDropEntry
     {
-        [SerializeField] private CollectibleItemController _collectiblePrefab;
-        public CollectibleItemController CollectiblePrefab => _collectiblePrefab;
+        [SerializeField] private CollectibleObjectController _collectiblePrefab;
+        public CollectibleObjectController CollectiblePrefab => _collectiblePrefab;
 
         [SerializeField, Min(0)] private int _minimumSpawnCount = 1;
         [SerializeField, Min(0)] private int _maximumSpawnCount = 1;

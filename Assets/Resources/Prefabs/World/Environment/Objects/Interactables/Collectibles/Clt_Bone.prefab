@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 1871264865254106975}
   - component: {fileID: 911403449981665168}
   m_Layer: 18
-  m_Name: CollectibleItem_Wood
+  m_Name: Clt_Bone
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,11 +111,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3257482554675122295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fa36882cd9ed8e4ebb1c22a92103a64, type: 3}
+  m_Script: {fileID: 11500000, guid: c0ab3d26036df5245b277bce62eb9a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CollectibleItemController
   _enableDebugLogs: 0
-  _profile: {fileID: 11400000, guid: 006d3e504d9d6d94a9fd72d0149e9471, type: 2}
+  _profile: {fileID: 11400000, guid: b95e1e0433854594580c5fa5e7d2dea2, type: 2}
   _visualTransform: {fileID: 13635673526426235}
   _visualSpriteRenderer: {fileID: 4503067659639655067}
   _isCollected: 0
@@ -214,7 +214,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 905117649, guid: 357b5a702fa0c1041af8504a4bf52131, type: 3}
+  m_Sprite: {fileID: 1457115570, guid: 357b5a702fa0c1041af8504a4bf52131, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

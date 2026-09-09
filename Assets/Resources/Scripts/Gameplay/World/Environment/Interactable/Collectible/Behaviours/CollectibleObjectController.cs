@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public sealed class CollectibleItemController : FOTLWorldObjectProfileBehaviour<CollectibleItemProfile>,
+    public sealed class CollectibleObjectController : FOTLWorldObjectProfileBehaviour<CollectibleObjectProfile>,
         IPlayerInteractable,
         IPlayerInteractionPromptSource,
         IPlayerInteractionPromptRefreshNotifier
@@ -37,7 +37,7 @@ namespace FlameOfTheLost
 
         // --- Events ---
         public event Action PromptRefreshRequested;
-        public event Action<CollectibleItemController, GameObject> Collected;
+        public event Action<CollectibleObjectController, GameObject> Collected;
 
         // --- Public APIs ---
         //  1. IPlayerInteractable
@@ -137,7 +137,7 @@ namespace FlameOfTheLost
         {
             base.ValidateInternalReferences();
 
-            if (this.Item == null) Debug.LogError($"[{this.gameObject.name}.{nameof(CollectibleItemController)}] Item is not assigned.", this);
+            if (this.Item == null) Debug.LogError($"[{this.gameObject.name}.{nameof(CollectibleObjectController)}] Item is not assigned.", this);
         }
         protected override void InitializeInternalState()
         {
