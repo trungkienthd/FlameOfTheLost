@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "CltItm_New", menuName = "Data/FlameOfTheLost/World/Environment/Interactable/Collectible/CollectibleItemProfile")]
+    [CreateAssetMenu(fileName = "Clt_New", menuName = "Data/FlameOfTheLost/World/Environment/Interactable/Collectible/CollectibleItemProfile")]
     public class CollectibleObjectProfile : FOTLWorldObjectProfile
     {
         // --- Data / Configs ---
