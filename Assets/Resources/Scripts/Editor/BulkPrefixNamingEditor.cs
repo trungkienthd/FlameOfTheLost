@@ -1,37 +1,38 @@
+#if UNITY_EDITOR
+
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public static class BulkPrefixRenamingEditor
+    public static class BulkPrefixNamingEditor
     {
-        private const string PREFIX = "CFRPG16_";
+        private const string Prefix = "CFRPG16_";
 
-
-        [MenuItem("Tools/Assets/Add Prefix to Selected Folder (CFRPG16_)")]
+        [MenuItem("FlameOfTheLost/Tools/Assets/Add Prefix to Selected Folder")]
         public static void AddPrefixToSelectedFolder()
         {
             Object obj = Selection.activeObject;
             if (obj == null)
             {
-                Debug.LogError("Select a folder in the Project window first.");
+                Debug.LogError($"[{nameof(BulkPrefixNamingEditor)}] Select a folder in the Project window first.");
                 return;
             }
 
             string folderPath = AssetDatabase.GetAssetPath(obj);
             if (!AssetDatabase.IsValidFolder(folderPath))
             {
-                Debug.LogError("Selected object is not a folder. Please select a folder.");
+                Debug.LogError($"[{nameof(BulkPrefixNamingEditor)}] Selected object is not a folder. Please select a folder.");
                 return;
             }
 
             // Get all assets (including subfolders). This returns GUIDs.
             string[] guids = AssetDatabase.FindAssets("", new[] { folderPath });
 
-            int renamed = 0;
-            int skipped = 0;
-            int failed = 0;
+            int renamedCount = 0;
+            int skippedCount = 0;
+            int failedCount = 0;
 
             AssetDatabase.StartAssetEditing();
             try
@@ -43,14 +44,14 @@ namespace FlameOfTheLost
                     // Skip folders
                     if (AssetDatabase.IsValidFolder(assetPath))
                     {
-                        skipped++;
+                        skippedCount++;
                         continue;
                     }
 
                     // Skip meta / non-assets just in case
                     if (assetPath.EndsWith(".meta"))
                     {
-                        skipped++;
+                        skippedCount++;
                         continue;
                     }
 
@@ -58,33 +59,33 @@ namespace FlameOfTheLost
                     string ext = Path.GetExtension(assetPath);
 
                     // Only rename if missing prefix
-                    if (fileName.StartsWith(PREFIX))
+                    if (fileName.StartsWith(BulkPrefixNamingEditor.Prefix))
                     {
-                        skipped++;
+                        skippedCount++;
                         continue;
                     }
 
-                    string newName = PREFIX + fileName;
+                    string newName = BulkPrefixNamingEditor.Prefix + fileName;
 
                     // Collision check (Unity rename fails if same name exists in folder)
                     string dir = Path.GetDirectoryName(assetPath)?.Replace("\\", "/");
                     string candidatePath = $"{dir}/{newName}{ext}";
                     if (File.Exists(candidatePath))
                     {
-                        Debug.LogWarning($"Skip (name collision): {assetPath} -> {candidatePath}");
-                        failed++;
+                        Debug.LogWarning($"[{nameof(BulkPrefixNamingEditor)}] Skipped '{assetPath}' because '{candidatePath}' already exists.");
+                        failedCount++;
                         continue;
                     }
 
                     string error = AssetDatabase.RenameAsset(assetPath, newName);
                     if (string.IsNullOrEmpty(error))
                     {
-                        renamed++;
+                        renamedCount++;
                     }
                     else
                     {
                         Debug.LogError($"Failed: {assetPath} -> {newName} | {error}");
-                        failed++;
+                        failedCount++;
                     }
                 }
             }
@@ -95,7 +96,9 @@ namespace FlameOfTheLost
                 AssetDatabase.Refresh();
             }
 
-            Debug.Log($"Bulk rename done. Renamed={renamed}, Skipped={skipped}, Failed={failed}");
+            Debug.Log($"[{nameof(BulkPrefixNamingEditor)}] Finished adding asset prefixes. Renamed: {renamedCount}, Skipped: {skippedCount}, Failed: {failedCount}.");
         }
     }
 }
+
+#endif

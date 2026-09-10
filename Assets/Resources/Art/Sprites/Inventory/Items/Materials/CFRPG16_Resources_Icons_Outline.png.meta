@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Resources_Icons_Outline_0
+      name: CFRPG16_Resources_Icons_Outline_0_Mtr_IronChunks
       rect:
         serializedVersion: 2
         x: 0
@@ -139,7 +139,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_1
+      name: CFRPG16_Resources_Icons_Outline_1_Mtr_IronOre
       rect:
         serializedVersion: 2
         x: 16
@@ -161,7 +161,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_2
+      name: CFRPG16_Resources_Icons_Outline_2_Mtr_IronBar
       rect:
         serializedVersion: 2
         x: 32
@@ -183,7 +183,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_3
+      name: CFRPG16_Resources_Icons_Outline_3_Mtr_AquamarineChunks
       rect:
         serializedVersion: 2
         x: 48
@@ -205,7 +205,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_4
+      name: CFRPG16_Resources_Icons_Outline_4_Mtr_AquamarineCrystal
       rect:
         serializedVersion: 2
         x: 64
@@ -227,7 +227,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_5
+      name: CFRPG16_Resources_Icons_Outline_5_Mtr_AquamarineBlock
       rect:
         serializedVersion: 2
         x: 80
@@ -249,7 +249,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_6
+      name: CFRPG16_Resources_Icons_Outline_6_Mtr_CopperChunks
       rect:
         serializedVersion: 2
         x: 0
@@ -271,7 +271,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_7
+      name: CFRPG16_Resources_Icons_Outline_7_Mtr_CopperOre
       rect:
         serializedVersion: 2
         x: 16
@@ -293,7 +293,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_8
+      name: CFRPG16_Resources_Icons_Outline_8_Mtr_CopperBar
       rect:
         serializedVersion: 2
         x: 32
@@ -315,7 +315,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_9
+      name: CFRPG16_Resources_Icons_Outline_9_Mtr_AmberChunks
       rect:
         serializedVersion: 2
         x: 48
@@ -337,7 +337,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_10
+      name: CFRPG16_Resources_Icons_Outline_10_Mtr_AmberCrystal
       rect:
         serializedVersion: 2
         x: 64
@@ -359,7 +359,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_11
+      name: CFRPG16_Resources_Icons_Outline_11_Mtr_AmberBlock
       rect:
         serializedVersion: 2
         x: 80
@@ -381,7 +381,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_12
+      name: CFRPG16_Resources_Icons_Outline_12_Mtr_GoldChunks
       rect:
         serializedVersion: 2
         x: 0
@@ -403,7 +403,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_13
+      name: CFRPG16_Resources_Icons_Outline_13_Mtr_GoldOre
       rect:
         serializedVersion: 2
         x: 16
@@ -425,7 +425,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_14
+      name: CFRPG16_Resources_Icons_Outline_14_Mtr_GoldBar
       rect:
         serializedVersion: 2
         x: 32
@@ -447,7 +447,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_15
+      name: CFRPG16_Resources_Icons_Outline_15_Mtr_RubyChunks
       rect:
         serializedVersion: 2
         x: 48
@@ -469,7 +469,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_16
+      name: CFRPG16_Resources_Icons_Outline_16_Mtr_RubyCrystal
       rect:
         serializedVersion: 2
         x: 64
@@ -491,7 +491,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_17
+      name: CFRPG16_Resources_Icons_Outline_17_Mtr_RubyBlock
       rect:
         serializedVersion: 2
         x: 80
@@ -513,7 +513,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_18
+      name: CFRPG16_Resources_Icons_Outline_18_Mtr_EmeraldChunks
       rect:
         serializedVersion: 2
         x: 0
@@ -535,7 +535,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_19
+      name: CFRPG16_Resources_Icons_Outline_19_Mtr_EmeraldCrystal
       rect:
         serializedVersion: 2
         x: 16
@@ -557,7 +557,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_20
+      name: CFRPG16_Resources_Icons_Outline_20_Mtr_EmeraldBlock
       rect:
         serializedVersion: 2
         x: 32
@@ -579,7 +579,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_21
+      name: CFRPG16_Resources_Icons_Outline_21_Mtr_AmethystChunks
       rect:
         serializedVersion: 2
         x: 48
@@ -601,7 +601,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_22
+      name: CFRPG16_Resources_Icons_Outline_22_Mtr_AmethystCrystal
       rect:
         serializedVersion: 2
         x: 64
@@ -623,7 +623,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_23
+      name: CFRPG16_Resources_Icons_Outline_23_Mtr_AmethystBlock
       rect:
         serializedVersion: 2
         x: 80
@@ -755,7 +755,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_29
+      name: CFRPG16_Resources_Icons_Outline_29_Mtr_PurpleOrb
       rect:
         serializedVersion: 2
         x: 80
@@ -777,7 +777,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Resources_Icons_Outline_30
+      name: CFRPG16_Resources_Icons_Outline_30_Mtr_Stone
       rect:
         serializedVersion: 2
         x: 0
@@ -812,9 +812,35 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      CFRPG16_Resources_Icons_Outline_0_Mtr_IronChunks: -2086938371
+      CFRPG16_Resources_Icons_Outline_10_Mtr_AmberCrystal: -949073377
+      CFRPG16_Resources_Icons_Outline_11_Mtr_AmberBlock: -739518123
+      CFRPG16_Resources_Icons_Outline_12_Mtr_GoldChunks: -362552378
+      CFRPG16_Resources_Icons_Outline_13_Mtr_GoldOre: 1127189001
+      CFRPG16_Resources_Icons_Outline_14_Mtr_GoldBar: 330284451
+      CFRPG16_Resources_Icons_Outline_15_Mtr_RubyChunks: 745375000
+      CFRPG16_Resources_Icons_Outline_16_Mtr_RubyCrystal: 1380207457
+      CFRPG16_Resources_Icons_Outline_17_Mtr_RubyBlock: -500379521
+      CFRPG16_Resources_Icons_Outline_18_Mtr_EmeraldChunks: -1433052538
+      CFRPG16_Resources_Icons_Outline_19_Mtr_EmeraldCrystal: -2050609561
+      CFRPG16_Resources_Icons_Outline_1_Mtr_IronOre: 743018279
+      CFRPG16_Resources_Icons_Outline_20_Mtr_EmeraldBlock: 1283119950
+      CFRPG16_Resources_Icons_Outline_21_Mtr_AmethystChunks: -355790192
+      CFRPG16_Resources_Icons_Outline_22_Mtr_AmethystCrystal: -1151119310
+      CFRPG16_Resources_Icons_Outline_23_Mtr_AmethystBlock: 492577825
       CFRPG16_Resources_Icons_Outline_24_Mtr_Wood: 905117649
       CFRPG16_Resources_Icons_Outline_25_Mtr_Bone: 1457115570
       CFRPG16_Resources_Icons_Outline_26_Mtr_Twig: 821133075
+      CFRPG16_Resources_Icons_Outline_29_Mtr_PurpleOrb: -192042698
+      CFRPG16_Resources_Icons_Outline_2_Mtr_IronBar: -2100697342
+      CFRPG16_Resources_Icons_Outline_30_Mtr_Stone: 173271784
+      CFRPG16_Resources_Icons_Outline_3_Mtr_AquamarineChunks: -1743210960
+      CFRPG16_Resources_Icons_Outline_4_Mtr_AquamarineCrystal: 2081980685
+      CFRPG16_Resources_Icons_Outline_5_Mtr_AquamarineBlock: -103892325
+      CFRPG16_Resources_Icons_Outline_6_Mtr_CopperChunks: 1009418198
+      CFRPG16_Resources_Icons_Outline_7_Mtr_CopperOre: 1668441280
+      CFRPG16_Resources_Icons_Outline_8_Mtr_CopperBar: 1210394440
+      CFRPG16_Resources_Icons_Outline_9_Mtr_AmberChunks: 258803281
       Resources_Icons_Outline_0: -2086938371
       Resources_Icons_Outline_1: 743018279
       Resources_Icons_Outline_10: -949073377
