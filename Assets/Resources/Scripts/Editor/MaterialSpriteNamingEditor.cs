@@ -60,7 +60,7 @@ namespace FlameOfTheLost
         };
 
         // --- Menu ---
-        [MenuItem("FlameOfTheLost/Tools/Asset/Sprite/Item/Material/Rename Outline Sprites")]
+        [MenuItem("FlameOfTheLost/Tools/Assets/Sprite/Item/Material/Rename Outline Sprites")]
         private static void RenameOutlineMaterialSprites()
         {
             TextureImporter importer = AssetImporter.GetAtPath(MaterialSpriteNamingEditor.OutlineSpriteSheetPath) as TextureImporter;

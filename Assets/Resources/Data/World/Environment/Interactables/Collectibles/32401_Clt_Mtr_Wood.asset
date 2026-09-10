@@ -26,6 +26,5 @@ MonoBehaviour:
   _initialVisualLocalScale: {x: 1, y: 1, z: 1}
   _configureIconAtStart: 1
   _item: {fileID: 11400000, guid: 6cd96918b48dfe144b27cba4f95e2526, type: 2}
-  _quantity: 1
   _interactionPromptPriority: 100
   _destroyAfterCollection: 1
