@@ -9,9 +9,7 @@ namespace FlameOfTheLost
         //  1. Item
         [Header("Item")]
         [SerializeField] private ItemProfile _item;
-        [SerializeField, Min(1)] private int _quantity = 1;
         public ItemProfile Item => _item;
-        public int Quantity => Mathf.Max(1, _quantity);
 
         //  2. Interaction
         [Header("Interaction")]

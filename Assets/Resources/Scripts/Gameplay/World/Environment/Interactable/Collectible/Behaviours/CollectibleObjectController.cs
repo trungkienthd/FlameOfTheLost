@@ -14,20 +14,20 @@ namespace FlameOfTheLost
             ? this.Profile.Item
             : null;
 
-        public int Quantity => this.Profile != null
-            ? this.Profile.Quantity
-            : 1;
-
         //  2. Interaction
-        public int InteractionPromptPriority => this.Profile != null
-            ? this.Profile.InteractionPromptPriority
-            : 100;
+        public int InteractionPromptPriority => this.Profile != null ? this.Profile.InteractionPromptPriority : 100;
 
         //  3. Collection
         private bool DestroyAfterCollection => this.Profile != null && this.Profile.DestroyAfterCollection;
 
         // --- Runtime ---
         [Header("Runtime")]
+        [SerializeField, Min(1)] private int _quantity = 1;
+        public int Quantity
+        {
+            get => _quantity;
+            private set => _quantity = Mathf.Max(1, value);
+        }
         [SerializeField] private bool _isCollected;
         public bool IsCollected
         {
@@ -40,6 +40,14 @@ namespace FlameOfTheLost
         public event Action<CollectibleObjectController, GameObject> Collected;
 
         // --- Public APIs ---
+        //  0. Runtime Configuration
+        public void ConfigureQuantity(int quantity)
+        {
+            this.Quantity = quantity;
+
+            this.PromptRefreshRequested?.Invoke();
+        }
+
         //  1. IPlayerInteractable
         public bool CanInteract(GameObject interactor)
         {
@@ -143,6 +151,7 @@ namespace FlameOfTheLost
         {
             base.InitializeInternalState();
 
+            this.Quantity = 1;
             this.IsCollected = false;
         }
     }

@@ -37,21 +37,20 @@ namespace FlameOfTheLost
                 if (entry.CollectiblePrefab == null) continue;
                 if (!entry.ShouldDrop()) continue;
 
-                int spawnCount = entry.RollSpawnCount();
+                int quantity = entry.RollQuantity();
 
-                for (int j = 0; j < spawnCount; j++)
-                {
-                    Vector3 spawnPosition = this.ResolveSpawnPosition(anchorCursor);
+                Vector3 spawnPosition = this.ResolveSpawnPosition(anchorCursor);
 
-                    anchorCursor++;
+                anchorCursor++;
 
-                    UnityEngine.Object.Instantiate
-                    (
-                        original: entry.CollectiblePrefab,
-                        position: spawnPosition,
-                        rotation: Quaternion.identity
-                    );
-                }
+                CollectibleObjectController collectibleController = UnityEngine.Object.Instantiate
+                (
+                    original: entry.CollectiblePrefab,
+                    position: spawnPosition,
+                    rotation: Quaternion.identity
+                );
+
+                collectibleController.ConfigureQuantity(quantity);
             }
         }
         private Vector3 ResolveSpawnPosition(int spawnIndex)

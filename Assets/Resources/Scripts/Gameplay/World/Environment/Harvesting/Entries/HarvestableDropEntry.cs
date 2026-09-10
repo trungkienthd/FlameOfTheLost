@@ -9,11 +9,12 @@ namespace FlameOfTheLost
         [SerializeField] private CollectibleObjectController _collectiblePrefab;
         public CollectibleObjectController CollectiblePrefab => _collectiblePrefab;
 
-        [SerializeField, Min(0)] private int _minimumSpawnCount = 1;
-        [SerializeField, Min(0)] private int _maximumSpawnCount = 1;
-        public int MinimumSpawnCount => Mathf.Max(0, _minimumSpawnCount);
-        public int MaximumSpawnCount => Mathf.Max(this.MinimumSpawnCount, _maximumSpawnCount);
+        [SerializeField, Min(1)] private int _minimumQuantity = 1;
+        [SerializeField, Min(1)] private int _maximumQuantity = 1;
+        public int MinimumQuantity => Mathf.Max(0, _minimumQuantity);
+        public int MaximumQuantity => Mathf.Max(this.MinimumQuantity, _maximumQuantity);
 
+        // --- Public APIs ---
         [SerializeField, Range(0f, 1f)] private float _dropChance = 1f;
         public float DropChance => Mathf.Clamp01(_dropChance);
 
@@ -22,9 +23,9 @@ namespace FlameOfTheLost
             return UnityEngine.Random.value < this.DropChance;
         }
 
-        public int RollSpawnCount()
+        public int RollQuantity()
         {
-            return UnityEngine.Random.Range(this.MinimumSpawnCount, this.MaximumSpawnCount + 1);
+            return UnityEngine.Random.Range(this.MinimumQuantity, this.MaximumQuantity + 1);
         }
     }
 }
