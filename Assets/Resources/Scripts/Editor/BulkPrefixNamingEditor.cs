@@ -10,7 +10,7 @@ namespace FlameOfTheLost
     {
         private const string Prefix = "CFRPG16_";
 
-        [MenuItem("FlameOfTheLost/Tools/Assets/Sprite/Common/Add Prefix to Selected Folder")]
+        [MenuItem("FlameOfTheLost/Tools/Assets/Art/Sprites/Common/Add Prefix to Selected Folder")]
         public static void AddPrefixToSelectedFolder()
         {
             Object obj = Selection.activeObject;
