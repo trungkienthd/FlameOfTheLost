@@ -16,7 +16,7 @@ MonoBehaviour:
   _key: COLLECTIBLE_AMETHYST_BLOCK
   _displayName: Collectible - Amethyst Block
   _description: 
-  _icon: {fileID: -1727855672, guid: 0c66aa529a220014d8cf4a84a708face, type: 3}
+  _icon: {fileID: 492577825, guid: 357b5a702fa0c1041af8504a4bf52131, type: 3}
   _configureInitialTransformAtStart: 0
   _initialPosition: {x: 0, y: 0, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}

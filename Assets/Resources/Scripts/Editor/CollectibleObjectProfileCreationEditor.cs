@@ -14,6 +14,7 @@ namespace FlameOfTheLost
         // --- Constants ---
         private const string MaterialProfileFolderPath = "Assets/Resources/Data/Inventory/Items/Materials";
         private const string CollectibleObjectProfileFolderPath = "Assets/Resources/Data/World/Environment/Interactables/Collectibles";
+        private const string MaterialOutlineSpriteSheetPath = "Assets/Resources/Art/Sprites/Inventory/Items/Materials/CFRPG16_Resources_Icons_Outline.png";
 
         private const int CollectibleIdRangeStart = 32401;
         private const int CollectibleIdRangeEnd = 32499;
@@ -38,6 +39,12 @@ namespace FlameOfTheLost
                 return;
             }
 
+            if (AssetDatabase.LoadAssetAtPath<Texture2D>(CollectibleObjectProfileCreationEditor.MaterialOutlineSpriteSheetPath) == null)
+            {
+                Debug.LogError($"[{nameof(CollectibleObjectProfileCreationEditor)}] Material outline sprite sheet could not be found at '{CollectibleObjectProfileCreationEditor.MaterialOutlineSpriteSheetPath}'.");
+                return;
+            }
+
             List<MaterialProfileAssetEntry> materialEntries = CollectibleObjectProfileCreationEditor.GetMaterialProfileEntries();
             if (materialEntries.Count == 0)
             {
@@ -45,18 +52,22 @@ namespace FlameOfTheLost
                 return;
             }
 
-            HashSet<ItemProfile> existingItems = CollectibleObjectProfileCreationEditor.GetExistingCollectibleItems();
-
-            HashSet<int> existingIds = CollectibleObjectProfileCreationEditor.GetExistingCollectibleIds();
-            int nextCollectibleId = CollectibleObjectProfileCreationEditor.GetNextAvailableCollectibleId(existingIds, CollectibleObjectProfileCreationEditor.CollectibleIdRangeStart);
-            if (nextCollectibleId < 0)
+            Dictionary<string, Sprite> outlineSprites = CollectibleObjectProfileCreationEditor.GetMaterialOutlineSprites();
+            if (outlineSprites.Count == 0)
             {
-                Debug.LogError($"[{nameof(CollectibleObjectProfileCreationEditor)}] No IDs remain in the {CollectibleObjectProfileCreationEditor.CollectibleIdRangeStart}-{CollectibleObjectProfileCreationEditor.CollectibleIdRangeEnd} range.");
+                Debug.LogError($"[{nameof(CollectibleObjectProfileCreationEditor)}] No Material sprites were found in the outline sprite sheet.");
                 return;
             }
 
+            Dictionary<ItemProfile, CollectibleObjectProfile> existingCollectibles = CollectibleObjectProfileCreationEditor.GetExistingCollectiblesByItem();
+
+            HashSet<int> existingIds = CollectibleObjectProfileCreationEditor.GetExistingCollectibleIds();
+
+            int nextCollectibleId = CollectibleObjectProfileCreationEditor.GetNextAvailableCollectibleId(existingIds, CollectibleObjectProfileCreationEditor.CollectibleIdRangeStart);
+
             int createdCount = 0;
-            int skippedCount = 0;
+            int updatedCount = 0;
+            int unchangedCount = 0;
             int failedCount = 0;
 
             AssetDatabase.StartAssetEditing();
@@ -65,21 +76,58 @@ namespace FlameOfTheLost
             {
                 foreach (MaterialProfileAssetEntry entry in materialEntries)
                 {
-                    if (existingItems.Contains(entry.Profile))
+                    string materialName = CollectibleObjectProfileCreationEditor.RemoveLeadingId(entry.AssetName);
+
+                    if (string.IsNullOrWhiteSpace(materialName))
                     {
-                        skippedCount++;
+                        Debug.LogError($"[{nameof(CollectibleObjectProfileCreationEditor)}] Could not determine the Material name from '{entry.AssetName}'.");
+                        failedCount++;
                         continue;
                     }
 
+                    if (!outlineSprites.TryGetValue(materialName, out Sprite outlineSprite))
+                    {
+                        Debug.LogError($"[{nameof(CollectibleObjectProfileCreationEditor)}] Could not find an outlined Material sprite for '{materialName}'.");
+                        failedCount++;
+                        continue;
+                    }
+
+                    // Existing collectible: synchronize its sprite instead of creating another profile.
+                    if (existingCollectibles.TryGetValue(entry.Profile, out CollectibleObjectProfile existingCollectible))
+                    {
+                        UpdateResult updateResult =
+                            CollectibleObjectProfileCreationEditor.UpdateCollectibleSprite(
+                                existingCollectible,
+                                outlineSprite);
+
+                        switch (updateResult)
+                        {
+                            case UpdateResult.Updated:
+                                updatedCount++;
+                                break;
+
+                            case UpdateResult.Unchanged:
+                                unchangedCount++;
+                                break;
+
+                            case UpdateResult.Failed:
+                                failedCount++;
+                                break;
+                        }
+
+                        continue;
+                    }
+
+                    // New collectible.
                     if (nextCollectibleId < 0)
                     {
                         Debug.LogError($"[{nameof(CollectibleObjectProfileCreationEditor)}] Stopped because the Collectible Object ID range is full.");
+
                         failedCount++;
                         break;
                     }
 
-                    bool created = CollectibleObjectProfileCreationEditor.TryCreateCollectibleProfile(entry, nextCollectibleId);
-
+                    bool created = CollectibleObjectProfileCreationEditor.TryCreateCollectibleProfile(entry, outlineSprite, nextCollectibleId);
                     if (!created)
                     {
                         failedCount++;
@@ -90,7 +138,6 @@ namespace FlameOfTheLost
                         continue;
                     }
 
-                    existingItems.Add(entry.Profile);
                     existingIds.Add(nextCollectibleId);
 
                     createdCount++;
@@ -103,7 +150,7 @@ namespace FlameOfTheLost
                 AssetDatabase.SaveAssets();
             }
 
-            Debug.Log($"[{nameof(CollectibleObjectProfileCreationEditor)}] Finished creating Material Collectible Object Profiles. Created: {createdCount}, Skipped: {skippedCount}, Failed: {failedCount}.");
+            Debug.Log($"[{nameof(CollectibleObjectProfileCreationEditor)}] Finished processing Material Collectible Object Profiles. Created: {createdCount}, Updated: {updatedCount}, Unchanged: {unchangedCount}, Failed: {failedCount}.");
         }
 
         // --- Material Profiles ---
@@ -118,7 +165,6 @@ namespace FlameOfTheLost
                 string assetPath = AssetDatabase.GUIDToAssetPath(guid);
 
                 MaterialProfile profile = AssetDatabase.LoadAssetAtPath<MaterialProfile>(assetPath);
-
                 if (profile == null)
                 {
                     Debug.LogWarning($"[{nameof(CollectibleObjectProfileCreationEditor)}] Skipped '{assetPath}' because it could not be loaded as a MaterialProfile.");
@@ -138,12 +184,50 @@ namespace FlameOfTheLost
             return entries.OrderBy(entry => entry.MaterialId).ToList();
         }
 
+        // --- Material Sprites ---
+        private static Dictionary<string, Sprite> GetMaterialOutlineSprites()
+        {
+            UnityEngine.Object[] assets = AssetDatabase.LoadAllAssetsAtPath(CollectibleObjectProfileCreationEditor.MaterialOutlineSpriteSheetPath);
+
+            Dictionary<string, Sprite> sprites = new();
+
+            foreach (UnityEngine.Object asset in assets)
+            {
+                if (asset is not Sprite sprite) continue;
+                if (!CollectibleObjectProfileCreationEditor.TryGetMaterialNameFromSpriteName(sprite.name, out string materialName)) continue;
+
+                if (sprites.ContainsKey(materialName))
+                {
+                    Debug.LogWarning($"[{nameof(CollectibleObjectProfileCreationEditor)}] Multiple outlined sprites were found for '{materialName}'. Keeping the first one.");
+                    continue;
+                }
+
+                sprites.Add(materialName, sprite);
+            }
+
+            return sprites;
+        }
+        private static bool TryGetMaterialNameFromSpriteName(string spriteName, out string materialName)
+        {
+            materialName = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(spriteName)) return false;
+
+            int materialPrefixIndex = spriteName.IndexOf("Mtr_", StringComparison.Ordinal);
+            if (materialPrefixIndex < 0) return false;
+
+            materialName = spriteName.Substring(materialPrefixIndex);
+
+            return !string.IsNullOrWhiteSpace(materialName);
+        }
+
         // --- Existing Collectibles ---
-        private static HashSet<ItemProfile> GetExistingCollectibleItems()
+        private static Dictionary<ItemProfile, CollectibleObjectProfile> GetExistingCollectiblesByItem()
         {
             string[] guids = AssetDatabase.FindAssets("t:CollectibleObjectProfile", new[] { CollectibleObjectProfileCreationEditor.CollectibleObjectProfileFolderPath });
 
-            HashSet<ItemProfile> items = new();
+            Dictionary<ItemProfile, CollectibleObjectProfile> collectibles =
+                new();
 
             foreach (string guid in guids)
             {
@@ -152,11 +236,16 @@ namespace FlameOfTheLost
                 CollectibleObjectProfile profile = AssetDatabase.LoadAssetAtPath<CollectibleObjectProfile>(assetPath);
 
                 if (profile == null || profile.Item == null) continue;
+                if (collectibles.ContainsKey(profile.Item))
+                {
+                    Debug.LogWarning($"[{nameof(CollectibleObjectProfileCreationEditor)}] Multiple Collectible Object Profiles reference '{profile.Item.name}'. Keeping the first one.");
+                    continue;
+                }
 
-                items.Add(profile.Item);
+                collectibles.Add(profile.Item, profile);
             }
 
-            return items;
+            return collectibles;
         }
 
         private static HashSet<int> GetExistingCollectibleIds()
@@ -192,7 +281,7 @@ namespace FlameOfTheLost
         }
 
         // --- Creation ---
-        private static bool TryCreateCollectibleProfile(MaterialProfileAssetEntry materialEntry, int collectibleId)
+        private static bool TryCreateCollectibleProfile(MaterialProfileAssetEntry materialEntry, Sprite outlineSprite, int collectibleId)
         {
             string materialName = CollectibleObjectProfileCreationEditor.RemoveLeadingId(materialEntry.AssetName);
 
@@ -220,7 +309,7 @@ namespace FlameOfTheLost
             CollectibleObjectProfileCreationEditor.SetIntProperty(collectibleSerializedObject, "_id", collectibleId);
             CollectibleObjectProfileCreationEditor.SetStringProperty(collectibleSerializedObject, "_key", CollectibleObjectProfileCreationEditor.CreateCollectibleKey(materialName));
             CollectibleObjectProfileCreationEditor.SetStringProperty(collectibleSerializedObject, "_displayName", CollectibleObjectProfileCreationEditor.CreateCollectibleDisplayName(materialSerializedObject, materialName));
-            CollectibleObjectProfileCreationEditor.CopyObjectReferenceProperty(materialSerializedObject, collectibleSerializedObject, "_icon");
+            CollectibleObjectProfileCreationEditor.SetObjectReferenceProperty(collectibleSerializedObject, "_icon", outlineSprite);
             CollectibleObjectProfileCreationEditor.SetBoolProperty(collectibleSerializedObject, "_configureIconAtStart", CollectibleObjectProfileCreationEditor.DefaultConfigureIconAtStart);
             CollectibleObjectProfileCreationEditor.SetObjectReferenceProperty(collectibleSerializedObject, "_item", materialEntry.Profile);
             CollectibleObjectProfileCreationEditor.SetIntProperty(collectibleSerializedObject, "_interactionPromptPriority", CollectibleObjectProfileCreationEditor.DefaultInteractionPromptPriority);
@@ -231,6 +320,33 @@ namespace FlameOfTheLost
             EditorUtility.SetDirty(collectibleProfile);
 
             return true;
+        }
+
+        // --- Updating ---
+        private static UpdateResult UpdateCollectibleSprite(CollectibleObjectProfile collectibleProfile, Sprite outlineSprite)
+        {
+            SerializedObject serializedObject = new SerializedObject(collectibleProfile);
+
+            SerializedProperty iconProperty = serializedObject.FindProperty("_icon");
+
+            if (iconProperty == null)
+            {
+                Debug.LogError($"[{nameof(CollectibleObjectProfileCreationEditor)}] Could not find serialized property '_icon' on '{collectibleProfile.name}'.");
+                return UpdateResult.Failed;
+            }
+
+            if (iconProperty.objectReferenceValue == outlineSprite)
+            {
+                return UpdateResult.Unchanged;
+            }
+
+            iconProperty.objectReferenceValue = outlineSprite;
+
+            serializedObject.ApplyModifiedPropertiesWithoutUndo();
+
+            EditorUtility.SetDirty(collectibleProfile);
+
+            return UpdateResult.Updated;
         }
 
         // --- Naming ---
@@ -382,20 +498,6 @@ namespace FlameOfTheLost
             property.objectReferenceValue = value;
         }
 
-        private static void CopyObjectReferenceProperty(SerializedObject source, SerializedObject destination, string propertyName)
-        {
-            SerializedProperty sourceProperty = source.FindProperty(propertyName);
-            SerializedProperty destinationProperty = destination.FindProperty(propertyName);
-
-            if (sourceProperty == null || destinationProperty == null)
-            {
-                Debug.LogWarning($"[{nameof(CollectibleObjectProfileCreationEditor)}] Could not copy serialized property '{propertyName}'.");
-                return;
-            }
-
-            destinationProperty.objectReferenceValue = sourceProperty.objectReferenceValue;
-        }
-
         // --- Data ---
         private readonly struct MaterialProfileAssetEntry
         {
@@ -409,6 +511,13 @@ namespace FlameOfTheLost
                 this.AssetName = assetName;
                 this.Profile = profile;
             }
+        }
+
+        private enum UpdateResult
+        {
+            Updated,
+            Unchanged,
+            Failed
         }
     }
 }
