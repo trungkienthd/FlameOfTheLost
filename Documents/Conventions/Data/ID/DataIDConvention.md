@@ -1,7 +1,7 @@
 # Data ID Convention
 
 **Project:** FlameOfTheLost  
-**Version:** 3.8  
+**Version:** 3.9  
 **Scope:** ID attributes assigned to project-owned **ScriptableObject** assets.
 
 ---
@@ -79,6 +79,8 @@ A category may reserve more than two trailing digits when additional internal gr
 
 For example, Materials use the full `75xxx` range and are further divided into `750xx`, `751xx`, and `752xx` sub-ranges.
 
+For Environment, the second digit directly identifies the Environment Profile type. The remaining three digits are available for Profile IDs within that type.
+
 ---
 
 ## 3.4 Stability
@@ -149,17 +151,17 @@ IDs must never be reused by unrelated gameplay definitions.
 
 3xxxx   Environment Data
 
-300xx   Terrain Profiles
+30xxx   Terrain Profiles
+31xxx   Crafting Station Profiles
+32xxx   Item Container Profiles
+33xxx   Collectible Object Profiles
+34xxx   Harvestable Object Profiles
+35xxx   Obstacle Profiles
 
-31xxx   Reserved
-
-32xxx   Environment Object Profiles
-
-320xx   Item Container Profiles
-321xx   Obstacle Profiles
-322xx   Harvestable Object Profiles
-323xx   Crafting Station Profiles
-324xx   Collectible Object Profiles
+36xxx   Reserved
+37xxx   Reserved
+38xxx   Reserved
+39xxx   Reserved
 
 4xxxx   Tutorial Data
 

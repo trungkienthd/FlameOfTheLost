@@ -13,13 +13,12 @@
 ## Profile Types
 
 ```text
-300xx   TerrainProfile
-
-320xx   ItemContainerProfile
-321xx   ObstacleProfile
-322xx   HarvestableObjectProfile
-323xx   CraftingStationProfile
-324xx   CollectibleObjectProfile
+30xxx   TerrainProfile
+31xxx   CraftingStationProfile
+32xxx   ItemContainerProfile
+33xxx   CollectibleObjectProfile
+34xxx   HarvestableObjectProfile
+35xxx   ObstacleProfile
 ```
 
 ---
@@ -27,64 +26,61 @@
 ## Category Structure
 
 ```text
-Environment
-├─ Terrain
-│  └─ TerrainProfile
-│
-└─ Environment Object
+World
+└─ Environment
+   ├─ Terrain
+   │  └─ TerrainProfile
+   │
    ├─ Interactable
-   │  ├─ ItemContainerProfile
-   │  ├─ CraftingStationProfile
-   │  └─ CollectibleObjectProfile
+   │  ├─ CraftingStation
+   │  │  └─ CraftingStationProfile
+   │  ├─ ItemContainer
+   │  │  └─ ItemContainerProfile
+   │  └─ Collectible
+   │     └─ CollectibleObjectProfile
    │
-   ├─ Obstacle
-   │  └─ ObstacleProfile
+   ├─ Harvestable Object
+   │  └─ HarvestableObjectProfile
    │
-   └─ Harvestable Object
-      └─ HarvestableObjectProfile
+   └─ Obstacle
+      └─ ObstacleProfile
 ```
+
+The numeric ID hierarchy does not need to mirror the runtime or semantic hierarchy exactly.
+
+`Interactable` is a gameplay grouping shared by several Environment object types, but Crafting Stations, Item Containers, and Collectible Objects each receive their own second-digit range because they are distinct authored Profile categories.
 
 ---
 
 ## Sub-Ranges
 
 ```text
-300xx   Terrain Profiles
+30xxx   Terrain Profiles
+31xxx   Crafting Station Profiles
+32xxx   Item Container Profiles
+33xxx   Collectible Object Profiles
+34xxx   Harvestable Object Profiles
+35xxx   Obstacle Profiles
 
-301xx   Reserved
-302xx   Reserved
-303xx   Reserved
-304xx   Reserved
-305xx   Reserved
-306xx   Reserved
-307xx   Reserved
-308xx   Reserved
-309xx   Reserved
-
-31xxx   Reserved
-
-32xxx   Environment Object Profiles
-
-320xx   Item Container Profiles
-321xx   Obstacle Profiles
-322xx   Harvestable Object Profiles
-323xx   Crafting Station Profiles
-324xx   Collectible Object Profiles
-
-325xx   Reserved
-326xx   Reserved
-327xx   Reserved
-328xx   Reserved
-329xx   Reserved
-
-33xxx   Reserved
-34xxx   Reserved
-35xxx   Reserved
 36xxx   Reserved
 37xxx   Reserved
 38xxx   Reserved
 39xxx   Reserved
 ```
+
+Each allocated Environment Profile type owns the full three trailing digits of its range.
+
+Examples:
+
+```text
+31000-31999   Crafting Station Profiles
+32000-32999   Item Container Profiles
+33000-33999   Collectible Object Profiles
+34000-34999   Harvestable Object Profiles
+35000-35999   Obstacle Profiles
+```
+
+This allows a Profile type to scale beyond 100 authored objects without requiring an unnecessary additional Profile sub-layer.
 
 ---
 
@@ -94,31 +90,39 @@ Environment
 
 The ID identifies a **terrain type**.
 
----
-
-### Environment Object Profiles
-
-The ID identifies an **environment object archetype**.
-
-Environment Object profiles are grouped into more specific sub-aspects such as Interactables, Obstacles, and Harvestable Objects.
-
-All instances using the same profile share the same ID.
-
----
-
-### Interactable Environment Object Profiles
-
-The ID identifies an **interactable environment object archetype**.
-
-Current interactable environment object profile types include:
-
 ```text
-320xx   ItemContainerProfile
-323xx   CraftingStationProfile
-324xx   CollectibleObjectProfile
+30xxx   Terrain Profiles
 ```
 
-All instances using the same profile share the same ID.
+Terrain Profile IDs are assigned sequentially within `30xxx`.
+
+---
+
+### Crafting Station Profiles
+
+The ID identifies a **crafting station archetype**.
+
+```text
+31xxx   Crafting Station Profiles
+```
+
+All instances using the same `CraftingStationProfile` share the same ID.
+
+Crafting Station Profile IDs are assigned sequentially within `31xxx`.
+
+---
+
+### Item Container Profiles
+
+The ID identifies an **item container archetype**.
+
+```text
+32xxx   Item Container Profiles
+```
+
+All instances using the same `ItemContainerProfile` share the same ID.
+
+Item Container Profile IDs are assigned sequentially within `32xxx`.
 
 ---
 
@@ -127,7 +131,7 @@ All instances using the same profile share the same ID.
 The ID identifies a **collectible object world-object archetype**.
 
 ```text
-324xx   Collectible Object Profiles
+33xxx   Collectible Object Profiles
 ```
 
 A `CollectibleObjectProfile` represents an Item as a collectible object that can exist in the game world.
@@ -135,25 +139,17 @@ A `CollectibleObjectProfile` represents an Item as a collectible object that can
 The Collectible ID and Item ID identify different gameplay definitions:
 
 ```text
-324xx   Collectible world-object definition
+33xxx   Collectible world-object definition
 7xxxx   Item definition
 ```
 
-A `CollectibleObjectProfile` therefore owns its own `324xx` ID and references the corresponding `ItemProfile`.
+A `CollectibleObjectProfile` therefore owns its own `33xxx` ID and references the corresponding `ItemProfile`.
 
 The Collectible ID must not be derived from, or required to numerically match, the referenced Item ID.
 
-Collectible IDs are assigned sequentially within `324xx`.
+Collectible IDs are assigned sequentially within `33xxx`.
 
 All world instances using the same `CollectibleObjectProfile` share the same Collectible ID.
-
----
-
-### Obstacle Profiles
-
-The ID identifies an **obstacle archetype**.
-
-All instances using the same profile share the same ID.
 
 ---
 
@@ -161,7 +157,27 @@ All instances using the same profile share the same ID.
 
 The ID identifies a **harvestable environment object archetype**.
 
-All instances using the same profile share the same ID.
+```text
+34xxx   Harvestable Object Profiles
+```
+
+All instances using the same `HarvestableObjectProfile` share the same ID.
+
+Harvestable Object Profile IDs are assigned sequentially within `34xxx`.
+
+---
+
+### Obstacle Profiles
+
+The ID identifies an **obstacle archetype**.
+
+```text
+35xxx   Obstacle Profiles
+```
+
+All instances using the same `ObstacleProfile` share the same ID.
+
+Obstacle Profile IDs are assigned sequentially within `35xxx`.
 
 ---
 
@@ -175,12 +191,12 @@ Collectible Object Profile asset names use:
 
 The wrapped Item name excludes the Item's numeric ID while retaining its Item-category prefix.
 
-Examples:
+Examples after the Environment ID remap:
 
 ```text
-32401_Clt_Mtr_Wood
-32402_Clt_Mtr_Bone
-32403_Clt_Mtr_Twig
+33001_Clt_Mtr_Wood
+33002_Clt_Mtr_Bone
+33003_Clt_Mtr_Twig
 ```
 
 The Collectible ID sequence is independent from the referenced Item ID sequence.
@@ -189,10 +205,31 @@ For example:
 
 ```text
 75001   Mtr_Wood
-32401   Clt_Mtr_Wood
+33001   Clt_Mtr_Wood
 ```
 
 The matching trailing digits above are incidental and do not establish an ID-mapping rule.
+
+---
+
+## Migration From Previous Environment Allocation
+
+The previous Environment convention grouped most Environment Object Profiles under `32xxx`.
+
+The new allocation gives each major Environment Profile type its own second-digit range.
+
+```text
+Previous   New     Profile Type
+
+300xx      30xxx   Terrain Profiles
+323xx      31xxx   Crafting Station Profiles
+320xx      32xxx   Item Container Profiles
+324xx      33xxx   Collectible Object Profiles
+322xx      34xxx   Harvestable Object Profiles
+321xx      35xxx   Obstacle Profiles
+```
+
+Existing Profile assets should be reassigned according to the new ranges while preserving their relative sequence where practical.
 
 ---
 
@@ -202,21 +239,21 @@ The matching trailing digits above are incidental and do not establish an ID-map
 30001   Grass
 30002   Water
 
+31001   Makeshift Worktable
+
 32001   Starting Weapon Chest
 32002   Basic Supply Chest
 
-32101   Small Rock
-32102   Fallen Tree
+33001   Collectible - Wood
+33002   Collectible - Bone
+33003   Collectible - Twig
 
-32201   Oak Tree
-32202   Berry Bush
-32203   Copper Ore Deposit
+34001   Oak Tree
+34002   Cherry Tree
+34003   Iron Node
 
-32301   Makeshift Worktable
-
-32401   Collectible - Wood
-32402   Collectible - Bone
-32403   Collectible - Twig
+35001   Small Rock
+35002   Fallen Tree
 ```
 
 ---
