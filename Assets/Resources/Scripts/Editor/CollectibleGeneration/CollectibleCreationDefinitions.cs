@@ -34,14 +34,14 @@ namespace FlameOfTheLost
             ),
 
             // Consumable
-            new CollectibleCategoryDefinition
-            (
-                displayName: "Consumable", itemProfileType: typeof(ConsumableItemProfile), itemPrefix: "Csm_",
-                itemProfileFolderPath:          "Assets/Resources/Data/Inventory/Items/Consumables",
-                collectibleProfileFolderPath:   "Assets/Resources/Data/World/Environment/Interactables/Collectibles/Consumables",
-                collectiblePrefabFolderPath:    "Assets/Resources/Prefabs/World/Environment/Interactables/Collectibles/Consumables",
-                outlineSpriteSheetPath:         "Assets/Resources/Art/Sprites/Inventory/Items/Consumables/CFRPG16_Consumables_Icons_Outline.png"
-            )
+            //new CollectibleCategoryDefinition
+            //(
+            //    displayName: "Consumable", itemProfileType: typeof(ConsumableItemProfile), itemPrefix: "Csm_",
+            //    itemProfileFolderPath:          "Assets/Resources/Data/Inventory/Items/Consumables",
+            //    collectibleProfileFolderPath:   "Assets/Resources/Data/World/Environment/Interactables/Collectibles/Consumables",
+            //    collectiblePrefabFolderPath:    "Assets/Resources/Prefabs/World/Environment/Interactables/Collectibles/Consumables",
+            //    outlineSpriteSheetPath:         "Assets/Resources/Art/Sprites/Inventory/Items/Consumables/CFRPG16_Consumables_Icons_Outline.png"
+            //)
         };
     }
 }

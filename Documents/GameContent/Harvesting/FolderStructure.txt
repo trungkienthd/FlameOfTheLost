@@ -1,9 +1,0 @@
-Documents/
-├── Architectures/
-├── Conventions/
-└── GameContent/
-    └── Harvesting/
-        ├── README.md
-        ├── Harvestables.md
-        ├── Materials.md
-        └── Consumables.md

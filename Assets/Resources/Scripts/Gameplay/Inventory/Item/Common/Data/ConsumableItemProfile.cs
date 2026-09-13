@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "CsmItem_New", menuName = "Data/FlameOfTheLost/Inventory/Item/ConsumableItem")]
+    [CreateAssetMenu(fileName = "Csm_New", menuName = "Data/FlameOfTheLost/Inventory/Item/ConsumableItem")]
     public class ConsumableItemProfile : ItemProfile
     {
         public override ItemType ItemType => ItemType.ConsumableItem;

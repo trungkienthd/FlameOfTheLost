@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f8de06ce7b2864292d1a999e5f05fb, type: 3}
-  m_Name: 72001_CsmItem_Cherry
+  m_Name: 72001_Csm_Cherry
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ConsumableItemProfile
   _id: 72001
   _key: CHERRY
