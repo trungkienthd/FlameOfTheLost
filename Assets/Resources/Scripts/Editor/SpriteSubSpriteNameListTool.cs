@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public sealed class SpriteSubSpriteNameTool : EditorWindow
+    public sealed class SpriteSubSpriteNameListTool : EditorWindow
     {
         // --- References ---
         private Sprite _selectedSprite;
@@ -16,10 +16,10 @@ namespace FlameOfTheLost
         private Vector2 _scrollPosition;
 
         // --- Editor Window ---
-        [MenuItem("FlameOfTheLost/Tools/Assets/Art/Sprites/Common/Sprite Sub-Sprite Names")]
+        [MenuItem("FlameOfTheLost/Tools/Assets/Art/Sprites/Common/Sprite Sub-Sprite Name List")]
         private static void OpenWindow()
         {
-            SpriteSubSpriteNameTool window = SpriteSubSpriteNameTool.GetWindow<SpriteSubSpriteNameTool>();
+            SpriteSubSpriteNameListTool window = SpriteSubSpriteNameListTool.GetWindow<SpriteSubSpriteNameListTool>();
 
             window.titleContent = new GUIContent("Sprite Names");
             window.minSize = new Vector2(420.0f, 300.0f);
