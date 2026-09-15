@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f8de06ce7b2864292d1a999e5f05fb, type: 3}
-  m_Name: 72001_Csm_Cherry
+  m_Name: 72045_Csm_GreenPepper
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ConsumableItemProfile
-  _id: 72001
-  _key: CHERRY
-  _displayName: Cherry
-  _description: Eat cherries to Heal.
-  _icon: {fileID: 327035347, guid: 338eb9325b511bf4dbf0184fff5f5d9c, type: 3}
+  _id: 72045
+  _key: GREEN_PEPPER
+  _displayName: Green Pepper
+  _description: 
+  _icon: {fileID: 1698793425, guid: 338eb9325b511bf4dbf0184fff5f5d9c, type: 3}
   _isStackable: 1
   _maxStackSize: 99
   _useCost:
@@ -29,7 +29,4 @@ MonoBehaviour:
     _costType: 0
     _blockedBySilence: 0
     _allowSelfKillWithHPCost: 0
-  _statusEffectApplications:
-  - _statusEffect: {fileID: 11400000, guid: bfa7591398c146848b33a663c1c78dd0, type: 2}
-    _chance: 1
-    _potency: 1
+  _statusEffectApplications: []
