@@ -11,6 +11,8 @@ Both sheets represent the same content; the Outline version is the outlined pres
 
 The mapping below follows the current **FlameOfTheLost** consumable design. Seed packets remain outside the Consumable Item naming scheme.
 
+Gameplay effect values are intentionally documented separately in [ConsumableEffectConfiguration](ConsumableEffectConfiguration.md); this file remains the authoritative sprite-to-identity mapping.
+
 ---
 
 ## 1. General Mapping Rules
