@@ -13,13 +13,13 @@ Consumables are documented separately from harvesting because harvesting is only
 - cooking or crafting;
 - quests or other gameplay systems.
 
-The availability of a sprite does not automatically require a gameplay item to be created. An icon becomes a consumable only when the game has a reason to represent it as an inventory item.
+The availability of a sprite does not automatically require a gameplay item to be created. Seed-packet sprites in particular remain outside the Consumable Item type until the future farming system defines their role.
 
 ## Documents
 
 - [ConsumableCatalogue](ConsumableCatalogue.md) - the consumable-item catalogue and content status.
-- [FoodSpriteMapping](FoodSpriteMapping.md) - mapping and working identities for the CFRPG16 Food icon sheet.
-- [ConsumableGameplayDesign](ConsumableGameplayDesign.md) - design rules for how raw food, prepared food, produce, mushrooms, and fish should participate in gameplay.
+- [FoodSpriteMapping](FoodSpriteMapping.md) - the current authored mapping for the CFRPG16 Food icon sheet.
+- [ConsumableGameplayDesign](ConsumableGameplayDesign.md) - design rules for produce, meat, prepared food, mushrooms, fish, dairy, and drinks.
 
 ## Content Status
 
@@ -27,21 +27,24 @@ The documents use the following statuses:
 
 - **Current** - already established in active gameplay.
 - **Planned** - intended content, but its data or gameplay implementation is not yet complete.
-- **Working name** - a temporary readable identity derived from the sprite appearance; it can be renamed later.
-- **Identity TBD** - the sprite is useful, but its final in-world item identity has not yet been designed.
-- **Reserved visual** - the sprite is intentionally not yet represented as a Consumable Item.
+- **Working name** - a readable authored identity that can still be refined later.
+- **Reserved visual** - a sprite intentionally not yet represented as a Consumable Item, such as the current seed packets.
 
 ## Naming
 
-Current consumable data naming follows:
+Consumable gameplay/data naming follows:
 
-`CsmItem_<ConsumableName>`
+`Csm_<ConsumableName>`
 
 Examples:
 
-- `CsmItem_Cherry`
-- `CsmItem_RawMeat`
-- `CsmItem_CookedMeat`
-- `CsmItem_BrownMushroom`
+- `Csm_Cherry`
+- `Csm_RawMeat`
+- `Csm_CookedMeat`
+- `Csm_BrownMushroom`
 
-Sprite-sheet position, colour, or art-pack index should not be encoded into the final gameplay name unless it is part of the actual item identity.
+The sprite sub-asset keeps the art-pack prefix and sprite index, followed by the consumable identity, for example:
+
+`CFRPG16_Food_Icons_NO_Outline_54_Csm_Cherry`
+
+Seed-packet sprites currently retain their original names because there is no Seed Item type or naming convention yet.

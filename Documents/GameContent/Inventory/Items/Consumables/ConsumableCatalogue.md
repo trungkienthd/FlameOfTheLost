@@ -43,34 +43,28 @@ Cherry remains the only Consumable Item that the Greenvale tutorial currently ne
 
 ## 2. Meat and Prepared Meat
 
-The CFRPG16 Food sheet contains several visually paired raw/cooked meat icons. These should be treated as a small reusable food family rather than as unrelated one-off items.
+The CFRPG16 Food sheet contains several visually paired raw/cooked meat icons.
 
 | Consumable | Suggested Asset | Status | Notes |
 |---|---|---|---|
-| Raw Poultry | `Csm_RawPoultry` | Planned / working name | Raw poultry-leg visual |
-| Cooked Poultry | `Csm_CookedPoultry` | Planned / working name | Prepared counterpart |
-| Raw Meat | `Csm_RawMeat` | Planned / working name | Generic raw red-meat visual |
-| Cooked Meat | `Csm_CookedMeat` | Planned / working name | Prepared counterpart |
-| Raw Meat Leg | `Csm_RawMeatLeg` | Planned / working name | Second bone-in raw-meat visual |
-| Cooked Meat Leg | `Csm_CookedMeatLeg` | Planned / working name | Prepared counterpart |
-| Raw Steak | `Csm_RawSteak` | Planned / working name | Steak/cut visual |
-| Cooked Steak | `Csm_CookedSteak` | Planned / working name | Prepared counterpart |
-
-### Design direction
+| Raw Poultry | `Csm_RawPoultry` | Planned | Raw poultry-leg visual |
+| Cooked Poultry | `Csm_CookedPoultry` | Planned | Prepared counterpart |
+| Raw Meat | `Csm_RawMeat` | Planned | Generic raw red-meat visual |
+| Cooked Meat | `Csm_CookedMeat` | Planned | Prepared counterpart |
+| Raw Meat Leg | `Csm_RawMeatLeg` | Planned | Bone-in raw-meat visual |
+| Cooked Meat Leg | `Csm_CookedMeatLeg` | Planned | Prepared counterpart |
+| Raw Steak | `Csm_RawSteak` | Planned | Steak/cut visual |
+| Cooked Steak | `Csm_CookedSteak` | Planned | Prepared counterpart |
 
 Raw and cooked versions are intentionally separate item identities.
 
-The expected future relationship is:
+Expected future relationship:
 
 `Raw Food -> preparation/cooking -> Prepared Food`
-
-The cooking system itself is not part of the current implementation scope. These items can remain Planned until that loop is designed.
 
 ---
 
 ## 3. Mushrooms
-
-The food sheet contains four clearly differentiated mushroom colours.
 
 | Consumable | Suggested Asset | Status |
 |---|---|---|
@@ -79,87 +73,69 @@ The food sheet contains four clearly differentiated mushroom colours.
 | Red Mushroom | `Csm_RedMushroom` | Planned |
 | Blue Mushroom | `Csm_BlueMushroom` | Planned |
 
-The colours are acceptable working identities because they are visually distinct, but their final gameplay effects should be designed before they are introduced into progression.
-
-Mushrooms are a good future category for differentiated consumable effects rather than four copies of the same healing item.
+The colours are part of the current authored identities for these sprites. Their final gameplay effects can be differentiated later.
 
 ---
 
-## 4. Eggs, Dairy, and Other Prepared Food
-
-The sheet visibly supports a small set of non-produce food icons.
+## 4. Eggs, Dairy, and Other Food
 
 | Consumable | Suggested Asset | Status | Notes |
 |---|---|---|---|
-| Egg | `Csm_Egg` | Planned | Raw ingredient / basic food |
+| Egg | `Csm_Egg` | Planned | Basic food / ingredient |
 | Fried Egg | `Csm_FriedEgg` | Planned | Prepared counterpart |
-| Milk | `Csm_Milk` | Planned / working name | Bottle/container visual; identity should be confirmed before data creation |
-| Unidentified Prepared Food A | TBD | Identity TBD | Yellow star-shaped food visual |
-
-The unidentified icon should not receive a permanent item asset until its intended identity is known.
+| Milk | `Csm_Milk` | Planned | Bottled dairy item |
+| Cheese | `Csm_Cheese` | Planned / working identity | Yellow prepared-food visual |
+| Orange Juice | `Csm_OrangeJuice` | Planned / working identity | Orange bottled drink |
 
 ---
 
 ## 5. Fish
 
-The food sheet contains eight fish icons distinguished primarily by colour.
+The food sheet contains eight visually distinct fish sprites. Their current consumable identities are colour-based working names.
 
-These should not be permanently named `BlueFish`, `GreenFish`, `Fish01`, and similar technical identities simply because the art is available.
-
-| Entry | Status | Intended Treatment |
+| Consumable | Suggested Asset | Status |
 |---|---|---|
-| Fish Species 01 | Identity TBD | Reserve sprite for a future named species |
-| Fish Species 02 | Identity TBD | Reserve sprite for a future named species |
-| Fish Species 03 | Identity TBD | Reserve sprite for a future named species |
-| Fish Species 04 | Identity TBD | Reserve sprite for a future named species |
-| Fish Species 05 | Identity TBD | Reserve sprite for a future named species |
-| Fish Species 06 | Identity TBD | Reserve sprite for a future named species |
-| Fish Species 07 | Identity TBD | Reserve sprite for a future named species |
-| Fish Species 08 | Identity TBD | Reserve sprite for a future named species |
+| Blue Fish | `Csm_BlueFish` | Planned / working name |
+| Cyan Fish | `Csm_CyanFish` | Planned / working name |
+| Dark Blue Fish | `Csm_DarkBlueFish` | Planned / working name |
+| Green Fish | `Csm_GreenFish` | Planned / working name |
+| Brown Fish | `Csm_BrownFish` | Planned / working name |
+| Red Fish | `Csm_RedFish` | Planned / working name |
+| Yellow Fish | `Csm_YellowFish` | Planned / working name |
+| Grey Fish | `Csm_GreyFish` | Planned / working name |
 
-The species should receive setting-specific names when fishing or aquatic resource gathering is actually designed.
+These names are intentionally simple visual identities. They can later be replaced by setting-specific species names if the fishing/aquatic-resource system requires stronger worldbuilding identities.
 
 ---
 
 ## 6. Fruits, Berries, and Produce
 
-### Existing planned produce
-
-The following consumables were already established through the harvesting-content design.
-
-| Consumable | Suggested Asset | Status | Existing Intended Source |
-|---|---|---|---|
-| Apple | `Csm_Apple` | Planned | Apple Tree |
-| Cherry | `Csm_Cherry` | Current | Cherry Tree |
-| Peach | `Csm_Peach` | Planned | Peach Tree |
-| Red Berry | `Csm_RedBerry` | Planned / working name | Red Berry Bush |
-| Purple Berry | `Csm_PurpleBerry` | Planned / working name | Purple Berry Bush |
-| Wheat | `Csm_Wheat` | Planned | Wheat Crop |
-| Tomato | `Csm_Tomato` | Planned | Tomato Plant |
-| Carrot | `Csm_Carrot` | Planned | Carrot Crop |
-| Eggplant | `Csm_Eggplant` | Planned | Eggplant Crop |
-| Corn | `Csm_Corn` | Planned | Corn Crop |
-| Pumpkin | `Csm_Pumpkin` | Planned | Pumpkin Crop |
-| Parsnip | `Csm_Parsnip` | Planned | Parsnip Crop |
-| Cabbage | `Csm_Cabbage` | Planned | Cabbage Crop |
-| Cucumber | `Csm_Cucumber` | Planned | Cucumber Crop |
-| Chili Pepper | `Csm_ChiliPepper` | Planned | Chili Crop |
-| Red Pepper | `Csm_RedPepper` | Planned | Red Pepper Crop |
-| Orange Pepper | `Csm_OrangePepper` | Planned | Orange Pepper Crop |
-| Green Pepper | `Csm_GreenPepper` | Planned | Green Pepper Crop |
-| Blue Squash | `Csm_BlueSquash` | Planned / working name | Blue Squash Crop |
-
-### Additional food-sheet candidates
-
-The Food sheet also provides visuals suitable for additional produce. These can extend the catalogue when their source and gameplay purpose are designed.
-
 | Consumable | Suggested Asset | Status |
 |---|---|---|
-| Strawberry | `Csm_Strawberry` | Planned |
+| Wheat | `Csm_Wheat` | Planned |
+| Green Squash | `Csm_GreenSquash` | Planned / working name |
+| Red Pepper | `Csm_RedPepper` | Planned |
+| Apple | `Csm_Apple` | Planned |
+| Tomato | `Csm_Tomato` | Planned |
+| Carrot | `Csm_Carrot` | Planned |
+| Orange Pepper | `Csm_OrangePepper` | Planned |
+| Peach | `Csm_Peach` | Planned |
 | Grapes | `Csm_Grapes` | Planned |
+| Cabbage | `Csm_Cabbage` | Planned |
+| Green Pepper | `Csm_GreenPepper` | Planned |
+| Pear | `Csm_Pear` | Planned |
+| Pumpkin | `Csm_Pumpkin` | Planned |
+| Cucumber | `Csm_Cucumber` | Planned |
+| Chili | `Csm_Chili` | Planned |
+| Cherry | `Csm_Cherry` | Current |
+| Corn | `Csm_Corn` | Planned |
+| Parsnip | `Csm_Parsnip` | Planned |
+| Turnip | `Csm_Turnip` | Planned |
 | Watermelon | `Csm_Watermelon` | Planned |
+| Strawberry | `Csm_Strawberry` | Planned |
+| Purple Berry | `Csm_PurpleBerry` | Planned / working name |
 
-Other visually ambiguous produce icons should remain **Identity TBD** until their authoritative or setting-specific identities are chosen.
+The catalogue should follow the authored sprite identity rather than forcing previously proposed produce names onto visually different sprites.
 
 ---
 
@@ -167,17 +143,15 @@ Other visually ambiguous produce icons should remain **Identity TBD** until thei
 
 Many produce icons on the CFRPG16 Food sheet have matching seed-packet visuals.
 
-These packets should **not** be created as `ConsumableItemProfile` data merely because they appear on the same sprite sheet.
+These packet sprites currently remain under their original sprite names and should **not** be created as `ConsumableItemProfile` data.
 
 They are reserved for a future farming/growing system.
 
-Possible future item concept:
+Conceptually:
 
-`Seed Item -> planted into a farming system -> grows Crop -> harvested Produce`
+`Seed Item -> planted into farming system -> grows Crop -> harvested Produce`
 
-Their eventual item category and data type should be decided when farming is designed.
-
-Until then, the seed-packet sprites are **Reserved visual** content.
+The future farming design will determine their item category, data type, and naming convention.
 
 ---
 
@@ -186,9 +160,9 @@ Until then, the seed-packet sprites are **Reserved visual** content.
 1. A sprite does not automatically imply an inventory item.
 2. A consumable should have a gameplay purpose before its data is created.
 3. Raw and prepared foods can be separate item identities when preparation changes gameplay value.
-4. Colour-based names are acceptable as working names, but should not replace stronger setting-specific identities when those become available.
-5. Fish should receive species identities before permanent ItemProfile creation.
-6. Seed packets are not Consumable Items.
+4. Colour-based names are acceptable working identities when they intentionally distinguish otherwise-similar sprites.
+5. Fish currently use colour-based working identities and may receive species names later.
+6. Seed packets are not Consumable Items and remain unnamed by the Consumable convention.
 7. A consumable can also be a future cooking/crafting ingredient without being duplicated as a Material.
 8. Harvesting, fishing, farming, cooking, vendors, containers, and enemies describe **sources**, not the consumable category itself.
 

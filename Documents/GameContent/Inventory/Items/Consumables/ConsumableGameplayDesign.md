@@ -30,6 +30,7 @@ Examples:
 - Cherry
 - Apple
 - Peach
+- Pear
 - berries
 - crops and vegetables
 
@@ -52,9 +53,9 @@ Typical role:
 - optional weak or situational direct use if desired later;
 - source item for cooking/preparation.
 
-Raw meat does not need to be introduced as a direct-use item simply because it has a Consumable Item icon.
-
 ### Prepared Meat / Prepared Food
+
+Examples include cooked meats, Fried Egg, Cheese, and potentially other prepared foods.
 
 Typical role:
 
@@ -74,20 +75,32 @@ The four mushroom colours should eventually have distinct gameplay identities.
 
 ### Fish
 
-Typical role:
+The current fish identities are:
 
-- fishing reward;
-- direct food or cooking ingredient;
-- biome/progression-specific resource.
+- Blue Fish
+- Cyan Fish
+- Dark Blue Fish
+- Green Fish
+- Brown Fish
+- Red Fish
+- Yellow Fish
+- Grey Fish
 
-Fish identity should be designed alongside the fishing/aquatic-resource loop rather than from colour alone.
+These are colour-based working identities. They can function as direct food or cooking ingredients and can later be replaced by species-specific names if the fishing system requires it.
 
 ### Egg and Dairy
 
 Typical role:
 
 - ingredients that bridge gathering/farming and cooking;
-- simple prepared-food pairs such as Egg -> Fried Egg.
+- simple prepared-food relationships such as Egg -> Fried Egg;
+- future recipe components such as Milk or Cheese.
+
+### Drinks
+
+Orange Juice establishes a possible drink-based consumable family.
+
+Its exact gameplay role is intentionally left open until broader consumable effect design is implemented.
 
 ---
 
@@ -134,7 +147,7 @@ The current Cherry establishes the simplest baseline:
 
 `consume -> restore Health`
 
-Future consumables can expand into other effect families, but the item should remain readable to the player.
+Future consumables can expand into other effect families while remaining readable to the player.
 
 Possible design spaces include:
 
@@ -146,9 +159,7 @@ Possible design spaces include:
 - resistance/status-oriented effects;
 - resource restoration if additional character resources are introduced.
 
-These are design spaces, not yet-assigned effects for specific food icons.
-
-Mushrooms and prepared foods are the strongest candidates for more specialized effects; common produce should generally remain simpler.
+Mushrooms, prepared foods, and drinks are strong candidates for more specialized effects; common produce should generally remain simpler.
 
 ---
 
@@ -177,7 +188,7 @@ Source-specific documentation should reference the shared consumable identity ra
 
 Seed packets shown on the Food sprite sheet are intentionally outside the current Consumable Item design.
 
-They represent a likely future farming resource.
+They remain under their original sprite names because there is currently no authored Seed Item type.
 
 Conceptually:
 
@@ -216,6 +227,7 @@ Additional families can be introduced when the relevant world/system context exi
 - mushrooms when differentiated effects become useful;
 - fish alongside fishing/aquatic gathering;
 - raw/prepared food alongside cooking;
+- drinks when their effect family is useful;
 - stronger prepared foods when the player understands the basic consumable loop.
 
 ---
@@ -232,4 +244,4 @@ Before creating a new Consumable Item data asset, define:
 6. whether it is also an ingredient;
 7. its progression purpose.
 
-If several of these are unknown, keeping the sprite reserved is preferable to creating placeholder inventory content.
+A sprite identity may exist before all gameplay values are finalized, but permanent data should still be created deliberately rather than automatically from sprite availability.

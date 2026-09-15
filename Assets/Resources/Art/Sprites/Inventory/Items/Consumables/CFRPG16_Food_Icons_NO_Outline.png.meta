@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_0
+      name: CFRPG16_Food_Icons_NO_Outline_0_Csm_RawPoultry
       rect:
         serializedVersion: 2
         x: 0
@@ -140,7 +140,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_1
+      name: CFRPG16_Food_Icons_NO_Outline_1_Csm_CookedPoultry
       rect:
         serializedVersion: 2
         x: 16
@@ -162,7 +162,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_2
+      name: CFRPG16_Food_Icons_NO_Outline_2_Csm_RawMeat
       rect:
         serializedVersion: 2
         x: 32
@@ -184,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_3
+      name: CFRPG16_Food_Icons_NO_Outline_3_Csm_CookedMeat
       rect:
         serializedVersion: 2
         x: 48
@@ -206,7 +206,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_4
+      name: CFRPG16_Food_Icons_NO_Outline_4_Csm_BrownMushroom
       rect:
         serializedVersion: 2
         x: 64
@@ -228,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_5
+      name: CFRPG16_Food_Icons_NO_Outline_5_Csm_PurpleMushroom
       rect:
         serializedVersion: 2
         x: 80
@@ -250,7 +250,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_6
+      name: CFRPG16_Food_Icons_NO_Outline_6_Csm_Cheese
       rect:
         serializedVersion: 2
         x: 96
@@ -272,7 +272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_7
+      name: CFRPG16_Food_Icons_NO_Outline_7_Csm_Milk
       rect:
         serializedVersion: 2
         x: 112
@@ -294,7 +294,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_8
+      name: CFRPG16_Food_Icons_NO_Outline_8_Csm_RawSteak
       rect:
         serializedVersion: 2
         x: 0
@@ -316,7 +316,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_9
+      name: CFRPG16_Food_Icons_NO_Outline_9_Csm_CookedSteak
       rect:
         serializedVersion: 2
         x: 16
@@ -338,7 +338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_10
+      name: CFRPG16_Food_Icons_NO_Outline_10_Csm_RawMeatLeg
       rect:
         serializedVersion: 2
         x: 32
@@ -360,7 +360,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_11
+      name: CFRPG16_Food_Icons_NO_Outline_11_Csm_CookedMeatLeg
       rect:
         serializedVersion: 2
         x: 48
@@ -382,7 +382,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_12
+      name: CFRPG16_Food_Icons_NO_Outline_12_Csm_RedMushroom
       rect:
         serializedVersion: 2
         x: 64
@@ -404,7 +404,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_13
+      name: CFRPG16_Food_Icons_NO_Outline_13_Csm_BlueMushroom
       rect:
         serializedVersion: 2
         x: 80
@@ -426,7 +426,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_14
+      name: CFRPG16_Food_Icons_NO_Outline_14_Csm_Egg
       rect:
         serializedVersion: 2
         x: 96
@@ -448,7 +448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_15
+      name: CFRPG16_Food_Icons_NO_Outline_15_Csm_FriedEgg
       rect:
         serializedVersion: 2
         x: 112
@@ -470,7 +470,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_16
+      name: CFRPG16_Food_Icons_NO_Outline_16_Csm_BlueFish
       rect:
         serializedVersion: 2
         x: 0
@@ -492,7 +492,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_17
+      name: CFRPG16_Food_Icons_NO_Outline_17_Csm_CyanFish
       rect:
         serializedVersion: 2
         x: 16
@@ -514,7 +514,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_18
+      name: CFRPG16_Food_Icons_NO_Outline_18_Csm_DarkBlueFish
       rect:
         serializedVersion: 2
         x: 32
@@ -536,7 +536,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_19
+      name: CFRPG16_Food_Icons_NO_Outline_19_Csm_GreenFish
       rect:
         serializedVersion: 2
         x: 48
@@ -558,7 +558,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_20
+      name: CFRPG16_Food_Icons_NO_Outline_20_Csm_BrownFish
       rect:
         serializedVersion: 2
         x: 64
@@ -580,7 +580,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_21
+      name: CFRPG16_Food_Icons_NO_Outline_21_Csm_RedFish
       rect:
         serializedVersion: 2
         x: 80
@@ -602,7 +602,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_22
+      name: CFRPG16_Food_Icons_NO_Outline_22_Csm_YellowFish
       rect:
         serializedVersion: 2
         x: 96
@@ -624,7 +624,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_23
+      name: CFRPG16_Food_Icons_NO_Outline_23_Csm_GreyFish
       rect:
         serializedVersion: 2
         x: 112
@@ -646,7 +646,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_24
+      name: CFRPG16_Food_Icons_NO_Outline_24_Csm_Wheat
       rect:
         serializedVersion: 2
         x: 0
@@ -690,7 +690,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_26
+      name: CFRPG16_Food_Icons_NO_Outline_26_Csm_GreenSquash
       rect:
         serializedVersion: 2
         x: 32
@@ -734,7 +734,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_28
+      name: CFRPG16_Food_Icons_NO_Outline_28_Csm_RedPepper
       rect:
         serializedVersion: 2
         x: 64
@@ -778,7 +778,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_30
+      name: CFRPG16_Food_Icons_NO_Outline_30_Csm_Apple
       rect:
         serializedVersion: 2
         x: 96
@@ -822,7 +822,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_32
+      name: CFRPG16_Food_Icons_NO_Outline_32_Csm_Tomato
       rect:
         serializedVersion: 2
         x: 0
@@ -866,7 +866,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_34
+      name: CFRPG16_Food_Icons_NO_Outline_34_Csm_Carrot
       rect:
         serializedVersion: 2
         x: 32
@@ -910,7 +910,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_36
+      name: CFRPG16_Food_Icons_NO_Outline_36_Csm_OrangePepper
       rect:
         serializedVersion: 2
         x: 64
@@ -954,7 +954,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_38
+      name: CFRPG16_Food_Icons_NO_Outline_38_Csm_Peach
       rect:
         serializedVersion: 2
         x: 96
@@ -998,7 +998,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_40
+      name: CFRPG16_Food_Icons_NO_Outline_40_Csm_Grapes
       rect:
         serializedVersion: 2
         x: 0
@@ -1042,7 +1042,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_42
+      name: CFRPG16_Food_Icons_NO_Outline_42_Csm_Cabbage
       rect:
         serializedVersion: 2
         x: 32
@@ -1086,7 +1086,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_44
+      name: CFRPG16_Food_Icons_NO_Outline_44_Csm_GreenPepper
       rect:
         serializedVersion: 2
         x: 64
@@ -1130,7 +1130,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_46
+      name: CFRPG16_Food_Icons_NO_Outline_46_Csm_Pear
       rect:
         serializedVersion: 2
         x: 96
@@ -1174,7 +1174,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_48
+      name: CFRPG16_Food_Icons_NO_Outline_48_Csm_Pumpkin
       rect:
         serializedVersion: 2
         x: 0
@@ -1218,7 +1218,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_50
+      name: CFRPG16_Food_Icons_NO_Outline_50_Csm_Cucumber
       rect:
         serializedVersion: 2
         x: 32
@@ -1262,7 +1262,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_52
+      name: CFRPG16_Food_Icons_NO_Outline_52_Csm_Chili
       rect:
         serializedVersion: 2
         x: 64
@@ -1350,7 +1350,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_56
+      name: CFRPG16_Food_Icons_NO_Outline_56_Csm_Corn
       rect:
         serializedVersion: 2
         x: 0
@@ -1394,7 +1394,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_58
+      name: CFRPG16_Food_Icons_NO_Outline_58_Csm_Parsnip
       rect:
         serializedVersion: 2
         x: 32
@@ -1438,7 +1438,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_60
+      name: CFRPG16_Food_Icons_NO_Outline_60_Turnip
       rect:
         serializedVersion: 2
         x: 64
@@ -1482,7 +1482,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_62
+      name: CFRPG16_Food_Icons_NO_Outline_62_Csm_Watermelon
       rect:
         serializedVersion: 2
         x: 96
@@ -1504,7 +1504,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_63
+      name: CFRPG16_Food_Icons_NO_Outline_63_Csm_OrangeJuice
       rect:
         serializedVersion: 2
         x: 112
@@ -1526,7 +1526,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_64
+      name: CFRPG16_Food_Icons_NO_Outline_64_Csm_Strawberry
       rect:
         serializedVersion: 2
         x: 0
@@ -1548,7 +1548,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Food_Icons_NO_Outline_65
+      name: CFRPG16_Food_Icons_NO_Outline_65_PurpleBerry
       rect:
         serializedVersion: 2
         x: 16
@@ -1583,7 +1583,55 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      ' CFRPG16_Food_Icons_NO_Outline_12_Csm_RedMushroom': 1766679241
+      CFRPG16_Food_Icons_NO_Outline_0_Csm_RawPoultry: -682981757
+      CFRPG16_Food_Icons_NO_Outline_10_Csm_RawMeatLeg: 514300988
+      CFRPG16_Food_Icons_NO_Outline_11_Csm_CookedMeatLeg: -886937231
+      CFRPG16_Food_Icons_NO_Outline_12_Csm_RedMushroom: 1766679241
+      CFRPG16_Food_Icons_NO_Outline_13_Csm_BlueMushroom: -437188307
+      CFRPG16_Food_Icons_NO_Outline_14_Csm_Egg: 2020520076
+      CFRPG16_Food_Icons_NO_Outline_15_Csm_FriedEgg: -484987781
+      CFRPG16_Food_Icons_NO_Outline_16_Csm_BlueFish: -1166393622
+      CFRPG16_Food_Icons_NO_Outline_17_Csm_CyanFish: -1155188841
+      CFRPG16_Food_Icons_NO_Outline_18_Csm_DarkBlueFish: 1702823355
+      CFRPG16_Food_Icons_NO_Outline_19_Csm_GreenFish: -1237256335
+      CFRPG16_Food_Icons_NO_Outline_1_Csm_CookedPoultry: 2073215446
+      CFRPG16_Food_Icons_NO_Outline_20_Csm_BrownFish: -270934301
+      CFRPG16_Food_Icons_NO_Outline_21_Csm_RedFish: 1539633059
+      CFRPG16_Food_Icons_NO_Outline_22_Csm_YellowFish: -1465296485
+      CFRPG16_Food_Icons_NO_Outline_23_Csm_GreyFish: -1047384466
+      CFRPG16_Food_Icons_NO_Outline_24_Csm_Wheat: -1139562571
+      CFRPG16_Food_Icons_NO_Outline_26_Csm_Cabbage: 1723427422
+      CFRPG16_Food_Icons_NO_Outline_26_Csm_GreenSquash: 1723427422
+      CFRPG16_Food_Icons_NO_Outline_28_Csm_RedPepper: 1267617916
+      CFRPG16_Food_Icons_NO_Outline_2_Csm_RawMeat: -1729922475
+      CFRPG16_Food_Icons_NO_Outline_30_Csm_Apple: 1327143038
+      CFRPG16_Food_Icons_NO_Outline_32_Csm_Tomato: 2138196466
+      CFRPG16_Food_Icons_NO_Outline_34_Csm_Carrot: -1072371997
+      CFRPG16_Food_Icons_NO_Outline_36_Csm_OrangePepper: -1934159407
+      CFRPG16_Food_Icons_NO_Outline_38_Csm_Peach: -272886794
+      CFRPG16_Food_Icons_NO_Outline_3_Csm_CookedMeat: 57941715
+      CFRPG16_Food_Icons_NO_Outline_40_Csm_Grapes: -1273182289
+      CFRPG16_Food_Icons_NO_Outline_42_Csm_Cabbage: -1319298885
+      CFRPG16_Food_Icons_NO_Outline_44_Csm_GreenPepper: 1698793425
+      CFRPG16_Food_Icons_NO_Outline_46_Csm_Pear: 686715164
+      CFRPG16_Food_Icons_NO_Outline_48_Csm_Pumpkin: 848407343
+      CFRPG16_Food_Icons_NO_Outline_4_Csm_BrownMushroom: 1322702537
+      CFRPG16_Food_Icons_NO_Outline_50_Csm_Cucumber: 520704130
+      CFRPG16_Food_Icons_NO_Outline_52_Csm_Chili: -1026108827
       CFRPG16_Food_Icons_NO_Outline_54_Csm_Cherry: 327035347
+      CFRPG16_Food_Icons_NO_Outline_56_Csm_Corn: 1864852485
+      CFRPG16_Food_Icons_NO_Outline_58_Csm_Parsnip: 18943493
+      CFRPG16_Food_Icons_NO_Outline_5_Csm_PurpleMushroom: 548243135
+      CFRPG16_Food_Icons_NO_Outline_60_Turnip: -335961244
+      CFRPG16_Food_Icons_NO_Outline_62_Csm_Watermelon: 298038387
+      CFRPG16_Food_Icons_NO_Outline_63_Csm_OrangeJuice: 800502692
+      CFRPG16_Food_Icons_NO_Outline_64_Csm_Strawberry: -302655048
+      CFRPG16_Food_Icons_NO_Outline_65_PurpleBerry: 1755349808
+      CFRPG16_Food_Icons_NO_Outline_6_Csm_Cheese: 1416897915
+      CFRPG16_Food_Icons_NO_Outline_7_Csm_Milk: 1288168905
+      CFRPG16_Food_Icons_NO_Outline_8_Csm_RawSteak: -1377743931
+      CFRPG16_Food_Icons_NO_Outline_9_Csm_CookedSteak: 280196778
       Food_Icons_NO_Outline_0: -682981757
       Food_Icons_NO_Outline_1: 2073215446
       Food_Icons_NO_Outline_10: 514300988

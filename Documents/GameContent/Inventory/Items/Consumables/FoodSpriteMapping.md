@@ -2,14 +2,14 @@
 
 ## Purpose
 
-This document records the current interpretation of the sprites in:
+This document records the current authored interpretation of the sprites in:
 
 - `CFRPG16_Food_Icons_NO_Outline`
 - `CFRPG16_Food_Icons_Outline`
 
 Both sheets represent the same content; the Outline version is the outlined presentation variant.
 
-This is a **content-design mapping**, not an authoritative claim about the original asset-pack naming. Where a sprite is visually ambiguous, the entry remains a working identity or `TBD` rather than inventing a permanent gameplay name.
+The mapping below follows the current **FlameOfTheLost** consumable design. Seed packets remain outside the Consumable Item naming scheme.
 
 ---
 
@@ -17,119 +17,115 @@ This is a **content-design mapping**, not an authoritative claim about the origi
 
 1. The outline and no-outline sheets must use the same gameplay identity.
 2. Sprite art is presentation; ItemProfile identity is gameplay content.
-3. Do not encode row/column numbers into final item names.
-4. Ambiguous icons remain `TBD` until their intended identity is designed.
-5. Seed packets are reserved for future farming content and are not Consumable Items.
+3. The numeric sprite index may remain in the sprite sub-asset name, but it is not part of the gameplay item identity.
+4. Consumable sprites use the `Csm_` identity suffix.
+5. Seed-packet sprites remain under their original names until a farming/seed item system exists.
 
 ---
 
-## 2. Top Food Rows
+## 2. Food Mapping
 
-### Meat / prepared-food candidates
+### Meat, Mushrooms, Eggs, and Dairy
 
-The first two rows contain several paired raw/prepared food visuals.
+| Index | Identity |
+|---:|---|
+| 0 | `Csm_RawPoultry` |
+| 1 | `Csm_CookedPoultry` |
+| 2 | `Csm_RawMeat` |
+| 3 | `Csm_CookedMeat` |
+| 4 | `Csm_BrownMushroom` |
+| 5 | `Csm_PurpleMushroom` |
+| 6 | `Csm_Cheese` |
+| 7 | `Csm_Milk` |
+| 8 | `Csm_RawSteak` |
+| 9 | `Csm_CookedSteak` |
+| 10 | `Csm_RawMeatLeg` |
+| 11 | `Csm_CookedMeatLeg` |
+| 12 | `Csm_RedMushroom` |
+| 13 | `Csm_BlueMushroom` |
+| 14 | `Csm_Egg` |
+| 15 | `Csm_FriedEgg` |
 
-Current working mapping:
+### Fish
 
-- Raw Poultry
-- Cooked Poultry
-- Raw Meat
-- Cooked Meat
-- Raw Meat Leg
-- Cooked Meat Leg
-- Raw Steak
-- Cooked Steak
+| Index | Identity |
+|---:|---|
+| 16 | `Csm_BlueFish` |
+| 17 | `Csm_CyanFish` |
+| 18 | `Csm_DarkBlueFish` |
+| 19 | `Csm_GreenFish` |
+| 20 | `Csm_BrownFish` |
+| 21 | `Csm_RedFish` |
+| 22 | `Csm_YellowFish` |
+| 23 | `Csm_GreyFish` |
 
-These names describe the intended gameplay relationship and may be refined if the art pack exposes more authoritative food names.
+These are current colour-based working identities. A future fishing system may replace them with setting-specific species names.
 
-### Mushrooms
+### Produce and Seed-Packet Sequence
 
-Current mapping:
-
-- Brown Mushroom
-- Purple Mushroom
-- Red Mushroom
-- Blue Mushroom
-
-### Other food
-
-Current mapping:
-
-- Egg
-- Fried Egg
-- Milk - working identity; confirm before final data creation
-- Yellow star-shaped prepared food - identity TBD
-
----
-
-## 3. Fish Row
-
-The sheet contains eight fish sprites.
-
-For now they are reserved as:
-
-- Fish Species 01
-- Fish Species 02
-- Fish Species 03
-- Fish Species 04
-- Fish Species 05
-- Fish Species 06
-- Fish Species 07
-- Fish Species 08
-
-These labels are documentation placeholders only. They should not become final `CsmItem_` asset names.
-
-When fishing is designed, each sprite should receive:
-
-- a species/content name;
-- an acquisition location or biome;
-- rarity or progression placement if needed;
-- a direct-use or cooking role.
-
----
-
-## 4. Produce and Seed Rows
-
-The lower section uses an alternating pattern of produce and matching seed-packet visuals for much of the sheet.
-
-Recognizable or already-established produce represented across the current food/harvesting art includes:
-
-- Wheat
-- Tomato
-- Carrot
-- Corn
-- Parsnip
-- Eggplant
-- Cabbage / leafy crop
-- Cucumber / squash-like crop
-- Chili Pepper
-- coloured pepper variants
-- Cherry
-- Grapes / purple berry cluster
-- Strawberry
-- Watermelon
-- Peach-like fruit
-- berry-family produce
-
-Where the exact visual identity is uncertain, the existing gameplay catalogue should remain authoritative rather than renaming an item solely from sprite appearance.
+| Index | Current Mapping |
+|---:|---|
+| 24 | `Csm_Wheat` |
+| 25 | Seed packet - reserved / original name |
+| 26 | `Csm_GreenSquash` |
+| 27 | Seed packet - reserved / original name |
+| 28 | `Csm_RedPepper` |
+| 29 | Seed packet - reserved / original name |
+| 30 | `Csm_Apple` |
+| 31 | Seed packet - reserved / original name |
+| 32 | `Csm_Tomato` |
+| 33 | Seed packet - reserved / original name |
+| 34 | `Csm_Carrot` |
+| 35 | Seed packet - reserved / original name |
+| 36 | `Csm_OrangePepper` |
+| 37 | Seed packet - reserved / original name |
+| 38 | `Csm_Peach` |
+| 39 | Seed packet - reserved / original name |
+| 40 | `Csm_Grapes` |
+| 41 | Seed packet - reserved / original name |
+| 42 | `Csm_Cabbage` |
+| 43 | Seed packet - reserved / original name |
+| 44 | `Csm_GreenPepper` |
+| 45 | Seed packet - reserved / original name |
+| 46 | `Csm_Pear` |
+| 47 | Seed packet - reserved / original name |
+| 48 | `Csm_Pumpkin` |
+| 49 | Seed packet - reserved / original name |
+| 50 | `Csm_Cucumber` |
+| 51 | Seed packet - reserved / original name |
+| 52 | `Csm_Chili` |
+| 53 | Seed packet - reserved / original name |
+| 54 | `Csm_Cherry` |
+| 55 | Seed packet - reserved / original name |
+| 56 | `Csm_Corn` |
+| 57 | Seed packet - reserved / original name |
+| 58 | `Csm_Parsnip` |
+| 59 | Seed packet - reserved / original name |
+| 60 | `Csm_Turnip` |
+| 61 | Seed packet - reserved / original name |
+| 62 | `Csm_Watermelon` |
+| 63 | `Csm_OrangeJuice` |
+| 64 | `Csm_Strawberry` |
+| 65 | `Csm_PurpleBerry` |
 
 ---
 
-## 5. Seed-Packet Treatment
+## 3. Seed-Packet Treatment
 
-The seed packet beside a produce icon is not the same item as the produce.
+Seed packets are deliberately not assigned Consumable identities.
 
-Example conceptual relationship:
+They should remain with their original sprite names until the farming design establishes:
 
-`Tomato Seed -> Tomato Plant -> Tomato`
+- whether seeds have their own Item type;
+- their data/profile type;
+- their naming prefix;
+- how they relate to crops and harvesting.
 
-The seed belongs to future farming content. It should receive its own item category or profile only when that system exists.
-
-The same principle applies to other crop/seed pairs.
+The current sprite sheet therefore intentionally mixes authored Consumable names with untouched seed-packet names.
 
 ---
 
-## 6. Outline Variant Usage
+## 4. Outline Variant Usage
 
 The project contains both outlined and non-outlined food sheets.
 
@@ -140,5 +136,3 @@ Recommended rule:
 - gameplay/data references identify the item;
 - presentation code or asset-generation tooling selects the appropriate visual variant;
 - outlined and non-outlined sprites do not create separate item data.
-
-This mirrors the current approach used for the resource/material icon sheets.
