@@ -2,63 +2,84 @@
 
 This folder documents the authored **Consumable Item** content for **FlameOfTheLost**.
 
-Consumables are documented separately from harvesting because harvesting is only one possible source of a consumable. A consumable may later come from:
+The current authored catalogue contains **45 Consumable Item identities with corresponding consumable `StatusEffectProfile` assets**. Two additional food-sheet identities, `Csm_Turnip` and `Csm_PurpleBerry`, remain reserved visuals without current profiles.
 
-- harvestable objects;
-- farming;
-- fishing;
-- enemy drops;
-- containers;
-- vendors;
-- cooking or crafting;
-- quests or other gameplay systems.
-
-The availability of a sprite does not automatically require a gameplay item to be created. Seed-packet sprites in particular remain outside the Consumable Item type until the future farming system defines their role.
+Consumables are documented separately from harvesting because harvesting is only one possible source. A consumable may later come from harvesting, farming, fishing, enemies, containers, vendors, cooking/crafting, quests, or other systems.
 
 ## Documents
 
-- [ConsumableCatalogue](ConsumableCatalogue.md) - the consumable-item catalogue, content status, and high-level gameplay role.
-- [FoodSpriteMapping](FoodSpriteMapping.md) - the current authored mapping for the CFRPG16 Food icon sheet.
-- [ConsumableGameplayDesign](ConsumableGameplayDesign.md) - shared design rules for direct use, raw/prepared food, effect families, and status-effect behaviour.
-- [ConsumableEffectConfiguration](ConsumableEffectConfiguration.md) - the current authored numerical baseline for `ResourceCostEntry` and consumable `StatusEffectProfile` applications.
+- [ConsumableCatalogue](ConsumableCatalogue.md) - catalogue, content status, tutorial scope, and high-level gameplay roles.
+- [FoodSpriteMapping](FoodSpriteMapping.md) - authoritative CFRPG16 Food sprite-to-identity mapping.
+- [ConsumableGameplayDesign](ConsumableGameplayDesign.md) - shared authoring rules, family roles, affinity, lifetime, and stacking principles.
+- [ConsumableEffectConfiguration](ConsumableEffectConfiguration.md) - concrete authored configuration for Status Effect IDs `53001-53045`.
+
+## Current Data Authority
+
+The concrete gameplay values stored in the current `.asset` profiles are authoritative.
+
+Documentation should mirror those assets rather than treating an older balance draft as the source of truth.
 
 ## Content Status
 
-The documents use the following statuses:
-
-- **Current** - already established in active gameplay.
-- **Data Created** - a `ConsumableItemProfile` asset exists, but the item may not yet be introduced through active world content.
-- **Planned** - intended content, but its data or gameplay implementation is not yet complete.
-- **Working name** - a readable authored identity that can still be refined later.
-- **Reserved visual** - a sprite intentionally not yet represented as a Consumable Item, such as the current seed packets.
+- **Current** - established in active gameplay.
+- **Data Created** - authored data exists but may not yet be introduced in world content.
+- **Planned** - intended content not yet implemented.
+- **Working name** - readable identity that can still be refined.
+- **Reserved visual** - mapped sprite without current Consumable data.
 
 ## Naming
 
-Consumable gameplay/data naming follows:
+Consumable Item identity:
 
 `Csm_<ConsumableName>`
 
+Consumable Status Effect asset:
+
+`<StatusEffectID>_SE_Csm_<ConsumableName>_<EffectIdentity>`
+
+Current Consumable Status Effect ID range:
+
+`53001-53045`
+
 Examples:
 
-- `Csm_Cherry`
-- `Csm_RawMeat`
-- `Csm_CookedMeat`
-- `Csm_BrownMushroom`
+- `53043_SE_Csm_Cherry_PeriodicHeal`
+- `53013_SE_Csm_RedMushroom_GlassCannon`
+- `53035_SE_Csm_Chili_Berserk`
 
-The sprite sub-asset keeps the art-pack prefix and sprite index, followed by the consumable identity, for example:
+The sprite sub-asset keeps the art-pack prefix and sprite index, followed by the Consumable identity, for example:
 
 `CFRPG16_Food_Icons_NO_Outline_54_Csm_Cherry`
 
-Seed-packet sprites currently retain their original names because there is no Seed Item type or naming convention yet.
+Seed-packet sprites retain their original names until a Seed Item system exists.
 
 ## Effect Authoring Boundary
 
-`ConsumableItemProfile` owns the use resource cost and the list of status-effect applications. The detailed gameplay behaviour belongs to reusable `StatusEffectProfile` assets.
+`ConsumableItemProfile` owns consumption cost and Status Effect applications.
 
-The current food baseline deliberately avoids Status Effect Flags for ordinary food. Food identity should normally be expressed through:
+`StatusEffectProfile` owns:
 
-- periodic HP / FP / Stamina contributions;
+- affinity;
+- lifetime and stacking;
+- flags;
 - stat modifiers;
-- or a deliberate mixture of positive and negative contributions.
+- stat periodics;
+- VFX.
 
-Major capability locks, immunities, and similar binary effects remain reserved for systems where they are semantically appropriate rather than being used merely to make food feel different.
+Ordinary food currently uses no Status Effect Flags. Differentiation comes from modifiers, periodics, affinity, and lifetime/stacking behaviour.
+
+## Current Tutorial Baseline
+
+Cherry currently uses:
+
+`53043_SE_Csm_Cherry_PeriodicHeal`
+
+with:
+
+- `Buff`;
+- `4s`;
+- `Max Stacks = 2`;
+- `Extend`;
+- HP Heal `5/s @0.5s`.
+
+The wider catalogue remains available for later progression.

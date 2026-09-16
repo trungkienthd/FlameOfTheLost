@@ -22,7 +22,13 @@ MonoBehaviour:
   _maxStacks: 1
   _durationRefreshType: 1
   _flags: []
-  _statModifiers: []
+  _statModifiers:
+  - _target: 3
+    _operation: 0
+    _value: 1.25
+  - _target: 8
+    _operation: 0
+    _value: 0.9
   _combinationType: 0
   _statPeriodics:
   - _isEnabled: 1

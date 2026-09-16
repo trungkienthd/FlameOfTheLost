@@ -11,7 +11,7 @@ Both sheets represent the same content; the Outline version is the outlined pres
 
 The mapping below follows the current **FlameOfTheLost** consumable design. Seed packets remain outside the Consumable Item naming scheme.
 
-Gameplay effect values are intentionally documented separately in [ConsumableEffectConfiguration](ConsumableEffectConfiguration.md); this file remains the authoritative sprite-to-identity mapping.
+Gameplay effect values are documented separately in [ConsumableEffectConfiguration](ConsumableEffectConfiguration.md); this file remains the authoritative sprite-to-identity mapping. The current mapping corresponds to 45 created Consumable identities, while `Csm_Turnip` and `Csm_PurpleBerry` remain reserved visuals without current profiles.
 
 ---
 
@@ -138,3 +138,17 @@ Recommended rule:
 - gameplay/data references identify the item;
 - presentation code or asset-generation tooling selects the appropriate visual variant;
 - outlined and non-outlined sprites do not create separate item data.
+
+
+---
+
+## 5. Current Profile Coverage
+
+The current authored consumable data covers **45 mapped Consumable identities** with corresponding Consumable Item and Status Effect profiles.
+
+Reserved mapped visuals without current profiles:
+
+- `Csm_Turnip`
+- `Csm_PurpleBerry`
+
+This coverage note does not change sprite identity or index mapping.

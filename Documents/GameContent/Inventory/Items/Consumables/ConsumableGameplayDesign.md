@@ -4,7 +4,7 @@
 
 This document defines the intended gameplay treatment of food-based Consumable Items in **FlameOfTheLost**.
 
-It defines the shared design rules and gameplay identities. The current numerical baseline is documented separately in [ConsumableEffectConfiguration](ConsumableEffectConfiguration.md), so balance values can evolve without weakening the higher-level design rules in this document.
+The current authored values live in [ConsumableEffectConfiguration](ConsumableEffectConfiguration.md). The `.asset` profiles are authoritative when balance changes are made.
 
 ---
 
@@ -17,17 +17,16 @@ A Consumable Item should answer at least one gameplay question:
 - Why would the player process or cook it instead of consuming it directly?
 - Why is this item distinct from another food item?
 
-The game should avoid creating a large catalogue of foods that all perform the same action at slightly different numbers.
+The game should avoid a catalogue where every food is just the same heal with slightly different numbers.
 
-Consumables should be **advantageous overall**, but an individual food does not need every contribution to be beneficial. A food can intentionally trade one attribute for a stronger gain elsewhere.
+Consumables should normally be advantageous overall, but individual contributions can include meaningful trade-offs. When positive and negative contributions coexist, the Status Effect should use `Mixed` affinity.
 
-Examples:
+Examples in the current authored set include:
 
-- raw food can provide emergency recovery while temporarily reducing mobility or increasing vulnerability;
-- an aggressive mushroom can increase damage dealt while also increasing damage received;
-- Chili can act as a high-risk offensive stimulant rather than a conventional healing item.
-
-When a single Status Effect contains both positive and negative contributions, its affinity should be `Mixed`.
+- Raw Poultry: HP recovery with slower movement and Stamina drain;
+- Raw Meat: HP recovery with increased damage received;
+- Red Mushroom: very high offence with increased damage received;
+- Chili: strong offence and Stamina efficiency paired with true self-damage.
 
 ---
 
@@ -35,54 +34,59 @@ When a single Status Effect contains both positive and negative contributions, i
 
 A `ConsumableItemProfile` owns:
 
-1. its `ResourceCostEntry` used when the item is consumed;
-2. its list of `StatusEffectApplicationEntry` entries.
+1. its consumption `ResourceCostEntry`;
+2. its `StatusEffectApplicationEntry` list.
 
-The actual gameplay behaviour belongs to the referenced `StatusEffectProfile` assets.
+The gameplay effect itself belongs to the referenced `StatusEffectProfile`.
 
-This keeps item identity separate from reusable status-effect behaviour and allows later systems to reuse, scale, or replace effects without changing the inventory item model.
+Current ordinary food uses no consumption resource cost and normally applies one guaranteed primary Status Effect with:
 
-### Current Resource-Cost Rule
-
-Normal food currently has **no use resource cost**:
-
-- HP Flat Cost = `0`
-- FP Flat Cost = `0`
-- Stamina Flat Cost = `0`
-- HP Percent of Max Cost = `0`
-- FP Percent of Max Cost = `0`
-- Stamina Percent of Max Cost = `0`
-- Blocked By Silence = `false`
-- Allow Self Kill With HP Cost = `false`
-
-`CostTriggerType` should use the canonical serialized value `OnAttackStart`; while all costs are zero, the trigger has no gameplay effect.
-
-This rule can be broken later for explicitly magical, cursed, sacrificial, or other special consumables, but ordinary food should not consume combat resources merely because it is used.
-
-### Current Status-Effect Application Rule
-
-The initial food catalogue normally uses one guaranteed application:
-
-- Chance = `1.0`
-- Potency = `1.0`
-
-A consumable can gain multiple application entries later when there is a clear gameplay reason to separate effects into independent profiles.
+- Chance = `1.0`;
+- Potency = `1.0`.
 
 ---
 
 ## 3. Status Effect Authoring Rules
 
-### 3.1 Flags
+### 3.1 Identity
 
-Ordinary food should normally have **no Status Effect Flags**.
+Current consumable Status Effect IDs use `53001-53045`.
 
-Flags represent binary gameplay rules such as movement locks, attack locks, immunities, or ignoring status-effect classes. These are too strong and categorical to use simply as flavour for normal food.
+Profile naming:
 
-Food differentiation should primarily come from Stat Modifiers and Stat Periodics.
+`<ID>_SE_Csm_<ConsumableName>_<EffectIdentity>`
 
-### 3.2 Stat Modifiers
+Keys omit the `SE_Csm` prefix and ID, for example:
 
-Current useful food modifier targets include:
+`CHILI_BERSERK`
+
+Display names use:
+
+`<Effect Identity> (<Consumable Name>)`
+
+### 3.2 Affinity
+
+Use:
+
+- `Buff` when the contribution package is beneficial;
+- `Debuff` when it is harmful;
+- `Mixed` when meaningful positive and negative contributions coexist.
+
+Affinity should describe the **whole contribution package**, not only its display name.
+
+### 3.3 Flags
+
+Ordinary food currently uses no Status Effect Flags.
+
+Food differentiation is authored through:
+
+- Stat Modifiers;
+- Stat Periodics;
+- lifetime and stacking behaviour.
+
+### 3.4 Stat Modifiers
+
+Current food uses targets including:
 
 - `DamageReceived`
 - `KnockbackReceived`
@@ -93,47 +97,34 @@ Current useful food modifier targets include:
 - `FPCost`
 - `StaminaCost`
 - `StaminaRegenRate`
-- `StaminaRegenDelayDelta`
 
-Multiplier values use `1.0` as neutral. For example:
+`Multiply` uses `1.0` as neutral. `AddFlat` directly adds/subtracts a flat amount.
 
-- `DamageDealt x1.10` = 10% more damage dealt;
-- `DamageReceived x0.92` = 8% less damage received;
-- `MovementSpeedScale x0.90` = 10% slower movement.
+### 3.5 Stat Periodics
 
-`VirtualHPGranted` is additive.
+Periodic targets are HP, FP, and Stamina.
 
-### 3.3 Stat Periodics
+Current authored methods include:
 
-Periodic targets are:
+- HP: `Heal`, `Damage`;
+- FP: `Restore`;
+- Stamina: `Restore`, `Drain`.
 
-- HP
-- FP
-- Stamina
+`AmountPerSecond` is the rate. `TickInterval` controls delivery frequency.
 
-Periodic methods are:
+### 3.6 Lifetime and Stacking
 
-- HP: `Heal` or `Damage`
-- FP / Stamina: `Restore` or `Drain`
+There is no longer one universal lifetime/stacking rule for every food.
 
-`AmountPerSecond` is the actual rate. `TickInterval` controls delivery frequency rather than multiplying the per-second rate.
+Current authored patterns are:
 
-Example:
+- early profiles `53001-53006`: `Max Stacks = 1`, `Extend`;
+- most profiles `53007-53042`, `53044-53045`: `Max Stacks = 1`, `Refresh`;
+- Cherry `53043`: `Max Stacks = 2`, `Extend`.
 
-`HP / Heal / 3 AmountPerSecond / 0.5 TickInterval`
+`Extend` increases remaining duration and can add stacks up to `Max Stacks`; `Refresh` resets remaining duration to the profile duration.
 
-means **3 HP per second**, delivered in half-second ticks.
-
-### 3.4 Default Lifetime and Stacking
-
-Unless a consumable-specific design requires otherwise, the current food effects use:
-
-- Max Stacks = `1`
-- Duration Refresh Type = `Refresh`
-- Stat Modifier Combination Type = `AddStacks`
-- no Status Effect VFX initially
-
-The one-stack rule prevents repeatedly consuming the same food from multiplying one status effect into an extreme value. Different food Status Effect Profiles can still coexist.
+All current consumable profiles use Stat Modifier Combination Type `AddStacks`.
 
 ---
 
@@ -141,109 +132,15 @@ The one-stack rule prevents repeatedly consuming the same food from multiplying 
 
 ### Produce
 
-Examples:
+Produce forms the most readable direct-use family and can cover HP/FP/Stamina recovery, light defence, regeneration, efficiency, or mobility.
 
-- Cherry
-- Apple
-- Peach
-- Pear
-- Strawberry
-- crops and vegetables
-
-Typical role:
-
-- readable direct-use consumables;
-- early-game recovery;
-- light HP / Stamina sustain;
-- future cooking ingredients;
-- farming/harvesting rewards.
-
-Produce should form the most understandable entry point into the Consumable Item system.
-
-Cherry is the baseline example.
+Current examples include Cherry, Apple, Peach, Pear, Strawberry, Tomato, Carrot, Cucumber, and larger crops.
 
 ### Raw Meat
 
-Typical role:
+Raw food remains usable directly but can carry drawbacks or rougher recovery behaviour.
 
-- ingredient first;
-- still usable directly in an emergency;
-- useful recovery paired with a temporary drawback;
-- source item for cooking/preparation.
-
-Raw food should not be made useless merely to encourage cooking. Instead, cooking should remove drawbacks and/or improve the positive effect.
-
-### Prepared Meat / Prepared Food
-
-Examples include Cooked Poultry, Cooked Meat, Cooked Steak, Cooked Meat Leg, Fried Egg, and Cheese.
-
-Typical role:
-
-- stronger recovery or utility than raw ingredients;
-- no raw-food drawback;
-- longer duration or additional benefit;
-- reward for investing in a future cooking/preparation loop.
-
-### Mushrooms
-
-Mushrooms are specialist effect-oriented consumables rather than four differently coloured healing items.
-
-Current identities:
-
-- Brown Mushroom - Stamina recovery / regeneration.
-- Purple Mushroom - strong FP recovery with a mobility trade-off.
-- Red Mushroom - aggressive damage output with increased vulnerability.
-- Blue Mushroom - FP efficiency / sustained special-skill use.
-
-### Fish
-
-The current fish identities are colour-based working identities. Their gameplay family focuses on **combat specialization**, so individual fish can support FP economy, mobility, defence, Stamina, knockback, or aggressive play.
-
-The names can later be replaced by setting-specific species names without requiring the gameplay niches to disappear.
-
-### Egg and Dairy
-
-Typical role:
-
-- ingredients that bridge gathering/farming and cooking;
-- balanced recovery;
-- durability or Stamina support;
-- simple prepared-food relationships such as Egg -> Fried Egg.
-
-### Peppers and Chili
-
-Peppers are combat-oriented produce rather than generic healing vegetables.
-
-- Red Pepper favours offence.
-- Orange Pepper favours mobility and Stamina recovery.
-- Green Pepper favours efficiency and defence.
-- Chili is intentionally a stronger **Mixed** effect with meaningful risk.
-
-### Drinks
-
-Orange Juice establishes a processed drink family.
-
-Processed consumables should normally be meaningfully stronger or more specialized than a simple raw ingredient. Orange Juice therefore focuses on mobility and resource recovery rather than behaving like another small fruit heal.
-
----
-
-## 5. Raw vs Prepared Food
-
-When both raw and prepared sprites exist, they should represent meaningful states rather than cosmetic duplicates.
-
-Recommended relationship:
-
-`Raw Item -> Cooking/Preparation -> Prepared Item`
-
-A prepared item should normally provide at least one meaningful advantage:
-
-- stronger recovery;
-- removal of the raw-food drawback;
-- an additional status benefit;
-- longer duration;
-- better inventory/value efficiency.
-
-Current intended pair hierarchy:
+Current raw/prepared pairs are:
 
 - Raw Poultry -> Cooked Poultry
 - Raw Meat -> Cooked Meat
@@ -251,130 +148,128 @@ Current intended pair hierarchy:
 - Raw Meat Leg -> Cooked Meat Leg
 - Egg -> Fried Egg
 
----
+### Prepared Food
 
-## 6. Direct Use vs Ingredient Use
+Prepared food should be a meaningful alternative to the raw item through stronger recovery, removed drawbacks, added combat utility, or improved efficiency.
 
-A food item can support both roles:
+The exact upgrade does not need to follow one fixed formula.
 
-- **Direct Use** - the player consumes the item immediately.
-- **Ingredient Use** - the item participates in future cooking/crafting.
+### Mushrooms
 
-These roles do not require duplicate item identities.
+Mushrooms are specialist consumables:
 
-Example:
+- Brown Mushroom: Stamina recovery/regeneration;
+- Purple Mushroom: FP recovery with reduced mobility;
+- Red Mushroom: high-risk glass-cannon offence;
+- Blue Mushroom: FP efficiency and recovery.
 
-`Cherry` can remain one Consumable Item whether it is eaten directly or later used in a recipe.
+### Fish
 
-A food should not be duplicated as a Material solely because crafting uses it.
+Fish focus on combat specialization: FP economy, mobility, defence, Stamina, knockback, Virtual HP, and aggressive play.
 
----
+Colour names remain working identities and may later be replaced by species names.
 
-## 7. Cherry Baseline
+### Egg and Dairy
 
-Cherry establishes the simplest tutorial consumable effect:
+Egg, Fried Egg, Cheese, and Milk bridge basic food, recovery, efficiency, and durability.
 
-- Resource Cost: none;
-- Status Effect Affinity: Buff;
-- Flags: none;
-- Stat Modifiers: none;
-- Duration: `5s`;
-- Max Stacks: `1`;
-- Duration Refresh: `Refresh`;
-- Periodic:
-  - Target = HP
-  - Method = Heal
-  - Amount Per Second = `3`
-  - Tick Interval = `0.5s`
+### Peppers and Chili
 
-This produces `15 HP` of total healing over the full duration.
+- Red Pepper supports offence plus Stamina recovery.
+- Orange Pepper supports mobility and Stamina regeneration.
+- Green Pepper supports defence and Stamina efficiency.
+- Chili is a `Mixed` high-risk stimulant with `DamageDealt ×1.25`, `StaminaCost ×0.90`, and true HP self-damage.
 
-Cherry should remain deliberately simple because it teaches the category rather than the entire status-effect system.
+### Drinks
+
+Orange Juice establishes a processed drink identity combining mobility, Stamina regeneration, and FP/Stamina restoration.
 
 ---
 
-## 8. Acquisition Is Separate from Item Category
+## 5. Direct Use vs Ingredient Use
 
-Consumable Item describes **what the inventory item is**, not where it comes from.
+A food item can be both:
 
-Possible sources include:
+- directly consumed;
+- used later as an ingredient.
 
-- harvestable fruit trees;
-- berry bushes;
-- crops;
-- future farming;
-- future fishing;
-- enemy drops;
-- containers;
-- vendors;
-- cooking/preparation;
-- quests.
-
-Source-specific documentation should reference the shared consumable identity rather than redefine it.
+This does not require duplicating it as a Material.
 
 ---
 
-## 9. Seed Items
+## 6. Cherry Tutorial Baseline
 
-Seed packets shown on the Food sprite sheet are intentionally outside the current Consumable Item design.
+Cherry remains the first tutorial consumable.
 
-They remain under their original sprite names because there is currently no authored Seed Item type.
+Current authored Status Effect:
+
+- Profile = `53043_SE_Csm_Cherry_PeriodicHeal`;
+- Affinity = `Buff`;
+- Duration = `4s`;
+- Max Stacks = `2`;
+- Duration Refresh Type = `Extend`;
+- Flags = none;
+- Stat Modifiers = none;
+- HP Heal = `5/s @0.5s`.
+
+A single uninterrupted application restores 20 HP. Repeated applications can extend the effect and increase stacks up to 2.
+
+Cherry is still simple mechanically because it teaches the Consumable category, but its stacking now also demonstrates repeat-use behaviour.
+
+---
+
+## 7. Acquisition Is Separate from Item Category
+
+Consumable Item describes what the inventory item is, not its source.
+
+Possible sources include harvesting, farming, fishing, enemies, containers, vendors, cooking, quests, and other systems.
+
+---
+
+## 8. Seed Items
+
+Seed packets shown on the Food sprite sheet remain outside the current Consumable Item design.
 
 Conceptually:
 
 `Seed Item -> Plant/Growth State -> Harvestable Crop -> Produce Consumable`
 
-The future farming design should decide whether seeds are:
-
-- a dedicated item category;
-- a Material-like resource;
-- a key/progression resource;
-- or another specialized item type.
-
-Do not make them Consumable Items simply to reuse the existing inventory type.
+Do not make seed packets Consumable Items merely to reuse an existing item type.
 
 ---
 
-## 10. Tutorial and Progression
+## 9. Tutorial and Progression
 
 ### Greenvale Border Path
 
-The first tutorial should teach only the minimum loop:
+Current minimum loop:
 
 1. encounter Cherry Tree;
 2. harvest Cherry;
 3. receive a Consumable Item;
-4. learn how to equip/select/use the consumable;
-5. restore Health through the Cherry periodic-heal Status Effect.
+4. learn to equip/select/use it;
+5. restore Health through `Periodic Heal (Cherry)`.
 
-This establishes the category without introducing cooking, farming, fishing, food quality, or multiple competing effects.
-
-### Later progression
-
-Additional families can be introduced when the relevant world/system context exists:
-
-- new produce through new biomes or farming;
-- mushrooms when differentiated effects become useful;
-- fish alongside fishing/aquatic gathering;
-- raw/prepared food alongside cooking;
-- drinks when processed consumables become useful;
-- stronger prepared foods when the player understands the basic consumable loop.
+The wider 45-item catalogue supports later areas and systems without overloading the tutorial.
 
 ---
 
-## 11. Content-Creation Rules
+## 10. Content-Creation Rules
 
-Before creating a new Consumable Item data asset, define:
+Before creating a new Consumable Item, define:
 
-1. its gameplay identity/name;
-2. its icon;
-3. its acquisition source or planned source;
-4. whether it can be directly consumed;
-5. its intended effect family;
-6. its `ResourceCostEntry`;
-7. its `StatusEffectApplicationEntry` list;
-8. whether its applied Status Effect is `Buff`, `Debuff`, or `Mixed`;
-9. whether it is also an ingredient;
-10. its progression purpose.
+1. gameplay identity/name;
+2. icon;
+3. source or planned source;
+4. direct-use role;
+5. effect family;
+6. `ResourceCostEntry`;
+7. `StatusEffectApplicationEntry`;
+8. Status Effect ID/key/display name;
+9. `Buff`, `Debuff`, or `Mixed` affinity;
+10. modifiers/periodics;
+11. lifetime and stacking behaviour;
+12. whether it is also an ingredient;
+13. progression purpose.
 
-A sprite identity may exist before all gameplay values are finalized, but permanent data should still be created deliberately rather than automatically from sprite availability.
+The profile asset remains the authority for concrete gameplay values.
