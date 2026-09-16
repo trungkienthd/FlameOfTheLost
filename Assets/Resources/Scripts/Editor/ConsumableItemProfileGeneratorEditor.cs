@@ -32,7 +32,7 @@ namespace FlameOfTheLost
         private readonly List<ConsumableGenerationEntry> _entries = new();
 
         // --- Menu ---
-        [MenuItem("FlameOfTheLost/Tools/Data/Inventory/Item/Consumable Item Profiles")]
+        [MenuItem("FlameOfTheLost/Tools/Assets/Data/Inventory/Item/Consumable Item Profiles")]
         public static void OpenWindow()
         {
             ConsumableItemProfileGeneratorEditor window = ConsumableItemProfileGeneratorEditor.GetWindow<ConsumableItemProfileGeneratorEditor>("Consumable Profile Generator");

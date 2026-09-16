@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "StatusEffectProfile", menuName = "Data/FlameOfTheLost/Character/Shared/StatusEffects/Profile")]
+    [CreateAssetMenu(fileName = "SE_New", menuName = "Data/FlameOfTheLost/Character/Shared/StatusEffects/StatusEffectProfile")]
     public class StatusEffectProfile : ScriptableObject, IIdentityProvider, IIconProvider
     {
         // --- States ---
