@@ -29,4 +29,7 @@ MonoBehaviour:
     _costType: 0
     _blockedBySilence: 0
     _allowSelfKillWithHPCost: 0
-  _statusEffectApplications: []
+  _statusEffectApplications:
+  - _statusEffect: {fileID: 11400000, guid: ddde8d9b49999c244a4303dcbebb3035, type: 2}
+    _chance: 1
+    _potency: 1
