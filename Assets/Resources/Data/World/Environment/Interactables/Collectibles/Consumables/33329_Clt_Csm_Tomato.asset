@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa222bc5d1d0f446af2b5e2f0104ea3, type: 3}
+  m_Name: 33329_Clt_Csm_Tomato
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CollectibleObjectProfile
+  _id: 33329
+  _key: COLLECTIBLE_TOMATO
+  _displayName: Collectible - Tomato
+  _description: 
+  _icon: {fileID: -2075042589, guid: 8280fb0419376c24c976a2cbf27ac05d, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
+  _item: {fileID: 11400000, guid: 3d360821593d13844be4cc68c0a5b0e3, type: 2}
+  _interactionPromptPriority: 100
+  _destroyAfterCollection: 1

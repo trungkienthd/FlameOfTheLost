@@ -18,7 +18,7 @@ namespace FlameOfTheLost.Editor
         private const bool DefaultConfigureIconAtStart = false;
 
         // --- Menu ---
-        [MenuItem("FlameOfTheLost/Tools/Assets/Data/Collectibles/Create Material Collectible Profiles")]
+        [MenuItem("FlameOfTheLost/Tools/Assets/Data/Collectibles/Create Collectible Profiles")]
         private static void CreateCollectibleProfiles()
         {
             if (!AssetDatabase.IsValidFolder(CollectibleCreationDefinitions.CollectibleObjectProfileRootFolderPath))
@@ -51,7 +51,8 @@ namespace FlameOfTheLost.Editor
             Debug.Log($"[{nameof(CollectibleObjectProfileCreationEditor)}] Finished processing Collectible Object Profiles. Created: {createdCount}, Updated: {updatedCount}, Unchanged: {unchangedCount}, Failed: {failedCount}.");
         }
 
-        // --- Category Processing ---
+        // --- Helpers ---
+        //  1. Category Processing
         private static ProcessResult ProcessCategory(CollectibleCategoryDefinition category, Dictionary<ItemProfile, CollectibleObjectProfile> existingCollectibles, HashSet<int> existingIds)
         {
             ProcessResult result = new();
@@ -69,9 +70,7 @@ namespace FlameOfTheLost.Editor
                 return result;
             }
 
-            Dictionary<string, Sprite> outlineSprites =
-                CollectibleObjectProfileCreationEditor.GetOutlineSprites(category);
-
+            Dictionary<string, Sprite> outlineSprites = CollectibleObjectProfileCreationEditor.GetOutlineSprites(category);
             if (outlineSprites.Count == 0)
             {
                 Debug.LogError($"[{nameof(CollectibleObjectProfileCreationEditor)}] No outlined sprites were found for category '{category.DisplayName}'.");
@@ -118,10 +117,10 @@ namespace FlameOfTheLost.Editor
                     continue;
                 }
 
-                int nextCollectibleId = CollectibleObjectProfileCreationEditor.GetNextAvailableCollectibleId(existingIds, CollectibleCreationDefinitions.CollectibleIdRangeStart);
+                int nextCollectibleId = CollectibleObjectProfileCreationEditor.GetNextAvailableCollectibleId(existingIds, category.CollectibleIdRangeStart, category.CollectibleIdRangeEnd);
                 if (nextCollectibleId < 0)
                 {
-                    Debug.LogError($"[{nameof(CollectibleObjectProfileCreationEditor)}] Stopped because the Collectible Object ID range {CollectibleCreationDefinitions.CollectibleIdRangeStart}-{CollectibleCreationDefinitions.CollectibleIdRangeEnd} is full.");
+                    Debug.LogError($"[{nameof(CollectibleObjectProfileCreationEditor)}] Stopped category '{category.DisplayName}' because the Collectible Object ID range {category.CollectibleIdRangeStart}-{category.CollectibleIdRangeEnd} is full.");
                     result.FailedCount++;
                     break;
                 }
@@ -143,7 +142,7 @@ namespace FlameOfTheLost.Editor
             return result;
         }
 
-        // --- Validation ---
+        //  2. Validation
         private static bool ValidateCategory(CollectibleCategoryDefinition category)
         {
             if (category.ItemProfileType == null)
@@ -186,7 +185,7 @@ namespace FlameOfTheLost.Editor
         }
 
 
-        // --- Item Profiles ---
+        //  3. Item Profiles
         private static List<ItemProfileAssetEntry> GetItemProfileEntries(CollectibleCategoryDefinition category)
         {
             string filter = $"t:{category.ItemProfileType.Name}";
@@ -224,7 +223,7 @@ namespace FlameOfTheLost.Editor
             return entries.OrderBy(entry => entry.ItemId).ToList();
         }
 
-        // --- Outline Sprites ---
+        //  4. Outline Sprites
         private static Dictionary<string, Sprite> GetOutlineSprites(CollectibleCategoryDefinition category)
         {
             UnityEngine.Object[] assets = AssetDatabase.LoadAllAssetsAtPath(category.OutlineSpriteSheetPath);
@@ -261,7 +260,7 @@ namespace FlameOfTheLost.Editor
             return !string.IsNullOrWhiteSpace(itemName);
         }
 
-        // --- Existing Collectibles ---
+        //  5. Existing Collectibles
         private static Dictionary<ItemProfile, CollectibleObjectProfile> GetExistingCollectiblesByItem()
         {
             string[] guids = AssetDatabase.FindAssets("t:CollectibleObjectProfile", new[] { CollectibleCreationDefinitions.CollectibleObjectProfileRootFolderPath });
@@ -288,39 +287,45 @@ namespace FlameOfTheLost.Editor
         }
         private static HashSet<int> GetExistingCollectibleIds()
         {
-            string[] guids = AssetDatabase.FindAssets("t:CollectibleObjectProfile", new[] { CollectibleCreationDefinitions.CollectibleObjectProfileRootFolderPath });
+            string[] guids =
+                AssetDatabase.FindAssets($"t:{nameof(CollectibleObjectProfile)}", new[] { CollectibleCreationDefinitions.CollectibleObjectProfileRootFolderPath });
 
             HashSet<int> ids = new();
 
             foreach (string guid in guids)
             {
                 string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-                string assetName = Path.GetFileNameWithoutExtension(assetPath);
 
-                if (!CollectibleObjectProfileCreationEditor.TryGetLeadingId(assetName, out int id)) continue;
-                if (id < CollectibleCreationDefinitions.CollectibleIdRangeStart || id > CollectibleCreationDefinitions.CollectibleIdRangeEnd) continue;
+                CollectibleObjectProfile profile = AssetDatabase.LoadAssetAtPath<CollectibleObjectProfile>(assetPath);
 
-                ids.Add(id);
+                if (profile == null) continue;
+
+                int id = profile.Id;
+                if (id <= 0)
+                {
+                    string assetName = Path.GetFileNameWithoutExtension(assetPath);
+                    if (!CollectibleObjectProfileCreationEditor.TryGetLeadingId(assetName, out id)) continue;
+                }
+
+                if (!ids.Add(id))
+                {
+                    Debug.LogWarning($"[{nameof(CollectibleObjectProfileCreationEditor)}] Duplicate Collectible Object ID '{id}' was found while scanning existing profiles.");
+                }
             }
 
             return ids;
         }
-        private static int GetNextAvailableCollectibleId(HashSet<int> existingIds, int startId)
+        private static int GetNextAvailableCollectibleId(HashSet<int> existingIds, int rangeStart, int rangeEnd)
         {
-            int firstCandidateId = Mathf.Max(startId, CollectibleCreationDefinitions.CollectibleIdRangeStart);
-
-            for (int id = firstCandidateId; id <= CollectibleCreationDefinitions.CollectibleIdRangeEnd; id++)
+            for (int id = rangeStart; id <= rangeEnd; id++)
             {
-                if (!existingIds.Contains(id))
-                {
-                    return id;
-                }
+                if (!existingIds.Contains(id)) return id;
             }
 
             return -1;
         }
 
-        // --- Creation ---
+        //  6. Creation
         private static bool TryCreateCollectibleProfile(CollectibleCategoryDefinition category, ItemProfileAssetEntry itemEntry, Sprite outlineSprite, int collectibleId, out CollectibleObjectProfile createdProfile)
         {
             createdProfile = null;
@@ -364,7 +369,7 @@ namespace FlameOfTheLost.Editor
             return true;
         }
 
-        // --- Updating ---
+        //  7. Updating
         private static UpdateResult UpdateExistingCollectible(CollectibleObjectProfile collectibleProfile, Sprite outlineSprite)
         {
             if (collectibleProfile == null) return UpdateResult.Failed;
@@ -484,7 +489,7 @@ namespace FlameOfTheLost.Editor
             return new string(characters.ToArray());
         }
 
-        // --- Serialized Properties ---
+        //  8. Serialized Properties
         private static void SetIntProperty(SerializedObject serializedObject, string propertyName, int value)
         {
             SerializedProperty property = serializedObject.FindProperty(propertyName);
@@ -536,7 +541,7 @@ namespace FlameOfTheLost.Editor
         }
 
 
-        // --- Data ---
+        // --- Model ---
         private readonly struct ItemProfileAssetEntry
         {
             public int ItemId { get; }
