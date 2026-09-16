@@ -24,7 +24,7 @@ namespace FlameOfTheLost.Editor
         private int _errorCount;
 
         // --- Menu ---
-        [MenuItem("FlameOfTheLost/Tools/Assets/Data/Inventory/Consumable Status Effect Applications")]
+        [MenuItem("FlameOfTheLost/Tools/Assets/Data/Inventory/Item/Consumable Status Effect Applications")]
         private static void OpenWindow()
         {
             ConsumableStatusEffectApplicationEditor window = ConsumableStatusEffectApplicationEditor.GetWindow<ConsumableStatusEffectApplicationEditor>();

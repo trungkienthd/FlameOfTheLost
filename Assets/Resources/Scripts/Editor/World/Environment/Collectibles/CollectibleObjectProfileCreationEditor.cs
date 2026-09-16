@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace FlameOfTheLost
+namespace FlameOfTheLost.Editor
 {
     public static class CollectibleObjectProfileCreationEditor
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace FlameOfTheLost
+namespace FlameOfTheLost.Editor
 {
     public sealed class SpriteSubSpriteNameListTool : EditorWindow
     {

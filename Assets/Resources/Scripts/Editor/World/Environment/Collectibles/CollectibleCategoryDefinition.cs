@@ -1,6 +1,6 @@
 using System;
 
-namespace FlameOfTheLost
+namespace FlameOfTheLost.Editor
 {
     public readonly struct CollectibleCategoryDefinition
     {

@@ -4,7 +4,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace FlameOfTheLost
+namespace FlameOfTheLost.Editor
 {
     public static class BulkPrefixNamingEditor
     {

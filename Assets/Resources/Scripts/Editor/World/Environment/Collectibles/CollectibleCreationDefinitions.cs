@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace FlameOfTheLost
+namespace FlameOfTheLost.Editor
 {
     public static class CollectibleCreationDefinitions
     {

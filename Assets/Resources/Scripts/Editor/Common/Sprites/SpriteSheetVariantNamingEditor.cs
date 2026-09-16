@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
-namespace FlameOfTheLost
+namespace FlameOfTheLost.Editor
 {
     public static class SpriteSheetVariantNamingEditor
     {

@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace FlameOfTheLost
+namespace FlameOfTheLost.Editor
 {
     public static class CollectibleObjectPrefabCreationEditor
     {
