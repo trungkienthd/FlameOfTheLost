@@ -26,16 +26,21 @@ The global definitions of those Items should remain under their Item-specific Ga
 
 ## Core Rules
 
-1. A gameplay Harvestable may have multiple visual variants.
-2. Visual size, growth stage, damaged state, or stump state does not automatically create a new Harvestable type.
-3. Drops are defined by the Harvestable, not by the impact used to break it.
-4. Each drop entry independently defines its minimum quantity, maximum quantity, and chance.
-5. Harvested and processed resources remain distinct.
-6. New Harvestables should be added only when they have an intentional gameplay role.
+1. A gameplay Harvestable may have multiple variants.
+2. A variant may change presentation and/or drop tuning without becoming a new core Harvestable type.
+3. Oak, Birch, and Spruce each have authored `Normal` and `Small` variants.
+4. Their Normal / Small variants share the same Timber Tree impact response and drop types, but use different drop chances.
+5. Visual size, damaged state, stump state, or other presentation differences do not automatically create a new core Harvestable type.
+6. Drops are defined by the Harvestable/variant, not by the impact used to break it.
+7. Each drop entry independently defines its minimum quantity, maximum quantity, and chance.
+8. Harvested and processed resources remain distinct.
+9. New core Harvestables should be added only when they have an intentional gameplay identity or role.
 
 ## Current Core Catalogue
 
-The current planned core catalogue contains **16 Harvestable types**:
+The current planned core catalogue contains **16 Harvestable types**.
+
+Oak, Birch, and Spruce each additionally have `Normal` and `Small` variants; these variants do not increase the core type count.
 
 - 3 Timber Trees
 - 4 Fruit Trees

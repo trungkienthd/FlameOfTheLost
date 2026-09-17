@@ -148,9 +148,11 @@ Expected standard hits to break:
 
 Used by:
 
-- Oak Tree
-- Birch Tree
-- Spruce Tree
+- Oak Tree — Normal and Small
+- Birch Tree — Normal and Small
+- Spruce Tree — Normal and Small
+
+Normal and Small variants use the same durability and impact response. Their difference is limited to drop chances, defined in `HarvestableDesign.md`.
 
 ### Fruit Tree
 
