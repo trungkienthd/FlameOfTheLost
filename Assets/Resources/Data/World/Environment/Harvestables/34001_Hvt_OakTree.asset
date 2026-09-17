@@ -26,7 +26,8 @@ MonoBehaviour:
   _initialVisualLocalScale: {x: 1, y: 1, z: 1}
   _configureIconAtStart: 0
   _maximumDurability: 5
-  _acceptedImpactTypes: -1
+  _defaultImpactDamageMultiplier: 0.25
+  _impactResponses: []
   _breakBehaviour: 0
   _harvestedSprite: {fileID: -2091055549, guid: 94ff3b01f7317c243a29213d03ca7285, type: 3}
   _dropEntries:
@@ -37,5 +38,5 @@ MonoBehaviour:
   - _collectiblePrefab: {fileID: 9210053615777669816, guid: 91cc0308508f19448b27869ee409637a, type: 3}
     _minimumQuantity: 1
     _maximumQuantity: 1
-    _dropChance: 0.3
+    _dropChance: 0.8
   _randomPositionRadius: 0.35

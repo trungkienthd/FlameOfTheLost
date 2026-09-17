@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0cab8679280d941b73444642356f58, type: 3}
+  m_Name: 34002_Hvt_SmallOakTree
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableObjectProfile
+  _id: 34002
+  _key: SMALL_OAK_TREE
+  _displayName: Small Oak Tree
+  _description: 
+  _icon: {fileID: -1198562835, guid: 94ff3b01f7317c243a29213d03ca7285, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: -1.25, y: 18, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
+  _maximumDurability: 5
+  _defaultImpactDamageMultiplier: 0.25
+  _impactResponses: []
+  _breakBehaviour: 0
+  _harvestedSprite: {fileID: -2091055549, guid: 94ff3b01f7317c243a29213d03ca7285, type: 3}
+  _dropEntries:
+  - _collectiblePrefab: {fileID: 807425697903884995, guid: cd538b8d34fd5234db3e5bad558425ea, type: 3}
+    _minimumQuantity: 1
+    _maximumQuantity: 1
+    _dropChance: 1
+  - _collectiblePrefab: {fileID: 9210053615777669816, guid: 91cc0308508f19448b27869ee409637a, type: 3}
+    _minimumQuantity: 1
+    _maximumQuantity: 1
+    _dropChance: 0.5
+  _randomPositionRadius: 0.35
