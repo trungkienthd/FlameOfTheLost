@@ -17,7 +17,7 @@ MonoBehaviour:
   _displayName: Collectible - Raw Meat
   _description: 
   _icon: {fileID: -747873837, guid: 8280fb0419376c24c976a2cbf27ac05d, type: 3}
-  _configureInitialTransformAtStart: 1
+  _configureInitialTransformAtStart: 0
   _initialPosition: {x: 0, y: 0, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
