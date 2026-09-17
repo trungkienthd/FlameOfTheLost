@@ -24,7 +24,7 @@ MonoBehaviour:
   _knockbackForce: 1
   _harvestDamage:
     _isEnabled: 1
-    _impactType: 0
+    _impactType: 3
     _combatDamageMultiplier: 0
     _flatHarvestDamage: 1
     _minimumHarvestDamage: 1

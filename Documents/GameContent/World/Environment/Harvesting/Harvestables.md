@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the harvestable content currently available from the project's environment and resource sprite sets and the items each harvestable is intended to produce.
+This document defines the harvestable content currently available from the project's environment and resource sprite sets, the items each harvestable is intended to produce, and the recommended harvesting-impact configuration.
 
 For now, harvestable drops are limited to:
 
@@ -11,9 +11,31 @@ For now, harvestable drops are limited to:
 
 Drop quantities and probabilities are baseline design values and can be tuned during balancing.
 
+Impact configuration follows [Impact Configuration](ImpactConfiguration.md).
+
+Unless a specific entry says otherwise:
+
+- `Default Impact Damage Multiplier = 0`
+- all four current impact types are authored explicitly;
+- drops are determined by the harvestable, not by the impact type used to break it.
+
 ---
 
 ## 1. Timber Trees
+
+### Shared Harvest Configuration
+
+Applies to Oak, Birch, and Spruce trees unless overridden later.
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 6 |
+| Slash | 1 |
+| Chop | 3 |
+| Pierce | 1 |
+| Blunt | 1 |
+
+`Chop` is the preferred timber-harvesting impact. Other player attacks can still break a normal tree, but substantially more slowly.
 
 ### Oak Tree
 
@@ -31,7 +53,7 @@ Drops:
 | Twig | Material | 1–2 | 100% | Primary basic tree resource |
 | Wood | Material | 1 | 30% | Less-common substantial timber |
 
-The current Section 2 Oak Tree should use this table.
+The current Section 2 Oak Tree should use the shared Timber Tree harvest configuration and this drop table.
 
 ### Birch Tree
 
@@ -77,6 +99,18 @@ Fruit-tree harvesting is primarily intended to teach and supply **Consumable Ite
 
 The generic `Small Fruit Tree`, `Medium Fruit Tree`, and `Big Fruit Tree` sprites are size/growth presentation variants rather than separate drop tables.
 
+### Shared Harvest Configuration
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 6 |
+| Slash | 2 |
+| Chop | 2 |
+| Pierce | 1 |
+| Blunt | 1 |
+
+Fruit trees deliberately do not use the timber-tree `Chop = 3` response. This keeps gathering fruit mechanically distinct from chopping a tree for Wood.
+
 ### Apple Tree
 
 **Status:** Planned
@@ -101,6 +135,8 @@ Drops:
 
 The Cherry Tree in Greenvale Border Path Section 3 should be the first clear **Harvestable -> Consumable Item** tutorial example.
 
+It should use the shared Fruit Tree impact configuration.
+
 ### Peach Tree
 
 **Status:** Planned
@@ -112,13 +148,23 @@ Drops:
 | Peach | Consumable Item | 1–3 | 100% | Primary produce |
 | Twig | Material | 1 | 20% | Optional secondary drop |
 
-Fruit trees do not normally drop `Wood`; harvesting fruit should remain mechanically distinct from chopping timber trees.
+Fruit trees do not normally drop `Wood`.
 
 ---
 
 ## 3. Berry Bushes
 
 The available sprite sheet contains two berry families.
+
+### Shared Harvest Configuration
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 4 |
+| Slash | 2 |
+| Chop | 1 |
+| Pierce | 1 |
+| Blunt | 1 |
 
 ### Red Berry Bush
 
@@ -148,24 +194,85 @@ The final lore/gameplay names of the berries may replace the colour-based workin
 
 Each crop sprite set contains several growth stages. Growth stages are visual/runtime states of one harvestable type and do not create separate content entries.
 
-The following crop families are represented by the supplied sprites.
+Crops use three response archetypes.
 
-| Harvestable | Status | Primary Drop | Category | Baseline Yield |
-|---|---|---|---|---:|
-| Wheat | Planned | Wheat | Consumable Item | 1–3 |
-| Tomato Plant | Planned | Tomato | Consumable Item | 1–3 |
-| Carrot Crop | Planned | Carrot | Consumable Item | 1–3 |
-| Eggplant Crop | Planned | Eggplant | Consumable Item | 1–3 |
-| Corn Crop | Planned | Corn | Consumable Item | 1–3 |
-| Pumpkin Crop | Planned | Pumpkin | Consumable Item | 1 |
-| Parsnip Crop | Planned | Parsnip | Consumable Item | 1–3 |
-| Cabbage Crop | Planned | Cabbage | Consumable Item | 1 |
-| Cucumber Crop | Planned | Cucumber | Consumable Item | 1–3 |
-| Chili Crop | Planned | Chili Pepper | Consumable Item | 1–3 |
-| Red Pepper Crop | Planned | Red Pepper | Consumable Item | 1–3 |
-| Orange Pepper Crop | Planned | Orange Pepper | Consumable Item | 1–3 |
-| Green Pepper Crop | Planned | Green Pepper | Consumable Item | 1–3 |
-| Blue Squash Crop | Planned / working name | Blue Squash | Consumable Item | 1 |
+### Soft Crop
+
+Intended for above-ground produce and stalk crops.
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 2 |
+| Slash | 2 |
+| Chop | 1 |
+| Pierce | 1 |
+| Blunt | 1 |
+
+Applies to:
+
+- Wheat
+- Tomato Plant
+- Eggplant Crop
+- Corn Crop
+- Cucumber Crop
+- Chili Crop
+- Red Pepper Crop
+- Orange Pepper Crop
+- Green Pepper Crop
+
+### Root Crop
+
+`Dig` / `Blunt` is preferred.
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 2 |
+| Slash | 1 |
+| Chop | 1 |
+| Pierce | 1 |
+| Blunt | 2 |
+
+Applies to:
+
+- Carrot Crop
+- Parsnip Crop
+
+### Heavy Crop
+
+Dense produce favors a heavier cutting action.
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 4 |
+| Slash | 1 |
+| Chop | 2 |
+| Pierce | 1 |
+| Blunt | 1 |
+
+Applies to:
+
+- Pumpkin Crop
+- Cabbage Crop
+- Blue Squash Crop
+
+### Crop Catalogue
+
+| Harvestable | Status | Primary Drop | Category | Baseline Yield | Harvest Archetype |
+|---|---|---|---|---:|---|
+| Wheat | Planned | Wheat | Consumable Item | 1–3 | Soft Crop |
+| Tomato Plant | Planned | Tomato | Consumable Item | 1–3 | Soft Crop |
+| Carrot Crop | Planned | Carrot | Consumable Item | 1–3 | Root Crop |
+| Eggplant Crop | Planned | Eggplant | Consumable Item | 1–3 | Soft Crop |
+| Corn Crop | Planned | Corn | Consumable Item | 1–3 | Soft Crop |
+| Pumpkin Crop | Planned | Pumpkin | Consumable Item | 1 | Heavy Crop |
+| Parsnip Crop | Planned | Parsnip | Consumable Item | 1–3 | Root Crop |
+| Cabbage Crop | Planned | Cabbage | Consumable Item | 1 | Heavy Crop |
+| Cucumber Crop | Planned | Cucumber | Consumable Item | 1–3 | Soft Crop |
+| Chili Crop | Planned | Chili Pepper | Consumable Item | 1–3 | Soft Crop |
+| Red Pepper Crop | Planned | Red Pepper | Consumable Item | 1–3 | Soft Crop |
+| Orange Pepper Crop | Planned | Orange Pepper | Consumable Item | 1–3 | Soft Crop |
+| Green Pepper Crop | Planned | Green Pepper | Consumable Item | 1–3 | Soft Crop |
+| Blue Squash Crop | Planned / working name | Blue Squash | Consumable Item | 1 | Heavy Crop |
 
 `Blue Squash` is a working name based on the final dark teal round crop sprite and should be renamed if the art pack provides an authoritative name.
 
@@ -183,6 +290,18 @@ The current material data separates them into:
 The intended direct harvest output is the raw **Chunks** form of each family.
 
 Processed forms such as `Ore`, `Bar`, `Crystal`, and `Block` are not intended to drop directly from mineral nodes unless a future design explicitly says otherwise.
+
+### Shared Harvest Configuration
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 9 |
+| Slash | 0 |
+| Chop | 1 |
+| Pierce | 0 |
+| Blunt | 3 |
+
+`Blunt` is the preferred mineral-harvesting impact. `Chop` can slowly chip a node. Slashing attacks, stabs, and arrows can contact the object but do no durability damage.
 
 ### Metal Nodes
 
@@ -263,9 +382,14 @@ Therefore a `Reed Patch`, for example, should remain decorative until a Reed-der
 
 For the first Greenvale Border Path map, the intended harvestable catalogue is deliberately small:
 
-| Harvestable | Drop(s) |
-|---|---|
-| Oak Tree | Twig, Wood |
-| Cherry Tree | Cherry, optional Twig |
+| Harvestable | Durability | Slash | Chop | Pierce | Blunt | Drop(s) |
+|---|---:|---:|---:|---:|---:|---|
+| Oak Tree | 6 | 1 | 3 | 1 | 1 | Twig, Wood |
+| Cherry Tree | 6 | 2 | 2 | 1 | 1 | Cherry, optional Twig |
 
-This keeps the first harvesting tutorials readable before the broader material, mineral, and farming catalogue is introduced.
+This keeps the first harvesting tutorials readable while demonstrating the new impact-response system:
+
+- Oak Tree teaches that `Chop` is the preferred timber impact.
+- Cherry Tree accepts the same physical attacks but does not behave like a timber resource.
+- Arrow hits remain possible but intentionally inefficient.
+- Enemy-only skills remain unable to harvest either object.
