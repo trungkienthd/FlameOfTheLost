@@ -131,6 +131,10 @@ Avoid fractional multipliers while the standard base damage remains `1`.
 
 ### Timber Tree
 
+Normal and Small Timber Tree variants share the same impact-response multipliers but use different Maximum Durability values.
+
+#### Normal Timber Tree
+
 | Property | Value |
 |---|---:|
 | Maximum Durability | 6 |
@@ -146,13 +150,35 @@ Expected standard hits to break:
 - Pierce: 6
 - Blunt: 6
 
+#### Small Timber Tree
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 5 |
+| Slash | 1 |
+| Chop | 3 |
+| Pierce | 1 |
+| Blunt | 1 |
+
+Expected standard hits to break:
+
+- Chop: 2
+- Slash: 5
+- Pierce: 5
+- Blunt: 5
+
 Used by:
 
 - Oak Tree — Normal and Small
 - Birch Tree — Normal and Small
 - Spruce Tree — Normal and Small
 
-Normal and Small variants use the same durability and impact response. Their difference is limited to drop chances, defined in `HarvestableDesign.md`.
+Variant differences are:
+
+- Maximum Durability: `Normal = 6`, `Small = 5`
+- drop chances: defined in `HarvestableDesign.md`
+
+Impact-response multipliers remain identical between the two variants.
 
 ### Fruit Tree
 

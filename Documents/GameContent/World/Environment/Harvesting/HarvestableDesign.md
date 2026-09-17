@@ -71,28 +71,28 @@ Crystal progression:
 
 ## 2. Catalogue Summary
 
-| Category | Harvestable | Variants | Status | Response Archetype | Primary Drop |
-|---|---|---|---|---|---|
-| Timber Tree | Oak Tree | Normal, Small | Current | Timber Tree | Wood |
-| Timber Tree | Birch Tree | Normal, Small | Planned | Timber Tree | Wood |
-| Timber Tree | Spruce Tree | Normal, Small | Planned | Timber Tree | Wood |
-| Fruit Tree | Apple Tree | Presentation variants | Planned | Fruit Tree | Apple |
-| Fruit Tree | Cherry Tree | Presentation variants | Current | Fruit Tree | Cherry |
-| Fruit Tree | Peach Tree | Presentation variants | Planned | Fruit Tree | Peach |
-| Fruit Tree | Pear Tree | Presentation variants | Planned | Fruit Tree | Pear |
-| Stone Resource | Stone Deposit | Visual variants | Planned | Mineral Node | Stone |
-| Metal Node | Iron Node | Visual variants | Planned | Mineral Node | Iron Chunks |
-| Metal Node | Copper Node | Visual variants | Planned | Mineral Node | Copper Chunks |
-| Metal Node | Gold Node | Visual variants | Planned | Mineral Node | Gold Chunks |
-| Crystal Node | Aquamarine Node | Visual variants | Planned | Mineral Node | Aquamarine Chunks |
-| Crystal Node | Amber Node | Visual variants | Planned | Mineral Node | Amber Chunks |
-| Crystal Node | Ruby Node | Visual variants | Planned | Mineral Node | Ruby Chunks |
-| Crystal Node | Emerald Node | Visual variants | Planned | Mineral Node | Emerald Chunks |
-| Crystal Node | Amethyst Node | Visual variants | Planned | Mineral Node | Amethyst Chunks |
+| Category | Harvestable | Variants | Status | Response Archetype | Max Durability | Primary Drop |
+|---|---|---|---|---|---:|---|
+| Timber Tree | Oak Tree | Normal, Small | Current | Timber Tree | 6 / 5 | Wood |
+| Timber Tree | Birch Tree | Normal, Small | Planned | Timber Tree | 6 / 5 | Wood |
+| Timber Tree | Spruce Tree | Normal, Small | Planned | Timber Tree | 6 / 5 | Wood |
+| Fruit Tree | Apple Tree | Presentation variants | Planned | Fruit Tree | 6 | Apple |
+| Fruit Tree | Cherry Tree | Presentation variants | Current | Fruit Tree | 6 | Cherry |
+| Fruit Tree | Peach Tree | Presentation variants | Planned | Fruit Tree | 6 | Peach |
+| Fruit Tree | Pear Tree | Presentation variants | Planned | Fruit Tree | 6 | Pear |
+| Stone Resource | Stone Deposit | Visual variants | Planned | Mineral Node | 9 | Stone |
+| Metal Node | Iron Node | Visual variants | Planned | Mineral Node | 9 | Iron Chunks |
+| Metal Node | Copper Node | Visual variants | Planned | Mineral Node | 9 | Copper Chunks |
+| Metal Node | Gold Node | Visual variants | Planned | Mineral Node | 9 | Gold Chunks |
+| Crystal Node | Aquamarine Node | Visual variants | Planned | Mineral Node | 9 | Aquamarine Chunks |
+| Crystal Node | Amber Node | Visual variants | Planned | Mineral Node | 9 | Amber Chunks |
+| Crystal Node | Ruby Node | Visual variants | Planned | Mineral Node | 9 | Ruby Chunks |
+| Crystal Node | Emerald Node | Visual variants | Planned | Mineral Node | 9 | Emerald Chunks |
+| Crystal Node | Amethyst Node | Visual variants | Planned | Mineral Node | 9 | Amethyst Chunks |
 
 **Total: 16 core Harvestable types**
 
-The Normal / Small Timber Tree variants do **not** increase this count.
+The Normal / Small Timber Tree variants do **not** increase this count. `6 / 5` in the summary means `Normal / Small` Maximum Durability.
 
 ---
 
@@ -108,15 +108,26 @@ Oak, Birch, and Spruce each have two authored variants:
 Both variants:
 
 - belong to the same Timber Tree species;
-- use the same **Timber Tree** response archetype;
+- use the same Timber Tree impact-response multipliers;
 - drop the same Item types;
+- use different Maximum Durability values;
 - use different drop chances.
 
-The Small variant represents a younger/lighter tree. It is more reliable for Twig but less reliable for substantial Wood.
+The Small variant represents a younger/lighter tree. It has slightly lower Maximum Durability, is more reliable for Twig, and is less reliable for substantial Wood.
 
-### Variant Drop Rules
+### Variant Configuration
 
 #### Normal Timber Tree
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 6 |
+| Slash | 1 |
+| Chop | 3 |
+| Pierce | 1 |
+| Blunt | 1 |
+
+Drops:
 
 | Drop | Category | Min | Max | Chance |
 |---|---|---:|---:|---:|
@@ -124,6 +135,16 @@ The Small variant represents a younger/lighter tree. It is more reliable for Twi
 | Twig | Material | 1 | 2 | 70% |
 
 #### Small Timber Tree
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 5 |
+| Slash | 1 |
+| Chop | 3 |
+| Pierce | 1 |
+| Blunt | 1 |
+
+Drops:
 
 | Drop | Category | Min | Max | Chance |
 |---|---|---:|---:|---:|
@@ -138,12 +159,12 @@ These values apply consistently to Oak, Birch, and Spruce unless a species-speci
 **Variants:** Normal, Small  
 **Response Archetype:** Timber Tree
 
-| Variant | Drop | Category | Min | Max | Chance |
-|---|---|---|---:|---:|---:|
-| Normal | Wood | Material | 1 | 2 | 100% |
-| Normal | Twig | Material | 1 | 2 | 70% |
-| Small | Wood | Material | 1 | 2 | 60% |
-| Small | Twig | Material | 1 | 2 | 100% |
+| Variant | Max Durability | Drop | Category | Min | Max | Chance |
+|---|---:|---|---|---:|---:|---:|
+| Normal | 6 | Wood | Material | 1 | 2 | 100% |
+| Normal | 6 | Twig | Material | 1 | 2 | 70% |
+| Small | 5 | Wood | Material | 1 | 2 | 60% |
+| Small | 5 | Twig | Material | 1 | 2 | 100% |
 
 ### Birch Tree
 
@@ -151,12 +172,12 @@ These values apply consistently to Oak, Birch, and Spruce unless a species-speci
 **Variants:** Normal, Small  
 **Response Archetype:** Timber Tree
 
-| Variant | Drop | Category | Min | Max | Chance |
-|---|---|---|---:|---:|---:|
-| Normal | Wood | Material | 1 | 2 | 100% |
-| Normal | Twig | Material | 1 | 2 | 70% |
-| Small | Wood | Material | 1 | 2 | 60% |
-| Small | Twig | Material | 1 | 2 | 100% |
+| Variant | Max Durability | Drop | Category | Min | Max | Chance |
+|---|---:|---|---|---:|---:|---:|
+| Normal | 6 | Wood | Material | 1 | 2 | 100% |
+| Normal | 6 | Twig | Material | 1 | 2 | 70% |
+| Small | 5 | Wood | Material | 1 | 2 | 60% |
+| Small | 5 | Twig | Material | 1 | 2 | 100% |
 
 ### Spruce Tree
 
@@ -164,12 +185,12 @@ These values apply consistently to Oak, Birch, and Spruce unless a species-speci
 **Variants:** Normal, Small  
 **Response Archetype:** Timber Tree
 
-| Variant | Drop | Category | Min | Max | Chance |
-|---|---|---|---:|---:|---:|
-| Normal | Wood | Material | 1 | 2 | 100% |
-| Normal | Twig | Material | 1 | 2 | 70% |
-| Small | Wood | Material | 1 | 2 | 60% |
-| Small | Twig | Material | 1 | 2 | 100% |
+| Variant | Max Durability | Drop | Category | Min | Max | Chance |
+|---|---:|---|---|---:|---:|---:|
+| Normal | 6 | Wood | Material | 1 | 2 | 100% |
+| Normal | 6 | Twig | Material | 1 | 2 | 70% |
+| Small | 5 | Wood | Material | 1 | 2 | 60% |
+| Small | 5 | Twig | Material | 1 | 2 | 100% |
 
 ---
 
@@ -261,37 +282,37 @@ Progression:
 
 ## 8. Complete Drop Table
 
-| Harvestable | Variant | Drop | Category | Min | Max | Chance |
-|---|---|---|---|---:|---:|---:|
-| Oak Tree | Normal | Wood | Material | 1 | 2 | 100% |
-| Oak Tree | Normal | Twig | Material | 1 | 2 | 70% |
-| Oak Tree | Small | Wood | Material | 1 | 2 | 60% |
-| Oak Tree | Small | Twig | Material | 1 | 2 | 100% |
-| Birch Tree | Normal | Wood | Material | 1 | 2 | 100% |
-| Birch Tree | Normal | Twig | Material | 1 | 2 | 70% |
-| Birch Tree | Small | Wood | Material | 1 | 2 | 60% |
-| Birch Tree | Small | Twig | Material | 1 | 2 | 100% |
-| Spruce Tree | Normal | Wood | Material | 1 | 2 | 100% |
-| Spruce Tree | Normal | Twig | Material | 1 | 2 | 70% |
-| Spruce Tree | Small | Wood | Material | 1 | 2 | 60% |
-| Spruce Tree | Small | Twig | Material | 1 | 2 | 100% |
-| Apple Tree | — | Apple | Consumable Item | 1 | 3 | 100% |
-| Apple Tree | — | Twig | Material | 1 | 1 | 20% |
-| Cherry Tree | — | Cherry | Consumable Item | 1 | 3 | 100% |
-| Cherry Tree | — | Twig | Material | 1 | 1 | 20% |
-| Peach Tree | — | Peach | Consumable Item | 1 | 3 | 100% |
-| Peach Tree | — | Twig | Material | 1 | 1 | 20% |
-| Pear Tree | — | Pear | Consumable Item | 1 | 3 | 100% |
-| Pear Tree | — | Twig | Material | 1 | 1 | 20% |
-| Stone Deposit | — | Stone | Material | 1 | 3 | 100% |
-| Iron Node | — | Iron Chunks | Material | 1 | 3 | 100% |
-| Copper Node | — | Copper Chunks | Material | 1 | 3 | 100% |
-| Gold Node | — | Gold Chunks | Material | 1 | 2 | 100% |
-| Aquamarine Node | — | Aquamarine Chunks | Material | 1 | 2 | 100% |
-| Amber Node | — | Amber Chunks | Material | 1 | 2 | 100% |
-| Ruby Node | — | Ruby Chunks | Material | 1 | 2 | 100% |
-| Emerald Node | — | Emerald Chunks | Material | 1 | 2 | 100% |
-| Amethyst Node | — | Amethyst Chunks | Material | 1 | 2 | 100% |
+| Harvestable | Variant | Max Durability | Drop | Category | Min | Max | Chance |
+|---|---|---:|---|---|---:|---:|---:|
+| Oak Tree | Normal | 6 | Wood | Material | 1 | 2 | 100% |
+| Oak Tree | Normal | 6 | Twig | Material | 1 | 2 | 70% |
+| Oak Tree | Small | 5 | Wood | Material | 1 | 2 | 60% |
+| Oak Tree | Small | 5 | Twig | Material | 1 | 2 | 100% |
+| Birch Tree | Normal | 6 | Wood | Material | 1 | 2 | 100% |
+| Birch Tree | Normal | 6 | Twig | Material | 1 | 2 | 70% |
+| Birch Tree | Small | 5 | Wood | Material | 1 | 2 | 60% |
+| Birch Tree | Small | 5 | Twig | Material | 1 | 2 | 100% |
+| Spruce Tree | Normal | 6 | Wood | Material | 1 | 2 | 100% |
+| Spruce Tree | Normal | 6 | Twig | Material | 1 | 2 | 70% |
+| Spruce Tree | Small | 5 | Wood | Material | 1 | 2 | 60% |
+| Spruce Tree | Small | 5 | Twig | Material | 1 | 2 | 100% |
+| Apple Tree | — | 6 | Apple | Consumable Item | 1 | 3 | 100% |
+| Apple Tree | — | 6 | Twig | Material | 1 | 1 | 20% |
+| Cherry Tree | — | 6 | Cherry | Consumable Item | 1 | 3 | 100% |
+| Cherry Tree | — | 6 | Twig | Material | 1 | 1 | 20% |
+| Peach Tree | — | 6 | Peach | Consumable Item | 1 | 3 | 100% |
+| Peach Tree | — | 6 | Twig | Material | 1 | 1 | 20% |
+| Pear Tree | — | 6 | Pear | Consumable Item | 1 | 3 | 100% |
+| Pear Tree | — | 6 | Twig | Material | 1 | 1 | 20% |
+| Stone Deposit | — | 9 | Stone | Material | 1 | 3 | 100% |
+| Iron Node | — | 9 | Iron Chunks | Material | 1 | 3 | 100% |
+| Copper Node | — | 9 | Copper Chunks | Material | 1 | 3 | 100% |
+| Gold Node | — | 9 | Gold Chunks | Material | 1 | 2 | 100% |
+| Aquamarine Node | — | 9 | Aquamarine Chunks | Material | 1 | 2 | 100% |
+| Amber Node | — | 9 | Amber Chunks | Material | 1 | 2 | 100% |
+| Ruby Node | — | 9 | Ruby Chunks | Material | 1 | 2 | 100% |
+| Emerald Node | — | 9 | Emerald Chunks | Material | 1 | 2 | 100% |
+| Amethyst Node | — | 9 | Amethyst Chunks | Material | 1 | 2 | 100% |
 
 ---
 
@@ -316,12 +337,12 @@ Crops, bushes, vines, fungi, and similar gathering content can be added later as
 
 Greenvale currently requires only:
 
-| Harvestable | Variant | Response Archetype | Drops |
-|---|---|---|---|
-| Oak Tree | Normal or Small as placed | Timber Tree | Wood, Twig |
-| Cherry Tree | Presentation variant as placed | Fruit Tree | Cherry, optional Twig |
+| Harvestable | Variant | Max Durability | Response Archetype | Drops |
+|---|---|---:|---|---|
+| Oak Tree | Normal / Small | 6 / 5 | Timber Tree | Wood, Twig |
+| Cherry Tree | Presentation variant as placed | 6 | Fruit Tree | Cherry, optional Twig |
 
-Oak Tree's Normal / Small variant determines its drop chances while both variants retain the same Timber Tree harvesting response.
+Oak Tree's Normal / Small variant determines both Maximum Durability and drop chances. Both variants retain the same Timber Tree impact-response multipliers.
 
 This provides two distinct tutorial relationships:
 

@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Oak_Tree_0
+      name: CFRPG16_Oak_Tree_0
       rect:
         serializedVersion: 2
         x: 0
@@ -125,7 +125,7 @@ TextureImporter:
         width: 64
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -139,7 +139,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Oak_Tree_1
+      name: CFRPG16_Oak_Tree_1
       rect:
         serializedVersion: 2
         x: 64
@@ -147,7 +147,7 @@ TextureImporter:
         width: 64
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -161,7 +161,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Oak_Tree_2
+      name: CFRPG16_Oak_Tree_2
       rect:
         serializedVersion: 2
         x: 128
@@ -169,7 +169,7 @@ TextureImporter:
         width: 64
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -196,9 +196,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Oak_Tree_0: -2091055549
-      Oak_Tree_1: -1198562835
-      Oak_Tree_2: 172130668
+      CFRPG16_Oak_Tree_0: -2091055549
+      CFRPG16_Oak_Tree_1: -1198562835
+      CFRPG16_Oak_Tree_2: 172130668
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

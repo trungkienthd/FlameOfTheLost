@@ -34,9 +34,9 @@ MonoBehaviour:
   - _collectiblePrefab: {fileID: 807425697903884995, guid: cd538b8d34fd5234db3e5bad558425ea, type: 3}
     _minimumQuantity: 1
     _maximumQuantity: 2
-    _dropChance: 1
+    _dropChance: 0.7
   - _collectiblePrefab: {fileID: 9210053615777669816, guid: 91cc0308508f19448b27869ee409637a, type: 3}
     _minimumQuantity: 1
-    _maximumQuantity: 1
-    _dropChance: 0.8
+    _maximumQuantity: 2
+    _dropChance: 1
   _randomPositionRadius: 0.35
