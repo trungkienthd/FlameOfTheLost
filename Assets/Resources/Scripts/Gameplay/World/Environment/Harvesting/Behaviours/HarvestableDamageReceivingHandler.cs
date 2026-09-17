@@ -37,13 +37,7 @@ namespace FlameOfTheLost
             }
             if (!other.TryGetComponent<IDamager>(out IDamager damager)) return;
 
-            this.LogDebug
-            (
-                $"{nameof(IDamager)} found on " +
-                $"'{other.gameObject.name}'. " +
-                $"EffectiveDamageAmount={damager.EffectiveDamageAmount}, " +
-                $"SourceCharacter='{this.GetObjectName(damager.SourceCharacter)}'."
-            );
+            this.LogDebug($"{nameof(IDamager)} found on '{other.gameObject.name}'. EffectiveDamageAmount={damager.EffectiveDamageAmount}, SourceCharacter='{this.GetObjectName(damager.SourceCharacter)}'.");
 
             IHarvestDamageSource harvestDamageSource = other.GetComponent<IHarvestDamageSource>();
             if (harvestDamageSource == null)
@@ -52,13 +46,7 @@ namespace FlameOfTheLost
                 return;
             }
 
-            this.LogDebug
-            (
-                $"{nameof(IHarvestDamageSource)} found. " +
-                $"ImpactType={harvestDamageSource.ImpactType}, " +
-                $"TriggerSelfOnHitStatusEffects=" +
-                $"{harvestDamageSource.TriggerSelfOnHitStatusEffects}."
-            );
+            this.LogDebug($"{nameof(IHarvestDamageSource)} found. ImpactType={harvestDamageSource.ImpactType}, TriggerSelfOnHitStatusEffects={harvestDamageSource.TriggerSelfOnHitStatusEffects}.");
 
             if (Time.frameCount == this.LastHitFrame && System.Object.ReferenceEquals(damager, this.LastDamager))
             {
@@ -67,82 +55,59 @@ namespace FlameOfTheLost
             }
 
             HarvestImpactType impactType = harvestDamageSource.ImpactType;
-            if (!this.HarvestableObjectController.AcceptsImpactType(impactType))
+            if (impactType == HarvestImpactType.None)
             {
-                this.LogDebug($"Harvest hit rejected: impact type '{impactType}' " + $"is not accepted. Accepted impact types are " + $"'{this.HarvestableObjectController.AcceptedImpactTypes}'.");
+                this.LogDebug($"Harvest hit rejected: {nameof(HarvestImpactType)} is {HarvestImpactType.None}.");
                 return;
             }
 
-            int harvestDamageAmount = harvestDamageSource.ComputeHarvestDamage(damager.EffectiveDamageAmount);
-            if (harvestDamageAmount <= 0)
+            int baseHarvestDamageAmount = harvestDamageSource.ComputeBaseHarvestDamage(damager.EffectiveDamageAmount);
+            if (baseHarvestDamageAmount <= 0)
             {
-                this.LogDebug($"Harvest hit rejected: computed harvest damage " + $"is {harvestDamageAmount}.");
+                this.LogDebug($"Harvest hit rejected: computed base harvest damage is {baseHarvestDamageAmount}.");
                 return;
             }
 
+            // Register this harvestable with the hitbox before applying the hit. This prevents repeated hits from the same hitbox activation even when effective durability damage becomes 0.
             HitboxController hitboxController = null;
             if (other.TryGetComponent<HitboxController>(out HitboxController foundHitboxController))
             {
                 hitboxController = foundHitboxController;
 
-                this.LogDebug($"{nameof(HitboxController)} found on " + $"'{other.gameObject.name}'. Attempting to register " + $"the harvestable object as a hit target.");
+                this.LogDebug($"{nameof(HitboxController)} found on '{other.gameObject.name}'. Attempting to register the harvestable object as a hit target.");
 
                 bool targetRegistered = hitboxController.TryRegisterHitTarget(this.HarvestableObjectController);
-
                 if (!targetRegistered)
                 {
-                    this.LogDebug
-                    (
-                        $"Harvest hit rejected: " +
-                        $"{nameof(HitboxController)} refused to register " +
-                        $"'{this.HarvestableObjectController.gameObject.name}' " +
-                        $"as a new hit target. It may already have been hit " +
-                        $"during this hitbox activation."
-                    );
+                    this.LogDebug($"Harvest hit rejected: {nameof(HitboxController)} refused to register '{this.HarvestableObjectController.gameObject.name}' as a new hit target. It may already have been hit during this hitbox activation.");
                     return;
                 }
             }
 
-            HarvestDamageAppliedContext context = new HarvestDamageAppliedContext
+            HarvestDamageRequestContext requestContext = new HarvestDamageRequestContext
             (
                 sourceCharacter:    damager.SourceCharacter,
                 sourceObject:       other.gameObject,
                 impactType:         impactType,
-                damageAmount:       harvestDamageAmount
-            );
-                       
-            this.LogDebug
-            (
-                $"Attempting to apply {harvestDamageAmount} " +
-                $"'{impactType}' harvest damage. " +
-                $"CurrentDurability=" +
-                $"{this.HarvestableObjectController.CurrentDurability}, " +
-                $"MaximumDurability=" +
-                $"{this.HarvestableObjectController.MaximumDurability}."
+                baseDamageAmount:   baseHarvestDamageAmount
             );
 
-            bool applied = this.HarvestableObjectController.TryApplyHarvestDamage(context);
+            this.LogDebug($"Attempting harvest hit. ImpactType={impactType}, BaseHarvestDamage={baseHarvestDamageAmount}, CurrentDurability={this.HarvestableObjectController.CurrentDurability}, MaximumDurability={this.HarvestableObjectController.MaximumDurability}.");
 
-            if (!applied)
+            bool hitApplied = this.HarvestableObjectController.TryApplyHarvestDamage(requestContext, out HarvestDamageAppliedContext appliedContext);
+
+            if (!hitApplied)
             {
-                this.LogDebug
-                (
-                    $"Harvest damage application failed. " +
-                    $"IsBroken={this.HarvestableObjectController.IsBroken}, " +
-                    $"CurrentDurability=" +
-                    $"{this.HarvestableObjectController.CurrentDurability}, " +
-                    $"ImpactType={impactType}, " +
-                    $"DamageAmount={harvestDamageAmount}."
-                );
-
+                this.LogDebug($"Harvest hit application failed. IsBroken={this.HarvestableObjectController.IsBroken}, ImpactType={impactType}, BaseDamage={baseHarvestDamageAmount}.");
                 return;
             }
+
+            this.LogDebug($"Harvest hit resolved. ImpactType={appliedContext.ImpactType}, BaseDamage={appliedContext.BaseDamageAmount}, ImpactMultiplier={appliedContext.ImpactDamageMultiplier}, AppliedDamage={appliedContext.AppliedDamageAmount}, CurrentDurability={this.HarvestableObjectController.CurrentDurability}.");
 
             this.LastHitFrame = Time.frameCount;
             this.LastDamager = damager;
 
-            // A Harvestable Object is a valid hit target, but not a
-            // Character status-effect target.
+            // The Harvestable Object is still a valid hit target even when its impact response reduces durability damage to zero.
             hitboxController?.NotifyHitConfirmed
             (
                 target:             this.HarvestableObjectController,

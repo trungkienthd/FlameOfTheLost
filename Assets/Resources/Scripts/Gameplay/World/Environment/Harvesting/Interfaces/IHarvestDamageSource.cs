@@ -13,6 +13,6 @@ namespace FlameOfTheLost
 
         public void ConfigureHarvestDamage(RuntimeHarvestDamage runtimeHarvestDamage);
         public void ClearHarvestDamage();
-        public int ComputeHarvestDamage(int combatDamageAmount);
+        public int ComputeBaseHarvestDamage(int combatDamageAmount);
     }
 }

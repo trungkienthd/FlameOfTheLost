@@ -1,13 +1,12 @@
-using System;
-
 namespace FlameOfTheLost
 {
-    [Flags]
     public enum HarvestImpactType
     {
         None = 0,
-        Cut = 1 << 0,
-        Chop = 1 << 1,
-        Smash = 1 << 2
+
+        Slash = 1,
+        Chop = 2,
+        Pierce = 3,
+        Blunt = 4
     }
 }

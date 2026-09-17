@@ -27,17 +27,16 @@ namespace FlameOfTheLost
             _activeHarvestDamage = RuntimeHarvestDamage.Disabled;
         }
 
-        public int ComputeHarvestDamage(int combatDamageAmount)
+        public int ComputeBaseHarvestDamage(int combatDamageAmount)
         {
             if (!this.IsHarvestDamageEnabled) return 0;
 
             combatDamageAmount = Mathf.Max(0, combatDamageAmount);
 
             float rawDamage = combatDamageAmount * this.ActiveHarvestDamage.CombatDamageMultiplier + this.ActiveHarvestDamage.FlatHarvestDamage;
+            if (rawDamage <= 0f) return 0;
 
             int result = Mathf.RoundToInt(rawDamage);
-
-            if (result <= 0) return 0;
 
             return Mathf.Max(this.ActiveHarvestDamage.MinimumHarvestDamage, result);
         }

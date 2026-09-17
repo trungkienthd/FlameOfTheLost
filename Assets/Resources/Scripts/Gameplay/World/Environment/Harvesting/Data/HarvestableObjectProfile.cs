@@ -13,11 +13,12 @@ namespace FlameOfTheLost
         [SerializeField, Min(1)] private int _maximumDurability = 10;
         public int MaximumDurability => Mathf.Max(1, _maximumDurability);
 
-        //      1.2. Accepted Impacts
-        [Header("Accepted Harvest Impacts")]
-        [SerializeField]
-        private HarvestImpactType _acceptedImpactTypes = HarvestImpactType.Cut;
-        public HarvestImpactType AcceptedImpactTypes => _acceptedImpactTypes;
+        //      1.2. Harvest Impact Responses
+        [Header("Harvest Impact Responses")]
+        [SerializeField, Min(0f)] private float _defaultImpactDamageMultiplier = 0.25f;
+        [SerializeField] private List<HarvestImpactResponseEntry> _impactResponses = new();
+        public float DefaultImpactDamageMultiplier => Mathf.Max(0f, _defaultImpactDamageMultiplier);
+        public IReadOnlyList<HarvestImpactResponseEntry> ImpactResponses => _impactResponses;
 
         //      1.3. Broken State
         [Header("Broken State")]
@@ -34,5 +35,29 @@ namespace FlameOfTheLost
 
         [SerializeField, Min(0f)] private float _randomPositionRadius = 0.35f;
         public float RandomPositionRadius => Mathf.Max(0f, _randomPositionRadius);
+
+        // --- Public APIs ---
+        public float GetImpactDamageMultiplier(HarvestImpactType impactType)
+        {
+            if (impactType == HarvestImpactType.None) return 0f;
+
+            if (this.ImpactResponses != null)
+            {
+                for (int i = 0; i < this.ImpactResponses.Count; i++)
+                {
+                    HarvestImpactResponseEntry entry = this.ImpactResponses[i];
+
+                    if (entry == null) continue;
+
+                    if (entry.ImpactType == impactType)
+                    {
+                        return entry.DamageMultiplier;
+                    }
+                }
+            }
+
+            return this.DefaultImpactDamageMultiplier;
+        }
+
     }
 }

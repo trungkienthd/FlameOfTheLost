@@ -9,8 +9,7 @@ namespace FlameOfTheLost
     {
         // --- References ---
         [Header("References")]
-        [SerializeField]
-        private HarvestableBrokenStateHandler _brokenStateHandler;
+        [SerializeField] private HarvestableBrokenStateHandler _brokenStateHandler;
         [SerializeField] private HarvestableDropHandler _dropHandler;
         private HarvestableBrokenStateHandler BrokenStateHandler => _brokenStateHandler;
         private HarvestableDropHandler DropHandler => _dropHandler;
@@ -18,9 +17,6 @@ namespace FlameOfTheLost
         // --- Configs ---
         //  1. Durability
         public int MaximumDurability => this.Profile.MaximumDurability;
-
-        //  2. Accepted Impacts
-        public HarvestImpactType AcceptedImpactTypes => this.Profile.AcceptedImpactTypes;
 
         // --- Runtime States ---
         [Header("Runtime State")]
@@ -39,46 +35,56 @@ namespace FlameOfTheLost
 
         // --- Events ---
         public event Action<int, int> DurabilityChanged;
-        public event Action<HarvestDamageAppliedContext> HarvestDamageApplied;
+        public event Action<HarvestDamageAppliedContext> HarvestHit;            // Raised for every valid harvest hit, including hits that resolve to zero durability damage.
+        public event Action<HarvestDamageAppliedContext> HarvestDamageApplied;  // Raised only when durability is actually reduced.
         public event Action<HarvestDamageAppliedContext> Broken;
 
         // --- Public APIs ---
-        public bool AcceptsImpactType(HarvestImpactType impactType)
-        {
-            if (impactType == HarvestImpactType.None) return false;
-
-            return (this.AcceptedImpactTypes & impactType) != 0;
-        }
-
-        public bool CanReceiveHarvestDamage(HarvestImpactType impactType, int damageAmount)
+        //  1. Harvest Damage
+        public bool CanReceiveHarvestHit(HarvestDamageRequestContext context)
         {
             if (this.IsBroken) return false;
-            if (damageAmount <= 0) return false;
-
-            if (!this.AcceptsImpactType(impactType)) return false;
+            if (context.ImpactType == HarvestImpactType.None) return false;
+            if (context.BaseDamageAmount <= 0) return false;
 
             return true;
         }
-
-        public bool TryApplyHarvestDamage(HarvestDamageAppliedContext context)
+        public bool TryApplyHarvestDamage(HarvestDamageRequestContext requestContext, out HarvestDamageAppliedContext appliedContext)
         {
-            if (!this.CanReceiveHarvestDamage(context.ImpactType, context.DamageAmount)) return false;
+            appliedContext = default;
+
+            if (!this.CanReceiveHarvestHit(requestContext)) return false;
+
+            float impactDamageMultiplier = this.Profile.GetImpactDamageMultiplier(requestContext.ImpactType);
+
+            int resolvedDamageAmount = this.ComputeEffectiveHarvestDamage(requestContext.BaseDamageAmount, impactDamageMultiplier);
 
             int previousDurability = this.CurrentDurability;
 
-            this.CurrentDurability -= context.DamageAmount;
+            if (resolvedDamageAmount > 0)
+            {
+                this.CurrentDurability -= resolvedDamageAmount;
+            }
 
-            int appliedDamage = previousDurability - this.CurrentDurability;
+            int appliedDamageAmount = previousDurability - this.CurrentDurability;
 
-            if (appliedDamage <= 0) return false;
-
-            HarvestDamageAppliedContext appliedContext = new HarvestDamageAppliedContext
+            appliedContext = new HarvestDamageAppliedContext
             (
-                sourceCharacter: context.SourceCharacter,
-                sourceObject: context.SourceObject,
-                impactType: context.ImpactType,
-                damageAmount: appliedDamage
+                sourceCharacter: requestContext.SourceCharacter,
+                sourceObject: requestContext.SourceObject,
+                impactType: requestContext.ImpactType,
+                baseDamageAmount: requestContext.BaseDamageAmount,
+                impactDamageMultiplier: impactDamageMultiplier,
+                appliedDamageAmount: appliedDamageAmount
             );
+
+            // A valid hit occurred even when the resulting durability damage is zero.
+            this.HarvestHit?.Invoke(appliedContext);
+
+            if (appliedDamageAmount <= 0)
+            {
+                return true;
+            }
 
             this.DurabilityChanged?.Invoke(this.CurrentDurability, this.MaximumDurability);
             this.HarvestDamageApplied?.Invoke(appliedContext);
@@ -91,6 +97,21 @@ namespace FlameOfTheLost
             return true;
         }
 
+        //  2. Impact Resolution
+        public int ComputeEffectiveHarvestDamage(int baseDamageAmount, float impactDamageMultiplier)
+        {
+            baseDamageAmount = Mathf.Max(0, baseDamageAmount);
+            impactDamageMultiplier = Mathf.Max(0f, impactDamageMultiplier);
+
+            if (baseDamageAmount <= 0) return 0;
+            if (impactDamageMultiplier <= 0f) return 0;
+
+            float rawDamage = baseDamageAmount * impactDamageMultiplier;
+
+            return Mathf.Max(0, Mathf.RoundToInt(rawDamage));
+        }
+
+        //  3. State
         public void ResetHarvestable()
         {
             this.IsBroken = false;
@@ -129,26 +150,11 @@ namespace FlameOfTheLost
 
             if (this.BrokenStateHandler == null)
             {
-                Debug.LogError
-                (
-                    $"[{this.gameObject.name}." +
-                    $"{nameof(HarvestableObjectController)}] " +
-                    $"{nameof(HarvestableBrokenStateHandler)} " +
-                    $"reference is not assigned.",
-                    this
-                );
+                Debug.LogError($"[{this.gameObject.name}.{nameof(HarvestableObjectController)}] {nameof(HarvestableBrokenStateHandler)} reference is not assigned.", this);
             }
-
             if (this.DropHandler == null)
             {
-                Debug.LogError
-                (
-                    $"[{this.gameObject.name}." +
-                    $"{nameof(HarvestableObjectController)}] " +
-                    $"{nameof(HarvestableDropHandler)} " +
-                    $"reference is not assigned.",
-                    this
-                );
+                Debug.LogError($"[{this.gameObject.name}.{nameof(HarvestableObjectController)}] {nameof(HarvestableDropHandler)} reference is not assigned.", this);
             }
         }
         protected override void BindInternalReferences()

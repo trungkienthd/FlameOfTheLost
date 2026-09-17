@@ -11,7 +11,7 @@ namespace FlameOfTheLost
 
         [SerializeField, Min(1)] private int _minimumQuantity = 1;
         [SerializeField, Min(1)] private int _maximumQuantity = 1;
-        public int MinimumQuantity => Mathf.Max(0, _minimumQuantity);
+        public int MinimumQuantity => Mathf.Max(1, _minimumQuantity);
         public int MaximumQuantity => Mathf.Max(this.MinimumQuantity, _maximumQuantity);
 
         // --- Public APIs ---

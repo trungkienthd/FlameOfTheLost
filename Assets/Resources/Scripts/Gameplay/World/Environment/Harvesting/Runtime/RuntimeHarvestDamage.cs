@@ -4,9 +4,11 @@ namespace FlameOfTheLost
     {
         public bool IsEnabled { get; }
         public HarvestImpactType ImpactType { get; }
+
         public float CombatDamageMultiplier { get; }
         public int FlatHarvestDamage { get; }
         public int MinimumHarvestDamage { get; }
+
         public bool TriggerSelfOnHitStatusEffects { get; }
 
         public RuntimeHarvestDamage(HarvestDamageEntry entry)
