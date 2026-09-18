@@ -1,46 +1,33 @@
 # Harvesting Content
 
-This folder contains the **game-content design** for Harvestable Objects in **FlameOfTheLost**.
-
-Architecture, runtime implementation, naming conventions, and global Item catalogues belong in their own documentation areas. This folder only records the authored harvesting relationships needed to configure game content.
+This folder contains the GameContent design for Harvestable Objects in **FlameOfTheLost**.
 
 ## Documents
 
-- [Harvestable Design](HarvestableDesign.md) — authoritative Harvestable catalogue, status, archetype, visual-variant rules, and drop configuration.
-- [Impact Configuration](ImpactConfiguration.md) — harvesting impact model, skill-side `HarvestDamageEntry` configuration, response tiers, and reusable Harvestable response archetypes.
+- [Harvestable Design](HarvestableDesign.md) — authoritative catalogue for Harvestables, durability, variants, drops, quantities, and chances.
+- [Impact Configuration](ImpactConfiguration.md) — skill-side harvesting rules and complete per-Harvestable impact-response configuration.
 
 ## Scope
 
-Current Harvestable drops use two Item categories:
+Current Harvestables can directly drop:
 
 - **Material**
 - **Consumable Item**
 
-The global definitions of those Items should remain under their Item-specific GameContent documentation. This folder only records which Items are obtained from which Harvestables.
-
-## Content Status
-
-- **Current** — already used or explicitly established in active gameplay.
-- **Planned** — intended game content not yet fully authored or placed.
-- **Working name** — temporary readable content name that may be replaced later.
+Global Item definitions remain under their Item-specific GameContent documentation.
 
 ## Core Rules
 
-1. A gameplay Harvestable may have multiple variants.
-2. A variant may change presentation and/or drop tuning without becoming a new core Harvestable type.
-3. Oak, Birch, and Spruce each have authored `Normal` and `Small` variants.
-4. Their Normal / Small variants share the same Timber Tree impact-response multipliers and drop types, but use different Maximum Durability values and drop chances.
-5. Visual size, damaged state, stump state, or other presentation differences do not automatically create a new core Harvestable type.
-6. Drops are defined by the Harvestable/variant, not by the impact used to break it.
-7. Each drop entry independently defines its minimum quantity, maximum quantity, and chance.
-8. Harvested and processed resources remain distinct.
-9. New core Harvestables should be added only when they have an intentional gameplay identity or role.
+1. A core Harvestable may have multiple variants.
+2. Variants may change durability and/or drop tuning without becoming new core types.
+3. All Harvestables are individually tunable; broad families only define readable physical rules.
+4. Drops belong to the Harvestable / variant, not the impact used to break it.
+5. Each drop entry has its own minimum quantity, maximum quantity, and chance.
+6. Harvested and processed mineral resources remain distinct.
 
 ## Current Core Catalogue
 
-The current planned core catalogue contains **16 Harvestable types**.
-
-Oak, Birch, and Spruce each additionally have `Normal` and `Small` variants; these variants do not increase the core type count. Normal variants use Maximum Durability `6`, while Small variants use `5`.
+The current planned catalogue contains **16 core Harvestable types**:
 
 - 3 Timber Trees
 - 4 Fruit Trees
@@ -48,7 +35,19 @@ Oak, Birch, and Spruce each additionally have `Normal` and `Small` variants; the
 - 3 Metal Nodes
 - 5 Crystal Nodes
 
-Greenvale Border Path currently requires only:
+Oak, Birch, and Spruce additionally have `Normal` and `Small` variants.
+
+## Physical Harvesting Language
+
+- Timber Trees -> `Chop`
+- Fruit Trees -> `Slash` and/or `Chop`
+- Stone -> `Blunt`
+- Metal Nodes -> `Blunt`
+- Crystal Nodes -> primarily `Blunt`, with selected `Chop` / `Pierce` fallback behaviour
+
+## Current Greenvale Scope
+
+Greenvale Border Path currently requires:
 
 - Oak Tree
 - Cherry Tree

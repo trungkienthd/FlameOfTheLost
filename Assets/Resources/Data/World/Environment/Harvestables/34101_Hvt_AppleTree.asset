@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0cab8679280d941b73444642356f58, type: 3}
+  m_Name: 34101_Hvt_AppleTree
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableObjectProfile
+  _id: 34101
+  _key: APPLE_TREE
+  _displayName: Apple Tree
+  _description: 
+  _icon: {fileID: 21300000, guid: 6609d2d49b25c2b4ea7d0e85195138a2, type: 3}
+  _configureInitialTransformAtStart: 0
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 1
+  _maximumDurability: 7
+  _defaultImpactDamageMultiplier: 0.25
+  _impactResponses:
+  - _impactType: 1
+    _damageMultiplier: 2
+  - _impactType: 2
+    _damageMultiplier: 3
+  - _impactType: 3
+    _damageMultiplier: 1
+  - _impactType: 4
+    _damageMultiplier: 1
+  _breakBehaviour: 0
+  _harvestedSprite: {fileID: 843581494, guid: 6a6cfded78404f5438272c3bbadfd32a, type: 3}
+  _dropEntries:
+  - _collectiblePrefab: {fileID: 5317155162895292581, guid: 333d76b2a9ca01c41b55dbc9768e514e, type: 3}
+    _minimumQuantity: 2
+    _maximumQuantity: 4
+    _dropChance: 1
+  - _collectiblePrefab: {fileID: 807425697903884995, guid: cd538b8d34fd5234db3e5bad558425ea, type: 3}
+    _minimumQuantity: 1
+    _maximumQuantity: 2
+    _dropChance: 0.25
+  _randomPositionRadius: 0.35

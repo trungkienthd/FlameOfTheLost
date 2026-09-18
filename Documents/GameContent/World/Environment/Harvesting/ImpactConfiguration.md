@@ -2,36 +2,33 @@
 
 ## Purpose
 
-This document defines how skills produce harvest damage and how Harvestable Objects respond to `HarvestImpactType`.
+This document defines how skills produce harvest damage and how each Harvestable responds to `HarvestImpactType`.
 
 The model is:
 
-`Skill -> Harvest Impact Type + Base Harvest Damage -> Harvestable Response Multiplier -> Applied Durability Damage`
-
-Combat damage and harvest damage remain separate concerns.
+`Skill -> Harvest Impact Type + Base Harvest Damage -> Harvestable Multiplier -> Applied Durability Damage`
 
 ---
 
 ## 1. Harvest Impact Types
 
-| Impact Type | Meaning | Typical Sources |
-|---|---|---|
-| `Slash` | Sweeping cutting contact | Sword slash |
-| `Chop` | Heavy focused cutting contact | Axe chop |
-| `Pierce` | Point/projectile penetration | Stab, arrows |
-| `Blunt` | Heavy non-cutting force | Dig/shovel-like impact |
+| Impact Type | Meaning |
+|---|---|
+| `Slash` | Sweeping cutting contact |
+| `Chop` | Heavy focused cutting contact |
+| `Pierce` | Point / projectile penetration |
+| `Blunt` | Heavy non-cutting force |
+| `None` | No harvesting participation |
 
-`None` means the skill does not participate in harvesting.
-
-Impact types are exclusive classifications, not combinable flags.
+Impact types are exclusive classifications.
 
 ---
 
-## 2. Standard `HarvestDamageEntry`
+## 2. Standard HarvestDamageEntry
 
-Current harvesting-capable player skills should normally use:
+Current harvesting-capable player skills normally use:
 
-| Property | Standard Value |
+| Property | Value |
 |---|---:|
 | Is Enabled | `true` |
 | Combat Damage Multiplier | `0` |
@@ -39,238 +36,153 @@ Current harvesting-capable player skills should normally use:
 | Minimum Harvest Damage | `1` |
 | Trigger Self On Hit Status Effects | `false` |
 
-Only `Impact Type` normally differs between skills.
-
-### Combat Damage Multiplier
-
-Use `0` by default.
-
-Combat strength should not automatically increase harvesting strength.
-
-### Flat Harvest Damage
-
-Use `1` by default.
-
-One successful hit contributes one unit of base harvest damage before the target response multiplier is applied.
-
-For multi-hit or multi-projectile skills, keep `1` per individual hit.
-
-### Minimum Harvest Damage
-
-Use `1` by default.
-
-This minimum applies to the skill-side base calculation and does **not** override a target multiplier of `0`.
-
-Example:
-
-`Base Harvest Damage 1 x Target Multiplier 0 = 0 final durability damage`
-
-### Trigger Self On Hit Status Effects
-
-Use `false` by default.
-
-Harvestable Objects should not normally trigger combat-oriented self `On Hit` effects.
+`Minimum Harvest Damage` applies before the target multiplier, so a target multiplier of `0` still produces `0` final durability damage.
 
 ---
 
 ## 3. Current Skill Mapping
 
-### Player Skills
+| Skill | Impact Type |
+|---|---|
+| Slash | `Slash` |
+| Dig | `Blunt` |
+| Stab | `Pierce` |
+| Chop | `Chop` |
+| Hemorrhage Slash | `Slash` |
+| Lightning Stab | `Pierce` |
+| Shot | `Pierce` |
+| Quick Shot | `Pierce` |
+| Double Shot | `Pierce` |
+| Tripple Shot | `Pierce` |
 
-| Skill ID | Skill | Harvesting | Impact Type |
-|---:|---|---|---|
-| 81001 | Slash | Enabled | `Slash` |
-| 81002 | Dig | Enabled | `Blunt` |
-| 81101 | Stab | Enabled | `Pierce` |
-| 81102 | Chop | Enabled | `Chop` |
-| 81201 | Hemorrhage Slash | Enabled | `Slash` |
-| 81202 | Lightning Stab | Enabled | `Pierce` |
-| 82001 | Shot | Enabled | `Pierce` |
-| 82101 | Quick Shot | Enabled | `Pierce` |
-| 82201 | Double Shot | Enabled | `Pierce` |
-| 82202 | Tripple Shot | Enabled | `Pierce` |
-
-Each projectile from Double Shot / Tripple Shot resolves independently.
-
-### Enemy Skills
-
-Enemy-only attacks currently have no harvesting role.
-
-| Skill ID | Skill | Harvesting | Impact Type |
-|---:|---|---|---|
-| 81011 | Feralshroom Cap Bash | Disabled | `None` |
-| 82011 | Feralshroom Toxic Puff | Disabled | `None` |
-| 82012 | Aquabara Water Glob | Disabled | `None` |
-
-Keep `Impact Type = None` when harvesting is disabled.
+Enemy-only skills remain harvesting-disabled with `Impact Type = None`.
 
 ---
 
 ## 4. Response Tiers
 
-With standard base harvest damage `1`, use integer target multipliers:
+| Multiplier | Meaning |
+|---:|---|
+| `0` | No durability damage |
+| `1` | Weak / fallback |
+| `2` | Effective |
+| `3` | Preferred |
 
-| Multiplier | Meaning | Damage per standard hit |
-|---:|---|---:|
-| `0` | No durability damage | 0 |
-| `1` | Weak / fallback | 1 |
-| `2` | Effective | 2 |
-| `3` | Preferred | 3 |
-
-Use:
+Recommended profile default:
 
 `Default Impact Damage Multiplier = 0`
 
-and explicitly configure the current impact types.
-
-Avoid fractional multipliers while the standard base damage remains `1`.
+Explicitly configure `Slash`, `Chop`, `Pierce`, and `Blunt`.
 
 ---
 
-## 5. Harvestable Response Archetypes
+## 5. Complete Harvestable Response Configuration
 
-### Timber Tree
+### Timber Trees
 
-Normal and Small Timber Tree variants share the same impact-response multipliers but use different Maximum Durability values.
+| Harvestable | Variant | Max Durability | Slash | Chop | Pierce | Blunt |
+|---|---|---:|---:|---:|---:|---:|
+| Oak Tree | Normal | 7 | 1 | 3 | 1 | 1 |
+| Oak Tree | Small | 5 | 1 | 3 | 1 | 1 |
+| Birch Tree | Normal | 6 | 1 | 3 | 1 | 1 |
+| Birch Tree | Small | 4 | 1 | 3 | 1 | 1 |
+| Spruce Tree | Normal | 8 | 1 | 3 | 1 | 1 |
+| Spruce Tree | Small | 6 | 1 | 3 | 1 | 1 |
 
-#### Normal Timber Tree
+### Fruit Trees
 
-| Property | Value |
-|---|---:|
-| Maximum Durability | 6 |
-| Slash | 1 |
-| Chop | 3 |
-| Pierce | 1 |
-| Blunt | 1 |
+| Harvestable | Max Durability | Slash | Chop | Pierce | Blunt |
+|---|---:|---:|---:|---:|---:|
+| Apple Tree | 7 | 2 | 3 | 1 | 1 |
+| Cherry Tree | 5 | 3 | 2 | 1 | 1 |
+| Peach Tree | 6 | 2 | 3 | 1 | 1 |
+| Pear Tree | 7 | 2 | 2 | 1 | 1 |
 
-Expected standard hits to break:
+### Stone Resource
 
-- Chop: 2
-- Slash: 6
-- Pierce: 6
-- Blunt: 6
+| Harvestable | Max Durability | Slash | Chop | Pierce | Blunt |
+|---|---:|---:|---:|---:|---:|
+| Stone Deposit | 7 | 0 | 1 | 0 | 3 |
 
-#### Small Timber Tree
+### Metal Nodes
 
-| Property | Value |
-|---|---:|
-| Maximum Durability | 5 |
-| Slash | 1 |
-| Chop | 3 |
-| Pierce | 1 |
-| Blunt | 1 |
+| Harvestable | Max Durability | Slash | Chop | Pierce | Blunt |
+|---|---:|---:|---:|---:|---:|
+| Copper Node | 8 | 0 | 1 | 0 | 3 |
+| Iron Node | 10 | 0 | 1 | 0 | 3 |
+| Gold Node | 9 | 0 | 1 | 0 | 2 |
 
-Expected standard hits to break:
+### Crystal Nodes
 
-- Chop: 2
-- Slash: 5
-- Pierce: 5
-- Blunt: 5
-
-Used by:
-
-- Oak Tree — Normal and Small
-- Birch Tree — Normal and Small
-- Spruce Tree — Normal and Small
-
-Variant differences are:
-
-- Maximum Durability: `Normal = 6`, `Small = 5`
-- drop chances: defined in `HarvestableDesign.md`
-
-Impact-response multipliers remain identical between the two variants.
-
-### Fruit Tree
-
-| Property | Value |
-|---|---:|
-| Maximum Durability | 6 |
-| Slash | 2 |
-| Chop | 2 |
-| Pierce | 1 |
-| Blunt | 1 |
-
-Expected standard hits to break:
-
-- Slash / Chop: 3
-- Pierce / Blunt: 6
-
-Used by:
-
-- Apple Tree
-- Cherry Tree
-- Peach Tree
-- Pear Tree
-
-### Mineral Node
-
-| Property | Value |
-|---|---:|
-| Maximum Durability | 9 |
-| Slash | 0 |
-| Chop | 1 |
-| Pierce | 0 |
-| Blunt | 3 |
-
-Expected standard hits to break:
-
-- Blunt: 3
-- Chop: 9
-- Slash / Pierce: no durability damage
-
-Used by:
-
-- Stone Deposit
-- Iron Node
-- Copper Node
-- Gold Node
-- Aquamarine Node
-- Amber Node
-- Ruby Node
-- Emerald Node
-- Amethyst Node
-
-Stone Deposit currently shares the Mineral Node response archetype. It can receive a separate lighter Stone archetype later if playtesting shows that it should break faster than ore/crystal nodes.
+| Harvestable | Max Durability | Slash | Chop | Pierce | Blunt |
+|---|---:|---:|---:|---:|---:|
+| Aquamarine Node | 8 | 0 | 1 | 0 | 3 |
+| Amber Node | 7 | 0 | 1 | 1 | 3 |
+| Ruby Node | 10 | 0 | 1 | 0 | 2 |
+| Emerald Node | 9 | 0 | 0 | 1 | 3 |
+| Amethyst Node | 8 | 0 | 1 | 1 | 3 |
 
 ---
 
-## 6. Authoring Rules
+## 6. Expected Standard Hits to Break
+
+With base harvest damage `1`:
+
+| Harvestable | Variant | Preferred / Effective Result |
+|---|---|---|
+| Oak Tree | Normal | Chop: 3 hits |
+| Oak Tree | Small | Chop: 2 hits |
+| Birch Tree | Normal | Chop: 2 hits |
+| Birch Tree | Small | Chop: 2 hits |
+| Spruce Tree | Normal | Chop: 3 hits |
+| Spruce Tree | Small | Chop: 2 hits |
+| Apple Tree | — | Chop: 3 hits |
+| Cherry Tree | — | Slash: 2 hits |
+| Peach Tree | — | Chop: 2 hits |
+| Pear Tree | — | Slash / Chop: 4 hits |
+| Stone Deposit | — | Blunt: 3 hits |
+| Copper Node | — | Blunt: 3 hits |
+| Iron Node | — | Blunt: 4 hits |
+| Gold Node | — | Blunt: 5 hits |
+| Aquamarine Node | — | Blunt: 3 hits |
+| Amber Node | — | Blunt: 3 hits |
+| Ruby Node | — | Blunt: 5 hits |
+| Emerald Node | — | Blunt: 3 hits |
+| Amethyst Node | — | Blunt: 3 hits |
+
+---
+
+## 7. Physical Harvesting Language
+
+Broad rules remain predictable:
+
+- Timber Trees favour `Chop`.
+- Fruit Trees favour `Slash` and/or `Chop`.
+- Stone and Metal Nodes favour `Blunt`.
+- Crystal Nodes favour `Blunt`.
+- Some Crystal Nodes allow inefficient `Pierce` or `Chop` fallback.
+- `Slash` does not damage current Stone / Metal / Crystal resources.
+
+This keeps the system readable while still allowing individual Harvestables to feel different.
+
+---
+
+## 8. Authoring Rules
 
 ### Skill authoring
 
-1. Enable harvesting only when the skill should interact with Harvestables.
-2. Choose the impact type from the physical action that reaches the target.
+1. Enable harvesting only for intended skills.
+2. Assign impact type from the physical action.
 3. Use `Combat Damage Multiplier = 0` by default.
 4. Use `Flat Harvest Damage = 1` by default.
 5. Use `Minimum Harvest Damage = 1` by default.
 6. Use `Trigger Self On Hit Status Effects = false` by default.
-7. Keep multi-hit/multi-projectile skills at one base harvest-damage unit per hit.
-8. Deviate only for an explicitly harvesting-specific skill.
+7. Multi-hit / multi-projectile skills remain one base harvest-damage unit per hit.
 
 ### Harvestable authoring
 
-1. Choose the closest response archetype.
-2. Use `Default Impact Damage Multiplier = 0`.
-3. Explicitly configure `Slash`, `Chop`, `Pierce`, and `Blunt`.
-4. Use multiplier `0` when contact should cause no durability damage.
-5. Balance durability and target response before changing skill-side harvest damage.
-6. Keep drops independent from impact type unless intentionally redesigned.
-7. Enemy-only skills should remain harvest-disabled unless their gameplay role changes.
-
----
-
-## 7. Code Consistency
-
-`HarvestImpactType` is treated as one exclusive value per hit.
-
-If the enum still uses `[Flags]` while values are serialized as:
-
-- `None = 0`
-- `Slash = 1`
-- `Chop = 2`
-- `Pierce = 3`
-- `Blunt = 4`
-
-remove `[Flags]`.
-
-`Pierce = 3` overlaps the binary values of `Slash` and `Chop`, so this layout is not a valid independent bit-flag definition.
+1. Use `Default Impact Damage Multiplier = 0`.
+2. Explicitly configure all four current impact types.
+3. Use `0` when the impact should cause no durability damage.
+4. Tune durability and target multipliers before changing skill-side harvest damage.
+5. Keep drops independent from impact type unless intentionally redesigned.
