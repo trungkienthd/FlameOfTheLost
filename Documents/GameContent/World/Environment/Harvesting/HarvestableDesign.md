@@ -21,8 +21,8 @@ Detailed harvesting-impact rules and skill mappings are defined in [Impact Confi
 
 ## 1. Core Rules
 
-1. A visual variant does not automatically create a new core Harvestable type.
-2. A variant may still have different durability or drop tuning.
+1. A visual variant does not automatically create a new core Harvestable type; however, a sprite may become its own Harvestable type when the design intentionally gives it a distinct gameplay configuration.
+2. The seven authored Stone sprites are treated as seven separate Stone-like Harvestable types because size/environment presentation is now tied to distinct durability and yield tuning.
 3. Drops are defined by the Harvestable / variant, not by the impact used to break it.
 4. Each drop entry independently defines minimum quantity, maximum quantity, and chance.
 5. Normal mineral Harvestables directly drop only their raw `Chunks` form.
@@ -43,7 +43,13 @@ Detailed harvesting-impact rules and skill mappings are defined in [Impact Confi
 | Fruit Tree | Cherry Tree | Presentation variants | Current | 5 | Slash | Cherry |
 | Fruit Tree | Peach Tree | Presentation variants | Planned | 6 | Chop | Peach |
 | Fruit Tree | Pear Tree | Presentation variants | Planned | 7 | Slash / Chop | Pear |
-| Stone Resource | Stone Deposit | Visual variants | Planned | 7 | Blunt | Stone |
+| Stone Resource | Stone Large | — | Planned | 10 | Blunt | Stone |
+| Stone Resource | Stone Normal | — | Planned | 7 | Blunt | Stone |
+| Stone Resource | Stone Small 0 | — | Planned | 4 | Blunt | Stone |
+| Stone Resource | Stone Small 1 | — | Planned | 5 | Blunt | Stone |
+| Stone Resource | Stone Water Large | Water | Planned | 9 | Blunt | Stone |
+| Stone Resource | Stone Water Normal | Water | Planned | 6 | Blunt | Stone |
+| Stone Resource | Stone Water Small | Water | Planned | 4 | Blunt | Stone |
 | Metal Node | Copper Node | Visual variants | Planned | 8 | Blunt | Copper Chunks |
 | Metal Node | Iron Node | Visual variants | Planned | 10 | Blunt | Iron Chunks |
 | Metal Node | Gold Node | Visual variants | Planned | 9 | Blunt | Gold Chunks |
@@ -53,7 +59,9 @@ Detailed harvesting-impact rules and skill mappings are defined in [Impact Confi
 | Crystal Node | Emerald Node | Visual variants | Planned | 9 | Blunt | Emerald Chunks |
 | Crystal Node | Amethyst Node | Visual variants | Planned | 8 | Blunt | Amethyst Chunks |
 
-**Total: 16 core Harvestable types.**
+**Total: 22 core Harvestable types.**
+
+Oak, Birch, and Spruce retain Normal / Small variants without increasing the core type count. The seven Stone sprites are intentionally counted as seven separate Stone-like Harvestable types.
 
 ---
 
@@ -173,11 +181,58 @@ Pear is neutral between Slash and Chop.
 
 ---
 
-## 5. Stone Resource
+## 5. Stone Resources
 
-### Stone Deposit
+The outdoor-decor sprite sheet provides seven authored Stone sprites, and the current design treats all seven as separate Stone-like Harvestable types:
 
-Stone Deposit is the introductory blunt-oriented resource.
+- `StoneLarge`
+- `StoneNormal`
+- `StoneSmall_0`
+- `StoneSmall_1`
+- `StoneWaterLarge`
+- `StoneWaterNormal`
+- `StoneWaterSmall`
+
+All seven drop the same `Stone` Material, but they differ in durability and yield.
+
+Shared impact-response configuration:
+
+| Impact | Multiplier |
+|---|---:|
+| Slash | 0 |
+| Chop | 1 |
+| Pierce | 0 |
+| Blunt | 3 |
+
+`Blunt` is the intended harvesting impact. `Chop` can slowly chip Stone. `Slash` and `Pierce` cause no durability damage.
+
+### Stone Large
+
+Sprite:
+
+`CFRPG16_Outdoor_Decor_27_StoneLarge`
+
+Large land-based stone resource.
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 10 |
+| Slash | 0 |
+| Chop | 1 |
+| Pierce | 0 |
+| Blunt | 3 |
+
+| Drop | Min | Max | Chance |
+|---|---:|---:|---:|
+| Stone | 4 | 7 | 100% |
+
+### Stone Normal
+
+Sprite:
+
+`CFRPG16_Outdoor_Decor_28_StoneNormal`
+
+Standard land-based stone resource.
 
 | Property | Value |
 |---|---:|
@@ -190,6 +245,118 @@ Stone Deposit is the introductory blunt-oriented resource.
 | Drop | Min | Max | Chance |
 |---|---:|---:|---:|
 | Stone | 2 | 4 | 100% |
+
+### Stone Small 0
+
+Sprite:
+
+`CFRPG16_Outdoor_Decor_18_StoneSmall_0`
+
+Small, low-durability stone resource.
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 4 |
+| Slash | 0 |
+| Chop | 1 |
+| Pierce | 0 |
+| Blunt | 3 |
+
+| Drop | Min | Max | Chance |
+|---|---:|---:|---:|
+| Stone | 1 | 2 | 100% |
+
+### Stone Small 1
+
+Sprite:
+
+`CFRPG16_Outdoor_Decor_19_StoneSmall_1`
+
+A second small land-stone type with slightly greater mass/yield than `StoneSmall_0`.
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 5 |
+| Slash | 0 |
+| Chop | 1 |
+| Pierce | 0 |
+| Blunt | 3 |
+
+| Drop | Min | Max | Chance |
+|---|---:|---:|---:|
+| Stone | 1 | 3 | 100% |
+
+### Stone Water Large
+
+Sprite:
+
+`CFRPG16_Outdoor_Decor_17_StoneWaterLarge`
+
+Large Stone-like Harvestable authored specifically for water environments.
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 9 |
+| Slash | 0 |
+| Chop | 1 |
+| Pierce | 0 |
+| Blunt | 3 |
+
+| Drop | Min | Max | Chance |
+|---|---:|---:|---:|
+| Stone | 3 | 6 | 100% |
+
+### Stone Water Normal
+
+Sprite:
+
+`CFRPG16_Outdoor_Decor_29_StoneWaterNormal`
+
+Normal-sized Stone-like Harvestable for water environments.
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 6 |
+| Slash | 0 |
+| Chop | 1 |
+| Pierce | 0 |
+| Blunt | 3 |
+
+| Drop | Min | Max | Chance |
+|---|---:|---:|---:|
+| Stone | 2 | 4 | 100% |
+
+### Stone Water Small
+
+Sprite:
+
+`CFRPG16_Outdoor_Decor_21_StoneWaterSmall`
+
+Small Stone-like Harvestable for water environments.
+
+| Property | Value |
+|---|---:|
+| Maximum Durability | 4 |
+| Slash | 0 |
+| Chop | 1 |
+| Pierce | 0 |
+| Blunt | 3 |
+
+| Drop | Min | Max | Chance |
+|---|---:|---:|---:|
+| Stone | 1 | 2 | 100% |
+
+### Stone Design Notes
+
+The water variants are separate Harvestable types because they have dedicated environment sprites and their own authored durability/yield values. They still preserve the same physical harvesting language as land Stone.
+
+Size remains the strongest balancing factor:
+
+- Large -> highest durability and yield.
+- Normal -> middle durability and yield.
+- Small -> lowest durability and yield.
+
+`StoneSmall_0` and `StoneSmall_1` remain separate because the art provides two distinct small Stone resources and the design now gives them different durability/yield profiles.
 
 ---
 
@@ -353,7 +520,13 @@ Amethyst allows both Chop and Pierce fallback.
 | Peach Tree | — | 6 | Twig | 1 | 2 | 20% |
 | Pear Tree | — | 7 | Pear | 2 | 4 | 100% |
 | Pear Tree | — | 7 | Twig | 1 | 2 | 25% |
-| Stone Deposit | — | 7 | Stone | 2 | 4 | 100% |
+| Stone Large | Land | 10 | Stone | 4 | 7 | 100% |
+| Stone Normal | Land | 7 | Stone | 2 | 4 | 100% |
+| Stone Small 0 | Land | 4 | Stone | 1 | 2 | 100% |
+| Stone Small 1 | Land | 5 | Stone | 2 | 3 | 100% |
+| Stone Water Large | Water | 9 | Stone | 3 | 6 | 100% |
+| Stone Water Normal | Water | 6 | Stone | 2 | 4 | 100% |
+| Stone Water Small | Water | 4 | Stone | 1 | 2 | 100% |
 | Copper Node | — | 8 | Copper Chunks | 2 | 5 | 100% |
 | Iron Node | — | 10 | Iron Chunks | 2 | 4 | 100% |
 | Gold Node | — | 9 | Gold Chunks | 1 | 2 | 100% |

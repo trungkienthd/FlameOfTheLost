@@ -27,21 +27,32 @@ Global Item definitions remain under their Item-specific GameContent documentati
 
 ## Current Core Catalogue
 
-The current planned catalogue contains **16 core Harvestable types**:
+The current planned catalogue contains **22 core Harvestable types**:
 
 - 3 Timber Trees
 - 4 Fruit Trees
-- 1 Stone Deposit
+- 7 Stone-like Harvestables
 - 3 Metal Nodes
 - 5 Crystal Nodes
 
 Oak, Birch, and Spruce additionally have `Normal` and `Small` variants.
 
+The Stone family is different: all seven authored Stone sprites are intentionally treated as separate core Harvestable types:
+
+- Stone Large
+- Stone Normal
+- Stone Small 0
+- Stone Small 1
+- Stone Water Large
+- Stone Water Normal
+- Stone Water Small
+
+
 ## Physical Harvesting Language
 
 - Timber Trees -> `Chop`
 - Fruit Trees -> `Slash` and/or `Chop`
-- Stone -> `Blunt`
+- Stone-like Harvestables -> `Blunt`
 - Metal Nodes -> `Blunt`
 - Crystal Nodes -> primarily `Blunt`, with selected `Chop` / `Pierce` fallback behaviour
 

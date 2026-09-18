@@ -98,11 +98,19 @@ Explicitly configure `Slash`, `Chop`, `Pierce`, and `Blunt`.
 | Peach Tree | 6 | 2 | 3 | 1 | 1 |
 | Pear Tree | 7 | 2 | 2 | 1 | 1 |
 
-### Stone Resource
+### Stone Resources
 
-| Harvestable | Max Durability | Slash | Chop | Pierce | Blunt |
-|---|---:|---:|---:|---:|---:|
-| Stone Deposit | 7 | 0 | 1 | 0 | 3 |
+All seven Stone-like Harvestables use the same physical response pattern but have individually authored durability:
+
+| Harvestable | Environment | Max Durability | Slash | Chop | Pierce | Blunt |
+|---|---|---:|---:|---:|---:|---:|
+| Stone Large | Land | 10 | 0 | 1 | 0 | 3 |
+| Stone Normal | Land | 7 | 0 | 1 | 0 | 3 |
+| Stone Small 0 | Land | 4 | 0 | 1 | 0 | 3 |
+| Stone Small 1 | Land | 5 | 0 | 1 | 0 | 3 |
+| Stone Water Large | Water | 9 | 0 | 1 | 0 | 3 |
+| Stone Water Normal | Water | 6 | 0 | 1 | 0 | 3 |
+| Stone Water Small | Water | 4 | 0 | 1 | 0 | 3 |
 
 ### Metal Nodes
 
@@ -140,7 +148,13 @@ With base harvest damage `1`:
 | Cherry Tree | — | Slash: 2 hits |
 | Peach Tree | — | Chop: 2 hits |
 | Pear Tree | — | Slash / Chop: 4 hits |
-| Stone Deposit | — | Blunt: 3 hits |
+| Stone Large | Land | Blunt: 4 hits |
+| Stone Normal | Land | Blunt: 3 hits |
+| Stone Small 0 | Land | Blunt: 2 hits |
+| Stone Small 1 | Land | Blunt: 2 hits |
+| Stone Water Large | Water | Blunt: 3 hits |
+| Stone Water Normal | Water | Blunt: 2 hits |
+| Stone Water Small | Water | Blunt: 2 hits |
 | Copper Node | — | Blunt: 3 hits |
 | Iron Node | — | Blunt: 4 hits |
 | Gold Node | — | Blunt: 5 hits |
@@ -158,7 +172,7 @@ Broad rules remain predictable:
 
 - Timber Trees favour `Chop`.
 - Fruit Trees favour `Slash` and/or `Chop`.
-- Stone and Metal Nodes favour `Blunt`.
+- All seven Stone-like Harvestables and all Metal Nodes favour `Blunt`.
 - Crystal Nodes favour `Blunt`.
 - Some Crystal Nodes allow inefficient `Pierce` or `Chop` fallback.
 - `Slash` does not damage current Stone / Metal / Crystal resources.
