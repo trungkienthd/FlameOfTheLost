@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0cab8679280d941b73444642356f58, type: 3}
+  m_Name: 34304_Hvt_CopperNodeRich
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableObjectProfile
+  _id: 34304
+  _key: COPPER_NODE_RICH
+  _displayName: Copper Node Rich
+  _description: 
+  _icon: {fileID: -65261976, guid: 572bb35294ab715449c4c06f31b1fa55, type: 3}
+  _configureInitialTransformAtStart: 0
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 1
+  _maximumDurability: 9
+  _defaultImpactDamageMultiplier: 0.25
+  _impactResponses:
+  - _impactType: 1
+    _damageMultiplier: 0
+  - _impactType: 2
+    _damageMultiplier: 1
+  - _impactType: 3
+    _damageMultiplier: 0
+  - _impactType: 4
+    _damageMultiplier: 3
+  _breakBehaviour: 2
+  _harvestedSprite: {fileID: 0}
+  _dropEntries:
+  - _collectiblePrefab: {fileID: 5873980520011914740, guid: be99f1614bebbc341bf0b139ef3866e7, type: 3}
+    _minimumQuantity: 3
+    _maximumQuantity: 5
+    _dropChance: 1
+  - _collectiblePrefab: {fileID: 4370613596646141915, guid: 9cf63d0574568cb4a91c79e7f748e6a0, type: 3}
+    _minimumQuantity: 1
+    _maximumQuantity: 3
+    _dropChance: 0.6
+  _randomPositionRadius: 0.35

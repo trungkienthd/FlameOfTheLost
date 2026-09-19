@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0cab8679280d941b73444642356f58, type: 3}
+  m_Name: 34305_Hvt_IronNodeLarge
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableObjectProfile
+  _id: 34305
+  _key: IRON_NODE_LARGE
+  _displayName: Iron Node Large
+  _description: 
+  _icon: {fileID: 532985936, guid: 572bb35294ab715449c4c06f31b1fa55, type: 3}
+  _configureInitialTransformAtStart: 0
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 1
+  _maximumDurability: 14
+  _defaultImpactDamageMultiplier: 0.25
+  _impactResponses:
+  - _impactType: 1
+    _damageMultiplier: 0
+  - _impactType: 2
+    _damageMultiplier: 1
+  - _impactType: 3
+    _damageMultiplier: 0
+  - _impactType: 4
+    _damageMultiplier: 3
+  _breakBehaviour: 2
+  _harvestedSprite: {fileID: 0}
+  _dropEntries:
+  - _collectiblePrefab: {fileID: 1826066810856446163, guid: 9f930226238c35a4288cd99881672305, type: 3}
+    _minimumQuantity: 4
+    _maximumQuantity: 6
+    _dropChance: 1
+  - _collectiblePrefab: {fileID: 5976662919117878685, guid: 7b1913763079f534586f845de95f0fa4, type: 3}
+    _minimumQuantity: 1
+    _maximumQuantity: 2
+    _dropChance: 0.3
+  _randomPositionRadius: 0.35
