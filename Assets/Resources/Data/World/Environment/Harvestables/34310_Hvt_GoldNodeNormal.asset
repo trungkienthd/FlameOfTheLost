@@ -35,7 +35,7 @@ MonoBehaviour:
   - _impactType: 3
     _damageMultiplier: 0
   - _impactType: 4
-    _damageMultiplier: 3
+    _damageMultiplier: 2
   _breakBehaviour: 2
   _harvestedSprite: {fileID: 0}
   _dropEntries:

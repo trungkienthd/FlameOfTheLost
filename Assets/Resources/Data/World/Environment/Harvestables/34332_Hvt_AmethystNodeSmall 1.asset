@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0cab8679280d941b73444642356f58, type: 3}
+  m_Name: 34332_Hvt_AmethystNodeSmall 1
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableObjectProfile
+  _id: 34332
+  _key: AMETHYST_NODE_RICH
+  _displayName: Amethyst Node Rich
+  _description: 
+  _icon: {fileID: 517163192, guid: 572bb35294ab715449c4c06f31b1fa55, type: 3}
+  _configureInitialTransformAtStart: 0
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 1
+  _maximumDurability: 9
+  _defaultImpactDamageMultiplier: 0.25
+  _impactResponses:
+  - _impactType: 1
+    _damageMultiplier: 0
+  - _impactType: 2
+    _damageMultiplier: 1
+  - _impactType: 3
+    _damageMultiplier: 1
+  - _impactType: 4
+    _damageMultiplier: 3
+  _breakBehaviour: 2
+  _harvestedSprite: {fileID: 0}
+  _dropEntries:
+  - _collectiblePrefab: {fileID: 5695403897089237639, guid: ec25e7a68d822c9448e91b49ead1f2b1, type: 3}
+    _minimumQuantity: 2
+    _maximumQuantity: 4
+    _dropChance: 1
+  - _collectiblePrefab: {fileID: 2609335897556652134, guid: ec17e29c59b266040bf625380a90e68e, type: 3}
+    _minimumQuantity: 1
+    _maximumQuantity: 3
+    _dropChance: 0.5
+  _randomPositionRadius: 0.35
