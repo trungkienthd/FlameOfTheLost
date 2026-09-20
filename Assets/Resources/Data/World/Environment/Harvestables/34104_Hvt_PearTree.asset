@@ -26,7 +26,7 @@ MonoBehaviour:
   _initialVisualLocalScale: {x: 1, y: 1, z: 1}
   _configureIconAtStart: 1
   _maximumDurability: 7
-  _defaultImpactDamageMultiplier: 0.25
+  _defaultImpactDamageMultiplier: 0
   _impactResponses:
   - _impactType: 1
     _damageMultiplier: 2
