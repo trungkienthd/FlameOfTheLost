@@ -145,7 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableDamageReceivingHandler
   _enableDebugLogs: 0
-  _harvestableObjectController: {fileID: 6244524684465928208}
 --- !u!1 &3102520659608807503
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +276,8 @@ MonoBehaviour:
   _visualSpriteRenderer: {fileID: 910537647476446899}
   _brokenStateHandler: {fileID: 4187473113774351543}
   _dropHandler: {fileID: 8483016149196059644}
+  _damageReceivingHandler: {fileID: 2612766993187685610}
+  _brokenColliderPresetTransform: {fileID: 4763982801204472736}
   _currentDurability: 0
   _isBroken: 0
 --- !u!114 &8483016149196059644
@@ -311,8 +312,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableBrokenStateHandler
   _enableDebugLogs: 0
   _visualSpriteRenderer: {fileID: 910537647476446899}
-  _activeCollider: {fileID: 3781653710060801201}
-  _brokenColliderPreset: {fileID: 3213249885053076553}
 --- !u!1 &5504170618807224716
 GameObject:
   m_ObjectHideFlags: 0
