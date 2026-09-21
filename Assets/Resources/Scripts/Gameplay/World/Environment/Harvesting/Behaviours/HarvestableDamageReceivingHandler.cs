@@ -2,13 +2,8 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public sealed class HarvestableDamageReceivingHandler : FOTLMonoBehaviour
+    public sealed class HarvestableDamageReceivingHandler : HarvestableObjectSubHandlerBase
     {
-        // --- References ---
-        [Header("References")]
-        [SerializeField] private HarvestableObjectController _harvestableObjectController;
-        private HarvestableObjectController HarvestableObjectController => _harvestableObjectController;
-
         // --- Runtime States ---
         //  1. Last Damage Source (for Duplicate Hit Protection)
         private int _lastHitFrame = -1;
@@ -28,6 +23,7 @@ namespace FlameOfTheLost
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other == null) return;
+            if (!this.EnsureBound()) return;
 
             if (this.HarvestableObjectController == null) return;
             if (this.HarvestableObjectController.IsBroken)
@@ -120,19 +116,16 @@ namespace FlameOfTheLost
             }
         }
 
+        // --- FOTLSubBehaviour Overrides ---
+        protected override void OnUnbound(HarvestableObjectController controller)
+        {
+            base.OnUnbound(controller);
+
+            this.LastHitFrame = -1;
+            this.LastDamager = null;
+        }
+
         // --- FOTLMonoBehaviour Overrides ---
-        protected override void CacheInternalReferences()
-        {
-            base.CacheInternalReferences();
-
-            if (this.HarvestableObjectController == null) _harvestableObjectController = this.GetComponentInParent<HarvestableObjectController>();
-        }
-        protected override void ValidateInternalReferences()
-        {
-            base.ValidateInternalReferences();
-
-            if (this.HarvestableObjectController == null) Debug.LogError($"[{this.gameObject.name}." + $"{nameof(HarvestableDamageReceivingHandler)}] " + $"{nameof(HarvestableObjectController)} " + $"reference is not assigned.", this);
-        }
         protected override void InitializeInternalState()
         {
             base.InitializeInternalState();

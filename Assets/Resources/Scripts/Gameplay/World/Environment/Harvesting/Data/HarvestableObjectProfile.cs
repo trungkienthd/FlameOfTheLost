@@ -36,6 +36,12 @@ namespace FlameOfTheLost
         [SerializeField, Min(0f)] private float _randomPositionRadius = 0.35f;
         public float RandomPositionRadius => Mathf.Max(0f, _randomPositionRadius);
 
+        //      1.5. Colliders
+        [Header("Colliders")]
+        [SerializeField]
+        private HarvestableColliderConfigurationRecord _colliderConfiguration = new();
+        public HarvestableColliderConfigurationRecord ColliderConfiguration => _colliderConfiguration;
+
         // --- Public APIs ---
         public float GetImpactDamageMultiplier(HarvestImpactType impactType)
         {

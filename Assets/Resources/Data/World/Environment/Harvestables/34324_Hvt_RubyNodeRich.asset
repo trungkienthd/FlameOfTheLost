@@ -48,3 +48,67 @@ MonoBehaviour:
     _maximumQuantity: 2
     _dropChance: 0.4
   _randomPositionRadius: 0.35
+  _colliderConfiguration:
+    _activeCollider:
+      _colliderType: 0
+      _boxConfiguration:
+        _offset: {x: 0, y: 0.05}
+        _isTrigger: 0
+        _size: {x: 0.9, y: 0.65}
+        _edgeRadius: 0
+        _autoTiling: 0
+      _circleConfiguration:
+        _offset: {x: 0, y: 0}
+        _isTrigger: 0
+        _radius: 0.5
+      _capsuleConfiguration:
+        _offset: {x: 0, y: 0}
+        _isTrigger: 0
+        _size: {x: 1, y: 1}
+        _direction: 0
+      _polygonConfiguration:
+        _offset: {x: 0, y: 0}
+        _isTrigger: 0
+        _paths: []
+    _damageReceiverCollider:
+      _colliderType: 1
+      _boxConfiguration:
+        _offset: {x: 0, y: 0}
+        _isTrigger: 0
+        _size: {x: 1, y: 1}
+        _edgeRadius: 0
+        _autoTiling: 0
+      _circleConfiguration:
+        _offset: {x: 0, y: 0}
+        _isTrigger: 1
+        _radius: 0.5
+      _capsuleConfiguration:
+        _offset: {x: 0, y: 0}
+        _isTrigger: 1
+        _size: {x: 1, y: 1}
+        _direction: 0
+      _polygonConfiguration:
+        _offset: {x: 0, y: 0}
+        _isTrigger: 0
+        _paths: []
+    _brokenColliderPreset:
+      _colliderType: 0
+      _boxConfiguration:
+        _offset: {x: 0, y: 0}
+        _isTrigger: 0
+        _size: {x: 0.25, y: 0.25}
+        _edgeRadius: 0
+        _autoTiling: 0
+      _circleConfiguration:
+        _offset: {x: 0, y: 0}
+        _isTrigger: 0
+        _radius: 0.5
+      _capsuleConfiguration:
+        _offset: {x: 0, y: 0}
+        _isTrigger: 0
+        _size: {x: 1, y: 1}
+        _direction: 0
+      _polygonConfiguration:
+        _offset: {x: 0, y: 0}
+        _isTrigger: 0
+        _paths: []

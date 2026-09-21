@@ -8,29 +8,24 @@ namespace FlameOfTheLost
         //  1. State References
         [Header("References")]
         [SerializeField] private SpriteRenderer _visualSpriteRenderer;
-        [SerializeField] private Collider2D _activeCollider;
-        [SerializeField] private Collider2D _brokenColliderPreset;
         private SpriteRenderer VisualSpriteRenderer => _visualSpriteRenderer;
-        private Collider2D ActiveCollider => _activeCollider;
-        private Collider2D BrokenColliderPreset => _brokenColliderPreset;
 
         // --- Data / Configs ---
         private HarvestableBreakBehaviour BreakBehaviour    => this.Profile != null ? this.Profile.BreakBehaviour : HarvestableBreakBehaviour.ReplaceVisual;
         private Sprite HarvestedSprite                      => this.Profile != null ? this.Profile.HarvestedSprite : null;
 
-        // --- Runtime States ---
+        // --- Runtime ---
         private Sprite _defaultSprite;
-        private ColliderSnapshotRecord _defaultColliderSnapshot;
         private Sprite DefaultSprite
         {
             get => _defaultSprite;
             set => _defaultSprite = value;
         }
-        private ColliderSnapshotRecord DefaultColliderSnapshot
-        {
-            get => _defaultColliderSnapshot;
-            set => _defaultColliderSnapshot = value;
-        }
+
+        private Collider2D _activeCollider;
+        private Collider2D _brokenColliderPreset;
+        private Collider2D ActiveCollider => _activeCollider;
+        private Collider2D BrokenColliderPreset => _brokenColliderPreset;
 
         // --- Public APIs ---
         //  1. State Application
@@ -54,15 +49,7 @@ namespace FlameOfTheLost
                     break;
 
                 default:
-                    Debug.LogError
-                    (
-                        $"[{this.gameObject.name}." +
-                        $"{nameof(HarvestableBrokenStateHandler)}] " +
-                        $"Unsupported " +
-                        $"{nameof(HarvestableBreakBehaviour)}: " +
-                        $"{this.BreakBehaviour}.",
-                        this
-                    );
+                    Debug.LogError($"[{this.gameObject.name}.{nameof(HarvestableBrokenStateHandler)}] Unsupported {nameof(HarvestableBreakBehaviour)}: {this.BreakBehaviour}.", this);
                     break;
             }
         }
@@ -73,6 +60,13 @@ namespace FlameOfTheLost
 
             this.RestoreDefaultVisual();
             this.RestoreDefaultCollider();
+        }
+
+        //  2. Collider Configuration
+        public void ConfigureColliders(Collider2D activeCollider, Collider2D brokenColliderPreset)
+        {
+            _activeCollider = activeCollider;
+            _brokenColliderPreset = brokenColliderPreset;
         }
 
         // --- Helpers ---
@@ -95,26 +89,13 @@ namespace FlameOfTheLost
         //  2. Collider
         private void ApplyBrokenCollider()
         {
-            if (this.ActiveCollider == null) return;
-            if (this.BrokenColliderPreset == null) return;
-
-            if (!ColliderSnapshotRecord.TryCapture(this.BrokenColliderPreset, out ColliderSnapshotRecord brokenState)) return;
-
-            brokenState.ApplyTo(this.ActiveCollider, this);
+            if (this.ActiveCollider         != null) this.ActiveCollider.enabled        = false;
+            if (this.BrokenColliderPreset   != null) this.BrokenColliderPreset.enabled  = true;
         }
         private void RestoreDefaultCollider()
         {
-            if (this.ActiveCollider == null) return;
-            if (this.DefaultColliderSnapshot == null) return;
-
-            this.DefaultColliderSnapshot.ApplyTo(this.ActiveCollider, this);
-        }
-        private bool AreColliderTypesCompatible()
-        {
-            if (this.ActiveCollider == null) return false;
-            if (this.BrokenColliderPreset == null) return false;
-
-            return this.ActiveCollider.GetType() == this.BrokenColliderPreset.GetType();
+            if (this.BrokenColliderPreset   != null) this.BrokenColliderPreset.enabled  = false;
+            if (this.ActiveCollider         != null) this.ActiveCollider.enabled        = true;
         }
 
         // --- FOTLMonoBehaviour Overrides ---
@@ -130,65 +111,7 @@ namespace FlameOfTheLost
 
             if (this.VisualSpriteRenderer == null)
             {
-                Debug.LogError
-                (
-                    $"[{this.gameObject.name}." +
-                    $"{nameof(HarvestableBrokenStateHandler)}] " +
-                    $"{nameof(SpriteRenderer)} reference " +
-                    $"is not assigned.",
-                    this
-                );
-            }
-
-            if (this.ActiveCollider == null)
-            {
-                Debug.LogError
-                (
-                    $"[{this.gameObject.name}." +
-                    $"{nameof(HarvestableBrokenStateHandler)}] " +
-                    $"Active {nameof(Collider2D)} reference " +
-                    $"is not assigned.",
-                    this
-                );
-            }
-
-            if (this.BrokenColliderPreset == null)
-            {
-                Debug.LogError
-                (
-                    $"[{this.gameObject.name}." +
-                    $"{nameof(HarvestableBrokenStateHandler)}] " +
-                    $"Broken collider preset is not assigned.",
-                    this
-                );
-
-                return;
-            }
-
-            if (this.ActiveCollider != null && !this.AreColliderTypesCompatible())
-            {
-                Debug.LogError
-                (
-                    $"[{this.gameObject.name}." +
-                    $"{nameof(HarvestableBrokenStateHandler)}] " +
-                    $"Active collider type " +
-                    $"'{this.ActiveCollider.GetType().Name}' " +
-                    $"does not match broken collider preset " +
-                    $"type " +
-                    $"'{this.BrokenColliderPreset.GetType().Name}'.",
-                    this
-                );
-            }
-
-            if (this.BrokenColliderPreset.enabled)
-            {
-                Debug.LogWarning
-                (
-                    $"[{this.gameObject.name}." +
-                    $"{nameof(HarvestableBrokenStateHandler)}] " +
-                    $"Broken collider preset should be disabled.",
-                    this
-                );
+                Debug.LogError($"[{this.gameObject.name}.{nameof(HarvestableBrokenStateHandler)}] {nameof(SpriteRenderer)} reference is not assigned.", this);
             }
         }
         protected override void InitializeInternalState()
@@ -198,11 +121,6 @@ namespace FlameOfTheLost
             if (this.VisualSpriteRenderer != null)
             {
                 this.DefaultSprite = this.VisualSpriteRenderer.sprite;
-            }
-
-            if (this.ActiveCollider != null && ColliderSnapshotRecord.TryCapture(this.ActiveCollider, out ColliderSnapshotRecord defaultState))
-            {
-                this.DefaultColliderSnapshot = defaultState;
             }
         }
     }

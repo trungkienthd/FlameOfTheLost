@@ -129,8 +129,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.25}
-  m_Size: {x: 1, y: 2.5}
+  m_Offset: {x: 0, y: 0.25}
+  m_Size: {x: 1.15, y: 2.15}
   m_Direction: 0
 --- !u!114 &2612766993187685610
 MonoBehaviour:
@@ -145,7 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableDamageReceivingHandler
   _enableDebugLogs: 0
-  _harvestableObjectController: {fileID: 6244524684465928208}
 --- !u!1 &3102520659608807503
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +246,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.3477316}
+  m_Offset: {x: 0, y: 0.4}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -257,7 +256,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1.1490269}
+  m_Size: {x: 0.7, y: 1.8}
   m_EdgeRadius: 0
 --- !u!114 &6244524684465928208
 MonoBehaviour:
@@ -277,6 +276,8 @@ MonoBehaviour:
   _visualSpriteRenderer: {fileID: 910537647476446899}
   _brokenStateHandler: {fileID: 4187473113774351543}
   _dropHandler: {fileID: 8483016149196059644}
+  _damageReceivingHandler: {fileID: 2612766993187685610}
+  _brokenColliderPresetTransform: {fileID: 4763982801204472736}
   _currentDurability: 0
   _isBroken: 0
 --- !u!114 &8483016149196059644
@@ -311,8 +312,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableBrokenStateHandler
   _enableDebugLogs: 0
   _visualSpriteRenderer: {fileID: 910537647476446899}
-  _activeCollider: {fileID: 3781653710060801201}
-  _brokenColliderPreset: {fileID: 3213249885053076553}
 --- !u!1 &5504170618807224716
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +351,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5504170618807224716}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -379,7 +378,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -1}
+  m_Offset: {x: 0, y: -0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -389,7 +388,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.5}
+  m_Size: {x: 0.35, y: 0.2}
   m_EdgeRadius: 0
 --- !u!1 &6888315045785847729
 GameObject:
