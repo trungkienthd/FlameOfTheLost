@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Outdoor_Decor_0
+      name: CFRPG16_Outdoor_Decor_0
       rect:
         serializedVersion: 2
         x: 0
@@ -989,6 +989,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      CFRPG16_Outdoor_Decor_0: -149804444
       CFRPG16_Outdoor_Decor_17_StoneWaterLarge: -970727135
       CFRPG16_Outdoor_Decor_18_StoneSmall_0: -386932625
       CFRPG16_Outdoor_Decor_19_StoneSmall_1: 398182873
@@ -996,7 +997,6 @@ TextureImporter:
       CFRPG16_Outdoor_Decor_27_StoneLarge: -2080755189
       CFRPG16_Outdoor_Decor_28_StoneNormal: 1037574564
       CFRPG16_Outdoor_Decor_29_StoneWaterNormal: 125679671
-      Outdoor_Decor_0: -149804444
       Outdoor_Decor_1: 1002843208
       Outdoor_Decor_10: 1060024160
       Outdoor_Decor_11: -829084033
