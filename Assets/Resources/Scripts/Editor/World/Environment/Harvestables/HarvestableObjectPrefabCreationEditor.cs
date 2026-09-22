@@ -50,7 +50,7 @@ namespace FlameOfTheLost
         private readonly List<HarvestableObjectProfile> _profiles = new();
 
         // --- Menu ---
-        [MenuItem("FlameOfTheLost/Tools/Assets/Prefabs/World/Environment/Harvestables")]
+        [MenuItem("FlameOfTheLost/Tools/Assets/Prefabs/World/Environment/Create Harvestable Prefabs")]
         private static void OpenWindow()
         {
             HarvestableObjectPrefabCreationEditor window = HarvestableObjectPrefabCreationEditor.GetWindow<HarvestableObjectPrefabCreationEditor>();

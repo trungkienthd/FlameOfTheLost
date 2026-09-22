@@ -558,7 +558,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Outdoor_Decor_20_Scn_Mushroom_BrownStemLarge
+      name: CFRPG16_Outdoor_Decor_20_Scn_MushroomBrownStemLarge
       rect:
         serializedVersion: 2
         x: 32
@@ -690,7 +690,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Outdoor_Decor_26_Scn_Mushroom_BrownStemSmall
+      name: CFRPG16_Outdoor_Decor_26_Scn_MushroomBrownStemSmall
       rect:
         serializedVersion: 2
         x: 32
@@ -1000,13 +1000,13 @@ TextureImporter:
       CFRPG16_Outdoor_Decor_18_Hvt_StoneSmall_0: -386932625
       CFRPG16_Outdoor_Decor_19_Hvt_StoneSmall_1: 398182873
       CFRPG16_Outdoor_Decor_1_Scn_GroundFloraLeaf_2: 1002843208
-      CFRPG16_Outdoor_Decor_20_Scn_Mushroom_BrownStemLarge: 55176741
+      CFRPG16_Outdoor_Decor_20_Scn_MushroomBrownStemLarge: 55176741
       CFRPG16_Outdoor_Decor_21_Hvt_StoneWaterSmall: 1453728269
       CFRPG16_Outdoor_Decor_22_Scn_GroundFloraSprout: -1508699092
       CFRPG16_Outdoor_Decor_23_Scn_ShrubRoundSmall: 2019216152
       CFRPG16_Outdoor_Decor_24_Scn_GroundFloraCarrotTop: -987441491
       CFRPG16_Outdoor_Decor_25_Scn_FallenWoodBrokenStumpPlain: 138702218
-      CFRPG16_Outdoor_Decor_26_Scn_Mushroom_BrownStemSmall: -1777685462
+      CFRPG16_Outdoor_Decor_26_Scn_MushroomBrownStemSmall: -1777685462
       CFRPG16_Outdoor_Decor_27_Hvt_StoneLarge: -2080755189
       CFRPG16_Outdoor_Decor_28_Hvt_StoneNormal: 1037574564
       CFRPG16_Outdoor_Decor_29_Hvt_StoneWaterNormal: 125679671
