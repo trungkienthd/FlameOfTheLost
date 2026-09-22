@@ -68,6 +68,9 @@ player can reliably distinguish the two.
 The player should not need to attack or interact with every environmental
 object merely to determine whether it has gameplay behaviour.
 
+Sprites already assigned to Harvestables must not also be treated as Scenery
+Objects.
+
 ---
 
 ## 4. Scenery Categories
@@ -77,21 +80,27 @@ The initial Scenery Object set is divided into the following categories:
 1. Ground Flora
 2. Wildflowers
 3. Wetland Flora
-4. Natural Debris
-5. Mushrooms
-6. Shrubs
-7. Fallen Wood
+4. Mushrooms
+5. Shrubs
+6. Fallen Wood
 
 These categories describe visual and environmental purpose rather than
 gameplay behaviour.
 
-All currently defined categories remain non-interactable.
+All currently defined Scenery Object categories remain non-interactable.
 
 ---
 
 ## 5. Ground Flora
 
-Ground Flora consists of small grass, sprouts, leaves, and similar vegetation.
+Ground Flora consists of small leaves, sprouts, crop tops, and similar
+vegetation placed directly on terrain.
+
+The current outdoor decor sheet provides:
+
+- three leaf variants;
+- one generic sprout;
+- one carrot top.
 
 ### Purpose
 
@@ -114,16 +123,10 @@ maintained location.
 
 ## 6. Wildflowers
 
-Wildflowers are small decorative flowers with stronger colour accents than
-ordinary Ground Flora.
+Wildflowers are small decorative flowering plants with stronger colour accents
+than ordinary Ground Flora.
 
-Possible visual variants include:
-
-- red flowers;
-- purple flowers;
-- blue flowers;
-- yellow flowers;
-- small mixed flower variants.
+The current outdoor decor sheet provides three Wildflower variants.
 
 ### Purpose
 
@@ -144,11 +147,12 @@ important gameplay objects.
 
 Wetland Flora is decorative vegetation associated primarily with water.
 
-Examples include:
+The current outdoor decor sheet provides Lily Pad variants including:
 
-- lily pads;
-- flowering lily pads;
-- grouped aquatic plants.
+- Single;
+- Double;
+- Flowering;
+- Cluster Flowering.
 
 Wetland Flora is distinct from Harvestable wetland vegetation such as
 Harvestable Reed Patches.
@@ -163,29 +167,7 @@ Wetland Flora is used to:
 
 ---
 
-## 8. Natural Debris
-
-Natural Debris consists of small naturally occurring objects scattered across
-terrain.
-
-Examples may include:
-
-- small branches;
-- twigs;
-- leaves;
-- minor woody fragments;
-- sufficiently distinct non-harvestable ground debris.
-
-### Stone Restriction
-
-Stone sprites that visually resemble existing Stone Harvestables should not be
-used as ordinary scenery.
-
-This prevents ambiguity between decorative stones and harvestable resources.
-
----
-
-## 9. Mushrooms
+## 8. Mushrooms
 
 Decorative Mushrooms are small non-interactable fungi used primarily around:
 
@@ -195,15 +177,45 @@ Decorative Mushrooms are small non-interactable fungi used primarily around:
 - damp environments;
 - forest edges.
 
+The current outdoor decor sheet contains two visually distinct Mushroom
+families.
+
+### Cap Mushrooms
+
+Cap Mushrooms are defined primarily by their rounded coloured caps.
+
+Current variants:
+
+- Red Cap — Large;
+- Purple Cap — Large;
+- Blue Cap — Large;
+- Red Cap — Small;
+- Purple Cap — Small;
+- Blue Cap — Small.
+
+### Brown Stem Mushrooms
+
+Brown Stem Mushrooms use a taller, exposed-stem silhouette.
+
+Current variants:
+
+- Brown Stem — Large;
+- Brown Stem — Small.
+
 If Mushroom Items or Harvestables are introduced in the future, their gameplay
 presentation should remain visually distinguishable from decorative Mushrooms.
 
 ---
 
-## 10. Shrubs
+## 9. Shrubs
 
-Shrubs are medium-sized vegetation used to occupy more visual space than
+Shrubs are medium-to-large vegetation used to occupy more visual space than
 Ground Flora or Wildflowers.
+
+The current outdoor decor sheet contains:
+
+- Round Small Shrub;
+- Dense Large Shrub.
 
 ### Purpose
 
@@ -219,17 +231,26 @@ Shrubs are non-blocking by default.
 
 ---
 
-## 11. Fallen Wood
+## 10. Fallen Wood
 
-Fallen Wood includes decorative logs, branches, stumps, and decaying wood.
+Fallen Wood includes decorative fallen logs, broken stumps, and decaying wood.
 
-Possible variants include:
+The current outdoor decor sheet contains the following families.
 
-- plain fallen logs;
-- logs with sprouts;
-- logs with mushrooms;
-- logs with coloured natural details;
-- broken wood pieces.
+### Logs
+
+- Plain;
+- Sprouting 01;
+- Sprouting 02;
+- Purple Fungus;
+- Red Fungus;
+- Blue Fungus.
+
+### Broken Stumps
+
+- Plain;
+- Sprouting;
+- Hollow.
 
 ### Purpose
 
@@ -249,18 +270,18 @@ Harvestable Wood objects.
 
 ---
 
-## 12. Collision Policy
+## 11. Collision Policy
 
 Scenery Objects are non-blocking by default.
 
 Objects such as:
 
-- flowers;
-- grass;
-- mushrooms;
-- lily pads;
-- small shrubs;
-- small debris
+- Ground Flora;
+- Wildflowers;
+- Mushrooms;
+- Lily Pads;
+- Shrubs;
+- Fallen Wood
 
 should normally have no gameplay collider.
 
@@ -273,7 +294,7 @@ for this purpose.
 
 ---
 
-## 13. Technical Complexity
+## 12. Technical Complexity
 
 Scenery Objects should remain lightweight.
 
@@ -288,6 +309,27 @@ gameplay behaviour makes such architecture necessary.
 
 Additional components may be added for purely rendering-related purposes where
 needed.
+
+---
+
+## 13. Naming
+
+`Scn` is the abbreviation used for Scenery in asset names.
+
+Scenery sprite names use the general form:
+
+`<SourceSheet>_<Index>_Scn_<SemanticName>`
+
+The semantic portion should remain readable without overusing underscores.
+
+Examples:
+
+- `CFRPG16_Outdoor_Decor_0_Scn_GroundFloraLeaf_1`
+- `CFRPG16_Outdoor_Decor_9_Scn_WetlandFloraLilyPadSingle`
+- `CFRPG16_Outdoor_Decor_30_Scn_FallenWoodLogSprouting_01`
+
+Underscores may still be used where they are useful for an existing variant
+suffix or established family distinction.
 
 ---
 
@@ -335,11 +377,12 @@ Higher density may suggest:
 
 ## 15. Initial Asset Source
 
-The initial Scenery Object sprites are primarily sourced from:
+The initial Scenery Object sprites are sourced from:
 
 `CFRPG16_Outdoor_Decor`
 
-Not every sprite from this sheet is automatically considered scenery.
+Only sprites formally assigned the `Scn` role are part of the initial Scenery
+Object set.
 
-Sprites already associated with gameplay-oriented objects, particularly
-Harvestable Stones, should remain reserved for those gameplay purposes.
+Sprites assigned to Harvestables, including the Stone variants from the same
+sheet, are excluded from Scenery.

@@ -12,19 +12,22 @@ For gameplay rules and placement principles, see:
 
 `SceneryObjectDesign.md`
 
+For the exact source-sprite names, see:
+
+`OutdoorDecorSpriteMapping.md`
+
 ---
 
 ## 2. Current Scenery Families
 
-| Category | Current Use | Interaction | Collision |
+| Category | Current Content | Interaction | Collision |
 |---|---|---|---|
-| Ground Flora | Grass, sprouts, small vegetation | None | None |
-| Wildflowers | Coloured decorative flowers | None | None |
-| Wetland Flora | Lily pads and aquatic vegetation | None | None |
-| Natural Debris | Branches and minor natural debris | None | None |
-| Mushrooms | Decorative forest fungi | None | None |
-| Shrubs | Medium-sized vegetation | None | None by default |
-| Fallen Wood | Logs and decaying wood | None | None by default |
+| Ground Flora | Leaves, sprout, carrot top | None | None |
+| Wildflowers | 3 flowering plant variants | None | None |
+| Wetland Flora | Lily Pad variants | None | None |
+| Mushrooms | Cap Mushrooms and Brown Stem Mushrooms | None | None |
+| Shrubs | Round Small and Dense Large | None | None by default |
+| Fallen Wood | Logs and Broken Stumps | None | None by default |
 
 ---
 
@@ -32,6 +35,14 @@ For gameplay rules and placement principles, see:
 
 Ground Flora contains small vegetation intended for common use throughout
 natural environments.
+
+### Current Objects
+
+- `GroundFloraLeaf_1`
+- `GroundFloraLeaf_2`
+- `GroundFloraLeaf_3`
+- `GroundFloraSprout`
+- `GroundFloraCarrotTop`
 
 Typical placement:
 
@@ -47,15 +58,13 @@ Ground Flora should form the most frequently used Scenery family.
 
 ## 4. Wildflowers
 
-Wildflowers provide stronger colour accents than Ground Flora.
+Wildflowers provide stronger colour accents than ordinary Ground Flora.
 
-Current visual groups may include:
+### Current Objects
 
-- Red;
-- Purple;
-- Blue;
-- Yellow;
-- Mixed / neutral flower variants.
+- `Wildflower_1`
+- `Wildflower_2`
+- `Wildflower_3`
 
 Wildflowers should generally be used more sparingly than ordinary Ground Flora.
 
@@ -63,8 +72,14 @@ Wildflowers should generally be used more sparingly than ordinary Ground Flora.
 
 ## 5. Wetland Flora
 
-Wetland Flora currently includes decorative aquatic vegetation such as
-lily pads.
+Wetland Flora currently consists of decorative Lily Pad variants.
+
+### Current Objects
+
+- `WetlandFloraLilyPadSingle`
+- `WetlandFloraLilyPadDouble`
+- `WetlandFloraLilyPadFlowering`
+- `WetlandFloraLilyPadClusterFlowering`
 
 Typical placement:
 
@@ -77,34 +92,45 @@ Harvestable Reed Patches are not part of this category.
 
 ---
 
-## 6. Natural Debris
+## 6. Mushrooms
 
-Natural Debris consists of small non-interactable environmental fragments.
+Decorative Mushrooms are divided into two initial visual families.
 
-Examples:
+### Cap Mushrooms
 
-- branches;
-- twigs;
-- woody fragments.
+- `MushroomRedCapLarge`
+- `MushroomPurpleCapLarge`
+- `MushroomBlueCapLarge`
+- `MushroomRedCapSmall`
+- `MushroomPurpleCapSmall`
+- `MushroomBlueCapSmall`
 
-Stone-like sprites should only be included when they are sufficiently
-distinguishable from Harvestable Stones.
+### Brown Stem Mushrooms
 
----
+- `Mushroom_BrownStemLarge`
+- `Mushroom_BrownStemSmall`
 
-## 7. Mushrooms
+Typical placement:
 
-Decorative Mushroom sprites may be used underneath trees, near fallen wood,
-or in damp and shaded environmental regions.
+- beneath trees;
+- beside Fallen Wood;
+- damp areas;
+- shaded vegetation;
+- forest edges.
 
 They currently have no gameplay functionality.
 
 ---
 
-## 8. Shrubs
+## 7. Shrubs
 
 Shrubs are larger visual fillers used to create variation in vegetation
 density.
+
+### Current Objects
+
+- `ShrubRoundSmall`
+- `ShrubDenseLarge`
 
 Typical placement:
 
@@ -115,34 +141,49 @@ Typical placement:
 
 ---
 
-## 9. Fallen Wood
+## 8. Fallen Wood
 
-Fallen Wood includes non-interactable logs and related woody scenery.
+Fallen Wood includes non-interactable logs and broken stumps.
 
-Variants may visually contain:
+### Logs
 
-- plain bark;
-- sprouts;
-- mushrooms;
-- flowers or coloured natural growth.
+- `FallenWoodLogPlain`
+- `FallenWoodLogSprouting_01`
+- `FallenWoodLogSprouting_02`
+- `FallenWoodLogPurpleFungus`
+- `FallenWoodLogRedFungus`
+- `FallenWoodLogBlueFungus`
+
+### Broken Stumps
+
+- `FallenWoodBrokenStumpPlain`
+- `FallenWoodBrokenStumpSprouting`
+- `FallenWoodBrokenStumpHollow`
 
 These objects are primarily used as larger visual anchors and for
 environmental storytelling.
 
 ---
 
-## 10. Reserved / Excluded Sprites
+## 9. Reserved / Excluded Sprites
 
-The following sprite types should not currently be treated as Scenery Objects:
+Sprites from `CFRPG16_Outdoor_Decor` that are already assigned to the
+Harvestable system are not Scenery Objects.
 
-### Harvestable Stones
+This currently includes Stone variants such as:
 
-Stone sprites already used by the Harvestable system remain gameplay assets.
+- Stone Small variants;
+- Stone Normal;
+- Stone Large;
+- Water Stone variants.
 
-They should not also appear as visually identical non-interactable scenery.
+Their existing Harvestable naming and gameplay role should be preserved.
+
+Identical Harvestable sprites should not also be used as non-interactable
+Scenery because doing so would weaken gameplay readability.
 
 ### Future Gameplay Resources
 
-Any sprite promoted to an interactable, Collectible, Harvestable, or other
-gameplay-oriented Environment Object should be reconsidered before continuing
-to use identical scenery variants.
+Any Scenery sprite later promoted to an interactable, Collectible, Harvestable,
+or other gameplay-oriented Environment Object should be reconsidered before
+continuing to use an identical non-interactable version.

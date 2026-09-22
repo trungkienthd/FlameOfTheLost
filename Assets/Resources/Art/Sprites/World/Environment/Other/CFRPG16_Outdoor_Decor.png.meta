@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CFRPG16_Outdoor_Decor_0
+      name: CFRPG16_Outdoor_Decor_0_Scn_GroundFloraLeaf_1
       rect:
         serializedVersion: 2
         x: 0
@@ -140,7 +140,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_1
+      name: CFRPG16_Outdoor_Decor_1_Scn_GroundFloraLeaf_2
       rect:
         serializedVersion: 2
         x: 16
@@ -162,7 +162,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_2
+      name: CFRPG16_Outdoor_Decor_2_Scn_GroundFloraLeaf_3
       rect:
         serializedVersion: 2
         x: 32
@@ -184,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_3
+      name: CFRPG16_Outdoor_Decor_3_Scn_Wildflower_1
       rect:
         serializedVersion: 2
         x: 48
@@ -206,7 +206,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_4
+      name: CFRPG16_Outdoor_Decor_4_Scn_Wildflower_2
       rect:
         serializedVersion: 2
         x: 64
@@ -228,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_5
+      name: CFRPG16_Outdoor_Decor_5_Scn_Wildflower_3
       rect:
         serializedVersion: 2
         x: 80
@@ -250,7 +250,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_6
+      name: CFRPG16_Outdoor_Decor_6_Scn_MushroomRedCapLarge
       rect:
         serializedVersion: 2
         x: 0
@@ -272,7 +272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_7
+      name: CFRPG16_Outdoor_Decor_7_Scn_MushroomPurpleCapLarge
       rect:
         serializedVersion: 2
         x: 16
@@ -294,7 +294,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_8
+      name: CFRPG16_Outdoor_Decor_8_Scn_MushroomBlueCapLarge
       rect:
         serializedVersion: 2
         x: 32
@@ -316,7 +316,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_9
+      name: CFRPG16_Outdoor_Decor_9_Scn_WetlandFloraLilyPadSingle
       rect:
         serializedVersion: 2
         x: 48
@@ -338,7 +338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_10
+      name: CFRPG16_Outdoor_Decor_10_Scn_WetlandFloraLilyPadClusterFlowering
       rect:
         serializedVersion: 2
         x: 64
@@ -360,7 +360,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_11
+      name: CFRPG16_Outdoor_Decor_11_Scn_WetlandFloraLilyPadFlowering
       rect:
         serializedVersion: 2
         x: 80
@@ -382,7 +382,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_12
+      name: CFRPG16_Outdoor_Decor_12_Scn_MushroomRedCapSmall
       rect:
         serializedVersion: 2
         x: 0
@@ -404,7 +404,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_13
+      name: CFRPG16_Outdoor_Decor_13_Scn_MushroomPurpleCapSmall
       rect:
         serializedVersion: 2
         x: 16
@@ -426,7 +426,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_14
+      name: CFRPG16_Outdoor_Decor_14_Scn_MushroomBlueCapSmall
       rect:
         serializedVersion: 2
         x: 32
@@ -448,7 +448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_15
+      name: CFRPG16_Outdoor_Decor_15_Scn_WetlandFloraLilyPadDouble
       rect:
         serializedVersion: 2
         x: 48
@@ -492,7 +492,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Outdoor_Decor_17_StoneWaterLarge
+      name: CFRPG16_Outdoor_Decor_17_Hvt_StoneWaterLarge
       rect:
         serializedVersion: 2
         x: 80
@@ -514,7 +514,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Outdoor_Decor_18_StoneSmall_0
+      name: CFRPG16_Outdoor_Decor_18_Hvt_StoneSmall_0
       rect:
         serializedVersion: 2
         x: 0
@@ -536,7 +536,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Outdoor_Decor_19_StoneSmall_1
+      name: CFRPG16_Outdoor_Decor_19_Hvt_StoneSmall_1
       rect:
         serializedVersion: 2
         x: 16
@@ -558,7 +558,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_20
+      name: CFRPG16_Outdoor_Decor_20_Scn_Mushroom_BrownStemLarge
       rect:
         serializedVersion: 2
         x: 32
@@ -580,7 +580,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Outdoor_Decor_21_StoneWaterSmall
+      name: CFRPG16_Outdoor_Decor_21_Hvt_StoneWaterSmall
       rect:
         serializedVersion: 2
         x: 48
@@ -602,7 +602,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_22
+      name: CFRPG16_Outdoor_Decor_22_Scn_GroundFloraSprout
       rect:
         serializedVersion: 2
         x: 64
@@ -624,7 +624,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_23
+      name: CFRPG16_Outdoor_Decor_23_Scn_ShrubRoundSmall
       rect:
         serializedVersion: 2
         x: 80
@@ -646,7 +646,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_24
+      name: CFRPG16_Outdoor_Decor_24_Scn_GroundFloraCarrotTop
       rect:
         serializedVersion: 2
         x: 0
@@ -668,7 +668,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_25
+      name: CFRPG16_Outdoor_Decor_25_Scn_FallenWoodBrokenStumpPlain
       rect:
         serializedVersion: 2
         x: 16
@@ -690,7 +690,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_26
+      name: CFRPG16_Outdoor_Decor_26_Scn_Mushroom_BrownStemSmall
       rect:
         serializedVersion: 2
         x: 32
@@ -712,7 +712,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Outdoor_Decor_27_StoneLarge
+      name: CFRPG16_Outdoor_Decor_27_Hvt_StoneLarge
       rect:
         serializedVersion: 2
         x: 48
@@ -734,7 +734,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Outdoor_Decor_28_StoneNormal
+      name: CFRPG16_Outdoor_Decor_28_Hvt_StoneNormal
       rect:
         serializedVersion: 2
         x: 64
@@ -756,7 +756,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CFRPG16_Outdoor_Decor_29_StoneWaterNormal
+      name: CFRPG16_Outdoor_Decor_29_Hvt_StoneWaterNormal
       rect:
         serializedVersion: 2
         x: 80
@@ -778,7 +778,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_30
+      name: CFRPG16_Outdoor_Decor_30_Scn_FallenWoodLogSprouting_01
       rect:
         serializedVersion: 2
         x: 0
@@ -800,7 +800,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_32
+      name: CFRPG16_Outdoor_Decor_32_Scn_FallenWoodLogSprouting_02
       rect:
         serializedVersion: 2
         x: 32
@@ -822,7 +822,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_34
+      name: CFRPG16_Outdoor_Decor_34_Scn_FallenWoodLogPlain
       rect:
         serializedVersion: 2
         x: 64
@@ -844,7 +844,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_36
+      name: CFRPG16_Outdoor_Decor_36_Scn_FallenWoodLogPurpleFungus
       rect:
         serializedVersion: 2
         x: 0
@@ -866,7 +866,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_38
+      name: CFRPG16_Outdoor_Decor_38_Scn_FallenWoodLogRedFungus
       rect:
         serializedVersion: 2
         x: 32
@@ -888,7 +888,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_40
+      name: CFRPG16_Outdoor_Decor_40_Scn_FallenWoodLogBlueFungus
       rect:
         serializedVersion: 2
         x: 64
@@ -910,7 +910,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_42
+      name: CFRPG16_Outdoor_Decor_42_Scn_FallenWoodBrokenStumpSprouting
       rect:
         serializedVersion: 2
         x: 0
@@ -932,7 +932,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_44
+      name: CFRPG16_Outdoor_Decor_44_Scn_FallenWoodBrokenStumpHollow
       rect:
         serializedVersion: 2
         x: 32
@@ -954,7 +954,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Outdoor_Decor_45
+      name: CFRPG16_Outdoor_Decor_45_Scn_ShrubDenseLarge
       rect:
         serializedVersion: 2
         x: 48
@@ -989,52 +989,52 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CFRPG16_Outdoor_Decor_0: -149804444
-      CFRPG16_Outdoor_Decor_17_StoneWaterLarge: -970727135
-      CFRPG16_Outdoor_Decor_18_StoneSmall_0: -386932625
-      CFRPG16_Outdoor_Decor_19_StoneSmall_1: 398182873
-      CFRPG16_Outdoor_Decor_21_StoneWaterSmall: 1453728269
-      CFRPG16_Outdoor_Decor_27_StoneLarge: -2080755189
-      CFRPG16_Outdoor_Decor_28_StoneNormal: 1037574564
-      CFRPG16_Outdoor_Decor_29_StoneWaterNormal: 125679671
-      Outdoor_Decor_1: 1002843208
-      Outdoor_Decor_10: 1060024160
-      Outdoor_Decor_11: -829084033
-      Outdoor_Decor_12: -1011045035
-      Outdoor_Decor_13: -1794845432
-      Outdoor_Decor_14: 752768044
-      Outdoor_Decor_15: -1242013515
+      CFRPG16_Outdoor_Decor_0_Scn_GroundFloraLeaf_1: -149804444
+      CFRPG16_Outdoor_Decor_10_Scn_WetlandFloraLilyPadClusterFlowering: 1060024160
+      CFRPG16_Outdoor_Decor_11_Scn_WetlandFloraLilyPadFlowering: -829084033
+      CFRPG16_Outdoor_Decor_12_Scn_MushroomRedCapSmall: -1011045035
+      CFRPG16_Outdoor_Decor_13_Scn_MushroomPurpleCapSmall: -1794845432
+      CFRPG16_Outdoor_Decor_14_Scn_MushroomBlueCapSmall: 752768044
+      CFRPG16_Outdoor_Decor_15_Scn_WetlandFloraLilyPadDouble: -1242013515
+      CFRPG16_Outdoor_Decor_17_Hvt_StoneWaterLarge: -970727135
+      CFRPG16_Outdoor_Decor_18_Hvt_StoneSmall_0: -386932625
+      CFRPG16_Outdoor_Decor_19_Hvt_StoneSmall_1: 398182873
+      CFRPG16_Outdoor_Decor_1_Scn_GroundFloraLeaf_2: 1002843208
+      CFRPG16_Outdoor_Decor_20_Scn_Mushroom_BrownStemLarge: 55176741
+      CFRPG16_Outdoor_Decor_21_Hvt_StoneWaterSmall: 1453728269
+      CFRPG16_Outdoor_Decor_22_Scn_GroundFloraSprout: -1508699092
+      CFRPG16_Outdoor_Decor_23_Scn_ShrubRoundSmall: 2019216152
+      CFRPG16_Outdoor_Decor_24_Scn_GroundFloraCarrotTop: -987441491
+      CFRPG16_Outdoor_Decor_25_Scn_FallenWoodBrokenStumpPlain: 138702218
+      CFRPG16_Outdoor_Decor_26_Scn_Mushroom_BrownStemSmall: -1777685462
+      CFRPG16_Outdoor_Decor_27_Hvt_StoneLarge: -2080755189
+      CFRPG16_Outdoor_Decor_28_Hvt_StoneNormal: 1037574564
+      CFRPG16_Outdoor_Decor_29_Hvt_StoneWaterNormal: 125679671
+      CFRPG16_Outdoor_Decor_2_Scn_GroundFloraLeaf_3: 681820928
+      CFRPG16_Outdoor_Decor_30_Scn_FallenWoodLogSprouting_01: 1211534522
+      CFRPG16_Outdoor_Decor_32_Scn_FallenWoodLogSprouting_02: 193286325
+      CFRPG16_Outdoor_Decor_34_Scn_FallenWoodLogPlain: -257270309
+      CFRPG16_Outdoor_Decor_36_Scn_FallenWoodLogPurpleFungus: 213158803
+      CFRPG16_Outdoor_Decor_38_Scn_FallenWoodLogRedFungus: -698116609
+      CFRPG16_Outdoor_Decor_3_Scn_Wildflower_1: -1625045083
+      CFRPG16_Outdoor_Decor_40_Scn_FallenWoodLogBlueFungus: 1539972970
+      CFRPG16_Outdoor_Decor_42_Scn_FallenWoodBrokenStumpSprouting: -1500708247
+      CFRPG16_Outdoor_Decor_44_Scn_FallenWoodBrokenStumpHollow: 1263955320
+      CFRPG16_Outdoor_Decor_45_Scn_ShrubDenseLarge: 1537057305
+      CFRPG16_Outdoor_Decor_4_Scn_Wildflower_2: -1117718067
+      CFRPG16_Outdoor_Decor_5_Scn_Wildflower_3: 501478741
+      CFRPG16_Outdoor_Decor_6_Scn_MushroomRedCapLarge: -1582738761
+      CFRPG16_Outdoor_Decor_7_Scn_MushroomPurpleCapLarge: 1333576141
+      CFRPG16_Outdoor_Decor_8_Scn_MushroomBlueCapLarge: -2038066442
+      CFRPG16_Outdoor_Decor_9_Scn_WetlandFloraLilyPadSingle: -1146010696
       Outdoor_Decor_16: 1304773709
-      Outdoor_Decor_2: 681820928
-      Outdoor_Decor_20: 55176741
-      Outdoor_Decor_22: -1508699092
-      Outdoor_Decor_23: 2019216152
-      Outdoor_Decor_24: -987441491
-      Outdoor_Decor_25: 138702218
-      Outdoor_Decor_26: -1777685462
-      Outdoor_Decor_3: -1625045083
-      Outdoor_Decor_30: 1211534522
       Outdoor_Decor_31: 1377143866
-      Outdoor_Decor_32: 193286325
       Outdoor_Decor_33: -153590184
-      Outdoor_Decor_34: -257270309
       Outdoor_Decor_35: 1921014335
-      Outdoor_Decor_36: 213158803
       Outdoor_Decor_37: -1968983924
-      Outdoor_Decor_38: -698116609
       Outdoor_Decor_39: -652161127
-      Outdoor_Decor_4: -1117718067
-      Outdoor_Decor_40: 1539972970
       Outdoor_Decor_41: 1772538615
-      Outdoor_Decor_42: -1500708247
       Outdoor_Decor_43: 1365215716
-      Outdoor_Decor_44: 1263955320
-      Outdoor_Decor_45: 1537057305
-      Outdoor_Decor_5: 501478741
-      Outdoor_Decor_6: -1582738761
-      Outdoor_Decor_7: 1333576141
-      Outdoor_Decor_8: -2038066442
-      Outdoor_Decor_9: -1146010696
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
