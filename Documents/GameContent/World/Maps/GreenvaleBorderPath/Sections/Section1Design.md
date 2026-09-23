@@ -272,5 +272,5 @@ Section 1 should be reviewed again when:
 - final Spawn Point behaviour is confirmed;
 - the first Item Container content is finalized;
 - visual hierarchy is tested in actual gameplay;
-- Section 2 is documented and the transition between the two sections is
-  finalized.
+- the transition into the now-documented Section 2 is finalized and reviewed
+  against `Section2Design.md`.
