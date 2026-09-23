@@ -151,7 +151,7 @@ namespace FlameOfTheLost
         {
             base.InitializeInternalState();
 
-            this.Quantity = 1;
+            //this.Quantity = 1;
             this.IsCollected = false;
         }
     }
