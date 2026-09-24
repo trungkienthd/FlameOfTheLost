@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181afeccca07db8438a0374f962778d1, type: 3}
+  m_Name: Variant_Chr_Enemy_Trl_AquabaraPond
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyVariantProfile
+  _initialInventoryEntries:
+  - _item: {fileID: 11400000, guid: b22e53e2ad3aa3a458902b84802a1081, type: 2}
+    _quantity: 1
+    _equipped: 0
+  _characterProfile: {fileID: 11400000, guid: f81522b5ec002f04a9e38033d80b0e30, type: 2}
+  _defaultRoamingConfig: {fileID: 11400000, guid: b8bb817a28f3d11469047bc4c0af34bb, type: 2}
+  _attackConfig: {fileID: 11400000, guid: dd0816b9842b07a40a3793e693449d7c, type: 2}

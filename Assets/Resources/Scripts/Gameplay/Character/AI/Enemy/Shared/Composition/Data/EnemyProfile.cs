@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "Chr_Enemy_New", menuName = "Data/FlameOfTheLost/Character/Enemy/EnemyProfile")]
+    [CreateAssetMenu(fileName = "Chr_Enemy_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/EnemyProfile")]
     public class EnemyProfile : CharacterAIProfile
     {
         // 1. Reward

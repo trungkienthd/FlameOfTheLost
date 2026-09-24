@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d721e4893daec4c8fa5e2a0757de39, type: 3}
+  m_Name: 10xxx_Chr_Ntr_Animal_COw
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalProfile
+  _id: 0
+  _key: 
+  _displayName: 
+  _description: 
+  _icon: {fileID: 0}
+  _prefab: {fileID: 0}
+  _characterType: 0
+  _faction: 0
+  _traversalType: 0
+  _movementConfig: {fileID: 0}
+  _dodgeConfig: {fileID: 0}
+  _visualConfig: {fileID: 0}
+  _combatConfig: {fileID: 0}
+  _statusEffectGuardConfig: {fileID: 0}
+  _progressionConfig: {fileID: 0}
+  _rewardDropProfile: {fileID: 0}

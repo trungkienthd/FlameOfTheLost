@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28c8803fbc3f20e4da52044a985c0fd2, type: 3}
+  m_Name: 10101_Chr_AI_Enemy_Trl_Feralshroom
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyProfile
+  _id: 10101
+  _key: FERALSHROOM
+  _displayName: Feralshroom
+  _description: 
+  _icon: {fileID: 0}
+  _prefab: {fileID: 2810860427036246779, guid: 2cf69941bf2d26947a773c321d00d5ba, type: 3}
+  _characterType: 2
+  _faction: 2
+  _traversalType: 1
+  _movementConfig: {fileID: 11400000, guid: 3421f0f0be54c91418c346da0089371e, type: 2}
+  _dodgeConfig: {fileID: 11400000, guid: c8c205336bbc80c4c820e4c00b8c8748, type: 2}
+  _visualConfig: {fileID: 11400000, guid: 819226a64e576a7458bec7da527051c1, type: 2}
+  _combatConfig: {fileID: 11400000, guid: 6159b19bff3602543ab87c4564e4afa2, type: 2}
+  _statusEffectGuardConfig: {fileID: 11400000, guid: af619af4a1df1ff4b87877e5452c7a03, type: 2}
+  _progressionConfig: {fileID: 11400000, guid: 13e8895b8b3489342b82009b5cfbb868, type: 2}
+  _rewardDropProfile: {fileID: 11400000, guid: 0155129f0eff00a40aaa6e7cc5d0b95e, type: 2}

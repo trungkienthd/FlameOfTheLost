@@ -6,8 +6,7 @@ namespace FlameOfTheLost
         ICharacterRefreshable,
         ICharacterDeathDisableable
     {
-        // --- State ---
-        //  1. References
+        // --- References ---
         protected CharacterVisualController VisualController => this.CharacterRootController.VisualController;
         private CharacterAITargetDetectionHandler TargetDetectionHandler => this.CharacterRootController is EnemyRootController enemyRoot 
             ? enemyRoot.TargetDetectionHandler 
@@ -16,7 +15,8 @@ namespace FlameOfTheLost
             ? enemyRoot.EnemyInputHandler 
             : null;
 
-        //  2. Current Target Info
+        // --- Runtime ---
+        //  1. Current Target Info
         protected CharacterRootController CurrentTarget
         {
             get
@@ -51,7 +51,7 @@ namespace FlameOfTheLost
             }
         }
 
-        //  3. Death Disable State (Runtime)
+        //  2. Death Disable State (Runtime)
         [Header("Death Disable (Runtime)")]
         [SerializeField] private bool _isDeathDisabled;
         public bool IsDeathDisabled
