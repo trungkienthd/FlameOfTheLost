@@ -7,5 +7,6 @@ namespace FlameOfTheLost
         Feralshroom     = 2,
         Aquabara        = 3,
         Rattleblade     = 4,
+        Cow             = 5,
     }
 }

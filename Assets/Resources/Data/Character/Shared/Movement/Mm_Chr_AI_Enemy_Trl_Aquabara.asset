@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 890ffac1f27b07d45a8b915e3bc22fe0, type: 3}
-  m_Name: Mm_Enemy_Aquabara
+  m_Name: Mm_Chr_AI_Enemy_Trl_Aquabara
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterMovementConfig
   _movementSpeed: 1
   _accel: 10

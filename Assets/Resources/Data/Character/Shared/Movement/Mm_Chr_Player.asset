@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 890ffac1f27b07d45a8b915e3bc22fe0, type: 3}
-  m_Name: Mm_Enemy_Feralshroom
+  m_Name: Mm_Chr_Player
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterMovementConfig
-  _movementSpeed: 1.5
-  _accel: 15
-  _decel: 20
+  _movementSpeed: 3.5
+  _accel: 35
+  _decel: 45

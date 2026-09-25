@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
+    [RequireComponent(typeof(AnimalRoamingHandler))]
+    [RequireComponent(typeof(AnimalThreatHandler))]
+    [RequireComponent(typeof(AnimalFleeHandler))]
     public class AnimalBrainController : NeutralCharacterBrainController
     {
         // --- Data / Configs ---
