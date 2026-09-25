@@ -165605,7 +165605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enableDebugLogs: 0
   _characterRootController: {fileID: 8000788421115896438}
-  _config: {fileID: 0}
+  _config: {fileID: 11400000, guid: aa344368b8f45f04b9a42f1d02e9ab60, type: 2}
   _spriteRenderer: {fileID: 6084845537114785318}
   _animator: {fileID: 100178451756846046}
   _characterFlipGroup: {fileID: 9065100916407894288}
@@ -168054,10 +168054,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!4 &6111924176180938066
 Transform:

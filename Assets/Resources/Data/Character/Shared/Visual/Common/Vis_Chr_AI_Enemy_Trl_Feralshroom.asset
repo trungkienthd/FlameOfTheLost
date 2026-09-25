@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcbea86a660b86948919f07eedb1be9c, type: 3}
-  m_Name: Vis_Enemy_Aquabara
+  m_Name: Vis_Chr_AI_Enemy_Trl_Feralshroom
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualConfig
   _normalColor: {r: 1, g: 1, b: 1, a: 1}
-  _locomotionAnimationProfile: {fileID: 11400000, guid: 10845e79ef7c34c4fbaa2fad4909a87e, type: 2}
-  _attackAnimationProfile: {fileID: 11400000, guid: ba3f7421c7aafe54dbb34871aff7b93a, type: 2}
-  _hitDeathAnimationProfile: {fileID: 11400000, guid: 31a385ec50803814e884b94461a7c8fb, type: 2}
+  _locomotionAnimationProfile: {fileID: 11400000, guid: fb951246804cd704387ca8a631bcae2c, type: 2}
+  _attackAnimationProfile: {fileID: 11400000, guid: f0e51d36e48ee4e43998ded6f8841cdc, type: 2}
+  _hitDeathAnimationProfile: {fileID: 11400000, guid: 374684fe68157104fb4be74de54fa19a, type: 2}
   _dodgeAnimationProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}

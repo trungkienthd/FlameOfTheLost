@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af94ae79a7b556d4ba94ea40f2f70883, type: 3}
+  m_Name: AniHD_Chr_AI_Ntr_Animal_Cow
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterHitDeathAnimationProfile
+  _characterType: 5
+  _hitAnimationClipSet:
+    _down: {fileID: 7400000, guid: 981ca31319ab93747bfa2a36adad3db2, type: 2}
+    _side: {fileID: 7400000, guid: d0ee533e4e32d4141834345fd905d64f, type: 2}
+    _up: {fileID: 7400000, guid: f9facfe835c3a1f4cafbd418fa4a5d63, type: 2}
+  _deathAnimationClipSet:
+    _down: {fileID: 7400000, guid: d9aa5420a1f5af148bcd21b56039ade0, type: 2}
+    _side: {fileID: 7400000, guid: a0bb91b06736d954eab0ce585c4ed82a, type: 2}
+    _up: {fileID: 7400000, guid: 4798160196daf0b47a4cb8094908364e, type: 2}

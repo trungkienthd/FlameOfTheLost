@@ -23,7 +23,7 @@ MonoBehaviour:
   _traversalType: 1
   _movementConfig: {fileID: 11400000, guid: 61f7ffc622ff67046a398056ab80883f, type: 2}
   _dodgeConfig: {fileID: 11400000, guid: c8c205336bbc80c4c820e4c00b8c8748, type: 2}
-  _visualConfig: {fileID: 0}
+  _visualConfig: {fileID: 11400000, guid: aa344368b8f45f04b9a42f1d02e9ab60, type: 2}
   _combatConfig: {fileID: 11400000, guid: 6159b19bff3602543ab87c4564e4afa2, type: 2}
   _statusEffectGuardConfig: {fileID: 11400000, guid: af619af4a1df1ff4b87877e5452c7a03, type: 2}
   _progressionConfig: {fileID: 11400000, guid: 08751a03d3f26d54a89c89b455f8d8df, type: 2}
