@@ -1,9 +1,16 @@
 fileFormatVersion: 2
 guid: 50148c0e17da4214bb5f5a057d404195
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295726
+  packageName: Cute Fantasy RPG - 16x16 top down pixel art asset pack
+  packageVersion: 1.0
+  assetPath: Assets/Kenmi/Cute Fantasy RPG - 16x16 top down pixel art asset pack/Sprites/Animals/Cow/Cow_01.png
+  uploadId: 694123
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +27,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,9 +71,10 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -75,9 +84,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -87,9 +97,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -99,13 +110,14 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cow_01_0
+      name: CFRPG16_Cow_01_0_Idle_Default_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,8 +125,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -126,7 +139,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_1
+      name: CFRPG16_Cow_01_1_Idle_Default_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -134,8 +147,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -147,7 +161,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_2
+      name: CFRPG16_Cow_01_2_Walk_Default_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -155,8 +169,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -168,7 +183,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_3
+      name: CFRPG16_Cow_01_3_Walk_Default_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -176,8 +191,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -189,7 +205,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_4
+      name: CFRPG16_Cow_01_4_Walk_Default_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -197,8 +213,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -210,7 +227,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_5
+      name: CFRPG16_Cow_01_5_Walk_Default_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -218,8 +235,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -231,7 +249,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_6
+      name: CFRPG16_Cow_01_6_Walk_Default_Side_4
       rect:
         serializedVersion: 2
         x: 128
@@ -239,8 +257,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -252,7 +271,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_7
+      name: CFRPG16_Cow_01_7_Walk_Default_Side_5
       rect:
         serializedVersion: 2
         x: 160
@@ -260,8 +279,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -273,7 +293,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_8
+      name: CFRPG16_Cow_01_8_Walk_Default_Side_6
       rect:
         serializedVersion: 2
         x: 192
@@ -281,8 +301,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -294,7 +315,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_9
+      name: CFRPG16_Cow_01_9_Walk_Default_Side_7
       rect:
         serializedVersion: 2
         x: 224
@@ -302,8 +323,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -315,7 +337,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_10
+      name: CFRPG16_Cow_01_10_Graze_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -323,8 +345,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -336,7 +359,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_11
+      name: CFRPG16_Cow_01_11_Graze_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -344,8 +367,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -357,7 +381,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_12
+      name: CFRPG16_Cow_01_12_Graze_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -365,8 +389,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -378,7 +403,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_13
+      name: CFRPG16_Cow_01_13_Graze_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -386,8 +411,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -399,7 +425,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_14
+      name: CFRPG16_Cow_01_14_Graze_Side_4
       rect:
         serializedVersion: 2
         x: 128
@@ -407,8 +433,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -420,7 +447,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_15
+      name: CFRPG16_Cow_01_15_Graze_Side_5
       rect:
         serializedVersion: 2
         x: 160
@@ -428,8 +455,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -441,7 +469,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_16
+      name: CFRPG16_Cow_01_16_Graze_Side_6
       rect:
         serializedVersion: 2
         x: 192
@@ -449,8 +477,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -462,7 +491,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_17
+      name: CFRPG16_Cow_01_17_Graze_Side_7
       rect:
         serializedVersion: 2
         x: 224
@@ -470,8 +499,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -483,7 +513,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_18
+      name: CFRPG16_Cow_01_18_Idle_Alert_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -491,8 +521,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -504,7 +535,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_19
+      name: CFRPG16_Cow_01_19_Idle_Alert_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -512,8 +543,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -525,7 +557,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_20
+      name: CFRPG16_Cow_01_20_Idle_Alert_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -533,8 +565,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -546,7 +579,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_21
+      name: CFRPG16_Cow_01_21_Idle_Alert_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -554,8 +587,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -567,7 +601,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_22
+      name: CFRPG16_Cow_01_22_Idle_Alert_Side_4
       rect:
         serializedVersion: 2
         x: 128
@@ -575,8 +609,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -588,7 +623,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_23
+      name: CFRPG16_Cow_01_23_Idle_Alert_Side_5
       rect:
         serializedVersion: 2
         x: 160
@@ -596,8 +631,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -609,7 +645,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_24
+      name: CFRPG16_Cow_01_24_Idle_Alert_Side_6
       rect:
         serializedVersion: 2
         x: 192
@@ -617,8 +653,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -630,7 +667,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_25
+      name: CFRPG16_Cow_01_25_Idle_Alert_Side_7
       rect:
         serializedVersion: 2
         x: 224
@@ -638,8 +675,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -651,7 +689,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_26
+      name: CFRPG16_Cow_01_26_LieDown_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -659,8 +697,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -672,7 +711,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_27
+      name: CFRPG16_Cow_01_27_LieDown_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -680,8 +719,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -693,7 +733,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_28
+      name: CFRPG16_Cow_01_28_LieDown_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -701,8 +741,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -714,7 +755,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_29
+      name: CFRPG16_Cow_01_29_LieDown_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -722,8 +763,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -735,7 +777,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_30
+      name: CFRPG16_Cow_01_30_LieDown_Side_4
       rect:
         serializedVersion: 2
         x: 128
@@ -743,8 +785,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -756,7 +799,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_31
+      name: CFRPG16_Cow_01_31_LieDown_Side_5
       rect:
         serializedVersion: 2
         x: 160
@@ -764,8 +807,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -777,7 +821,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_32
+      name: CFRPG16_Cow_01_32_StandUp_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -785,8 +829,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -798,7 +843,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_33
+      name: CFRPG16_Cow_01_33_StandUp_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -806,8 +851,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -819,7 +865,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_34
+      name: CFRPG16_Cow_01_34_StandUp_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -827,8 +873,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -840,7 +887,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_35
+      name: CFRPG16_Cow_01_35_StandUp_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -848,8 +895,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -861,7 +909,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_36
+      name: CFRPG16_Cow_01_36_StandUp_Side_4
       rect:
         serializedVersion: 2
         x: 128
@@ -869,8 +917,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -882,7 +931,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_37
+      name: CFRPG16_Cow_01_37_StandUp_Side_5
       rect:
         serializedVersion: 2
         x: 160
@@ -890,8 +939,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -903,7 +953,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_38
+      name: CFRPG16_Cow_01_38_Rest_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -911,8 +961,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -924,7 +975,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_39
+      name: CFRPG16_Cow_01_39_Rest_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -932,8 +983,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -945,7 +997,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_40
+      name: CFRPG16_Cow_01_40_Rest_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -953,8 +1005,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -966,7 +1019,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_41
+      name: CFRPG16_Cow_01_41_Rest_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -974,8 +1027,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -987,7 +1041,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_42
+      name: CFRPG16_Cow_01_42_Sleep_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -995,8 +1049,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1008,7 +1063,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_43
+      name: CFRPG16_Cow_01_43_Sleep_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -1016,8 +1071,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1029,7 +1085,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_44
+      name: CFRPG16_Cow_01_44_Sleep_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -1037,8 +1093,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1050,7 +1107,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_45
+      name: CFRPG16_Cow_01_45_Sleep_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -1058,8 +1115,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1071,7 +1129,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_46
+      name: CFRPG16_Cow_01_46_Sleep_Side_4
       rect:
         serializedVersion: 2
         x: 128
@@ -1079,8 +1137,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1092,7 +1151,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_47
+      name: CFRPG16_Cow_01_47_Sleep_Side_5
       rect:
         serializedVersion: 2
         x: 160
@@ -1100,8 +1159,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1113,7 +1173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_48
+      name: CFRPG16_Cow_01_48_Sleep_Side_6
       rect:
         serializedVersion: 2
         x: 192
@@ -1121,8 +1181,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1134,7 +1195,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_49
+      name: CFRPG16_Cow_01_49_Sleep_Side_7
       rect:
         serializedVersion: 2
         x: 224
@@ -1142,8 +1203,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1155,7 +1217,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_50
+      name: CFRPG16_Cow_01_50_Hit_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1163,8 +1225,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1176,7 +1239,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_51
+      name: CFRPG16_Cow_01_51_Hit_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -1184,8 +1247,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1197,7 +1261,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_52
+      name: CFRPG16_Cow_01_52_Hit_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -1205,8 +1269,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1218,7 +1283,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_01_53
+      name: CFRPG16_Cow_01_53_Hit_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -1226,8 +1291,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1239,6 +1305,7 @@ TextureImporter:
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -1248,71 +1315,66 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
-      Cow_01_0: 901374672
-      Cow_01_1: 578239372
-      Cow_01_10: -1180279265
-      Cow_01_11: 489117538
-      Cow_01_12: -2119246589
-      Cow_01_13: 576759516
-      Cow_01_14: -1501556727
-      Cow_01_15: 1942300081
-      Cow_01_16: 572631556
-      Cow_01_17: -139495260
-      Cow_01_18: 1859654454
-      Cow_01_19: -1904251353
-      Cow_01_2: 1448121862
-      Cow_01_20: 2103049945
-      Cow_01_21: 346633374
-      Cow_01_22: -1153241227
-      Cow_01_23: -707523325
-      Cow_01_24: 888474960
-      Cow_01_25: -260469445
-      Cow_01_26: 1883019871
-      Cow_01_27: -1757437881
-      Cow_01_28: 1225877547
-      Cow_01_29: 1651372208
-      Cow_01_3: -1516387814
-      Cow_01_30: 290487583
-      Cow_01_31: -855318801
-      Cow_01_32: 2005638518
-      Cow_01_33: -2134681569
-      Cow_01_34: -541297157
-      Cow_01_35: 385192960
-      Cow_01_36: 172793640
-      Cow_01_37: -1661679425
-      Cow_01_38: -237438982
-      Cow_01_39: -914763029
-      Cow_01_4: 1911470243
-      Cow_01_40: -88938270
-      Cow_01_41: -1596832143
-      Cow_01_42: 247112586
-      Cow_01_43: 1896499788
-      Cow_01_44: -1067026118
-      Cow_01_45: 590892245
-      Cow_01_46: 1788030812
-      Cow_01_47: 938755939
-      Cow_01_48: 1387049643
-      Cow_01_49: -294106974
-      Cow_01_5: -531125515
-      Cow_01_50: 1023642196
-      Cow_01_51: 1299145298
-      Cow_01_52: -487074274
-      Cow_01_53: 1438887613
-      Cow_01_6: -617778812
-      Cow_01_7: -187077985
-      Cow_01_8: 1373379395
-      Cow_01_9: -1575279488
-  spritePackingTag: 
+      CFRPG16_Cow_01_0_Idle_Default_Side_0: 901374672
+      CFRPG16_Cow_01_10_Graze_Side_0: -1180279265
+      CFRPG16_Cow_01_11_Graze_Side_1: 489117538
+      CFRPG16_Cow_01_12_Graze_Side_2: -2119246589
+      CFRPG16_Cow_01_13_Graze_Side_3: 576759516
+      CFRPG16_Cow_01_14_Graze_Side_4: -1501556727
+      CFRPG16_Cow_01_15_Graze_Side_5: 1942300081
+      CFRPG16_Cow_01_16_Graze_Side_6: 572631556
+      CFRPG16_Cow_01_17_Graze_Side_7: -139495260
+      CFRPG16_Cow_01_18_Idle_Alert_Side_0: 1859654454
+      CFRPG16_Cow_01_19_Idle_Alert_Side_1: -1904251353
+      CFRPG16_Cow_01_1_Idle_Default_Side_1: 578239372
+      CFRPG16_Cow_01_20_Idle_Alert_Side_2: 2103049945
+      CFRPG16_Cow_01_21_Idle_Alert_Side_3: 346633374
+      CFRPG16_Cow_01_22_Idle_Alert_Side_4: -1153241227
+      CFRPG16_Cow_01_23_Idle_Alert_Side_5: -707523325
+      CFRPG16_Cow_01_24_Idle_Alert_Side_6: 888474960
+      CFRPG16_Cow_01_25_Idle_Alert_Side_7: -260469445
+      CFRPG16_Cow_01_26_LieDown_Side_0: 1883019871
+      CFRPG16_Cow_01_27_LieDown_Side_1: -1757437881
+      CFRPG16_Cow_01_28_LieDown_Side_2: 1225877547
+      CFRPG16_Cow_01_29_LieDown_Side_3: 1651372208
+      CFRPG16_Cow_01_2_Walk_Default_Side_0: 1448121862
+      CFRPG16_Cow_01_30_LieDown_Side_4: 290487583
+      CFRPG16_Cow_01_31_LieDown_Side_5: -855318801
+      CFRPG16_Cow_01_32_StandUp_Side_0: 2005638518
+      CFRPG16_Cow_01_33_StandUp_Side_1: -2134681569
+      CFRPG16_Cow_01_34_StandUp_Side_2: -541297157
+      CFRPG16_Cow_01_35_StandUp_Side_3: 385192960
+      CFRPG16_Cow_01_36_StandUp_Side_4: 172793640
+      CFRPG16_Cow_01_37_StandUp_Side_5: -1661679425
+      CFRPG16_Cow_01_38_Rest_Side_0: -237438982
+      CFRPG16_Cow_01_39_Rest_Side_1: -914763029
+      CFRPG16_Cow_01_3_Walk_Default_Side_1: -1516387814
+      CFRPG16_Cow_01_40_Rest_Side_2: -88938270
+      CFRPG16_Cow_01_41_Rest_Side_3: -1596832143
+      CFRPG16_Cow_01_42_Sleep_Side_0: 247112586
+      CFRPG16_Cow_01_43_Sleep_Side_1: 1896499788
+      CFRPG16_Cow_01_44_Sleep_Side_2: -1067026118
+      CFRPG16_Cow_01_45_Sleep_Side_3: 590892245
+      CFRPG16_Cow_01_46_Sleep_Side_4: 1788030812
+      CFRPG16_Cow_01_47_Sleep_Side_5: 938755939
+      CFRPG16_Cow_01_48_Sleep_Side_6: 1387049643
+      CFRPG16_Cow_01_49_Sleep_Side_7: -294106974
+      CFRPG16_Cow_01_4_Walk_Default_Side_2: 1911470243
+      CFRPG16_Cow_01_50_Hit_Si3de_3: 1438887613
+      CFRPG16_Cow_01_50_Hit_Side_0: 1023642196
+      CFRPG16_Cow_01_51_Hit_Side_1: 1299145298
+      CFRPG16_Cow_01_52_Hit_Side_2: -487074274
+      CFRPG16_Cow_01_53_Hit_Side_3: 1438887613
+      CFRPG16_Cow_01_5_Walk_Default_Side_3: -531125515
+      CFRPG16_Cow_01_6_Walk_Default_Side_4: -617778812
+      CFRPG16_Cow_01_7_Walk_Default_Side_5: -187077985
+      CFRPG16_Cow_01_8_Walk_Default_Side_6: 1373379395
+      CFRPG16_Cow_01_9_Walk_Default_Side_7: -1575279488
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 295726
-  packageName: Cute Fantasy RPG - 16x16 top down pixel art asset pack
-  packageVersion: 1.0
-  assetPath: Assets/Kenmi/Cute Fantasy RPG - 16x16 top down pixel art asset pack/Sprites/Animals/Cow/Cow_01.png
-  uploadId: 694123
