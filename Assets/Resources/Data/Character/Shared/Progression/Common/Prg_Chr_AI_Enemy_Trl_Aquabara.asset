@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 507b2b395c74c5c42b09448764d6e972, type: 3}
-  m_Name: Prg_Aquabara
+  m_Name: Prg_Chr_AI_Enemy_Trl_Aquabara
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionConfig
   _baseAttributeEntries:
   - _attributeType: 0

@@ -1,7 +1,7 @@
 # Data ID Convention
 
 **Project:** FlameOfTheLost  
-**Version:** 3.9  
+**Version:** 3.10  
 **Scope:** ID attributes assigned to project-owned **ScriptableObject** assets.
 
 ---
@@ -43,6 +43,8 @@ IDs identify project-owned gameplay data definitions.
 
 For Characters specifically, the ID identifies the **Character archetype/type**, not the `CharacterProfile` asset as a separate entity. `CharacterProfile` stores and exposes the Character ID as part of the Character's fixed data.
 
+The Character major range also contains Player-related Profile types under the special `10xxx` allocation.
+
 Runtime `MonoBehaviour` components do **not** own independent IDs.
 
 Runtime objects should reference their associated data definition when an ID is required.
@@ -61,12 +63,12 @@ Do not use strings or GUIDs as gameplay content identifiers.
 
 The **first digit** identifies the major gameplay system.
 
-Additional leading digits identify subcategories within that system.
+Additional digits may encode category-specific classifications.
 
 Example:
 
 ```text
-1xxxx   Characters
+1xxxx   Character-related
 2xxxx   Spawning
 3xxxx   Environment
 4xxxx   Tutorial
@@ -76,6 +78,20 @@ Example:
 ```
 
 A category may reserve more than two trailing digits when additional internal grouping is required.
+
+For Character IDs in the multi-character factions (`11xxx`, `12xxx`, and `13xxx`), the five digits follow:
+
+```text
+1FSTI
+
+1       Character-related
+F       Faction
+S       Faction-specific Sub-class
+T       Traverse Type
+I       Individual Character
+```
+
+The `10xxx` Player / Player-related range is an explicit exception because there is only one Player Character. `10001` identifies the Player, while other `10xxx` sub-ranges may be allocated to Player-related Profile types.
 
 For example, Materials use the full `75xxx` range and are further divided into `750xx`, `751xx`, and `752xx` sub-ranges.
 
@@ -110,7 +126,7 @@ IDs must never be reused by unrelated gameplay definitions.
 
 | Range | Gameplay System | Documentation |
 |--------|-----------------|---------------|
-| **1xxxx** | Characters | Characters.md |
+| **1xxxx** | Character-related | Characters.md |
 | **2xxxx** | Spawning | Spawning.md |
 | **3xxxx** | Environment | Environment.md |
 | **4xxxx** | Tutorial | Tutorial.md |
@@ -123,20 +139,48 @@ IDs must never be reused by unrelated gameplay definitions.
 # 5. Summary Table
 
 ```text
-1xxxx   Character Data
+1xxxx   Character-related Data
 
-10xxx   Characters
+10xxx   Player / Player-related Data
+10001   Player
+101xx   CraftingRecipeProfile
 
-100xx   Player Characters
-101xx   Mushroom Enemies
-102xx   Humanoid Enemies
-103xx   Wildlife
-104xx   Friendly NPCs
-105xx   Bosses
+102xx   Reserved
+103xx   Reserved
+104xx   Reserved
+105xx   Reserved
+106xx   Reserved
+107xx   Reserved
+108xx   Reserved
+109xx   Reserved
 
-11xxx   Character Crafting Data
+11xxx   Ally Characters
+110xx-119xx   Reserved for Ally Sub-classes
 
-110xx   Crafting Recipe Profiles
+12xxx   Enemy Characters
+120xx   Territorial Enemy
+121xx   Boss
+122xx-129xx   Reserved
+
+13xxx   Neutral Characters
+130xx   Animal
+131xx-139xx   Reserved
+
+14xxx   Reserved
+15xxx   Reserved
+16xxx   Reserved
+17xxx   Reserved
+18xxx   Reserved
+19xxx   Reserved
+
+Character Traverse Type digit for 11xxx-13xxx:
+1xx0x   Humanoid
+1xx1x   Land Creature
+1xx2x   Aquatic
+1xx3x   Amphibious
+1xx4x   Flying
+1xx5x   Ethernal
+1xx6x-1xx9x   Reserved
 
 2xxxx   Spawning Data
 
@@ -207,7 +251,17 @@ When creating a new ID-bearing gameplay data definition:
 6. Store the ID in the corresponding data asset or profile.
 7. Commit the data with the assigned ID.
 
-For Characters, assign the ID to the Character definition and store it in the corresponding `CharacterProfile`.
+For Characters in `11xxx`, `12xxx`, and `13xxx`:
+
+1. Select the Character's faction.
+2. Select the faction-specific sub-class.
+3. Select the Traverse Type.
+4. Assign the next available individual Character digit from `1-9`.
+5. Store the ID in the corresponding `CharacterProfile`.
+
+The final digit `0` is reserved as the category base for these Character classifications.
+
+For Player-related data, follow the dedicated `10xxx` allocations documented in `Characters.md`. `10001` is permanently assigned to the Player Character.
 
 ---
 
@@ -222,6 +276,7 @@ The following are **not permitted**:
 - Using temporary IDs in committed assets.
 - Using negative IDs as valid content.
 - Using `00000` for real gameplay assets.
+- Assigning a multi-character faction Character to a final-digit `0` category-base ID.
 
 ---
 
@@ -234,6 +289,8 @@ The following are **not permitted**:
 
 `00000` must never be assigned to gameplay content.
 
+Within classified Character ranges (`11xxx`, `12xxx`, and `13xxx`), IDs ending in `0` are reserved as category bases and are not assigned to Character definitions.
+
 ---
 
 # 9. Future Expansion
@@ -245,6 +302,13 @@ When introducing a new gameplay system or a new documented sub-range:
 3. Update this document when the top-level summary changes.
 4. Document the allocation before assigning IDs.
 5. Preserve existing IDs and reserved gaps.
+
+For Character-related expansion:
+
+- New factions may use currently reserved second-digit ranges.
+- New faction-specific Character sub-classes must be documented before use.
+- New Traverse Types must be allocated consistently across classified Character factions.
+- New Player-related Profile types may use currently reserved `10xxx` sub-ranges.
 
 ---
 

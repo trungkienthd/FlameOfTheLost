@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28c8803fbc3f20e4da52044a985c0fd2, type: 3}
-  m_Name: 10101_Chr_AI_Enemy_Trl_Feralshroom
+  m_Name: 12011_Chr_AI_Enemy_Trl_Feralshroom
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyProfile
-  _id: 10101
+  _id: 12011
   _key: FERALSHROOM
   _displayName: Feralshroom
   _description: 

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 859e09abb74d36a44b1468e4a4821a45, type: 3}
-  m_Name: CrfRcp_Mtr_Wood_Prjt_Arrow
+  m_Name: 10101_CrfRcp_Mtr_Twig_Prjt_Arrow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CraftingRecipeProfile
-  _id: 11001
-  _key: CRAFTING_RECIPE_ARROW
-  _displayName: Arrow's Crafting Recipe
+  _id: 10101
+  _key: CRAFTING_RECIPE_TWIG_TO_ARROW
+  _displayName: Twig-to-Arrow's Crafting Recipe
   _description: 
   _icon: {fileID: 21300000, guid: 9c404df72e8c2b343932c19ab856cf5e, type: 3}
   _resultItem: {fileID: 11400000, guid: e3f2367d6724ced468c2cdf9e43748e3, type: 2}
-  _resultQuantity: 6
+  _resultQuantity: 3
   _materialRequirements:
-  - _material: {fileID: 11400000, guid: 6cd96918b48dfe144b27cba4f95e2526, type: 2}
+  - _material: {fileID: 11400000, guid: 64127e18f3906764b8b893d8ef8925bf, type: 2}
     _quantity: 1
   _lostEmbersCost: 5

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28c8803fbc3f20e4da52044a985c0fd2, type: 3}
-  m_Name: 10301_Chr_AI_Enemy_Trl_Aquabara
+  m_Name: 12021_Chr_AI_Enemy_Trl_Aquabara
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyCharacterProfile
-  _id: 10301
+  _id: 12021
   _key: AQUABARA
   _displayName: Aquabara
   _description: "\t"
