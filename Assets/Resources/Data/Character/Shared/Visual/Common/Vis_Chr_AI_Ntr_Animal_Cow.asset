@@ -16,7 +16,7 @@ MonoBehaviour:
   _speedForOne: 10
   _speedDampTime: 0.05
   _locomotionAnimationProfile: {fileID: 0}
-  _attackAnimationProfile: {fileID: 0}
+  _attackAnimationProfile: {fileID: 11400000, guid: 96e91b24bb5929445b608c7fb8251e81, type: 2}
   _hitDeathAnimationProfile: {fileID: 11400000, guid: 74b71be6fc7c15243b9ddcd650e0d70d, type: 2}
   _dodgeAnimationProfile: {fileID: 0}
   _hitCompletionFallbackDelay: 0.3

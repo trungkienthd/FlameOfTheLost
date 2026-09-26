@@ -24,7 +24,8 @@ namespace FlameOfTheLost
                 return null;
             }
         }
-           // this.CharacterRootController is EnemyRootController enemyRootController ? enemyRootController.EnemyBrainController : null; }
+        
+        // this.CharacterRootController is EnemyRootController enemyRootController ? enemyRootController.EnemyBrainController : null; }
 
         //  2. Locomotion Mode Mapping
         [Header("Locomotion Mode Mapping")]
