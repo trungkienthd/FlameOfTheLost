@@ -424,7 +424,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualFacingHandler
   _enableDebugLogs: 0
-  _brainBehaviour: {fileID: 584078816329254573}
   _lastDirection: {x: 0, y: -1}
   _facingSignX: 1
   _isFacingLocked: 0
@@ -441,7 +440,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualLocomotionAnimationHandler
   _enableDebugLogs: 0
-  _brainBehaviour: {fileID: 584078816329254573}
   _placeholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
   _locomotionModeProviderBehaviour: {fileID: 8619395251524575671}
   _manualLocomotionMode: 0
@@ -480,7 +478,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualCombatAnimationHandler
   _enableDebugLogs: 0
-  _brainBehaviour: {fileID: 584078816329254573}
   _placeholderProfile: {fileID: 11400000, guid: 96e91b24bb5929445b608c7fb8251e81, type: 2}
 --- !u!114 &391864750833664329
 MonoBehaviour:
@@ -495,7 +492,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualHitDeathAnimationHandler
   _enableDebugLogs: 0
-  _brainBehaviour: {fileID: 584078816329254573}
   _placeholderProfile: {fileID: 11400000, guid: cba0c4783b92dc34295f5a1cb5341fa0, type: 2}
 --- !u!114 &8086331531521290570
 MonoBehaviour:
@@ -510,8 +506,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualDodgeAnimationHandler
   _enableDebugLogs: 0
-  _brainBehaviour: {fileID: 584078816329254573}
   _placeholderProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
+--- !u!1 &359354401614543464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7271032496330904339}
+  m_Layer: 9
+  m_Name: DropAnchor_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7271032496330904339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359354401614543464}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5799098014862224348}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &546589716473818984
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +701,37 @@ Transform:
   m_Children:
   - {fileID: 8031254016463205955}
   m_Father: {fileID: 5963968130057620577}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &849307222314084964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5894421589236889968}
+  m_Layer: 9
+  m_Name: DropAnchor_02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5894421589236889968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849307222314084964}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5799098014862224348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &865456852956897858
 GameObject:
@@ -1411,6 +1468,40 @@ MonoBehaviour:
   _characterRootController: {fileID: 5013856377803996316}
   _rangeType: 0
   _triggerCollider: {fileID: 2824026965855872081}
+--- !u!1 &2684845279859087408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5799098014862224348}
+  m_Layer: 9
+  m_Name: DropAnchors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5799098014862224348
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2684845279859087408}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7271032496330904339}
+  - {fileID: 5894421589236889968}
+  - {fileID: 7027360850901274876}
+  m_Father: {fileID: 926192897596052555}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2810860427036246779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,7 +1923,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutCapacityHandler
   _enableDebugLogs: 0
-  _brainBehaviour: {fileID: 1967698609657820187}
 --- !u!114 &7713573844728834922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1846,7 +1936,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutWeaponHandler
   _enableDebugLogs: 0
-  _brainBehaviour: {fileID: 1967698609657820187}
   _maxEquippedEntries: 1
   _equippedEntries:
   - _item: {fileID: 0}
@@ -1872,7 +1961,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutProjectileHandler
   _enableDebugLogs: 0
-  _brainBehaviour: {fileID: 1967698609657820187}
   _maxEquippedEntries: 1
   _equippedEntries:
   - _item: {fileID: 0}
@@ -1895,7 +1983,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutSpecialSkillHandler
   _enableDebugLogs: 0
-  _brainBehaviour: {fileID: 1967698609657820187}
 --- !u!114 &835810724065106510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1909,7 +1996,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatLoadoutConsumableItemHandler
   _enableDebugLogs: 0
-  _brainBehaviour: {fileID: 1967698609657820187}
   _maxEquippedEntries: 1
   _equippedEntries:
   - _item: {fileID: 0}
@@ -1949,7 +2035,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5799098014862224348}
   m_Father: {fileID: 5963968130057620577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1482769842203035230
@@ -1982,6 +2069,11 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _config: {fileID: 11400000, guid: 0155129f0eff00a40aaa6e7cc5d0b95e, type: 2}
+  _defaultDropOrigin: {fileID: 5799098014862224348}
+  _dropAnchors:
+  - {fileID: 7271032496330904339}
+  - {fileID: 5894421589236889968}
+  - {fileID: 7027360850901274876}
 --- !u!1 &4581592430822712175
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,6 +2502,37 @@ Transform:
   - {fileID: 2906988059610458126}
   - {fileID: 5593934950314088825}
   m_Father: {fileID: 5963968130057620577}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7126835440517869507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7027360850901274876}
+  m_Layer: 9
+  m_Name: DropAnchor_03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7027360850901274876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126835440517869507}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5799098014862224348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7293745998217739976
 GameObject:

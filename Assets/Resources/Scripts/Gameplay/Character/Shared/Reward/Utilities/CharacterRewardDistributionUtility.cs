@@ -9,26 +9,36 @@ namespace FlameOfTheLost
             if (receiverCharacter == null) return false;
             if (defeatedCharacter == null) return false;
 
-            CharacterAIRootController defeatedAICharacter = defeatedCharacter as CharacterAIRootController;
-            if (defeatedAICharacter == null) return false;
+            if (defeatedCharacter is not CharacterAIRootController) return false;
+            if (defeatedCharacter is not ICharacterRewardDropProviderSource rewardDropSource) return false;
 
-            EnemyRootController defeatedEnemy = defeatedAICharacter as EnemyRootController;
-
-            CharacterRewardDropProvider defeatedRewardDropProvider = defeatedEnemy.RewardDropProvider;
+            CharacterRewardDropProvider defeatedRewardDropProvider = rewardDropSource.RewardDropProvider;
             if (defeatedRewardDropProvider == null) return false;
 
+            bool distributedAnything = false;
+
+            // a. Lost Embers
             CharacterRewardWalletController receiverRewardWallet = receiverCharacter.RewardWalletController;
-            if (receiverRewardWallet == null) return false;
 
-            if (CharacterRewardDistributionUtility.TryDistributeReward(defeatedRewardDropProvider, receiverRewardWallet))
+            if (receiverRewardWallet != null && CharacterRewardDistributionUtility.TryDistributeReward(defeatedRewardDropProvider, receiverRewardWallet))
             {
-                receiverCharacter?.RewardVFXHandler?.PlayGainVFX();
-                defeatedCharacter?.RewardVFXHandler?.PlayReleaseVFX();
-
-                return true;
+                distributedAnything = true;
             }
 
-            return false;
+            // b. Item Drops
+            if (defeatedRewardDropProvider.TryDropItems())
+            {
+                distributedAnything = true;
+            }
+
+            // c. Reward VFX
+            if (distributedAnything)
+            {
+                receiverCharacter.RewardVFXHandler?.PlayGainVFX();
+                defeatedCharacter.RewardVFXHandler?.PlayReleaseVFX();
+            }
+
+            return distributedAnything;
         }
 
         public static bool TryDistributeReward(CharacterRewardDropProvider dropProvider, CharacterRewardWalletController walletController)

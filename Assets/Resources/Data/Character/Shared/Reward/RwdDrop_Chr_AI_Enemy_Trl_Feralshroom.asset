@@ -13,3 +13,10 @@ MonoBehaviour:
   m_Name: RwdDrop_Chr_AI_Enemy_Trl_Feralshroom
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardDropProfile
   _amount: 30
+  _itemDropEntries:
+  - _source: 0
+    _collectiblePrefab: {fileID: 8590103314768862426, guid: 9b2d63e468c8d6c4596c3ed66c19af2b, type: 3}
+    _minimumQuantity: 1
+    _maximumQuantity: 2
+    _dropChance: 0.35
+  _randomPositionRadius: 0.35

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EnemyRootController : CharacterAIRootController<EnemyProfile>
+    public class EnemyRootController : CharacterAIRootController<EnemyProfile>, ICharacterRewardDropProviderSource
     {
         // --- Data / Configs ---
         public EnemyProfile EnemyProfile => this.TypedProfile;

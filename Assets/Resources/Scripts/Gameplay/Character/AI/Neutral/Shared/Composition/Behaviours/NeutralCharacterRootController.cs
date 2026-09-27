@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class NeutralCharacterRootController : CharacterAIRootController
+    public abstract class NeutralCharacterRootController : CharacterAIRootController, ICharacterRewardDropProviderSource
     {
         // --- Data / Configs ---
         public abstract NeutralCharacterProfile NeutralCharacterProfile { get; }

@@ -13,3 +13,10 @@ MonoBehaviour:
   m_Name: RwdDrop_Chr_Ntr_Animal_Cow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterRewardDropProfile
   _amount: 10
+  _itemDropEntries:
+  - _source: 0
+    _collectiblePrefab: {fileID: 2896292567257503753, guid: 71202187b065d0642b1bc53243baa383, type: 3}
+    _minimumQuantity: 1
+    _maximumQuantity: 2
+    _dropChance: 1
+  _randomPositionRadius: 0.35

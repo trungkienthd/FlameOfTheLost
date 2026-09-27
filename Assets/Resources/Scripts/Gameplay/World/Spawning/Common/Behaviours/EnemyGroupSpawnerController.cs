@@ -4,13 +4,11 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class EnemyGroupSpawnerController :
-        CharacterAIGroupSpawnerController
+    public abstract class EnemyGroupSpawnerController : CharacterAIGroupSpawnerController
     {
         // --- References ---
         [Header("References - Enemy Default Spawn Points")]
-        [SerializeField]
-        private List<EnemyDefaultSpawnPointController> _enemyDefaultSpawnPointControllers = new();
+        [SerializeField] private List<EnemyDefaultSpawnPointController> _enemyDefaultSpawnPointControllers = new();
         protected IReadOnlyList<EnemyDefaultSpawnPointController> EnemyDefaultSpawnPointControllers => _enemyDefaultSpawnPointControllers;
 
         protected override IReadOnlyList<CharacterAIDefaultSpawnPointController> CharacterAIDefaultSpawnPointControllers => this.EnemyDefaultSpawnPointControllers;
