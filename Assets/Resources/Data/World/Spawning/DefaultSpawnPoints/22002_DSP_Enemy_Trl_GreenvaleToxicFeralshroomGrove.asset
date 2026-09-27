@@ -30,12 +30,12 @@ MonoBehaviour:
   _initialSpawnAnchorLocalPosition: {x: 0, y: 0, z: 0}
   _initialSpawnAnchorLocalEulerAngles: {x: 0, y: 0, z: 0}
   _initialSpawnAnchorLocalScale: {x: 1, y: 1, z: 1}
-  _enemySpawnEntries:
-  - _enemyVariant: {fileID: 11400000, guid: 3c93c93deff29e64ba46ea2143cb07b2, type: 2}
-    _spawnCount: 1
+  _characterAISpawnEntries:
+  - _spawnCount: 1
     _spawnOnStart: 1
     _spawnWhenPlayerRespawns: 1
     _randomSpawnOffsetRadius: 0
+    _enemyVariant: {fileID: 11400000, guid: 3c93c93deff29e64ba46ea2143cb07b2, type: 2}
     _homeAreaEntry:
       _bottomLeftPosition: {x: 29, y: 24}
       _topRightPosition: {x: 31, y: 26}

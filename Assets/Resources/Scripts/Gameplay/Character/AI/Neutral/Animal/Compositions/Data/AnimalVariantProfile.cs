@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class AnimalVariantProfile : NeutralCharacterVariantProfile<AnimalProfile>
+    [CreateAssetMenu(fileName = "Variant_Chr_AI_Ntr_Animal_New", menuName = "Data/FlameOfTheLost/Character/AI/Neutral/Animal/VariantProfile")]
+    public class AnimalVariantProfile : NeutralCharacterVariantProfile<AnimalProfile>
     {
         // --- Data / Configs ---
         [Header("Configs - Animal AI")]

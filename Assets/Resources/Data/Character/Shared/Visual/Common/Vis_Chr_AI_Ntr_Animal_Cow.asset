@@ -15,10 +15,10 @@ MonoBehaviour:
   _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _speedForOne: 10
   _speedDampTime: 0.05
-  _locomotionAnimationProfile: {fileID: 0}
+  _locomotionAnimationProfile: {fileID: 11400000, guid: 65018fb313b87ed49be1e115264145a6, type: 2}
   _attackAnimationProfile: {fileID: 11400000, guid: 96e91b24bb5929445b608c7fb8251e81, type: 2}
   _hitDeathAnimationProfile: {fileID: 11400000, guid: 74b71be6fc7c15243b9ddcd650e0d70d, type: 2}
-  _dodgeAnimationProfile: {fileID: 0}
+  _dodgeAnimationProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
   _hitCompletionFallbackDelay: 0.3
   _hitCompletionPadding: 0.03
   _hitToDeathDelay: 0.15

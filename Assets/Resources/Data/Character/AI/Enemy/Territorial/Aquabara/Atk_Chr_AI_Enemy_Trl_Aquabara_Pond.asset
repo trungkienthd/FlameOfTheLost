@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daee2ca9a9ac2454e96716b491cd9b69, type: 3}
+  m_Name: Atk_Chr_AI_Enemy_Trl_Aquabara_Pond
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyAttackConfig
+  _idealAttackRange: 9
+  _preAttackDuration: 0.55
+  _attackDecisionCooldown: 3.5
+  _attackingStateDuration: 0.8
+  _normalAttackSide: 0
