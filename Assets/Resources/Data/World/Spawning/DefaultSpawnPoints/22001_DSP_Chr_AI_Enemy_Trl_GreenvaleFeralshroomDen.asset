@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3a28473c8bfa05409ff34fb4c2f1378, type: 3}
-  m_Name: 22001_DSP_Enemy_Trl_GreenvaleFeralshroomDen
+  m_Name: 22001_DSP_Chr_AI_Enemy_Trl_GreenvaleFeralshroomDen
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyDefaultSpawnPointProfile
   _id: 22001
   _key: GREENVALE_FERALSHROOM_DEN

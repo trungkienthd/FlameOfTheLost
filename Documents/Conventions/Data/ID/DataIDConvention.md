@@ -1,7 +1,7 @@
 # Data ID Convention
 
 **Project:** FlameOfTheLost  
-**Version:** 3.10  
+**Version:** 3.11  
 **Scope:** ID attributes assigned to project-owned **ScriptableObject** assets.
 
 ---
@@ -190,6 +190,9 @@ Character Traverse Type digit for 11xxx-13xxx:
 
 22xxx   Enemy Default Spawn Point Profiles
 220xx   Territorial Enemy Default Spawn Point Profiles
+
+23xxx   Neutral Character Default Spawn Point Profiles
+230xx   Animal Default Spawn Point Profiles
 
 29xxx   Death Trigger Profiles
 

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3a28473c8bfa05409ff34fb4c2f1378, type: 3}
-  m_Name: 22003_DSP_Enemy_Trl_GreenvaleFeralshroomGrove
+  m_Name: 22002_DSP_Chr_AI_Enemy_Trl_GreenvaleToxicFeralshroomGrove
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyDefaultSpawnPointProfile
-  _id: 22003
-  _key: GREENVALE_FERALSHROOM_GROVE
-  _displayName: Greenvale Feralshroom Grove
+  _id: 22002
+  _key: GREENVALE_TOXIC_FERALSHROOM_GROVE
+  _displayName: Greenvale Toxic Feralshroom Grove
   _description: 
   _icon: {fileID: 0}
   _configureInitialTransformAtStart: 1
-  _initialPosition: {x: 45, y: 23, z: 0}
+  _initialPosition: {x: 30, y: 25, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
   _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
@@ -31,23 +31,13 @@ MonoBehaviour:
   _initialSpawnAnchorLocalEulerAngles: {x: 0, y: 0, z: 0}
   _initialSpawnAnchorLocalScale: {x: 1, y: 1, z: 1}
   _characterAISpawnEntries:
-  - _spawnCount: 2
-    _spawnOnStart: 1
-    _spawnWhenPlayerRespawns: 1
-    _randomSpawnOffsetRadius: 1
-    _enemyVariant: {fileID: 11400000, guid: 546bdeb72e47c0245ba81690b31138a7, type: 2}
-    _homeAreaEntry:
-      _bottomLeftPosition: {x: 42, y: 22}
-      _topRightPosition: {x: 46, y: 24}
-      _returnReachDistance: 0.5
-    _roamingConfigOverride: {fileID: 11400000, guid: 000c4860f7a515747ac9664d03c92793, type: 2}
   - _spawnCount: 1
     _spawnOnStart: 1
     _spawnWhenPlayerRespawns: 1
     _randomSpawnOffsetRadius: 0
     _enemyVariant: {fileID: 11400000, guid: 3c93c93deff29e64ba46ea2143cb07b2, type: 2}
     _homeAreaEntry:
-      _bottomLeftPosition: {x: 43, y: 22}
-      _topRightPosition: {x: 47, y: 24}
-      _returnReachDistance: 0.75
+      _bottomLeftPosition: {x: 29, y: 24}
+      _topRightPosition: {x: 31, y: 26}
+      _returnReachDistance: 0.5
     _roamingConfigOverride: {fileID: 11400000, guid: 2169f9fea3c023d419e2f3b7ceda6517, type: 2}

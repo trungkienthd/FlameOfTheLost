@@ -20,6 +20,9 @@
 22xxx   Enemy Default Spawn Point Profiles
 220xx   Territorial Enemy Default Spawn Point Profiles
 
+23xxx   Neutral Character Default Spawn Point Profiles
+230xx   Animal Default Spawn Point Profiles
+
 29xxx   DeathTriggerProfile
 ```
 
@@ -46,7 +49,20 @@
 228xx   Reserved
 229xx   Reserved
 
-23xxx   Reserved
+23xxx   Neutral Character Default Spawn Point Profiles
+
+230xx   Animal Default Spawn Point Profiles
+
+231xx   Reserved
+232xx   Reserved
+233xx   Reserved
+234xx   Reserved
+235xx   Reserved
+236xx   Reserved
+237xx   Reserved
+238xx   Reserved
+239xx   Reserved
+
 24xxx   Reserved
 25xxx   Reserved
 26xxx   Reserved
@@ -103,6 +119,25 @@ The third digit further classifies Enemy Default Spawn Point types.
 
 ---
 
+### Neutral Character Default Spawn Points
+
+The ID identifies a **Neutral Character Default Spawn Point definition**.
+
+Runtime Neutral Character Default Spawn Point behaviours do not own independent IDs.
+
+A Neutral Character Default Spawn Point references its corresponding ScriptableObject profile when an ID is required.
+
+Neutral Character Default Spawn Points use the `23xxx` range.
+
+The third digit further classifies Neutral Character Default Spawn Point types.
+
+```text
+230xx   Animal Default Spawn Points
+231xx-239xx   Reserved for additional Neutral Character Default Spawn Point categories
+```
+
+---
+
 ### Death Triggers
 
 The ID identifies a **Death Trigger definition**.
@@ -125,6 +160,8 @@ Death Triggers use the `29xxx` range.
 21002   Tutorial Area 3 Player Checkpoint
 
 22001   Greenvale Feralshroom Den Territorial Enemy Default Spawn Point
+
+23001   Animal Default Spawn Point
 
 29001   Tutorial Pitfall
 29002   Deep Water

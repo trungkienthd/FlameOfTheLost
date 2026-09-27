@@ -70585,9 +70585,9 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1760074558}
+    m_TransformParent: {fileID: 1334256573}
     m_Modifications:
-    - target: {fileID: 932458012224459112, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+    - target: {fileID: 0}
       propertyPath: _profile
       value: 
       objectReference: {fileID: 11400000, guid: 3e6b93677bc4e76449b8e0243e4ef0cb, type: 2}
@@ -70609,15 +70609,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -70633,7 +70633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_Name
-      value: GO_DSP_Generic_Enemy_Trl_GreenvaleFeralshroomGrove
+      value: GO_DSP_Chr_AI_Enemy_Trl_GreenvaleFeralshroomGrove
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -70645,17 +70645,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
   m_PrefabInstance: {fileID: 448428042}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &448428044 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 932458012224459112, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
-  m_PrefabInstance: {fileID: 448428042}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 026a14b5159fe444898325b49bfcee33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyDefaultSpawnPointController
 --- !u!1 &459125926
 GameObject:
   m_ObjectHideFlags: 0
@@ -74172,9 +74161,9 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1760074558}
+    m_TransformParent: {fileID: 1334256573}
     m_Modifications:
-    - target: {fileID: 932458012224459112, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+    - target: {fileID: 0}
       propertyPath: _profile
       value: 
       objectReference: {fileID: 11400000, guid: 55ab940873c052844b009506e42728dc, type: 2}
@@ -74208,15 +74197,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -74232,7 +74221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_Name
-      value: GO_DSP_Generic_Enemy_Trl_GreenvaleAquabaraPond
+      value: GO_DSP_Chr_AI_Enemy_Trl_GreenvaleAquabaraPond
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -74244,17 +74233,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
   m_PrefabInstance: {fileID: 659931185}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &659931187 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 932458012224459112, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
-  m_PrefabInstance: {fileID: 659931185}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 026a14b5159fe444898325b49bfcee33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyDefaultSpawnPointController
 --- !u!1 &674296348
 GameObject:
   m_ObjectHideFlags: 0
@@ -78259,6 +78237,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1315048635602585759, guid: 174e341554339f247a3d2fa6cfaad87d, type: 3}
   m_PrefabInstance: {fileID: 879901981}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &882014408
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 882014409}
+  m_Layer: 0
+  m_Name: NeutralCharacterGroupSpawners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &882014409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882014408}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1454157901}
+  m_Father: {fileID: 1321106611}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &886402126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -148880,6 +148890,39 @@ Material:
     - _WidthHeightRadius: {r: 24, g: 24, b: 7, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+--- !u!1 &1321106610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1321106611}
+  m_Layer: 0
+  m_Name: CharacterAIGroupSpawners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1321106611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321106610}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1503040719}
+  - {fileID: 882014409}
+  m_Father: {fileID: 1681114750}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1326150325
 GameObject:
   m_ObjectHideFlags: 0
@@ -149129,7 +149172,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1760074558}
+  - {fileID: 957075722}
+  - {fileID: 1727164402}
+  - {fileID: 448428043}
+  - {fileID: 659931186}
   m_Father: {fileID: 1503040719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1334256574
@@ -149146,15 +149192,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TerritorialEnemyGroupSpawnerController
   _enableDebugLogs: 1
   _playerSpawnerController: {fileID: 331205190}
-  _enemyGroupRoot: {fileID: 625036373}
+  _characterAIGroupRoot: {fileID: 1321106611}
+  _isSpawnedCharactersOnStart: 1
+  _isRespawnedCharactersWhenPlayerSpawnsOrRespawns: 1
+  _spawnedCharacters: []
   _enemyDefaultSpawnPointControllers:
-  - {fileID: 6603920198943105486}
-  - {fileID: 1727164403}
-  - {fileID: 448428044}
-  - {fileID: 659931187}
-  _isSpawnedEnemiesOnStart: 1
-  _isRespawnedEnemiesWhenPlayerSpawnsOrRespawns: 1
-  _spawnedEnemies: []
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &1335242390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149922,6 +149968,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66aeb3dfabba684ba20a31d57031185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EquippedLoadoutSubIconSlotController
+--- !u!1 &1454157900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1454157901}
+  - component: {fileID: 1454157902}
+  m_Layer: 0
+  m_Name: AnimalGroupSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1454157901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454157900}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1472249408}
+  m_Father: {fileID: 882014409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1454157902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454157900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6fdc334c03017d4c96cc641f7edb369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalGroupSpawnerController
+  _enableDebugLogs: 0
+  _playerSpawnerController: {fileID: 331205190}
+  _characterAIGroupRoot: {fileID: 1321106611}
+  _isSpawnedCharactersOnStart: 1
+  _isRespawnedCharactersWhenPlayerSpawnsOrRespawns: 1
+  _spawnedCharacters: []
+  _neutralCharacterDefaultSpawnPointControllers:
+  - {fileID: 1472249410}
 --- !u!1 &1459995821
 GameObject:
   m_ObjectHideFlags: 0
@@ -150169,6 +150268,113 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 38, y: 1}
   m_EdgeRadius: 0
+--- !u!1001 &1472249407
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1454157901}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: _profile
+      value: 
+      objectReference: {fileID: 11400000, guid: 835dd2a95aac14444bb085aa9d775ef2, type: 2}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_Name
+      value: GO_DSP_Chr_AI_Ntr_Animal_GreenvaleCowPasture
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1472249410}
+  m_SourcePrefab: {fileID: 100100000, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+--- !u!4 &1472249408 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+  m_PrefabInstance: {fileID: 1472249407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1472249409 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+  m_PrefabInstance: {fileID: 1472249407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1472249410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472249409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe46f2feb3f5d684b912183687ba44ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalDefaultSpawnPointController
+  _enableDebugLogs: 0
+  _profile: {fileID: 11400000, guid: 835dd2a95aac14444bb085aa9d775ef2, type: 2}
+  _visualTransform: {fileID: 1472249411}
+  _visualSpriteRenderer: {fileID: 1472249412}
+  _spawnAnchor: {fileID: 1472249413}
+--- !u!4 &1472249411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4638977974553220024, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+  m_PrefabInstance: {fileID: 1472249407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1472249412 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5165766568723357902, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+  m_PrefabInstance: {fileID: 1472249407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1472249413 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7340919082135302459, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+  m_PrefabInstance: {fileID: 1472249407}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1472868646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150690,13 +150896,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503040718}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1334256573}
-  m_Father: {fileID: 1681114750}
+  m_Father: {fileID: 1321106611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1503506520
 PrefabInstance:
@@ -154801,7 +155007,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 331205189}
-  - {fileID: 1503040719}
+  - {fileID: 1321106611}
   - {fileID: 1287938411}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -155697,9 +155903,9 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1760074558}
+    m_TransformParent: {fileID: 1334256573}
     m_Modifications:
-    - target: {fileID: 932458012224459112, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+    - target: {fileID: 0}
       propertyPath: _profile
       value: 
       objectReference: {fileID: 11400000, guid: 158ba656edd948443aedbd179184779b, type: 2}
@@ -155721,15 +155927,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -155745,7 +155951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_Name
-      value: GO_DSP_Generic_Enemy_Trl_GreenvaleToxicFeralshroomGrove
+      value: GO_DSP_Chr_AI_Enemy_Trl_GreenvaleToxicFeralshroomGrove
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -155757,17 +155963,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
   m_PrefabInstance: {fileID: 1727164401}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1727164403 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 932458012224459112, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
-  m_PrefabInstance: {fileID: 1727164401}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 026a14b5159fe444898325b49bfcee33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyDefaultSpawnPointController
 --- !u!1001 &1733653263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -156456,41 +156651,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 890135632957262070, guid: d71640d54a13ea94eb7f88ceaf5392f7, type: 3}
   m_PrefabInstance: {fileID: 1759862734}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1760074557
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1760074558}
-  m_Layer: 0
-  m_Name: EnemyDefaultSpawnPoints
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1760074558
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760074557}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 957075722}
-  - {fileID: 1727164402}
-  - {fileID: 448428043}
-  - {fileID: 659931186}
-  m_Father: {fileID: 1334256573}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1761196477
 GameObject:
   m_ObjectHideFlags: 0
@@ -164791,9 +164951,9 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1760074558}
+    m_TransformParent: {fileID: 1334256573}
     m_Modifications:
-    - target: {fileID: 932458012224459112, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+    - target: {fileID: 0}
       propertyPath: _profile
       value: 
       objectReference: {fileID: 11400000, guid: 9510e0783dbd7f44eaaee09f82e25c64, type: 2}
@@ -164827,15 +164987,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -164851,24 +165011,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
       propertyPath: m_Name
-      value: GO_DSP_Generic_Enemy_Trl_GreenvaleFeralshroomDen
+      value: GO_DSP_Chr_AI_Enemy_Trl_GreenvaleFeralshroomDen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
---- !u!114 &6603920198943105486 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 932458012224459112, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
-  m_PrefabInstance: {fileID: 6603920198943105485}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 026a14b5159fe444898325b49bfcee33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyDefaultSpawnPointController
 --- !u!1001 &7456929387342691977
 PrefabInstance:
   m_ObjectHideFlags: 0

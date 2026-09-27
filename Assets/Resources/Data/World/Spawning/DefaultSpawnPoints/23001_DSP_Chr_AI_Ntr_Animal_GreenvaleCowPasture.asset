@@ -9,23 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3a28473c8bfa05409ff34fb4c2f1378, type: 3}
-  m_Name: 22004_DSP_Enemy_Trl_GreenvaleAquabaraPond
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyDefaultSpawnPointProfile
-  _id: 22004
-  _key: GREENVALE_AQUABARA_POND
-  _displayName: Greenvale Aquabara Pond
+  m_Script: {fileID: 11500000, guid: c5de0aea71522a74e8f815ad6bf55951, type: 3}
+  m_Name: 23001_DSP_Chr_AI_Ntr_Animal_GreenvaleCowPasture
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalDefaultSpawnPointProfile
+  _id: 23001
+  _key: 
+  _displayName: 
   _description: 
   _icon: {fileID: 0}
   _configureInitialTransformAtStart: 1
-  _initialPosition: {x: 35, y: 9, z: 0}
+  _initialPosition: {x: 22.5, y: 16, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
   _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
   _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
   _initialVisualLocalScale: {x: 1, y: 1, z: 1}
   _configureIconAtStart: 0
-  _defaultFacing: 2
+  _defaultFacing: 1
   _configureSpawnAnchorTransformAtStart: 1
   _initialSpawnAnchorLocalPosition: {x: 0, y: 0, z: 0}
   _initialSpawnAnchorLocalEulerAngles: {x: 0, y: 0, z: 0}
@@ -35,9 +35,10 @@ MonoBehaviour:
     _spawnOnStart: 1
     _spawnWhenPlayerRespawns: 1
     _randomSpawnOffsetRadius: 0
-    _enemyVariant: {fileID: 11400000, guid: 0141723053add4f4696bbb75f53e4136, type: 2}
+    _neutralCharacterVariant: {fileID: 11400000, guid: 90b70306e40fd6d40a9c05649296258e, type: 2}
     _homeAreaEntry:
-      _bottomLeftPosition: {x: 33, y: 7}
-      _topRightPosition: {x: 37, y: 11}
+      _bottomLeftPosition: {x: 21, y: 15.5}
+      _topRightPosition: {x: 24, y: 16.5}
       _returnReachDistance: 0.5
-    _roamingConfigOverride: {fileID: 11400000, guid: b8bb817a28f3d11469047bc4c0af34bb, type: 2}
+    _roamingConfigOverride: {fileID: 11400000, guid: 99c4f33473a143a4d92bdca793b65fd9, type: 2}
+    _fleeConfigOverride: {fileID: 11400000, guid: 4959549b9ca00e54db960aca4024ad0e, type: 2}
