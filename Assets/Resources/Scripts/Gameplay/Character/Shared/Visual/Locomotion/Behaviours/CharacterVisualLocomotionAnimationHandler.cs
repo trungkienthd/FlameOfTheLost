@@ -16,9 +16,9 @@ namespace FlameOfTheLost
         // --- References ---
         [Header("Optional Mode Provider")]
         [SerializeField] private MonoBehaviour _locomotionModeProviderBehaviour;
-        private MonoBehaviour LocomotionModeProviderBehavior => _locomotionModeProviderBehaviour;
+        private ICharacterLocomotionVisualModeProvider ConfiguredLocomotionModeProvider => _locomotionModeProviderBehaviour as ICharacterLocomotionVisualModeProvider;
         private ICharacterLocomotionVisualModeProvider _boundProvider;
-        private ICharacterLocomotionVisualModeProvider LocomotionModeProvider => this.LocomotionModeProviderBehavior as ICharacterLocomotionVisualModeProvider;
+        private ICharacterLocomotionVisualModeProvider LocomotionModeProvider => _boundProvider;
 
         // --- Runtime ---
         [Header("Manual Runtime State")]
@@ -62,6 +62,14 @@ namespace FlameOfTheLost
             CharacterCarryItemType carryItemType = this.CurrentCarryItemType;
             LightSourceType lightSourceType = this.CurrentLightSourceType;
 
+            this.LogDebug
+            (
+                $"Applying locomotion overrides. " +
+                $"Mode: {locomotionMode}, " +
+                $"Carry: {carryItemType}, " +
+                $"Light: {lightSourceType}."
+            );
+
             AnimationClip realIdleDown  = this.ActiveProfile.GetIdleClip(CharacterFacingStatus.Down, locomotionMode, carryItemType, lightSourceType);
             AnimationClip realIdleSide  = this.ActiveProfile.GetIdleClip(CharacterFacingStatus.Side, locomotionMode, carryItemType, lightSourceType);
             AnimationClip realIdleUp    = this.ActiveProfile.GetIdleClip(CharacterFacingStatus.Up,   locomotionMode, carryItemType, lightSourceType);
@@ -92,13 +100,17 @@ namespace FlameOfTheLost
         {
             this.UnbindProvider();
 
-            _boundProvider = this.LocomotionModeProvider;
-            if (_boundProvider != null)
+            _boundProvider = this.ConfiguredLocomotionModeProvider;
+            if (_boundProvider == null)
             {
-                _boundProvider.OnLocomotionVisualModeChanged += this.OnProviderModeChanged;
+                this.LogDebug("No locomotion visual mode provider resolved.");
+                return;
             }
-        }
 
+            _boundProvider.OnLocomotionVisualModeChanged += this.OnProviderModeChanged;
+
+            this.LogDebug($"Bound locomotion visual mode provider: {this.GetObjectName(this._locomotionModeProviderBehaviour)}.");
+        }
         private void UnbindProvider()
         {
             if (_boundProvider == null) return;
@@ -109,12 +121,20 @@ namespace FlameOfTheLost
 
         private void OnProviderModeChanged()
         {
+            CharacterLocomotionMode resolvedMode = this.LocomotionModeProvider != null
+                ? this.LocomotionModeProvider.GetLocomotionMode()
+                : this.ManualLocomotionMode;
+
+            this.LogDebug($"Provider locomotion mode changed. Resolved Mode: {resolvedMode}.");
+
             this.RequestRebuild();
         }
 
         private void RequestRebuild()
         {
             if (!this.EnsureBound()) return;
+
+            this.LogDebug("Requesting animation override rebuild.");
 
             this.VisualController.RebuildBaseAnimationOverride();
         }

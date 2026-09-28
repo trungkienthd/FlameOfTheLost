@@ -8,12 +8,17 @@ namespace FlameOfTheLost
 
             return selfFaction switch
             {
+                CharacterFaction.Ally =>
+                    targetFaction == CharacterFaction.Enemy,
+
                 CharacterFaction.Enemy =>
                     targetFaction == CharacterFaction.Player ||
                     targetFaction == CharacterFaction.Ally,
 
-                CharacterFaction.Ally =>
-                    targetFaction == CharacterFaction.Enemy,
+                CharacterFaction.Neutral =>
+                    targetFaction == CharacterFaction.Player ||
+                    targetFaction == CharacterFaction.Enemy ||
+                    targetFaction == CharacterFaction.Ally,
 
                 CharacterFaction.Player =>
                     targetFaction == CharacterFaction.Enemy,

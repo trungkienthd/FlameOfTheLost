@@ -51,7 +51,6 @@ namespace FlameOfTheLost
         // --- Runtime ---
         [Header("Runtime")]
         [SerializeField] private CharacterLocomotionMode _currentResolvedMode = CharacterLocomotionMode.Default;
-
         private CharacterLocomotionMode CurrentResolvedMode
         {
             get => _currentResolvedMode;
@@ -66,7 +65,6 @@ namespace FlameOfTheLost
         {
             this.ResolveCurrentModeAndNotifyIfChanged(forceNotify: true);
         }
-
         private void Update()
         {
             this.ResolveCurrentModeAndNotifyIfChanged(forceNotify: false);
@@ -102,6 +100,8 @@ namespace FlameOfTheLost
         private void ResolveCurrentModeAndNotifyIfChanged(bool forceNotify)
         {
             CharacterLocomotionMode nextMode = this.ResolveLocomotionMode();
+
+            this.LogDebug($"Mode: {nextMode.ToString()} - {this.AnimalBrainController.CurrentState.ToString()}");
 
             if (!forceNotify && this.CurrentResolvedMode == nextMode) return;
 

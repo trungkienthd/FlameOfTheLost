@@ -12,19 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146cb9f9e7dd8fe499519ed9a67fa187, type: 3}
   m_Name: Roam_Chr_AI_Ntr_Animal_Cow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalRoamingConfig
-  _minIdleDuration: 2.5
-  _maxIdleDuration: 5
-  _minWalkDuration: 2
-  _maxWalkDuration: 4
-  _minGrazeDuration: 3
-  _maxGrazeDuration: 6
-  _lieDownDuration: 1
-  _minRestDuration: 3
-  _maxRestDuration: 6
-  _minSleepDuration: 5
-  _maxSleepDuration: 10
-  _standUpDuration: 1
-  _idleWeight: 3
-  _wanderingWeight: 3
-  _grazeWeight: 5
-  _lieDownWeight: 2
+  _minIdleDuration: 4
+  _maxIdleDuration: 7
+  _minWalkDuration: 5
+  _maxWalkDuration: 8
+  _minGrazeDuration: 5
+  _maxGrazeDuration: 8
+  _lieDownDuration: 2
+  _restChance: 0.7
+  _minRestDuration: 5
+  _maxRestDuration: 8
+  _minSleepDuration: 9
+  _maxSleepDuration: 14
+  _standUpDuration: 2

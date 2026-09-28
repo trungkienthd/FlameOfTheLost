@@ -690,8 +690,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyTargetDetectionTriggerController
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
-  _rangeType: 0
+  _targetDetectionHandler: {fileID: 0}
   _triggerCollider: {fileID: 5700758873067085601}
+  _rangeType: 0
 --- !u!1 &1432488505513039283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,7 +1570,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7224299074674246769}
@@ -1990,8 +1991,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyTargetDetectionTriggerController
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
-  _rangeType: 1
+  _targetDetectionHandler: {fileID: 0}
   _triggerCollider: {fileID: 4367010673051191990}
+  _rangeType: 1
 --- !u!1 &4023154548217669915
 GameObject:
   m_ObjectHideFlags: 0

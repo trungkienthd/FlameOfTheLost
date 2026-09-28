@@ -7,18 +7,21 @@ namespace FlameOfTheLost
         ICharacterRefreshable,
         ICharacterDeathDisableable
     {
-        // --- State ---
+        // --- Runtime ---
         //  1. Faction
         private CharacterFaction Faction => this.CharacterRootController.Faction;
 
         //  2. Detected Targets
         private readonly HashSet<CharacterRootController> _alertTargets = new();
         private readonly HashSet<CharacterRootController> _attackRangeTargets = new();
-        public bool HasAlertTarget => this.CurrentAlertTarget != null;
-        public bool HasAttackRangeTarget => this.CurrentAttackRangeTarget != null;
+        private readonly HashSet<CharacterRootController> _fleeRangeTargets = new();
+        public bool HasAlertTarget          => this.CurrentAlertTarget != null;
+        public bool HasAttackRangeTarget    => this.CurrentAttackRangeTarget != null;
+        public bool HasFleeRangeTarget      => this.CurrentFleeRangeTarget != null;
 
-        public CharacterRootController CurrentAlertTarget => this.ResolveNearestValidTarget(_alertTargets);
+        public CharacterRootController CurrentAlertTarget       => this.ResolveNearestValidTarget(_alertTargets);
         public CharacterRootController CurrentAttackRangeTarget => this.ResolveNearestValidTarget(_attackRangeTargets);
+        public CharacterRootController CurrentFleeRangeTarget   => this.ResolveNearestValidTarget(_fleeRangeTargets);
 
         //  3. References - Current Target
         public CharacterRootController CurrentTarget
@@ -26,7 +29,10 @@ namespace FlameOfTheLost
             get
             {
                 if (this.IsDeathDisabled) return null;
-                if (this.CurrentAttackRangeTarget != null) return this.CurrentAttackRangeTarget;
+
+                if (this.CurrentAttackRangeTarget   != null) return this.CurrentAttackRangeTarget;
+                if (this.CurrentFleeRangeTarget     != null) return this.CurrentFleeRangeTarget;
+
                 return this.CurrentAlertTarget;
             }
         }
@@ -44,6 +50,23 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs ---
+        //  0.. Interface implementation
+        //      0.1. ICharacterRefreshable implementation
+        public int RefreshmentConfigurePriority => 85;
+        public void RefreshCharacter(CharacterRefreshContext context)
+        {
+            this.IsDeathDisabled = false;
+            this.ClearAllTargets();
+        }
+
+        //      0.2. ICharacterDeathDisableable implementation
+        public int DeathDisablePriority => 5;
+        public void DisableAfterCharacterDeath(CharacterDeathContext context)
+        {
+            this.IsDeathDisabled = true;
+            this.ClearAllTargets();
+        }
+
         //  1. Target Registration
         public void RegisterTarget(CharacterRootController target, CharacterAITargetDetectionRangeType rangeType)
         {
@@ -58,6 +81,10 @@ namespace FlameOfTheLost
 
                 case CharacterAITargetDetectionRangeType.AttackRange:
                     _attackRangeTargets.Add(target);
+                    break;
+
+                case CharacterAITargetDetectionRangeType.FleeRange:
+                    _fleeRangeTargets.Add(target);
                     break;
             }
         }
@@ -74,28 +101,17 @@ namespace FlameOfTheLost
                 case CharacterAITargetDetectionRangeType.AttackRange:
                     _attackRangeTargets.Remove(target);
                     break;
+
+                case CharacterAITargetDetectionRangeType.FleeRange:
+                    _fleeRangeTargets.Remove(target);
+                    break;
             }
         }
         public void ClearAllTargets()
         {
             _alertTargets.Clear();
             _attackRangeTargets.Clear();
-        }
-
-        //  2. ICharacterRefreshable Implementation
-        public int RefreshmentConfigurePriority => 85;
-        public void RefreshCharacter(CharacterRefreshContext context)
-        {
-            this.IsDeathDisabled = false;
-            this.ClearAllTargets();
-        }
-
-        //  3. ICharacterDeathDisableable Implementation
-        public int DeathDisablePriority => 5;
-        public void DisableAfterCharacterDeath(CharacterDeathContext context)
-        {
-            this.IsDeathDisabled = true;
-            this.ClearAllTargets();
+            _fleeRangeTargets.Clear();
         }
 
         // --- Helpers ---
