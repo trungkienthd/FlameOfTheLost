@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcbea86a660b86948919f07eedb1be9c, type: 3}
-  m_Name: Vis_Chr_AI_Enemy_Trl_Aquabara
+  m_Name: Vis_Variant_Chr_AI_Enemy_Trl_AquabaraOcean
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualConfig
   _normalColor: {r: 1, g: 1, b: 1, a: 1}
   _locomotionAnimationProfile: {fileID: 11400000, guid: 10845e79ef7c34c4fbaa2fad4909a87e, type: 2}

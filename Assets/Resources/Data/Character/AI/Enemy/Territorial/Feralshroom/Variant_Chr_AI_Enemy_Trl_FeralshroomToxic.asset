@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181afeccca07db8438a0374f962778d1, type: 3}
   m_Name: Variant_Chr_AI_Enemy_Trl_FeralshroomToxic
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyVariantProfile
+  _visualConfig: {fileID: 11400000, guid: 5293e5def0db92d4d90b6718b97d91bf, type: 2}
   _initialInventoryEntries:
   - _item: {fileID: 11400000, guid: 363524329bee2e5448ce96f08412d8f8, type: 2}
     _quantity: 1

@@ -152,6 +152,7 @@ namespace FlameOfTheLost
             if (spawnPoint == null) return;
             if (spawnEntry == null) return;
 
+            this.ConfigureSpawnedCharacterVisual(spawnedCharacter, spawnEntry);
             this.ConfigureSpawnedCharacterInventory(spawnedCharacter, spawnEntry);
         }
         protected virtual void NotifyCharacterAISpawned(CharacterAIDefaultSpawnPointController spawnPoint, CharacterAISpawnEntry spawnEntry, CharacterRootController character)
@@ -278,6 +279,37 @@ namespace FlameOfTheLost
         }
 
         //  3. Configuration
+        private void ConfigureSpawnedCharacterVisual(GameObject spawnedCharacter, CharacterAISpawnEntry spawnEntry)
+        {
+            if (spawnedCharacter == null) return;
+            if (spawnEntry == null) return;
+
+            CharacterAIVariantProfile variant = spawnEntry.CharacterAIVariant;
+            if (variant == null) return;
+
+            CharacterVisualConfig resolvedVisualConfig = variant.ResolvedVisualConfig;
+            if (resolvedVisualConfig == null)
+            {
+                Debug.LogWarning($"[{spawnedCharacter.name}.{nameof(CharacterAIGroupSpawnerController)}] No {nameof(CharacterVisualConfig)} could be resolved from the Character AI Variant or Character Profile.", spawnedCharacter);
+                return;
+            }
+
+            CharacterRootController rootController = spawnedCharacter.GetComponentInChildren<CharacterRootController>(true);
+            if (rootController == null)
+            {
+                Debug.LogWarning($"[{spawnedCharacter.name}.{nameof(CharacterAIGroupSpawnerController)}] Spawned Character AI has no {nameof(CharacterRootController)}.", spawnedCharacter);
+                return;
+            }
+
+            CharacterVisualController visualController = rootController.VisualController;
+            if (visualController == null)
+            {
+                Debug.LogWarning($"[{spawnedCharacter.name}.{nameof(CharacterAIGroupSpawnerController)}] Spawned Character AI has no {nameof(CharacterVisualController)}.", spawnedCharacter);
+                return;
+            }
+
+            visualController.SetConfig(resolvedVisualConfig);
+        }
         private void ConfigureSpawnedCharacterInventory(GameObject spawnedCharacter, CharacterAISpawnEntry spawnEntry)
         {
             CharacterRootController rootController = spawnedCharacter.GetComponentInChildren<CharacterRootController>(true);

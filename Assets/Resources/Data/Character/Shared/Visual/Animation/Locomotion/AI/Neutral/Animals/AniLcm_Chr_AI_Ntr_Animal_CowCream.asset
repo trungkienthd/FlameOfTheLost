@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 758aa5499b30185419b695be631fb731, type: 3}
-  m_Name: AniLcm_Chr_AI_Ntr_Animal_Cow
+  m_Name: AniLcm_Chr_AI_Ntr_Animal_CowCream
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterLocomotionAnimationProfile
   _defaultLocomotion: {fileID: 11400000, guid: 0f72dd88469d7654a8554f8fcf337171, type: 2}
   _locomotionVariants:

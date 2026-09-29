@@ -17,6 +17,11 @@ namespace FlameOfTheLost
             _config = config;
         }
 
+        public void SetConfig(TConfig config)
+        {
+            _config = config;
+        }
+
         // --- FOTLMonoBehaviour Overrides ---
         protected override void ValidateInternalReferences()
         {

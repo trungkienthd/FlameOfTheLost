@@ -10,17 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcbea86a660b86948919f07eedb1be9c, type: 3}
-  m_Name: Vis_Chr_AI_Ntr_Animal_Cow
+  m_Name: Vis_Variant_Chr_AI_Enemy_Trl_AquabaraPond
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualConfig
   _normalColor: {r: 1, g: 1, b: 1, a: 1}
-  _speedForOne: 10
-  _speedDampTime: 0.05
-  _locomotionAnimationProfile: {fileID: 11400000, guid: 65018fb313b87ed49be1e115264145a6, type: 2}
-  _attackAnimationProfile: {fileID: 11400000, guid: 96e91b24bb5929445b608c7fb8251e81, type: 2}
-  _hitDeathAnimationProfile: {fileID: 11400000, guid: 74b71be6fc7c15243b9ddcd650e0d70d, type: 2}
+  _locomotionAnimationProfile: {fileID: 11400000, guid: 10845e79ef7c34c4fbaa2fad4909a87e, type: 2}
+  _attackAnimationProfile: {fileID: 11400000, guid: ba3f7421c7aafe54dbb34871aff7b93a, type: 2}
+  _hitDeathAnimationProfile: {fileID: 11400000, guid: 31a385ec50803814e884b94461a7c8fb, type: 2}
   _dodgeAnimationProfile: {fileID: 11400000, guid: d3c9def74de29114caf6a136191d92ca, type: 2}
-  _hitCompletionFallbackDelay: 0.3
-  _hitCompletionPadding: 0.03
-  _hitToDeathDelay: 0.15
-  _deathCompletionFallbackDelay: 1
-  _deathCompletionPadding: 0.03

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181afeccca07db8438a0374f962778d1, type: 3}
   m_Name: Variant_Chr_Enemy_Trl_Aquabara_Ocean
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.TerritorialEnemyVariantProfile
+  _visualConfig: {fileID: 11400000, guid: 089526d93c990c54598f3832fbeec678, type: 2}
   _initialInventoryEntries:
   - _item: {fileID: 11400000, guid: b22e53e2ad3aa3a458902b84802a1081, type: 2}
     _quantity: 1
