@@ -13,8 +13,6 @@ namespace FlameOfTheLost
         protected IReadOnlyList<NeutralCharacterDefaultSpawnPointController> NeutralCharacterDefaultSpawnPointControllers => _neutralCharacterDefaultSpawnPointControllers;
         protected override IReadOnlyList<CharacterAIDefaultSpawnPointController> CharacterAIDefaultSpawnPointControllers => this.NeutralCharacterDefaultSpawnPointControllers;
 
-        protected override string CharacterAIGroupRootName => "NeutralCharacterGroup";
-
         // --- Events ---
         public event Action<NeutralCharacterSpawnEntry, CharacterRootController> NeutralCharacterSpawned;
 

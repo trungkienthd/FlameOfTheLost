@@ -13,8 +13,6 @@ namespace FlameOfTheLost
 
         protected override IReadOnlyList<CharacterAIDefaultSpawnPointController> CharacterAIDefaultSpawnPointControllers => this.EnemyDefaultSpawnPointControllers;
 
-        protected override string CharacterAIGroupRootName => "EnemyGroup";
-
         // --- Events ---
         public event Action<EnemySpawnEntry, CharacterRootController> EnemySpawned;
 

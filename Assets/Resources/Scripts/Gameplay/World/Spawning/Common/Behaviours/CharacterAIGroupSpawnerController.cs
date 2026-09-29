@@ -19,7 +19,6 @@ namespace FlameOfTheLost
 
         //  3. Character AI Default Spawn Points
         protected abstract IReadOnlyList<CharacterAIDefaultSpawnPointController> CharacterAIDefaultSpawnPointControllers { get; }
-        protected abstract string CharacterAIGroupRootName { get; }
 
         // --- Configs ---
         [Header("Settings")]
@@ -166,6 +165,12 @@ namespace FlameOfTheLost
         //  1. General Spawning
         private void SpawnCharacters(Predicate<CharacterAISpawnEntry> predicate)
         {
+            if (this.CharacterAIGroupRoot == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterAIGroupSpawnerController)}] Cannot spawn Character AI because no Character AI group root is assigned.", this);
+                return;
+            }
+
             if (this.CharacterAIDefaultSpawnPointControllers == null) return;
 
             foreach (CharacterAIDefaultSpawnPointController spawnPoint in this.CharacterAIDefaultSpawnPointControllers)
@@ -205,13 +210,16 @@ namespace FlameOfTheLost
 
             for (int i = 0; i < remainingSpawnCount; i++)
             {
-                this.SpawnSingleCharacter(spawnPoint, spawnEntry);
+                int spawnedCharacterIndex = currentSpawnedCount + i + 1;
+
+                this.SpawnSingleCharacter(spawnPoint, spawnEntry, spawnedCharacterIndex);
             }
         }
-        private GameObject SpawnSingleCharacter(CharacterAIDefaultSpawnPointController spawnPoint, CharacterAISpawnEntry spawnEntry)
+        private GameObject SpawnSingleCharacter(CharacterAIDefaultSpawnPointController spawnPoint, CharacterAISpawnEntry spawnEntry, int spawnedCharacterIndex)
         {
             if (spawnPoint == null) return null;
             if (spawnEntry == null) return null;
+            if (this.CharacterAIGroupRoot == null) return null;
 
             CharacterAIVariantProfile variant = spawnEntry.CharacterAIVariant;
 
@@ -222,6 +230,8 @@ namespace FlameOfTheLost
             GameObject spawnedCharacter = UnityEngine.Object.Instantiate(variant.CharacterProfile.Prefab, this.CharacterAIGroupRoot);
 
             if (spawnedCharacter == null) return null;
+
+            spawnedCharacter.name = this.GetSpawnedCharacterGameObjectName(variant.CharacterProfile.Prefab, spawnedCharacterIndex);
 
             this.RegisterSpawnedCharacter(spawnEntry, spawnedCharacter);
 
@@ -245,6 +255,26 @@ namespace FlameOfTheLost
             this.NotifySpawnedCharacter(spawnPoint, spawnEntry, spawnedCharacter);
 
             return spawnedCharacter;
+        }
+        private string GetSpawnedCharacterGameObjectName(GameObject characterPrefab, int spawnedCharacterIndex)
+        {
+            if (characterPrefab == null) return $"GO_Chr_AI_{spawnedCharacterIndex:D2}";
+
+            string characterName = characterPrefab.name;
+
+            const string prefabPrefix = "Prefab_";
+            const string gameObjectPrefix = "GO_";
+
+            if (characterName.StartsWith(prefabPrefix))
+            {
+                characterName = characterName.Substring(prefabPrefix.Length);
+            }
+            else if (characterName.StartsWith(gameObjectPrefix))
+            {
+                characterName = characterName.Substring(gameObjectPrefix.Length);
+            }
+
+            return $"{gameObjectPrefix}{characterName}_{spawnedCharacterIndex:D2}";
         }
 
         //  3. Configuration
@@ -387,14 +417,6 @@ namespace FlameOfTheLost
                 if (this.transform.parent           != null) _playerSpawnerController = this.transform.parent.GetComponentInChildren<PlayerSpawnerController>();
                 if (this.PlayerSpawnerController    == null) _playerSpawnerController = UnityEngine.Object.FindFirstObjectByType<PlayerSpawnerController>();
             }
-
-            if (this.CharacterAIGroupRoot == null)
-            {
-                GameObject groupRoot = GameObject.Find(this.CharacterAIGroupRootName);
-                _characterAIGroupRoot = groupRoot != null
-                    ? groupRoot.transform
-                    : this.transform;
-            }
         }
         protected override void ValidateExternalReferences()
         {
@@ -407,7 +429,7 @@ namespace FlameOfTheLost
 
             if (this.CharacterAIGroupRoot == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(CharacterAIGroupSpawnerController)}] No Character AI group root assigned.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterAIGroupSpawnerController)}] No Character AI group root assigned.", this);
             }
         }
         protected override void BindExternalReferences()
