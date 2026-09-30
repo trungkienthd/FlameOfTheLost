@@ -1,0 +1,1337 @@
+fileFormatVersion: 2
+guid: 2aa6def07fdf92d438ec0352f6426f77
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295726
+  packageName: Cute Fantasy RPG - 16x16 top down pixel art asset pack
+  packageVersion: 1.0
+  assetPath: Assets/Kenmi/Cute Fantasy RPG - 16x16 top down pixel art asset pack/Sprites/Animals/Sheep/Sheep_07.png
+  uploadId: 694123
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_0_SheepPurple_Idle_Default_Side_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91d507b81c1e78a408d271c3fc9907c1
+      internalID: 81247723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_1_SheepPurple_Idle_Default_Side_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: febec3dc3f4e8a54caddf0dedb420aa4
+      internalID: -1814124751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_2_SheepPurple_Walk_Default_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4accd88e22ce8e4cab902ba5821accc
+      internalID: -2084517439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_3_SheepPurple_Walk_Default_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0293054ae8affb740bc3a231c2c9aead
+      internalID: 1619938178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_4_SheepPurple_Walk_Default_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3fd9da6484ac6043929119d609ec124
+      internalID: 721973946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_5_SheepPurple_Walk_Default_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea97c4c65421f9a40838ff8c4014df31
+      internalID: 1636530575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_6_SheepPurple_Walk_Default_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4af74e74bcf7120498a9821b3ee66aba
+      internalID: 2054490289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_7_SheepPurple_Walk_Default_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed229d4e4343ce34aa4a10cc3c299259
+      internalID: -1476651997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_8_SheepPurple_Walk_Default_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94042913b3cc5d6479e10522bbf2105d
+      internalID: 2055752854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_9_SheepPurple_Walk_Default_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 224
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1bae462e8f04d846afc01e9a7efdb4f
+      internalID: 2143396531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_10_SheepPurple_Idle_Graze_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6250d3540e2063419cff2eb6e6200e3
+      internalID: 932568254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_11_SheepPurple_Idle_Graze_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 539a9b3a2675fd04badd550d2dfafc1d
+      internalID: 1770740670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_12_SheepPurple_Idle_Graze_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47355b706b5cbba4c8f8260a69454c37
+      internalID: 2006736632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_13_SheepPurple_Idle_Graze_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7be10515a40455e48a7acd01c8a0916d
+      internalID: -809835667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_14_SheepPurple_Idle_Graze_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c5d09bd4d5f6e3448df38b2045a6dc0
+      internalID: 1796610829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_15_SheepPurple_Idle_Graze_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31fdd91c17ad9594888be6be5ed5d05a
+      internalID: 1317435371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_16_SheepPurple_Idle_Graze_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9bd142027737484b8b6e9b888da12db
+      internalID: 1336196156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_17_SheepPurple_Idle_Graze_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32d99d3e0a334bb45b0d7a0f7631160f
+      internalID: 754148689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_18_SheepPurple_Idle_Alert_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6672cc135755b0b4abd82f40bc480745
+      internalID: -247720150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_19_SheepPurple_Idle_Alert_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7091bb13e17f10041aa67f12ba26f5b7
+      internalID: -1922573813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_20_SheepPurple_Idle_Alert_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f500ddc09cbb1a4b906e25c1f5859c0
+      internalID: -1302311848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_21_SheepPurple_Idle_Alert_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44e7ba64a5dbce84d9e6ec8b285c46ea
+      internalID: 1519380557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_22_SheepPurple_Idle_Alert_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c872c8710e6dc04428c77cbe34f16205
+      internalID: -1601684555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_23_SheepPurple_Idle_Alert_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7073cabd21ec4a14bacc99600379f4b9
+      internalID: 155539382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_24_SheepPurple_Idle_Alert_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2bffe643d21bb940814a8ceb0cd92cd
+      internalID: -1953858399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_25_SheepPurple_Idle_Alert_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6c1a968b965ae24d8633396f722a3d6
+      internalID: -1942826761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_26_SheepPurple_Idle_LieDown_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7bf9c89e83fa2a428a4b407d29ba997
+      internalID: 738718968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_27_SheepPurple_Idle_LieDown_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b85d35c65075af64c97f0aa588a9d417
+      internalID: -554204786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_28_SheepPurple_Idle_LieDown_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d776e257769ddf1499f2683088f0c5d7
+      internalID: -243243461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_29_SheepPurple_Idle_LieDown_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 695b61859c21a5f45b2e5130b5a55dbb
+      internalID: -1439250787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_30_SheepPurple_Idle_StandUp_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 445408241de56da4ba5cb879a9d2a9de
+      internalID: 1871809880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_31_SheepPurple_Idle_StandUp_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 608efd3ebb0f0f34e9c6e4e71b0af0d8
+      internalID: 486998162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_32_SheepPurple_Idle_StandUp_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b560e4542be1764aa08223e2f65beb8
+      internalID: 1684367972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_33_SheepPurple_Idle_StandUp_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 578c735039febdb44a92bf349eb3a818
+      internalID: -1904107857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_34_SheepPurple_Idle_Rest_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c66126088f52b1e488d29b21b6c59b72
+      internalID: -745621913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_35_SheepPurple_Idle_Rest_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c2476e99f86ae54f96a6ccb72772821
+      internalID: 489542790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_36_SheepPurple_Idle_Rest_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f181cfcca068fb448ab7cba718f3daad
+      internalID: 1688271752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_37_SheepPurple_Idle_Rest_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f2496465bc06534fae4df3e59105402
+      internalID: 1886312121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_38_SheepPurple_Idle_Sleep_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41266592ea0750a40bbc92c74653f347
+      internalID: 98956174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_39_SheepPurple_Idle_Sleep_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5689ed55d58d7b747ac7f3478bb93b97
+      internalID: -1935708073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_40_SheepPurple_Idle_Sleep_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92dd184bc02929e4da9078d756d1985c
+      internalID: 1711794349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_41_SheepPurple_Idle_Sleep_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9834b9010a12af24d8a2715b74bebc8d
+      internalID: 160495723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_42_SheepPurple_Idle_Sleep_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd6902a92ba293a41ab28da07751ff30
+      internalID: 71076492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_43_SheepPurple_Idle_Sleep_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 297583d33b58a5c42bee53b027ba0e9e
+      internalID: 1891031097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_44_SheepPurple_Idle_Sleep_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cf2e6ba5427f8b4dbdfd588bd3f9898
+      internalID: -1439948147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_45_SheepPurple_Idle_Sleep_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 972e32385b573d54586d2c3ce8b55630
+      internalID: 245359199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_46_SheepPurple_Hit_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9543544be54c5ab40aa46fdb03eb6270
+      internalID: 2090612483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_47_SheepPurple_Hit_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 981f9cccc612574429c9c024636c2b05
+      internalID: -1916317987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_48_SheepPurple_Hit_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11c19834eea3c48459a5b9c3b86aaf99
+      internalID: -864099183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CFRPG16_Sheep_07_49_SheepPurple_Hit_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c56e026754ab7b64ab72a248c560f228
+      internalID: -688372481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      CFRPG16_Sheep_07_0_SheepPurple_Idle_Default_Side_0: 81247723
+      CFRPG16_Sheep_07_10_SheepPurple_Idle_Graze_0: 932568254
+      CFRPG16_Sheep_07_11_SheepPurple_Idle_Graze_1: 1770740670
+      CFRPG16_Sheep_07_12_SheepPurple_Idle_Graze_2: 2006736632
+      CFRPG16_Sheep_07_13_SheepPurple_Idle_Graze_3: -809835667
+      CFRPG16_Sheep_07_14_SheepPurple_Idle_Graze_4: 1796610829
+      CFRPG16_Sheep_07_15_SheepPurple_Idle_Graze_5: 1317435371
+      CFRPG16_Sheep_07_16_SheepPurple_Idle_Graze_6: 1336196156
+      CFRPG16_Sheep_07_17_SheepPurple_Idle_Graze_7: 754148689
+      CFRPG16_Sheep_07_18_SheepPurple_Idle_Alert_0: -247720150
+      CFRPG16_Sheep_07_19_SheepPurple_Idle_Alert_1: -1922573813
+      CFRPG16_Sheep_07_1_SheepPurple_Idle_Default_Side_1: -1814124751
+      CFRPG16_Sheep_07_20_SheepPurple_Idle_Alert_2: -1302311848
+      CFRPG16_Sheep_07_21_SheepPurple_Idle_Alert_3: 1519380557
+      CFRPG16_Sheep_07_22_SheepPurple_Idle_Alert_4: -1601684555
+      CFRPG16_Sheep_07_23_SheepPurple_Idle_Alert_5: 155539382
+      CFRPG16_Sheep_07_24_SheepPurple_Idle_Alert_6: -1953858399
+      CFRPG16_Sheep_07_25_SheepPurple_Idle_Alert_7: -1942826761
+      CFRPG16_Sheep_07_26_SheepPurple_Idle_LieDown_0: 738718968
+      CFRPG16_Sheep_07_27_SheepPurple_Idle_LieDown_1: -554204786
+      CFRPG16_Sheep_07_28_SheepPurple_Idle_LieDown_2: -243243461
+      CFRPG16_Sheep_07_29_SheepPurple_Idle_LieDown_3: -1439250787
+      CFRPG16_Sheep_07_2_SheepPurple_Walk_Default_0: -2084517439
+      CFRPG16_Sheep_07_30_SheepPurple_Idle_StandUp_0: 1871809880
+      CFRPG16_Sheep_07_31_SheepPurple_Idle_StandUp_1: 486998162
+      CFRPG16_Sheep_07_32_SheepPurple_Idle_StandUp_2: 1684367972
+      CFRPG16_Sheep_07_33_SheepPurple_Idle_StandUp_3: -1904107857
+      CFRPG16_Sheep_07_34_SheepPurple_Idle_Rest_0: -745621913
+      CFRPG16_Sheep_07_35_SheepPurple_Idle_Rest_1: 489542790
+      CFRPG16_Sheep_07_36_SheepPurple_Idle_Rest_2: 1688271752
+      CFRPG16_Sheep_07_37_SheepPurple_Idle_Rest_3: 1886312121
+      CFRPG16_Sheep_07_38_SheepPurple_Idle_Sleep_0: 98956174
+      CFRPG16_Sheep_07_39_SheepPurple_Idle_Sleep_1: -1935708073
+      CFRPG16_Sheep_07_3_SheepPurple_Walk_Default_1: 1619938178
+      CFRPG16_Sheep_07_40_SheepPurple_Idle_Sleep_2: 1711794349
+      CFRPG16_Sheep_07_41_SheepPurple_Idle_Sleep_3: 160495723
+      CFRPG16_Sheep_07_42_SheepPurple_Idle_Sleep_4: 71076492
+      CFRPG16_Sheep_07_43_SheepPurple_Idle_Sleep_5: 1891031097
+      CFRPG16_Sheep_07_44_SheepPurple_Idle_Sleep_6: -1439948147
+      CFRPG16_Sheep_07_45_SheepPurple_Idle_Sleep_7: 245359199
+      CFRPG16_Sheep_07_46_SheepPurple_Hit_0: 2090612483
+      CFRPG16_Sheep_07_47_SheepPurple_Hit_1: -1916317987
+      CFRPG16_Sheep_07_48_SheepPurple_Hit_2: -864099183
+      CFRPG16_Sheep_07_49_SheepPurple_Hit_3: -688372481
+      CFRPG16_Sheep_07_4_SheepPurple_Walk_Default_2: 721973946
+      CFRPG16_Sheep_07_5_SheepPurple_Walk_Default_3: 1636530575
+      CFRPG16_Sheep_07_6_SheepPurple_Walk_Default_4: 2054490289
+      CFRPG16_Sheep_07_7_SheepPurple_Walk_Default_5: -1476651997
+      CFRPG16_Sheep_07_8_SheepPurple_Walk_Default_6: 2055752854
+      CFRPG16_Sheep_07_9_SheepPurple_Walk_Default_7: 2143396531
+      Sheep_07_0: 81247723
+      Sheep_07_1: -1814124751
+      Sheep_07_10: 932568254
+      Sheep_07_11: 1770740670
+      Sheep_07_12: 2006736632
+      Sheep_07_13: -809835667
+      Sheep_07_14: 1796610829
+      Sheep_07_15: 1317435371
+      Sheep_07_16: 1336196156
+      Sheep_07_17: 754148689
+      Sheep_07_18: -247720150
+      Sheep_07_19: -1922573813
+      Sheep_07_2: -2084517439
+      Sheep_07_20: -1302311848
+      Sheep_07_21: 1519380557
+      Sheep_07_22: -1601684555
+      Sheep_07_23: 155539382
+      Sheep_07_24: -1953858399
+      Sheep_07_25: -1942826761
+      Sheep_07_26: 738718968
+      Sheep_07_27: -554204786
+      Sheep_07_28: -243243461
+      Sheep_07_29: -1439250787
+      Sheep_07_3: 1619938178
+      Sheep_07_30: 1871809880
+      Sheep_07_31: 486998162
+      Sheep_07_32: 1684367972
+      Sheep_07_33: -1904107857
+      Sheep_07_34: -745621913
+      Sheep_07_35: 489542790
+      Sheep_07_36: 1688271752
+      Sheep_07_37: 1886312121
+      Sheep_07_38: 98956174
+      Sheep_07_39: -1935708073
+      Sheep_07_4: 721973946
+      Sheep_07_40: 1711794349
+      Sheep_07_41: 160495723
+      Sheep_07_42: 71076492
+      Sheep_07_43: 1891031097
+      Sheep_07_44: -1439948147
+      Sheep_07_45: 245359199
+      Sheep_07_46: 2090612483
+      Sheep_07_47: -1916317987
+      Sheep_07_48: -864099183
+      Sheep_07_49: -688372481
+      Sheep_07_5: 1636530575
+      Sheep_07_6: 2054490289
+      Sheep_07_7: -1476651997
+      Sheep_07_8: 2055752854
+      Sheep_07_9: 2143396531
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
