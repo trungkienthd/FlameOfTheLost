@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae294ba8c27c224b9ae5de55b824480, type: 3}
   m_Name: AniAtk_Chr_AI_Enemy_Trl_Aquabara
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterAttackAnimationProfile
-  _characterType: 3
+  _characterType: 12021
   _elements:
   - {fileID: 11400000, guid: 6fb71580ca4b401469648788bade41c0, type: 2}

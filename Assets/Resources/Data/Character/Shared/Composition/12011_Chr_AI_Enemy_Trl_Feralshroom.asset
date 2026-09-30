@@ -16,9 +16,9 @@ MonoBehaviour:
   _key: FERALSHROOM
   _displayName: Feralshroom
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 2146813563, guid: be4adecc10265f8489f1aea4e141ec35, type: 3}
   _prefab: {fileID: 2810860427036246779, guid: 2cf69941bf2d26947a773c321d00d5ba, type: 3}
-  _characterType: 2
+  _characterType: 12011
   _faction: 2
   _traversalType: 1
   _movementConfig: {fileID: 11400000, guid: 3421f0f0be54c91418c346da0089371e, type: 2}

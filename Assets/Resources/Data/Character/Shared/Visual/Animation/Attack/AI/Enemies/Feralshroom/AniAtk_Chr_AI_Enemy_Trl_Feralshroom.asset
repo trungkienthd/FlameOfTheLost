@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae294ba8c27c224b9ae5de55b824480, type: 3}
   m_Name: AniAtk_Chr_AI_Enemy_Trl_Feralshroom
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAnimationProfile
-  _characterType: 2
+  _characterType: 12011
   _elements:
   - {fileID: 11400000, guid: bf8bca7c514f8d447af07b5db271376a, type: 2}
   - {fileID: 11400000, guid: 91f9a4fd31fd9464aa983e3d0f8fe2a8, type: 2}

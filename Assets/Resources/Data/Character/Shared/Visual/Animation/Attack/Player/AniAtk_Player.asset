@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae294ba8c27c224b9ae5de55b824480, type: 3}
   m_Name: AniAtk_Player
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterCombatAnimationProfile
-  _characterType: 1
+  _characterType: 10001
   _elements:
   - {fileID: 11400000, guid: d6c5aa4badb9e384bbaf967bb601953c, type: 2}
   - {fileID: 11400000, guid: c307a85dfb23773489cd28ec36c02d8d, type: 2}

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af94ae79a7b556d4ba94ea40f2f70883, type: 3}
-  m_Name: AniHD_Chr_AI_Ntr_Animal_Cow
+  m_Name: AniHD_Chr_AI_Ntr_Animal_CowCream
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterHitDeathAnimationProfile
-  _characterType: 5
+  _characterType: 13011
   _hitAnimationClipSet:
     _down: {fileID: 7400000, guid: 981ca31319ab93747bfa2a36adad3db2, type: 2}
     _side: {fileID: 7400000, guid: d0ee533e4e32d4141834345fd905d64f, type: 2}

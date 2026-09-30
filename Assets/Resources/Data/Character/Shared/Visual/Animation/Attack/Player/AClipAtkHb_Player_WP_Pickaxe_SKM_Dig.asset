@@ -15,7 +15,7 @@ MonoBehaviour:
   _skills:
   - {fileID: 11400000, guid: 68e73c67a79d838489524d5703823772, type: 2}
   _weapon: {fileID: 11400000, guid: 721c7d036524bc846b64cd856cd235ce, type: 2}
-  _characterType: 1
+  _characterType: 10001
   _left:
     _down:
       _animationClip: {fileID: 7400000, guid: 8cbf0515dce74344baf500bb4722cd60, type: 2}
@@ -67,3 +67,4 @@ MonoBehaviour:
         - {x: 0.45, y: -0.35}
         _offset: {x: 0, y: 0}
   _attackWindowDuration: 0.5
+  _hitboxActivationDelay: 0

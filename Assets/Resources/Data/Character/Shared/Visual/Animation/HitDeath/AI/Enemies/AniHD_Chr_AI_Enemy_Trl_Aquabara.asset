@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af94ae79a7b556d4ba94ea40f2f70883, type: 3}
   m_Name: AniHD_Chr_AI_Enemy_Trl_Aquabara
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterHitDeathAnimationProfile
-  _characterType: 3
+  _characterType: 12021
   _hitAnimationClipSet:
     _down: {fileID: 7400000, guid: 448a259af5d1355418856bc3ab4240ee, type: 2}
     _side: {fileID: 7400000, guid: 6b6543c5a5b194f4dadfe21003432c26, type: 2}

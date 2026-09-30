@@ -3,10 +3,12 @@ namespace FlameOfTheLost
     public enum CharacterType
     {
         Default         = 0,
-        Player          = 1,
-        Feralshroom     = 2,
-        Aquabara        = 3,
+        Player          = 10001,
+        Feralshroom     = 12011,
+        Aquabara        = 12021,
         Rattleblade     = 4,
-        Cow             = 5,
+
+        Cow             = 13011,
+        Sheep           = 13012
     }
 }

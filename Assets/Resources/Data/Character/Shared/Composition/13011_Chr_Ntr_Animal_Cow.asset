@@ -16,9 +16,9 @@ MonoBehaviour:
   _key: COW
   _displayName: Cow
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 901374672, guid: 50148c0e17da4214bb5f5a057d404195, type: 3}
   _prefab: {fileID: 5700391693417721261, guid: 263844d0e11e9f64fbb8a5c71c65a092, type: 3}
-  _characterType: 5
+  _characterType: 13011
   _faction: 0
   _traversalType: 1
   _movementConfig: {fileID: 11400000, guid: 61f7ffc622ff67046a398056ab80883f, type: 2}

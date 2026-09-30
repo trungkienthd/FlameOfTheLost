@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalVariantProfile
   _visualConfig: {fileID: 0}
   _initialInventoryEntries: []
-  _characterProfile: {fileID: 11400000, guid: e85a0a61b648a7f4da0e4d15f64bdcc8, type: 2}
+  _characterProfile: {fileID: 11400000, guid: abf73163e51ba4340923c6125ecbac29, type: 2}
   _roamingConfig: {fileID: 11400000, guid: f447361876f098d4db24971b5265b4de, type: 2}
   _fleeConfig: {fileID: 11400000, guid: a959e1044ba43764e9674d372370daab, type: 2}

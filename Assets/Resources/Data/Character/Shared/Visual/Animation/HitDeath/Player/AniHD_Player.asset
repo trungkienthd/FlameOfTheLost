@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af94ae79a7b556d4ba94ea40f2f70883, type: 3}
   m_Name: AniHD_Player
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterHitDeathAnimationProfile
-  _characterType: 1
+  _characterType: 10001
   _hitAnimationClipSet:
     _down: {fileID: 7400000, guid: bf94f9174ec8c3e4a84373f7cb992180, type: 2}
     _side: {fileID: 7400000, guid: f0e7aedb6b88a9d4c8575d15c4e384e6, type: 2}

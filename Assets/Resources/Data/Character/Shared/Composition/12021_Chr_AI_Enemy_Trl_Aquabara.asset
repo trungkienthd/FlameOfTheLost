@@ -16,9 +16,9 @@ MonoBehaviour:
   _key: AQUABARA
   _displayName: Aquabara
   _description: "\t"
-  _icon: {fileID: 0}
+  _icon: {fileID: -889003269, guid: 5a9646ead01ccbd4fb7cae74cf0e3c16, type: 3}
   _prefab: {fileID: 1898948674111791293, guid: 2c5e3fa9629bb5b4096a1aafc8ad0fa6, type: 3}
-  _characterType: 3
+  _characterType: 12021
   _faction: 2
   _traversalType: 2
   _movementConfig: {fileID: 11400000, guid: f9cdbf1c8b9c309498a5be3644112c80, type: 2}
