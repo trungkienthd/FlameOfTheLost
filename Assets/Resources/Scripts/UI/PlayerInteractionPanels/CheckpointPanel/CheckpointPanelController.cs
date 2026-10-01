@@ -1,6 +1,4 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace FlameOfTheLost
 {
@@ -9,9 +7,13 @@ namespace FlameOfTheLost
         // --- References ---
         [Header("References")]
 
-        //  1. UI
-        [SerializeField] private TMP_Text _mapNameText;
-        private TMP_Text MapNameText => _mapNameText;
+        //  1. Sub-Panels
+        [SerializeField] private CheckpointMainSubPanelController           _mainSubPanelController;
+        [SerializeField] private CheckpointUpgradePlayerSubPanelController  _upgradePlayerSubPanelController;
+        [SerializeField] private CheckpointLeaveSubPanelController          _leaveSubPanelController;
+        private CheckpointMainSubPanelController            MainSubPanelController          => _mainSubPanelController;
+        private CheckpointUpgradePlayerSubPanelController   UpgradePlayerSubPanelController => _upgradePlayerSubPanelController;
+        private CheckpointLeaveSubPanelController           LeaveSubPanelController         => _leaveSubPanelController;
 
         // --- Runtime ---
         //  1. Active Checkpoint / Player
@@ -28,30 +30,55 @@ namespace FlameOfTheLost
             if (checkpointController == null) return;
             if (playerRootController == null) return;
 
-            base.Open();
-
             this.CurrentCheckpointController = checkpointController;
             this.PlayerRootController = playerRootController;
 
-            this.RefreshMapName();
+            this.ShowMainSubPanel();
+
+            base.Open();
         }
         public override void Close()
         {
+            this.ResetSubPanels();
+
             this.CurrentCheckpointController = null;
             this.PlayerRootController = null;
 
             base.Close();
         }
 
-        // --- Helpers ---
-        //  1. Map Name
-        private void RefreshMapName()
+        //  1. Sub-Panel Navigation
+        public void ShowMainSubPanel()
         {
-            if (this.MapNameText == null) return;
+            this.MainSubPanelController?.Show();
 
-            Scene activeScene = SceneManager.GetActiveScene();
+            this.UpgradePlayerSubPanelController?.Hide();
+            this.LeaveSubPanelController?.Hide();
+        }
+        public void ShowUpgradePlayerSubPanel()
+        {
+            this.MainSubPanelController?.SetInteractionEnabled(false);
 
-            this.MapNameText.text = activeScene.name;
+            this.UpgradePlayerSubPanelController?.Show();
+            this.LeaveSubPanelController?.Hide();
+        }
+        public void ShowLeaveSubPanel()
+        {
+            this.MainSubPanelController?.SetInteractionEnabled(false);
+
+            this.UpgradePlayerSubPanelController?.Hide();
+            this.LeaveSubPanelController?.Show();
+        }
+
+        // --- Helpers ---
+        //  1. Sub-Panel State
+        private void ResetSubPanels()
+        {
+            this.MainSubPanelController?.SetInteractionEnabled(true);
+            this.MainSubPanelController?.Show();
+
+            this.UpgradePlayerSubPanelController?.Hide();
+            this.LeaveSubPanelController?.Hide();
         }
 
         // --- FOTLMonoBehaviour Overrides ---
@@ -59,16 +86,34 @@ namespace FlameOfTheLost
         {
             base.CacheInternalReferences();
 
-            if (this.MapNameText == null) _mapNameText = this.GetComponentInChildren<TMP_Text>(true);
+            if (this.MainSubPanelController             == null) _mainSubPanelController            = this.GetComponentInChildren<CheckpointMainSubPanelController>(true);
+            if (this.UpgradePlayerSubPanelController    == null) _upgradePlayerSubPanelController   = this.GetComponentInChildren<CheckpointUpgradePlayerSubPanelController>(true);
+            if (this.LeaveSubPanelController            == null) _leaveSubPanelController           = this.GetComponentInChildren<CheckpointLeaveSubPanelController>(true);
         }
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
 
-            if (this.MapNameText == null)
+            if (this.MainSubPanelController == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] {nameof(TMP_Text)} reference for Map Name is missing.", this);
+                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] {nameof(CheckpointMainSubPanelController)} reference is missing.", this);
             }
+            if (this.UpgradePlayerSubPanelController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] {nameof(CheckpointUpgradePlayerSubPanelController)} reference is missing.", this);
+            }
+            if (this.LeaveSubPanelController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] {nameof(CheckpointLeaveSubPanelController)} reference is missing.", this);
+            }
+        }
+        protected override void BindInternalReferences()
+        {
+            base.BindInternalReferences();
+
+            this.MainSubPanelController?.Bind(this);
+            this.UpgradePlayerSubPanelController?.Bind(this);
+            this.LeaveSubPanelController?.Bind(this);
         }
         protected override void InitializeInternalState()
         {
@@ -76,6 +121,16 @@ namespace FlameOfTheLost
 
             this.CurrentCheckpointController = null;
             this.PlayerRootController = null;
+
+            this.ResetSubPanels();
+        }
+        protected override void UnbindInternalReferences()
+        {
+            this.MainSubPanelController?.Unbind(this);
+            this.UpgradePlayerSubPanelController?.Unbind(this);
+            this.LeaveSubPanelController?.Unbind(this);
+
+            base.UnbindInternalReferences();
         }
     }
 }
