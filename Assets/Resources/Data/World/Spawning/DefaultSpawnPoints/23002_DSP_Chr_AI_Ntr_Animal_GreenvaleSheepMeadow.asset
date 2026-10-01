@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5de0aea71522a74e8f815ad6bf55951, type: 3}
+  m_Name: 23002_DSP_Chr_AI_Ntr_Animal_GreenvaleSheepMeadow
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalDefaultSpawnPointProfile
+  _id: 23002
+  _key: GREENVALE_SHEEP_MEADOW
+  _displayName: Greenvale Sheep Meadow
+  _description: 
+  _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 31.5, y: 21.5, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
+  _defaultFacing: 1
+  _configureSpawnAnchorTransformAtStart: 1
+  _initialSpawnAnchorLocalPosition: {x: 0, y: 0, z: 0}
+  _initialSpawnAnchorLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialSpawnAnchorLocalScale: {x: 1, y: 1, z: 1}
+  _characterAISpawnEntries:
+  - _spawnCount: 2
+    _spawnOnStart: 1
+    _spawnWhenPlayerRespawns: 1
+    _randomSpawnOffsetRadius: 0
+    _neutralCharacterVariant: {fileID: 11400000, guid: 66ac72352ee84f94182d29c7d1b687c1, type: 2}
+    _homeAreaEntry:
+      _bottomLeftPosition: {x: 30.5, y: 21}
+      _topRightPosition: {x: 32.5, y: 22}
+      _returnReachDistance: 0.5
+    _roamingConfigOverride: {fileID: 11400000, guid: f447361876f098d4db24971b5265b4de, type: 2}
+    _fleeConfigOverride: {fileID: 11400000, guid: a959e1044ba43764e9674d372370daab, type: 2}

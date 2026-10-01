@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758aa5499b30185419b695be631fb731, type: 3}
   m_Name: AniLcm_Chr_AI_Ntr_Animal_SheepWhite
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterLocomotionAnimationProfile
-  _defaultLocomotion: {fileID: 11400000, guid: 0f72dd88469d7654a8554f8fcf337171, type: 2}
+  _defaultLocomotion: {fileID: 11400000, guid: 98de99d61d7ed69458a244e05dca67aa, type: 2}
   _locomotionVariants:
-  - {fileID: 11400000, guid: dc517d9ede5dc76488f89117ef7d6bee, type: 2}
-  - {fileID: 11400000, guid: 8dc2e1f439baca747a890bfccf147de2, type: 2}
-  - {fileID: 11400000, guid: 69f635b095af6f246acdeaa54317ddb2, type: 2}
-  - {fileID: 11400000, guid: abaf4c33d4f84c641b3595053e3aa05e, type: 2}
-  - {fileID: 11400000, guid: ec968efb33293f14ebc259e0eb7aa538, type: 2}
-  - {fileID: 11400000, guid: 8ef45ab20e2346b44863b4501b50750c, type: 2}
+  - {fileID: 11400000, guid: ca1523f3789bdf9438097f30665cbbd1, type: 2}
+  - {fileID: 11400000, guid: 7cbe03c1aee5f6343809395c09fc2b27, type: 2}
+  - {fileID: 11400000, guid: c8fe7a7775ed20e4abd84b2a37adca28, type: 2}
+  - {fileID: 11400000, guid: d3558a17191a48247867eff56b2a2a76, type: 2}
+  - {fileID: 11400000, guid: 3eb03098ed13e4f4f8831fd5575cf671, type: 2}
+  - {fileID: 11400000, guid: fe14bbdb3170c6944b238418fb79d93f, type: 2}

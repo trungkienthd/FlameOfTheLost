@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af94ae79a7b556d4ba94ea40f2f70883, type: 3}
   m_Name: AniHD_Chr_AI_Ntr_Animal_SheepWhite
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterHitDeathAnimationProfile
-  _characterType: 13011
+  _characterType: 13012
   _hitAnimationClipSet:
-    _down: {fileID: 7400000, guid: 981ca31319ab93747bfa2a36adad3db2, type: 2}
-    _side: {fileID: 7400000, guid: d0ee533e4e32d4141834345fd905d64f, type: 2}
-    _up: {fileID: 7400000, guid: f9facfe835c3a1f4cafbd418fa4a5d63, type: 2}
+    _down: {fileID: 7400000, guid: b61b663b2b1217546ba07c9656217b73, type: 2}
+    _side: {fileID: 7400000, guid: 0a5794b16814644409ec0e69a23039f8, type: 2}
+    _up: {fileID: 7400000, guid: 3e2450cfee6894c4998678d7372b6583, type: 2}
   _deathAnimationClipSet:
-    _down: {fileID: 7400000, guid: d9aa5420a1f5af148bcd21b56039ade0, type: 2}
-    _side: {fileID: 7400000, guid: a0bb91b06736d954eab0ce585c4ed82a, type: 2}
-    _up: {fileID: 7400000, guid: 4798160196daf0b47a4cb8094908364e, type: 2}
+    _down: {fileID: 7400000, guid: 58dfff505c932974a802b87b84dd5597, type: 2}
+    _side: {fileID: 7400000, guid: d06b83778ebf26542bea516de0110ab6, type: 2}
+    _up: {fileID: 7400000, guid: 85a695c7a0b24f548a3017cfd0cb77d6, type: 2}

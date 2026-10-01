@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4306b76e5219f4c8939e740999211b, type: 3}
   m_Name: Flee_Chr_AI_Ntr_Animal_SheepWhite
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalFleeConfig
-  _damageThreatForgetDuration: 4
-  _sameHorizontalPositionThreshold: 0.15
-  _boundaryProbeDistance: 0.3
-  _boundaryPadding: 0.1
+  _sameHorizontalPositionThreshold: 0.04
