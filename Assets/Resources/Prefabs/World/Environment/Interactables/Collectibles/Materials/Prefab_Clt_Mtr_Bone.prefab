@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2897951574400114868}
   - component: {fileID: 4551739376455168230}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_Bone
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3507838988092097218}
   - component: {fileID: 2559343699103731075}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 5882353440344479771}
   - component: {fileID: 4283499135400434890}
   - component: {fileID: 745192618469352108}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

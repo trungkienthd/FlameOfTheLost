@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7618256037857761892}
   - component: {fileID: 4070867063289160133}
   - component: {fileID: 3564367488314257064}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5973485866752669733}
   - component: {fileID: 69363503956374185}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3107114563267094711}
   - component: {fileID: 1826066810856446163}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_IronChunks
   m_TagString: Interactable
   m_Icon: {fileID: 0}

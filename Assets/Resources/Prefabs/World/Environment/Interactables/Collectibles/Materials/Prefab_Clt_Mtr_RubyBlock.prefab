@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3711077847195152360}
   - component: {fileID: 7798342683445961360}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5811897647673476931}
   - component: {fileID: 1630370310574955087}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_RubyBlock
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 7872465306377771321}
   - component: {fileID: 4549523211653610409}
   - component: {fileID: 6432050289481798568}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

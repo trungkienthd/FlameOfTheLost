@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2486667879015556094}
   - component: {fileID: 3746372541755058821}
   - component: {fileID: 8286554933733264188}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5030207409367889426}
   - component: {fileID: 7330421764536664656}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1139200441132752061}
   - component: {fileID: 4370613596646141915}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_CopperOre
   m_TagString: Interactable
   m_Icon: {fileID: 0}

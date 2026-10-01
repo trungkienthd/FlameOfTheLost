@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3258473662253885949}
   - component: {fileID: 4742785598821232186}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_CopperBar
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 5564970946943019572}
   - component: {fileID: 3521661037120882647}
   - component: {fileID: 1779562157914269362}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 233552541427833007}
   - component: {fileID: 7755192985072271522}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

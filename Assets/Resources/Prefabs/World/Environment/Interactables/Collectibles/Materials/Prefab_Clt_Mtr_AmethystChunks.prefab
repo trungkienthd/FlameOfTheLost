@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2397025590411893158}
   - component: {fileID: 7696204347862298286}
   - component: {fileID: 4596934914615406853}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5464782795250183001}
   - component: {fileID: 2942447397826039864}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2725292606637589634}
   - component: {fileID: 5695403897089237639}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_AmethystChunks
   m_TagString: Interactable
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1586025559775882433}
   - component: {fileID: 807425697903884995}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_Twig
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8146749792324740484}
   - component: {fileID: 2756981869810416612}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 4345882000437496527}
   - component: {fileID: 4855741537819380930}
   - component: {fileID: 7763897530179537185}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

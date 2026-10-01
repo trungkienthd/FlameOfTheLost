@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5366873622328147479}
   - component: {fileID: 4771011942055688679}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_Stone
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 1203958080359034254}
   - component: {fileID: 8338575765406421233}
   - component: {fileID: 2864180070993247101}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5885076922613342940}
   - component: {fileID: 383576362250279366}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

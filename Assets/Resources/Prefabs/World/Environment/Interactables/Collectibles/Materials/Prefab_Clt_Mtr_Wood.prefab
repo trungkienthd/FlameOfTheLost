@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5157432668829803719}
   - component: {fileID: 80156722419456310}
   - component: {fileID: 1613651810700699538}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8656092361640239365}
   - component: {fileID: 5184217433366676154}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5297017966076728687}
   - component: {fileID: 9210053615777669816}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_Wood
   m_TagString: Interactable
   m_Icon: {fileID: 0}

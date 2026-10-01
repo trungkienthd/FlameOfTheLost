@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9156964064867722245}
   - component: {fileID: 1575818592868768756}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3631141532137645616}
   - component: {fileID: 8194802702815355142}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_AmethystBlock
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 4379880998839685214}
   - component: {fileID: 8921369377279394070}
   - component: {fileID: 2146747153980617902}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

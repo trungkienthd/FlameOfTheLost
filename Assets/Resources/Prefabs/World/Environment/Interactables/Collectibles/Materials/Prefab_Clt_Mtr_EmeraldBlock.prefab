@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8843803668754532445}
   - component: {fileID: 32329843787533841}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 2410060236315578979}
   - component: {fileID: 4986850934248722975}
   - component: {fileID: 6985455816128230458}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6609321131503412472}
   - component: {fileID: 9220724473585622639}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_EmeraldBlock
   m_TagString: Interactable
   m_Icon: {fileID: 0}

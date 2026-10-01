@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8854737605210961926}
   - component: {fileID: 9197340100772906276}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6345704547525708278}
   - component: {fileID: 6509768033137376142}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_GoldBar
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 8699060513533396256}
   - component: {fileID: 6108635805111952958}
   - component: {fileID: 7768263660671767288}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

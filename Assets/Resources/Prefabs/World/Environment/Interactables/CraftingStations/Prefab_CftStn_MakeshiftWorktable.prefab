@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8520101356412447783}
   - component: {fileID: 7801913724746748079}
   - component: {fileID: 6791031275128103298}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 6626898219147005800}
   - component: {fileID: 5675397019524132978}
   - component: {fileID: 7843635380844688494}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_CftStn_MakeshiftWorktable
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8511725677832047048}
   - component: {fileID: 7993296508616360040}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

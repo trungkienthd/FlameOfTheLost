@@ -93,8 +93,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyTargetDetectionTriggerController
   _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
-  _rangeType: 1
+  _targetDetectionHandler: {fileID: 0}
   _triggerCollider: {fileID: 7296007160329736246}
+  _rangeType: 1
 --- !u!1 &326665471017654876
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +108,7 @@ GameObject:
   - component: {fileID: 454456458558062930}
   - component: {fileID: 356123139692388542}
   - component: {fileID: 2880118840919773103}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: MeleeHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1466,8 +1467,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyTargetDetectionTriggerController
   _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
-  _rangeType: 0
+  _targetDetectionHandler: {fileID: 0}
   _triggerCollider: {fileID: 2824026965855872081}
+  _rangeType: 0
 --- !u!1 &2684845279859087408
 GameObject:
   m_ObjectHideFlags: 0

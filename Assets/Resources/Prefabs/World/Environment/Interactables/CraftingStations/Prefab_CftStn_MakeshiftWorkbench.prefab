@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4317875918476551606}
   - component: {fileID: 6618769796083267150}
   - component: {fileID: 827588361090991222}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_CftStn_MakeshiftWorkbench
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 8840376051353278521}
   - component: {fileID: 6487113951615937604}
   - component: {fileID: 5745010620753567974}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1156913040774449775}
   - component: {fileID: 1245526795946096561}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_TutPTrg
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -50,9 +50,7 @@ MonoBehaviour:
   _visualTransform: {fileID: 0}
   _visualSpriteRenderer: {fileID: 0}
   _interactionTriggerArea: {fileID: 8576418517268496398}
-  _conditionStateMap:
-    _keys: 
-    _values: 
+  _gameConditionController: {fileID: 0}
   _isPromptEnabled: 0
   _isCompleted: 0
 --- !u!1 &8576418517268496398
@@ -64,7 +62,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5174480908878295247}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

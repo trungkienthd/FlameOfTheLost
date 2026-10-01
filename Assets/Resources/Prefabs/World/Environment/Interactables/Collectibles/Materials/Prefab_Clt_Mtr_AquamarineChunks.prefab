@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1955934457854066109}
   - component: {fileID: 2877945216650022023}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 813867891091048917}
   - component: {fileID: 7725459394967494067}
   - component: {fileID: 2567663652621927292}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4084057915158241373}
   - component: {fileID: 4584651084968878822}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_AquamarineChunks
   m_TagString: Interactable
   m_Icon: {fileID: 0}

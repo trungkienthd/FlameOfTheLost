@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6195843857142934955}
   - component: {fileID: 2738601377656756048}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4100351351653522472}
   - component: {fileID: 5873980520011914740}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_CopperChunks
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 1764018488881271806}
   - component: {fileID: 5027309073642906488}
   - component: {fileID: 3946754299717187482}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

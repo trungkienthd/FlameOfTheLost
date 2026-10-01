@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1613794184969679560}
   - component: {fileID: 5299827479081744059}
   - component: {fileID: 654875724407211736}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7056964599746749001}
   - component: {fileID: 1563804028123417178}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4413571665694384075}
   - component: {fileID: 2609335897556652134}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_AmethystCrystal
   m_TagString: Interactable
   m_Icon: {fileID: 0}

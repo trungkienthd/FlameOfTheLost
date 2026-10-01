@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5348260191213517641}
   - component: {fileID: 3714712395317793330}
   - component: {fileID: 8155563106358571696}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9043251923883612117}
   - component: {fileID: 5976662919117878685}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_IronOre
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 991984225130725983}
   - component: {fileID: 4517012630549050845}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

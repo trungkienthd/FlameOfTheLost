@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7505162399035391314}
   - component: {fileID: 2093993446947677886}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2981597080038863265}
   - component: {fileID: 8632858305407152663}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_EmeraldChunks
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 5629931603827771758}
   - component: {fileID: 3686365506051320811}
   - component: {fileID: 5068077502518387007}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

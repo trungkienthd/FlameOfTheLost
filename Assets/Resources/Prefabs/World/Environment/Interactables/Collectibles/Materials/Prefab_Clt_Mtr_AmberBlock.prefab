@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6962233216256449130}
   - component: {fileID: 6948195141144306574}
   - component: {fileID: 7212911648658196814}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4144985282143711028}
   - component: {fileID: 53610473404017804}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_AmberBlock
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2264894834987411840}
   - component: {fileID: 7672861375143836882}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

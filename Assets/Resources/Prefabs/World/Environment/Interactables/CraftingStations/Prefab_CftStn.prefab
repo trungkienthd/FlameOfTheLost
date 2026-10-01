@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 647472803690618504}
   - component: {fileID: 1958982714293601889}
   - component: {fileID: 3226718385828139144}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4774982024348271761}
   - component: {fileID: 5877043915899017846}
   - component: {fileID: 6559945071370477493}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Prefab_CftStn
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 204149311267211745}
   - component: {fileID: 2062771067782711498}
   - component: {fileID: 4943867211659434618}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8309595482714698634}
   - component: {fileID: 5172555741275955169}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4127488019657957222}
   - component: {fileID: 9174917306914993336}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_GoldChunks
   m_TagString: Interactable
   m_Icon: {fileID: 0}

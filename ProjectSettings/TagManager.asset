@@ -23,18 +23,18 @@ TagManager:
   - Player
   - Enemy
   - Ally
+  - Neutral
   - MeleeHitboxPlayer
   - MeleeHitboxEnemy
   - MeleeHitboxAlly
+  - MeleeHitboxNeutral
   - ProjectilePlayer
   - ProjectileEnemy
   - ProjectileAlly
-  - Trigger
+  - ProjectileNeutral
   - Interactable
+  - Trigger
   - LightBlocker
-  - 
-  - 
-  - 
   - 
   - 
   - 

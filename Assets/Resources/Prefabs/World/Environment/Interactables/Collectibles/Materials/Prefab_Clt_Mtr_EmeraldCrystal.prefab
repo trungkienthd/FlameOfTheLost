@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 598136128518041268}
   - component: {fileID: 507494827988139752}
   - component: {fileID: 1383987311054071164}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4899441049200963563}
   - component: {fileID: 3802081253550849166}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6816028651887067784}
   - component: {fileID: 5121203587204500875}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_EmeraldCrystal
   m_TagString: Interactable
   m_Icon: {fileID: 0}

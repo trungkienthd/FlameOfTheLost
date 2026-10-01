@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5559517677566157179}
   - component: {fileID: 4101400353473844719}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_IronBar
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   m_Component:
   - component: {fileID: 117014601860386530}
   - component: {fileID: 670006335599928283}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 5991697913357351207}
   - component: {fileID: 6292061336759656442}
   - component: {fileID: 1695863553686908221}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

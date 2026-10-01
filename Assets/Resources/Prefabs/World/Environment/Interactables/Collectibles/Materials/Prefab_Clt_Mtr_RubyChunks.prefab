@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1849778904682599238}
   - component: {fileID: 7725106061714950512}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: InteractionTriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1610714611168846738}
   - component: {fileID: 2687212717764738177}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Prefab_Clt_Mtr_RubyChunks
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 3024883819377613060}
   - component: {fileID: 1080334167879041890}
   - component: {fileID: 6232006837859182209}
-  m_Layer: 18
+  m_Layer: 20
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
