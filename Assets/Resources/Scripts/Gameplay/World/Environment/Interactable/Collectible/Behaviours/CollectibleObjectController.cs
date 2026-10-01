@@ -62,10 +62,7 @@ namespace FlameOfTheLost
             if (this.IsCollected) return false;
             if (this.Item == null) return false;
 
-            if (!this.TryGetInteractorInventory(interactor, out InventoryController inventoryController))
-            {
-                return false;
-            }
+            if (!this.TryGetInteractorInventory(interactor, out InventoryController inventoryController)) return false;
 
             if (!inventoryController.TryAddItem(this.Item, this.Quantity))
             {
