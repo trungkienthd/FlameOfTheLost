@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 8004549843006660084}
   - component: {fileID: 5616965089624009412}
   m_Layer: 5
-  m_Name: TryUpgradeButton
+  m_Name: Button_TryUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
