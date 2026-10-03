@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "Ckpt_New", menuName = "Data/FlameOfTheLost/World/Spawning/SpawnPoints/Checkpoints/CheckpointProfile")]
+    [CreateAssetMenu(fileName = "Cpt_New", menuName = "Data/FlameOfTheLost/World/Spawning/SpawnPoints/Checkpoints/CheckpointProfile")]
     public sealed class CheckpointProfile : CharacterSpawnPointProfile
     {
         // --- Data / Configs ---

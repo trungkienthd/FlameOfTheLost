@@ -12,6 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 507b2b395c74c5c42b09448764d6e972, type: 3}
   m_Name: Prg_Player
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterProgressionConfig
+  _attributeDisplayEntries:
+  - _attributeType: 0
+    _icon: {fileID: -888288611, guid: 97674d34c3046274f9cee23fa0f2aec1, type: 3}
+    _displayName: Might
+    _description: Increases physical strength and improves health-related capabilities.
+    _costScalingExplanation: 'Base cost: 10 Lost Embers. Cost increases by 5 for
+      each current Attribute level.'
+  - _attributeType: 1
+    _icon: {fileID: 1824045904, guid: 97674d34c3046274f9cee23fa0f2aec1, type: 3}
+    _displayName: Focus
+    _description: Improves mental focus and increases focus-related capabilities.
+    _costScalingExplanation: 'Base cost: 10 Lost Embers. Cost increases by 5 for
+      each current Attribute level.'
+  - _attributeType: 2
+    _icon: {fileID: -1944351425, guid: 97674d34c3046274f9cee23fa0f2aec1, type: 3}
+    _displayName: Technique
+    _description: Improves precision, control, and equipment-handling capabilities.
+    _costScalingExplanation: 'Base cost: 10 Lost Embers. Cost increases by 5 for
+      each current Attribute level.'
+  - _attributeType: 3
+    _icon: {fileID: -1465473246, guid: 97674d34c3046274f9cee23fa0f2aec1, type: 3}
+    _displayName: Attunement
+    _description: Strengthens the player's connection to energy and improves stamina-related
+      capabilities.
+    _costScalingExplanation: 'Base cost: 10 Lost Embers. Cost increases by 5 for
+      each current Attribute level.'
   _baseAttributeEntries:
   - _attributeType: 0
     _baseValue: 1

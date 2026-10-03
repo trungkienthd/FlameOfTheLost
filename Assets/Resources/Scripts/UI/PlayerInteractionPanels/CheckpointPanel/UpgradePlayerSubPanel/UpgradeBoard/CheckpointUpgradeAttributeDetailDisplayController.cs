@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class CheckpointUpgradeAttributeDetailDisplay : CheckpointUpgradeBoardSubBehaviourBase
+    public class CheckpointUpgradeAttributeDetailDisplayController : CheckpointUpgradeBoardSubBehaviourBase
     {
         // --- References ---
         //  1. General
@@ -39,9 +39,11 @@ namespace FlameOfTheLost
 
             CharacterProgressionAttributeDisplayEntry displayEntry = controller.GetAttributeDisplayEntry(attributeType);
 
+            Debug.Log($"Hello: {displayEntry.DisplayName} - {displayEntry.Description}");
+
             this.RefreshGeneralSection(displayEntry);
             this.RefreshNextValueSection(controller, attributeType);
-            this.RefreshCostScalingSection(displayEntry);
+            this.RefreshCostScalingSection(controller, attributeType, displayEntry);
         }
 
         // --- Helpers ---
@@ -90,12 +92,22 @@ namespace FlameOfTheLost
             }
         }
 
-
         //  3. Cost Scaling
-        private void RefreshCostScalingSection(CharacterProgressionAttributeDisplayEntry displayEntry)
+        private void RefreshCostScalingSection(CheckpointUpgradePlayerSubPanelController controller, CharacterProgressionAttributeType attributeType, CharacterProgressionAttributeDisplayEntry displayEntry)
         {
             if (_costScalingExplanationText == null) return;
 
+            CharacterProgressionUpgradeConfig upgradeConfig = controller.ProgressionUpgradeHandler?.UpgradeConfig;
+
+            CharacterProgressionAttributeUpgradeCostEntry costEntry = upgradeConfig?.GetUpgradeCostEntry(attributeType);
+
+            if (costEntry != null)
+            {
+                _costScalingExplanationText.text = $"Base cost: {costEntry.BaseCost} Lost Embers. Cost increases by {costEntry.CostIncreasePerCurrentValue} for each current Attribute level.";
+                return;
+            }
+
+            // Fallback authored explanation.
             _costScalingExplanationText.text = displayEntry != null
                 ? displayEntry.CostScalingExplanation
                 : string.Empty;

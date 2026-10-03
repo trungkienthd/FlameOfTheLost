@@ -16,9 +16,21 @@ namespace FlameOfTheLost
         private CheckpointLeaveSubPanelController           LeaveSubPanelController         => _leaveSubPanelController;
 
         // --- Runtime ---
+        [Header("Runtime")]
+
         //  1. Active Checkpoint / Player
-        public CheckpointController CurrentCheckpointController { get; private set; }
-        public PlayerRootController PlayerRootController { get; private set; }
+        [SerializeField] private CheckpointController _currentCheckpointController;
+        public CheckpointController CurrentCheckpointController 
+        {
+            get => _currentCheckpointController; 
+            private set => _currentCheckpointController = value; 
+        }
+        [SerializeField] private PlayerRootController _playerRootController;
+        public PlayerRootController PlayerRootController
+        {
+            get => _playerRootController; 
+            private set => _playerRootController = value; 
+        }
 
         //  2. Resting
         public bool IsResting => this.IsOpen;
@@ -119,8 +131,8 @@ namespace FlameOfTheLost
         {
             base.InitializeInternalState();
 
-            this.CurrentCheckpointController = null;
-            this.PlayerRootController = null;
+            //this.CurrentCheckpointController = null;
+            //this.PlayerRootController = null;
 
             this.ResetSubPanels();
         }

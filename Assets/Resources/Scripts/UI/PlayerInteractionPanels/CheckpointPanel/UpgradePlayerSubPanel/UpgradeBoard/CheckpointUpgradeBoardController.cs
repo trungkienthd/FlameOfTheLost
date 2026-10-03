@@ -13,7 +13,7 @@ namespace FlameOfTheLost
         [Header("References - Displays")]
         [SerializeField] private CheckpointUpgradeLostEmberDisplayController _lostEmberDisplay;
         [SerializeField] private CheckpointUpgradeAttributeBarController[] _attributeBars;
-        [SerializeField] private CheckpointUpgradeAttributeDetailDisplay _attributeDetailDisplay;
+        [SerializeField] private CheckpointUpgradeAttributeDetailDisplayController _attributeDetailDisplay;
 
         //  2. Actions
         [Header("References - Actions")]
@@ -21,7 +21,7 @@ namespace FlameOfTheLost
         [SerializeField] private Button _confirmButton;
         public CheckpointUpgradeLostEmberDisplayController LostEmberDisplay => _lostEmberDisplay;
         public CheckpointUpgradeAttributeBarController[] AttributeBars => _attributeBars;
-        public CheckpointUpgradeAttributeDetailDisplay AttributeDetailDisplay => _attributeDetailDisplay;
+        public CheckpointUpgradeAttributeDetailDisplayController AttributeDetailDisplay => _attributeDetailDisplay;
 
         // --- Public APIs ---
         //  1. Refresh
@@ -69,7 +69,7 @@ namespace FlameOfTheLost
 
             if (this.AttributeBars == null || this.AttributeBars.Length == 0) _attributeBars = this.GetComponentsInChildren<CheckpointUpgradeAttributeBarController>(true);
 
-            if (this.AttributeDetailDisplay == null) _attributeDetailDisplay = this.GetComponentInChildren<CheckpointUpgradeAttributeDetailDisplay>(true);
+            if (this.AttributeDetailDisplay == null) _attributeDetailDisplay = this.GetComponentInChildren<CheckpointUpgradeAttributeDetailDisplayController>(true);
         }
         protected override void ValidateInternalReferences()
         {
@@ -82,7 +82,7 @@ namespace FlameOfTheLost
 
             if (this.AttributeDetailDisplay == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] {nameof(CheckpointUpgradeAttributeDetailDisplay)} reference is missing.", this);
+                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] {nameof(CheckpointUpgradeAttributeDetailDisplayController)} reference is missing.", this);
             }
 
             if (this.AttributeBars == null || this.AttributeBars.Length == 0)
