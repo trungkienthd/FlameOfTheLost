@@ -71238,6 +71238,7 @@ GameObject:
   - component: {fileID: 409536672}
   - component: {fileID: 409536674}
   - component: {fileID: 409536673}
+  - component: {fileID: 409536675}
   m_Layer: 5
   m_Name: LostEmberDisplay
   m_TagString: Untagged
@@ -71304,6 +71305,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409536671}
   m_CullTransparentMesh: 1
+--- !u!114 &409536675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409536671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba04d41f4013f54998d9841e2495e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CheckpointUpgradeLostEmberDisplayController
+  _enableDebugLogs: 0
+  _quantityText: {fileID: 1453272507}
+  _defaultValueColor: {r: 1, g: 1, b: 1, a: 1}
+  _stagedValueColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1001 &410427601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73838,6 +73855,7 @@ GameObject:
   - component: {fileID: 567843260}
   - component: {fileID: 567843263}
   - component: {fileID: 567843262}
+  - component: {fileID: 567843264}
   m_Layer: 5
   m_Name: DerivedStatsPreview
   m_TagString: Untagged
@@ -73903,6 +73921,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567843259}
   m_CullTransparentMesh: 1
+--- !u!114 &567843264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567843259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40612e43729b0f342b217a1c2cae3a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CheckpointUpgradeDerivedStatsPreview
 --- !u!1001 &574786829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75094,6 +75124,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CheckpointUpgradePlayerSubPanelController
   _enableDebugLogs: 0
+  _upgradeBoardController: {fileID: 1190449517}
+  _derivedStatsPreview: {fileID: 567843264}
+  _selectedAttributeType: 0
+  _stagedTotalCost: 0
 --- !u!1001 &622742046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76714,6 +76748,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 703748575}
+  - component: {fileID: 703748576}
   m_Layer: 5
   m_Name: AttributeDetailDisplay
   m_TagString: Untagged
@@ -76744,6 +76779,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &703748576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703748574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f92f69e0a45244281414c6c1f821aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CheckpointUpgradeAttributeDetailDisplay
+  _enableDebugLogs: 0
+  _attributeIcon: {fileID: 2039519396}
+  _attributeNameText: {fileID: 2142374472}
+  _attributeDescriptionText: {fileID: 781534910}
+  _currentValueText: {fileID: 931925657}
+  _nextValueText: {fileID: 1579319838}
+  _costScalingExplanationText: {fileID: 1303318767}
+  _defaultNextValueColor: {r: 0.27450982, g: 0, b: 0, a: 1}
+  _stagedNextValueColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &704400748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78983,6 +79039,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3176631653630633809, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
+      propertyPath: _attributeType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5142984327053426578, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
       propertyPath: m_Name
       value: AttributeBar_Attunement
@@ -79001,6 +79061,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 716620122858322091, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
   m_PrefabInstance: {fileID: 774892491}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &774892493 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3176631653630633809, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
+  m_PrefabInstance: {fileID: 774892491}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16e0af9bfc995c408372370a514c222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CheckpointUpgradeAttributeBarController
 --- !u!1 &780716481
 GameObject:
   m_ObjectHideFlags: 0
@@ -81807,6 +81878,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3176631653630633809, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
+      propertyPath: _attributeType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5142984327053426578, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
       propertyPath: m_Name
       value: AttributeBar_Techinique
@@ -81825,6 +81900,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 716620122858322091, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
   m_PrefabInstance: {fileID: 928690984}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &928690986 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3176631653630633809, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
+  m_PrefabInstance: {fileID: 928690984}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16e0af9bfc995c408372370a514c222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CheckpointUpgradeAttributeBarController
 --- !u!1001 &930409518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83444,6 +83530,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3176631653630633809, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
+      propertyPath: _attributeType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5142984327053426578, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
       propertyPath: m_Name
       value: AttributeBar_Focus
@@ -83462,6 +83552,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 716620122858322091, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
   m_PrefabInstance: {fileID: 999049312}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &999049314 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3176631653630633809, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
+  m_PrefabInstance: {fileID: 999049312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16e0af9bfc995c408372370a514c222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CheckpointUpgradeAttributeBarController
 --- !u!1 &1006287876
 GameObject:
   m_ObjectHideFlags: 0
@@ -133285,6 +133386,7 @@ GameObject:
   - component: {fileID: 1190449513}
   - component: {fileID: 1190449516}
   - component: {fileID: 1190449515}
+  - component: {fileID: 1190449517}
   m_Layer: 5
   m_Name: UpgradeBoard
   m_TagString: Untagged
@@ -133308,8 +133410,8 @@ RectTransform:
   - {fileID: 409536672}
   - {fileID: 872891292}
   - {fileID: 703748575}
-  - {fileID: 2069435085}
   - {fileID: 975200360}
+  - {fileID: 2069435085}
   m_Father: {fileID: 618691909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -133355,6 +133457,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190449512}
   m_CullTransparentMesh: 1
+--- !u!114 &1190449517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190449512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3675583208579439a688280b137dc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CheckpointUpgradeBoardController
+  _enableDebugLogs: 0
+  _lostEmberDisplay: {fileID: 409536675}
+  _attributeBars:
+  - {fileID: 5727919824882604907}
+  - {fileID: 999049314}
+  - {fileID: 928690986}
+  - {fileID: 774892493}
+  _attributeDetailDisplay: {fileID: 703748576}
+  _dismissButton: {fileID: 975200361}
+  _confirmButton: {fileID: 2069435086}
 --- !u!1001 &1192032369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -170503,6 +170627,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
+--- !u!114 &5727919824882604907 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3176631653630633809, guid: c126662153b32dc4eaa0bf018fa5ca24, type: 3}
+  m_PrefabInstance: {fileID: 5727919824882604906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16e0af9bfc995c408372370a514c222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CheckpointUpgradeAttributeBarController
 --- !u!4 &5870380665452182523 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4789865712436624767, guid: b5b282c40e3cd9f46ae86a758d1425a3, type: 3}
