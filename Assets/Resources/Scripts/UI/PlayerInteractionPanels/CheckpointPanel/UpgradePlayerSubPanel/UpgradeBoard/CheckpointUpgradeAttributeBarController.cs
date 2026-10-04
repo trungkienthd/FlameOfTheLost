@@ -28,6 +28,14 @@ namespace FlameOfTheLost
         [Header("Selection Colors")]
         [SerializeField] private Color _normalColor = Color.white;
         [SerializeField] private Color _selectedColor = Color.yellow;
+        private Color NormalColor => _normalColor;
+        private Color SelectedColor => _selectedColor;
+
+        [Header("Attribute Value Colors")]
+        [SerializeField] private Color _realValueColor = new Color32(70, 0, 0, 255);
+        [SerializeField] private Color _stagedValueColor = Color.green;
+        private Color RealValueColor => _realValueColor;
+        private Color StagedValueColor => _stagedValueColor;
 
         // --- Public APIs ---
         public void RefreshDisplay()
@@ -47,7 +55,7 @@ namespace FlameOfTheLost
 
                 if (_attributeTitleText != null)
                 {
-                    _attributeTitleText.text = displayEntry.DisplayName;
+                    this.RefreshAttributeTitle(controller, displayEntry.DisplayName);
                 }
             }
 
@@ -56,8 +64,8 @@ namespace FlameOfTheLost
             if (_barImage != null)
             {
                 _barImage.color = selected
-                    ? _selectedColor
-                    : _normalColor;
+                    ? this.SelectedColor
+                    : this.NormalColor;
             }
 
             int nextCost = controller.GetNextUpgradeCost(this.AttributeType);
@@ -76,7 +84,7 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        //  1. Event Handlers
+        //  0. Event Handlers
         private void HandleSelectClicked()
         {
             if (!this.EnsureBound()) return;
@@ -88,6 +96,30 @@ namespace FlameOfTheLost
             if (!this.EnsureBound()) return;
 
             this.UpgradePlayerSubPanelController.StageUpgrade(this.AttributeType);
+        }
+
+        //  1. Display
+        private void RefreshAttributeTitle(CheckpointUpgradePlayerSubPanelController controller, string displayName)
+        {
+            if (_attributeTitleText == null) return;
+            if (controller == null) return;
+
+            int currentValue = controller.GetCurrentAttributeValue(this.AttributeType);
+            int stagedCount = controller.GetStagedUpgradeCount(this.AttributeType);
+
+            bool hasStagedUpgrade = stagedCount > 0;
+
+            int displayedValue = hasStagedUpgrade
+                ? controller.GetProjectedAttributeValue(this.AttributeType)
+                : currentValue;
+
+            Color valueColor = hasStagedUpgrade
+                ? _stagedValueColor
+                : _realValueColor;
+
+            string colorHex = ColorUtility.ToHtmlStringRGBA(valueColor);
+
+            _attributeTitleText.text = $"{displayName} (<color=#{colorHex}>{displayedValue}</color>)";
         }
 
         // --- FOTLMonoBehaviour Overrides ---

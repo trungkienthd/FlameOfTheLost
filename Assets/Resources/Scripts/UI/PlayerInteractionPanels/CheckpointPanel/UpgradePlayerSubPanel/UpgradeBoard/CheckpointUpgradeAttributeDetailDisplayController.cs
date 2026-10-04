@@ -39,8 +39,6 @@ namespace FlameOfTheLost
 
             CharacterProgressionAttributeDisplayEntry displayEntry = controller.GetAttributeDisplayEntry(attributeType);
 
-            Debug.Log($"Hello: {displayEntry.DisplayName} - {displayEntry.Description}");
-
             this.RefreshGeneralSection(displayEntry);
             this.RefreshNextValueSection(controller, attributeType);
             this.RefreshCostScalingSection(controller, attributeType, displayEntry);
