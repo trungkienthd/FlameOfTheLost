@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100 (+0)
+  m_text: 0 (+0)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e93cf950105fa1439cda190f5bd3eb2, type: 2}
   m_sharedMaterial: {fileID: -3650841308131034549, guid: 7e93cf950105fa1439cda190f5bd3eb2, type: 2}
@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 1966476811556564123}
   - component: {fileID: 7828037739930036}
   - component: {fileID: 6441471474089193582}
+  - component: {fileID: 534889363628321089}
   m_Layer: 5
   m_Name: Prefab_UI_CheckpointPanel_DerivedStatBar
   m_TagString: Untagged
@@ -503,3 +504,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.5
+--- !u!114 &534889363628321089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351030484345240539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23f2782a0e83f347b68e88a18248e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CheckpointUpgradeDerivedStatBarController
+  _enableDebugLogs: 0
+  _icon: {fileID: 2684237863443313841}
+  _titleText: {fileID: 6635474583492177831}
+  _valueText: {fileID: 550950779331999487}
+  _derivedStatType: 0
+  _realValueColor: {r: 0, g: 1, b: 0, a: 1}
+  _stagedValueColor: {r: 1, g: 0, b: 0, a: 1}

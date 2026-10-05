@@ -36,7 +36,7 @@ namespace FlameOfTheLost
 
             if (this.NeutralCharacterInputHandler == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] {nameof(this.InputHandler)} must be a {nameof(FlameOfTheLost.NeutralCharacterInputHandler)}.", this);
+                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] {nameof(this.InputHandler)} must be a {nameof(NeutralCharacterInputHandler)}.", this);
             }
         }
     }

@@ -50,8 +50,8 @@ namespace FlameOfTheLost
             base.ValidateInternalReferences();
 
             if (this.BackgroundClickClearAreaHandler    == null) Debug.LogError($"{nameof(LoadoutPanelController)} requires a {nameof(LoadoutPanelBackgroundClickClearAreaHandler)}.", this);
-            if (this.EquippedLoadoutSubPanelController  == null) Debug.LogError($"{nameof(LoadoutPanelController)} requires an {nameof(FlameOfTheLost.EquippedLoadoutSubPanelController)}.", this);
-            if (this.CandidateLoadoutSubPanelController == null) Debug.LogError($"{nameof(LoadoutPanelController)} requires a {nameof(FlameOfTheLost.CandidateLoadoutSubPanelController)}.", this);
+            if (this.EquippedLoadoutSubPanelController  == null) Debug.LogError($"{nameof(LoadoutPanelController)} requires an {nameof(EquippedLoadoutSubPanelController)}.", this);
+            if (this.CandidateLoadoutSubPanelController == null) Debug.LogError($"{nameof(LoadoutPanelController)} requires a {nameof(CandidateLoadoutSubPanelController)}.", this);
         }
         protected override void BindInternalReferences()
         {

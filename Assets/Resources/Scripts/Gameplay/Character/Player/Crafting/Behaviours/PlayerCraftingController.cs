@@ -204,7 +204,7 @@ namespace FlameOfTheLost
 
             if (this.InventoryController == null)
             {
-                Debug.LogError($"[{this.CharacterName}.{nameof(PlayerCraftingController)}] " + $"{nameof(FlameOfTheLost.InventoryController)} reference is unavailable.", this);
+                Debug.LogError($"[{this.CharacterName}.{nameof(PlayerCraftingController)}] " + $"{nameof(InventoryController)} reference is unavailable.", this);
             }
             if (this.RewardWalletController == null)
             {

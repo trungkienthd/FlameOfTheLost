@@ -26,7 +26,7 @@ namespace FlameOfTheLost
 
             if (this.AnimalBrainController == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No {nameof(FlameOfTheLost.AnimalBrainController)} assigned.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No {nameof(AnimalBrainController)} assigned.", this);
             }
         }
 

@@ -80,7 +80,7 @@ namespace FlameOfTheLost
 
             if (this.InventoryController == null)
             {
-                Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}]" + $"requires an {nameof(FlameOfTheLost.InventoryController)}.", this);
+                Debug.LogError($"[{this.name}.{nameof(ItemContainerController)}]" + $"requires an {nameof(InventoryController)}.", this);
             }
         }
         protected override void CacheExternalReferences()

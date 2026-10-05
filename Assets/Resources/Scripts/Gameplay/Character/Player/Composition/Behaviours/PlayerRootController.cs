@@ -43,22 +43,22 @@ namespace FlameOfTheLost
             
             if (this.PlayerInputHandler == null)
             {
-                Debug.LogError($"{this.gameObject.name}.{this.GetType().Name} {nameof(CharacterInputHandler)} must be a {nameof(FlameOfTheLost.PlayerInputHandler)}.", this);
+                Debug.LogError($"{this.gameObject.name}.{this.GetType().Name} {nameof(CharacterInputHandler)} must be a {nameof(PlayerInputHandler)}.", this);
             }
 
             if (this.PlayerCarryLoadoutController == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No {nameof(FlameOfTheLost.PlayerCarryLoadoutController)} assigned.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No {nameof(PlayerCarryLoadoutController)} assigned.", this);
             }
 
             if (this.PlayerInteractionHandler == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No {nameof(FlameOfTheLost.PlayerInteractionHandler)} assigned.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No {nameof(PlayerInteractionHandler)} assigned.", this);
             }
 
             if (this.PlayerCraftingController == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No {nameof(FlameOfTheLost.PlayerCraftingController)} assigned.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] No {nameof(PlayerCraftingController)} assigned.", this);
             }
         }
     }

@@ -456,7 +456,7 @@ namespace FlameOfTheLost
 
             if (this.PlayerSpawnerController == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterAIGroupSpawnerController)}] No {nameof(FlameOfTheLost.PlayerSpawnerController)} assigned.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterAIGroupSpawnerController)}] No {nameof(PlayerSpawnerController)} assigned.", this);
             }
 
             if (this.CharacterAIGroupRoot == null)

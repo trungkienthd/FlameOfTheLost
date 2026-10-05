@@ -169,13 +169,73 @@ namespace FlameOfTheLost
             return this.ProgressionConfig?.GetAttributeDisplayEntry(attributeType);
         }
 
-        //  9. Refresh
+        //  9. Derived Stats
+        public CharacterProgressionDerivedStatEntry GetDerivedStatEntry(CharacterProgressionDerivedStatType derivedStatType)
+        {
+            if (this.ProgressionConfig == null) return null;
+
+            foreach (CharacterProgressionDerivedStatEntry entry in this.ProgressionConfig.DerivedStatEntries)
+            {
+                if (entry == null) continue;
+                if (entry.DerivedStatType != derivedStatType) continue;
+
+                return entry;
+            }
+
+            return null;
+        }
+        public int GetCurrentDerivedStatValue(CharacterProgressionDerivedStatType derivedStatType)
+        {
+            if (this.ProgressionController == null) return 0;
+
+            return this.ProgressionController.GetDerivedStatValue(derivedStatType);
+        }
+        public int GetProjectedDerivedStatValue(CharacterProgressionDerivedStatType derivedStatType)
+        {
+            CharacterProgressionDerivedStatEntry entry = this.GetDerivedStatEntry(derivedStatType);
+
+            if (entry == null) return 0;
+
+            int value = entry.BaseValue;
+
+            foreach (CharacterProgressionDerivedStatContributionEntry contribution in entry.Contributions)
+            {
+                if (contribution == null) continue;
+
+                int projectedAttributeValue = this.GetProjectedAttributeValue(contribution.AttributeType);
+
+                value += contribution.CalculateValue(projectedAttributeValue);
+            }
+
+            if (entry.HasMaximumValue)
+            {
+                value = Mathf.Min(value, entry.MaximumValue);
+            }
+
+            return Mathf.Max(0, value);
+        }
+        public int GetCurrentDerivedStatAttributeBonus(CharacterProgressionDerivedStatType derivedStatType)
+        {
+            CharacterProgressionDerivedStatEntry entry = this.GetDerivedStatEntry(derivedStatType);
+
+            if (entry == null) return 0;
+
+            return Mathf.Max(0, this.GetCurrentDerivedStatValue(derivedStatType) - entry.BaseValue);
+        }
+        public int GetProjectedDerivedStatAttributeBonus(CharacterProgressionDerivedStatType derivedStatType)
+        {
+            CharacterProgressionDerivedStatEntry entry = this.GetDerivedStatEntry(derivedStatType);
+
+            if (entry == null) return 0;
+
+            return Mathf.Max(0, this.GetProjectedDerivedStatValue(derivedStatType) - entry.BaseValue);
+        }
+
+        //  10. Refresh
         public void RefreshAll()
         {
             this.UpgradeBoardController?.RefreshDisplay();
-
-            // Later:
-            // this.DerivedStatsPreview?.RefreshDisplay();
+            this.DerivedStatsPreview?.RefreshDisplay();
         }
 
         // --- Helpers ---
@@ -190,7 +250,8 @@ namespace FlameOfTheLost
         {
             base.CacheInternalReferences();
 
-            if (this.UpgradeBoardController == null) _upgradeBoardController = this.GetComponentInChildren<CheckpointUpgradeBoardController>(true);
+            if (this.UpgradeBoardController == null) _upgradeBoardController    = this.GetComponentInChildren<CheckpointUpgradeBoardController>(true);
+            if (this.DerivedStatsPreview    == null) _derivedStatsPreview       = this.GetComponentInChildren<CheckpointUpgradeDerivedStatsPreviewController>(true);
         }
         protected override void ValidateInternalReferences()
         {
@@ -199,6 +260,10 @@ namespace FlameOfTheLost
             if (this.UpgradeBoardController == null)
             {
                 Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] {nameof(CheckpointUpgradeBoardController)} reference is missing.", this);
+            }
+            if (this.DerivedStatsPreview == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] {nameof(CheckpointUpgradeDerivedStatsPreviewController)} reference is missing.", this);
             }
         }
         protected override void BindInternalReferences()

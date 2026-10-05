@@ -40,7 +40,7 @@ namespace FlameOfTheLost
 
             if (this.PlayerSpawnerController == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(CheckpointController)}] No {nameof(FlameOfTheLost.PlayerSpawnerController)} assigned.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(CheckpointController)}] No {nameof(PlayerSpawnerController)} assigned.", this);
                 return false;
             }
 
