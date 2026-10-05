@@ -8,9 +8,9 @@ namespace FlameOfTheLost
         // --- References ---
         [Header("References - Sub Behaviours")]
         [SerializeField] private CheckpointUpgradeBoardController _upgradeBoardController;
-        [SerializeField] private CheckpointUpgradeDerivedStatsPreview _derivedStatsPreview;
+        [SerializeField] private CheckpointUpgradeDerivedStatsPreviewController _derivedStatsPreview;
         public CheckpointUpgradeBoardController UpgradeBoardController => _upgradeBoardController;
-        public CheckpointUpgradeDerivedStatsPreview DerivedStatsPreview => _derivedStatsPreview;
+        public CheckpointUpgradeDerivedStatsPreviewController DerivedStatsPreview => _derivedStatsPreview;
 
         private PlayerRootController PlayerRootController => this.BrainBehaviour?.PlayerRootController;
         public CharacterProgressionController ProgressionController => this.PlayerRootController?.ProgressionController;
@@ -206,10 +206,12 @@ namespace FlameOfTheLost
             base.BindInternalReferences();
 
             this.UpgradeBoardController?.Bind(this);
+            this.DerivedStatsPreview?.Bind(this);
         }
         protected override void UnbindInternalReferences()
         {
             this.UpgradeBoardController?.Unbind(this);
+            this.DerivedStatsPreview?.Unbind(this);
 
             base.UnbindInternalReferences();
         }

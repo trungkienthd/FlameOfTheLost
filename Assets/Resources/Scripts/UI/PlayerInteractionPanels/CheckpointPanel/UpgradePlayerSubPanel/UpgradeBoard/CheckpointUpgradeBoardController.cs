@@ -3,25 +3,24 @@ using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
-    public class CheckpointUpgradeBoardController : FOTLSubBehaviour<CheckpointUpgradePlayerSubPanelController>
+    public class CheckpointUpgradeBoardController : CheckpointUpgradePlayerSubPanelSubBehaviourBase
     {
         // --- References ---
-        //  1. Brain Behaviour
-        public CheckpointUpgradePlayerSubPanelController UpgradePlayerSubPanelController => this.BrainBehaviour;
-
-        //  2. Displays
+        //  1. Displays
         [Header("References - Displays")]
         [SerializeField] private CheckpointUpgradeLostEmberDisplayController _lostEmberDisplay;
         [SerializeField] private CheckpointUpgradeAttributeBarController[] _attributeBars;
         [SerializeField] private CheckpointUpgradeAttributeDetailDisplayController _attributeDetailDisplay;
+        public CheckpointUpgradeLostEmberDisplayController LostEmberDisplay => _lostEmberDisplay;
+        public CheckpointUpgradeAttributeBarController[] AttributeBars => _attributeBars;
+        public CheckpointUpgradeAttributeDetailDisplayController AttributeDetailDisplay => _attributeDetailDisplay;
 
         //  2. Actions
         [Header("References - Actions")]
         [SerializeField] private Button _dismissButton;
         [SerializeField] private Button _confirmButton;
-        public CheckpointUpgradeLostEmberDisplayController LostEmberDisplay => _lostEmberDisplay;
-        public CheckpointUpgradeAttributeBarController[] AttributeBars => _attributeBars;
-        public CheckpointUpgradeAttributeDetailDisplayController AttributeDetailDisplay => _attributeDetailDisplay;
+        private Button DismissButton => _dismissButton;
+        private Button ConfirmButton => _confirmButton;
 
         // --- Public APIs ---
         //  1. Refresh
@@ -41,8 +40,8 @@ namespace FlameOfTheLost
 
             this.AttributeDetailDisplay?.RefreshDisplay();
 
-            if (_confirmButton != null) _confirmButton.interactable = this.UpgradePlayerSubPanelController.HasStagedUpgrades;
-            if (_dismissButton != null) _dismissButton.interactable = this.UpgradePlayerSubPanelController.HasStagedUpgrades;
+            if (this.ConfirmButton != null) this.ConfirmButton.interactable = this.UpgradePlayerSubPanelController.HasStagedUpgrades;
+            if (this.DismissButton != null) this.DismissButton.interactable = this.UpgradePlayerSubPanelController.HasStagedUpgrades;
         }
 
         // --- Helpers ---
@@ -90,12 +89,12 @@ namespace FlameOfTheLost
                 Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] No {nameof(CheckpointUpgradeAttributeBarController)} references are assigned.", this);
             }
 
-            if (_dismissButton == null)
+            if (this.DismissButton == null)
             {
                 Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] Dismiss Button reference is missing.", this);
             }
 
-            if (_confirmButton == null)
+            if (this.ConfirmButton == null)
             {
                 Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] Confirm Button reference is missing.", this);
             }
