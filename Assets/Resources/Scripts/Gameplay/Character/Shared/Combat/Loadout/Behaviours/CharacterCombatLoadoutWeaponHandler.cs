@@ -20,6 +20,7 @@ namespace FlameOfTheLost
         private RuntimeWeaponDictionary RuntimeWeaponMap => _runtimeWeaponMap;
 
         // --- Public APIs ---
+        //  1. Runtime Weapon
         public RuntimeWeapon GetOrCreateRuntimeInstance(InventoryItemEntry weaponEntry)
         {
             if (!this.TryGetItemFromEntry(weaponEntry, out WeaponProfile weapon)) return null;
@@ -32,14 +33,20 @@ namespace FlameOfTheLost
             return runtimeWeapon;
         }
 
+        internal void PrepareForSaveDataRestore()
+        {
+            this.RuntimeWeaponMap.Clear();
+        }
+
+        //  2. Item Queries
         public bool TryGetItemFromEntry(InventoryItemEntry weaponEntry, out WeaponProfile weapon)
         {
             weapon = null;
 
             if (this.InventoryController == null) return false;
+
             return this.InventoryController.TryGetWeaponFromEntry(weaponEntry, out weapon);
         }
-
         public override bool IsEntryValid(InventoryItemEntry entry)
         {
             if (!this.TryGetItemFromEntry(entry, out WeaponProfile weapon)) return false;
@@ -51,6 +58,7 @@ namespace FlameOfTheLost
             return true;
         }
 
+        //  3. Special Skill
         public SkillProfile ResolveActiveSpecialSkill()
         {
             if (!this.TryGetItemFromEntry(this.ActiveEquippedEntry, out WeaponProfile weapon)) return null;

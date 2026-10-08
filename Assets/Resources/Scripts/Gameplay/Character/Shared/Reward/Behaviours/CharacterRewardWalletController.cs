@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterRewardWalletController : CharacterBehaviourControllerBase
+    public class CharacterRewardWalletController : CharacterBehaviourControllerBase, ISaveDataHandler<PlayerRewardSaveData>
     {
         // --- States ---
         [Header("Lost Embers Amount (Runtime)")]
@@ -13,7 +13,12 @@ namespace FlameOfTheLost
             get => _currentAmount;
             private set
             {
-                _currentAmount = Mathf.Max(0, value);
+                int clampedValue = Mathf.Max(0, value);
+
+                if (_currentAmount == clampedValue) return;
+
+                _currentAmount = clampedValue;
+
                 this.AmountChanged?.Invoke(this.CurrentAmount);
             }
         }
@@ -22,6 +27,7 @@ namespace FlameOfTheLost
         public event Action<int> AmountChanged;
 
         // --- Public APIs ---
+        //  1. Reward Modification
         public void Add(int amount)
         {
             if (amount <= 0) return;
@@ -48,6 +54,21 @@ namespace FlameOfTheLost
         public void SetAmount(int amount)
         {
             this.CurrentAmount = Mathf.Max(0, amount);
+        }
+
+        //  2. ISaveDataHandler<PlayerRewardSaveData>
+        public PlayerRewardSaveData CaptureSaveData()
+        {
+            return new PlayerRewardSaveData
+            {
+                LostEmbers = this.CurrentAmount
+            };
+        }
+        public void RestoreSaveData(PlayerRewardSaveData saveData)
+        {
+            if (saveData == null) return;
+
+            this.SetAmount(Mathf.Max(0, saveData.LostEmbers));
         }
     }
 }

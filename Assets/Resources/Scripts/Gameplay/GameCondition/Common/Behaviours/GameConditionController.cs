@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.Overlays;
+using UnityEditor.U2D.Tooling.Analyzer;
 using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class GameConditionController : FOTLMonoBehaviour
+    public class GameConditionController : FOTLMonoBehaviour, ISaveDataHandler<GameConditionSaveData>
     {
         // --- References ---
         //  1. Sub-Behaviours
@@ -20,6 +22,12 @@ namespace FlameOfTheLost
         private IReadOnlyList<GameConditionInitialStateEntry> InitialStateEntries => _initialStateEntries;
 
         // --- Runtime State ---
+        //  1. Authoritative Runtime State
+        private GameConditionStateMap _conditionStates = new();
+
+        public IReadOnlyDictionary<GameConditionKey, bool> ConditionStates => _conditionStates;
+
+        //  2. Inspector / Debug Mirror
         [Header("Condition States (Runtime)")]
         [SerializeField] private List<GameConditionStateEntry> _conditionStateEntries = new();
         private IReadOnlyList<GameConditionStateEntry> ConditionStateEntries => _conditionStateEntries;
@@ -32,9 +40,9 @@ namespace FlameOfTheLost
         public bool GetConditionState(GameConditionKey conditionKey)
         {
             if (conditionKey == GameConditionKey.None) return false;
+            if (!_conditionStates.TryGetValue(conditionKey, out bool value)) return false;
 
-            GameConditionStateEntry stateEntry = this.FindConditionStateEntry(conditionKey);
-            return stateEntry != null && stateEntry.Value;
+            return value;
         }
 
         //  2. State Updates
@@ -42,20 +50,12 @@ namespace FlameOfTheLost
         {
             if (conditionKey == GameConditionKey.None) return;
 
-            GameConditionStateEntry stateEntry = this.FindConditionStateEntry(conditionKey);
+            bool hasExistingValue = _conditionStates.TryGetValue(conditionKey, out bool currentValue);
+            if (hasExistingValue && currentValue == value) return;
 
-            if (stateEntry == null)
-            {
-                stateEntry = new GameConditionStateEntry(conditionKey, value);
-                _conditionStateEntries.Add(stateEntry);
+            _conditionStates[conditionKey] = value;
 
-                this.ConditionStateChanged?.Invoke(conditionKey, value);
-                return;
-            }
-
-            if (stateEntry.Value == value) return;
-
-            stateEntry.Value = value;
+            this.RefreshRuntimeDebugEntries();
 
             this.ConditionStateChanged?.Invoke(conditionKey, value);
         }
@@ -73,42 +73,108 @@ namespace FlameOfTheLost
         {
             this.InitializeConditionStates();
 
-            for (int i = 0; i < this.ConditionStateEntries.Count; i++)
-            {
-                GameConditionStateEntry stateEntry = this.ConditionStateEntries[i];
-                if (stateEntry == null) continue;
+            this.PublishAllConditionStates();
+        }
 
-                this.ConditionStateChanged?.Invoke(stateEntry.ConditionKey, stateEntry.Value);
+        //  4. ISaveDataHandler: Save / Load
+        public GameConditionSaveData CaptureSaveData()
+        {
+            GameConditionSaveData saveData = new();
+
+            foreach (KeyValuePair<GameConditionKey, bool> pair in _conditionStates)
+            {
+                if (pair.Key == GameConditionKey.None) continue;
+
+                saveData.States[pair.Key] = pair.Value;
             }
+
+            return saveData;
+        }
+        public void RestoreSaveData(GameConditionSaveData saveData)
+        {
+            // a. Rebuild from the CURRENT game configuration.
+            this.InitializeConditionStates();
+
+            // b. Overlay the saved state.
+            if (saveData?.States != null)
+            {
+                foreach (KeyValuePair<GameConditionKey, bool> pair in saveData.States)
+                {
+                    if (pair.Key == GameConditionKey.None) continue;
+
+                    _conditionStates[pair.Key] = pair.Value;
+                }
+            }
+
+            // c. Synchronize the Inspector representation.
+            this.RefreshRuntimeDebugEntries();
+
+            // d. Publish only the FINAL restored values.
+            this.PublishAllConditionStates();
         }
 
         // --- Helpers ---
-        private GameConditionStateEntry FindConditionStateEntry(GameConditionKey conditionKey)
-        {
-            for (int i = 0; i < this.ConditionStateEntries.Count; i++)
-            {
-                GameConditionStateEntry stateEntry = this.ConditionStateEntries[i];
-                if (stateEntry == null) continue;
-
-                if (stateEntry.ConditionKey == conditionKey) return stateEntry;
-            }
-
-            return null;
-        }
-
+        //  1. Runtime State Initialization
         private void InitializeConditionStates()
         {
-            _conditionStateEntries.Clear();
-
-            for (int i = 0; i < this.InitialStateEntries.Count; i++)
+            if (_conditionStates == null)
             {
-                GameConditionInitialStateEntry initialStateEntry = this.InitialStateEntries[i];
+                _conditionStates = new GameConditionStateMap();
+            }
+            else
+            {
+                _conditionStates.Clear();
+            }
 
-                if (initialStateEntry == null) continue;
-                if (initialStateEntry.ConditionKey == GameConditionKey.None) continue;
+            if (this.InitialStateEntries != null)
+            {
+                for (int i = 0; i < this.InitialStateEntries.Count; i++)
+                {
+                    GameConditionInitialStateEntry initialStateEntry = this.InitialStateEntries[i];
 
-                GameConditionStateEntry entry = new GameConditionStateEntry(initialStateEntry.ConditionKey, initialStateEntry.InitialValue);
-                _conditionStateEntries.Add(entry);
+                    if (initialStateEntry == null) continue;
+                    if (initialStateEntry.ConditionKey == GameConditionKey.None) continue;
+
+                    _conditionStates[initialStateEntry.ConditionKey] = initialStateEntry.InitialValue;
+                }
+            }
+
+            this.RefreshRuntimeDebugEntries();
+        }
+
+        //  2. Inspector / Debug State
+        private void RefreshRuntimeDebugEntries()
+        {
+            if (_conditionStateEntries == null)
+            {
+                _conditionStateEntries = new List<GameConditionStateEntry>();
+            }
+            else
+            {
+                _conditionStateEntries.Clear();
+            }
+
+            if (_conditionStates == null) return;
+
+            foreach (KeyValuePair<GameConditionKey, bool> pair in _conditionStates)
+            {
+                if (pair.Key == GameConditionKey.None) continue;
+
+                var conditionState = new GameConditionStateEntry(pair.Key, pair.Value);
+                _conditionStateEntries.Add(conditionState);
+            }
+        }
+
+        //  3. State Publishing
+        private void PublishAllConditionStates()
+        {
+            if (_conditionStates == null) return;
+
+            foreach (KeyValuePair<GameConditionKey, bool> pair in _conditionStates)
+            {
+                if (pair.Key == GameConditionKey.None) continue;
+
+                this.ConditionStateChanged?.Invoke(pair.Key, pair.Value);
             }
         }
 
@@ -117,7 +183,8 @@ namespace FlameOfTheLost
         {
             base.CacheInternalReferences();
 
-            if (this.TutorialProgressController == null) _tutorialProgressController = this.GetComponentInChildren<TutorialProgressController>(true);
+            if (this.TutorialProgressController     == null) _tutorialProgressController    = this.GetComponentInChildren<TutorialProgressController>(true);
+            if (this.MilestoneProgressController    == null) _milestoneProgressController   = this.GetComponentInChildren<MilestoneProgressController>(true);
         }
         protected override void ValidateInternalReferences()
         {

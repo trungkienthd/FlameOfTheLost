@@ -9,29 +9,33 @@ namespace FlameOfTheLost
     {
         [SerializeField] private List<TKey> _keys = new List<TKey>();
         [SerializeField] private List<TValue> _values = new List<TValue>();
-
         private List<TKey> KeysList => _keys;
         private List<TValue> ValuesList => _values;
 
-        // Save the dictionary to lists
+        // --- ISerializationCallbackReceiver ---
+        //  1. Save the dictionary to lists
         public void OnBeforeSerialize()
         {
             this.KeysList.Clear();
             this.ValuesList.Clear();
-            foreach (var kvp in this)
+
+            foreach (KeyValuePair<TKey, TValue> pair in this)
             {
-                this.KeysList.Add(kvp.Key);
-                this.ValuesList.Add(kvp.Value);
+                this.KeysList.Add(pair.Key);
+                this.ValuesList.Add(pair.Value);
             }
         }
 
-        // Load dictionary from lists
+        //  2. Load dictionary from lists
         public void OnAfterDeserialize()
         {
             this.Clear();
 
             if (this.KeysList.Count != this.ValuesList.Count)
-                throw new System.Exception($"There are {this.KeysList.Count} keys and {this.ValuesList.Count} values after deserialization. Make sure that both key and value types are serializable.");
+            {
+                Debug.LogError($"[{nameof(SerializableDictionary<TKey, TValue>)}] Serialized key/value count mismatch. Keys={this.KeysList.Count}, Values={this.ValuesList.Count}.");
+                return;
+            }
 
             for (int i = 0; i < this.KeysList.Count; i++)
             {

@@ -5,15 +5,19 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CharacterProgressionController : CharacterConfiguredBehaviourBase<CharacterProgressionConfig>, ICharacterRefreshable
+    public class CharacterProgressionController : CharacterConfiguredBehaviourBase<CharacterProgressionConfig>, ICharacterRefreshable, ISaveDataHandler<PlayerProgressionSaveData>
     {
         // --- Data / Configs ---
         public CharacterProgressionConfig ProgressionConfig => this.Config;
 
         // --- Runtime ---
+
+        //  1. Progression Attributes
         [Header("Runtime - Progression Attributes")]
         [SerializeField] private List<RuntimeCharacterProgressionAttribute> _runtimeAttributeEntries = new();
         public IReadOnlyList<RuntimeCharacterProgressionAttribute> RuntimeAttributeEntries => _runtimeAttributeEntries;
+
+        //  2. Derived Stats
         private IReadOnlyList<CharacterProgressionDerivedStatEntry> DerivedStatEntries
         {
             get
@@ -28,6 +32,7 @@ namespace FlameOfTheLost
         [SerializeField] private DerivedStatValueMap _derivedStatValueMap = new();
         private IReadOnlyDictionary<CharacterProgressionDerivedStatType, int> DerivedStatValueMap => _derivedStatValueMap;
 
+        // --- References ---
         private HPController HPController => this.CharacterRootController.HPController;
         private FPController FPController => this.CharacterRootController.FPController;
         private StaminaController StaminaController => this.CharacterRootController.StaminaController;
@@ -45,7 +50,16 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs ---
-        //  1. Getters for attributes and derived stats
+        //  0. ICharacterRefreshable implementation
+        public int RefreshmentConfigurePriority => 20;
+        public void RefreshCharacter(CharacterRefreshContext context)
+        {
+            this.RecalculateAndApplyDerivedStats();
+
+            this.OnProgressionChanged?.Invoke();
+        }
+
+        //  1. Queries for attributes and derived stats
         public int GetAttributeValue(CharacterProgressionAttributeType attributeType)
         {
             RuntimeCharacterProgressionAttribute entry = this.GetAttributeEntry(attributeType);
@@ -62,7 +76,7 @@ namespace FlameOfTheLost
             return 0;
         }
 
-        //  2. Methods to modify attributes (e.g., adding bonuses from upgrades)
+        //  2. Attribute Modification
         public void AddAttributeBonus(CharacterProgressionAttributeType attributeType, int amount)
         {
             if (amount <= 0) return;
@@ -96,26 +110,77 @@ namespace FlameOfTheLost
             this.OnProgressionChanged?.Invoke();
         }
 
-        //  3. ICharacterPlacementRefreshable implementation
-        public int RefreshmentConfigurePriority => 20;
-        public void RefreshCharacter(CharacterRefreshContext context)
+        //  3. ISaveDataHandler implementation
+        public PlayerProgressionSaveData CaptureSaveData()
         {
+            PlayerProgressionSaveData saveData = new();
+
+            for (int i = 0; i < this.RuntimeAttributeEntries.Count; i++)
+            {
+                RuntimeCharacterProgressionAttribute runtimeEntry = this.RuntimeAttributeEntries[i];
+                if (runtimeEntry == null) continue;
+
+                var saveEntry = new PlayerAttributeSaveEntry
+                {
+                    AttributeType = runtimeEntry.AttributeType,
+                    BonusValue = runtimeEntry.BonusValue
+                };
+                saveData.Attributes.Add(saveEntry);
+            }
+
+            return saveData;
+        }
+        public void RestoreSaveData(PlayerProgressionSaveData saveData)
+        {
+            this.ResetRuntimeAttributesToConfig();
+
+            if (saveData?.Attributes != null)
+            {
+                for (int i = 0; i < saveData.Attributes.Count; i++)
+                {
+                    PlayerAttributeSaveEntry saveEntry = saveData.Attributes[i];
+                    if (saveEntry == null) continue;
+                    if (!Enum.IsDefined(typeof(CharacterProgressionAttributeType), saveEntry.AttributeType)) continue;
+
+                    RuntimeCharacterProgressionAttribute runtimeEntry = this.GetOrCreateAttributeEntry(saveEntry.AttributeType);
+                    runtimeEntry.SetBonusValue(saveEntry.BonusValue);
+                }
+
+            }
+
             this.RecalculateAndApplyDerivedStats();
 
             this.OnProgressionChanged?.Invoke();
         }
 
         // --- Helpers ---
+        //  1. Runtime Attribute Initialization
         private void InitializeRuntimeAttributesFromConfig()
         {
             if (this.ProgressionConfig == null) return;
-
             if (_runtimeAttributeEntries != null && this.RuntimeAttributeEntries.Count > 0) return;
 
-            _runtimeAttributeEntries = new List<RuntimeCharacterProgressionAttribute>();
-
-            foreach (CharacterProgressionBaseAttributeEntry configEntry in this.ProgressionConfig.BaseAttributeEntries)
+            this.ResetRuntimeAttributesToConfig();
+        }
+        private void ResetRuntimeAttributesToConfig()
+        {
+            if (_runtimeAttributeEntries == null)
             {
+                _runtimeAttributeEntries = new List<RuntimeCharacterProgressionAttribute>();
+            }
+            else
+            {
+                _runtimeAttributeEntries.Clear();
+            }
+
+            if (this.ProgressionConfig == null) return;
+
+            IReadOnlyList<CharacterProgressionBaseAttributeEntry> baseAttributeEntries = this.ProgressionConfig.BaseAttributeEntries;
+            if (baseAttributeEntries == null) return;
+
+            for (int i = 0; i < baseAttributeEntries.Count; i++)
+            {
+                CharacterProgressionBaseAttributeEntry configEntry = baseAttributeEntries[i];
                 if (configEntry == null) continue;
 
                 RuntimeCharacterProgressionAttribute runtimeEntry = new RuntimeCharacterProgressionAttribute(configEntry);
@@ -123,15 +188,16 @@ namespace FlameOfTheLost
             }
         }
 
+        //  2. Attribute Lookup
         private RuntimeCharacterProgressionAttribute GetAttributeEntry(CharacterProgressionAttributeType attributeType)
         {
+            if (this.RuntimeAttributeEntries == null) return null;
+
             return this.RuntimeAttributeEntries.FirstOrDefault(entry => entry.AttributeType == attributeType);
         }
-
         private RuntimeCharacterProgressionAttribute GetOrCreateAttributeEntry(CharacterProgressionAttributeType attributeType)
         {
             RuntimeCharacterProgressionAttribute entry = this.GetAttributeEntry(attributeType);
-
             if (entry != null) return entry;
 
             RuntimeCharacterProgressionAttribute newEntry = new RuntimeCharacterProgressionAttribute(attributeType, 0);
@@ -140,12 +206,12 @@ namespace FlameOfTheLost
             return newEntry;
         }
 
+        //  3. Derived Stat Recalculation
         private void RecalculateAndApplyDerivedStats()
         {
             this.RecalculateDerivedStats();
             this.ApplyDerivedStatsToCharacterSystems();
         }
-
         private void RecalculateDerivedStats()
         {
             _derivedStatValueMap.Clear();
@@ -159,12 +225,12 @@ namespace FlameOfTheLost
             }
         }
 
+        //  4. Derived Stat Application
         private void ApplyDerivedStatsToCharacterSystems()
         {
             this.ApplyResourceDerivedStats();
             this.ApplyLoadoutDerivedStats();
         }
-
         private void ApplyResourceDerivedStats()
         {
             int maxHP       = this.GetDerivedStatValue(CharacterProgressionDerivedStatType.MAX_HP);
@@ -175,7 +241,6 @@ namespace FlameOfTheLost
             if (this.FPController       != null && maxFP        > 0) this.FPController.SetMaxValue(maxFP, true);
             if (this.StaminaController  != null && maxStamina   > 0) this.StaminaController.SetMaxValue(maxStamina, true);
         }
-
         private void ApplyLoadoutDerivedStats()
         {
             if (this.CombatLoadoutController == null) return;

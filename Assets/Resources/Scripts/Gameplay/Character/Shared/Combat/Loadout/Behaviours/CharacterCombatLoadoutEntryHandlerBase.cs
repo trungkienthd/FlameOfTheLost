@@ -35,6 +35,7 @@ namespace FlameOfTheLost
         protected abstract string EntryDisplayName { get; }
 
         // --- Public APIs ---
+        //  1. Capacity
         public void SetMaxEquippedEntriesFromProgression(int amount)
         {
             int clampedAmount = Mathf.Clamp(amount, this.MinEquippedEntryCapacity, this.MaxEquippedEntryCapacity);
@@ -51,6 +52,7 @@ namespace FlameOfTheLost
             //this.NotifyActiveEntryChanged(this.ActiveEquippedEntry);
         }
 
+        //  2. Queries
         public bool EquippedEntryListIsValid()
         {
             return _equippedEntries != null && this.EquippedEntries.Count == this.MaxEquippedEntries;
@@ -61,6 +63,7 @@ namespace FlameOfTheLost
             return entry != null && _equippedEntries != null && this.EquippedEntries.Contains(entry);
         }
 
+        //  3. Cycling
         public bool TryCycleEquippedEntry(int step)
         {
             if (this.IsLoadoutChangeBlocked(nameof(CharacterCombatLoadoutEntryHandlerBase.TryCycleEquippedEntry))) return false;
@@ -102,6 +105,7 @@ namespace FlameOfTheLost
             return true;
         }
 
+        //  4. Replace / Unequip
         public bool TryReplaceEquippedEntry(int slotIndex, InventoryItemEntry newEntry, out InventoryItemEntry removedEntry)
         {
             removedEntry = null;
@@ -159,6 +163,7 @@ namespace FlameOfTheLost
             return true;
         }
 
+        //  5. Quick Equip
         public virtual bool TryQuickEquip()
         {
             if (this.IsLoadoutChangeBlocked(nameof(CharacterCombatLoadoutEntryHandlerBase.TryQuickEquip))) return false;
@@ -195,11 +200,13 @@ namespace FlameOfTheLost
             return true;
         }
 
+        //  6. UI
         public Sprite GetActiveEntryIcon()
         {
             return this.ActiveEquippedEntry != null ? this.ActiveEquippedEntry.Icon : null;
         }
 
+        //  7. Character Refresh
         public void RefreshLoadoutAfterCharacterRefreshment()
         {
             this.ClampEquippedEntriesToCapacity();
@@ -208,6 +215,71 @@ namespace FlameOfTheLost
             this.EnsureActiveEntryIsValid();
 
             //this.NotifyActiveEntryChanged(this.ActiveEquippedEntry);
+        }
+
+        //  8. Save / Restore
+        internal void RestoreEquippedEntries(IReadOnlyList<InventoryItemEntry> restoredEntries, InventoryItemEntry restoredActiveEntry)
+        {
+            if (_equippedEntries == null) _equippedEntries = new List<InventoryItemEntry>();
+
+            // a. Clear previous equipped flags.
+            for (int i = 0; i < _equippedEntries.Count; i++)
+            {
+                InventoryItemEntry oldEntry = _equippedEntries[i];
+                if (oldEntry != null) oldEntry.Equipped = false;
+            }
+
+            // b. Reconstruct the exact slot layout.
+            _equippedEntries.Clear();
+
+            for (int slotIndex = 0; slotIndex < this.MaxEquippedEntries; slotIndex++)
+            {
+                InventoryItemEntry restoredEntry = null;
+
+                if (restoredEntries != null && slotIndex < restoredEntries.Count)
+                {
+                    restoredEntry = restoredEntries[slotIndex];
+                }
+
+                // Reject invalid/corrupt references.
+                if (restoredEntry != null && !this.IsEntryValid(restoredEntry))
+                {
+                    restoredEntry = null;
+                }
+
+                // The same Inventory entry cannot occupy two slots.
+                if (restoredEntry != null && _equippedEntries.Contains(restoredEntry))
+                {
+                    restoredEntry = null;
+                }
+
+                _equippedEntries.Add(restoredEntry);
+
+                if (restoredEntry != null)
+                {
+                    restoredEntry.Equipped = true;
+                }
+            }
+
+            // c. Restore active entry.
+            if (restoredActiveEntry != null && this.IsEntryValid(restoredActiveEntry) && _equippedEntries.Contains(restoredActiveEntry))
+            {
+                this.SetActiveEntrySilently(restoredActiveEntry);
+                return;
+            }
+
+            // Saved active entry is missing/invalid. Fall back to the first valid equipped entry.
+            for (int i = 0; i < _equippedEntries.Count; i++)
+            {
+                InventoryItemEntry entry = _equippedEntries[i];
+                if (!this.IsEntryValid(entry)) continue;
+
+                this.SetActiveEntrySilently(entry);
+
+                return;
+            }
+
+            this.SetActiveEntrySilently(null);
         }
 
         // --- Helpers ---
@@ -242,7 +314,6 @@ namespace FlameOfTheLost
                 Debug.Log($"[{this.CharacterName}.{this.GetType().Name}] {actionName} blocked: {this.EntryDisplayName} loadout change is locked during attack window.");
                 return true;
             }
-
             if (this.CombatLoadoutController.IsLoadoutSwapLocked)
             {
                 Debug.Log($"[{this.CharacterName}.{this.GetType().Name}] {actionName} blocked: CannotSwapLoadout flag is active.");
@@ -262,7 +333,7 @@ namespace FlameOfTheLost
             if (slotIndex < 0 || slotIndex >= this.EquippedEntries.Count) return;
 
             InventoryItemEntry oldEntry = this.EquippedEntries[slotIndex];
-            if (ReferenceEquals(oldEntry, newEntry)) return;
+            if (UnityEngine.Object.ReferenceEquals(oldEntry, newEntry)) return;
 
             if (oldEntry != null)
             {
@@ -343,10 +414,7 @@ namespace FlameOfTheLost
 
         protected void ClampEquippedEntriesToCapacity()
         {
-            if (_equippedEntries == null)
-            {
-                _equippedEntries = new List<InventoryItemEntry>();
-            }
+            if (_equippedEntries == null) _equippedEntries = new List<InventoryItemEntry>();
 
             int max = this.MaxEquippedEntries;
             int currentCount = this.EquippedEntries.Count;

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class InventoryController : FOTLMonoBehaviour
+    public class InventoryController : FOTLMonoBehaviour, ISaveDataHandler<PlayerInventorySaveData>
     {
-        // --- States ---
+        // --- Runtime ---
         //  1. Inventory (Items)
         [Header("Items")]
         [SerializeField] private List<InventoryItemEntry> _items = new();
@@ -109,6 +109,7 @@ namespace FlameOfTheLost
         public event Action<ItemProfile, int> OnItemRemoved;
         public event Action<SkillProfile> OnLearnedSpecialSkillAdded;
         public event Action<SkillProfile> OnLearnedSpecialSkillRemoved;
+        public event Action OnInventoryRestored;
 
         // --- Public APIs ---
         public void InitializeInventory(int maximumEntryCount, IReadOnlyList<InventoryItemEntry> sourceEntries)
@@ -388,6 +389,82 @@ namespace FlameOfTheLost
             return _learnedSpecialSkills.Contains(skill);
         }
 
+        public InventoryItemEntry GetEntryByRuntimeId(string runtimeId)
+        {
+            if (string.IsNullOrWhiteSpace(runtimeId)) return null;
+
+            for (int i = 0; i < _items.Count; i++)
+            {
+                InventoryItemEntry entry = _items[i];
+
+                if (entry == null) continue;
+
+                if (entry.RuntimeId == runtimeId)
+                {
+                    return entry;
+                }
+            }
+
+            return null;
+        }
+
+        public PlayerInventorySaveData CaptureSaveData()
+        {
+            PlayerInventorySaveData saveData = new();
+
+            // a. Items
+            foreach (InventoryItemEntry entry in this.Items)
+            {
+                if (entry == null) continue;
+                if (entry.Item == null) continue;
+                if (entry.Quantity <= 0) continue;
+
+                entry.EnsureRuntimeId();
+
+                saveData.Entries.Add
+                (
+                    new PlayerInventoryItemSaveEntry
+                    {
+                        RuntimeId = entry.RuntimeId,
+                        ItemProfileId = entry.Item.Id,
+                        Quantity = entry.Quantity
+                    }
+                );
+            }
+
+            // b. Learned Special Skills
+            if (this.LearnedSpecialSkills != null)
+            {
+                for (int i = 0; i < this.LearnedSpecialSkills.Count; i++)
+                {
+                    SkillProfile skill = this.LearnedSpecialSkills[i];
+
+                    if (skill == null) continue;
+                    if (skill.DefaultProvisionType != SkillProvisionType.CharacterLearned) continue;
+                    if (saveData.LearnedSpecialSkillIds.Contains(skill.Id)) continue;
+
+                    saveData.LearnedSpecialSkillIds.Add(skill.Id);
+                }
+            }
+
+            return saveData;
+        }
+        public void RestoreSaveData(PlayerInventorySaveData saveData)
+        {
+            this.ClearInventory();
+
+            if (saveData == null)
+            {
+                this.NotifyInventoryRestored();
+                return;
+            }
+
+            this.RestoreItemEntries(saveData.Entries);
+            this.RestoreLearnedSpecialSkills(saveData.LearnedSpecialSkillIds);
+
+            this.NotifyInventoryRestored();
+        }
+
         // --- Helpers ---
         private bool IsExcluded(SkillProfile skill, List<SkillProfile> excludedSkills)
         {
@@ -426,10 +503,7 @@ namespace FlameOfTheLost
                     entry.Quantity += addableQuantity;
                     remainingQuantity -= addableQuantity;
 
-                    if (remainingQuantity <= 0)
-                    {
-                        return true;
-                    }
+                    if (remainingQuantity <= 0) return true;
                 }
             }
 
@@ -449,6 +523,103 @@ namespace FlameOfTheLost
             }
 
             return true;
+        }
+
+        private void ClearInventory()
+        {
+            if (_items == null)
+            {
+                _items = new List<InventoryItemEntry>();
+            }
+            else
+            {
+                _items.Clear();
+            }
+
+            if (_learnedSpecialSkills == null)
+            {
+                _learnedSpecialSkills = new List<SkillProfile>();
+            }
+            else
+            {
+                _learnedSpecialSkills.Clear();
+            }
+        }
+
+        private InventoryItemEntry AddItemForRestore(ItemProfile item, int quantity)
+        {
+            if (item == null) return null;
+            if (quantity <= 0) return null;
+
+            InventoryItemEntry entry = new InventoryItemEntry
+            { 
+                Item = item, 
+                Quantity = quantity,
+                Equipped = false
+            };
+
+            _items.Add(entry);
+
+            return entry;
+        }
+
+        private void RestoreItemEntries(IReadOnlyList<PlayerInventoryItemSaveEntry> savedEntries)
+        {
+            if (savedEntries == null) return;
+
+            for (int i = 0; i < savedEntries.Count; i++)
+            {
+                PlayerInventoryItemSaveEntry savedEntry = savedEntries[i];
+
+                if (savedEntry == null) continue;
+                if (savedEntry.Quantity <= 0) continue;
+
+                ItemProfile itemProfile = InventoryItemProfileResolver.GetById(savedEntry.ItemProfileId);
+                if (itemProfile == null)
+                {
+                    Debug.LogWarning($"[{this.gameObject.name}.{nameof(InventoryController)}] Unable to restore {nameof(ItemProfile)} ID '{savedEntry.ItemProfileId}'.", this);
+                    continue;
+                }
+
+                InventoryItemEntry runtimeEntry = this.AddItemForRestore(itemProfile, savedEntry.Quantity);
+                if (runtimeEntry == null) continue;
+
+                runtimeEntry.RestoreRuntimeId(savedEntry.RuntimeId);
+
+                // Defensive handling for old/corrupt saves that do not contain an entry runtime ID.
+                runtimeEntry.EnsureRuntimeId();
+            }
+        }
+        private void RestoreLearnedSpecialSkills(IReadOnlyList<int> savedSkillIds)
+        {
+            if (savedSkillIds == null) return;
+
+            for (int i = 0; i < savedSkillIds.Count; i++)
+            {
+                int skillId = savedSkillIds[i];
+
+                SkillProfile skill = InventorySkillProfileResolver.GetById(skillId);
+                if (skill == null)
+                {
+                    Debug.LogWarning($"[{this.gameObject.name}.{nameof(InventoryController)}] Unable to restore {nameof(SkillProfile)} ID '{skillId}'.", this);
+                    continue;
+                }
+
+                if (skill.DefaultProvisionType != SkillProvisionType.CharacterLearned)
+                {
+                    Debug.LogWarning($"[{this.gameObject.name}.{nameof(InventoryController)}] Skill '{skill.name}' ({skill.Id}) cannot be restored as a learned skill because its provision type is '{skill.DefaultProvisionType}'.", this);
+                    continue;
+                }
+
+                if (_learnedSpecialSkills.Contains(skill)) continue;
+
+                _learnedSpecialSkills.Add(skill);
+            }
+        }
+
+        private void NotifyInventoryRestored()
+        {
+            this.OnInventoryRestored?.Invoke();
         }
     }
 }

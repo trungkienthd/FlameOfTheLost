@@ -4,28 +4,21 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class CharacterAIGroupSpawnerController : FOTLMonoBehaviour
+    public abstract class CharacterAIGroupSpawnerController : FOTLMonoBehaviour, IWorldRefreshable
     {
         // --- References ---
-        //  1. Player Spawner
-        [Header("References - Player Spawner")]
-        [SerializeField] private PlayerSpawnerController _playerSpawnerController;
-        protected PlayerSpawnerController PlayerSpawnerController => _playerSpawnerController;
-
-        //  2. Character AI Group Root
+        //  1. Character AI Group Root
         [Header("References - Character AI Group Root")]
         [SerializeField] private Transform _characterAIGroupRoot;
         protected Transform CharacterAIGroupRoot => _characterAIGroupRoot;
 
-        //  3. Character AI Default Spawn Points
+        //  2. Character AI Default Spawn Points
         protected abstract IReadOnlyList<CharacterAIDefaultSpawnPointController> CharacterAIDefaultSpawnPointControllers { get; }
 
         // --- Configs ---
         [Header("Settings")]
         [SerializeField] private bool _isSpawnedCharactersOnStart = true;
-        [SerializeField] private bool _isRespawnedCharactersWhenPlayerSpawnsOrRespawns = true;
         private bool IsSpawnedCharactersOnStart => _isSpawnedCharactersOnStart;
-        private bool IsRespawnedCharactersWhenPlayerSpawnsOrRespawns => _isRespawnedCharactersWhenPlayerSpawnsOrRespawns;
 
         // --- Runtime ---
         //  1. Spawned Characters
@@ -38,30 +31,21 @@ namespace FlameOfTheLost
 
         private IReadOnlyDictionary<CharacterAISpawnEntry, List<GameObject>> SpawnedCharactersByEntry => _spawnedCharactersByEntry;
 
-        //  3. External Binding
-        private bool _hasBoundExternalReferences;
-        private bool HasBoundExternalReferences
-        {
-            get => _hasBoundExternalReferences;
-            set => _hasBoundExternalReferences = value;
-        }
-
         // --- Events ---
         public event Action<CharacterAISpawnEntry, CharacterRootController> CharacterAISpawned;
 
-        // --- Unity Callbacks ---
-        private void OnEnable()
-        {
-            if (!this.HasBoundExternalReferences) return;
-
-            this.SubscribeToPlayerSpawner();
-        }
-        private void OnDisable()
-        {
-            this.UnsubscribeFromPlayerSpawner();
-        }
-
         // --- Public APIs ---
+        //  0. IWorldRefreshable implementation
+        public virtual int WorldRefreshPriority => 100;
+        public void RefreshWorldContent(WorldRefreshContext context)
+        {
+            this.ClearSpawnedCharacters();
+
+            if (!this.ShouldSpawnCharactersAfterWorldRefresh(context)) return;
+
+            this.SpawnCharacters(spawnEntry => this.ShouldSpawnEntryAfterWorldRefresh(spawnEntry,context));
+        }
+
         //  1. Spawn Entry Queries
         public bool TryGetFirstCharacterAISpawnEntry(out CharacterAISpawnEntry spawnEntry)
         {
@@ -121,11 +105,6 @@ namespace FlameOfTheLost
         public void SpawnCharactersOnStart()
         {
             this.SpawnCharacters(spawnEntry => spawnEntry.SpawnOnStart);
-        }
-
-        public void SpawnCharactersAfterPlayerRespawn()
-        {
-            this.SpawnCharacters(spawnEntry => spawnEntry.SpawnWhenPlayerRespawns);
         }
 
         // --- Helpers ---
@@ -356,7 +335,11 @@ namespace FlameOfTheLost
             {
                 GameObject spawnedCharacter = this.SpawnedCharacters[i];
 
-                if (spawnedCharacter != null) UnityEngine.Object.Destroy(spawnedCharacter);
+                if (spawnedCharacter == null) continue;
+
+                spawnedCharacter.SetActive(false);
+
+                UnityEngine.Object.Destroy(spawnedCharacter);
             }
 
             this.SpawnedCharacters.Clear();
@@ -409,25 +392,16 @@ namespace FlameOfTheLost
             }
         }
 
-        //  6. Player Respawn
-        private void HandlePlayerSpawnedOrRespawned()
+        //  6. 
+        protected virtual bool ShouldSpawnCharactersAfterWorldRefresh(WorldRefreshContext context)
         {
-            if (!this.IsRespawnedCharactersWhenPlayerSpawnsOrRespawns) return;
-
-            this.SpawnCharactersAfterPlayerRespawn();
+            return context.IsPlayerRespawn || context.IsSaveReload;
         }
-        private void SubscribeToPlayerSpawner()
+        protected virtual bool ShouldSpawnEntryAfterWorldRefresh(CharacterAISpawnEntry spawnEntry, WorldRefreshContext context)
         {
-            if (this.PlayerSpawnerController == null) return;
+            if (spawnEntry == null) return false;
 
-            this.PlayerSpawnerController.OnPlayerSpawnedOrRespawned -= this.HandlePlayerSpawnedOrRespawned;
-            this.PlayerSpawnerController.OnPlayerSpawnedOrRespawned += this.HandlePlayerSpawnedOrRespawned;
-        }
-        private void UnsubscribeFromPlayerSpawner()
-        {
-            if (this.PlayerSpawnerController == null) return;
-
-            this.PlayerSpawnerController.OnPlayerSpawnedOrRespawned -= this.HandlePlayerSpawnedOrRespawned;
+            return spawnEntry.SpawnWhenPlayerRespawns;
         }
 
         // --- FOTLMonoBehaviour Overrides ---
@@ -437,39 +411,15 @@ namespace FlameOfTheLost
 
             this.SpawnedCharacters.Clear();
             _spawnedCharactersByEntry.Clear();
-
-            this.HasBoundExternalReferences = false;
-        }
-        protected override void CacheExternalReferences()
-        {
-            base.CacheExternalReferences();
-
-            if (this.PlayerSpawnerController == null)
-            {
-                if (this.transform.parent           != null) _playerSpawnerController = this.transform.parent.GetComponentInChildren<PlayerSpawnerController>();
-                if (this.PlayerSpawnerController    == null) _playerSpawnerController = UnityEngine.Object.FindFirstObjectByType<PlayerSpawnerController>();
-            }
         }
         protected override void ValidateExternalReferences()
         {
             base.ValidateExternalReferences();
 
-            if (this.PlayerSpawnerController == null)
-            {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterAIGroupSpawnerController)}] No {nameof(PlayerSpawnerController)} assigned.", this);
-            }
-
             if (this.CharacterAIGroupRoot == null)
             {
                 Debug.LogError($"[{this.gameObject.name}.{nameof(CharacterAIGroupSpawnerController)}] No Character AI group root assigned.", this);
             }
-        }
-        protected override void BindExternalReferences()
-        {
-            base.BindExternalReferences();
-
-            this.HasBoundExternalReferences = true;
-            this.SubscribeToPlayerSpawner();
         }
         protected override void InitializePregameplayState()
         {

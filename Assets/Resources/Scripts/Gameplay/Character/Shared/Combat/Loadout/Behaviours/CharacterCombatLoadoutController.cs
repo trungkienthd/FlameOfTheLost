@@ -11,7 +11,8 @@ namespace FlameOfTheLost
     [RequireComponent(typeof(CharacterCombatLoadoutConsumableItemHandler))]
     public class CharacterCombatLoadoutController : CharacterBehaviourControllerBase, 
         IStatusEffectFlagConsumer, 
-        ICharacterDeathDisableable
+        ICharacterDeathDisableable,
+        ISaveDataHandler<PlayerCombatLoadoutSaveData>
     {
         // --- Referneces ---
         //  1. Character
@@ -81,33 +82,34 @@ namespace FlameOfTheLost
         public event Action<SkillProfile> OnActiveSpecialSkillChanged;
         public event Action<InventoryItemEntry> OnActiveEquippedConsumableItemChanged;
 
+        public event Action OnCombatLoadoutRestored;
+
         // --- Public APIs ---
-        //  0. Properties
-        //      0.1. Weapon APIs
+        //  1. Weapon APIs
         public int MaxEquippedWeaponCapacity                            => this.WeaponHandler.MaxEquippedEntryCapacity;
         public int MaxEquippedWeapons                                   => this.WeaponHandler.MaxEquippedEntries;
         public IReadOnlyList<InventoryItemEntry> EquippedWeaponEntries  => this.WeaponHandler.EquippedEntries;
         public InventoryItemEntry ActiveEquippedWeaponEntry             => this.WeaponHandler.ActiveEquippedEntry;
         public RuntimeWeapon ActiveEquippedRuntimeWeapon                => this.WeaponHandler.ActiveEquippedRuntimeWeapon;
 
-        //      0.2. Projectile APIs
+        //  2. Projectile APIs
         public int MaxEquippedProjectileCapacity                            => this.ProjectileHandler.MaxEquippedEntryCapacity;
         public int MaxEquippedProjectiles                                   => this.ProjectileHandler.MaxEquippedEntries;
         public IReadOnlyList<InventoryItemEntry> EquippedProjectileEntries  => this.ProjectileHandler.EquippedEntries;
         public InventoryItemEntry ActiveEquippedProjectileEntry             => this.ProjectileHandler.ActiveEquippedEntry;
 
-        //      0.3. Consumable item APIs
+        //  3. Consumable item APIs
         public int MaxEquippedConsumableCapacity                                => this.ConsumableItemHandler.MaxEquippedEntryCapacity;
         public int MaxEquippedConsumables                                       => this.ConsumableItemHandler.MaxEquippedEntries;
         public IReadOnlyList<InventoryItemEntry> EquippedConsumableItemEntries  => this.ConsumableItemHandler.EquippedEntries;
         public InventoryItemEntry ActiveEquippedConsumableItemEntry             => this.ConsumableItemHandler.ActiveEquippedEntry;
 
-        //  1. Progression-affected Loadout Max Capacity
+        //  4. Progression-affected Loadout Max Capacity
         public void SetMaxEquippedWeaponsFromProgression(int amount)            => this.CapacityHandler.SetMaxEquippedWeaponsFromProgression(amount);
         public void SetMaxEquippedProjectilesFromProgression(int amount)        => this.CapacityHandler.SetMaxEquippedProjectilesFromProgression(amount);
         public void SetMaxEquippedConsumableItemsFromProgression(int amount)    => this.CapacityHandler.SetMaxEquippedConsumableItemsFromProgression(amount);
 
-        //  2. Weapon Management
+        //  5. Weapon Management
         public bool TryCycleWeaponEntry(int step)
         {
             if (this.IsDeathDisabled) return false;
@@ -137,7 +139,7 @@ namespace FlameOfTheLost
             return this.WeaponHandler.TryQuickEquip();
         }
 
-        //  3. Projectile Management
+        //  6. Projectile Management
         public bool TryCycleProjectileEntry(int step)
         {
             if (this.IsDeathDisabled) return false;
@@ -185,7 +187,7 @@ namespace FlameOfTheLost
             this.ProjectileHandler.RefundProjectileCost(projectileCostRecord);
         }
 
-        //  4. Active Special Skill handling
+        //  7. Special Skill handling
         public bool TrySetEquippedWeaponActiveSpecialSkill(InventoryItemEntry weaponEntry, SkillProfile specialSkill)
         {
             if (this.IsDeathDisabled) return false;
@@ -209,7 +211,7 @@ namespace FlameOfTheLost
             return this.SpecialSkillHandler.GetWeaponActiveSpecialSkill(weaponEntry);
         }
 
-        //  5. Consumable Item Management
+        //  8. Consumable Item Management
         public bool TryCycleConsumableItemEntry(int step)
         {
             if (this.IsDeathDisabled) return false;
@@ -239,21 +241,21 @@ namespace FlameOfTheLost
             return this.ConsumableItemHandler.TryConsume();
         }
 
-        //  6. UI APIs
+        //  9. UI APIs
         public Sprite GetActiveEquippedWeaponIcon()     => this.WeaponHandler.GetActiveEntryIcon();
         public Sprite GetActiveEquippedProjectileIcon() => this.ProjectileHandler.GetActiveEntryIcon();
         public Sprite GetActiveSpecialSkillIcon()       => this.SpecialSkillHandler.GetActiveSpecialSkillIcon();
         public Sprite GetActiveConsumableItemIcon()     => this.ConsumableItemHandler.GetActiveEntryIcon();
 
 
-        //  7. Event Notifiers
+        //  10. Event Notifiers
         internal void NotifyEquippedWeaponEntriesChanged()                                                    => this.OnEquippedWeaponEntriesChanged?.Invoke();
         internal void NotifyActiveEquippedWeaponChanged(InventoryItemEntry activeWeaponEntry)                 => this.OnActiveEquippedWeaponChanged?.Invoke(activeWeaponEntry);
         internal void NotifyActiveEquippedProjectileChanged(InventoryItemEntry activeProjectileEntry)         => this.OnActiveEquippedProjectileChanged?.Invoke(activeProjectileEntry);
         internal void NotifyActiveSpecialSkillChanged(SkillProfile activeSpecialSkill)                        => this.OnActiveSpecialSkillChanged?.Invoke(activeSpecialSkill);
         internal void NotifyActiveEquippedConsumableItemChanged(InventoryItemEntry activeConsumableItemEntry) => this.OnActiveEquippedConsumableItemChanged?.Invoke(activeConsumableItemEntry);
 
-        //  8. IStatusEffectFlagConsumer implementation
+        //  11. IStatusEffectFlagConsumer implementation
         public void SetStatusEffectFlag(StatusEffectFlagTarget flagType, bool value)
         {
             switch (flagType)
@@ -271,7 +273,7 @@ namespace FlameOfTheLost
             }
         }
 
-        //  9. Refresh Character: Reset all loadout states and ensure validity
+        //  12. Refresh Character: Reset all loadout states and ensure validity
         public void RefreshLoadoutAfterCharacterRefreshment()
         {
             this.IsDeathDisabled = false;
@@ -282,11 +284,254 @@ namespace FlameOfTheLost
             this.ConsumableItemHandler.RefreshLoadoutAfterCharacterRefreshment();
         }
 
-        //  10. ICharacterDeathDisableable implementation
+        //  13. ICharacterDeathDisableable implementation
         public int DeathDisablePriority => 40;
         public void DisableAfterCharacterDeath(CharacterDeathContext context)
         {
             this.IsDeathDisabled = true;
+        }
+
+        //  14. ISaveDataHandler implementation
+        public PlayerCombatLoadoutSaveData CaptureSaveData()
+        {
+            PlayerCombatLoadoutSaveData saveData = new();
+
+            // a. Weapons
+            this.CaptureEquippedEntryIds(this.EquippedWeaponEntries, saveData.EquippedWeaponEntryIds);
+
+            saveData.ActiveWeaponEntryId = this.GetRuntimeId(this.ActiveEquippedWeaponEntry);
+
+            // b. Weapon Special Skills
+            this.CaptureWeaponActiveSpecialSkills(saveData);
+
+            // c. Projectiles
+            this.CaptureEquippedEntryIds(this.EquippedProjectileEntries, saveData.EquippedProjectileEntryIds);
+
+            saveData.ActiveProjectileEntryId = this.GetRuntimeId(this.ActiveEquippedProjectileEntry);
+
+            // d. Consumables
+            this.CaptureEquippedEntryIds(this.EquippedConsumableItemEntries, saveData.EquippedConsumableEntryIds);
+
+            saveData.ActiveConsumableEntryId = this.GetRuntimeId(this.ActiveEquippedConsumableItemEntry);
+
+            return saveData;
+        }
+        public void RestoreSaveData(PlayerCombatLoadoutSaveData saveData)
+        {
+            if (this.InventoryController == null)
+            {
+                Debug.LogError($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] {nameof(InventoryController)} is missing. Combat Loadout cannot be restored.", this);
+                return;
+            }
+
+            // Inventory has already been restored. Progression has also already been restored, therefore the current loadout capacities are already authoritative.
+            this.WeaponHandler.PrepareForSaveDataRestore();
+
+            if (saveData == null)
+            {
+                this.RestoreEmptyLoadout();
+                this.NotifyCombatLoadoutRestored();
+
+                return;
+            }
+
+            // a. Weapons
+            List<InventoryItemEntry> restoredWeapons = this.ResolveInventoryEntries(saveData.EquippedWeaponEntryIds);
+            InventoryItemEntry activeWeapon = this.ResolveInventoryEntry(saveData.ActiveWeaponEntryId);
+
+            this.WeaponHandler.RestoreEquippedEntries(restoredWeapons, activeWeapon);
+
+            this.EnsureRuntimeWeaponsForEquippedEntries();
+
+            // b. Special Skills
+            this.RestoreWeaponActiveSpecialSkills(saveData.WeaponActiveSpecialSkills);
+
+            // c. Projectiles
+            List<InventoryItemEntry> restoredProjectiles = this.ResolveInventoryEntries(saveData.EquippedProjectileEntryIds);
+            InventoryItemEntry activeProjectile = this.ResolveInventoryEntry(saveData.ActiveProjectileEntryId);
+
+            this.ProjectileHandler.RestoreEquippedEntries(restoredProjectiles, activeProjectile);
+
+            // d. Consumables
+            List<InventoryItemEntry> restoredConsumables = this.ResolveInventoryEntries(saveData.EquippedConsumableEntryIds);
+            InventoryItemEntry activeConsumable = this.ResolveInventoryEntry(saveData.ActiveConsumableEntryId);
+
+            this.ConsumableItemHandler.RestoreEquippedEntries(restoredConsumables, activeConsumable);
+
+            this.NotifyCombatLoadoutRestored();
+        }
+
+        // --- Helpers ---
+        //  1. Capture
+        private void CaptureEquippedEntryIds(IReadOnlyList<InventoryItemEntry> equippedEntries, List<string> destination)
+        {
+            if (destination == null) return;
+
+            destination.Clear();
+
+            if (equippedEntries == null) return;
+
+            // One save value per slot. Empty slot => string.Empty.
+            for (int i = 0; i < equippedEntries.Count; i++)
+            {
+                destination.Add(this.GetRuntimeId(equippedEntries[i]));
+            }
+        }
+
+        private void CaptureWeaponActiveSpecialSkills(PlayerCombatLoadoutSaveData saveData)
+        {
+            if (saveData == null) return;
+
+            if (saveData.WeaponActiveSpecialSkills == null)
+            {
+                saveData.WeaponActiveSpecialSkills = new List<PlayerCombatLoadoutWeaponSkillSaveEntry>();
+            }
+            else
+            {
+                saveData.WeaponActiveSpecialSkills.Clear();
+            }
+
+            IReadOnlyList<InventoryItemEntry> weapons = this.EquippedWeaponEntries;
+            if (weapons == null) return;
+
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                InventoryItemEntry weaponEntry = weapons[i];
+                if (weaponEntry == null) continue;
+
+                string weaponEntryId = this.GetRuntimeId(weaponEntry);
+                if (string.IsNullOrWhiteSpace(weaponEntryId)) continue;
+
+                SkillProfile activeSpecialSkill = this.GetWeaponActiveSpecialSkill(weaponEntry);
+
+                PlayerCombatLoadoutWeaponSkillSaveEntry skillSaveEntry = new()
+                {
+                    WeaponEntryId = weaponEntryId,
+                    ActiveSpecialSkillId = activeSpecialSkill != null
+                       ? activeSpecialSkill.Id
+                       : PlayerCombatLoadoutWeaponSkillSaveEntry.NO_SPECIAL_SKILL_ID
+                };
+
+                saveData.WeaponActiveSpecialSkills.Add(skillSaveEntry);
+            }
+        }
+
+        private string GetRuntimeId(InventoryItemEntry entry)
+        {
+            if (entry == null) return string.Empty;
+
+            entry.EnsureRuntimeId();
+
+            return entry.RuntimeId;
+        }
+
+        //  2. Restore - Inventory Entries
+        private InventoryItemEntry ResolveInventoryEntry(string runtimeId)
+        {
+            if (string.IsNullOrWhiteSpace(runtimeId)) return null;
+
+            InventoryItemEntry entry = this.InventoryController?.GetEntryByRuntimeId(runtimeId);
+
+            if (entry == null)
+            {
+                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] Unable to resolve Inventory entry RuntimeId '{runtimeId}'.", this);
+            }
+
+            return entry;
+        }
+
+        private List<InventoryItemEntry> ResolveInventoryEntries(IReadOnlyList<string> runtimeIds)
+        {
+            List<InventoryItemEntry> result = new();
+
+            if (runtimeIds == null) return result;
+
+            // Preserve every slot index.
+            for (int i = 0; i < runtimeIds.Count; i++)
+            {
+                InventoryItemEntry entry = this.ResolveInventoryEntry(runtimeIds[i]);
+
+                result.Add(entry);
+            }
+
+            return result;
+        }
+
+        //  3. Restore - Runtime Weapons
+        private void EnsureRuntimeWeaponsForEquippedEntries()
+        {
+            IReadOnlyList<InventoryItemEntry> weapons = this.EquippedWeaponEntries;
+
+            if (weapons == null) return;
+
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                InventoryItemEntry weaponEntry = weapons[i];
+                if (weaponEntry == null) continue;
+
+                this.WeaponHandler.GetOrCreateRuntimeInstance(weaponEntry);
+            }
+        }
+
+        //  4. Restore - Weapon Special Skills
+        private void RestoreWeaponActiveSpecialSkills(IReadOnlyList<PlayerCombatLoadoutWeaponSkillSaveEntry> savedSkillEntries)
+        {
+            if (savedSkillEntries == null)
+            {
+                // Older save data: retain RuntimeWeapon constructor defaults.
+                return;
+            }
+
+            for (int i = 0; i < savedSkillEntries.Count; i++)
+            {
+                PlayerCombatLoadoutWeaponSkillSaveEntry savedEntry = savedSkillEntries[i];
+                if (savedEntry == null) continue;
+
+                InventoryItemEntry weaponEntry = this.ResolveInventoryEntry(savedEntry.WeaponEntryId);
+                if (weaponEntry == null) continue;
+
+                // Ignore mappings referring to Inventory weapons which are not currently equipped.
+                if (!this.WeaponHandler.IsEquippedEntry(weaponEntry)) continue;
+
+                SkillProfile specialSkill = null;
+
+                if (savedEntry.ActiveSpecialSkillId != PlayerCombatLoadoutWeaponSkillSaveEntry.NO_SPECIAL_SKILL_ID)
+                {
+                    specialSkill = InventorySkillProfileResolver.GetById(savedEntry.ActiveSpecialSkillId);
+                    if (specialSkill == null)
+                    {
+                        Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] Unable to restore active special skill ID '{savedEntry.ActiveSpecialSkillId}' for weapon entry '{savedEntry.WeaponEntryId}'.", this);
+                        continue;
+                    }
+                }
+
+                bool restored = this.SpecialSkillHandler.RestoreWeaponActiveSpecialSkill(weaponEntry, specialSkill);
+                if (!restored)
+                {
+                    Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterCombatLoadoutController)}] Unable to restore active special skill for weapon entry '{savedEntry.WeaponEntryId}'.", this);
+                }
+            }
+        }
+
+        //  5. Empty Restore
+        private void RestoreEmptyLoadout()
+        {
+            this.WeaponHandler.RestoreEquippedEntries(null, null);
+            this.ProjectileHandler.RestoreEquippedEntries(null, null);
+            this.ConsumableItemHandler.RestoreEquippedEntries(null, null);
+        }
+
+        //  6. Restore Notification
+        private void NotifyCombatLoadoutRestored()
+        {
+            this.NotifyEquippedWeaponEntriesChanged();
+
+            this.NotifyActiveEquippedWeaponChanged(this.ActiveEquippedWeaponEntry);
+            this.NotifyActiveEquippedProjectileChanged(this.ActiveEquippedProjectileEntry);
+            this.NotifyActiveEquippedConsumableItemChanged(this.ActiveEquippedConsumableItemEntry);
+            this.NotifyActiveSpecialSkillChanged(this.WeaponHandler.ResolveActiveSpecialSkill());
+
+            this.OnCombatLoadoutRestored?.Invoke();
         }
 
         // --- FOTLMonoBehaviour Overrides ---

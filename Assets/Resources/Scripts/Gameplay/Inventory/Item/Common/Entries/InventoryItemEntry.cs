@@ -6,6 +6,9 @@ namespace FlameOfTheLost
     [Serializable]
     public class InventoryItemEntry
     {
+        [SerializeField] private string _runtimeId;
+        public string RuntimeId => _runtimeId;
+
         [SerializeField] private ItemProfile _item;
         [SerializeField] private int _quantity;
         [SerializeField] private bool _equipped;
@@ -78,6 +81,17 @@ namespace FlameOfTheLost
                 Quantity = source.Quantity,
                 Equipped = resetEquipped ? false : source.Equipped
             };
+        }
+
+        public void EnsureRuntimeId()
+        {
+            if (!string.IsNullOrWhiteSpace(this.RuntimeId)) return;
+
+            _runtimeId = Guid.NewGuid().ToString("N");
+        }
+        internal void RestoreRuntimeId(string runtimeId)
+        {
+            _runtimeId = runtimeId;
         }
     }
 }

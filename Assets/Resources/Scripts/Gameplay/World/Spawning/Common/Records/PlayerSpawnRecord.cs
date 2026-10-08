@@ -4,11 +4,13 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [Serializable]
-    public sealed class PlayerSpawnRecord
+    public sealed class PlayerSpawnRecord : ISaveDataHandler<PlayerSpawnSaveData>
     {
+        // --- Constants ---
         private const int DEFAULT_SPAWN_POINT_ID = 20001;
         private const int INVALID_CHECKPOINT_ID = -1;
 
+        // --- Runtime ---
         [SerializeField] private CharacterRefreshOrigin _spawnPlacementSourceType = CharacterRefreshOrigin.DefaultSpawnPoint;
         public CharacterRefreshOrigin SpawnPlacementSourceType 
         {
@@ -35,6 +37,7 @@ namespace FlameOfTheLost
         public bool HasActiveCheckpoint => this.ActiveCheckpointId >= 0;
 
         // --- Public APIs ---
+        //  1. Activation
         public void SetSpawnPointSpawn(int spawnPointId)
         {
             if (spawnPointId < 0) return;
@@ -47,7 +50,6 @@ namespace FlameOfTheLost
             }
         }
 
-
         public void SetCheckpointSpawn(int checkpointId)
         {
             if (checkpointId < 0) return;
@@ -57,6 +59,7 @@ namespace FlameOfTheLost
             this.SpawnPlacementSourceType = CharacterRefreshOrigin.Checkpoint;
         }
 
+        //  2. Spawn Placement Source
         public bool TrySetSpawnPlacementSource(CharacterRefreshOrigin sourceType)
         {
             switch (sourceType)
@@ -84,6 +87,46 @@ namespace FlameOfTheLost
             if (this.HasActiveSpawnPoint)
             {
                 this.SpawnPlacementSourceType = CharacterRefreshOrigin.DefaultSpawnPoint;
+            }
+        }
+
+        //  3. ISaveDataHandler implementation
+        public PlayerSpawnSaveData CaptureSaveData()
+        {
+            return new PlayerSpawnSaveData
+            {
+                SpawnPlacementSourceType = this.SpawnPlacementSourceType,
+                ActiveSpawnPointId = this.ActiveSpawnPointId,
+                ActiveCheckpointId = this.ActiveCheckpointId
+            };
+        }
+
+        public void RestoreSaveData(PlayerSpawnSaveData saveData)
+        {
+            if (saveData == null) return;
+
+            // Restore the complete record first.
+            this.ActiveSpawnPointId = saveData.ActiveSpawnPointId >= 0
+                ? saveData.ActiveSpawnPointId
+                : PlayerSpawnRecord.DEFAULT_SPAWN_POINT_ID;
+
+            this.ActiveCheckpointId = saveData.ActiveCheckpointId >= 0
+                ? saveData.ActiveCheckpointId
+                : PlayerSpawnRecord.INVALID_CHECKPOINT_ID;
+
+            // Restore the preferred source when possible.
+            if (this.TrySetSpawnPlacementSource(saveData.SpawnPlacementSourceType)) return;
+
+            // Defensive fallback for invalid / older save data.
+            if (this.HasActiveSpawnPoint)
+            {
+                this.SpawnPlacementSourceType = CharacterRefreshOrigin.DefaultSpawnPoint;
+                return;
+            }
+
+            if (this.HasActiveCheckpoint)
+            {
+                this.SpawnPlacementSourceType = CharacterRefreshOrigin.Checkpoint;
             }
         }
     }

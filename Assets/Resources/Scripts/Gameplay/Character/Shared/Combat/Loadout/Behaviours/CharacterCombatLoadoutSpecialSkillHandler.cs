@@ -11,6 +11,7 @@ namespace FlameOfTheLost
             : null;
 
         // --- Public APIs ---
+        //  1. Gameplay Skill Selection
         public bool TrySetEquippedWeaponActiveSpecialSkill(InventoryItemEntry weaponEntry, SkillProfile specialSkill)
         {
             if (this.CombatLoadoutWeaponHandler == null) return false;
@@ -98,6 +99,36 @@ namespace FlameOfTheLost
             return runtimeWeapon != null ? runtimeWeapon.ActiveSpecialSkill : null;
         }
 
+        //  2. Save Restoration
+        internal bool RestoreWeaponActiveSpecialSkill(InventoryItemEntry weaponEntry, SkillProfile specialSkill)
+        {
+            if (this.CombatLoadoutWeaponHandler == null) return false;
+            if (!this.CombatLoadoutWeaponHandler.IsEquippedEntry(weaponEntry)) return false;
+            if (!this.CombatLoadoutWeaponHandler.IsEntryValid(weaponEntry)) return false;
+
+            RuntimeWeapon runtimeWeapon = this.CombatLoadoutWeaponHandler.GetOrCreateRuntimeInstance(weaponEntry);
+            if (runtimeWeapon == null) return false;
+
+            // Explicit null is a valid persisted state.
+            if (specialSkill == null)
+            {
+                runtimeWeapon.ActiveSpecialSkill = null;
+                return true;
+            }
+
+            if (!this.CanEquipSkillByProgression(specialSkill)) return false;
+
+            if (this.InventoryController == null) return false;
+
+            List<SkillProfile> candidates = this.InventoryController.GetPossibleActiveSpecialSkillCandidates(weaponEntry);
+            if (candidates == null || !candidates.Contains(specialSkill)) return false;
+
+            runtimeWeapon.ActiveSpecialSkill = specialSkill;
+
+            return true;
+        }
+
+        //  3. UI
         public Sprite GetActiveSpecialSkillIcon()
         {
             if (this.CombatLoadoutWeaponHandler == null) return null;
@@ -107,6 +138,7 @@ namespace FlameOfTheLost
             return resolvedSkill != null ? resolvedSkill.Icon : null;
         }
 
+        //  4. Character Refresh
         public void RefreshLoadoutAfterCharacterRefreshment()
         {
             // this.CombatLoadoutController.NotifyActiveSpecialSkillChanged(this.CombatLoadoutWeaponHandler.ActiveEquippedRuntimeWeapon?.ActiveSpecialSkill);

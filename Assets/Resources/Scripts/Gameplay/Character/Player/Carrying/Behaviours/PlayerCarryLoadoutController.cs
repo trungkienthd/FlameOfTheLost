@@ -194,6 +194,17 @@ namespace FlameOfTheLost
             this.SetCarriableItemCarryingStateInternal(false);
         }
 
+        //  5. Save
+        public PlayerCarryLoadoutSaveData CaptureSaveData()
+        {
+            PlayerCarryLoadoutSaveData data = new();
+
+            return data;
+        }
+        public void RestoreSaveData(PlayerCarryLoadoutSaveData data)
+        {
+        }
+
         // --- Helpers ---
         //  1. Carriable Item Entry Validation
         private bool IsCarriableItemEntryValid(InventoryItemEntry entry)
