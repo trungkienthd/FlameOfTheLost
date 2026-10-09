@@ -5,7 +5,8 @@ namespace FlameOfTheLost
 {
     public class PlayerCarryLoadoutController : CharacterBehaviourControllerBase, 
         ICharacterRefreshable,
-        ICharacterDeathDisableable
+        ICharacterDeathDisableable,
+        ISaveDataHandler<PlayerCarryLoadoutSaveData>
     {
         // --- States ---
         //  1. References
@@ -194,15 +195,50 @@ namespace FlameOfTheLost
             this.SetCarriableItemCarryingStateInternal(false);
         }
 
-        //  5. Save
+        //  5. ISaveDataHandler implementation
         public PlayerCarryLoadoutSaveData CaptureSaveData()
         {
-            PlayerCarryLoadoutSaveData data = new();
+            PlayerCarryLoadoutSaveData saveData = new();
 
-            return data;
+            if (this.IsCarriableItemEntryValid(this.EquippedCarriableItemEntry))
+            {
+                this.EquippedCarriableItemEntry.EnsureRuntimeId();
+
+                saveData.EquippedCarriableItemEntryId = this.EquippedCarriableItemEntry.RuntimeId;
+            }
+
+            return saveData;
         }
-        public void RestoreSaveData(PlayerCarryLoadoutSaveData data)
+        public void RestoreSaveData(PlayerCarryLoadoutSaveData saveData)
         {
+            // Clear the previously equipped entry.
+            this.SetEquippedCarriableItemEntry(null);
+
+            if (saveData == null || this.InventoryController == null)
+            {
+                this.OnEquippedCarriableItemChanged?.Invoke(null);
+                return;
+            }
+
+            string entryId = saveData.EquippedCarriableItemEntryId;
+            if (string.IsNullOrWhiteSpace(entryId))
+            {
+                this.OnEquippedCarriableItemChanged?.Invoke(null);
+                return;
+            }
+
+            // Retrieve the restored inventory entry using its RuntimeId.
+            InventoryItemEntry entry = this.InventoryController.GetEntryByRuntimeId(entryId);
+            if (!this.IsCarriableItemEntryValid(entry))
+            {
+                this.OnEquippedCarriableItemChanged?.Invoke(null);
+                return;
+            }
+
+            // Restore the equipped carriable item.
+            this.SetEquippedCarriableItemEntry(entry);
+
+            this.OnEquippedCarriableItemChanged?.Invoke(this.EquippedCarriableItemEntry);
         }
 
         // --- Helpers ---
@@ -211,7 +247,6 @@ namespace FlameOfTheLost
         {
             if (!this.TryGetCarriableItemFromEntry(entry, out _)) return false;
             if (entry.Quantity != 1) return false;
-            if (this.InventoryController == null) return false;
             if (!this.InventoryController.ContainsEntry(entry)) return false;
 
             return true;

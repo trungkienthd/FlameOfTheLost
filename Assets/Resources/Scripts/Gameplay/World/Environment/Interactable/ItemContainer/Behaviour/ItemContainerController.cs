@@ -19,6 +19,7 @@ namespace FlameOfTheLost
         private InventoryController InventoryController => _inventoryController;
         private ItemContainerPanelController ItemContainerPanelController => _itemContainerPanelController;
 
+        // --- Public APIs ---
         public bool CanInteract(GameObject interactor)
         {
             if (interactor == null) return false;
@@ -55,6 +56,13 @@ namespace FlameOfTheLost
             return $"Open {this.DisplayName}";
         }
 
+        //  3. Inventory Refresh
+        public void RefreshInventory()
+        {
+            this.InitializeInventory();
+        }
+
+        // --- Helpers ---
         private void InitializeInventory()
         {
             if (this.InventoryController == null) return;

@@ -14,6 +14,10 @@ namespace FlameOfTheLost
             ? _defaultDropOrigin
             : this.transform;
 
+        //  2. Runtime Collectible Refresh
+        [SerializeField] private RuntimeCollectibleRefreshController _runtimeCollectibleRefreshController;
+        private RuntimeCollectibleRefreshController RuntimeCollectibleRefreshController => _runtimeCollectibleRefreshController;
+
         [SerializeField] private List<Transform> _dropAnchors = new();
         private IReadOnlyList<Transform> DropAnchors => _dropAnchors;
 
@@ -51,6 +55,8 @@ namespace FlameOfTheLost
                 );
 
                 collectibleController.ConfigureQuantity(quantity);
+
+                this.RuntimeCollectibleRefreshController?.RegisterRuntimeCollectible(collectibleController);
             }
         }
         private Vector3 ResolveSpawnPosition(int spawnIndex)
@@ -95,7 +101,7 @@ namespace FlameOfTheLost
             this.SpawnDrops(context);
         }
 
-        // --- Binding Hooks ---
+        //  3. Binding Hooks
         protected override void OnBound(HarvestableObjectController controller)
         {
             base.OnBound(controller);
@@ -108,6 +114,23 @@ namespace FlameOfTheLost
             controller.Broken -= this.HandleBroken;
 
             base.OnUnbinding(controller);
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
+        protected override void CacheExternalReferences()
+        {
+            base.CacheExternalReferences();
+
+            if (this.RuntimeCollectibleRefreshController == null) _runtimeCollectibleRefreshController = UnityEngine.Object.FindFirstObjectByType<RuntimeCollectibleRefreshController>();
+        }
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
+            if (this.RuntimeCollectibleRefreshController == null)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(HarvestableDropHandler)}] {nameof(RuntimeCollectibleRefreshController)} reference is missing. Generated collectibles will not be registered for World Refresh.", this);
+            }
         }
     }
 }
