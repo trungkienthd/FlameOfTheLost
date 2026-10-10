@@ -7,20 +7,26 @@ namespace FlameOfTheLost
 {
     public class CharacterDeathHandler : CharacterBehaviourControllerBase, ICharacterRefreshable
     {
-        // --- States ---
-        //  1. References
+        // --- References ---
+        //  1. PLayer Spawner
         [Header("References - Player Spawner")]
         [SerializeField] private PlayerSpawnerController _playerSpawnerController;
         private PlayerSpawnerController PlayerSpawnerController => _playerSpawnerController;
         private HPController HPController => this.CharacterRootController.HPController;
         private CharacterVisualController VisualController => this.CharacterRootController.VisualController;
 
-        //  2. Runtime Death Cause
+        //  2. Game Save (Player Only)
+        [Header("References - Game Save (Player Only)")]
+        [SerializeField] private GameSaveController _gameSaveController;
+        private GameSaveController GameSaveController => _gameSaveController;
+
+        // --- Runtime ---
+        //  1. Runtime Death Cause
         private CharacterDeathCauseEntry LastDeathCause => this.HPController != null
             ? this.HPController.LastDeathCause
             : null;
 
-        //  3. Runtime States
+        //  2. Other Runtime States
         private bool _hasHandledTechnicalDeath = false;
         private bool _hasHandledDeathAnimationFinished = false;
         private bool _hasDistributedReward = false;
@@ -113,6 +119,12 @@ namespace FlameOfTheLost
                 $"SourceCharacter: {(deathCause?.SourceCharacter != null ? deathCause.SourceCharacter.name : "None")}.",
                 this
             );
+
+            // Automatically save persistent Player state before respawning.
+            if (this.CharacterRootController is PlayerRootController)
+            {
+                this.TryAutoSaveOnPlayerDeath();
+            }
 
             this.DisableDeathDisableableSystems(context);
         }
@@ -214,14 +226,34 @@ namespace FlameOfTheLost
             UnityEngine.Object.Destroy(this.CharacterRootController.gameObject);
         }
 
-        //  3. Cache & Validate References
+        //  3. Automatic Saving (Player Only)
+        private void TryAutoSaveOnPlayerDeath()
+        {
+            if (this.GameSaveController == null)
+            {
+                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Cannot autosave player death: {nameof(GameSaveController)} is missing.", this);
+                return;
+            }
+
+            if (!this.GameSaveController.SaveGame())
+            {
+                Debug.LogWarning($"[{this.CharacterName}.{nameof(CharacterDeathHandler)}] Autosave failed on player death.", this);
+            }
+        }
+
+        // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
 
             if (this.PlayerSpawnerController == null) _playerSpawnerController = UnityEngine.Object.FindFirstObjectByType<PlayerSpawnerController>();
-        }
 
+            // Only Player characters require the GameSaveController reference.
+            if (this.CharacterRootController is PlayerRootController && this.GameSaveController == null)
+            {
+                _gameSaveController = UnityEngine.Object.FindFirstObjectByType<GameSaveController>();
+            }
+        }
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();

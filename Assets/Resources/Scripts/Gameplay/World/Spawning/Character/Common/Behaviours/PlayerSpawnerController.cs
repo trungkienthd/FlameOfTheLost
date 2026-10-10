@@ -22,12 +22,17 @@ namespace FlameOfTheLost
         private WorldRefreshController _worldRefreshController;
         private WorldRefreshController WorldRefreshController => _worldRefreshController;
 
-        //  3. Default Spawn Points
+        //  3. Game Save
+        [Header("References - Game Save")]
+        [SerializeField] private GameSaveController _gameSaveController;
+        private GameSaveController GameSaveController => _gameSaveController;
+
+        //  4. Default Spawn Points
         [Header("References - Default Spawn Points (Controllers)")]
         [SerializeField] private List<PlayerDefaultSpawnPointController> _defaultSpawnPointCtrls = new();
         private IReadOnlyList<PlayerDefaultSpawnPointController> DefaultSpawnPointCtrls => _defaultSpawnPointCtrls;
 
-        //  4. Checkpoints
+        //  5. Checkpoints
         [Header("References - Checkpoints (Controllers)")]
         [SerializeField] private List<CheckpointController> _checkpointCtrls = new();
         private IReadOnlyList<CheckpointController> CheckpointCtrls => _checkpointCtrls;
@@ -53,6 +58,9 @@ namespace FlameOfTheLost
         [Header("Runtime - Recorded Player Spawn State(s)")]
         [SerializeField] private PlayerSpawnRecord _spawnRecord = new();
         public PlayerSpawnRecord PlayerSpawnRecord => _spawnRecord;
+
+        //  3. Gameplay Initialization
+        private bool _hasEnteredGameplay;
 
         // --- Events ---
         public event Action OnPlayerSpawned;
@@ -105,6 +113,9 @@ namespace FlameOfTheLost
             this.PlayerSpawnRecord.SetSpawnPointSpawn(spawnPoint.Id);
 
             //Debug.Log($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Activated spawn point: {spawnPoint.DisplayName}", spawnPoint);
+
+            // Automatically save after updating the active spawn point.
+            this.TryAutoSaveAfterActivation();
         }
         public void ActivateCheckpoint(CheckpointController checkpoint)
         {
@@ -113,6 +124,9 @@ namespace FlameOfTheLost
             this.PlayerSpawnRecord.SetCheckpointSpawn(checkpoint.Id);
 
             //Debug.Log($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Activated checkpoint: {checkpoint.CheckpointId}", checkpoint);
+
+            // Automatically save after updating the active spawn point.
+            this.TryAutoSaveAfterActivation();
         }
 
         //  6. ISaveDataHandler<PlayerSpawnSaveData>
@@ -310,12 +324,31 @@ namespace FlameOfTheLost
             return this.CheckpointCtrls.FirstOrDefault(checkpoint => checkpoint != null && checkpoint.Id == checkpointId);
         }
 
+        //  7. Automatic Saving
+        private void TryAutoSaveAfterActivation()
+        {
+            // Do not save during initial scene initialization or respawning.
+            if (!_hasEnteredGameplay || this.IsRespawning) return;
+
+            if (this.GameSaveController == null)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Cannot autosave: {nameof(GameSaveController)} is missing.", this);
+                return;
+            }
+
+            if (!this.GameSaveController.SaveGame())
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Autosave failed after spawn/checkpoint activation.", this);
+            }
+        }
+
         // --- FOTLMonoBehaviour Overrides ---
         protected override void InitializeInternalState()
         {
             base.InitializeInternalState();
 
             this.IsRespawning = false;
+            _hasEnteredGameplay = false;
 
             if (this.PlayerSpawnRecord == null)
             {
@@ -332,10 +365,9 @@ namespace FlameOfTheLost
                 _playerRoot = player != null ? player.GetComponent<PlayerRootController>() : null;
             }
 
-            if (this.WorldRefreshController == null)
-            {
-                _worldRefreshController = UnityEngine.Object.FindFirstObjectByType<WorldRefreshController>();
-            }
+            if (this.WorldRefreshController == null) _worldRefreshController = UnityEngine.Object.FindFirstObjectByType<WorldRefreshController>();
+
+            if (this.GameSaveController == null) _gameSaveController = UnityEngine.Object.FindFirstObjectByType<GameSaveController>();
 
             if (_defaultSpawnPointCtrls == null || _defaultSpawnPointCtrls.Count == 0)
             {
@@ -392,6 +424,9 @@ namespace FlameOfTheLost
             {
                 this.SpawnPlayer();
             }
+
+            // Allow automatic saving only after initial gameplay setup.
+            _hasEnteredGameplay = true;
         }
     }
 }
