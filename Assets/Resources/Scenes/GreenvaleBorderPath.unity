@@ -58540,6 +58540,8 @@ MonoBehaviour:
   _returnToMainMenuButton: {fileID: 1478766759}
   _exitGameButton: {fileID: 75023652}
   _returnToJourneyButton: {fileID: 270595351}
+  _gameSaveController: {fileID: 1868797573}
+  _mainMenuSceneName: MainMenu
 --- !u!1 &57846143
 GameObject:
   m_ObjectHideFlags: 0
