@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 31060179}
   - component: {fileID: 31060181}
   - component: {fileID: 31060180}
+  - component: {fileID: 31060182}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -230,6 +231,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31060178}
   m_CullTransparentMesh: 1
+--- !u!114 &31060182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31060178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d2e4883065bfc4cae200783d31be16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MainMenuBackgroundClickClearAreaHandler
+  _enableDebugLogs: 0
 --- !u!1 &50715937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,6 +1069,7 @@ GameObject:
   - component: {fileID: 170881458}
   - component: {fileID: 170881460}
   - component: {fileID: 170881459}
+  - component: {fileID: 170881461}
   m_Layer: 5
   m_Name: CreditsPanel
   m_TagString: Untagged
@@ -1121,6 +1136,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170881457}
   m_CullTransparentMesh: 1
+--- !u!114 &170881461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170881457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af466476c0d65d4980315a21f26292f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MainMenuCreditsPanelController
+  _enableDebugLogs: 0
 --- !u!1 &224297523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2019,6 +2047,7 @@ GameObject:
   - component: {fileID: 375228858}
   - component: {fileID: 375228860}
   - component: {fileID: 375228859}
+  - component: {fileID: 375228861}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -2083,6 +2112,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375228857}
   m_CullTransparentMesh: 1
+--- !u!114 &375228861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375228857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d2e4883065bfc4cae200783d31be16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MainMenuBackgroundClickClearAreaHandler
+  _enableDebugLogs: 0
 --- !u!1 &417869556
 GameObject:
   m_ObjectHideFlags: 0
@@ -2660,6 +2702,7 @@ GameObject:
   - component: {fileID: 497785287}
   - component: {fileID: 497785289}
   - component: {fileID: 497785288}
+  - component: {fileID: 497785290}
   m_Layer: 5
   m_Name: NewJourneyConfirmationPanel
   m_TagString: Untagged
@@ -2679,6 +2722,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1594554876}
   - {fileID: 991253010}
   m_Father: {fileID: 1148879246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2725,6 +2769,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497785286}
   m_CullTransparentMesh: 1
+--- !u!114 &497785290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497785286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b4281b7a1fe73418826994bd375925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MainMenuNewJourneyConfirmationController
+  _enableDebugLogs: 0
+  _confirmButton: {fileID: 811972287}
+  _cancelButton: {fileID: 463697288}
 --- !u!1 &538162779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2793,9 +2852,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1043667037}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -165}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &545273924
@@ -5435,9 +5494,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1043667037}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 250, y: -285}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116261781
@@ -6281,6 +6340,7 @@ GameObject:
   - component: {fileID: 1366268511}
   - component: {fileID: 1366268513}
   - component: {fileID: 1366268512}
+  - component: {fileID: 1366268514}
   m_Layer: 5
   m_Name: SettingsPanel
   m_TagString: Untagged
@@ -6347,6 +6407,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366268510}
   m_CullTransparentMesh: 1
+--- !u!114 &1366268514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366268510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 425db8efc628a4847b5eb1ff34343f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MainMenuSettingsPanelController
+  _enableDebugLogs: 0
+  _audioButton: {fileID: 417869558}
+  _graphicsButton: {fileID: 1281301968}
+  _gameplayButton: {fileID: 350027699}
+  _controlsButton: {fileID: 556407692}
+  _audioSection: {fileID: 1897131178}
+  _graphicsSection: {fileID: 2068515461}
+  _gameplaySection: {fileID: 1647815977}
+  _controlsSection: {fileID: 1745999446}
 --- !u!1 &1368586683
 GameObject:
   m_ObjectHideFlags: 0
@@ -6939,6 +7020,95 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 20}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1594554875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1594554876}
+  - component: {fileID: 1594554878}
+  - component: {fileID: 1594554877}
+  - component: {fileID: 1594554879}
+  m_Layer: 5
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1594554876
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594554875}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 497785287}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1594554877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594554875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7019608}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1594554878
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594554875}
+  m_CullTransparentMesh: 1
+--- !u!114 &1594554879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594554875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d2e4883065bfc4cae200783d31be16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MainMenuBackgroundClickClearAreaHandler
+  _enableDebugLogs: 0
 --- !u!1 &1647815977
 GameObject:
   m_ObjectHideFlags: 0
@@ -6984,8 +7154,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1648885154}
   - component: {fileID: 1648885155}
+  - component: {fileID: 1648885156}
   m_Layer: 5
-  m_Name: MainMenuPanel
+  m_Name: MainPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7022,6 +7193,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648885153}
   m_CullTransparentMesh: 1
+--- !u!114 &1648885156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648885153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c622e9853e91e14299d5c70d52d3d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MainMenuMainPanelController
+  _enableDebugLogs: 0
+  _continueJourneyButton: {fileID: 1697336522}
+  _newJourneyButton: {fileID: 1684064034}
+  _settingsButton: {fileID: 891028499}
+  _creditsButton: {fileID: 1778426577}
+  _exitButton: {fileID: 848387446}
 --- !u!1 &1654030676
 GameObject:
   m_ObjectHideFlags: 0
@@ -7706,6 +7895,7 @@ GameObject:
   - component: {fileID: 1849775411}
   - component: {fileID: 1849775413}
   - component: {fileID: 1849775414}
+  - component: {fileID: 1849775415}
   m_Layer: 5
   m_Name: TransitionOverlay
   m_TagString: Untagged
@@ -7754,6 +7944,22 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1849775415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849775410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 516a478b34d70cd40a3249b74e72001e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MainMenuTransitionController
+  _enableDebugLogs: 0
+  _canvasGroup: {fileID: 1849775414}
+  _loadingContainer: {fileID: 1043667036}
+  _fadeDuration: 0.5
 --- !u!1 &1864833313
 GameObject:
   m_ObjectHideFlags: 0
@@ -7798,6 +8004,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f164169be9864a2439c13aa7bab79cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuController
+  _enableDebugLogs: 0
+  _mainPanelController: {fileID: 1648885156}
+  _newJourneyConfirmationController: {fileID: 497785290}
+  _settingsPanelController: {fileID: 1366268514}
+  _creditsPanelController: {fileID: 170881461}
+  _transitionController: {fileID: 1849775415}
+  _backgroundClickClearAreaHandlers:
+  - {fileID: 1594554879}
+  - {fileID: 31060182}
+  - {fileID: 375228861}
+  _gameplaySceneName: GreenvaleBorderPath
 --- !u!1 &1872825336
 GameObject:
   m_ObjectHideFlags: 0
