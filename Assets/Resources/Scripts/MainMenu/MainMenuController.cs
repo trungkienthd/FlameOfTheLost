@@ -1,16 +1,29 @@
 using UnityEngine;
 
-public class MainMenuController : MonoBehaviour
+namespace FlameOfTheLost
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class MainMenuController : FOTLMonoBehaviour
     {
-        
-    }
+        // --- References ---
+        [Header("References - Sub Panels")]
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField] private MainMenuMainPanelController _mainPanelController;
+
+        [SerializeField] private MainMenuNewJourneyConfirmationController _newJourneyConfirmationController;
+
+        [SerializeField] private MainMenuSettingsPanelController _settingsPanelController;
+
+        [SerializeField] private MainMenuCreditsPanelController _creditsPanelController;
+
+        [SerializeField] private MainMenuTransitionController _transitionController;
+
+        private MainMenuMainPanelController MainPanelController => _mainPanelController;
+        private MainMenuNewJourneyConfirmationController NewJourneyConfirmationController => _newJourneyConfirmationController;
+
+        private MainMenuSettingsPanelController SettingsPanelController => _settingsPanelController;
+
+        private MainMenuCreditsPanelController CreditsPanelController => _creditsPanelController;
+
+        private MainMenuTransitionController TransitionController => _transitionController;
     }
 }
