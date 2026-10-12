@@ -88,13 +88,7 @@ namespace FlameOfTheLost
         {
             if (!this.EnableDebugLogs) return;
 
-            Debug.Log
-            (
-                $"[{this.gameObject.name}." +
-                $"{nameof(HarvestableDamageReceivingHandler)}] " +
-                message,
-                this
-            );
+            Debug.Log($"[{this.gameObject.name}.{this.GetType().Name}] {message}", this);
         }
 
         protected string GetObjectName(Object target)

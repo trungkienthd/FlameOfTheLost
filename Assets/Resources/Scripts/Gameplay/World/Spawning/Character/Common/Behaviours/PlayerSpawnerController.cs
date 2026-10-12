@@ -61,6 +61,8 @@ namespace FlameOfTheLost
 
         //  3. Gameplay Initialization
         private bool _hasEnteredGameplay;
+        private bool _isSessionInitializing;
+        public bool IsSessionInitializing => _isSessionInitializing;
 
         // --- Events ---
         public event Action OnPlayerSpawned;
@@ -141,6 +143,14 @@ namespace FlameOfTheLost
             this.PlayerSpawnRecord.RestoreSaveData(saveData);
 
             this.ValidateRestoredSpawnRecord();
+        }
+
+        //  7. Finish Initialization Session
+        public void CompleteSessionInitialization()
+        {
+            _isSessionInitializing = false;
+
+            this.PlayerInputHandler?.UnblockAllPlayerInputs();
         }
 
         // --- Helpers ---
@@ -328,7 +338,7 @@ namespace FlameOfTheLost
         private void TryAutoSaveAfterActivation()
         {
             // Do not save during initial scene initialization or respawning.
-            if (!_hasEnteredGameplay || this.IsRespawning) return;
+            if (!_hasEnteredGameplay || this.IsRespawning || this.IsSessionInitializing) return;
 
             if (this.GameSaveController == null)
             {
@@ -348,7 +358,9 @@ namespace FlameOfTheLost
             base.InitializeInternalState();
 
             this.IsRespawning = false;
+
             _hasEnteredGameplay = false;
+            _isSessionInitializing = MainMenuSessionRequest.HasPendingRequest;
 
             if (this.PlayerSpawnRecord == null)
             {
@@ -420,7 +432,13 @@ namespace FlameOfTheLost
         {
             base.InitializeGameplay();
 
-            if (this.SpawnPlayerOnStart)
+            bool isContinuingJourney = MainMenuSessionRequest.PendingJourneyType == MainMenuJourneyType.Continue;
+
+            if (isContinuingJourney)
+            {
+                this.PlayerInputHandler?.BlockAllPlayerInputs();
+            }
+            else if (this.SpawnPlayerOnStart)
             {
                 this.SpawnPlayer();
             }

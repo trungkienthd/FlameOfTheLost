@@ -47,7 +47,6 @@ namespace FlameOfTheLost
         }
 
         //  2. Interaction
-
         public void SetInteractionEnabled(bool interactable)
         {
             if (this.ContinueJourneyButton  != null) this.ContinueJourneyButton.interactable    = interactable;

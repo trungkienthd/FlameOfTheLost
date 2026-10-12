@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -51,6 +52,12 @@ namespace FlameOfTheLost
             }
             if (!this.Repository.TryLoad(out GameSaveData saveData)) return false;
             if (!this.ValidateSaveData(saveData)) return false;
+
+            if (!this.CanRestore())
+            {
+                Debug.LogError($"[{nameof(GameSaveController)}] Cannot restore saved game because required systems are missing.", this);
+                return false;
+            }
 
             this.RestoreSaveData(saveData);
 
@@ -136,6 +143,12 @@ namespace FlameOfTheLost
             if (this.PlayerSpawnerController == null) return false;
             if (this.Player == null) return false;
 
+            if (this.PlayerSpawnerController.IsSessionInitializing)
+            {
+                Debug.LogWarning($"[{nameof(GameSaveController)}] Cannot save while the gameplay session is initializing.", this);
+                return false;
+            }
+
             return true;
         }
         private bool ValidateSaveData(GameSaveData saveData)
@@ -151,6 +164,94 @@ namespace FlameOfTheLost
                 Debug.LogError($"[{this.gameObject.name}.{nameof(GameSaveController)}] Save data version {saveData.Version} is newer than the currently supported version {GameSaveData.CurrentVersion}.", this);
                 return false;
             }
+
+            return true;
+        }
+
+        private bool CanRestore()
+        {
+            if (this.GameConditionController == null) return false;
+            if (this.PlayerSpawnerController == null) return false;
+            if (this.WorldRefreshController == null) return false;
+            if (this.Player == null) return false;
+
+            if (this.Player.ProgressionController == null) return false;
+            if (this.Player.RewardWalletController == null) return false;
+            if (this.Player.InventoryController == null) return false;
+            if (this.Player.CombatLoadoutController == null) return false;
+            if (this.Player.PlayerCarryLoadoutController == null) return false;
+
+            return true;
+        }
+
+        //  4. Gameplay Session Initialization
+        private IEnumerator InitializeGameplaySessionRoutine()
+        {
+            MainMenuJourneyType journeyType = MainMenuSessionRequest.PendingJourneyType;
+            if (journeyType == MainMenuJourneyType.None) yield break;
+
+            Debug.Log($"[{nameof(GameSaveController)}] Initializing gameplay session: {journeyType}", this);
+
+            // Wait until the scene's initial Start callbacks have completed.
+            yield return null;
+
+            bool success = false;
+
+            switch (journeyType)
+            {
+                case MainMenuJourneyType.New:
+                    success = this.InitializeNewJourney();
+                    break;
+
+                case MainMenuJourneyType.Continue:
+                    success = this.InitializeContinuedJourney();
+                    break;
+
+                default:
+                    Debug.LogError($"[{nameof(GameSaveController)}] Unsupported journey type: {journeyType}", this);
+                    break;
+            }
+
+            if (success)
+            {
+                this.PlayerSpawnerController?.CompleteSessionInitialization();
+
+                Debug.Log($"[{nameof(GameSaveController)}] Gameplay session initialized successfully: {journeyType}", this);
+            }
+            else
+            {
+                Debug.LogError($"[{nameof(GameSaveController)}] Gameplay session initialization failed: {journeyType}", this);
+            }
+
+            MainMenuSessionRequest.ClearRequest();
+        }
+
+        private bool InitializeNewJourney()
+        {
+            Debug.Log($"[{nameof(GameSaveController)}] Starting a New Journey.", this);
+
+            if (this.Repository == null)
+            {
+                Debug.LogError($"[{nameof(GameSaveController)}] Repository is missing.", this);
+                return false;
+            }
+
+            this.Repository.DeleteSave();
+
+            return true;
+        }
+
+        private bool InitializeContinuedJourney()
+        {
+            Debug.Log($"[{nameof(GameSaveController)}] Loading previous Journey.", this);
+
+            if (!this.LoadGame())
+            {
+                Debug.LogError($"[{nameof(GameSaveController)}] Failed to restore the previous Journey. The existing save file will be preserved.", this);
+                return false;
+            }
+
+            Debug.Log($"[{nameof(GameSaveController)}] Previous Journey restored successfully.", this);
 
             return true;
         }
@@ -171,7 +272,6 @@ namespace FlameOfTheLost
             if (this.Player == null) _player = UnityEngine.Object.FindFirstObjectByType<PlayerRootController>();
             if (this.WorldRefreshController == null) _worldRefreshController = UnityEngine.Object.FindFirstObjectByType<WorldRefreshController>();
         }
-
         protected override void ValidateExternalReferences()
         {
             base.ValidateExternalReferences();
@@ -190,6 +290,12 @@ namespace FlameOfTheLost
             {
                 Debug.LogError($"[{this.gameObject.name}.{nameof(GameSaveController)}] {nameof(this.Player)} is missing.", this);
             }
+        }
+        protected override void InitializeGameplay()
+        {
+            base.InitializeGameplay();
+
+            this.StartCoroutine(this.InitializeGameplaySessionRoutine());
         }
     }
 }
