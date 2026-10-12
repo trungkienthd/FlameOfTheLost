@@ -22,7 +22,10 @@ namespace FlameOfTheLost
         {
             get
             {
-                if (this.ContinueJourneyButton != null && this.ContinueJourneyButton.interactable) return this.ContinueJourneyButton;
+                if (this.ContinueJourneyButton != null && this.ContinueJourneyButton.gameObject.activeInHierarchy && this.ContinueJourneyButton.IsInteractable())
+                {
+                    return this.ContinueJourneyButton;
+                }
 
                 return this.NewJourneyButton;
             }
@@ -47,16 +50,13 @@ namespace FlameOfTheLost
 
         public void SetInteractionEnabled(bool interactable)
         {
-            if (this.NewJourneyButton   != null) this.NewJourneyButton.interactable = interactable;
-            if (this.SettingsButton     != null) this.SettingsButton.interactable   = interactable;
-            if (this.CreditsButton      != null) this.CreditsButton.interactable    = interactable;
-            if (this.ExitButton         != null) this.ExitButton.interactable       = interactable;
+            if (this.ContinueJourneyButton  != null) this.ContinueJourneyButton.interactable    = interactable;
+            if (this.NewJourneyButton       != null) this.NewJourneyButton.interactable         = interactable;
+            if (this.SettingsButton         != null) this.SettingsButton.interactable           = interactable;
+            if (this.CreditsButton          != null) this.CreditsButton.interactable            = interactable;
+            if (this.ExitButton             != null) this.ExitButton.interactable               = interactable;
 
-            if (!interactable)
-            {
-                if (this.ContinueJourneyButton != null) this.ContinueJourneyButton.interactable = false;
-            }
-            else
+            if (interactable)
             {
                 this.RefreshContinueButton();
             }
@@ -67,7 +67,9 @@ namespace FlameOfTheLost
 
             if (this.ContinueJourneyButton == null) return;
 
-            this.ContinueJourneyButton.interactable = this.MainMenuController.HasValidSaveGame;
+            bool hasValidSaveGame = this.MainMenuController.HasValidSaveGame;
+
+            this.ContinueJourneyButton.gameObject.SetActive(hasValidSaveGame);
         }
 
         // --- Helpers ---
