@@ -110,6 +110,27 @@ SFUI_Panel_Dialogue.png
 
 ---
 
+### 3.6 2D Pixel Art Platformer | Biome - American Forest
+**Publisher:** Superposition Principle
+
+**Prefix:**  SPPAF_
+
+**Usage Scope:**
+- Forest environment tiles and tilesets
+- Trees and vegetation sprites
+- Rocks and stones
+- Forest backgrounds
+- Terrain and environment decorations
+
+**Source:** https://assetstore.unity.com/packages/2d/environments/2d-pixel-art-platformer-biome-american-forest-255694
+
+**Example:**
+`SPPAF_Tile_ForestGround_01.png`
+`SPPAF_Environment_Tree_01.png`
+`SPPAF_Prop_Rock_01.png`
+
+---
+
 ## 4. Custom Project Assets
 
 All internally created assets must use a dedicated project prefix: FTL_
