@@ -46,7 +46,6 @@ namespace FlameOfTheLost
         // --- Runtime ---
         //  1. Respawning
         private bool _isRespawning;
-
         private bool IsRespawning
         {
             get => _isRespawning;
@@ -90,23 +89,45 @@ namespace FlameOfTheLost
         //  3. Save Reload
         public void ReloadPlayerFromSave()
         {
-            /*
-             * Persistent Player systems must already have been restored before calling this.
-             *
-             * PlacePlayer() then refreshes every transient ICharacterRefreshable system.
-             */
             this.PlacePlayer();
 
             this.OnPlayerReloaded?.Invoke();
         }
 
-        //  4. Spawn Point Queries
+        //  4. World Location Placement
+        public bool PlacePlayerAtWorldLocation(Vector3 position, CharacterRefreshOrigin refreshOrigin, CharacterFacingStatus facing = CharacterFacingStatus.Side)
+        {
+            if (this.PlayerRefreshHandler == null)
+            {
+                Debug.LogError($"[{nameof(PlayerSpawnerController)}] {nameof(PlayerRefreshHandler)} is missing.", this);
+                return false;
+            }
+
+            CharacterRefreshTarget target = new CharacterRefreshTarget(position, Quaternion.identity, facing);
+
+            this.PlayerRefreshHandler.Refresh(target, refreshOrigin);
+
+            return true;
+        }
+
+        //  5. Spawn Point Queries
         public PlayerDefaultSpawnPointController GetFirstDefaultSpawnPoint()
         {
             return this.DefaultSpawnPointCtrls.FirstOrDefault(spawnPoint => spawnPoint != null);
         }
+        public PlayerSpawnSaveData CreateSceneDefaultSpawnSaveData()
+        {
+            PlayerDefaultSpawnPointController spawnPoint = this.GetFirstDefaultSpawnPoint();
 
-        //  5. Activation
+            return new PlayerSpawnSaveData
+            {
+                SpawnPlacementSourceType = CharacterRefreshOrigin.DefaultSpawnPoint,
+                ActiveSpawnPointId = spawnPoint != null ? spawnPoint.Id : -1,
+                ActiveCheckpointId = -1
+            };
+        }
+
+        //  6. Activation
         public void ActivateSpawnPoint(PlayerDefaultSpawnPointController spawnPoint)
         {
             if (spawnPoint == null) return;
@@ -115,8 +136,7 @@ namespace FlameOfTheLost
 
             //Debug.Log($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Activated spawn point: {spawnPoint.DisplayName}", spawnPoint);
 
-            // Automatically save after updating the active spawn point.
-            this.TryAutoSaveAfterActivation();
+            this.TryAutoSaveAfterActivation();  // Automatically save after updating the active spawn point.
         }
         public void ActivateCheckpoint(CheckpointController checkpoint)
         {
@@ -126,11 +146,10 @@ namespace FlameOfTheLost
 
             //Debug.Log($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Activated checkpoint: {checkpoint.CheckpointId}", checkpoint);
 
-            // Automatically save after updating the active spawn point.
             this.TryAutoSaveAfterActivation();
         }
 
-        //  6. ISaveDataHandler<PlayerSpawnSaveData>
+        //  7. ISaveDataHandler<PlayerSpawnSaveData>
         public PlayerSpawnSaveData CaptureSaveData()
         {
             return this.PlayerSpawnRecord?.CaptureSaveData() ?? new PlayerSpawnSaveData();
@@ -144,7 +163,7 @@ namespace FlameOfTheLost
             this.ValidateRestoredSpawnRecord();
         }
 
-        //  7. Finish Initialization Session
+        //  8. Session Initialization
         public void CompleteSessionInitialization()
         {
             _isSessionInitializing = false;
@@ -153,7 +172,7 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        //  1. Placement
+        //  1. Normal Placement
         private void PlacePlayer()
         {
             if (this.PlayerRefreshHandler == null)
@@ -162,21 +181,9 @@ namespace FlameOfTheLost
                 return;
             }
 
-            CharacterRefreshTarget spawnResult = this.ResolveSpawn();
+            CharacterRefreshTarget target = this.ResolveSpawn();
 
-            this.PlayerRefreshHandler.Refresh(spawnResult, this.PlayerSpawnRecord.SpawnPlacementSourceType);
-        }
-        public void PlacePlayerAtWorldLocation(Vector3 position, CharacterRefreshOrigin refreshOrigin)
-        {
-            if (this.PlayerRefreshHandler == null)
-            {
-                Debug.LogError($"[{nameof(PlayerSpawnerController)}] {nameof(PlayerRefreshHandler)} is missing.", this);
-                return;
-            }
-
-            CharacterRefreshTarget target = new CharacterRefreshTarget(position, Quaternion.identity, CharacterFacingStatus.Side);
-
-            this.PlayerRefreshHandler.Refresh(target, refreshOrigin);
+            this.PlayerRefreshHandler.Refresh(target, this.PlayerSpawnRecord.SpawnPlacementSourceType);
         }
 
         //  2. Death Respawn
@@ -225,6 +232,13 @@ namespace FlameOfTheLost
         //  3. Spawn Record Initialization
         private void InitializeFirstDefaultSpawnPointIfNeeded()
         {
+            // Continue Journey and World Map Transition will restore their corresponding spawn records.
+            bool isContinuingJourney = MainMenuSessionRequest.PendingJourneyType == MainMenuJourneyType.Continue;
+
+            bool isWorldMapTransition = WorldMapTransitionRequest.HasPendingRequest;
+
+            if (isContinuingJourney || isWorldMapTransition) return;
+
             if (this.PlayerSpawnRecord.SpawnPlacementSourceType == CharacterRefreshOrigin.Checkpoint) return;
 
             PlayerDefaultSpawnPointController firstDefaultSpawnPoint = this.GetFirstDefaultSpawnPoint();
@@ -304,6 +318,7 @@ namespace FlameOfTheLost
             }
 
             Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No valid spawn point was found. Using Player's current transform.", this);
+            
             if (this.PlayerRoot != null)
             {
                 return new CharacterRefreshTarget
@@ -348,7 +363,6 @@ namespace FlameOfTheLost
         //  7. Automatic Saving
         private void TryAutoSaveAfterActivation()
         {
-            // Do not save during initial scene initialization or respawning.
             if (!_hasEnteredGameplay || this.IsRespawning || this.IsSessionInitializing) return;
 
             if (this.GameSaveController == null)
@@ -356,7 +370,6 @@ namespace FlameOfTheLost
                 Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Cannot autosave: {nameof(GameSaveController)} is missing.", this);
                 return;
             }
-
             if (!this.GameSaveController.SaveGame())
             {
                 Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] Autosave failed after spawn/checkpoint activation.", this);

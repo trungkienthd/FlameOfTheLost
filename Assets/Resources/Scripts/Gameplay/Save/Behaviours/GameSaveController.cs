@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FlameOfTheLost
 {
@@ -32,7 +34,20 @@ namespace FlameOfTheLost
         {
             if (!this.CanSave()) return false;
 
-            GameSaveData saveData = this.CaptureSaveData();
+            // Load previous data to preserve records from other scenes.
+            GameSaveData previousSaveData = null;
+            if (this.Repository.HasSave())
+            {
+                if (!this.Repository.TryLoad(out previousSaveData))
+                {
+                    Debug.LogError($"[{nameof(GameSaveController)}] An existing save file could not be loaded. Saving was aborted to prevent data loss.", this);
+                    return false;
+                }
+
+                if (!this.ValidateSaveData(previousSaveData)) return false;
+            }
+
+            GameSaveData saveData = this.CaptureSaveData(previousSaveData);
 
             bool success = this.Repository.Save(saveData);
             if (!success) return false;
@@ -45,21 +60,20 @@ namespace FlameOfTheLost
         //  2. Loading
         public bool LoadGame()
         {
-            if (this.Repository == null)
+            if (!this.TryReadSave(out GameSaveData saveData)) return false;
+
+            if (!this.CanRestore()) return false;
+
+            string currentSceneName = SceneManager.GetActiveScene().name;
+
+            // Prevent loading saved data into the wrong scene.
+            if (saveData.Version >= 2 && saveData.WorldLocation != null && !string.IsNullOrEmpty(saveData.WorldLocation.SceneName) && saveData.WorldLocation.SceneName != currentSceneName)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(GameSaveController)}] {nameof(this.Repository)} is not initialized.", this);
+                Debug.LogError($"[{nameof(GameSaveController)}] Saved game belongs to scene '{saveData.WorldLocation.SceneName}', not '{currentSceneName}'.", this);
                 return false;
             }
-            if (!this.Repository.TryLoad(out GameSaveData saveData)) return false;
-            if (!this.ValidateSaveData(saveData)) return false;
 
-            if (!this.CanRestore())
-            {
-                Debug.LogError($"[{nameof(GameSaveController)}] Cannot restore saved game because required systems are missing.", this);
-                return false;
-            }
-
-            this.RestoreSaveData(saveData);
+            if (!this.RestoreIntoCurrentScene(saveData, null)) return false;
 
             this.GameLoaded?.Invoke();
 
@@ -69,80 +83,248 @@ namespace FlameOfTheLost
         //  3. Save File Queries
         public bool HasSaveGame()
         {
-            return this.Repository.HasSave();
+            return this.Repository != null && this.Repository.HasSave();
+        }
+        public static bool TryGetSavedSceneName(out string sceneName)
+        {
+            sceneName = null;
+
+            GameSaveFileRepository repository = new GameSaveFileRepository();
+
+            if (!repository.TryLoad(out GameSaveData saveData)) return false;
+
+            if (saveData == null) return false;
+            if (saveData.Version > GameSaveData.CurrentVersion) return false;
+
+            sceneName = saveData.Version >= 2
+                ? saveData.WorldLocation?.SceneName
+                : null;
+
+            // Compatibility with older saves.
+            if (string.IsNullOrWhiteSpace(sceneName))
+            {
+                sceneName = "GreenvaleBorderPath";
+            }
+
+            return Application.CanStreamedLevelBeLoaded(sceneName);
         }
 
-        //  3. Save File Deletion
+        //  4. Save File Deletion
         public void DeleteSaveGame()
         {
-            this.Repository.DeleteSave();
+            this.Repository?.DeleteSave();
         }
 
         // --- Helpers ---
         //  1. Capture
-        private GameSaveData CaptureSaveData()
+        private GameSaveData CaptureSaveData(GameSaveData previousSaveData)
         {
-            GameSaveData saveData = new();
+            string currentSceneName = SceneManager.GetActiveScene().name;
 
-            // a. Game Condition
-            saveData.GameCondition = this.GameConditionController?.CaptureSaveData();
+            GameSaveData saveData = new GameSaveData
+            {
+                // a. Game Conditions
+                GameCondition = this.GameConditionController.CaptureSaveData(),
 
-            // b. Spawn
-            saveData.PlayerSpawn = this.PlayerSpawnerController?.CaptureSaveData() ?? new PlayerSpawnSaveData();
+                // b. Player Spawn
+                PlayerSpawn =
+                    this.PlayerSpawnerController.CaptureSaveData(),
 
-            // c. Persistent Player systems
+                // c. Preserve other scenes' spawn records
+                ScenePlayerSpawns = previousSaveData?.ScenePlayerSpawns != null ? new List<PlayerSceneSpawnSaveEntry>(previousSaveData.ScenePlayerSpawns) : new List<PlayerSceneSpawnSaveEntry>(),
+
+                // d. Player World Location
+                WorldLocation = new PlayerWorldLocationSaveData
+                {
+                    SceneName = currentSceneName,
+                    Position = this.Player.transform.position
+                }
+            };
+
+            // e. Persistent Player Systems
             saveData.Player.Progression     = this.Player.ProgressionController?.CaptureSaveData();
             saveData.Player.Reward          = this.Player.RewardWalletController?.CaptureSaveData();
             saveData.Player.Inventory       = this.Player.InventoryController?.CaptureSaveData();
             saveData.Player.CombatLoadout   = this.Player.CombatLoadoutController?.CaptureSaveData();
             saveData.Player.CarryLoadout    = this.Player.PlayerCarryLoadoutController?.CaptureSaveData();
 
-            // d. Player's world location
-            saveData.WorldLocation = new PlayerWorldLocationSaveData
+            // Migrate a previous single-scene spawn record.
+            if (previousSaveData != null && previousSaveData.Version < 3 && previousSaveData.PlayerSpawn != null && previousSaveData.WorldLocation != null && !string.IsNullOrEmpty(previousSaveData.WorldLocation.SceneName))
             {
-                SceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name,
-                Position = this.Player.transform.position
-            };
+                GameSaveController.SetSceneSpawn(saveData.ScenePlayerSpawns, previousSaveData.WorldLocation.SceneName, previousSaveData.PlayerSpawn);
+            }
+
+            // Update the current scene's spawn record.
+            GameSaveController.SetSceneSpawn(saveData.ScenePlayerSpawns, currentSceneName, saveData.PlayerSpawn);
 
             return saveData;
         }
 
-        //  2. Restore
-        private void RestoreSaveData(GameSaveData saveData)
+        //  2. Scene Spawn Records
+        private static void SetSceneSpawn(List<PlayerSceneSpawnSaveEntry> entries, string sceneName, PlayerSpawnSaveData spawnData)
         {
-            if (saveData == null) return;
+            if (entries == null) return;
 
-            // a. Game Condition
-            this.GameConditionController?.RestoreSaveData(saveData.GameCondition);
+            if (string.IsNullOrWhiteSpace(sceneName)) return;
 
-            // b. Spawn
-            this.PlayerSpawnerController?.RestoreSaveData(saveData.PlayerSpawn);
+            if (spawnData == null) return;
 
-            PlayerSaveData playerData = saveData.Player ?? new PlayerSaveData();
+            // Remove the previous record for the same scene.
+            entries.RemoveAll( entry => entry == null || entry.SceneName == sceneName);
 
-            // c. Persistent Player systems
-            this.Player.ProgressionController?.RestoreSaveData(playerData.Progression);
+            // Add the latest scene record.
+            var spawnSaveEntry = new PlayerSceneSpawnSaveEntry
+            {
+                SceneName = sceneName,
+                Spawn = spawnData
+            };
+            entries.Add(spawnSaveEntry);
+        }
+        private PlayerSpawnSaveData FindSceneSpawn(GameSaveData saveData, string sceneName)
+        {
+            if (saveData.ScenePlayerSpawns != null)
+            {
+                foreach (PlayerSceneSpawnSaveEntry entry in saveData.ScenePlayerSpawns)
+                {
+                    if (entry == null) continue;
 
-            //  c.1. Reward
-            this.Player.RewardWalletController?.RestoreSaveData(playerData.Reward);
+                    if (entry.SceneName != sceneName) continue;
 
-            //  c.2. Inventory (MUST be before Loadouts)
-            this.Player.InventoryController?.RestoreSaveData(playerData.Inventory);
+                    return entry.Spawn;
+                }
+            }
 
-            //  c.3. Combat Loadout
-            this.Player.CombatLoadoutController?.RestoreSaveData(playerData.CombatLoadout);
+            // Compatibility with version-1 and version-2 saves.
+            if (saveData.Version < 3 && saveData.PlayerSpawn != null)
+            {
+                bool sameScene = saveData.WorldLocation == null || string.IsNullOrEmpty(saveData.WorldLocation.SceneName) || saveData.WorldLocation.SceneName == sceneName;
+                if (sameScene)
+                {
+                    return saveData.PlayerSpawn;
+                }
+            }
 
-            //  c.4. Carry Loadout
-            this.Player.PlayerCarryLoadoutController?.RestoreSaveData(playerData.CarryLoadout);
-
-            // d. Respawn + transient Character refresh
-            this.PlayerSpawnerController?.ReloadPlayerFromSave();
-
-            // e. Reset ordinary world content
-            this.WorldRefreshController?.RefreshForSaveReload();
+            return null;
         }
 
-        //  3. Validation
+        //  3. Restore
+        private bool RestoreIntoCurrentScene(GameSaveData saveData, WorldMapTransitionRequest transitionRequest)
+        {
+            if (!this.CanRestore()) return false;
+
+            string currentSceneName = SceneManager.GetActiveScene().name;
+
+            // a. Restore Game Conditions
+            this.GameConditionController.RestoreSaveData(saveData.GameCondition);
+
+            // b. Restore current scene's spawn record
+            PlayerSpawnSaveData spawnData = this.FindSceneSpawn(saveData, currentSceneName);
+            if (spawnData == null)
+            {
+                spawnData = this.PlayerSpawnerController.CreateSceneDefaultSpawnSaveData();
+            }
+
+            this.PlayerSpawnerController.RestoreSaveData(spawnData);
+
+            // c. Restore persistent Player systems
+            PlayerSaveData playerData = saveData.Player ?? new PlayerSaveData();
+
+            this.Player.ProgressionController.RestoreSaveData(playerData.Progression);
+            this.Player.RewardWalletController.RestoreSaveData(playerData.Reward);
+            this.Player.InventoryController.RestoreSaveData(playerData.Inventory);  // IMPORTANT: Inventory must be restored before loadouts.
+            this.Player.CombatLoadoutController.RestoreSaveData(playerData.CombatLoadout);
+            this.Player.PlayerCarryLoadoutController.RestoreSaveData(playerData.CarryLoadout);
+
+            // d. Resolve Player placement
+            if (transitionRequest != null)
+            {
+                // d.1. World Map Transition
+                WorldMapBoundaryTransitionHandler boundary = GameSaveController.FindArrivalBoundary(transitionRequest.DestinationBoundary);
+                if (boundary == null)
+                {
+                    Debug.LogError($"[{nameof(GameSaveController)}] Cannot find destination boundary '{transitionRequest.DestinationBoundary}' in scene '{currentSceneName}'.", this);
+                    return false;
+                }
+
+                // Obtain Player collider dimensions.
+                Collider2D playerCollider = this.Player.GetComponent<Collider2D>();
+
+                float halfWidth = playerCollider != null
+                    ? playerCollider.bounds.extents.x
+                    : 0.5f;
+                float halfHeight = playerCollider != null
+                    ? playerCollider.bounds.extents.y
+                    : 0.5f;
+
+                bool isVerticalBoundary = transitionRequest.DestinationBoundary == WorldMapBoundaryDirection.Left || transitionRequest.DestinationBoundary == WorldMapBoundaryDirection.Right;
+
+                // Safe inward placement distance.
+                float inwardOffset = (isVerticalBoundary ? halfWidth : halfHeight) + 0.15f;
+
+                // Clearance from the ends of the boundary.
+                float edgeClearance = (isVerticalBoundary ? halfHeight : halfWidth) + 0.05f;
+
+                Bounds bounds = boundary.GetBoundaryBounds();
+
+                float edgeLength = isVerticalBoundary
+                    ? bounds.size.y
+                    : bounds.size.x;
+
+                edgeClearance = Mathf.Min(edgeClearance, Mathf.Max(0f, edgeLength * 0.49f));
+
+                Vector3 destinationPosition = boundary.CalculateDestinationPosition(transitionRequest.NormalizedBoundaryPosition, inwardOffset, edgeClearance);
+
+                // Refresh the Player once at the destination.
+                bool placed = this.PlayerSpawnerController.PlacePlayerAtWorldLocation(destinationPosition, CharacterRefreshOrigin.WorldMapTransition);
+                if (!placed) return false;
+            }
+            else if (saveData.Version >= 2 && saveData.WorldLocation != null && saveData.WorldLocation.SceneName == currentSceneName
+            )
+            {
+                // d.2. Saved World Location
+                bool placed = this.PlayerSpawnerController.PlacePlayerAtWorldLocation(saveData.WorldLocation.Position, CharacterRefreshOrigin.SavedWorldLocation);
+                if (!placed) return false;
+            }
+            else
+            {
+                // d.3. Legacy Save Fallback
+                this.PlayerSpawnerController.ReloadPlayerFromSave();
+            }
+
+            // e. Refresh ordinary world content
+            this.WorldRefreshController.RefreshForSaveReload();
+
+            return true;
+        }
+
+        //  4. Destination Boundary Lookup
+        private static WorldMapBoundaryTransitionHandler FindArrivalBoundary(WorldMapBoundaryDirection direction)
+        {
+            WorldMapBoundaryTransitionHandler[] handlers = UnityEngine.Object.FindObjectsByType<WorldMapBoundaryTransitionHandler>(FindObjectsSortMode.None);
+
+            foreach (WorldMapBoundaryTransitionHandler handler in handlers)
+            {
+                if (handler == null) continue;
+                if (handler.BoundaryDirection != direction) continue;
+
+                return handler;
+            }
+
+            return null;
+        }
+
+        //  5. Repository
+        private bool TryReadSave(out GameSaveData saveData)
+        {
+            saveData = null;
+
+            if (this.Repository == null) return false;
+            if (!this.Repository.TryLoad(out saveData)) return false;
+
+            return this.ValidateSaveData(saveData);
+        }
+
+        //  6. Validation
         private bool CanSave()
         {
             if (this.Repository == null) return false;
@@ -174,7 +356,6 @@ namespace FlameOfTheLost
 
             return true;
         }
-
         private bool CanRestore()
         {
             if (this.GameConditionController == null) return false;
@@ -182,85 +363,224 @@ namespace FlameOfTheLost
             if (this.WorldRefreshController == null) return false;
             if (this.Player == null) return false;
 
-            if (this.Player.ProgressionController == null) return false;
-            if (this.Player.RewardWalletController == null) return false;
-            if (this.Player.InventoryController == null) return false;
-            if (this.Player.CombatLoadoutController == null) return false;
-            if (this.Player.PlayerCarryLoadoutController == null) return false;
+            if (this.Player.ProgressionController           == null) return false;
+            if (this.Player.RewardWalletController          == null) return false;
+            if (this.Player.InventoryController             == null) return false;
+            if (this.Player.CombatLoadoutController         == null) return false;
+            if (this.Player.PlayerCarryLoadoutController    == null) return false;
 
             return true;
         }
 
-        //  4. Gameplay Session Initialization
+        //  7. Gameplay Session Initialization
         private IEnumerator InitializeGameplaySessionRoutine()
         {
+            // a. Determine the requested initialization type.
+            bool isWorldMapTransition = WorldMapTransitionRequest.HasPendingRequest;
             MainMenuJourneyType journeyType = MainMenuSessionRequest.PendingJourneyType;
-            if (journeyType == MainMenuJourneyType.None) yield break;
-
-            Debug.Log($"[{nameof(GameSaveController)}] Initializing gameplay session: {journeyType}", this);
+            if (!isWorldMapTransition && journeyType == MainMenuJourneyType.None) yield break;
 
             // Wait until the scene's initial Start callbacks have completed.
             yield return null;
 
-            bool success = false;
+            string currentSceneName = SceneManager.GetActiveScene().name;
 
-            switch (journeyType)
+            // b. World Map Transition
+            if (isWorldMapTransition)
             {
-                case MainMenuJourneyType.New:
-                    success = this.InitializeNewJourney();
-                    break;
+                WorldMapTransitionRequest request = WorldMapTransitionRequest.Pending;
 
-                case MainMenuJourneyType.Continue:
-                    success = this.InitializeContinuedJourney();
-                    break;
+                // b.1. Validate transition request.
+                if (request == null)
+                {
+                    this.HandleGameplaySessionInitializationFailure("Transition request is missing.");
+                    yield break;
+                }
+                if (request.DestinationSceneName != currentSceneName)
+                {
+                    this.HandleGameplaySessionInitializationFailure($"Transition request targets '{request.DestinationSceneName}', but the current scene is '{currentSceneName}'.");
+                    yield break;
+                }
 
-                default:
-                    Debug.LogError($"[{nameof(GameSaveController)}] Unsupported journey type: {journeyType}", this);
-                    break;
+                // b.2. Validate destination boundary BEFORE restoring.
+                WorldMapBoundaryTransitionHandler destinationBoundary =
+                    GameSaveController.FindArrivalBoundary(request.DestinationBoundary);
+
+                if (destinationBoundary == null)
+                {
+                    this.HandleGameplaySessionInitializationFailure($"Cannot find destination boundary '{request.DestinationBoundary}' in scene '{currentSceneName}'.");
+                    yield break;
+                }
+
+                // b.3. Read departure save.
+                if (!this.TryReadSave(out GameSaveData transitionSaveData))
+                {
+                    this.HandleGameplaySessionInitializationFailure("Failed to load the saved Player state.");
+                    yield break;
+                }
+
+                // b.4. Restore Player systems and initialize destination.
+                bool transitionSuccess = false;
+
+                try
+                {
+                    transitionSuccess = this.RestoreIntoCurrentScene(transitionSaveData, request);
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogException(exception, this);
+                }
+
+                if (!transitionSuccess)
+                {
+                    this.HandleGameplaySessionInitializationFailure("Failed to restore Player state or initialize the destination scene.");
+                    yield break;
+                }
+
+                // b.5. Complete gameplay initialization.
+                this.PlayerSpawnerController.CompleteSessionInitialization();
+
+                // b.6. Clear the transition request.
+                WorldMapTransitionRequest.ClearRequest();
+
+                // b.7. Save the Player's new scene and arrival position.
+                if (!this.SaveGame())
+                {
+                    Debug.LogError($"[{nameof(GameSaveController)}] Map transition succeeded, but saving the destination location failed.", this);
+                }
+
+                // b.8. Notify listeners.
+                this.GameLoaded?.Invoke();
+
+                Debug.Log($"[{nameof(GameSaveController)}] World map transition completed: '{request.SourceSceneName}' → '{currentSceneName}'.", this);
+
+                yield break;
             }
 
-            if (success)
+            // c. Continue Journey
+            if (journeyType == MainMenuJourneyType.Continue)
             {
-                this.PlayerSpawnerController?.CompleteSessionInitialization();
+                // c.1. Read saved game.
+                if (!this.TryReadSave(out GameSaveData saveData))
+                {
+                    this.HandleGameplaySessionInitializationFailure("Failed to read the saved Journey.");
+                    yield break;
+                }
 
-                Debug.Log($"[{nameof(GameSaveController)}] Gameplay session initialized successfully: {journeyType}", this);
+                // c.2. Resolve saved scene.
+                string savedSceneName = saveData.Version >= 2
+                    ? saveData.WorldLocation?.SceneName
+                    : null;
+                if (string.IsNullOrWhiteSpace(savedSceneName))
+                {
+                    savedSceneName = "GreenvaleBorderPath";
+                }
+
+                // c.3. Redirect to the saved scene when necessary.
+                if (savedSceneName != currentSceneName)
+                {
+                    if (!Application.CanStreamedLevelBeLoaded(savedSceneName))
+                    {
+                        this.HandleGameplaySessionInitializationFailure($"Saved scene '{savedSceneName}' cannot be loaded.");
+                        yield break;
+                    }
+
+                    Debug.Log($"[{nameof(GameSaveController)}] Redirecting Continue Journey to '{savedSceneName}'.", this);
+
+                    // Preserve the Continue request for the destination scene.
+                    try
+                    {
+                        SceneManager.LoadScene(savedSceneName);
+                    }
+                    catch (Exception exception)
+                    {
+                        Debug.LogException(exception, this);
+
+                        this.HandleGameplaySessionInitializationFailure($"Failed to load saved scene '{savedSceneName}'.");
+                    }
+
+                    yield break;
+                }
+
+                // c.4. Restore saved gameplay state.
+                bool restoreSuccess = false;
+
+                try
+                {
+                    restoreSuccess = this.RestoreIntoCurrentScene(saveData, null);
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogException(exception, this);
+                }
+
+                if (!restoreSuccess)
+                {
+                    this.HandleGameplaySessionInitializationFailure("Failed to restore the saved Journey.");
+                    yield break;
+                }
+
+                // c.5. Notify listeners.
+                this.GameLoaded?.Invoke();
+
+                Debug.Log($"[{nameof(GameSaveController)}] Continue Journey restored successfully in '{currentSceneName}'.", this);
             }
+
+            // d. New Journey
+            else if (journeyType == MainMenuJourneyType.New)
+            {
+                if (this.Repository == null)
+                {
+                    Debug.LogError($"[{nameof(GameSaveController)}] Cannot initialize New Journey because the repository is missing.", this);
+                    MainMenuSessionRequest.ClearRequest();
+                    yield break;
+                }
+
+                // Delete previous saved journey.
+                this.Repository.DeleteSave();
+
+                Debug.Log($"[{nameof(GameSaveController)}] New Journey initialized in '{currentSceneName}'.", this);
+            }
+
+            // e. Unsupported Journey Type
             else
             {
-                Debug.LogError($"[{nameof(GameSaveController)}] Gameplay session initialization failed: {journeyType}", this);
+                Debug.LogError($"[{nameof(GameSaveController)}] Unsupported journey type: {journeyType}", this);
+                MainMenuSessionRequest.ClearRequest();
+                yield break;
             }
 
+            // f. Complete session initialization
+            this.PlayerSpawnerController.CompleteSessionInitialization();
+
+            // g. Consume Main Menu request
             MainMenuSessionRequest.ClearRequest();
         }
 
-        private bool InitializeNewJourney()
+        //  8. World Map Transition Failure
+        private void HandleGameplaySessionInitializationFailure(string reason)
         {
-            Debug.Log($"[{nameof(GameSaveController)}] Starting a New Journey.", this);
+            Debug.LogError($"[{nameof(GameSaveController)}] Gameplay session initialization failed: {reason}", this);
 
-            if (this.Repository == null)
+            WorldMapTransitionRequest.ClearRequest();
+            MainMenuSessionRequest.ClearRequest();
+
+            const string mainMenuSceneName = "MainMenu";
+
+            if (!Application.CanStreamedLevelBeLoaded(mainMenuSceneName))
             {
-                Debug.LogError($"[{nameof(GameSaveController)}] Repository is missing.", this);
-                return false;
+                Debug.LogError($"[{nameof(GameSaveController)}] Cannot return to Main Menu because '{mainMenuSceneName}' is unavailable.", this);
+                return;
             }
 
-            this.Repository.DeleteSave();
-
-            return true;
-        }
-
-        private bool InitializeContinuedJourney()
-        {
-            Debug.Log($"[{nameof(GameSaveController)}] Loading previous Journey.", this);
-
-            if (!this.LoadGame())
+            try
             {
-                Debug.LogError($"[{nameof(GameSaveController)}] Failed to restore the previous Journey. The existing save file will be preserved.", this);
-                return false;
+                SceneManager.LoadScene(mainMenuSceneName);
             }
-
-            Debug.Log($"[{nameof(GameSaveController)}] Previous Journey restored successfully.", this);
-
-            return true;
+            catch (Exception exception)
+            {
+                Debug.LogException(exception, this);
+            }
         }
 
         // --- FOTLMonoBehaviour ---

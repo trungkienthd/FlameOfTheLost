@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,7 +7,7 @@ namespace FlameOfTheLost
     public class WorldMapTransitionController : FOTLMonoBehaviour
     {
         // --- References ---
-        [Header("References")]
+        [Header("References - Game Save")]
         [SerializeField] private GameSaveController _gameSaveController;
         private GameSaveController GameSaveController => _gameSaveController;
 
@@ -17,16 +18,15 @@ namespace FlameOfTheLost
         // --- Public APIs ---
         public bool TryTransition(string destinationSceneName, WorldMapBoundaryDirection destinationBoundary, float normalizedBoundaryPosition)
         {
+            // Prevent overlapping transitions.
             if (this.IsTransitioning) return false;
 
+            if (WorldMapTransitionRequest.HasPendingRequest) return false;
+
+            // Validate destination.
             if (string.IsNullOrWhiteSpace(destinationSceneName))
             {
                 Debug.LogError($"[{nameof(WorldMapTransitionController)}] Destination scene name is empty.", this);
-                return false;
-            }
-            if (this.GameSaveController == null)
-            {
-                Debug.LogError($"[{nameof(WorldMapTransitionController)}] {nameof(GameSaveController)} is missing.", this);
                 return false;
             }
             if (!Application.CanStreamedLevelBeLoaded(destinationSceneName))
@@ -34,16 +34,19 @@ namespace FlameOfTheLost
                 Debug.LogError($"[{nameof(WorldMapTransitionController)}] Destination scene '{destinationSceneName}' cannot be loaded.", this);
                 return false;
             }
-
-            _isTransitioning = true;
-
+            if (this.GameSaveController == null)
+            {
+                Debug.LogError($"[{nameof(WorldMapTransitionController)}] {nameof(GameSaveController)} is missing.", this);
+                return false;
+            }
             // Preserve the player's current supported save state.
             if (!this.GameSaveController.SaveGame())
             {
-                Debug.LogError($"[{nameof(WorldMapTransitionController)}] Failed to save game before transitioning.", this);
-                _isTransitioning = false;
+                Debug.LogError($"[{nameof(WorldMapTransitionController)}] Map transition aborted because saving failed.", this);
                 return false;
             }
+
+            _isTransitioning = true;
 
             string sourceSceneName = SceneManager.GetActiveScene().name;
 
@@ -51,9 +54,23 @@ namespace FlameOfTheLost
 
             WorldMapTransitionRequest.SetRequest(request);
 
-            SceneManager.LoadScene(destinationSceneName);
+            // Load destination scene.
+            try
+            {
+                SceneManager.LoadScene(destinationSceneName);
 
-            return true;
+                return true;
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception, this);
+
+                WorldMapTransitionRequest.ClearRequest();
+
+                _isTransitioning = false;
+
+                return false;
+            }
         }
 
         // --- FOTLMonoBehaviour Overrides ---
@@ -68,6 +85,15 @@ namespace FlameOfTheLost
             base.CacheExternalReferences();
 
             if (this.GameSaveController == null) _gameSaveController = UnityEngine.Object.FindFirstObjectByType<GameSaveController>();
+        }
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
+            if (this.GameSaveController == null)
+            {
+                Debug.LogError($"[{nameof(WorldMapTransitionController)}] {nameof(GameSaveController)} is missing.", this);
+            }
         }
     }
 }
