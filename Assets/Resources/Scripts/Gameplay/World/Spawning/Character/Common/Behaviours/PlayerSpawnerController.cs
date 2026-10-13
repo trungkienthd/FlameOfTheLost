@@ -18,8 +18,7 @@ namespace FlameOfTheLost
 
         //  2. World Refresh
         [Header("References - World")]
-        [SerializeField]
-        private WorldRefreshController _worldRefreshController;
+        [SerializeField] private WorldRefreshController _worldRefreshController;
         private WorldRefreshController WorldRefreshController => _worldRefreshController;
 
         //  3. Game Save
@@ -166,6 +165,18 @@ namespace FlameOfTheLost
             CharacterRefreshTarget spawnResult = this.ResolveSpawn();
 
             this.PlayerRefreshHandler.Refresh(spawnResult, this.PlayerSpawnRecord.SpawnPlacementSourceType);
+        }
+        public void PlacePlayerAtWorldLocation(Vector3 position, CharacterRefreshOrigin refreshOrigin)
+        {
+            if (this.PlayerRefreshHandler == null)
+            {
+                Debug.LogError($"[{nameof(PlayerSpawnerController)}] {nameof(PlayerRefreshHandler)} is missing.", this);
+                return;
+            }
+
+            CharacterRefreshTarget target = new CharacterRefreshTarget(position, Quaternion.identity, CharacterFacingStatus.Side);
+
+            this.PlayerRefreshHandler.Refresh(target, refreshOrigin);
         }
 
         //  2. Death Respawn
@@ -360,7 +371,7 @@ namespace FlameOfTheLost
             this.IsRespawning = false;
 
             _hasEnteredGameplay = false;
-            _isSessionInitializing = MainMenuSessionRequest.HasPendingRequest;
+            _isSessionInitializing = MainMenuSessionRequest.HasPendingRequest || WorldMapTransitionRequest.HasPendingRequest;
 
             if (this.PlayerSpawnRecord == null)
             {
@@ -433,8 +444,8 @@ namespace FlameOfTheLost
             base.InitializeGameplay();
 
             bool isContinuingJourney = MainMenuSessionRequest.PendingJourneyType == MainMenuJourneyType.Continue;
-
-            if (isContinuingJourney)
+            bool isWorldMapTransition = WorldMapTransitionRequest.HasPendingRequest;
+            if (isContinuingJourney || isWorldMapTransition)
             {
                 this.PlayerInputHandler?.BlockAllPlayerInputs();
             }

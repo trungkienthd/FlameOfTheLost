@@ -4,6 +4,7 @@ namespace FlameOfTheLost
     {
         DefaultSpawnPoint = 0,
         Checkpoint = 1,
-        //Scripted = 2,
+        WorldMapTransition = 2,
+        SavedWorldLocation = 3
     }
 }

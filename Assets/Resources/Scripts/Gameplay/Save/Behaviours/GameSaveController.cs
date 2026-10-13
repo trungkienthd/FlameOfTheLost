@@ -97,6 +97,13 @@ namespace FlameOfTheLost
             saveData.Player.CombatLoadout   = this.Player.CombatLoadoutController?.CaptureSaveData();
             saveData.Player.CarryLoadout    = this.Player.PlayerCarryLoadoutController?.CaptureSaveData();
 
+            // d. Player's world location
+            saveData.WorldLocation = new PlayerWorldLocationSaveData
+            {
+                SceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name,
+                Position = this.Player.transform.position
+            };
+
             return saveData;
         }
 
