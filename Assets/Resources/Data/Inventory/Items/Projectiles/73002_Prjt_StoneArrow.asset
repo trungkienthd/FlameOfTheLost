@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ba1ae50026d434c9fbe62d12c59dbc, type: 3}
+  m_Name: 73002_Prjt_StoneArrow
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ProjectileProfile
+  _id: 73002
+  _key: STONE_ARROW
+  _displayName: Stone Arrow
+  _description: 
+  _icon: {fileID: 21300000, guid: 9c404df72e8c2b343932c19ab856cf5e, type: 3}
+  _isStackable: 1
+  _maxStackSize: 99
+  _projectileType: 1
+  _projectilePrefab: {fileID: 1925744174769983495, guid: b0e85b637a9a9164d9820fa5d0d41e7a, type: 3}

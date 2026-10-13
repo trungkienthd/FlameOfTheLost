@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ba1ae50026d434c9fbe62d12c59dbc, type: 3}
+  m_Name: 73003_Prjt_Pebble
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ProjectileProfile
+  _id: 73003
+  _key: PEBBLE
+  _displayName: Pebble
+  _description: 
+  _icon: {fileID: 21300000, guid: ee783af553e5e2c42b62096ac5cf699d, type: 3}
+  _isStackable: 1
+  _maxStackSize: 99
+  _projectileType: 2
+  _projectilePrefab: {fileID: 3043559614890823337, guid: c7622f3bb5dc9c940b5ee1e75cf79745, type: 3}
