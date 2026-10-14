@@ -287,7 +287,7 @@ namespace FlameOfTheLost
             PlayerDefaultSpawnPointController fallback = this.GetFirstDefaultSpawnPoint();
             if (fallback == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No valid default spawn point exists for restored Player spawn data.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No valid default spawn point exists for restored Player spawn data.", this);
                 return;
             }
 

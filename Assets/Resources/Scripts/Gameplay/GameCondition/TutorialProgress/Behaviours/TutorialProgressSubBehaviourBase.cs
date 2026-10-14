@@ -15,20 +15,23 @@ namespace FlameOfTheLost
 
         // --- Internal APIs ---
         //  1. Gameplay Reference Lifecycle
-        internal void BindGameplayReferences()
+        internal bool BindGameplayReferences()
         {
-            if (!this.EnsureBound()) return;
-            if (this.GameplayReferencesBound) return;
+            if (!this.EnsureBound()) return false;
+
+            if (this.GameplayReferencesBound) return true;
 
             this.PrepareGameplayReferences();
 
-            if (!this.ValidateGameplayReferences()) return;
+            if (!this.ValidateGameplayReferences()) return false;
 
             this.BindGameplayReferencesInternal();
 
             _gameplayReferencesBound = true;
 
             this.OnGameplayReferencesBound();
+
+            return true;
         }
         internal void UnbindGameplayReferences()
         {

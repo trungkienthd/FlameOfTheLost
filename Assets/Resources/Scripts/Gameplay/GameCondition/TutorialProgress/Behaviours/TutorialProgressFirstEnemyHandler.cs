@@ -7,8 +7,7 @@ namespace FlameOfTheLost
         // --- References ---
         //  1. First Enemy Source
         [Header("References (First Enemy Source)")]
-        [SerializeField]
-        private EnemyGroupSpawnerController _preferredFirstEnemySpawner;
+        [SerializeField] private EnemyGroupSpawnerController _preferredFirstEnemySpawner;
         private EnemyGroupSpawnerController PreferredFirstEnemySpawner => _preferredFirstEnemySpawner;
 
         // --- Runtime ---
@@ -27,6 +26,8 @@ namespace FlameOfTheLost
         //      1.1. Validation
         protected override bool ValidateGameplayReferences()
         {
+            if (!this.ValidatePlayerReference()) return false;
+
             bool isValid = true;
 
             if (this.Player.DamageReceivingHandler == null)
@@ -77,6 +78,9 @@ namespace FlameOfTheLost
             }
 
             this.UnbindFirstEnemy();
+
+            _firstEnemySpawner = null;
+            _firstEnemySpawnEntry = null;
 
             base.UnbindGameplayReferencesInternal();
         }

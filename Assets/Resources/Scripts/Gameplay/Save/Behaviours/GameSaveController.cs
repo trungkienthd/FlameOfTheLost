@@ -14,7 +14,15 @@ namespace FlameOfTheLost
         [SerializeField] private PlayerSpawnerController _playerSpawnerController;
         [SerializeField] private PlayerRootController _player;
         [SerializeField] private WorldRefreshController _worldRefreshController;
-        private GameConditionController GameConditionController => _gameConditionController;
+        private GameConditionController GameConditions
+        {
+            get
+            {
+                if (GameConditionController.Instance != null) return GameConditionController.Instance;
+
+                return _gameConditionController;
+            }
+        }
         private PlayerSpawnerController PlayerSpawnerController => _playerSpawnerController;
         private PlayerRootController Player => _player;
         private WorldRefreshController WorldRefreshController => _worldRefreshController;
@@ -124,7 +132,7 @@ namespace FlameOfTheLost
             GameSaveData saveData = new GameSaveData
             {
                 // a. Game Conditions
-                GameCondition = this.GameConditionController.CaptureSaveData(),
+                GameCondition = this.GameConditions.CaptureSaveData(),
 
                 // b. Player Spawn
                 PlayerSpawn =
@@ -215,7 +223,9 @@ namespace FlameOfTheLost
             string currentSceneName = SceneManager.GetActiveScene().name;
 
             // a. Restore Game Conditions
-            this.GameConditionController.RestoreSaveData(saveData.GameCondition);
+            this.GameConditions.UnbindGameplayReferences();     // Suspend gameplay observations while saved data is being restored.
+
+            this.GameConditions.RestoreSaveData(saveData.GameCondition);
 
             // b. Restore current scene's spawn record
             PlayerSpawnSaveData spawnData = this.FindSceneSpawn(saveData, currentSceneName);
@@ -294,6 +304,13 @@ namespace FlameOfTheLost
             // e. Refresh ordinary world content
             this.WorldRefreshController.RefreshForSaveReload();
 
+            // f. Rebind GameCondition gameplay dependencies.
+            if (!this.GameConditions.BindGameplayReferences())
+            {
+                Debug.LogError($"[{nameof(GameSaveController)}] Failed to bind GameCondition gameplay references.", this);
+                return false;
+            }
+
             return true;
         }
 
@@ -328,7 +345,7 @@ namespace FlameOfTheLost
         private bool CanSave()
         {
             if (this.Repository == null) return false;
-            if (this.GameConditionController == null) return false;
+            if (this.GameConditions == null) return false;
             if (this.PlayerSpawnerController == null) return false;
             if (this.Player == null) return false;
 
@@ -358,7 +375,7 @@ namespace FlameOfTheLost
         }
         private bool CanRestore()
         {
-            if (this.GameConditionController == null) return false;
+            if (this.GameConditions == null) return false;
             if (this.PlayerSpawnerController == null) return false;
             if (this.WorldRefreshController == null) return false;
             if (this.Player == null) return false;
@@ -378,10 +395,25 @@ namespace FlameOfTheLost
             // a. Determine the requested initialization type.
             bool isWorldMapTransition = WorldMapTransitionRequest.HasPendingRequest;
             MainMenuJourneyType journeyType = MainMenuSessionRequest.PendingJourneyType;
-            if (!isWorldMapTransition && journeyType == MainMenuJourneyType.None) yield break;
 
             // Wait until the scene's initial Start callbacks have completed.
             yield return null;
+
+            if (!isWorldMapTransition && journeyType == MainMenuJourneyType.None)
+            {
+                if (this.GameConditions == null)
+                {
+                    Debug.LogError($"[{nameof(GameSaveController)}] GameConditions is missing.", this);
+                    yield break;
+                }
+
+                if (!this.GameConditions.BindGameplayReferences())
+                {
+                    Debug.LogError($"[{nameof(GameSaveController)}] Failed to initialize GameCondition gameplay references.", this);
+                }
+
+                yield break;
+            }
 
             string currentSceneName = SceneManager.GetActiveScene().name;
 
@@ -536,8 +568,19 @@ namespace FlameOfTheLost
                     yield break;
                 }
 
-                // Delete previous saved journey.
+                // d.1. Delete previous saved journey.
                 this.Repository.DeleteSave();
+
+                // d.2. Reset GameConditions.
+                this.GameConditions.UnbindGameplayReferences();
+                this.GameConditions.ResetConditions();
+
+                // d.3. Bind current gameplay dependencies.
+                if (!this.GameConditions.BindGameplayReferences())
+                {
+                    this.HandleGameplaySessionInitializationFailure("Failed to initialize GameCondition gameplay references for New Journey.");
+                    yield break;
+                }
 
                 Debug.Log($"[{nameof(GameSaveController)}] New Journey initialized in '{currentSceneName}'.", this);
             }
@@ -594,7 +637,7 @@ namespace FlameOfTheLost
         {
             base.CacheExternalReferences();
 
-            if (this.GameConditionController == null) _gameConditionController = UnityEngine.Object.FindFirstObjectByType<GameConditionController>();
+            if (this.GameConditions == null) _gameConditionController = GameConditionController.Instance ?? UnityEngine.Object.FindFirstObjectByType<GameConditionController>();
             if (this.PlayerSpawnerController == null) _playerSpawnerController = UnityEngine.Object.FindFirstObjectByType<PlayerSpawnerController>();
             if (this.Player == null) _player = UnityEngine.Object.FindFirstObjectByType<PlayerRootController>();
             if (this.WorldRefreshController == null) _worldRefreshController = UnityEngine.Object.FindFirstObjectByType<WorldRefreshController>();
@@ -603,9 +646,9 @@ namespace FlameOfTheLost
         {
             base.ValidateExternalReferences();
 
-            if (this.GameConditionController == null)
+            if (this.GameConditions == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(GameSaveController)}] {nameof(this.GameConditionController)} is missing.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(GameSaveController)}] {nameof(this.GameConditions)} is missing.", this);
             }
 
             if (this.PlayerSpawnerController == null)

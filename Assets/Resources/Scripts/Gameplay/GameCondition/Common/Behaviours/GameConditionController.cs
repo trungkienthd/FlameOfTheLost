@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.Overlays;
-using UnityEditor.U2D.Tooling.Analyzer;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FlameOfTheLost
 {
-    public class GameConditionController : FOTLMonoBehaviour, ISaveDataHandler<GameConditionSaveData>
+    public class GameConditionController : FOTLSingletonMonoBehaviour<GameConditionController>, ISaveDataHandler<GameConditionSaveData>
     {
+        // --- Singleton ---
+        protected override bool PersistAcrossScenes => true;
+
         // --- References ---
         //  1. Sub-Behaviours
         [Header("References (Sub-Behaviours)")]
@@ -21,7 +23,7 @@ namespace FlameOfTheLost
         [SerializeField] private List<GameConditionInitialStateEntry> _initialStateEntries = new();
         private IReadOnlyList<GameConditionInitialStateEntry> InitialStateEntries => _initialStateEntries;
 
-        // --- Runtime State ---
+        // --- Runtime ---
         //  1. Authoritative Runtime State
         private GameConditionStateMap _conditionStates = new();
 
@@ -32,11 +34,40 @@ namespace FlameOfTheLost
         [SerializeField] private List<GameConditionStateEntry> _conditionStateEntries = new();
         private IReadOnlyList<GameConditionStateEntry> ConditionStateEntries => _conditionStateEntries;
 
+        //  3. Runtime Ref
+        private bool _gameplayReferencesBound;
+
         // --- Events ---
         public event Action<GameConditionKey, bool> ConditionStateChanged;
 
         // --- Public APIs ---
-        //  1. State Queries
+        //  1. Gameplay Reference Lifecycle
+        public bool BindGameplayReferences()
+        {
+            if (_gameplayReferencesBound) return true;
+
+            if (this.TutorialProgressController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] Cannot bind gameplay references because TutorialProgressController is missing.", this);
+                return false;
+            }
+
+            if (!this.TutorialProgressController.BindGameplayReferences()) return false;
+
+            _gameplayReferencesBound = true;
+
+            return true;
+        }
+        public void UnbindGameplayReferences()
+        {
+            if (!_gameplayReferencesBound) return;
+
+            this.TutorialProgressController?.UnbindGameplayReferences();
+
+            _gameplayReferencesBound = false;
+        }
+
+        //  2. State Queries
         public bool GetConditionState(GameConditionKey conditionKey)
         {
             if (conditionKey == GameConditionKey.None) return false;
@@ -45,7 +76,7 @@ namespace FlameOfTheLost
             return value;
         }
 
-        //  2. State Updates
+        //  3. State Updates
         public void SetConditionState(GameConditionKey conditionKey, bool value)
         {
             if (conditionKey == GameConditionKey.None) return;
@@ -68,7 +99,7 @@ namespace FlameOfTheLost
             this.SetConditionState(conditionKey, false);
         }
 
-        //  3. Reset
+        //  4. Reset
         public void ResetConditions()
         {
             this.InitializeConditionStates();
@@ -76,7 +107,7 @@ namespace FlameOfTheLost
             this.PublishAllConditionStates();
         }
 
-        //  4. ISaveDataHandler: Save / Load
+        //  5. ISaveDataHandler implementation
         public GameConditionSaveData CaptureSaveData()
         {
             GameConditionSaveData saveData = new();
@@ -114,7 +145,22 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        //  1. Runtime State Initialization
+        //  1. Scene changed event
+        private void HandleActiveSceneChanged(Scene previousScene, Scene nextScene)
+        {
+            if (Instance != this) return;
+
+            // Invalidate bindings to gameplay objects from the previous scene.
+            this.UnbindGameplayReferences();
+
+            // Returning to the Main Menu ends the current gameplay session.
+            if (nextScene.name == "MainMenu")
+            {
+                UnityEngine.Object.Destroy(this.gameObject);
+            }
+        }
+
+        //  2. Runtime State Initialization
         private void InitializeConditionStates()
         {
             if (_conditionStates == null)
@@ -142,7 +188,7 @@ namespace FlameOfTheLost
             this.RefreshRuntimeDebugEntries();
         }
 
-        //  2. Inspector / Debug State
+        //  3. Inspector / Debug State
         private void RefreshRuntimeDebugEntries()
         {
             if (_conditionStateEntries == null)
@@ -165,7 +211,7 @@ namespace FlameOfTheLost
             }
         }
 
-        //  3. State Publishing
+        //  4. State Publishing
         private void PublishAllConditionStates()
         {
             if (_conditionStates == null) return;
@@ -203,7 +249,19 @@ namespace FlameOfTheLost
         {
             base.InitializeInternalState();
 
+            _gameplayReferencesBound = false;
+
             this.InitializeConditionStates();
+
+            SceneManager.activeSceneChanged += this.HandleActiveSceneChanged;
+        }
+        protected override void CleanupStates()
+        {
+            SceneManager.activeSceneChanged -= this.HandleActiveSceneChanged;
+
+            this.UnbindGameplayReferences();
+
+            base.CleanupStates();
         }
         protected override void UnbindInternalReferences()
         {

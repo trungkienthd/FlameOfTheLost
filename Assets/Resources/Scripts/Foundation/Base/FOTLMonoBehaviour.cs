@@ -9,8 +9,16 @@ namespace FlameOfTheLost
         [SerializeField] private bool _enableDebugLogs = false;
         private bool EnableDebugLogs => _enableDebugLogs;
 
+        // --- Runtime ---
+        private bool _behaviourInitialized;
+
+        // --- Unity Callbacks ---
         protected virtual void Awake()
         {
+            _behaviourInitialized = this.InitializeBehaviour();
+
+            if (!_behaviourInitialized) return;
+
             this.CacheInternalReferences();
             this.ValidateInternalReferences();
             this.BindInternalReferences();
@@ -19,6 +27,8 @@ namespace FlameOfTheLost
 
         protected virtual void Start()
         {
+            if (!_behaviourInitialized) return;
+
             this.CacheExternalReferences();
             this.ValidateExternalReferences();
             this.BindExternalReferences();
@@ -28,6 +38,8 @@ namespace FlameOfTheLost
 
         private void OnDestroy()
         {
+            if (!_behaviourInitialized) return;
+
             this.CleanupStates();
             this.UnbindInternalReferences();
             this.UnbindExternalReferences();
@@ -35,50 +47,43 @@ namespace FlameOfTheLost
 
         // --- Helpers ---
         //  1. Lifecycle
+        protected virtual bool InitializeBehaviour()
+        {
+            return true;
+        }
         protected virtual void CacheInternalReferences()
         {
         }
-
         protected virtual void ValidateInternalReferences()
         {
         }
-
         protected virtual void BindInternalReferences()
         {
         }
-
         protected virtual void InitializeInternalState()
         {
         }
-
         protected virtual void CacheExternalReferences()
         {
         }
-
         protected virtual void ValidateExternalReferences()
         {
         }
-
         protected virtual void BindExternalReferences()
         {
         }
-
         protected virtual void InitializePregameplayState()
         {
         }
-
         protected virtual void InitializeGameplay()
         {
         }
-
         protected virtual void UnbindInternalReferences()
         {
         }
-
         protected virtual void UnbindExternalReferences()
         {
         }
-
         protected virtual void CleanupStates()
         {
         }

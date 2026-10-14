@@ -20,6 +20,58 @@ namespace FlameOfTheLost
         private TutorialProgressFirstEnemyHandler FirstEnemyHandler => _firstEnemyHandler;
 
         // --- Public APIs ---
+        //  1. Gameplay Reference Lifecycle
+        public bool BindGameplayReferences()
+        {
+            if (!this.EnsureBound()) return false;
+
+            this.UnbindGameplayReferences();
+
+            this.ResolvePlayerReference();
+
+            if (this.Player == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressController)}] Cannot bind gameplay references because Player is missing.", this);
+                return false;
+            }
+
+            if (this.EquipmentHandler == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressController)}] EquipmentHandler is missing.", this);
+                return false;
+            }
+
+            // Equipment monitoring is mandatory.
+            if (!this.EquipmentHandler.BindGameplayReferences())
+            {
+                this.UnbindGameplayReferences();
+                return false;
+            }
+
+            // First-enemy monitoring is specific to the tutorial map.
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "GreenvaleBorderPath")
+            {
+                if (this.FirstEnemyHandler != null)
+                {
+                    // A missing tutorial enemy should not block the entire gameplay session.
+                    if (!this.FirstEnemyHandler.BindGameplayReferences())
+                    {
+                        Debug.LogWarning($"[{this.gameObject.name}.{nameof(TutorialProgressController)}] First-enemy tutorial monitoring could not be initialized.", this);
+                    }
+                }
+            }
+
+            return true;
+        }
+        public void UnbindGameplayReferences()
+        {
+            this.EquipmentHandler?.UnbindGameplayReferences();
+            this.FirstEnemyHandler?.UnbindGameplayReferences();
+
+            _player = null;
+        }
+
+        //  2. Reset
         public void ResetTutorialProgress()
         {
             if (!this.EnsureBound()) return;
@@ -56,6 +108,15 @@ namespace FlameOfTheLost
             this.GameConditionController.SatisfyCondition(GameConditionKey.FirstEnemyDefeated);
         }
 
+        // --- Helpers ---
+        private void ResolvePlayerReference()
+        {
+            _player = null;
+
+            GameObject player = GameObject.Find("Player");
+            if (player != null) _player = player.GetComponent<CharacterRootController>();
+        }
+
         // --- FOTLMonoBehaviour Overrides  ----
         protected override void CacheInternalReferences()
         {
@@ -78,32 +139,10 @@ namespace FlameOfTheLost
             this.EquipmentHandler?.Bind(this);
             this.FirstEnemyHandler?.Bind(this);
         }
-        protected override void CacheExternalReferences()
-        {
-            base.CacheExternalReferences();
-
-            if (this.Player == null)
-            {
-                GameObject player = GameObject.Find("Player");
-                if (player != null) _player = player.GetComponent<CharacterRootController>();
-            }
-        }
-        protected override void ValidateExternalReferences()
-        {
-            base.ValidateExternalReferences();
-
-            if (this.Player == null) Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressController)}] {nameof(this.Player)} reference is not assigned.", this);
-        }
-        protected override void BindExternalReferences()
-        {
-            base.BindExternalReferences();
-
-            // The Brain has completed external-reference caching before allowing its Sub-Behaviours to bind gameplay dependencies.
-            this.EquipmentHandler?.BindGameplayReferences();
-            this.FirstEnemyHandler?.BindGameplayReferences();
-        }
         protected override void UnbindInternalReferences()
         {
+            this.UnbindGameplayReferences();
+
             this.EquipmentHandler?.Unbind(this);
             this.FirstEnemyHandler?.Unbind(this);
 
