@@ -10,7 +10,7 @@ namespace FlameOfTheLost
         // --- Events ---
         public event Action<EnemySpawnedContext<T>> TypedEnemySpawned;
 
-        // --- Hooks ---
+        // --- Helpers ---
         //  1. Spawn Entry Filtering
         protected override IEnumerable<CharacterAISpawnEntry> GetSpawnEntries(CharacterAIDefaultSpawnPointController spawnPoint)
         {

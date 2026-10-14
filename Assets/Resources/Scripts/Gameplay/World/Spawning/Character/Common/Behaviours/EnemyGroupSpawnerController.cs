@@ -17,6 +17,37 @@ namespace FlameOfTheLost
         public event Action<EnemySpawnEntry, CharacterRootController> EnemySpawned;
 
         // --- Public APIs ---
+        public bool TryGetSpawnEntryBySpawnPointId(int spawnPointId, out EnemySpawnEntry spawnEntry)
+        {
+            spawnEntry = null;
+
+            if (spawnPointId <= 0) return false;
+            if (this.EnemyDefaultSpawnPointControllers == null) return false;
+
+            foreach (EnemyDefaultSpawnPointController spawnPoint in this.EnemyDefaultSpawnPointControllers)
+            {
+                if (spawnPoint == null || spawnPoint.Id != spawnPointId) continue;
+
+                foreach (CharacterAISpawnEntry candidate in this.GetSpawnEntries(spawnPoint))
+                {
+                    if (candidate is not EnemySpawnEntry enemyEntry || !enemyEntry.IsValid) continue;
+
+                    // A single DSP must uniquely identify the tutorial target's entry.
+                    if (spawnEntry != null)
+                    {
+                        Debug.LogError($"[{this.gameObject.name}.{nameof(EnemyGroupSpawnerController)}] Multiple valid enemy entries exist for DSP ID {spawnPointId}. Specify a unique tutorial spawn point.", this);
+
+                        spawnEntry = null;
+                        return false;
+                    }
+
+                    spawnEntry = enemyEntry;
+                }
+            }
+
+            return spawnEntry != null;
+        }
+
         public bool TryGetFirstSpawnEntry(out EnemySpawnEntry spawnEntry)
         {
             spawnEntry = null;

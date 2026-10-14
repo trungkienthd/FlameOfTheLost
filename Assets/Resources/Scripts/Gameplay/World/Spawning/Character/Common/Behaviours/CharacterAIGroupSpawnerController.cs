@@ -33,6 +33,7 @@ namespace FlameOfTheLost
 
         // --- Events ---
         public event Action<CharacterAISpawnEntry, CharacterRootController> CharacterAISpawned;
+        public event Action SpawnedCharactersClearing;
 
         // --- Public APIs ---
         //  0. IWorldRefreshable implementation
@@ -331,6 +332,9 @@ namespace FlameOfTheLost
         //  5. Runtime Registration
         protected void ClearSpawnedCharacters()
         {
+            // Notify observers before old characters are deactivated and Destroy is queued.
+            this.SpawnedCharactersClearing?.Invoke();
+
             for (int i = this.SpawnedCharacters.Count - 1; i >= 0; i--)
             {
                 GameObject spawnedCharacter = this.SpawnedCharacters[i];

@@ -23,7 +23,11 @@ namespace FlameOfTheLost
 
             this.PrepareGameplayReferences();
 
-            if (!this.ValidateGameplayReferences()) return false;
+            if (!this.ValidateGameplayReferences())
+            {
+                this.OnGameplayReferenceBindingFailed();
+                return false;
+            }
 
             this.BindGameplayReferencesInternal();
 
@@ -62,6 +66,9 @@ namespace FlameOfTheLost
         {
         }
         protected virtual void OnGameplayReferencesBound()
+        {
+        }
+        protected virtual void OnGameplayReferenceBindingFailed()
         {
         }
         protected virtual void OnGameplayReferencesUnbinding()

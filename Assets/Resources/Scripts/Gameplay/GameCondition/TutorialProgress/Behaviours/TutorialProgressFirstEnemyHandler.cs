@@ -4,11 +4,10 @@ namespace FlameOfTheLost
 {
     public sealed class TutorialProgressFirstEnemyHandler : TutorialProgressSubBehaviourBase
     {
-        // --- References ---
-        //  1. First Enemy Source
-        [Header("References (First Enemy Source)")]
-        [SerializeField] private EnemyGroupSpawnerController _preferredFirstEnemySpawner;
-        private EnemyGroupSpawnerController PreferredFirstEnemySpawner => _preferredFirstEnemySpawner;
+        // --- Configs ---
+        [Header("Configs - First Enemy")]
+        [SerializeField, Min(1)] private int _firstEnemyDefaultSpawnPointId = 22001;
+        private int FirstEnemyDefaultSpawnPointId => _firstEnemyDefaultSpawnPointId;
 
         // --- Runtime ---
         //  1. First Enemy
@@ -64,6 +63,7 @@ namespace FlameOfTheLost
             this.Player.DamageReceivingHandler.OnDamageApplied += this.HandleDamageApplied;
 
             this.FirstEnemySpawner.EnemySpawned += this.HandleEnemySpawned;
+            this.FirstEnemySpawner.SpawnedCharactersClearing += this.HandleSpawnedCharactersClearing;
         }
         protected override void UnbindGameplayReferencesInternal()
         {
@@ -75,6 +75,7 @@ namespace FlameOfTheLost
             if (this.FirstEnemySpawner != null)
             {
                 this.FirstEnemySpawner.EnemySpawned -= this.HandleEnemySpawned;
+                this.FirstEnemySpawner.SpawnedCharactersClearing -= this.HandleSpawnedCharactersClearing;
             }
 
             this.UnbindFirstEnemy();
@@ -90,6 +91,13 @@ namespace FlameOfTheLost
 
             this.TryBindExistingFirstEnemy();
         }
+        protected override void OnGameplayReferenceBindingFailed()
+        {
+            base.OnGameplayReferenceBindingFailed();
+
+            _firstEnemySpawner = null;
+            _firstEnemySpawnEntry = null;
+        }
 
         //  2. First Enemy Source Resolution
         private void ResolveFirstEnemySource()
@@ -97,30 +105,31 @@ namespace FlameOfTheLost
             _firstEnemySpawner = null;
             _firstEnemySpawnEntry = null;
 
-            if (this.TryUseFirstEnemySpawner(this.PreferredFirstEnemySpawner)) return;
+            if (this.FirstEnemyDefaultSpawnPointId <= 0)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressFirstEnemyHandler)}] Invalid First Enemy DSP ID: {this.FirstEnemyDefaultSpawnPointId}.", this);
+                return;
+            }
 
             EnemyGroupSpawnerController[] spawners = UnityEngine.Object.FindObjectsByType<EnemyGroupSpawnerController>(FindObjectsSortMode.None);
-
-            for (int i = 0; i < spawners.Length; i++)
+            foreach (EnemyGroupSpawnerController spawner in spawners)
             {
-                EnemyGroupSpawnerController spawner = spawners[i];
-
                 if (spawner == null) continue;
-                if (spawner == this.PreferredFirstEnemySpawner) continue;
+                if (!spawner.TryGetSpawnEntryBySpawnPointId(this.FirstEnemyDefaultSpawnPointId, out EnemySpawnEntry spawnEntry)) continue;
 
-                if (this.TryUseFirstEnemySpawner(spawner)) return;
+                if (this.FirstEnemySpawner != null)
+                {
+                    Debug.LogError($"[{this.gameObject.name}.{nameof(TutorialProgressFirstEnemyHandler)}] Multiple enemy spawners match DSP ID {this.FirstEnemyDefaultSpawnPointId}.", this);
+
+                    _firstEnemySpawner = null;
+                    _firstEnemySpawnEntry = null;
+
+                    return;
+                }
+
+                _firstEnemySpawner = spawner;
+                _firstEnemySpawnEntry = spawnEntry;
             }
-        }
-        private bool TryUseFirstEnemySpawner(EnemyGroupSpawnerController spawner)
-        {
-            if (spawner == null) return false;
-
-            if (!spawner.TryGetFirstSpawnEntry(out EnemySpawnEntry spawnEntry)) return false;
-
-            _firstEnemySpawner = spawner;
-            _firstEnemySpawnEntry = spawnEntry;
-
-            return true;
         }
 
         //  3. First Enemy Binding
@@ -179,6 +188,11 @@ namespace FlameOfTheLost
 
             this.TutorialProgressController.MarkFirstEnemyDefeated();
 
+            this.UnbindFirstEnemy();
+        }
+        private void HandleSpawnedCharactersClearing()
+        {
+            // Destroy() is deferred, so release the old target before new spawn events fire.
             this.UnbindFirstEnemy();
         }
 
