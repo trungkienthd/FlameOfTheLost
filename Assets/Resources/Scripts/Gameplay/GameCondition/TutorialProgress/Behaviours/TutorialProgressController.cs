@@ -4,7 +4,7 @@ namespace FlameOfTheLost
 {
     [RequireComponent(typeof(TutorialProgressEquipmentHandler))]
     [RequireComponent(typeof(TutorialProgressFirstEnemyHandler))]
-    public class TutorialProgressController : GameConditionSubBehaviourBase
+    public class TutorialProgressController : GameConditionProgressControllerBase
     {
         // --- References ---
         //  1. Characters
@@ -21,7 +21,7 @@ namespace FlameOfTheLost
 
         // --- Public APIs ---
         //  1. Gameplay Reference Lifecycle
-        public bool BindGameplayReferences()
+        public override bool BindGameplayReferences()
         {
             if (!this.EnsureBound()) return false;
 
@@ -63,7 +63,7 @@ namespace FlameOfTheLost
 
             return true;
         }
-        public void UnbindGameplayReferences()
+        public override void UnbindGameplayReferences()
         {
             this.EquipmentHandler?.UnbindGameplayReferences();
             this.FirstEnemyHandler?.UnbindGameplayReferences();

@@ -1,38 +1,68 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace FlameOfTheLost
 {
+    [RequireComponent(typeof(GameConditionStateHandler))]
+    [RequireComponent(typeof(GameConditionSaveHandler))]
+    [RequireComponent(typeof(GameConditionSceneHandler))]
     public class GameConditionController : FOTLSingletonMonoBehaviour<GameConditionController>, ISaveDataHandler<GameConditionSaveData>
     {
         // --- Singleton ---
         protected override bool PersistAcrossScenes => true;
 
         // --- References ---
-        //  1. Sub-Behaviours
-        [Header("References (Sub-Behaviours)")]
+        //  1. Sub-Behaviours - Game Condition Common 
+        [Header("References - Sub-Behaviours - Game Condition Common)")]
+        [SerializeField] private GameConditionStateHandler _stateHandler;
+        [SerializeField] private GameConditionSaveHandler _saveHandler;
+        [SerializeField] private GameConditionSceneHandler _sceneHandler;
+        private GameConditionStateHandler StateHandler  => _stateHandler;
+        private GameConditionSaveHandler SaveHandler    => _saveHandler;
+        private GameConditionSceneHandler SceneHandler  => _sceneHandler;
+
+        //  2. Sub-behaviours - Progress Controllers
+        [Header("References - Sub-behaviours - Progress Controllers)")]
         [SerializeField] private TutorialProgressController _tutorialProgressController;
         [SerializeField] private MilestoneProgressController _milestoneProgressController;
-        private TutorialProgressController TutorialProgressController => _tutorialProgressController;
+        private TutorialProgressController TutorialProgressController   => _tutorialProgressController;
         private MilestoneProgressController MilestoneProgressController => _milestoneProgressController;
 
         // --- Data / Configs ---
-        [Header("Initial Condition States")]
+        [Header("Configs - Initial Condition States")]
         [SerializeField] private List<GameConditionInitialStateEntry> _initialStateEntries = new();
-        private IReadOnlyList<GameConditionInitialStateEntry> InitialStateEntries => _initialStateEntries;
+        internal IReadOnlyList<GameConditionInitialStateEntry> InitialStateEntries => _initialStateEntries;
 
         // --- Runtime ---
         //  1. Authoritative Runtime State
         private GameConditionStateMap _conditionStates = new();
-
         public IReadOnlyDictionary<GameConditionKey, bool> ConditionStates => _conditionStates;
 
+        internal GameConditionStateMap MutableConditionStates
+        {
+            get
+            {
+                _conditionStates ??= new GameConditionStateMap();
+
+                return _conditionStates;
+            }
+        }
+
         //  2. Inspector / Debug Mirror
-        [Header("Condition States (Runtime)")]
+        [Header("Runtime - Condition States")]
         [SerializeField] private List<GameConditionStateEntry> _conditionStateEntries = new();
         private IReadOnlyList<GameConditionStateEntry> ConditionStateEntries => _conditionStateEntries;
+
+        internal List<GameConditionStateEntry> MutableConditionStateEntries
+        {
+            get
+            {
+                _conditionStateEntries ??= new List<GameConditionStateEntry>();
+
+                return _conditionStateEntries;
+            }
+        }
 
         //  3. Runtime Ref
         private bool _gameplayReferencesBound;
@@ -48,11 +78,28 @@ namespace FlameOfTheLost
 
             if (this.TutorialProgressController == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] Cannot bind gameplay references because TutorialProgressController is missing.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] Cannot bind gameplay references because {nameof(this.TutorialProgressController)} is missing.", this);
+                return false;
+            }
+            if (this.MilestoneProgressController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] Cannot bind gameplay references because {nameof(this.MilestoneProgressController)} is missing.", this);
                 return false;
             }
 
-            if (!this.TutorialProgressController.BindGameplayReferences()) return false;
+            // a. Bind tutorial progression.
+            if (!this.TutorialProgressController.BindGameplayReferences())
+            {
+                this.UnbindProgressControllerGameplayReferences();
+                return false;
+            }
+
+            // b. Bind milestone progression.
+            if (!this.MilestoneProgressController.BindGameplayReferences())
+            {
+                this.UnbindProgressControllerGameplayReferences();
+                return false;
+            }
 
             _gameplayReferencesBound = true;
 
@@ -60,9 +107,7 @@ namespace FlameOfTheLost
         }
         public void UnbindGameplayReferences()
         {
-            if (!_gameplayReferencesBound) return;
-
-            this.TutorialProgressController?.UnbindGameplayReferences();
+            this.UnbindProgressControllerGameplayReferences();
 
             _gameplayReferencesBound = false;
         }
@@ -70,25 +115,15 @@ namespace FlameOfTheLost
         //  2. State Queries
         public bool GetConditionState(GameConditionKey conditionKey)
         {
-            if (conditionKey == GameConditionKey.None) return false;
-            if (!_conditionStates.TryGetValue(conditionKey, out bool value)) return false;
+            if (this.StateHandler == null) return false;
 
-            return value;
+            return this.StateHandler.GetConditionState(conditionKey);
         }
 
         //  3. State Updates
         public void SetConditionState(GameConditionKey conditionKey, bool value)
         {
-            if (conditionKey == GameConditionKey.None) return;
-
-            bool hasExistingValue = _conditionStates.TryGetValue(conditionKey, out bool currentValue);
-            if (hasExistingValue && currentValue == value) return;
-
-            _conditionStates[conditionKey] = value;
-
-            this.RefreshRuntimeDebugEntries();
-
-            this.ConditionStateChanged?.Invoke(conditionKey, value);
+            this.StateHandler?.SetConditionState(conditionKey, value);
         }
         public void SatisfyCondition(GameConditionKey conditionKey)
         {
@@ -102,132 +137,61 @@ namespace FlameOfTheLost
         //  4. Reset
         public void ResetConditions()
         {
-            this.InitializeConditionStates();
-
-            this.PublishAllConditionStates();
+            this.StateHandler?.ResetConditions();
         }
 
         //  5. ISaveDataHandler implementation
         public GameConditionSaveData CaptureSaveData()
         {
-            GameConditionSaveData saveData = new();
-
-            foreach (KeyValuePair<GameConditionKey, bool> pair in _conditionStates)
+            if (this.SaveHandler == null)
             {
-                if (pair.Key == GameConditionKey.None) continue;
-
-                saveData.States[pair.Key] = pair.Value;
+                Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] Cannot capture save data because {nameof(this.SaveHandler)} is missing.", this);
+                return null;
             }
 
-            return saveData;
+            return this.SaveHandler.CaptureSaveData();
         }
+
         public void RestoreSaveData(GameConditionSaveData saveData)
         {
-            // a. Rebuild from the CURRENT game configuration.
-            this.InitializeConditionStates();
+            this.SaveHandler?.RestoreSaveData(saveData);
+        }
 
-            // b. Overlay the saved state.
-            if (saveData?.States != null)
-            {
-                foreach (KeyValuePair<GameConditionKey, bool> pair in saveData.States)
-                {
-                    if (pair.Key == GameConditionKey.None) continue;
+        // --- Internal APIs ---
+        //  1. Condition State Event Publishing
+        internal void PublishConditionStateChanged(GameConditionKey conditionKey, bool value)
+        {
+            this.ConditionStateChanged?.Invoke(conditionKey, value);
+        }
 
-                    _conditionStates[pair.Key] = pair.Value;
-                }
-            }
+        //  2. Gameplay Reference Lifecycle
+        internal void HandleGameplaySceneChanged()
+        {
+            this.UnbindGameplayReferences();
+        }
 
-            // c. Synchronize the Inspector representation.
-            this.RefreshRuntimeDebugEntries();
-
-            // d. Publish only the FINAL restored values.
-            this.PublishAllConditionStates();
+        //  3. Save Restoration Support
+        internal void RestoreConditionStates(IReadOnlyDictionary<GameConditionKey, bool> savedStates)
+        {
+            this.StateHandler?.RestoreConditionStates(savedStates);
         }
 
         // --- Helpers ---
-        //  1. Scene changed event
-        private void HandleActiveSceneChanged(Scene previousScene, Scene nextScene)
+        //  1. Progress Controller Cleanup
+        private void UnbindProgressControllerGameplayReferences()
         {
-            if (Instance != this) return;
-
-            // Invalidate bindings to gameplay objects from the previous scene.
-            this.UnbindGameplayReferences();
-
-            // Returning to the Main Menu ends the current gameplay session.
-            if (nextScene.name == "MainMenu")
-            {
-                UnityEngine.Object.Destroy(this.gameObject);
-            }
-        }
-
-        //  2. Runtime State Initialization
-        private void InitializeConditionStates()
-        {
-            if (_conditionStates == null)
-            {
-                _conditionStates = new GameConditionStateMap();
-            }
-            else
-            {
-                _conditionStates.Clear();
-            }
-
-            if (this.InitialStateEntries != null)
-            {
-                for (int i = 0; i < this.InitialStateEntries.Count; i++)
-                {
-                    GameConditionInitialStateEntry initialStateEntry = this.InitialStateEntries[i];
-
-                    if (initialStateEntry == null) continue;
-                    if (initialStateEntry.ConditionKey == GameConditionKey.None) continue;
-
-                    _conditionStates[initialStateEntry.ConditionKey] = initialStateEntry.InitialValue;
-                }
-            }
-
-            this.RefreshRuntimeDebugEntries();
-        }
-
-        //  3. Inspector / Debug State
-        private void RefreshRuntimeDebugEntries()
-        {
-            if (_conditionStateEntries == null)
-            {
-                _conditionStateEntries = new List<GameConditionStateEntry>();
-            }
-            else
-            {
-                _conditionStateEntries.Clear();
-            }
-
-            if (_conditionStates == null) return;
-
-            foreach (KeyValuePair<GameConditionKey, bool> pair in _conditionStates)
-            {
-                if (pair.Key == GameConditionKey.None) continue;
-
-                var conditionState = new GameConditionStateEntry(pair.Key, pair.Value);
-                _conditionStateEntries.Add(conditionState);
-            }
-        }
-
-        //  4. State Publishing
-        private void PublishAllConditionStates()
-        {
-            if (_conditionStates == null) return;
-
-            foreach (KeyValuePair<GameConditionKey, bool> pair in _conditionStates)
-            {
-                if (pair.Key == GameConditionKey.None) continue;
-
-                this.ConditionStateChanged?.Invoke(pair.Key, pair.Value);
-            }
+            this.MilestoneProgressController?.UnbindGameplayReferences();
+            this.TutorialProgressController?.UnbindGameplayReferences();
         }
 
         // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
         {
             base.CacheInternalReferences();
+
+            if (this.StateHandler   == null) _stateHandler  = this.GetComponent<GameConditionStateHandler>();
+            if (this.SaveHandler    == null) _saveHandler   = this.GetComponent<GameConditionSaveHandler>();
+            if (this.SceneHandler   == null) _sceneHandler  = this.GetComponent<GameConditionSceneHandler>();
 
             if (this.TutorialProgressController     == null) _tutorialProgressController    = this.GetComponentInChildren<TutorialProgressController>(true);
             if (this.MilestoneProgressController    == null) _milestoneProgressController   = this.GetComponentInChildren<MilestoneProgressController>(true);
@@ -236,11 +200,20 @@ namespace FlameOfTheLost
         {
             base.ValidateInternalReferences();
 
-            if (this.TutorialProgressController == null) Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] {nameof(this.TutorialProgressController)} reference is not assigned.", this);
+            if (this.StateHandler   == null) Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] {nameof(this.StateHandler)} reference is not assigned.", this);
+            if (this.SaveHandler    == null) Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] {nameof(this.SaveHandler)} reference is not assigned.", this);
+            if (this.SceneHandler   == null) Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] {nameof(this.SceneHandler)} reference is not assigned.", this);
+
+            if (this.TutorialProgressController     == null) Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] {nameof(this.TutorialProgressController)} reference is not assigned.", this);
+            if (this.MilestoneProgressController    == null) Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] {nameof(this.MilestoneProgressController)} reference is not assigned.", this);
         }
         protected override void BindInternalReferences()
         {
             base.BindInternalReferences();
+
+            this.StateHandler?.Bind(this);
+            this.SaveHandler?.Bind(this);
+            this.SceneHandler?.Bind(this);
 
             this.TutorialProgressController?.Bind(this);
             this.MilestoneProgressController?.Bind(this);
@@ -251,14 +224,10 @@ namespace FlameOfTheLost
 
             _gameplayReferencesBound = false;
 
-            this.InitializeConditionStates();
-
-            SceneManager.activeSceneChanged += this.HandleActiveSceneChanged;
+            this.StateHandler?.InitializeConditionStates();
         }
         protected override void CleanupStates()
         {
-            SceneManager.activeSceneChanged -= this.HandleActiveSceneChanged;
-
             this.UnbindGameplayReferences();
 
             base.CleanupStates();
@@ -267,6 +236,10 @@ namespace FlameOfTheLost
         {
             this.TutorialProgressController?.Unbind(this);
             this.MilestoneProgressController?.Unbind(this);
+
+            this.SceneHandler?.Unbind(this);
+            this.SaveHandler?.Unbind(this);
+            this.StateHandler?.Unbind(this);
 
             base.UnbindInternalReferences();
         }
