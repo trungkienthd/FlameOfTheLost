@@ -131,6 +131,50 @@ SFUI_Panel_Dialogue.png
 
 ---
 
+### 3.7 Cute Fantasy Characters - 16x16 Top Down Pixel Art Asset Pack
+**Publisher:** kenmi
+
+**Prefix:** `KCFC16_`
+
+**Usage Scope:**
+- Character sprite sheets
+- NPC sprites and animations
+- Fantasy character variants
+- Character-related sprites
+
+**Source:** https://assetstore.unity.com/packages/2d/characters/cute-fantasy-characters-16x16-top-down-pixel-art-asset-pack-302080
+
+**Examples:**
+- `KCFC16_Character_NPC_01.png`
+- `KCFC16_Character_Merchant_01.png`
+- `KCFC16_Animation_NPC_Idle.anim`
+
+**Note:** Example names illustrate the naming format; use the actual character/animation names after inspecting the imported contents. Keep this pack distinct from `CFRPG16_`, even though both are published by kenmi.
+
+---
+
+### 3.8 Cute Fantasy Dungeon - 16x16 Top Down Asset Pack
+**Publisher:** kenmi
+
+**Prefix:** `KCFD16_`
+
+**Usage Scope:**
+- Dungeon tiles and tilesets
+- Ruin and dungeon environment sprites
+- Dungeon props and scenery
+- Dungeon-related animated environment assets
+
+**Source:** https://assetstore.unity.com/packages/2d/environments/cute-fantasy-dungeon-16x16-top-down-asset-pack-301753
+
+**Examples:**
+- `KCFD16_Tile_DungeonFloor_01.png`
+- `KCFD16_Tile_DungeonWall_01.png`
+- `KCFD16_Prop_RuinPillar_01.png`
+
+**Note:** Example names are illustrative and should be adapted to actual imported content. Do not reuse `CFRPG16_` for assets from this separate pack.
+
+---
+
 ## 4. Custom Project Assets
 
 All internally created assets must use a dedicated project prefix: FTL_
