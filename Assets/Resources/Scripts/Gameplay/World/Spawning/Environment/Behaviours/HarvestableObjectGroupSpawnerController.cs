@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class HarvestableObjectGroupSpawnerController : EnvironmentObjectGroupSpawnerController<HarvestableObjectSpawnEntry>
+    public class HarvestableObjectGroupSpawnerController : EnvironmentObjectGroupSpawnerController<HarvestableObjectGroupSpawnerProfile, HarvestableObjectSpawnEntry>
     {
         // --- Hooks ---
         //  1. Spawned Harvestable Configuration

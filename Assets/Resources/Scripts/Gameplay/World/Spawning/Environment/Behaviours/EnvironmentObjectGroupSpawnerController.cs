@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace FlameOfTheLost
 {
-    public class EnvironmentObjectGroupSpawnerController<TEntry> : FOTLMonoBehaviour,
-        IWorldRefreshable
+    public class EnvironmentObjectGroupSpawnerController<TProfile, TEntry> : FOTLWorldObjectProfileBehaviour<TProfile>, IWorldRefreshable
+        where TProfile : EnvironmentObjectGroupSpawnerProfile<TEntry>
         where TEntry : EnvironmentObjectSpawnEntry
     {
         // --- References ---
@@ -16,14 +17,13 @@ namespace FlameOfTheLost
 
         // --- Data / Configs ---
         //  1. Spawn Entries
-        [Header("Spawn Entries")]
-        [SerializeField] private List<TEntry> _spawnEntries = new();
-        protected IReadOnlyList<TEntry> SpawnEntries => _spawnEntries;
+        protected IReadOnlyList<TEntry> SpawnEntries => this.Profile != null
+            ? this.Profile.SpawnEntries
+            : null;
 
         //  2. Spawn Settings
-        [Header("Settings")]
-        [SerializeField] private bool _spawnObjectsOnStart = true;
-        protected bool SpawnObjectsOnStart => _spawnObjectsOnStart;
+        protected bool SpawnObjectsOnStart => this.Profile != null
+            && this.Profile.SpawnObjectsOnStart;
 
         // --- Runtime ---
         //  1. Spawned Objects
@@ -75,12 +75,16 @@ namespace FlameOfTheLost
         //  1. General Spawning
         private void SpawnObjects(Predicate<TEntry> predicate)
         {
+            if (this.Profile == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] Cannot spawn environment objects because no profile is assigned.", this);
+                return;
+            }
             if (this.EnvironmentObjectGroupRoot == null)
             {
                 Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] Cannot spawn environment objects because no object group root is assigned.", this);
                 return;
             }
-
             if (this.SpawnEntries == null) return;
 
             for (int i = 0; i < this.SpawnEntries.Count; i++)
@@ -88,7 +92,6 @@ namespace FlameOfTheLost
                 TEntry spawnEntry = this.SpawnEntries[i];
 
                 if (spawnEntry == null) continue;
-
                 if (!spawnEntry.IsValid)
                 {
                     Debug.LogWarning($"[{this.gameObject.name}.{this.GetType().Name}] Invalid environment object spawn entry at index {i}.", this);

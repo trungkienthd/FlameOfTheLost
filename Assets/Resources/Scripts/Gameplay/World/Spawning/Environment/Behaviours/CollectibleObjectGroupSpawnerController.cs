@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class CollectibleObjectGroupSpawnerController : EnvironmentObjectGroupSpawnerController<CollectibleObjectSpawnEntry>
+    public class CollectibleObjectGroupSpawnerController : EnvironmentObjectGroupSpawnerController<CollectibleObjectGroupSpawnerProfile, CollectibleObjectSpawnEntry>
     {
         // --- Hooks ---
         //  1. Spawned Collectible Configuration
@@ -14,7 +14,6 @@ namespace FlameOfTheLost
             if (spawnEntry == null) return;
 
             CollectibleObjectController collectibleController = spawnedObject.GetComponent<CollectibleObjectController>();
-
             if (collectibleController == null)
             {
                 Debug.LogWarning($"[{spawnedObject.name}.{nameof(CollectibleObjectGroupSpawnerController)}] Spawned object has no {nameof(CollectibleObjectController)}.", spawnedObject);
