@@ -23,6 +23,10 @@
 23xxx   Neutral Character Default Spawn Point Profiles
 230xx   Animal Default Spawn Point Profiles
 
+28xxx   Environment Object Group Spawner Profiles
+280xx   HarvestableObjectGroupSpawnerProfile
+281xx   CollectibleObjectGroupSpawnerProfile
+
 29xxx   DeathTriggerProfile
 ```
 
@@ -67,7 +71,18 @@
 25xxx   Reserved
 26xxx   Reserved
 27xxx   Reserved
-28xxx   Reserved
+
+28xxx   Environment Object Group Spawner Profiles
+280xx   Harvestable Object Group Spawner Profiles
+281xx   Collectible Object Group Spawner Profiles
+282xx   Reserved
+283xx   Reserved
+284xx   Reserved
+285xx   Reserved
+286xx   Reserved
+287xx   Reserved
+288xx   Reserved
+289xx   Reserved
 
 29xxx   Death Trigger Profiles
 ```
@@ -138,6 +153,44 @@ The third digit further classifies Neutral Character Default Spawn Point types.
 
 ---
 
+### Environment Object Group Spawner Profiles
+
+The `28xxx` range identifies **map-specific environment object group spawning configurations**. These definitions are ScriptableObject profiles, not the individual environment objects they spawn.
+
+```text
+280xx   HarvestableObjectGroupSpawnerProfile
+281xx   CollectibleObjectGroupSpawnerProfile
+282xx-289xx   Reserved for future environment spawning profile types
+```
+
+Each profile configures **one environment object category in one map**. Create separate profiles for different maps even when they spawn the same object archetypes. Assign IDs sequentially and independently within each profile type, starting from `28001` or `28101`, respectively. The last two digits do not encode a global map ID, and they do not have to match across profile types.
+
+The profile ID identifies the **spawner configuration**, not its spawn entries or its spawned instances. Individual `EnvironmentObjectSpawnEntry` values embedded in the profile do not receive separate IDs. The environment object profiles referenced by spawned prefabs keep their own `3xxxx` IDs (for example, `34xxx` harvestables and `33xxx` collectibles).
+
+Runtime group spawner controllers reference these profiles; they do not own separate IDs. One profile should normally be assigned to one corresponding map's group spawner, rather than shared between distinct maps.
+
+**Asset naming:** `<ID>_SHvt_<MapName>` for harvestable groups and `<ID>_SClt_<MapName>` for collectible groups. The name following the numeric prefix uses the map name without spaces.
+
+Initial assignments:
+
+```text
+28001   SHvt_GreenvaleBorderPath
+28002   SHvt_GreenvaleCrossroads
+28101   SClt_GreenvaleBorderPath
+28102   SClt_GreenvaleCrossroads
+```
+
+Full ScriptableObject asset filenames:
+
+```text
+28001_SHvt_GreenvaleBorderPath.asset
+28002_SHvt_GreenvaleCrossroads.asset
+28101_SClt_GreenvaleBorderPath.asset
+28102_SClt_GreenvaleCrossroads.asset
+```
+
+---
+
 ### Death Triggers
 
 The ID identifies a **Death Trigger definition**.
@@ -162,6 +215,11 @@ Death Triggers use the `29xxx` range.
 22001   Greenvale Feralshroom Den Territorial Enemy Default Spawn Point
 
 23001   Animal Default Spawn Point
+
+28001   Greenvale Border Path Harvestable Object Group Spawner
+28002   Greenvale Crossroads Harvestable Object Group Spawner
+28101   Greenvale Border Path Collectible Object Group Spawner
+28102   Greenvale Crossroads Collectible Object Group Spawner
 
 29001   Tutorial Pitfall
 29002   Deep Water
