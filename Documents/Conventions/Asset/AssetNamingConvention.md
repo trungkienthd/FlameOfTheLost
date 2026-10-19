@@ -175,6 +175,33 @@ SFUI_Panel_Dialogue.png
 
 ---
 
+### 3.9 Pixel Art Top Down - Basic
+**Publisher:** Cainos
+
+**Prefix:** `CPTDB_`
+
+**Usage Scope:**
+- 32x32 top-down environment sprites
+- Grass, stone-ground, and wall tilesets
+- Trees, grasses, and vegetation sprites
+- Ruin structures and environment props
+- Separate shadow sprites
+- Environment-related prefabs and animations, when used
+
+**Source:** https://assetstore.unity.com/packages/2d/environments/pixel-art-top-down-basic-187605
+
+**Examples:**
+- `CPTDB_Tile_GrassGround_01.png`
+- `CPTDB_Tile_StoneGround_01.png`
+- `CPTDB_Tile_RuinWall_01.png`
+- `CPTDB_Environment_Tree_01.png`
+- `CPTDB_Prop_RuinPillar_01.png`
+- `CPTDB_Shadow_Tree_01.png`
+
+**Note:** Example names illustrate the convention; adapt them to the actual imported files. Keep `CPTDB_` distinct from `KCFD16_` and other environment packs. This pack uses a 32x32 base sprite size, unlike the 16x16 Cute Fantasy packs. If importing the publisher's demo project, review its project settings and avoid overwriting FlameOfTheLost's existing settings.
+
+---
+
 ## 4. Custom Project Assets
 
 All internally created assets must use a dedicated project prefix: FTL_
