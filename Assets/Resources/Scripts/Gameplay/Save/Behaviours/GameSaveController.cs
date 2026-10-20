@@ -216,7 +216,7 @@ namespace FlameOfTheLost
         }
 
         //  3. Restore
-        private bool RestoreIntoCurrentScene(GameSaveData saveData, WorldMapTransitionRequest transitionRequest)
+        private bool RestoreIntoCurrentScene(GameSaveData saveData, WorldMapTransitionRequest transitionRequest, SceneTransitionPointRequest sceneTransitionRequest = null)
         {
             if (!this.CanRestore()) return false;
 
@@ -246,7 +246,23 @@ namespace FlameOfTheLost
             this.Player.PlayerCarryLoadoutController.RestoreSaveData(playerData.CarryLoadout);
 
             // d. Resolve Player placement
-            if (transitionRequest != null)
+            if (sceneTransitionRequest != null)
+            {
+                // d.1. Scene Transition Point
+                SceneTransitionPointController destinationPoint = GameSaveController.FindArrivalTransitionPoint(sceneTransitionRequest.DestinationArrivalKey);
+
+                if (destinationPoint == null)
+                {
+                    Debug.LogError($"[{nameof(GameSaveController)}] Cannot find destination transition point '{sceneTransitionRequest.DestinationArrivalKey}' in scene '{currentSceneName}'.", this);
+                    return false;
+                }
+
+                // Refresh the Player at the configured arrival position.
+                bool placed = this.PlayerSpawnerController.PlacePlayerAtWorldLocation(destinationPoint.ArrivalPosition, CharacterRefreshOrigin.WorldMapTransition, destinationPoint.ArrivalFacing);
+
+                if (!placed) return false;
+            }
+            else if(transitionRequest != null)
             {
                 // d.1. World Map Transition
                 WorldMapBoundaryTransitionHandler boundary = GameSaveController.FindArrivalBoundary(transitionRequest.DestinationBoundary);
@@ -314,7 +330,8 @@ namespace FlameOfTheLost
             return true;
         }
 
-        //  4. Destination Boundary Lookup
+        //  4. Lookup
+        //      4.1. Destination Boundary Lookup
         private static WorldMapBoundaryTransitionHandler FindArrivalBoundary(WorldMapBoundaryDirection direction)
         {
             WorldMapBoundaryTransitionHandler[] handlers = UnityEngine.Object.FindObjectsByType<WorldMapBoundaryTransitionHandler>(FindObjectsSortMode.None);
@@ -328,6 +345,32 @@ namespace FlameOfTheLost
             }
 
             return null;
+        }
+
+        //      4.2. Scene Transition Point Lookup
+        private static SceneTransitionPointController FindArrivalTransitionPoint(string arrivalKey)
+        {
+            if (string.IsNullOrWhiteSpace(arrivalKey)) return null;
+
+            SceneTransitionPointController[] transitionPoints = UnityEngine.Object.FindObjectsByType<SceneTransitionPointController>(FindObjectsSortMode.None);
+
+            SceneTransitionPointController result = null;
+
+            foreach (SceneTransitionPointController transitionPoint in transitionPoints)
+            {
+                if (transitionPoint == null) continue;
+                if (transitionPoint.ArrivalKey != arrivalKey) continue;
+
+                if (result != null)
+                {
+                    Debug.LogError($"[{nameof(GameSaveController)}] Multiple scene transition points use arrival key '{arrivalKey}'.");
+                    return null;
+                }
+
+                result = transitionPoint;
+            }
+
+            return result;
         }
 
         //  5. Repository
@@ -394,12 +437,13 @@ namespace FlameOfTheLost
         {
             // a. Determine the requested initialization type.
             bool isWorldMapTransition = WorldMapTransitionRequest.HasPendingRequest;
+            bool isSceneTransitionPoint = SceneTransitionPointRequest.HasPendingRequest;
             MainMenuJourneyType journeyType = MainMenuSessionRequest.PendingJourneyType;
 
             // Wait until the scene's initial Start callbacks have completed.
             yield return null;
 
-            if (!isWorldMapTransition && journeyType == MainMenuJourneyType.None)
+            if (!isWorldMapTransition && !isSceneTransitionPoint && journeyType == MainMenuJourneyType.None)
             {
                 if (this.GameConditions == null)
                 {
@@ -489,7 +533,77 @@ namespace FlameOfTheLost
                 yield break;
             }
 
-            // c. Continue Journey
+            // c. Scene Transition Point
+            if (isSceneTransitionPoint)
+            {
+                SceneTransitionPointRequest request = SceneTransitionPointRequest.Pending;
+                // c.1. Validate transition request.
+                if (request == null)
+                {
+                    this.HandleGameplaySessionInitializationFailure("Scene transition request is missing.");
+                    yield break;
+                }
+
+                if (request.DestinationSceneName != currentSceneName)
+                {
+                    this.HandleGameplaySessionInitializationFailure($"Scene transition request targets '{request.DestinationSceneName}', but the current scene is '{currentSceneName}'.");
+                    yield break;
+                }
+
+                // c.2. Validate arrival point before restoration.
+                SceneTransitionPointController arrivalPoint = GameSaveController.FindArrivalTransitionPoint(request.DestinationArrivalKey);
+                if (arrivalPoint == null)
+                {
+                    this.HandleGameplaySessionInitializationFailure($"Cannot find arrival point '{request.DestinationArrivalKey}' in scene '{currentSceneName}'.");
+                    yield break;
+                }
+
+                // c.3. Read departure save.
+                if (!this.TryReadSave(out GameSaveData transitionSaveData))
+                {
+                    this.HandleGameplaySessionInitializationFailure("Failed to load the saved Player state.");
+                    yield break;
+                }
+
+                // c.4. Restore Player systems and initialize destination.
+                bool transitionSuccess = false;
+
+                try
+                {
+                    transitionSuccess = this.RestoreIntoCurrentScene(transitionSaveData, null, request);
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogException(exception, this);
+                }
+
+                if (!transitionSuccess)
+                {
+                    this.HandleGameplaySessionInitializationFailure("Failed to restore Player state or initialize destination scene.");
+                    yield break;
+                }
+
+                // c.5. Complete gameplay initialization.
+                this.PlayerSpawnerController.CompleteSessionInitialization();
+
+                // c.6. Clear the transition request.
+                SceneTransitionPointRequest.ClearRequest();
+
+                // c.7. Save Player's new scene and arrival position.
+                if (!this.SaveGame())
+                {
+                    Debug.LogError($"[{nameof(GameSaveController)}] Scene transition succeeded, but saving arrival location failed.", this);
+                }
+
+                // c.8. Notify listeners.
+                this.GameLoaded?.Invoke();
+
+                Debug.Log($"[{nameof(GameSaveController)}] Scene transition completed: '{request.SourceSceneName}' → '{currentSceneName}'.", this);
+
+                yield break;
+            }
+
+            // d. Continue Journey
             if (journeyType == MainMenuJourneyType.Continue)
             {
                 // c.1. Read saved game.
@@ -606,6 +720,7 @@ namespace FlameOfTheLost
             Debug.LogError($"[{nameof(GameSaveController)}] Gameplay session initialization failed: {reason}", this);
 
             WorldMapTransitionRequest.ClearRequest();
+            SceneTransitionPointRequest.ClearRequest();
             MainMenuSessionRequest.ClearRequest();
 
             const string mainMenuSceneName = "MainMenu";

@@ -33993,6 +33993,10 @@ PrefabInstance:
       propertyPath: _playerSpawnerController
       value: 
       objectReference: {fileID: 585747468}
+    - target: {fileID: 5375913243933556515, guid: 1a2a63ce0ea899b408bc85a1374b61e2, type: 3}
+      propertyPath: _checkpointPanelController
+      value: 
+      objectReference: {fileID: 1784922163}
     - target: {fileID: 8730474623178684496, guid: 1a2a63ce0ea899b408bc85a1374b61e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3

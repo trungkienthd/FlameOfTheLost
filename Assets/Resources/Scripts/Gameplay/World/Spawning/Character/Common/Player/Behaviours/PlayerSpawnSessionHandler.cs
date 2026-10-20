@@ -21,7 +21,7 @@ namespace FlameOfTheLost
         {
             _hasEnteredGameplay = false;
 
-            _isSessionInitializing = MainMenuSessionRequest.HasPendingRequest || WorldMapTransitionRequest.HasPendingRequest;
+            _isSessionInitializing = MainMenuSessionRequest.HasPendingRequest || WorldMapTransitionRequest.HasPendingRequest || SceneTransitionPointRequest.HasPendingRequest;
         }
 
         //  2. Pregameplay Initialization
@@ -32,7 +32,9 @@ namespace FlameOfTheLost
             // Continue Journey and World Map Transition restore their corresponding spawn records.
             bool isContinuingJourney = MainMenuSessionRequest.PendingJourneyType == MainMenuJourneyType.Continue;
             bool isWorldMapTransition = WorldMapTransitionRequest.HasPendingRequest;
-            if (isContinuingJourney || isWorldMapTransition) return;
+            bool isSceneTransitionPoint = SceneTransitionPointRequest.HasPendingRequest;
+
+            if (isContinuingJourney || isWorldMapTransition || isSceneTransitionPoint) return;
 
             if (this.PlayerSpawner.PlayerSpawnRecord.SpawnPlacementSourceType == CharacterRefreshOrigin.Checkpoint) return;
 
@@ -53,8 +55,9 @@ namespace FlameOfTheLost
 
             bool isContinuingJourney = MainMenuSessionRequest.PendingJourneyType == MainMenuJourneyType.Continue;
             bool isWorldMapTransition = WorldMapTransitionRequest.HasPendingRequest;
+            bool isSceneTransitionPoint = SceneTransitionPointRequest.HasPendingRequest;
 
-            if (isContinuingJourney || isWorldMapTransition)
+            if (isContinuingJourney || isWorldMapTransition || isSceneTransitionPoint)
             {
                 this.PlayerSpawner.PlayerInputHandler?.BlockAllPlayerInputs();
             }
