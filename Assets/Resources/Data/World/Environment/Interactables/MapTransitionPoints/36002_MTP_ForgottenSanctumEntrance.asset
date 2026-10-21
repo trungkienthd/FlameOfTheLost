@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa0d1f3c5318fc49975b293aa4afcd8, type: 3}
+  m_Name: 36002_MTP_ForgottenSanctumEntrance
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MapTransitionPointProfile
+  _id: 36002
+  _key: MTP_FORGOTTEN_SANCTUM_ENTRANCE
+  _displayName: Forgotten Sanctum Entrance
+  _description: An ancient passage leading back to Whispering Grove.
+  _icon: {fileID: 21300114, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 1
+  _destinationSceneName: GreenvaleCrossroads
+  _destinationArrivalKey: FromForgottenSanctum
+  _interactionPromptText: Return to Whispering Grove

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa0d1f3c5318fc49975b293aa4afcd8, type: 3}
+  m_Name: 36001_MTP_WhisperingGroveShrine
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MapTransitionPointProfile
+  _id: 36001
+  _key: MTP_WHISPERING_GROVE_SHRINE
+  _displayName: Whispering Grove Shrine
+  _description: An ancient shrine standing silently within Whispering Grove.
+  _icon: {fileID: 21300072, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 0, y: -10, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 1
+  _destinationSceneName: ForgottenSanctum
+  _destinationArrivalKey: FromWhisperingGroveShrine
+  _interactionPromptText: Enter the Forgotten Sanctum

@@ -394842,6 +394842,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4990406599919834684, guid: e6faa6b1fd7b23f44b89b6fb6b3f708b, type: 3}
+      propertyPath: _gameSaveController
+      value: 
+      objectReference: {fileID: 2132763792}
     - target: {fileID: 8634941120194537206, guid: e6faa6b1fd7b23f44b89b6fb6b3f708b, type: 3}
       propertyPath: m_Name
       value: GO_MTP_WhisperingGroveShrine
