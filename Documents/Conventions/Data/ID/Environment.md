@@ -19,6 +19,7 @@
 33xxx   CollectibleObjectProfile
 34xxx   HarvestableObjectProfile
 35xxx   ObstacleProfile
+36xxx   SceneTransitionPointProfile
 ```
 
 ---
@@ -36,8 +37,10 @@ World
    │  │  └─ CraftingStationProfile
    │  ├─ ItemContainer
    │  │  └─ ItemContainerProfile
-   │  └─ Collectible
-   │     └─ CollectibleObjectProfile
+   │  ├─ Collectible
+   │  │  └─ CollectibleObjectProfile
+   │  └─ SceneTransitionPoint
+   │     └─ SceneTransitionPointProfile
    │
    ├─ Harvestable Object
    │  └─ HarvestableObjectProfile
@@ -48,7 +51,7 @@ World
 
 The numeric ID hierarchy does not need to mirror the runtime or semantic hierarchy exactly.
 
-`Interactable` is a gameplay grouping shared by several Environment object types, but Crafting Stations, Item Containers, and Collectible Objects each receive their own second-digit range because they are distinct authored Profile categories.
+`Interactable` is a gameplay grouping shared by several Environment object types, but Crafting Stations, Item Containers, Collectible Objects, and Scene Transition Points each receive their own second-digit range because they are distinct authored Profile categories.
 
 ---
 
@@ -61,8 +64,9 @@ The numeric ID hierarchy does not need to mirror the runtime or semantic hierarc
 33xxx   Collectible Object Profiles
 34xxx   Harvestable Object Profiles
 35xxx   Obstacle Profiles
+36xxx   Scene Transition Point Profiles
 
-36xxx   Reserved
+37xxx   Reserved
 37xxx   Reserved
 38xxx   Reserved
 39xxx   Reserved
@@ -78,6 +82,7 @@ Examples:
 33000-33999   Collectible Object Profiles
 34000-34999   Harvestable Object Profiles
 35000-35999   Obstacle Profiles
+36000-36999   Scene Transition Point Profiles
 ```
 
 This allows a Profile type to scale beyond 100 authored objects without requiring an unnecessary additional Profile sub-layer.
@@ -181,6 +186,36 @@ Obstacle Profile IDs are assigned sequentially within `35xxx`.
 
 ---
 
+### Scene Transition Point Profiles
+
+The ID identifies an **authored scene transition point definition**, including its configured destination scene and destination arrival key.
+
+```text
+36xxx   Scene Transition Point Profiles
+```
+
+Scene Transition Point Profile IDs are assigned sequentially within `36xxx`.
+
+Instances referencing the same `SceneTransitionPointProfile` share its ID and destination configuration. Distinct destinations should use distinct Profiles.
+
+The numeric Profile ID is separate from the scene-local `ArrivalKey` used to locate an arrival point; arrival keys must be unique within their destination scene and need not match a Profile ID.
+
+Scene Transition Point Profile asset names use:
+
+```text
+<ID>_STP_<DescriptiveName>
+```
+
+First allocation (Whispering Grove, Greenvale Crossroads):
+
+```text
+36001_STP_WhisperingGroveShrine
+```
+
+This Profile represents the statue/shrine entrance to the planned **Forgotten Sanctum** dungeon. The destination scene name and destination arrival key must be configured to match the actual dungeon scene and its arrival point when created.
+
+---
+
 ## Collectible Object Naming
 
 Collectible Object Profile asset names use:
@@ -254,6 +289,8 @@ Existing Profile assets should be reassigned according to the new ranges while p
 
 35001   Small Rock
 35002   Fallen Tree
+
+36001   Whispering Grove Shrine (Forgotten Sanctum entrance)
 ```
 
 ---

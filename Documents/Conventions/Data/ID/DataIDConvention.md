@@ -1,7 +1,7 @@
 # Data ID Convention
 
 **Project:** FlameOfTheLost  
-**Version:** 3.12  
+**Version:** 3.13  
 **Scope:** ID attributes assigned to project-owned **ScriptableObject** assets.
 
 ---
@@ -209,8 +209,9 @@ Character Traverse Type digit for 11xxx-13xxx:
 33xxx   Collectible Object Profiles
 34xxx   Harvestable Object Profiles
 35xxx   Obstacle Profiles
+36xxx   Scene Transition Point Profiles
 
-36xxx   Reserved
+37xxx   Reserved
 37xxx   Reserved
 38xxx   Reserved
 39xxx   Reserved
