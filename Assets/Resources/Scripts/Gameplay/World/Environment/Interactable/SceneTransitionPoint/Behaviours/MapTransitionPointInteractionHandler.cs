@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace FlameOfTheLost
 {
-    public class SceneTransitionPointInteractionHandler : SceneTransitionPointSubBehaviourBase
+    public class MapTransitionPointInteractionHandler : MapTransitionPointSubBehaviourBase
     {
         // --- References ---
         [Header("References - Game Save")]
@@ -22,7 +22,7 @@ namespace FlameOfTheLost
 
             if (this.GameSaveController == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(SceneTransitionPointInteractionHandler)}] {nameof(GameSaveController)} is missing.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(MapTransitionPointInteractionHandler)}] {nameof(GameSaveController)} is missing.", this);
                 return false;
             }
 
@@ -35,27 +35,27 @@ namespace FlameOfTheLost
             // a. Validate destination scene.
             if (!Application.CanStreamedLevelBeLoaded(destinationSceneName))
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(SceneTransitionPointInteractionHandler)}] Destination scene '{destinationSceneName}' cannot be loaded.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(MapTransitionPointInteractionHandler)}] Destination scene '{destinationSceneName}' cannot be loaded.", this);
                 return false;
             }
 
             if (sourceSceneName == destinationSceneName)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(SceneTransitionPointInteractionHandler)}] Source and destination scenes are identical.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(MapTransitionPointInteractionHandler)}] Source and destination scenes are identical.", this);
                 return false;
             }
 
             // b. Save Player state before leaving the current scene.
             if (!this.GameSaveController.SaveGame())
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(SceneTransitionPointInteractionHandler)}] Failed to save Player state before scene transition.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(MapTransitionPointInteractionHandler)}] Failed to save Player state before scene transition.", this);
                 return false;
             }
 
             // c. Register the pending scene transition.
             if (!SceneTransitionPointRequest.TryCreateRequest(sourceSceneName, destinationSceneName, destinationArrivalKey))
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(SceneTransitionPointInteractionHandler)}] Failed to create the scene transition request.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(MapTransitionPointInteractionHandler)}] Failed to create the scene transition request.", this);
                 return false;
             }
 
@@ -89,7 +89,7 @@ namespace FlameOfTheLost
 
             if (this.GameSaveController == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(SceneTransitionPointInteractionHandler)}] {nameof(GameSaveController)} reference is missing.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(MapTransitionPointInteractionHandler)}] {nameof(GameSaveController)} reference is missing.", this);
             }
         }
     }

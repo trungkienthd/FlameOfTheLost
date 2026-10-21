@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "SceneTransitionPointProfile", menuName = "Scriptable Objects/SceneTransitionPointProfile")]
-    public class SceneTransitionPointProfile : FOTLWorldObjectProfile
+    [CreateAssetMenu(fileName = "MTP_New", menuName = "Data/FlameOfTheLost/World/Environment/Interactable/TransitionPointProfile")]
+    public class MapTransitionPointProfile : FOTLWorldObjectProfile
     {
         // --- Data / Configs ---
         //  1. Transition Destination

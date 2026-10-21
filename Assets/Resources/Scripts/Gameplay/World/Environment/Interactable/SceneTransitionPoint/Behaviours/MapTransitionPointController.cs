@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [RequireComponent(typeof(SceneTransitionPointInteractionHandler))]
-    public class SceneTransitionPointController : FOTLWorldObjectProfileBehaviour<SceneTransitionPointProfile>,
+    [RequireComponent(typeof(MapTransitionPointInteractionHandler))]
+    public class MapTransitionPointController : FOTLWorldObjectProfileBehaviour<MapTransitionPointProfile>,
           IPlayerInteractable,
           IPlayerInteractionPromptSource
     {
@@ -16,8 +16,8 @@ namespace FlameOfTheLost
         //  2. Sub-Behaviours
         [Header("References - Sub-Behaviours")]
         [SerializeField]
-        private SceneTransitionPointInteractionHandler _interactionHandler;
-        private SceneTransitionPointInteractionHandler InteractionHandler => _interactionHandler;
+        private MapTransitionPointInteractionHandler _interactionHandler;
+        private MapTransitionPointInteractionHandler InteractionHandler => _interactionHandler;
 
         // --- Data / Configs ---
         //  1. Arrival
@@ -97,7 +97,7 @@ namespace FlameOfTheLost
 
             if (this.ArrivalPoint == null) _arrivalPoint = this.transform.Find("ArrivalPoint");
 
-            if (this.InteractionHandler == null) _interactionHandler = this.GetComponent<SceneTransitionPointInteractionHandler>();
+            if (this.InteractionHandler == null) _interactionHandler = this.GetComponent<MapTransitionPointInteractionHandler>();
         }
         protected override void ValidateInternalReferences()
         {
@@ -105,17 +105,17 @@ namespace FlameOfTheLost
 
             if (this.ArrivalPoint == null)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(SceneTransitionPointController)}] ArrivalPoint is not assigned. Root position will be used.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(MapTransitionPointController)}] ArrivalPoint is not assigned. Root position will be used.", this);
             }
 
             if (this.InteractionHandler == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(SceneTransitionPointController)}] {nameof(SceneTransitionPointInteractionHandler)} is missing.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(MapTransitionPointController)}] {nameof(MapTransitionPointInteractionHandler)} is missing.", this);
             }
 
             if (string.IsNullOrWhiteSpace(this.ArrivalKey))
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(SceneTransitionPointController)}] ArrivalKey is empty.", this);
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(MapTransitionPointController)}] ArrivalKey is empty.", this);
             }
         }
         protected override void BindInternalReferences()

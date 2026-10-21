@@ -249,7 +249,7 @@ namespace FlameOfTheLost
             if (sceneTransitionRequest != null)
             {
                 // d.1. Scene Transition Point
-                SceneTransitionPointController destinationPoint = GameSaveController.FindArrivalTransitionPoint(sceneTransitionRequest.DestinationArrivalKey);
+                MapTransitionPointController destinationPoint = GameSaveController.FindArrivalTransitionPoint(sceneTransitionRequest.DestinationArrivalKey);
 
                 if (destinationPoint == null)
                 {
@@ -348,15 +348,15 @@ namespace FlameOfTheLost
         }
 
         //      4.2. Scene Transition Point Lookup
-        private static SceneTransitionPointController FindArrivalTransitionPoint(string arrivalKey)
+        private static MapTransitionPointController FindArrivalTransitionPoint(string arrivalKey)
         {
             if (string.IsNullOrWhiteSpace(arrivalKey)) return null;
 
-            SceneTransitionPointController[] transitionPoints = UnityEngine.Object.FindObjectsByType<SceneTransitionPointController>(FindObjectsSortMode.None);
+            MapTransitionPointController[] transitionPoints = UnityEngine.Object.FindObjectsByType<MapTransitionPointController>(FindObjectsSortMode.None);
 
-            SceneTransitionPointController result = null;
+            MapTransitionPointController result = null;
 
-            foreach (SceneTransitionPointController transitionPoint in transitionPoints)
+            foreach (MapTransitionPointController transitionPoint in transitionPoints)
             {
                 if (transitionPoint == null) continue;
                 if (transitionPoint.ArrivalKey != arrivalKey) continue;
@@ -551,7 +551,7 @@ namespace FlameOfTheLost
                 }
 
                 // c.2. Validate arrival point before restoration.
-                SceneTransitionPointController arrivalPoint = GameSaveController.FindArrivalTransitionPoint(request.DestinationArrivalKey);
+                MapTransitionPointController arrivalPoint = GameSaveController.FindArrivalTransitionPoint(request.DestinationArrivalKey);
                 if (arrivalPoint == null)
                 {
                     this.HandleGameplaySessionInitializationFailure($"Cannot find arrival point '{request.DestinationArrivalKey}' in scene '{currentSceneName}'.");
