@@ -669,7 +669,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Props Gravestone A
+      name: CPTDB_TX Props Gravestone A
       rect:
         serializedVersion: 2
         x: 225
@@ -1131,7 +1131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Props Pillar
+      name: CPTDB_TX Props Pillar
       rect:
         serializedVersion: 2
         x: 352
@@ -1153,7 +1153,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Props Pillar Broken
+      name: CPTDB_TX Props Pillar Broken
       rect:
         serializedVersion: 2
         x: 416
@@ -1175,7 +1175,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Props Stone Cube
+      name: CPTDB_TX Props Stone Cube
       rect:
         serializedVersion: 2
         x: 288
@@ -1197,7 +1197,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Props Altar
+      name: CPTDB_TX Props Altar
       rect:
         serializedVersion: 2
         x: 353
@@ -1439,7 +1439,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TX Props Well
+      name: CPTDB_TX Props Well
       rect:
         serializedVersion: 2
         x: 420
@@ -1474,7 +1474,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      CPTDB_TX Props Altar: 21300142
+      CPTDB_TX Props Gravestone A: 21300068
+      CPTDB_TX Props Pillar: 21300118
+      CPTDB_TX Props Pillar Broken: 21300120
       CPTDB_TX Props Statue: 21300114
+      CPTDB_TX Props Stone Cube: 21300130
+      CPTDB_TX Props Well: 21300164
       TX Props - Brick 01: 21300152
       TX Props - Brick 02: 21300154
       TX Props - Brick 03: 21300156
@@ -1484,7 +1490,6 @@ TextureImporter:
       TX Props - Stone 04: 21300108
       TX Props - Stone 05: 21300110
       TX Props - Stone 06: 21300112
-      TX Props Altar: 21300142
       TX Props Altar Rune 1: 21300144
       TX Props Altar Rune 2: 21300146
       TX Props Altar Rune 3: 21300148
@@ -1495,11 +1500,8 @@ TextureImporter:
       TX Props Crate: 21300034
       TX Props Crate Small: 21300038
       TX Props Cube: 21300036
-      TX Props Gravestone A: 21300068
       TX Props Gravestone B: 21300070
       TX Props Gravestone C: 21300072
-      TX Props Pillar: 21300118
-      TX Props Pillar Broken: 21300120
       TX Props Pot A: 21300090
       TX Props Pot B: 21300092
       TX Props Pot C: 21300094
@@ -1516,10 +1518,8 @@ TextureImporter:
       TX Props Stone Bench W: 21300098
       TX Props Stone Coffin H: 21300078
       TX Props Stone Coffin V: 21300076
-      TX Props Stone Cube: 21300130
       TX Props Stone Lantern: 21300116
       TX Props Stone T7: 21300162
-      TX Props Well: 21300164
       TX Props Wooden Gate: 21300158
       TX Props Wooden Gate Opened: 21300160
   mipmapLimitGroupName: 

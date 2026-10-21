@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 4626889292913281473}
   - component: {fileID: 1933743043678913655}
   m_Layer: 20
-  m_Name: Prefab_ItmCtn
+  m_Name: Prefab_ItmCtn_1
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
