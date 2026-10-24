@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5de0aea71522a74e8f815ad6bf55951, type: 3}
+  m_Name: 23003_DSP_Chr_AI_Ntr_Animal_WhisperingGroveCowPasture
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalDefaultSpawnPointProfile
+  _id: 23003
+  _key: WHISPERING_GROVE_COW_PASTURE
+  _displayName: Whispering Grove Cow Pasture
+  _description: 
+  _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: -2, y: -2.5, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
+  _defaultFacing: 1
+  _configureSpawnAnchorTransformAtStart: 1
+  _initialSpawnAnchorLocalPosition: {x: 0, y: 0, z: 0}
+  _initialSpawnAnchorLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialSpawnAnchorLocalScale: {x: 1, y: 1, z: 1}
+  _characterAISpawnEntries:
+  - _spawnCount: 2
+    _spawnOnStart: 1
+    _spawnWhenPlayerRespawns: 1
+    _randomSpawnOffsetRadius: 0
+    _neutralCharacterVariant: {fileID: 11400000, guid: 6e715cacc09ac284783e3e8af49f840d, type: 2}
+    _homeAreaEntry:
+      _bottomLeftPosition: {x: -3.5, y: -3.5}
+      _topRightPosition: {x: -0.5, y: -1.5}
+      _returnReachDistance: 0.5
+    _roamingConfigOverride: {fileID: 11400000, guid: a395b067a3215344ba53da66fe1aa771, type: 2}
+    _fleeConfigOverride: {fileID: 11400000, guid: 8f55f4593a58ce34797ce57cb341a1fe, type: 2}

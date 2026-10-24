@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65163b05174bdc4694637d6b2cc914f, type: 3}
+  m_Name: AClipLcm_Chr_AI_Ntr_Animal_CowBlack_Alert
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterLocomotionAnimationClipSetProfile
+  _locomotionMode: 2
+  _carryItemType: 0
+  _lightSourceType: 0
+  _idleClipSet:
+    _down: {fileID: 7400000, guid: 81c6a2e17dabc3941b107a6cefead531, type: 2}
+    _side: {fileID: 7400000, guid: f1c5e3083d668a64c821756a70b9c606, type: 2}
+    _up: {fileID: 7400000, guid: 035b7a36a0f54794bb65837b5c47769b, type: 2}
+  _walkClipSet:
+    _down: {fileID: 7400000, guid: 59d0f6931b36d1546934973169139ae4, type: 2}
+    _side: {fileID: 7400000, guid: abab4188b97f372438582b5d911dced0, type: 2}
+    _up: {fileID: 7400000, guid: e9c56fba1a480b94cad88851baee161d, type: 2}

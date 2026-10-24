@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af94ae79a7b556d4ba94ea40f2f70883, type: 3}
+  m_Name: AniHD_Chr_AI_Ntr_Animal_CowBlack
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterHitDeathAnimationProfile
+  _characterType: 13011
+  _hitAnimationClipSet:
+    _down: {fileID: 7400000, guid: 1a449183ba42e1b4ebc675e4ad69302c, type: 2}
+    _side: {fileID: 7400000, guid: d2fee1d19c29d8d418ad9424b50526a3, type: 2}
+    _up: {fileID: 7400000, guid: d02174b0443dbcd46a0a0620fb6c21c7, type: 2}
+  _deathAnimationClipSet:
+    _down: {fileID: 7400000, guid: b5d70fa637956af489d24f8e38b67ec5, type: 2}
+    _side: {fileID: 7400000, guid: 7dd37ba20b402684498ab7fadff4ea12, type: 2}
+    _up: {fileID: 7400000, guid: 8343df3bd2cc31d4db6890f17222faa2, type: 2}
