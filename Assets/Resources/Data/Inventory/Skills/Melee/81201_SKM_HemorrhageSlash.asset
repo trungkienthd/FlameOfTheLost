@@ -19,7 +19,9 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 9a2fd91a1a9668b4199707e6aa891db4, type: 3}
   _defaultProvisionType: 2
   _attachableWeaponTypes: 0000000002000000
-  _requirements: []
+  _requirements:
+  - _attributeType: 2
+    _requiredValue: 3
   _damageAmount: 12
   _knockbackForce: 4
   _harvestDamage:

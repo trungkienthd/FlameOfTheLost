@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "AI_Enm_Trt_Roam_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/Territorial/RoamingConfig")]
+    [CreateAssetMenu(fileName = "Roam_Variant_Chr_AI_Enm_Trl_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/Territorial/RoamingConfig")]
     public class TerritorialEnemyRoamingConfig : ScriptableObject
     {
         [Header("Walk Duration")]

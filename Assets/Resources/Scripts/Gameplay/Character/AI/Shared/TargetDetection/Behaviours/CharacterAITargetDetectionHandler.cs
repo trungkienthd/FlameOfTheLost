@@ -114,6 +114,15 @@ namespace FlameOfTheLost
             _fleeRangeTargets.Clear();
         }
 
+        //  2. Validation
+        public bool IsTargetDetected(CharacterRootController target)
+        {
+            if (this.IsDeathDisabled) return false;
+            if (!this.IsValidTarget(target)) return false;
+
+            return _alertTargets.Contains(target) || _attackRangeTargets.Contains(target) || _fleeRangeTargets.Contains(target);
+        }
+
         // --- Helpers ---
         private CharacterRootController ResolveNearestValidTarget(HashSet<CharacterRootController> targets)
         {

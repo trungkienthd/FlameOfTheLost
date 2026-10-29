@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "TEAttack_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/Territorial/AttackConfig")]
+    [CreateAssetMenu(fileName = "Atk_Variant_Chr_AI_Enm_Trl_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/Territorial/AttackConfig")]
     public class TerritorialEnemyAttackConfig : ScriptableObject
     {
         [Header("Attack Range")]

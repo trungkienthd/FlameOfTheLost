@@ -26,12 +26,7 @@ namespace FlameOfTheLost
             if (this.TargetDetectionHandler == null) return;
             if (!this.TryGetTarget(other, out CharacterRootController target)) return;
 
-            this.LogDebug
-            (
-                $"Target entered detection trigger. " +
-                $"Target: {this.GetObjectName(target)}, " +
-                $"Range Type: {this.RangeType}."
-            );
+            this.LogDebug($"Target entered detection trigger. Target: {this.GetObjectName(target)}, Range Type: {this.RangeType}.");
 
             this.TargetDetectionHandler.RegisterTarget(target, this.RangeType);
         }   
@@ -40,12 +35,7 @@ namespace FlameOfTheLost
             if (this.TargetDetectionHandler == null) return;
             if (!this.TryGetTarget(other, out CharacterRootController target)) return;
 
-            this.LogDebug
-            (
-                $"Target left detection trigger. " +
-                $"Target: {this.GetObjectName(target)}, " +
-                $"Range Type: {this.RangeType}."
-            );
+            this.LogDebug($"Target left detection trigger. Target: {this.GetObjectName(target)}, Range Type: {this.RangeType}.");
 
             this.TargetDetectionHandler.UnregisterTarget(target, this.RangeType);
         }
@@ -86,7 +76,6 @@ namespace FlameOfTheLost
                 this.TriggerCollider.isTrigger = true;
             }
         }
-
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
