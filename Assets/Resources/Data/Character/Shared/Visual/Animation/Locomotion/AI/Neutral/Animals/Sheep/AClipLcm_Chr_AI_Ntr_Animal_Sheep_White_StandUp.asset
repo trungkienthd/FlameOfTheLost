@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65163b05174bdc4694637d6b2cc914f, type: 3}
+  m_Name: AClipLcm_Chr_AI_Ntr_Animal_Sheep_White_StandUp
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterLocomotionAnimationClipSetProfile
+  _locomotionMode: 8
+  _carryItemType: 0
+  _lightSourceType: 0
+  _idleClipSet:
+    _down: {fileID: 7400000, guid: 72e73733b64dc4b4fbb38e3eb5197421, type: 2}
+    _side: {fileID: 7400000, guid: dc2df3aaab15a114eab71eaa3fa52d3f, type: 2}
+    _up: {fileID: 7400000, guid: 2a5668fd6b9443e4db4967083c887a63, type: 2}
+  _walkClipSet:
+    _down: {fileID: 7400000, guid: 2a6279b9ea5f33744a18496d3f61cac9, type: 2}
+    _side: {fileID: 7400000, guid: 34a7ec67dc3cdab4fbc942f4ea53271e, type: 2}
+    _up: {fileID: 7400000, guid: cb1c5055e26b9bb4386aaba4dac6e404, type: 2}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3c570cbabb876e499196e8ea69bfdfc, type: 3}
+  m_Name: Variant_Chr_AI_Ntr_Animal_Cow_Black
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalVariantProfile
+  _visualConfig: {fileID: 11400000, guid: 13d7a04dea779ce4f898b0a66f7df9b8, type: 2}
+  _initialInventoryEntries: []
+  _characterProfile: {fileID: 11400000, guid: e85a0a61b648a7f4da0e4d15f64bdcc8, type: 2}
+  _roamingConfig: {fileID: 11400000, guid: a395b067a3215344ba53da66fe1aa771, type: 2}
+  _fleeConfig: {fileID: 11400000, guid: 8f55f4593a58ce34797ce57cb341a1fe, type: 2}
