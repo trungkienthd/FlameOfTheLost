@@ -15,7 +15,7 @@ namespace FlameOfTheLost
         [SerializeField] private List<CharacterAttackAnimationClipHitboxSetProfile> _elements = new();
         public IReadOnlyList<CharacterAttackAnimationClipHitboxSetProfile> Elements => _elements;
 
-        // --- Unity methods ---
+        // --- Unity Callbacks ---
 #if UNITY_EDITOR
         private void OnValidate()
         {

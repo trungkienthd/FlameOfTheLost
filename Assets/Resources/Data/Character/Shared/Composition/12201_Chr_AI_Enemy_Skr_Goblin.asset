@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28c8803fbc3f20e4da52044a985c0fd2, type: 3}
-  m_Name: 12201_Chr_AI_Enemy_Trl_Feralshroom 1
+  m_Name: 12201_Chr_AI_Enemy_Skr_Goblin
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnemyProfile
   _id: 12201
   _key: GOBLIN
@@ -23,7 +23,7 @@ MonoBehaviour:
   _traversalType: 0
   _movementConfig: {fileID: 0}
   _dodgeConfig: {fileID: 11400000, guid: c8c205336bbc80c4c820e4c00b8c8748, type: 2}
-  _visualConfig: {fileID: 0}
+  _visualConfig: {fileID: 11400000, guid: 70e947256ccef2947a146d3dc3c54327, type: 2}
   _combatConfig: {fileID: 0}
   _statusEffectGuardConfig: {fileID: 11400000, guid: af619af4a1df1ff4b87877e5452c7a03, type: 2}
   _progressionConfig: {fileID: 0}

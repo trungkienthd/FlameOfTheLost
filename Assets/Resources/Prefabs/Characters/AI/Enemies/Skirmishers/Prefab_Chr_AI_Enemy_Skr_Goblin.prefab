@@ -406,7 +406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
-  _config: {fileID: 0}
+  _config: {fileID: 11400000, guid: 70e947256ccef2947a146d3dc3c54327, type: 2}
   _spriteRenderer: {fileID: 6084845536400234014}
   _animator: {fileID: 100178451394550758}
   _characterFlipGroup: {fileID: 9065100916030918952}
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualLocomotionAnimationHandler
   _enableDebugLogs: 0
   _placeholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
-  _locomotionModeProviderBehaviour: {fileID: 0}
+  _locomotionModeProviderBehaviour: {fileID: 5404796725017508831}
   _manualLocomotionMode: 0
 --- !u!114 &5404796725017508831
 MonoBehaviour:
@@ -766,13 +766,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865456852956897858}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2906988059610458126}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &685813562957492941
 SpriteRenderer:
   serializedVersion: 2
@@ -1605,7 +1605,7 @@ MonoBehaviour:
   _rewardWalletController: {fileID: 1482769842203035230}
   _inventoryController: {fileID: 9039944795399646901}
   _targetDetectionHandler: {fileID: 8768203270480612390}
-  _profile: {fileID: 0}
+  _profile: {fileID: 11400000, guid: 19adaf6e58359e74ea59a97b066f486d, type: 2}
   _enemyBrainController: {fileID: 9076757766696690799}
   _rewardDropProvider: {fileID: 5302589758685020755}
 --- !u!114 &5857655726257863253
