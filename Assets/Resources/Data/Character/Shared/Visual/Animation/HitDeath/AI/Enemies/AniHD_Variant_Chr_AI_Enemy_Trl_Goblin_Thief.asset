@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af94ae79a7b556d4ba94ea40f2f70883, type: 3}
+  m_Name: AniHD_Variant_Chr_AI_Enemy_Trl_Goblin_Thief
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterHitDeathAnimationProfile
+  _characterType: 12201
+  _hitAnimationClipSet:
+    _down: {fileID: 7400000, guid: 3709408cb0d62eb48a8ac6485a04c2b6, type: 2}
+    _side: {fileID: 7400000, guid: 7e9c1d2c544d32b41a098210ee9bb633, type: 2}
+    _up: {fileID: 7400000, guid: 5fcba492f646bbe41b4d6e8ee90c4909, type: 2}
+  _deathAnimationClipSet:
+    _down: {fileID: 7400000, guid: 07d19ed0b2c9a2340aa01df8e7c01d4a, type: 2}
+    _side: {fileID: 7400000, guid: 09309ecbec95341458f1372f5c52977b, type: 2}
+    _up: {fileID: 7400000, guid: 23938a192ed11114a95e9e55e807bd3a, type: 2}

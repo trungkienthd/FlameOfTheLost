@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65163b05174bdc4694637d6b2cc914f, type: 3}
+  m_Name: AClipLcm_Variant_Chr_AI_Enemy_Skr_Goblin_Thief_Alert
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterLocomotionAnimationClipSetProfile
+  _locomotionMode: 2
+  _carryItemType: 0
+  _lightSourceType: 0
+  _idleClipSet:
+    _down: {fileID: 7400000, guid: e8db38ab0cb44984cad1662c20eba1d4, type: 2}
+    _side: {fileID: 7400000, guid: 2279ad04ebcd54f439e6fcc2e8f82cb1, type: 2}
+    _up: {fileID: 7400000, guid: 51e08d5a0dab5b246b523fa8701fd849, type: 2}
+  _walkClipSet:
+    _down: {fileID: 7400000, guid: 6bfd932d74e96434991c8404c1c30d0f, type: 2}
+    _side: {fileID: 7400000, guid: 2fce256167f181b4697d9ba302e963b0, type: 2}
+    _up: {fileID: 7400000, guid: 5e5d1893a1bb08c41a228d41280de55b, type: 2}

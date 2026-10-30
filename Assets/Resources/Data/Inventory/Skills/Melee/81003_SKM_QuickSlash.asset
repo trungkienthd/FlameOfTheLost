@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066661c177f42b944b17c8871d1f7693, type: 3}
   m_Name: 81003_SKM_QuickSlash
   m_EditorClassIdentifier: 
-  _id: 81001
-  _key: SLASH
-  _displayName: Slash
+  _id: 81003
+  _key: QUICK_SLASH
+  _displayName: Quick Slash
   _description: 
   _icon: {fileID: 21300000, guid: 2aecc5a2a324ee94caf1bf8ecd1bb432, type: 3}
   _defaultProvisionType: 0
