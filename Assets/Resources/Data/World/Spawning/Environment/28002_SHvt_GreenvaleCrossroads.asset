@@ -1,0 +1,329 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b4957939a2abf4293abaaf328292f5, type: 3}
+  m_Name: 28002_SHvt_GreenvaleCrossroads
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.HarvestableObjectGroupSpawnerProfile
+  _id: 28001
+  _key: SPAWNING_HARVESTABLE_GREENVALE_BODER_PATH
+  _displayName: 
+  _description: 
+  _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 0
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
+  _spawnEntries:
+  - _prefab: {fileID: 3102520659608807503, guid: d191960824b1b2d4385289a311260f7c, type: 3}
+    _initialPosition: {x: -13.7, y: 18.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: d191960824b1b2d4385289a311260f7c, type: 3}
+    _initialPosition: {x: -12.3, y: 27.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: d191960824b1b2d4385289a311260f7c, type: 3}
+    _initialPosition: {x: 5, y: 1.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: d191960824b1b2d4385289a311260f7c, type: 3}
+    _initialPosition: {x: -6.85, y: -3.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: b8815f711b8946845a43d4911eeadfca, type: 3}
+    _initialPosition: {x: -3.4, y: 18, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: b8815f711b8946845a43d4911eeadfca, type: 3}
+    _initialPosition: {x: 1.2, y: 20, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: b8815f711b8946845a43d4911eeadfca, type: 3}
+    _initialPosition: {x: 2.2, y: 19.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: b8815f711b8946845a43d4911eeadfca, type: 3}
+    _initialPosition: {x: 4.1, y: -4, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: b8815f711b8946845a43d4911eeadfca, type: 3}
+    _initialPosition: {x: 6, y: -4.3, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: b8815f711b8946845a43d4911eeadfca, type: 3}
+    _initialPosition: {x: -13.3, y: -13.3, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: dc53f6e913a1e0548ac4ef4b5c26ce03, type: 3}
+    _initialPosition: {x: -11.8, y: 23.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: dc53f6e913a1e0548ac4ef4b5c26ce03, type: 3}
+    _initialPosition: {x: -10.6, y: 23, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 210af64e84fbdef4f847871350433b49, type: 3}
+    _initialPosition: {x: 3.3, y: 26.4, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 210af64e84fbdef4f847871350433b49, type: 3}
+    _initialPosition: {x: 14.1, y: -6, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 210af64e84fbdef4f847871350433b49, type: 3}
+    _initialPosition: {x: 12.8, y: -6.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 068328a6b875a0942a52ef25e45a7a24, type: 3}
+    _initialPosition: {x: -15, y: -8.6, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 068328a6b875a0942a52ef25e45a7a24, type: 3}
+    _initialPosition: {x: -14, y: -9.9, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 068328a6b875a0942a52ef25e45a7a24, type: 3}
+    _initialPosition: {x: -13.5, y: -4.7, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 33600c173637f344cac2947e7dedd19f, type: 3}
+    _initialPosition: {x: -10, y: 17, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 33600c173637f344cac2947e7dedd19f, type: 3}
+    _initialPosition: {x: -10.5, y: 16.9, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 33600c173637f344cac2947e7dedd19f, type: 3}
+    _initialPosition: {x: -10.2, y: 18.1, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 33600c173637f344cac2947e7dedd19f, type: 3}
+    _initialPosition: {x: -11.6, y: 18.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 33600c173637f344cac2947e7dedd19f, type: 3}
+    _initialPosition: {x: -14.4, y: 22.1, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 33600c173637f344cac2947e7dedd19f, type: 3}
+    _initialPosition: {x: 2.1, y: 24.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 33600c173637f344cac2947e7dedd19f, type: 3}
+    _initialPosition: {x: 3.35, y: 18.2, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 33600c173637f344cac2947e7dedd19f, type: 3}
+    _initialPosition: {x: 3.4, y: 15.75, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 33600c173637f344cac2947e7dedd19f, type: 3}
+    _initialPosition: {x: 2.65, y: -16.4, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 35da89b18674f8d4695023d126d97d58, type: 3}
+    _initialPosition: {x: -8.5, y: 17, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 35da89b18674f8d4695023d126d97d58, type: 3}
+    _initialPosition: {x: -9.7, y: 18.4, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 35da89b18674f8d4695023d126d97d58, type: 3}
+    _initialPosition: {x: -13.9, y: 22.4, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 35da89b18674f8d4695023d126d97d58, type: 3}
+    _initialPosition: {x: 3.6, y: 17.8, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 35da89b18674f8d4695023d126d97d58, type: 3}
+    _initialPosition: {x: 3.6, y: 19.8, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 35da89b18674f8d4695023d126d97d58, type: 3}
+    _initialPosition: {x: 3.2, y: -16.2, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 35da89b18674f8d4695023d126d97d58, type: 3}
+    _initialPosition: {x: -10.4, y: 1.4, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 73a8b989b61987a4b8ae1c84ee548df3, type: 3}
+    _initialPosition: {x: -10.7, y: 17.25, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 73a8b989b61987a4b8ae1c84ee548df3, type: 3}
+    _initialPosition: {x: -11.2, y: 16.3, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 73a8b989b61987a4b8ae1c84ee548df3, type: 3}
+    _initialPosition: {x: -11.6, y: 17.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 73a8b989b61987a4b8ae1c84ee548df3, type: 3}
+    _initialPosition: {x: -10.5, y: -16.7, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 73a8b989b61987a4b8ae1c84ee548df3, type: 3}
+    _initialPosition: {x: -7.3, y: -16.9, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 73a8b989b61987a4b8ae1c84ee548df3, type: 3}
+    _initialPosition: {x: 5, y: -9.2, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 614fe4696a145b5439805fb301f3fc6f, type: 3}
+    _initialPosition: {x: -8.8, y: 17.9, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 614fe4696a145b5439805fb301f3fc6f, type: 3}
+    _initialPosition: {x: 2.65, y: 24.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 614fe4696a145b5439805fb301f3fc6f, type: 3}
+    _initialPosition: {x: 1.7, y: 25.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 614fe4696a145b5439805fb301f3fc6f, type: 3}
+    _initialPosition: {x: 3.3, y: 16.2, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 614fe4696a145b5439805fb301f3fc6f, type: 3}
+    _initialPosition: {x: 3.7, y: 16.8, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 614fe4696a145b5439805fb301f3fc6f, type: 3}
+    _initialPosition: {x: -10.8, y: 1.6, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 614fe4696a145b5439805fb301f3fc6f, type: 3}
+    _initialPosition: {x: -10.25, y: 0.6, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 614fe4696a145b5439805fb301f3fc6f, type: 3}
+    _initialPosition: {x: -1.8, y: 3.35, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 614fe4696a145b5439805fb301f3fc6f, type: 3}
+    _initialPosition: {x: -1.45, y: 3.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  - _prefab: {fileID: 3102520659608807503, guid: 614fe4696a145b5439805fb301f3fc6f, type: 3}
+    _initialPosition: {x: 5.6, y: -8.35, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+  _spawnObjectsOnStart: 1

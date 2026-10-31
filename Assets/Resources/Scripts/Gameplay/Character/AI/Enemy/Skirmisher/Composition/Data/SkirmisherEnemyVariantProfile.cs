@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "Variant_AI_Enemy_Skr_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/Skirmisher/VariantProfile")]
+    [CreateAssetMenu(fileName = "Variant_Chr_AI_Enemy_Skr_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/Skirmisher/VariantProfile")]
     public class SkirmisherEnemyVariantProfile : EnemyVariantProfile
     {
         // --- Data / Configs ---

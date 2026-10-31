@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a599b2e386c8c8c4b8c8146546145acc, type: 3}
+  m_Name: 32004_ItmCtn_StoneworkersCache
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerProfile
+  _id: 32004
+  _key: STONEWORKERS_CACHE
+  _displayName: Stoneworker's Cache
+  _description: An old supply chest left behind by stoneworkers.
+  _icon: {fileID: 337032105, guid: 0fb3e78572f02624ab8a9ca0db2921d9, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: -11.5, y: -1, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 1
+  _initialItems:
+  - _runtimeId: 
+    _item: {fileID: 11400000, guid: 721c7d036524bc846b64cd856cd235ce, type: 2}
+    _quantity: 1
+    _equipped: 0
+  _maximumEntryCount: 20

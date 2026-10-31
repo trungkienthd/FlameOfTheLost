@@ -24,12 +24,14 @@ MonoBehaviour:
   _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
   _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
   _initialVisualLocalScale: {x: 1, y: 1, z: 1}
-  _configureIconAtStart: 0
+  _configureIconAtStart: 1
   _initialItems:
-  - _item: {fileID: 11400000, guid: f14bc7cca332c78468593a8bbd652d25, type: 2}
+  - _runtimeId: 
+    _item: {fileID: 11400000, guid: f14bc7cca332c78468593a8bbd652d25, type: 2}
     _quantity: 1
     _equipped: 0
-  - _item: {fileID: 11400000, guid: e3f2367d6724ced468c2cdf9e43748e3, type: 2}
+  - _runtimeId: 
+    _item: {fileID: 11400000, guid: e3f2367d6724ced468c2cdf9e43748e3, type: 2}
     _quantity: 2
     _equipped: 0
   _maximumEntryCount: 20

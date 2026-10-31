@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a599b2e386c8c8c4b8c8146546145acc, type: 3}
+  m_Name: 32005_ItmCtn_WayfarersLightCache
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerProfile
+  _id: 32005
+  _key: WAYFARERS_LIGHT_CACHE
+  _displayName: Wayfarer's Light Cache
+  _description: A forgotten traveler's cache containing a lantern, ready to light
+    the way through darkness.
+  _icon: {fileID: -1724803183, guid: b58241b40bcf43d42849b44c429f5fb0, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: -11.5, y: -1, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 1
+  _initialItems:
+  - _runtimeId: 
+    _item: {fileID: 11400000, guid: d7384c926e26ed84d916a6073dd92de9, type: 2}
+    _quantity: 1
+    _equipped: 0
+  _maximumEntryCount: 20

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d0ef1f0fd81ef46982ccd99c3336e6, type: 3}
+  m_Name: 28102_SClt_GreenvaleCrossroads
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CollectibleObjectGroupSpawnerProfile
+  _id: 28101
+  _key: SPAWNING_COLLECTIBLE_GREENVALE_BODER_PATH
+  _displayName: 
+  _description: 
+  _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
+  _spawnEntries:
+  - _prefab: {fileID: 692900736931796655, guid: cd538b8d34fd5234db3e5bad558425ea, type: 3}
+    _initialPosition: {x: -10, y: 17.5, z: 0}
+    _initialEulerAngles: {x: 0, y: 0, z: 0}
+    _initialLocalScale: {x: 1, y: 1, z: 1}
+    _spawnOnStart: 1
+    _spawnOnWorldRefresh: 1
+    _initialQuantity: 2
+  _spawnObjectsOnStart: 1

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "Cbt_Variant_Chr_AI_Enm_Skr_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/Skirmisher/CombatConfig")]
+    [CreateAssetMenu(fileName = "Cbt_Variant_Chr_AI_Enemy_Skr_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/Skirmisher/CombatConfig")]
     public class SkirmisherEnemyCombatConfig : CharacterDataAsset
     {
         //  1. Attack Decision

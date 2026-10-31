@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "Pos_Variant_Chr_AI_Enm_Skr_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/Skirmisher/PositioningConfig")]
+    [CreateAssetMenu(fileName = "Pos_Variant_Chr_AI_Enemy_Skr_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/Skirmisher/PositioningConfig")]
     public class SkirmisherEnemyPositioningConfig : CharacterDataAsset
     {
         //  1. Combat Distance
