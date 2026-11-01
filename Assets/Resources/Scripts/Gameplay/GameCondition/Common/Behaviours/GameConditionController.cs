@@ -24,10 +24,12 @@ namespace FlameOfTheLost
 
         //  2. Sub-behaviours - Progress Controllers
         [Header("References - Sub-behaviours - Progress Controllers)")]
-        [SerializeField] private TutorialProgressController _tutorialProgressController;
-        [SerializeField] private MilestoneProgressController _milestoneProgressController;
+        [SerializeField] private TutorialProgressController     _tutorialProgressController;
+        [SerializeField] private MilestoneProgressController    _milestoneProgressController;
+        [SerializeField] private QuestProgressController        _questProgressController;
         private TutorialProgressController TutorialProgressController   => _tutorialProgressController;
         private MilestoneProgressController MilestoneProgressController => _milestoneProgressController;
+        private QuestProgressController QuestProgressController         => _questProgressController;
 
         // --- Data / Configs ---
         [Header("Configs - Initial Condition States")]
@@ -86,6 +88,11 @@ namespace FlameOfTheLost
                 Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] Cannot bind gameplay references because {nameof(this.MilestoneProgressController)} is missing.", this);
                 return false;
             }
+            if (this.QuestProgressController == null)
+            {
+                Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] Cannot bind gameplay references because {nameof(this.QuestProgressController)} is missing.", this);
+                return false;
+            }
 
             // a. Bind tutorial progression.
             if (!this.TutorialProgressController.BindGameplayReferences())
@@ -96,6 +103,13 @@ namespace FlameOfTheLost
 
             // b. Bind milestone progression.
             if (!this.MilestoneProgressController.BindGameplayReferences())
+            {
+                this.UnbindProgressControllerGameplayReferences();
+                return false;
+            }
+
+            // c. Bind quest progression.
+            if (!this.QuestProgressController.BindGameplayReferences())
             {
                 this.UnbindProgressControllerGameplayReferences();
                 return false;
@@ -151,7 +165,6 @@ namespace FlameOfTheLost
 
             return this.SaveHandler.CaptureSaveData();
         }
-
         public void RestoreSaveData(GameConditionSaveData saveData)
         {
             this.SaveHandler?.RestoreSaveData(saveData);
@@ -180,6 +193,7 @@ namespace FlameOfTheLost
         //  1. Progress Controller Cleanup
         private void UnbindProgressControllerGameplayReferences()
         {
+            this.QuestProgressController?.UnbindGameplayReferences();
             this.MilestoneProgressController?.UnbindGameplayReferences();
             this.TutorialProgressController?.UnbindGameplayReferences();
         }
@@ -195,6 +209,7 @@ namespace FlameOfTheLost
 
             if (this.TutorialProgressController     == null) _tutorialProgressController    = this.GetComponentInChildren<TutorialProgressController>(true);
             if (this.MilestoneProgressController    == null) _milestoneProgressController   = this.GetComponentInChildren<MilestoneProgressController>(true);
+            if (this.QuestProgressController        == null) _questProgressController       = this.GetComponentInChildren<QuestProgressController>(true);
         }
         protected override void ValidateInternalReferences()
         {
@@ -206,6 +221,7 @@ namespace FlameOfTheLost
 
             if (this.TutorialProgressController     == null) Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] {nameof(this.TutorialProgressController)} reference is not assigned.", this);
             if (this.MilestoneProgressController    == null) Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] {nameof(this.MilestoneProgressController)} reference is not assigned.", this);
+            if (this.QuestProgressController        == null) Debug.LogError($"[{this.gameObject.name}.{nameof(GameConditionController)}] {nameof(this.QuestProgressController)} reference is not assigned.", this);
         }
         protected override void BindInternalReferences()
         {
@@ -217,6 +233,7 @@ namespace FlameOfTheLost
 
             this.TutorialProgressController?.Bind(this);
             this.MilestoneProgressController?.Bind(this);
+            this.QuestProgressController?.Bind(this);
         }
         protected override void InitializeInternalState()
         {
@@ -234,8 +251,9 @@ namespace FlameOfTheLost
         }
         protected override void UnbindInternalReferences()
         {
-            this.TutorialProgressController?.Unbind(this);
+            this.QuestProgressController?.Unbind(this);
             this.MilestoneProgressController?.Unbind(this);
+            this.TutorialProgressController?.Unbind(this);
 
             this.SceneHandler?.Unbind(this);
             this.SaveHandler?.Unbind(this);
