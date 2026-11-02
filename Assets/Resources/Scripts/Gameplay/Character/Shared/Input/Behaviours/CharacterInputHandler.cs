@@ -76,7 +76,7 @@ namespace FlameOfTheLost
         }
 
         //  3. Movement Input APIs
-        public void SetMoveInput(Vector2 moveInput)
+        public virtual void SetMoveInput(Vector2 moveInput)
         {
             if (this.IsDeathDisabled || this.IsHitSequenceInputBlocked)
             {
@@ -89,13 +89,13 @@ namespace FlameOfTheLost
 
             this.MovementHandler.RawMovementInput = moveInput;
         }
-        public void ClearMoveInput()
+        public virtual void ClearMoveInput()
         {
             this.SetMoveInput(Vector2.zero);
         }
 
         //  4. Dodging Input APIs
-        public void RequestDodge()
+        public virtual void RequestDodge()
         {
             //if (this.IsInputBlocked) return;
             if (this.IsDeathDisabled || this.IsHitSequenceInputBlocked) return;
@@ -105,44 +105,44 @@ namespace FlameOfTheLost
 
         //  5. Combat Input APIs
         //      5.1. Attack Input
-        public void RequestNormalAttack(AttackSide attackSide)
+        public virtual void RequestNormalAttack(AttackSide attackSide)
         {
             if (this.IsInputBlocked) return;
             this.CombatController?.TryDoNormalAttack(attackSide);
         }
 
-        public void RequestSpecialAttack(AttackSide attackSide)
+        public virtual void RequestSpecialAttack(AttackSide attackSide)
         {
             if (this.IsInputBlocked) return;
             this.CombatController?.TryDoSpecialAttack(attackSide);
         }
 
         //      5.2. Combat Loadout Input
-        public void RequestCycleWeapon(int direction)
+        public virtual void RequestCycleWeapon(int direction)
         {
             if (this.IsInputBlocked) return;
             this.CombatLoadoutController?.TryCycleWeaponEntry(direction);
         }
 
-        public void RequestQuickEquipWeapon()
+        public virtual void RequestQuickEquipWeapon()
         {
             if (this.IsInputBlocked) return;
             this.CombatLoadoutController?.TryQuickEquipWeapon();
         }
 
-        public void RequestCycleConsumableItem(int direction)
+        public virtual void RequestCycleConsumableItem(int direction)
         {
             if (this.IsInputBlocked) return;
             this.CombatLoadoutController?.TryCycleConsumableItemEntry(direction);
         }
 
-        public void RequestConsumeConsumableItem()
+        public virtual void RequestConsumeConsumableItem()
         {
             if (this.IsInputBlocked) return;
             this.CombatLoadoutController?.TryConsumeConsumableItem();
         }
 
-        public void RequestSetActiveWeaponSpecialSkill(SkillProfile skill)
+        public virtual void RequestSetActiveWeaponSpecialSkill(SkillProfile skill)
         {
             if (this.IsInputBlocked) return;
             if (skill == null) return;
