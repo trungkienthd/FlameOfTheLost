@@ -102,19 +102,14 @@ namespace FlameOfTheLost
 
             if (this.Profile == null)
             {
-                Debug.LogError
-                (
-                    $"[{this.gameObject.name}.{this.GetType().Name}] " +
-                    $"{typeof(TProfile).Name} reference is not assigned.",
-                    this
-                );
+                Debug.LogError($"[{this.gameObject.name}.{this.GetType().Name}] {typeof(TProfile).Name} reference is not assigned.", this);
             }
         }
         protected override void InitializePregameplayState()
         {
             base.InitializePregameplayState();
 
-            //this.ConfigureInitialTransform();
+            this.ConfigureInitialTransform();
             this.ConfigureInitialVisual();
         }
     }

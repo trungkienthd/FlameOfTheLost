@@ -17,7 +17,7 @@ MonoBehaviour:
   _displayName: Collectible - Bloodied Dagger
   _description: 
   _icon: {fileID: 21300000, guid: e6a1f0f9930d0894b8cf8cddc309f999, type: 3}
-  _configureInitialTransformAtStart: 1
+  _configureInitialTransformAtStart: 0
   _initialPosition: {x: 0, y: 0, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
