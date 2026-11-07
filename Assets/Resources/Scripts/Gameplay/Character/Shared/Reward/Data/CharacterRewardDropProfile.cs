@@ -4,7 +4,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [CreateAssetMenu(fileName = "RwdDrop_Character", menuName = "Data/FlameOfTheLost/Character/Shared/Reward/CharacterRewardDropProfile")]
-    public class CharacterRewardDropProfile : CharacterDataAsset
+    public class CharacterRewardDropProfile : CharacterData
     {
         // --- Data / Configs ---
         //  1. Lost Embers

@@ -1,16 +1,28 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace FlameOfTheLost
 {
     public class NPCDialoguePanelController : PlayerInteractionBasePanelController
     {
+        // --- References ---
+        [Header("References - Dialogue UI")]
+        [SerializeField] private TMP_Text _speakerNameText;
+        [SerializeField] private TMP_Text _dialogueText;
+        [SerializeField] private Transform _choicesRoot;
+        [SerializeField] private Button _choiceButtonPrefab;
+
         // --- Runtime ---
         //  1. Current Interaction
         public NPCRootController CurrentNPC { get; private set; }
         public PlayerRootController CurrentPlayer { get; private set; }
 
         //  2. Dialogue
-        private NPCDialogueHandler CurrentDialogueHandler => this.CurrentNPC?.NPCBrainController?.DialogueHandler;
+        private NPCDialogueHandler CurrentDialogueHandler => this.CurrentNPC?.DialogueHandler;
+
+        private readonly List<Button> _spawnedChoiceButtons = new();
 
         // --- Public APIs ---
         //  1. Opening
@@ -19,14 +31,20 @@ namespace FlameOfTheLost
             if (npc == null) return;
             if (player == null) return;
 
-            NPCDialogueHandler dialogueHandler = npc.NPCBrainController?.DialogueHandler;
+            NPCDialogueHandler dialogueHandler = npc?.DialogueHandler;
 
             if (dialogueHandler == null) return;
             if (!dialogueHandler.IsConversationActive) return;
             if (dialogueHandler.CurrentPlayer != player) return;
 
+            if (this.IsOpen) this.Close();
+
             this.CurrentNPC = npc;
             this.CurrentPlayer = player;
+
+            dialogueHandler.DialogueNodeChanged += this.HandleDialogueNodeChanged;
+
+            dialogueHandler.ConversationEnded += this.HandleConversationEnded;
 
             base.Open();
         }
@@ -34,7 +52,19 @@ namespace FlameOfTheLost
         //  2. Closing
         public override void Close()
         {
-            this.EndCurrentConversation();
+            if (!this.IsOpen) return;
+
+            NPCDialogueHandler dialogueHandler = this.CurrentDialogueHandler;
+            if (dialogueHandler != null)
+            {
+                dialogueHandler.DialogueNodeChanged -= this.HandleDialogueNodeChanged;
+
+                dialogueHandler.ConversationEnded -= this.HandleConversationEnded;
+            }
+
+            dialogueHandler?.EndConversation();
+
+            this.ClearChoiceButtons();
 
             this.CurrentNPC = null;
             this.CurrentPlayer = null;
@@ -43,9 +73,100 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        private void EndCurrentConversation()
+        //  1. Panel Hooks
+        protected override void OnOpened()
         {
-            this.CurrentDialogueHandler?.EndConversation();
+            base.OnOpened();
+
+            this.RefreshDialogueUI();
+        }
+        protected override void OnClosing()
+        {
+            this.ClearChoiceButtons();
+
+            base.OnClosing();
+        }
+
+        //  2. Dialogue Events
+        private void HandleDialogueNodeChanged(NPCDialogueNodeData node)
+        {
+            this.RefreshDialogueUI();
+        }
+        private void HandleConversationEnded(PlayerRootController player)
+        {
+            this.Close();
+        }
+
+        //  3. UI
+        private void RefreshDialogueUI()
+        {
+            this.ClearChoiceButtons();
+
+            NPCDialogueHandler dialogueHandler = this.CurrentDialogueHandler;
+            if (dialogueHandler == null) return;
+
+            NPCDialogueNodeData node = dialogueHandler.CurrentNode;
+            if (node == null) return;
+
+            if (_speakerNameText != null) _speakerNameText.text = node.SpeakerName;
+
+            if (_dialogueText != null) _dialogueText.text = node.DialogueText;
+
+            List<NPCDialogueChoiceEntry> choices = dialogueHandler.GetAvailableChoices();
+            if (choices.Count == 0)
+            {
+                this.CreateChoiceButton("Leave", -1);
+                return;
+            }
+
+            for (int i = 0; i < choices.Count; i++)
+            {
+                this.CreateChoiceButton(choices[i].ChoiceText, i);
+            }
+        }
+        private void CreateChoiceButton(string text, int choiceIndex)
+        {
+            if (_choiceButtonPrefab == null || _choicesRoot == null)
+            {
+                return;
+            }
+
+            Button button = UnityEngine.Object.Instantiate(_choiceButtonPrefab, _choicesRoot);
+            button.gameObject.SetActive(true);
+
+            TMP_Text label = button.GetComponentInChildren<TMP_Text>(true);
+            if (label != null) label.text = text;
+
+            int selectedIndex = choiceIndex;
+
+            button.onClick.AddListener(() => { this.HandleChoiceSelected(selectedIndex); });
+
+            _spawnedChoiceButtons.Add(button);
+        }
+        private void HandleChoiceSelected(int choiceIndex)
+        {
+            if (choiceIndex < 0)
+            {
+                this.Close();
+                return;
+            }
+
+            NPCDialogueHandler dialogueHandler = this.CurrentDialogueHandler;
+            if (dialogueHandler == null) return;
+
+            if (!dialogueHandler.TrySelectChoice(choiceIndex))
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(NPCDialoguePanelController)}] Failed to execute dialogue choice.", this);
+            }
+        }
+        private void ClearChoiceButtons()
+        {
+            foreach (Button button in _spawnedChoiceButtons)
+            {
+                if (button != null) UnityEngine.Object.Destroy(button.gameObject);
+            }
+
+            _spawnedChoiceButtons.Clear();
         }
 
         // --- FOTLMonoBehaviour Overrides ---
@@ -55,10 +176,23 @@ namespace FlameOfTheLost
 
             this.CurrentNPC = null;
             this.CurrentPlayer = null;
+
+            _spawnedChoiceButtons.Clear();
         }
         protected override void CleanupStates()
         {
-            this.EndCurrentConversation();
+            NPCDialogueHandler dialogueHandler = this.CurrentDialogueHandler;
+
+            if (dialogueHandler != null)
+            {
+                dialogueHandler.DialogueNodeChanged -= this.HandleDialogueNodeChanged;
+
+                dialogueHandler.ConversationEnded -= this.HandleConversationEnded;
+
+                dialogueHandler.EndConversation();
+            }
+
+            this.ClearChoiceButtons();
 
             this.CurrentNPC = null;
             this.CurrentPlayer = null;

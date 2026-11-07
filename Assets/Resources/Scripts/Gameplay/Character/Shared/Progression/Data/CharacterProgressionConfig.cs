@@ -5,7 +5,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [CreateAssetMenu(fileName = "Prg_Character", menuName = "Data/FlameOfTheLost/Character/Shared/Progression/CharacterProgressionConfig")]
-    public class CharacterProgressionConfig : CharacterDataAsset
+    public class CharacterProgressionConfig : CharacterData
     {
         [Header("Attribute Display")]
         [SerializeField] private List<CharacterProgressionAttributeDisplayEntry> _attributeDisplayEntries = new();

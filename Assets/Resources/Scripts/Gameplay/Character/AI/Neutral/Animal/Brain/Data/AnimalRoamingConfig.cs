@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [CreateAssetMenu(fileName = "Chr_AI_Ntr_Animal_Roam_New", menuName = "Data/FlameOfTheLost/Character/AI/Neutral/Animal/Brain/RoamingConfig")]
-    public class AnimalRoamingConfig : CharacterDataAsset
+    public class AnimalRoamingConfig : CharacterData
     {
         // --- Passive State Durations ---
         //  1. Idle

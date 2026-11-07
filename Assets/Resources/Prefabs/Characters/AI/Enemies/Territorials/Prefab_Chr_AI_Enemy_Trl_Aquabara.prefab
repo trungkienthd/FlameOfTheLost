@@ -2767,9 +2767,9 @@ MonoBehaviour:
   _damageDealtAddFlat: 0
   _knockbackDealtMultiplier: 1
   _knockbackDealtAddFlat: 0
-  _sourceCharacterFaction: 2
+  _sourceCharacterFaction: 3
   _originTransform: {fileID: 3031436592083108686}
-  _sourceCharacterRootController: {fileID: 0}
+  _sourceCharacterRootController: {fileID: 2842159701441206635}
   _ignoresSameFaction: 1
 --- !u!1 &6678998158664432998
 GameObject:
@@ -2999,6 +2999,7 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
   _playerSpawnerController: {fileID: 0}
+  _gameSaveController: {fileID: 0}
 --- !u!114 &4316563585464491958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3265,10 +3266,12 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _maxEquippedEntries: 1
   _equippedEntries:
-  - _item: {fileID: 0}
+  - _runtimeId: 
+    _item: {fileID: 0}
     _quantity: 0
     _equipped: 0
   _activeEquippedEntry:
+    _runtimeId: 
     _item: {fileID: 0}
     _quantity: 0
     _equipped: 0
@@ -3290,10 +3293,12 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _maxEquippedEntries: 1
   _equippedEntries:
-  - _item: {fileID: 0}
+  - _runtimeId: 
+    _item: {fileID: 0}
     _quantity: 0
     _equipped: 0
   _activeEquippedEntry:
+    _runtimeId: 
     _item: {fileID: 0}
     _quantity: 0
     _equipped: 0
@@ -3325,10 +3330,12 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _maxEquippedEntries: 1
   _equippedEntries:
-  - _item: {fileID: 0}
+  - _runtimeId: 
+    _item: {fileID: 0}
     _quantity: 0
     _equipped: 0
   _activeEquippedEntry:
+    _runtimeId: 
     _item: {fileID: 0}
     _quantity: 0
     _equipped: 0

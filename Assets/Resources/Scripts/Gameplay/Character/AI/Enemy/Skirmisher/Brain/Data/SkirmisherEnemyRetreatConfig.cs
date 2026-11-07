@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [CreateAssetMenu(fileName = "Ret_Variant_Chr_AI_Enemy_Skr_New", menuName = "Data/FlameOfTheLost/Character/AI/Enemy/Skirmisher/RetreatConfig")]
-    public class SkirmisherEnemyRetreatConfig : CharacterDataAsset
+    public class SkirmisherEnemyRetreatConfig : CharacterData
     {
         //  1. Retreat Trigger
         [Header("Retreat Trigger")]

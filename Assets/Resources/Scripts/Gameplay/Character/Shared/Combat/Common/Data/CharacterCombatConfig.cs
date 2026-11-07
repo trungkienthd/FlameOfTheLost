@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [CreateAssetMenu(fileName = "Cbt_Character", menuName = "Data/FlameOfTheLost/Character/Shared/Combat/CharacterCombatConfig")]
-    public class CharacterCombatConfig : CharacterDataAsset
+    public class CharacterCombatConfig : CharacterData
     {
         [Header("Aiming - Routing")]
         [SerializeField] private bool _aimingOverridesFacing = true;

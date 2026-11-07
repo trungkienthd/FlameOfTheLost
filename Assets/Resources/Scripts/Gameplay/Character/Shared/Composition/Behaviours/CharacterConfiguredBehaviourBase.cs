@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class CharacterConfiguredBehaviourBase<TConfig> : CharacterBehaviourControllerBase where TConfig : CharacterDataAsset
+    public abstract class CharacterConfiguredBehaviourBase<TConfig> : CharacterBehaviourControllerBase where TConfig : CharacterData
     {
         // --- Data / Configs ---
         [Header("Config")]

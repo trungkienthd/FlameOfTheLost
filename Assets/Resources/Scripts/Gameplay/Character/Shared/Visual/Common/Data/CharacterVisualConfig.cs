@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [CreateAssetMenu(fileName = "Vis_Character", menuName = "Data/FlameOfTheLost/Character/Shared/Visual/CharacterVisualConfig")]
-    public class CharacterVisualConfig : CharacterDataAsset
+    public class CharacterVisualConfig : CharacterData
     {
         //  1. General Visual 
         //      1.1. Color

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class CharacterAIVariantProfile : CharacterDataAsset
+    public abstract class CharacterAIVariantProfile : CharacterData
     {
         //   1. Character
         public abstract CharacterAIProfile CharacterProfile { get; }

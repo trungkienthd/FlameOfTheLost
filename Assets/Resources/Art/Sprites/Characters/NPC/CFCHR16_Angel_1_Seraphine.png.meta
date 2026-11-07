@@ -514,7 +514,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_18
+      name: CFCHR16_Seraphine_Walk_Default_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -536,7 +536,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_19
+      name: CFCHR16_Seraphine_Walk_Default_Down_1
       rect:
         serializedVersion: 2
         x: 64
@@ -558,7 +558,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_20
+      name: CFCHR16_Seraphine_Walk_Default_Down_2
       rect:
         serializedVersion: 2
         x: 128
@@ -580,7 +580,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_21
+      name: CFCHR16_Seraphine_Walk_Default_Down_3
       rect:
         serializedVersion: 2
         x: 192
@@ -602,7 +602,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_22
+      name: CFCHR16_Seraphine_Walk_Default_Down_4
       rect:
         serializedVersion: 2
         x: 256
@@ -624,7 +624,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_23
+      name: CFCHR16_Seraphine_Walk_Default_Down_5
       rect:
         serializedVersion: 2
         x: 320
@@ -646,7 +646,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_24
+      name: CFCHR16_Seraphine_Walk_Default_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -668,7 +668,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_25
+      name: CFCHR16_Seraphine_Walk_Default_Side_1
       rect:
         serializedVersion: 2
         x: 64
@@ -690,7 +690,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_26
+      name: CFCHR16_Seraphine_Walk_Default_Side_2
       rect:
         serializedVersion: 2
         x: 128
@@ -712,7 +712,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_27
+      name: CFCHR16_Seraphine_Walk_Default_Side_3
       rect:
         serializedVersion: 2
         x: 192
@@ -734,7 +734,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_28
+      name: CFCHR16_Seraphine_Walk_Default_Side_4
       rect:
         serializedVersion: 2
         x: 256
@@ -756,7 +756,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_29
+      name: CFCHR16_Seraphine_Walk_Default_Side_5
       rect:
         serializedVersion: 2
         x: 320
@@ -778,7 +778,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_30
+      name: CFCHR16_Seraphine_Walk_Default_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -800,7 +800,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_31
+      name: CFCHR16_Seraphine_Walk_Default_Up_1
       rect:
         serializedVersion: 2
         x: 64
@@ -822,7 +822,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_32
+      name: CFCHR16_Seraphine_Walk_Default_Up_2
       rect:
         serializedVersion: 2
         x: 128
@@ -844,7 +844,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_33
+      name: CFCHR16_Seraphine_Walk_Default_Up_3
       rect:
         serializedVersion: 2
         x: 192
@@ -866,7 +866,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_34
+      name: CFCHR16_Seraphine_Walk_Default_Up_4
       rect:
         serializedVersion: 2
         x: 256
@@ -888,7 +888,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_35
+      name: CFCHR16_Seraphine_Walk_Default_Up_5
       rect:
         serializedVersion: 2
         x: 320
@@ -910,7 +910,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_36
+      name: CFCHR16_Seraphine_Attack_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -932,7 +932,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_37
+      name: CFCHR16_Seraphine_Attack_Down_1
       rect:
         serializedVersion: 2
         x: 64
@@ -954,7 +954,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_38
+      name: CFCHR16_Seraphine_Attack_Down_2
       rect:
         serializedVersion: 2
         x: 128
@@ -976,7 +976,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_39
+      name: CFCHR16_Seraphine_Attack_Down_3
       rect:
         serializedVersion: 2
         x: 192
@@ -998,7 +998,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_40
+      name: CFCHR16_Seraphine_Attack_Down_4
       rect:
         serializedVersion: 2
         x: 256
@@ -1020,7 +1020,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_41
+      name: CFCHR16_Seraphine_Attack_Down_5
       rect:
         serializedVersion: 2
         x: 320
@@ -1042,7 +1042,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_42
+      name: CFCHR16_Seraphine_Attack_Down_6
       rect:
         serializedVersion: 2
         x: 384
@@ -1064,7 +1064,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_43
+      name: CFCHR16_Seraphine_Attack_Down_7
       rect:
         serializedVersion: 2
         x: 448
@@ -1086,7 +1086,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_44
+      name: CFCHR16_Seraphine_Attack_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1108,7 +1108,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_45
+      name: CFCHR16_Seraphine_Attack_Side_1
       rect:
         serializedVersion: 2
         x: 64
@@ -1130,7 +1130,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_46
+      name: CFCHR16_Seraphine_Attack_Side_2
       rect:
         serializedVersion: 2
         x: 128
@@ -1152,7 +1152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_47
+      name: CFCHR16_Seraphine_Attack_Side_3
       rect:
         serializedVersion: 2
         x: 192
@@ -1174,7 +1174,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_48
+      name: CFCHR16_Seraphine_Attack_Side_4
       rect:
         serializedVersion: 2
         x: 256
@@ -1196,7 +1196,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_49
+      name: CFCHR16_Seraphine_Attack_Side_5
       rect:
         serializedVersion: 2
         x: 320
@@ -1218,7 +1218,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_50
+      name: CFCHR16_Seraphine_Attack_Side_6
       rect:
         serializedVersion: 2
         x: 384
@@ -1240,7 +1240,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_51
+      name: CFCHR16_Seraphine_Attack_Side_7
       rect:
         serializedVersion: 2
         x: 448
@@ -1262,7 +1262,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_52
+      name: CFCHR16_Seraphine_Attack_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1284,7 +1284,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_53
+      name: CFCHR16_Seraphine_Attack_Up_1
       rect:
         serializedVersion: 2
         x: 64
@@ -1306,7 +1306,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_54
+      name: CFCHR16_Seraphine_Attack_Up_2
       rect:
         serializedVersion: 2
         x: 128
@@ -1328,7 +1328,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_55
+      name: CFCHR16_Seraphine_Attack_Up_3
       rect:
         serializedVersion: 2
         x: 192
@@ -1350,7 +1350,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_56
+      name: CFCHR16_Seraphine_Attack_Up_4
       rect:
         serializedVersion: 2
         x: 256
@@ -1372,7 +1372,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_57
+      name: CFCHR16_Seraphine_Attack_Up_5
       rect:
         serializedVersion: 2
         x: 320
@@ -1394,7 +1394,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_58
+      name: CFCHR16_Seraphine_Attack_Up_6
       rect:
         serializedVersion: 2
         x: 384
@@ -1416,7 +1416,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_59
+      name: CFCHR16_Seraphine_Attack_Up_7
       rect:
         serializedVersion: 2
         x: 448
@@ -1438,7 +1438,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_60
+      name: CFCHR16_Seraphine_Hit_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1460,7 +1460,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_61
+      name: CFCHR16_Seraphine_Hit_Down_1
       rect:
         serializedVersion: 2
         x: 64
@@ -1482,7 +1482,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_62
+      name: CFCHR16_Seraphine_Hit_Down_2
       rect:
         serializedVersion: 2
         x: 128
@@ -1504,7 +1504,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_63
+      name: CFCHR16_Seraphine_Hit_Down_3
       rect:
         serializedVersion: 2
         x: 192
@@ -1526,7 +1526,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_64
+      name: CFCHR16_Seraphine_Hit_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1548,7 +1548,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_65
+      name: CFCHR16_Seraphine_Hit_Side_1
       rect:
         serializedVersion: 2
         x: 64
@@ -1570,7 +1570,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_66
+      name: CFCHR16_Seraphine_Hit_Side_2
       rect:
         serializedVersion: 2
         x: 128
@@ -1592,7 +1592,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_67
+      name: CFCHR16_Seraphine_Hit_Side_3
       rect:
         serializedVersion: 2
         x: 192
@@ -1614,7 +1614,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_68
+      name: CFCHR16_Seraphine_Hit_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1636,7 +1636,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_69
+      name: CFCHR16_Seraphine_Hit_Up_1
       rect:
         serializedVersion: 2
         x: 64
@@ -1658,7 +1658,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_70
+      name: CFCHR16_Seraphine_Hit_Up_2
       rect:
         serializedVersion: 2
         x: 128
@@ -1680,7 +1680,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_71
+      name: CFCHR16_Seraphine_Hit_Up_3
       rect:
         serializedVersion: 2
         x: 192
@@ -1702,7 +1702,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_72
+      name: CFCHR16_Seraphine_Die_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1724,7 +1724,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_73
+      name: CFCHR16_Seraphine_Die_Side_1
       rect:
         serializedVersion: 2
         x: 64
@@ -1746,7 +1746,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_74
+      name: CFCHR16_Seraphine_Die_Side_2
       rect:
         serializedVersion: 2
         x: 128
@@ -1768,7 +1768,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Angel_1_75
+      name: CFCHR16_Seraphine_Die_Side_3
       rect:
         serializedVersion: 2
         x: 192
@@ -1803,64 +1803,46 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Angel_1_18: -1221040072
-      Angel_1_19: 1638513568
-      Angel_1_20: -618979006
-      Angel_1_21: 1690976433
-      Angel_1_22: -1114950365
-      Angel_1_23: -568174952
-      Angel_1_24: 1847828425
-      Angel_1_25: -613125789
-      Angel_1_26: 1722181772
-      Angel_1_27: 71266240
-      Angel_1_28: 816533920
-      Angel_1_29: -806026986
-      Angel_1_30: -1525066578
-      Angel_1_31: -2098317664
-      Angel_1_32: -438484570
-      Angel_1_33: 2006474529
-      Angel_1_34: -2126545017
-      Angel_1_35: -502969707
-      Angel_1_36: -653021605
-      Angel_1_37: -1137705373
-      Angel_1_38: -1736196534
-      Angel_1_39: 1441142773
-      Angel_1_40: 824147635
-      Angel_1_41: -1793912339
-      Angel_1_42: 1971664929
-      Angel_1_43: 969470365
-      Angel_1_44: 1390499323
-      Angel_1_45: -999772220
-      Angel_1_46: -2093946579
-      Angel_1_47: -1187996247
-      Angel_1_48: 1696357005
-      Angel_1_49: 215339016
-      Angel_1_50: 443939864
-      Angel_1_51: -1960580601
-      Angel_1_52: 342812862
-      Angel_1_53: -871116
-      Angel_1_54: 1611498109
-      Angel_1_55: -1850320793
-      Angel_1_56: -1608520569
-      Angel_1_57: 177120211
-      Angel_1_58: 574044443
-      Angel_1_59: -1341880048
-      Angel_1_60: -1338735288
-      Angel_1_61: 1608045052
-      Angel_1_62: -1937595991
-      Angel_1_63: 1870157006
-      Angel_1_64: -1475479727
-      Angel_1_65: -1626819555
-      Angel_1_66: 303478685
-      Angel_1_67: -2039258058
-      Angel_1_68: -80162931
-      Angel_1_69: 1430264678
-      Angel_1_70: -216145554
-      Angel_1_71: -771136112
-      Angel_1_72: 1915683317
-      Angel_1_73: 126373180
-      Angel_1_74: 1844804680
-      Angel_1_75: -1634944323
+      CFCHR16_Seraphine_Attack_Down_0: -653021605
+      CFCHR16_Seraphine_Attack_Down_1: -1137705373
+      CFCHR16_Seraphine_Attack_Down_2: -1736196534
+      CFCHR16_Seraphine_Attack_Down_3: 1441142773
+      CFCHR16_Seraphine_Attack_Down_4: 824147635
+      CFCHR16_Seraphine_Attack_Down_5: -1793912339
+      CFCHR16_Seraphine_Attack_Down_6: 1971664929
+      CFCHR16_Seraphine_Attack_Down_7: 969470365
+      CFCHR16_Seraphine_Attack_Side_0: 1390499323
+      CFCHR16_Seraphine_Attack_Side_1: -999772220
+      CFCHR16_Seraphine_Attack_Side_2: -2093946579
+      CFCHR16_Seraphine_Attack_Side_3: -1187996247
+      CFCHR16_Seraphine_Attack_Side_4: 1696357005
+      CFCHR16_Seraphine_Attack_Side_5: 215339016
+      CFCHR16_Seraphine_Attack_Side_6: 443939864
+      CFCHR16_Seraphine_Attack_Side_7: -1960580601
+      CFCHR16_Seraphine_Attack_Up_0: 342812862
+      CFCHR16_Seraphine_Attack_Up_1: -871116
+      CFCHR16_Seraphine_Attack_Up_2: 1611498109
+      CFCHR16_Seraphine_Attack_Up_3: -1850320793
+      CFCHR16_Seraphine_Attack_Up_4: -1608520569
+      CFCHR16_Seraphine_Attack_Up_5: 177120211
+      CFCHR16_Seraphine_Attack_Up_6: 574044443
+      CFCHR16_Seraphine_Attack_Up_7: -1341880048
+      CFCHR16_Seraphine_Die_Side_0: 1915683317
+      CFCHR16_Seraphine_Die_Side_1: 126373180
+      CFCHR16_Seraphine_Die_Side_2: 1844804680
+      CFCHR16_Seraphine_Die_Side_3: -1634944323
+      CFCHR16_Seraphine_Hit_Down_0: -1338735288
+      CFCHR16_Seraphine_Hit_Down_1: 1608045052
+      CFCHR16_Seraphine_Hit_Down_2: -1937595991
+      CFCHR16_Seraphine_Hit_Down_3: 1870157006
+      CFCHR16_Seraphine_Hit_Side_0: -1475479727
+      CFCHR16_Seraphine_Hit_Side_1: -1626819555
+      CFCHR16_Seraphine_Hit_Side_2: 303478685
+      CFCHR16_Seraphine_Hit_Side_3: -2039258058
+      CFCHR16_Seraphine_Hit_Up_0: -80162931
+      CFCHR16_Seraphine_Hit_Up_1: 1430264678
+      CFCHR16_Seraphine_Hit_Up_2: -216145554
+      CFCHR16_Seraphine_Hit_Up_3: -771136112
       CFCHR16_Seraphine_Idle_Default_Down_0: -1048812495
       CFCHR16_Seraphine_Idle_Default_Down_1: 1818745373
       CFCHR16_Seraphine_Idle_Default_Down_2: 2023950822
@@ -1879,6 +1861,24 @@ TextureImporter:
       CFCHR16_Seraphine_Idle_Default_Up_3: 1116656634
       CFCHR16_Seraphine_Idle_Default_Up_4: -2095349691
       CFCHR16_Seraphine_Idle_Default_Up_5: 335590811
+      CFCHR16_Seraphine_Walk_Default_Down_0: -1221040072
+      CFCHR16_Seraphine_Walk_Default_Down_1: 1638513568
+      CFCHR16_Seraphine_Walk_Default_Down_2: -618979006
+      CFCHR16_Seraphine_Walk_Default_Down_3: 1690976433
+      CFCHR16_Seraphine_Walk_Default_Down_4: -1114950365
+      CFCHR16_Seraphine_Walk_Default_Down_5: -568174952
+      CFCHR16_Seraphine_Walk_Default_Side_0: 1847828425
+      CFCHR16_Seraphine_Walk_Default_Side_1: -613125789
+      CFCHR16_Seraphine_Walk_Default_Side_2: 1722181772
+      CFCHR16_Seraphine_Walk_Default_Side_3: 71266240
+      CFCHR16_Seraphine_Walk_Default_Side_4: 816533920
+      CFCHR16_Seraphine_Walk_Default_Side_5: -806026986
+      CFCHR16_Seraphine_Walk_Default_Up_0: -1525066578
+      CFCHR16_Seraphine_Walk_Default_Up_1: -2098317664
+      CFCHR16_Seraphine_Walk_Default_Up_2: -438484570
+      CFCHR16_Seraphine_Walk_Default_Up_3: 2006474529
+      CFCHR16_Seraphine_Walk_Default_Up_4: -2126545017
+      CFCHR16_Seraphine_Walk_Default_Up_5: -502969707
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

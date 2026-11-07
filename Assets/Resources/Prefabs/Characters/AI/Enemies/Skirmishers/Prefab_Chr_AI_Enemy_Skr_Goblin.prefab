@@ -249,9 +249,9 @@ MonoBehaviour:
   _damageDealtAddFlat: 0
   _knockbackDealtMultiplier: 1
   _knockbackDealtAddFlat: 0
-  _sourceCharacterFaction: 2
+  _sourceCharacterFaction: 3
   _originTransform: {fileID: 5963968130057620577}
-  _sourceCharacterRootController: {fileID: 0}
+  _sourceCharacterRootController: {fileID: 5013856377803996316}
   _ignoresSameFaction: 1
 --- !u!1 &333170155362222021
 GameObject:

@@ -21,7 +21,7 @@ namespace FlameOfTheLost
         //  1. NPC Root
         private NPCRootController NPCRootController => this.CharacterRootController as NPCRootController;
         private NPCBrainController NPCBrainController => this.NPCRootController?.NPCBrainController;
-        private NPCDialogueHandler DialogueHandler => this.NPCBrainController?.DialogueHandler;
+        private NPCDialogueHandler DialogueHandler => this.NPCRootController?.DialogueHandler;
 
         //  2. Interaction Panel
         [Header("References - External")]

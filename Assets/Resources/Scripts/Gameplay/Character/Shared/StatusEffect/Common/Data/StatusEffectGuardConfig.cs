@@ -3,7 +3,7 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [CreateAssetMenu(fileName = "SEGuard_Character", menuName = "Data/FlameOfTheLost/Character/Shared/StatusEffects/CharacterGuardConfig")]
-    public class StatusEffectGuardConfig : CharacterDataAsset
+    public class StatusEffectGuardConfig : CharacterData
     {
         [Header("Global Floors & Ceilings (Multipliers)")]
         [SerializeField, Min(0f)] private float _minMovementSpeedScale = 0f;     // Allows 0 for Stunned effects

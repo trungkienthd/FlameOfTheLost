@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public abstract class FOTLDataAsset : ScriptableObject
+    public abstract class FOTLData : ScriptableObject
     {
     }
 }

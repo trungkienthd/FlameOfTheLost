@@ -731,9 +731,9 @@ MonoBehaviour:
   _damageDealtAddFlat: 0
   _knockbackDealtMultiplier: 1
   _knockbackDealtAddFlat: 0
-  _sourceCharacterFaction: 1
+  _sourceCharacterFaction: 2
   _originTransform: {fileID: 8603779394308998006}
-  _sourceCharacterRootController: {fileID: 0}
+  _sourceCharacterRootController: {fileID: 925858766075263748}
   _ignoresSameFaction: 1
 --- !u!114 &4849377817284962119
 MonoBehaviour:

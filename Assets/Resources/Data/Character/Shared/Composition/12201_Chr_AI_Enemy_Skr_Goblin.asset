@@ -19,7 +19,7 @@ MonoBehaviour:
   _icon: {fileID: -559199840, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
   _prefab: {fileID: 2810860427036246779, guid: 2532a0f34a355aa46bd2a815341ebcf8, type: 3}
   _characterType: 12201
-  _faction: 2
+  _faction: 3
   _traversalType: 0
   _movementConfig: {fileID: 11400000, guid: cb1210d5a79ce094984f4bad624e97cc, type: 2}
   _dodgeConfig: {fileID: 11400000, guid: c8c205336bbc80c4c820e4c00b8c8748, type: 2}
