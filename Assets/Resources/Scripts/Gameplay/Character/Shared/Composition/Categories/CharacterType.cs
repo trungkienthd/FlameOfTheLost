@@ -10,6 +10,8 @@ namespace FlameOfTheLost
         Rattleblade     = 4,
 
         Cow             = 13011,
-        Sheep           = 13012
+        Sheep           = 13012,
+
+        Seraphine       = 14041
     }
 }

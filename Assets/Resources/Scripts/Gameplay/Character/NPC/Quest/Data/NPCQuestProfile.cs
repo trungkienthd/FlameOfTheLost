@@ -3,17 +3,19 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "NPCQst_New", menuName = "Data/FlameOfTheLost/Characters/NPC/Quest/NPCQuestProfile")]
-    public class NPCQuestProfile : CharacterData
+    [CreateAssetMenu(fileName = "NPCQst_New", menuName = "Data/FlameOfTheLost/Character/NPC/Quest/NPCQuestProfile")]
+    public class NPCQuestProfile : CharacterData, IIdentityProvider
     {
         // --- Data / Configs ---
         //  1. Identity
         [Header("Identity")]
-        [SerializeField] private int _questID;
-        [SerializeField] private string _questName;
+        [SerializeField] private int _id;
+        [SerializeField] private string _key;
+        [SerializeField] private string _displayName;
         [SerializeField, TextArea(3, 6)] private string _description;
-        public int QuestID => _questID;
-        public string QuestName => _questName;
+        public int Id => _id;
+        public string Key => _key;
+        public string DisplayName => _displayName;
         public string Description => _description;
 
         //  2. Progression
@@ -35,9 +37,9 @@ namespace FlameOfTheLost
 
         //  4. Rewards
         [Header("Rewards")]
-        [SerializeField] private NPCRewardProfile _acceptanceReward;
-        [SerializeField] private NPCRewardProfile _completionReward;
-        public NPCRewardProfile AcceptanceReward => _acceptanceReward;
-        public NPCRewardProfile CompletionReward => _completionReward;
+        [SerializeField] private NPCQuestRewardProfile _acceptanceReward;
+        [SerializeField] private NPCQuestRewardProfile _completionReward;
+        public NPCQuestRewardProfile AcceptanceReward => _acceptanceReward;
+        public NPCQuestRewardProfile CompletionReward => _completionReward;
     }
 }

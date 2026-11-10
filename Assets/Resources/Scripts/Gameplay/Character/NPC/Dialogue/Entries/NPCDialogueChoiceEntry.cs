@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace FlameOfTheLost
 {
+    [Serializable]
     public class NPCDialogueChoiceEntry
     {
         // --- Data / Configs 

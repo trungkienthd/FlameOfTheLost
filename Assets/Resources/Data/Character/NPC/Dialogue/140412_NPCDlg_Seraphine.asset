@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754f0f7a05a98dd4f8fa668e9e0066ef, type: 3}
+  m_Name: 140412_NPCDlg_Seraphine
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueProfile
+  _id: 140412
+  _key: DIALOGUE_SERAPHINE
+  _displayName: Seraphine's Dialogue
+  _description: 
+  _entries:
+  - _priority: 700
+    _startingNode: {fileID: 11400000, guid: fa0699e91d0d53b4ba70320e69ec57aa, type: 2}
+    _requirements:
+    - _conditionKey: 14041121
+      _requiredState: 1
+  - _priority: 600
+    _startingNode: {fileID: 11400000, guid: 3dca31295ab65bf4196dacd3a621e906, type: 2}
+    _requirements:
+    - _conditionKey: 14041120
+      _requiredState: 1
+    - _conditionKey: 140411222
+      _requiredState: 1
+    - _conditionKey: 14041121
+      _requiredState: 0
+  - _priority: 500
+    _startingNode: {fileID: 11400000, guid: fffce6408123f2040b791f3a9d014d2f, type: 2}
+    _requirements:
+    - _conditionKey: 14041120
+      _requiredState: 1
+    - _conditionKey: 140411222
+      _requiredState: 0
+    - _conditionKey: 14041121
+      _requiredState: 0
+  - _priority: 400
+    _startingNode: {fileID: 11400000, guid: 5acf35254a7b5694ab426dcfa296b0c3, type: 2}
+    _requirements:
+    - _conditionKey: 14041111
+      _requiredState: 1
+    - _conditionKey: 14041120
+      _requiredState: 0
+    - _conditionKey: 14041121
+      _requiredState: 0
+  - _priority: 300
+    _startingNode: {fileID: 11400000, guid: 7e29d08f64bfc7341852fe7981964162, type: 2}
+    _requirements:
+    - _conditionKey: 14041110
+      _requiredState: 1
+    - _conditionKey: 140411121
+      _requiredState: 1
+    - _conditionKey: 140411122
+      _requiredState: 1
+    - _conditionKey: 14041111
+      _requiredState: 0
+  - _priority: 200
+    _startingNode: {fileID: 11400000, guid: ccd95bf0ede18594386e583123d42566, type: 2}
+    _requirements:
+    - _conditionKey: 14041110
+      _requiredState: 1
+    - _conditionKey: 14041111
+      _requiredState: 0
+  - _priority: 100
+    _startingNode: {fileID: 11400000, guid: 79300420de14074438eae0ec638c27d4, type: 2}
+    _requirements:
+    - _conditionKey: 14041110
+      _requiredState: 0
+    - _conditionKey: 14041111
+      _requiredState: 0
+  - _priority: 0
+    _startingNode: {fileID: 11400000, guid: 62d2418d3807a93428220b66e0cc3ee2, type: 2}
+    _requirements: []

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6be908d18430e9428f02384baacbcde, type: 3}
+  m_Name: 1404111_NPCQst_TheForgottenFlame
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCQuestProfile
+  _id: 1404111
+  _key: NPC_QUEST_THE_FORGOTTEN_FLAME
+  _displayName: 'Seraphine''s Quest: The Forgotten Flame'
+  _description: Seraphine has entrusted you with a Torch to restore the ancient lights
+    of the Forgotten Sanctum, hidden beyond Whispering Grove. Ignite enough lantern
+    posts to summon Gor'Vakh, the Ashbound Chief, defeat him, and recover the Emberbound
+    Sigil. Return to Seraphine with the relic.
+  _acceptedCondition: 14041110
+  _completedCondition: 14041111
+  _availabilityRequirements: []
+  _completionRequirements:
+  - _conditionKey: 140411121
+    _requiredState: 1
+  - _conditionKey: 140411122
+    _requiredState: 1
+  _acceptanceReward: {fileID: 11400000, guid: d11b4a3f655a77c4ea57c55693e8b475, type: 2}
+  _completionReward: {fileID: 11400000, guid: 4f76e5795600d2a4286c509f8b418bef, type: 2}

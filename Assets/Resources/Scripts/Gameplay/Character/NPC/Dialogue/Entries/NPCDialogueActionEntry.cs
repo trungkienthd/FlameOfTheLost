@@ -18,7 +18,7 @@ namespace FlameOfTheLost
         [SerializeField] private NPCQuestProfile _quest;
 
         [Header("Reward")]
-        [SerializeField] private NPCRewardProfile _reward;
+        [SerializeField] private NPCQuestRewardProfile _reward;
 
         // --- Public APIs ---
         public bool Execute(NPCRootController npc, PlayerRootController player)

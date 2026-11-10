@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14041205_NPCDlgNode_Seraphine_Q1Offer
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14041205
+  _key: DIALOGUE_SERAPHINE_NODE_Q1_OFFER
+  _displayName: 
+  _description: 
+  _speakerName: Seraphine
+  _dialogueText: 'An Orc chieftain named Gor''Vakh has claimed the Forgotten Sanctum.
+    The corruption surrounding that place has changed him, and something precious
+    remains trapped within.
+
+    I cannot abandon my post, but perhaps you can succeed
+    where others have failed.
+
+    Take this Torch. Its flame will allow you to ignite
+    the ancient lanterns and break the seal that conceals him.
+
+    Defeat Gor''Vakh,
+    recover the relic he guards, and bring it to me.
+
+    Will you accept this task?'
+  _choices:
+  - _choiceText: I'll investigate the Forgotten Sanctum.
+    _requirements: []
+    _actions:
+    - _actionType: 1
+      _conditionKey: 0
+      _conditionValue: 1
+      _quest: {fileID: 11400000, guid: 7e4c42a8a8453fe4eb110deb2170a92c, type: 2}
+      _reward: {fileID: 0}
+    _nextNode: {fileID: 11400000, guid: 49d562cbabdb28d4ab860fb44dee6048, type: 2}
+  - _choiceText: I'm not ready yet.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6be908d18430e9428f02384baacbcde, type: 3}
+  m_Name: 1404112_NPCQst_TheFallenRadiance
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCQuestProfile
+  _id: 1404112
+  _key: NPC_QUEST_THE_FALLEN_RADIANCE
+  _displayName: 'Seraphine''s Quest: The Fallen Radiance'
+  _description: Having earned Seraphine's trust, you have learned the fate of her
+    brother Aurelian, once a guardian of the First Flame. Consumed by the corruption
+    he sought to contain, he now guards the Eastern Altar. Restore the altar's sacred
+    lights to summon the Forsaken Warden and defeat him. Seraphine has offered to
+    stand beside you in battle. Return to her when the threat is ended.
+  _acceptedCondition: 14041120
+  _completedCondition: 14041121
+  _availabilityRequirements:
+  - _conditionKey: 14041111
+    _requiredState: 1
+  _completionRequirements:
+  - _conditionKey: 140411222
+    _requiredState: 1
+  _acceptanceReward: {fileID: 0}
+  _completionReward: {fileID: 11400000, guid: 69c97d484d2a00544b5204ed5fd8ef4a, type: 2}

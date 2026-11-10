@@ -4,14 +4,14 @@ using UnityEngine;
 namespace FlameOfTheLost
 {
     [Serializable]
-    public class NPCRewardEntry
+    public class NPCQuestRewardEntry
     {
         [SerializeField] private NPCRewardType _rewardType;
-        [SerializeField] private int _itemID; 
+        [SerializeField] private ItemProfile _item; 
         [SerializeField, Min(1)] private int _amount = 1;
         [SerializeField] private GameConditionKey _claimedCondition;
         public NPCRewardType RewardType => _rewardType;
-        public int ItemID => _itemID;
+        public ItemProfile Item => _item;
         public int Amount => _amount;
         public GameConditionKey ClaimedCondition => _claimedCondition;
     }

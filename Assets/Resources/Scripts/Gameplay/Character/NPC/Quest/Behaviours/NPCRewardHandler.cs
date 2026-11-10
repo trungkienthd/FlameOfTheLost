@@ -11,10 +11,10 @@ namespace FlameOfTheLost
         private INPCRewardGrantService RewardGrantService => _rewardGrantServiceBehaviour as INPCRewardGrantService;
 
         // --- Events ---
-        public event Action<PlayerRootController, NPCRewardEntry> RewardGranted;
+        public event Action<PlayerRootController, NPCQuestRewardEntry> RewardGranted;
 
         // --- Public APIs ---
-        public bool TryGrantRewards(PlayerRootController player, NPCRewardProfile reward)
+        public bool TryGrantRewards(PlayerRootController player, NPCQuestRewardProfile reward)
         {
             if (player == null) return false;
 
@@ -27,7 +27,7 @@ namespace FlameOfTheLost
             if (entries == null) return true;
 
             // Ensure required dependencies are present before attempting any delivery.
-            foreach (NPCRewardEntry entry in entries)
+            foreach (NPCQuestRewardEntry entry in entries)
             {
                 if (entry == null) return false;
                 if (entry.Amount <= 0) return false;
@@ -42,7 +42,7 @@ namespace FlameOfTheLost
                 }
             }
 
-            foreach (NPCRewardEntry entry in entries)
+            foreach (NPCQuestRewardEntry entry in entries)
             {
                 if (conditions.GetConditionState(entry.ClaimedCondition)) continue;
 

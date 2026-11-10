@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14041204_NPCDlgNode_Seraphine_SanctumBriefing
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14041204
+  _key: DIALOGUE_SERAPHINE_NODE_SANCTUM_BRIEFING
+  _displayName: 
+  _description: 
+  _speakerName: Seraphine
+  _dialogueText: 'South of these crossroads, within the Whispering Grove, lies an
+    entrance to the Forgotten Sanctum.
+
+    The ancients built sacred lanterns within
+    such places. Their flames were more than sources of light; together, they could
+    awaken the power sealed within a sanctuary.
+
+    To summon its guardian, you
+    must carry a Light Source and ignite enough of the ancient lanterns. Once the
+    required flames are burning, the seal will break.
+
+    But beware. What answers
+    your call may no longer be the guardian it once was.'
+  _choices:
+  - _choiceText: What awaits me in the Sanctum?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 5bb8da062ab2aa64bb19790b4fd8fb8d, type: 2}
+  - _choiceText: How do I obtain a Light Source?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 5bb8da062ab2aa64bb19790b4fd8fb8d, type: 2}
+  - _choiceText: That sounds dangerous. Farewell.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

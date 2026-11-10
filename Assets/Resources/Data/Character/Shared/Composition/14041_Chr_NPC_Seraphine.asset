@@ -18,13 +18,13 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: -1048812495, guid: 7abab14565f22a648bfa7d494bd6d14c, type: 3}
   _prefab: {fileID: 5700391693417721261, guid: ca0d99ba3c0ff144d85e0960233774f4, type: 3}
-  _characterType: 0
+  _characterType: 14041
   _faction: 0
   _traversalType: 4
   _movementConfig: {fileID: 0}
   _dodgeConfig: {fileID: 0}
   _visualConfig: {fileID: 0}
   _combatConfig: {fileID: 0}
-  _statusEffectGuardConfig: {fileID: 0}
+  _statusEffectGuardConfig: {fileID: 11400000, guid: af619af4a1df1ff4b87877e5452c7a03, type: 2}
   _progressionConfig: {fileID: 0}
-  _hostilityResponseType: 1
+  _hostilityResponseType: 0
