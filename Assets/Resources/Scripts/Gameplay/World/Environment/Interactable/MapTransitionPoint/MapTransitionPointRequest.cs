@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public sealed class SceneTransitionPointRequest
+    public sealed class MapTransitionPointRequest
     {
         // --- Data ---
         public string SourceSceneName { get; }
@@ -10,13 +10,13 @@ namespace FlameOfTheLost
         public string DestinationArrivalKey { get; }
 
         // --- Runtime ---
-        private static SceneTransitionPointRequest _pending;
-        public static SceneTransitionPointRequest Pending => _pending;
+        private static MapTransitionPointRequest _pending;
+        public static MapTransitionPointRequest Pending => _pending;
 
         public static bool HasPendingRequest => _pending != null;
 
         // --- Constructor ---
-        private SceneTransitionPointRequest( string sourceSceneName, string destinationSceneName, string destinationArrivalKey)
+        private MapTransitionPointRequest( string sourceSceneName, string destinationSceneName, string destinationArrivalKey)
         {
             this.SourceSceneName = sourceSceneName;
             this.DestinationSceneName = destinationSceneName;
@@ -27,13 +27,13 @@ namespace FlameOfTheLost
         //  1. Request Creation
         public static bool TryCreateRequest(string sourceSceneName, string destinationSceneName, string destinationArrivalKey)
         {
-            if (SceneTransitionPointRequest.HasPendingRequest) return false;
+            if (MapTransitionPointRequest.HasPendingRequest) return false;
 
             if (string.IsNullOrWhiteSpace(sourceSceneName))         return false;
             if (string.IsNullOrWhiteSpace(destinationSceneName))    return false;
             if (string.IsNullOrWhiteSpace(destinationArrivalKey))   return false;
 
-            _pending = new SceneTransitionPointRequest(sourceSceneName, destinationSceneName, destinationArrivalKey);
+            _pending = new MapTransitionPointRequest(sourceSceneName, destinationSceneName, destinationArrivalKey);
 
             return true;
         }

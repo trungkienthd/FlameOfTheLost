@@ -17,10 +17,12 @@ MonoBehaviour:
   _displayName: Dawnkeeper's Sweep
   _description: A quick horizontal swing using the staff's shaft and golden head.
     The attack deals physical contact damage without releasing a projectile.
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: dd41dfff854888f498ea07bd713036dc, type: 3}
   _defaultProvisionType: 0
   _attachableWeaponTypes: 05000000
-  _requirements: []
+  _requirements:
+  - _attributeType: 0
+    _requiredValue: 2
   _damageAmount: 12
   _knockbackForce: 3
   _harvestDamage:

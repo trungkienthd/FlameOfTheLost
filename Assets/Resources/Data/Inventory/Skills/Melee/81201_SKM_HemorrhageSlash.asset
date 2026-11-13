@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 81201_SKM_HemorrhageSlash
   m_EditorClassIdentifier: 
   _id: 81201
-  _key: 
+  _key: SKILL_MELEE_HEMORRHAGE_SLASH
   _displayName: Hemorrhage Slash
   _description: 
   _icon: {fileID: 21300000, guid: 9a2fd91a1a9668b4199707e6aa891db4, type: 3}

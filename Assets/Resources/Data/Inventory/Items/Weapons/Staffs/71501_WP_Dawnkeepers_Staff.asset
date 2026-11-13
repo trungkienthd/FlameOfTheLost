@@ -17,10 +17,12 @@ MonoBehaviour:
   _displayName: Dawnkeeper's Staff
   _description: A golden staff once wielded by Seraphine, a guardian of the First
     Flame. Though its radiance has faded, a gentle warmth still lingers within.
-  _icon: {fileID: 1971664929, guid: 7abab14565f22a648bfa7d494bd6d14c, type: 3}
+  _icon: {fileID: 21300000, guid: 38e8794fd20c32a4ca3f357b0245289a, type: 3}
   _isStackable: 0
   _maxStackSize: 1
   _type: 5
   _normalSkill: {fileID: 11400000, guid: 49a74c2dfe60a5e4c84b76a750f4d801, type: 2}
   _innateSpecialSkill: {fileID: 11400000, guid: fdab66331adea3543888a0a7fd0e1ecd, type: 2}
-  _requirements: []
+  _requirements:
+  - _attributeType: 0
+    _requiredValue: 2

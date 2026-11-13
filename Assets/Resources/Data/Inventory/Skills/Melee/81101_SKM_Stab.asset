@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 81101_SKM_Stab
   m_EditorClassIdentifier: 
   _id: 81101
-  _key: 
+  _key: SKILL_MELEE_STAB
   _displayName: Stab
   _description: 
   _icon: {fileID: 21300000, guid: c97b9728a15ccca4bbda099859d97136, type: 3}

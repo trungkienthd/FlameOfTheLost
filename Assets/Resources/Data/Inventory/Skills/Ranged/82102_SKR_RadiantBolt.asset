@@ -16,10 +16,14 @@ MonoBehaviour:
   _key: SKILL_RANGED_RADIANT_BOLT
   _displayName: Radiant Bolt
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 239d6bf243f66914aaef83720f8a73fb, type: 3}
   _defaultProvisionType: 2
-  _attachableWeaponTypes: 
-  _requirements: []
+  _attachableWeaponTypes: 05000000
+  _requirements:
+  - _attributeType: 1
+    _requiredValue: 3
+  - _attributeType: 3
+    _requiredValue: 4
   _damageAmount: 20
   _knockbackForce: 2
   _harvestDamage:

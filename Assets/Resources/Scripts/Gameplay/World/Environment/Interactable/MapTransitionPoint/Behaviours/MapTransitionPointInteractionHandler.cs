@@ -53,7 +53,7 @@ namespace FlameOfTheLost
             }
 
             // c. Register the pending scene transition.
-            if (!SceneTransitionPointRequest.TryCreateRequest(sourceSceneName, destinationSceneName, destinationArrivalKey))
+            if (!MapTransitionPointRequest.TryCreateRequest(sourceSceneName, destinationSceneName, destinationArrivalKey))
             {
                 Debug.LogError($"[{this.gameObject.name}.{nameof(MapTransitionPointInteractionHandler)}] Failed to create the scene transition request.", this);
                 return false;
@@ -70,7 +70,7 @@ namespace FlameOfTheLost
             {
                 Debug.LogException(exception, this);
 
-                SceneTransitionPointRequest.ClearRequest();
+                MapTransitionPointRequest.ClearRequest();
 
                 return false;
             }

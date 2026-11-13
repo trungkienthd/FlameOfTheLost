@@ -58,7 +58,7 @@ namespace FlameOfTheLost
 
             if (string.IsNullOrWhiteSpace(this.DestinationArrivalKey)) return false;
 
-            if (SceneTransitionPointRequest.HasPendingRequest)  return false;
+            if (MapTransitionPointRequest.HasPendingRequest)  return false;
             if (WorldMapTransitionRequest.HasPendingRequest)    return false;
             if (MainMenuSessionRequest.HasPendingRequest)       return false;
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 81202_SKM_LightningStab
   m_EditorClassIdentifier: 
   _id: 81202
-  _key: 
+  _key: SKILL_MELEE_LIGHTNING_STAB
   _displayName: Lightning Stab
   _description: 
   _icon: {fileID: 21300000, guid: cfa352e4154902b4a96b7213411ba9d6, type: 3}

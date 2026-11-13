@@ -216,7 +216,7 @@ namespace FlameOfTheLost
         }
 
         //  3. Restore
-        private bool RestoreIntoCurrentScene(GameSaveData saveData, WorldMapTransitionRequest transitionRequest, SceneTransitionPointRequest sceneTransitionRequest = null)
+        private bool RestoreIntoCurrentScene(GameSaveData saveData, WorldMapTransitionRequest transitionRequest, MapTransitionPointRequest sceneTransitionRequest = null)
         {
             if (!this.CanRestore()) return false;
 
@@ -437,7 +437,7 @@ namespace FlameOfTheLost
         {
             // a. Determine the requested initialization type.
             bool isWorldMapTransition = WorldMapTransitionRequest.HasPendingRequest;
-            bool isSceneTransitionPoint = SceneTransitionPointRequest.HasPendingRequest;
+            bool isSceneTransitionPoint = MapTransitionPointRequest.HasPendingRequest;
             MainMenuJourneyType journeyType = MainMenuSessionRequest.PendingJourneyType;
 
             // Wait until the scene's initial Start callbacks have completed.
@@ -536,7 +536,7 @@ namespace FlameOfTheLost
             // c. Scene Transition Point
             if (isSceneTransitionPoint)
             {
-                SceneTransitionPointRequest request = SceneTransitionPointRequest.Pending;
+                MapTransitionPointRequest request = MapTransitionPointRequest.Pending;
                 // c.1. Validate transition request.
                 if (request == null)
                 {
@@ -587,7 +587,7 @@ namespace FlameOfTheLost
                 this.PlayerSpawnerController.CompleteSessionInitialization();
 
                 // c.6. Clear the transition request.
-                SceneTransitionPointRequest.ClearRequest();
+                MapTransitionPointRequest.ClearRequest();
 
                 // c.7. Save Player's new scene and arrival position.
                 if (!this.SaveGame())
@@ -720,7 +720,7 @@ namespace FlameOfTheLost
             Debug.LogError($"[{nameof(GameSaveController)}] Gameplay session initialization failed: {reason}", this);
 
             WorldMapTransitionRequest.ClearRequest();
-            SceneTransitionPointRequest.ClearRequest();
+            MapTransitionPointRequest.ClearRequest();
             MainMenuSessionRequest.ClearRequest();
 
             const string mainMenuSceneName = "MainMenu";
