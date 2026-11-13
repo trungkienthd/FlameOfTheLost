@@ -1,9 +1,16 @@
 fileFormatVersion: 2
 guid: 843b411185eff4843b3ff2dd87870e86
+AssetOrigin:
+  serializedVersion: 1
+  productId: 301753
+  packageName: Cute Fantasy Dungeon - 16x16 top down asset pack
+  packageVersion: 1.0
+  assetPath: Assets/Kenmi/Cute Fantasy Dungeon - 16x16 top down asset pack/Sprites/Objects/Dungeon_Objects.png
+  uploadId: 706198
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +27,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,9 +71,10 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -75,9 +84,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -87,9 +97,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -99,13 +110,14 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dungeon_Objects_0
+      name: CFDGN16_Dungeon_Objects_0
       rect:
         serializedVersion: 2
         x: 16
@@ -113,8 +125,9 @@ TextureImporter:
         width: 16
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -126,7 +139,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_1
+      name: CFDGN16_Dungeon_Objects_1
       rect:
         serializedVersion: 2
         x: 32
@@ -134,8 +147,9 @@ TextureImporter:
         width: 16
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -147,7 +161,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_2
+      name: CFDGN16_Dungeon_Objects_2
       rect:
         serializedVersion: 2
         x: 64
@@ -155,8 +169,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -168,7 +183,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_3
+      name: CFDGN16_Dungeon_Objects_3
       rect:
         serializedVersion: 2
         x: 112
@@ -176,8 +191,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -189,7 +205,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_4
+      name: CFDGN16_Dungeon_Objects_4
       rect:
         serializedVersion: 2
         x: 0
@@ -197,8 +213,9 @@ TextureImporter:
         width: 16
         height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -210,7 +227,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_5
+      name: CFDGN16_Dungeon_Objects_5
       rect:
         serializedVersion: 2
         x: 48
@@ -218,8 +235,9 @@ TextureImporter:
         width: 16
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -231,7 +249,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_6
+      name: CFDGN16_Dungeon_Objects_6
       rect:
         serializedVersion: 2
         x: 64
@@ -239,8 +257,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -252,7 +271,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_8
+      name: CFDGN16_Dungeon_Objects_8
       rect:
         serializedVersion: 2
         x: 80
@@ -260,8 +279,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -273,7 +293,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_9
+      name: CFDGN16_Dungeon_Objects_9
       rect:
         serializedVersion: 2
         x: 96
@@ -281,8 +301,9 @@ TextureImporter:
         width: 16
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -294,7 +315,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_10
+      name: CFDGN16_Dungeon_Objects_10
       rect:
         serializedVersion: 2
         x: 0
@@ -302,8 +323,9 @@ TextureImporter:
         width: 16
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -315,7 +337,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_11
+      name: CFDGN16_Dungeon_Objects_11
       rect:
         serializedVersion: 2
         x: 16
@@ -323,8 +345,9 @@ TextureImporter:
         width: 16
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -336,7 +359,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_12
+      name: CFDGN16_Dungeon_Objects_12
       rect:
         serializedVersion: 2
         x: 32
@@ -344,8 +367,9 @@ TextureImporter:
         width: 16
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -357,7 +381,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_13
+      name: CFDGN16_Dungeon_Objects_13
       rect:
         serializedVersion: 2
         x: 48
@@ -365,8 +389,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -378,7 +403,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_14
+      name: CFDGN16_Dungeon_Objects_14
       rect:
         serializedVersion: 2
         x: 64
@@ -386,8 +411,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -399,7 +425,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_15
+      name: CFDGN16_Dungeon_Objects_15
       rect:
         serializedVersion: 2
         x: 80
@@ -407,8 +433,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -420,7 +447,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_16
+      name: CFDGN16_Dungeon_Objects_16
       rect:
         serializedVersion: 2
         x: 112
@@ -428,8 +455,9 @@ TextureImporter:
         width: 16
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -441,7 +469,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_17
+      name: CFDGN16_Dungeon_Objects_17
       rect:
         serializedVersion: 2
         x: 0
@@ -449,8 +477,9 @@ TextureImporter:
         width: 48
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -462,7 +491,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_18
+      name: CFDGN16_Dungeon_Objects_18
       rect:
         serializedVersion: 2
         x: 32
@@ -470,8 +499,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -483,7 +513,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_19
+      name: CFDGN16_Dungeon_Objects_19
       rect:
         serializedVersion: 2
         x: 48
@@ -491,8 +521,9 @@ TextureImporter:
         width: 32
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -504,7 +535,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_20
+      name: CFDGN16_Dungeon_Objects_20
       rect:
         serializedVersion: 2
         x: 96
@@ -512,8 +543,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -525,7 +557,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_21
+      name: CFDGN16_Dungeon_Objects_21
       rect:
         serializedVersion: 2
         x: 48
@@ -533,8 +565,9 @@ TextureImporter:
         width: 16
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -546,7 +579,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_22
+      name: CFDGN16_Dungeon_Objects_22
       rect:
         serializedVersion: 2
         x: 64
@@ -554,8 +587,9 @@ TextureImporter:
         width: 16
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -567,7 +601,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_23
+      name: CFDGN16_Dungeon_Objects_23
       rect:
         serializedVersion: 2
         x: 80
@@ -575,8 +609,9 @@ TextureImporter:
         width: 16
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -588,7 +623,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_24
+      name: CFDGN16_Dungeon_Objects_24
       rect:
         serializedVersion: 2
         x: 96
@@ -596,8 +631,9 @@ TextureImporter:
         width: 16
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -609,7 +645,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_25
+      name: CFDGN16_Dungeon_Objects_25
       rect:
         serializedVersion: 2
         x: 112
@@ -617,8 +653,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -630,7 +667,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_26
+      name: CFDGN16_Dungeon_Objects_26
       rect:
         serializedVersion: 2
         x: 80
@@ -638,8 +675,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -651,7 +689,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_27
+      name: CFDGN16_Dungeon_Objects_27
       rect:
         serializedVersion: 2
         x: 112
@@ -659,8 +697,9 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -672,7 +711,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Objects_7
+      name: CFDGN16_Dungeon_Objects_7
       rect:
         serializedVersion: 2
         x: 0
@@ -680,8 +719,9 @@ TextureImporter:
         width: 32
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -693,6 +733,7 @@ TextureImporter:
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -702,45 +743,39 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
-      Dungeon_Objects_0: 1403667247
-      Dungeon_Objects_1: 296965229
-      Dungeon_Objects_10: 1085271382
-      Dungeon_Objects_11: -1158544813
-      Dungeon_Objects_12: -128489288
-      Dungeon_Objects_13: 758454931
-      Dungeon_Objects_14: 1566834062
-      Dungeon_Objects_15: 786667330
-      Dungeon_Objects_16: -860386748
-      Dungeon_Objects_17: 2032794790
-      Dungeon_Objects_18: 1626078347
-      Dungeon_Objects_19: -1047295758
-      Dungeon_Objects_2: -322210414
-      Dungeon_Objects_20: 1946981540
-      Dungeon_Objects_21: -1096653057
-      Dungeon_Objects_22: 939320202
-      Dungeon_Objects_23: -2077406583
-      Dungeon_Objects_24: -1784212903
-      Dungeon_Objects_25: 1999149145
-      Dungeon_Objects_26: -1519003067
-      Dungeon_Objects_27: -1224688514
-      Dungeon_Objects_3: 615832968
-      Dungeon_Objects_4: -577896204
-      Dungeon_Objects_5: 1524638018
-      Dungeon_Objects_6: -178653941
-      Dungeon_Objects_7: 1592475858
-      Dungeon_Objects_8: 906686420
-      Dungeon_Objects_9: 1383039722
-  spritePackingTag: 
+      CFDGN16_Dungeon_Objects_0: 1403667247
+      CFDGN16_Dungeon_Objects_1: 296965229
+      CFDGN16_Dungeon_Objects_10: 1085271382
+      CFDGN16_Dungeon_Objects_11: -1158544813
+      CFDGN16_Dungeon_Objects_12: -128489288
+      CFDGN16_Dungeon_Objects_13: 758454931
+      CFDGN16_Dungeon_Objects_14: 1566834062
+      CFDGN16_Dungeon_Objects_15: 786667330
+      CFDGN16_Dungeon_Objects_16: -860386748
+      CFDGN16_Dungeon_Objects_17: 2032794790
+      CFDGN16_Dungeon_Objects_18: 1626078347
+      CFDGN16_Dungeon_Objects_19: -1047295758
+      CFDGN16_Dungeon_Objects_2: -322210414
+      CFDGN16_Dungeon_Objects_20: 1946981540
+      CFDGN16_Dungeon_Objects_21: -1096653057
+      CFDGN16_Dungeon_Objects_22: 939320202
+      CFDGN16_Dungeon_Objects_23: -2077406583
+      CFDGN16_Dungeon_Objects_24: -1784212903
+      CFDGN16_Dungeon_Objects_25: 1999149145
+      CFDGN16_Dungeon_Objects_26: -1519003067
+      CFDGN16_Dungeon_Objects_27: -1224688514
+      CFDGN16_Dungeon_Objects_3: 615832968
+      CFDGN16_Dungeon_Objects_4: -577896204
+      CFDGN16_Dungeon_Objects_5: 1524638018
+      CFDGN16_Dungeon_Objects_6: -178653941
+      CFDGN16_Dungeon_Objects_7: 1592475858
+      CFDGN16_Dungeon_Objects_8: 906686420
+      CFDGN16_Dungeon_Objects_9: 1383039722
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 301753
-  packageName: Cute Fantasy Dungeon - 16x16 top down asset pack
-  packageVersion: 1.0
-  assetPath: Assets/Kenmi/Cute Fantasy Dungeon - 16x16 top down asset pack/Sprites/Objects/Dungeon_Objects.png
-  uploadId: 706198

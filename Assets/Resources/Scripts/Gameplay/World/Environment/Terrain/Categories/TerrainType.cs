@@ -10,5 +10,7 @@ namespace FlameOfTheLost
         Water,      // Shallow water
         DeepWater,
         Bridge,
+        Stone,
+        Ground,
     }
 }
