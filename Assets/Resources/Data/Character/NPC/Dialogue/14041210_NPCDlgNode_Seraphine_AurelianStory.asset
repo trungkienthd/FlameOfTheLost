@@ -12,10 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
   m_Name: 14041210_NPCDlgNode_Seraphine_AurelianStory
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
-  _id: 0
-  _key: DIALOGUE_SERAPHINE_NODE_
+  _id: 1404210
+  _key: DIALOGUE_SERAPHINE_NODE_AURELIAN_STORY
   _displayName: 
   _description: 
   _speakerName: Seraphine
-  _dialogueText: 
-  _choices: []
+  _dialogueText: 'Aurelian was the greatest among our guardians. Where others saw
+    danger, he saw only those who needed protection.
+
+    When the First Flame began
+    to fade, he refused to accept its loss.
+
+    He believed that if he could bind
+    its remaining power to himself, he might become an eternal guardian... one who
+    could hold back the darkness alone.
+
+    I begged him to abandon the ritual.
+    He would not listen.
+
+    The corruption he sought to contain consumed him instead.
+
+    His
+    wings darkened. His radiance vanished. And the brother I knew became something
+    I could no longer reach.
+
+    I fled the Eastern Altar that day. I have carried
+    that shame ever since.'
+  _choices:
+  - _choiceText: Where is Aurelian now?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 5acf35254a7b5694ab426dcfa296b0c3, type: 2}
+  - _choiceText: Can he still be saved?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 5acf35254a7b5694ab426dcfa296b0c3, type: 2}
+  - _choiceText: I'm sorry, Seraphine.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

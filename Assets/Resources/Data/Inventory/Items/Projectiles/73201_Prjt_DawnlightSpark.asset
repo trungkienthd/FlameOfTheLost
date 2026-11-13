@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ba1ae50026d434c9fbe62d12c59dbc, type: 3}
+  m_Name: 73201_Prjt_DawnlightSpark
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ProjectileProfile
+  _id: 73201
+  _key: PROJECTILE_DAWNLIGHT_SPARK
+  _displayName: 
+  _description: 
+  _icon: {fileID: 0}
+  _isStackable: 0
+  _maxStackSize: 1
+  _projectileType: 103
+  _projectilePrefab: {fileID: 3043559614890823337, guid: 05cd9948c4021594b994459c2b16ac7f, type: 3}

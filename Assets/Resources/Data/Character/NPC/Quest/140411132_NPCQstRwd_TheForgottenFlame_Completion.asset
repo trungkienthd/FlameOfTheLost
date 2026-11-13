@@ -17,7 +17,7 @@ MonoBehaviour:
   _displayName: 'Completion - Seraphine''s Quest: The Forgotten Flame'
   _description: 
   _entries:
-  - _rewardType: 1
+  - _rewardType: 0
     _item: {fileID: 0}
-    _amount: 1
-    _claimedCondition: 140411232
+    _amount: 300
+    _claimedCondition: 140411132

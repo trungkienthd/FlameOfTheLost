@@ -12,10 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
   m_Name: 14041208_NPCDlgNode_Seraphine_Q1Completion
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
-  _id: 0
-  _key: DIALOGUE_SERAPHINE_NODE_
+  _id: 14041208
+  _key: DIALOGUE_SERAPHINE_NODE_Q1_COMPLETION
   _displayName: 
   _description: 
   _speakerName: Seraphine
-  _dialogueText: 
-  _choices: []
+  _dialogueText: 'That warmth... I recognise it.
+
+    You truly defeated Gor''Vakh.
+    And the relic you carry... it is an Emberbound Sigil.
+
+    I thought the last
+    of these had been lost when the sanctuaries fell.
+
+    You have done more than
+    defeat a corrupted chieftain, traveller. You have returned a fragment of our
+    forgotten legacy to the light.
+
+    Please, accept these Lost Embers. You have
+    earned my trust... and there is something I must tell you.'
+  _choices:
+  - _choiceText: I'm listening, Seraphine.
+    _requirements: []
+    _actions:
+    - _actionType: 2
+      _conditionKey: 0
+      _conditionValue: 0
+      _quest: {fileID: 11400000, guid: 7e4c42a8a8453fe4eb110deb2170a92c, type: 2}
+      _reward: {fileID: 0}
+    _nextNode: {fileID: 0}
+  - _choiceText: I need a moment before we speak.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

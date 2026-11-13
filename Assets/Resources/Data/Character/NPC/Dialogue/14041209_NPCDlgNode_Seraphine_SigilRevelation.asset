@@ -12,10 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
   m_Name: 14041209_NPCDlgNode_Seraphine_SigilRevelation
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
-  _id: 0
-  _key: DIALOGUE_SERAPHINE_NODE_
+  _id: 14041209
+  _key: DIALOGUE_SERAPHINE_NODE_SIGIL_REVELATION
   _displayName: 
   _description: 
   _speakerName: Seraphine
-  _dialogueText: 
-  _choices: []
+  _dialogueText: 'That Sigil bears the mark of the First Flame''s guardians.
+
+    My
+    order once entrusted such relics to the sanctuaries. They were symbols of our
+    duty, reminders that the Flame belonged to the world, not to any one guardian.
+
+    I
+    once believed that duty would endure forever.
+
+    But one among us tried to
+    preserve the Flame by his own strength... and paid a terrible price.
+
+    His
+    name was Aurelian.
+
+    He was my brother.'
+  _choices:
+  - _choiceText: Tell me about Aurelian.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 41582da0d0721dc49a0b8f8ceae13c87, type: 2}
+  - _choiceText: What happened to him?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 5acf35254a7b5694ab426dcfa296b0c3, type: 2}
+  - _choiceText: I should take my leave.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

@@ -12,10 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
   m_Name: 14041213_NPCDlgNode_Seraphine_Q2Reminder
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
-  _id: 0
-  _key: DIALOGUE_SERAPHINE_NODE_
+  _id: 14041213
+  _key: DIALOGUE_SERAPHINE_NODE_Q2_REMINDER
   _displayName: 
   _description: 
   _speakerName: Seraphine
-  _dialogueText: 
-  _choices: []
+  _dialogueText: 'The Eastern Altar awaits you.
+
+    Restore its sacred lanterns,
+    and Aurelian will emerge from the darkness.
+
+    Remember, you need not face
+    him alone. My promise still stands.
+
+    I fear what we may find when we confront
+    him... but I fear even more what will happen if we do nothing.'
+  _choices:
+  - _choiceText: Remind me about Aurelian.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 41582da0d0721dc49a0b8f8ceae13c87, type: 2}
+  - _choiceText: How can I summon you?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: a7976ed8c2dd2814f93de7401de84720, type: 2}
+  - _choiceText: I'll head to the altar.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

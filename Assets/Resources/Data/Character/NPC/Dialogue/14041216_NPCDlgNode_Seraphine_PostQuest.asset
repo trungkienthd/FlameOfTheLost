@@ -12,10 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
   m_Name: 14041216_NPCDlgNode_Seraphine_PostQuest
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
-  _id: 0
-  _key: DIALOGUE_SERAPHINE_NODE_
+  _id: 14041216
+  _key: DIALOGUE_SERAPHINE_NODE_POST_QUEST
   _displayName: 
   _description: 
   _speakerName: Seraphine
-  _dialogueText: 
-  _choices: []
+  _dialogueText: 'Welcome back, traveller.
+
+    The winds have grown gentler since
+    the Eastern Altar was freed. For the first time in many years, these crossroads
+    feel almost peaceful.
+
+    I cannot say what lies beyond our lands, nor whether
+    the First Flame can ever be restored.
+
+    But I believe that wherever your journey
+    leads, you will carry its light with you.'
+  _choices:
+  - _choiceText: Tell me about the First Flame again
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 237790b69086ede4b8a1ef3d9020febc, type: 2}
+  - _choiceText: Tell me about Aurelian.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 41582da0d0721dc49a0b8f8ceae13c87, type: 2}
+  - _choiceText: Farewell, Seraphine.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

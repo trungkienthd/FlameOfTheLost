@@ -12,10 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
   m_Name: 14041215_NPCDlgNode_Seraphine_Q2Rewarded
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
-  _id: 0
-  _key: DIALOGUE_SERAPHINE_NODE_
+  _id: 14041215
+  _key: DIALOGUE_SERAPHINE_NODE_Q2_REWARDED
   _displayName: 
   _description: 
   _speakerName: Seraphine
-  _dialogueText: 
-  _choices: []
+  _dialogueText: 'Then it is yours.
+
+    The path ahead will not be easy. The corruption
+    that consumed Aurelian is only a fragment of a greater darkness.
+
+    But where
+    I once saw only loss, I now see the possibility of something new.
+
+    Go, traveller.
+    Carry the light into the places where it has long been forgotten.
+
+    And should
+    our paths cross again, I hope it will be beneath a brighter sky.'
+  _choices:
+  - _choiceText: Farewell, Seraphine.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

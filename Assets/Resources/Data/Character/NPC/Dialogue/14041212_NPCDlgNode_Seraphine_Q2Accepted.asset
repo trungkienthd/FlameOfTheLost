@@ -12,10 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
   m_Name: 14041212_NPCDlgNode_Seraphine_Q2Accepted
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
-  _id: 0
-  _key: DIALOGUE_SERAPHINE_NODE_
+  _id: 14041212
+  _key: DIALOGUE_SERAPHINE_NODE_Q2_ACCEPTED
   _displayName: 
   _description: 
   _speakerName: Seraphine
-  _dialogueText: 
-  _choices: []
+  _dialogueText: 'Thank you, traveller.
+
+    Follow the eastern path until you reach
+    the altar. Carry a Light Source, for its ancient lanterns must be awakened before
+    Aurelian will appear.
+
+    When the seal breaks, prepare yourself. My brother
+    was once the strongest of our order, and corruption has made him more dangerous
+    still.
+
+    If the burden becomes too great, call for me. I will stand beside
+    you.
+
+    Whatever awaits us... this time, I shall not turn away.'
+  _choices:
+  - _choiceText: I'll see you at the Eastern Altar.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

@@ -12,10 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
   m_Name: 14041207_NPCDlgNode_Seraphine_Q1Reminder
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
-  _id: 0
-  _key: DIALOGUE_SERAPHINE_NODE_
+  _id: 14041207
+  _key: DIALOGUE_SERAPHINE_NODE_Q1_REMINDER
   _displayName: 
   _description: 
   _speakerName: Seraphine
-  _dialogueText: 
-  _choices: []
+  _dialogueText: 'You have returned. Has the Forgotten Sanctum yielded its secrets?
+
+    Remember,
+    the ancient lanterns must be ignited to reveal Gor''Vakh. Keep your Torch close
+    and watch the darkness around you.
+
+    The relic he guards is of great importance.
+    I must see it with my own eyes.'
+  _choices:
+  - _choiceText: Remind me how the lanterns work.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 8956e7d7f4ce8594c9308217922f91d9, type: 2}
+  - _choiceText: What should I look for?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 49d562cbabdb28d4ab860fb44dee6048, type: 2}
+  - _choiceText: I'll continue my search.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

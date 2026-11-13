@@ -12,10 +12,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
   m_Name: 14041211_NPCDlgNode_Seraphine_Q2Offer
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
-  _id: 0
-  _key: DIALOGUE_SERAPHINE_NODE_
+  _id: 14041211
+  _key: DIALOGUE_SERAPHINE_NODE_Q2_OFFER
   _displayName: 
   _description: 
   _speakerName: Seraphine
-  _dialogueText: 
-  _choices: []
+  _dialogueText: 'Aurelian remains bound to the Eastern Altar, beyond these crossroads.
+
+    The
+    sacred lanterns there still hold a fragment of the First Flame''s power. As in
+    the Forgotten Sanctum, igniting enough of them will break the seal and summon
+    the guardian within.
+
+    But Aurelian is no ordinary foe.
+
+    I have watched
+    over these crossroads for so long, waiting for someone capable of facing him.
+    You have already proven your strength in the Forgotten Sanctum.
+
+    If you choose
+    to confront my brother, I will not ask you to face him alone.
+
+    Call upon
+    me when you stand before him, and I shall answer.
+
+    Will you help me bring
+    an end to his suffering?'
+  _choices:
+  - _choiceText: I'll confront Aurelian.
+    _requirements:
+    - _conditionKey: 14041120
+      _requiredState: 0
+    _actions:
+    - _actionType: 1
+      _conditionKey: 0
+      _conditionValue: 0
+      _quest: {fileID: 11400000, guid: 142bb9e067ac66e4a8c43420ecaf3881, type: 2}
+      _reward: {fileID: 0}
+    _nextNode: {fileID: 11400000, guid: a7976ed8c2dd2814f93de7401de84720, type: 2}
+  - _choiceText: I need more time to prepare.
+    _requirements:
+    - _conditionKey: 14041120
+      _requiredState: 0
+    _actions:
+    - _actionType: 1
+      _conditionKey: 0
+      _conditionValue: 0
+      _quest: {fileID: 11400000, guid: 142bb9e067ac66e4a8c43420ecaf3881, type: 2}
+      _reward: {fileID: 0}
+    _nextNode: {fileID: 0}
+  - _choiceText: Tell me more about your brother.
+    _requirements:
+    - _conditionKey: 14041120
+      _requiredState: 0
+    _actions:
+    - _actionType: 1
+      _conditionKey: 0
+      _conditionValue: 0
+      _quest: {fileID: 11400000, guid: 142bb9e067ac66e4a8c43420ecaf3881, type: 2}
+      _reward: {fileID: 0}
+    _nextNode: {fileID: 11400000, guid: 41582da0d0721dc49a0b8f8ceae13c87, type: 2}
