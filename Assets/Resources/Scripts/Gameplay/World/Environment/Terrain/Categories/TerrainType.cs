@@ -12,5 +12,6 @@ namespace FlameOfTheLost
         Bridge,
         Stone,
         Ground,
+        Wall
     }
 }
