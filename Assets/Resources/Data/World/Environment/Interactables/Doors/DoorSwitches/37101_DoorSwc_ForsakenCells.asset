@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe82e15d1750f840af26bd8f1a2a24a, type: 3}
+  m_Name: 37101_DoorSwc_ForsakenCells
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.EnvironmentDoorSwitchProfile
+  _id: 37101
+  _key: DOOR_SWITCH_FORSAKEN_CELLS
+  _displayName: Forsaken Cells Switch
+  _description: An ancient mechanism controlling the sealed entrance to the Forsaken
+    Cells. Activating it opens or closes the prison door.
+  _icon: {fileID: -1224688514, guid: 843b411185eff4843b3ff2dd87870e86, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
+  _initiallyInteractionEnabled: 1
+  _interactionPromptPriority: 0
+  _openPromptText: Open Door
+  _closePromptText: Close Door

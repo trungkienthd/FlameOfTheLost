@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    [CreateAssetMenu(fileName = "MTP_New", menuName = "Data/FlameOfTheLost/World/Environment/Interactable/TransitionPointProfile")]
+    [CreateAssetMenu(fileName = "MTP_New", menuName = "Data/FlameOfTheLost/World/Environment/Interactable/MapTransitionPointProfile")]
     public class MapTransitionPointProfile : FOTLWorldObjectProfile
     {
         // --- Data / Configs ---

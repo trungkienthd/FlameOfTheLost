@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,23 +6,22 @@ using UnityEngine.Tilemaps;
 
 namespace FlameOfTheLost
 {
-    public class EnvironmentDoorController : FOTLMonoBehaviour
+    public class EnvironmentDoorController : FOTLWorldObjectProfileBehaviour<EnvironmentDoorProfile>
     {
         // --- Data / Configs ---
-        [Header("Initial State")]
-        [SerializeField] private bool _initiallyOpen = false;
-
-        [Header("Door Tiles")]
-        [SerializeField] private List<EnvironmentDoorTileEntry> _tileEntries = new();
-        public IReadOnlyList<EnvironmentDoorTileEntry> TileEntries => _tileEntries;
+        public IReadOnlyList<EnvironmentDoorTileEntry> TileEntries => this.Profile != null
+            ? this.Profile.TileEntries
+            : Array.Empty<EnvironmentDoorTileEntry>();
 
         // --- References ---
+        //  1. Tilemaps
         [Header("Tilemaps")]
         [SerializeField] private Tilemap _backgroundTilemap;
         [SerializeField] private Tilemap _foregroundTilemap;
         private Tilemap BackgroundTilemap => _backgroundTilemap;
         private Tilemap ForegroundTilemap => _foregroundTilemap;
 
+        //  2. Blocking Colliders
         [Header("Blocking Colliders")]
         [SerializeField] private List<Collider2D> _blockingColliders = new();
         public IReadOnlyList<Collider2D> BlockingColliders => _blockingColliders;
@@ -36,11 +36,11 @@ namespace FlameOfTheLost
         public event Action<bool> OnDoorStateChanged;
 
         // --- Public APIs ---
+        //  1. Door State
         public void Open()
         {
             this.SetOpen(true);
         }
-
         public void Close()
         {
             this.SetOpen(false);
@@ -53,13 +53,14 @@ namespace FlameOfTheLost
 
         public void SetOpen(bool isOpen)
         {
+            if (this.Profile == null) return;
             if (this.IsOpen == isOpen) return;
 
             this.SetOpenInternal(isOpen, true);
         }
 
         // --- Helpers ---
-        //  1. Door state
+        //  1. Door State
         private void SetOpenInternal(bool isOpen, bool notify)
         {
             _isOpen = isOpen;
@@ -69,19 +70,16 @@ namespace FlameOfTheLost
 
             this.LogDebug($"Door state changed: {(this.IsOpen ? "Open" : "Closed")}");
 
-            if (notify)
-            {
-                this.OnDoorStateChanged?.Invoke(this.IsOpen);
-            }
+            if (notify) this.OnDoorStateChanged?.Invoke(this.IsOpen);
         }
 
-        //  2. Door tiles
+        //  2. Door Tiles
         private void RefreshDoorTiles()
         {
             if (this.BackgroundTilemap == null) return;
             if (this.ForegroundTilemap == null) return;
 
-            // Clear only the cells managed by this door.
+            // Clear only cells managed by this door.
             foreach (EnvironmentDoorTileEntry entry in this.TileEntries)
             {
                 if (entry == null) continue;
@@ -92,17 +90,15 @@ namespace FlameOfTheLost
                 this.ForegroundTilemap.SetTile(cellPosition, null);
             }
 
-            // Repaint the tiles for the current state.
+            // Repaint cells according to the current door state.
             foreach (EnvironmentDoorTileEntry entry in this.TileEntries)
             {
                 if (entry == null) continue;
 
                 TileBase targetTile = entry.GetTile(this.IsOpen);
-
                 if (targetTile == null) continue;
 
                 Tilemap targetTilemap = this.GetTargetTilemap(entry.GetSorting(this.IsOpen));
-
                 if (targetTilemap == null) continue;
 
                 targetTilemap.SetTile(entry.CellPosition, targetTile);
@@ -124,7 +120,7 @@ namespace FlameOfTheLost
             }
         }
 
-        //  3. Door collision
+        //  3. Door Collision
         private void RefreshDoorCollision()
         {
             foreach (Collider2D blockingCollider in this.BlockingColliders)
@@ -146,12 +142,7 @@ namespace FlameOfTheLost
 
             if (this.BackgroundTilemap != null && this.BackgroundTilemap == this.ForegroundTilemap)
             {
-                Debug.LogError($"[{this.name}] Background and Foreground " + "Tilemaps must be different.", this);
-            }
-
-            if (this.TileEntries.Count == 0)
-            {
-                Debug.LogWarning($"[{this.name}] No door tile entries configured.", this);
+                Debug.LogError($"[{this.name}] Background and Foreground Tilemaps must be different.", this);
             }
 
             if (this.BlockingColliders.Count == 0)
@@ -159,10 +150,35 @@ namespace FlameOfTheLost
                 Debug.LogWarning($"[{this.name}] No blocking colliders configured.", this);
             }
 
+            foreach (Collider2D blockingCollider in this.BlockingColliders)
+            {
+                if (blockingCollider == null)
+                {
+                    Debug.LogWarning($"[{this.name}] A blocking collider reference is missing.", this);
+                }
+            }
+        }
+        protected override void ValidateExternalReferences()
+        {
+            base.ValidateExternalReferences();
+
+            if (this.Profile == null) return;
+
+            if (this.TileEntries.Count == 0)
+            {
+                Debug.LogWarning($"[{this.name}] No door tile entries configured in profile '{this.Profile.name}'.", this);
+                return;
+            }
+
             HashSet<Vector3Int> configuredCells = new();
+
             foreach (EnvironmentDoorTileEntry entry in this.TileEntries)
             {
-                if (entry == null) continue;
+                if (entry == null)
+                {
+                    Debug.LogWarning($"[{this.name}] A door tile entry is null.", this);
+                    continue;
+                }
 
                 if (!configuredCells.Add(entry.CellPosition))
                 {
@@ -174,20 +190,21 @@ namespace FlameOfTheLost
         {
             base.InitializeInternalState();
 
-            _isOpen = _initiallyOpen;
+            _isOpen = this.Profile != null && this.Profile.InitiallyOpen;
         }
         protected override void InitializePregameplayState()
         {
             base.InitializePregameplayState();
 
-            // Apply the default state when the scene starts.
-            this.SetOpenInternal(_initiallyOpen, false);
+            if (this.Profile == null) return;
+
+            this.SetOpenInternal(this.Profile.InitiallyOpen, false);
         }
         protected override void CleanupStates()
         {
-            base.CleanupStates();
-
             this.OnDoorStateChanged = null;
+
+            base.CleanupStates();
         }
     }
 }

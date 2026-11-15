@@ -1,29 +1,27 @@
+
 using System;
 using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class EnvironmentDoorSwitchController : FOTLMonoBehaviour,
+    public class EnvironmentDoorSwitchController : FOTLWorldObjectProfileBehaviour<EnvironmentDoorSwitchProfile>,
         IPlayerInteractable,
         IPlayerInteractionPromptSource,
         IPlayerInteractionPromptRefreshNotifier
     {
-        // --- Configs ---
-        [Header("Interaction")]
-        [SerializeField] private bool _interactionEnabled = true;
-        public bool InteractionEnabled => _interactionEnabled;
-
-        [Header("Interaction Prompt")]
-        [SerializeField] private int _interactionPromptPriority = 0;
-        [SerializeField] private string _openPromptText = "Open Door";
-        [SerializeField] private string _closePromptText = "Close Door";
-
-        public int InteractionPromptPriority => _interactionPromptPriority;
+        // --- Data / Configs ---
+        public int InteractionPromptPriority => this.Profile != null
+            ? this.Profile.InteractionPromptPriority
+            : 0;
 
         // --- References ---
         [Header("References")]
         [SerializeField] private EnvironmentDoorController _targetDoorController;
         private EnvironmentDoorController TargetDoorController => _targetDoorController;
+
+        // --- Runtime ---
+        private bool _interactionEnabled;
+        public bool InteractionEnabled => _interactionEnabled;
 
         // --- Events ---
         public event Action PromptRefreshRequested;
@@ -33,13 +31,18 @@ namespace FlameOfTheLost
         public bool CanInteract(GameObject interactor)
         {
             if (!this.isActiveAndEnabled) return false;
+            if (this.Profile == null) return false;
             if (!this.InteractionEnabled) return false;
             if (interactor == null) return false;
+
             if (this.TargetDoorController == null) return false;
             if (!this.TargetDoorController.isActiveAndEnabled) return false;
 
+            if (this.TargetDoorController.Profile == null) return false;
+
             return true;
         }
+
         public bool TryInteract(GameObject interactor)
         {
             if (!this.CanInteract(interactor)) return false;
@@ -56,20 +59,20 @@ namespace FlameOfTheLost
         {
             return this.CanInteract(interactor);
         }
+
         public string GetInteractionPromptText(GameObject interactor)
         {
-            if (!this.CanShowInteractionPrompt(interactor))
-                return string.Empty;
+            if (!this.CanShowInteractionPrompt(interactor)) return string.Empty;
 
             return this.TargetDoorController.IsOpen
-                ? _closePromptText
-                : _openPromptText;
+                ? this.Profile.ClosePromptText
+                : this.Profile.OpenPromptText;
         }
 
         //  3. Interaction State
         public void SetInteractionEnabled(bool enabled)
         {
-            if (_interactionEnabled == enabled) return;
+            if (this.InteractionEnabled == enabled) return;
 
             _interactionEnabled = enabled;
 
@@ -89,6 +92,12 @@ namespace FlameOfTheLost
         }
 
         // --- FOTLMonoBehaviour Overrides ---
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            _interactionEnabled = this.Profile != null && this.Profile.InitiallyInteractionEnabled;
+        }
         protected override void ValidateExternalReferences()
         {
             base.ValidateExternalReferences();
@@ -98,6 +107,7 @@ namespace FlameOfTheLost
                 Debug.LogError($"[{this.gameObject.name}.{nameof(EnvironmentDoorSwitchController)}] {nameof(EnvironmentDoorController)} reference is missing.", this);
             }
         }
+
         protected override void BindExternalReferences()
         {
             base.BindExternalReferences();
@@ -112,9 +122,9 @@ namespace FlameOfTheLost
         }
         protected override void CleanupStates()
         {
-            base.CleanupStates();
-
             this.PromptRefreshRequested = null;
+
+            base.CleanupStates();
         }
     }
 }

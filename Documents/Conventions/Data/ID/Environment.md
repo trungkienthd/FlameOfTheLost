@@ -39,8 +39,8 @@ World
    │  │  └─ ItemContainerProfile
    │  ├─ Collectible
    │  │  └─ CollectibleObjectProfile
-   │  └─ SceneTransitionPoint
-   │     └─ SceneTransitionPointProfile
+   │  └─ MapTransitionPoint
+   │     └─ MapTransitionPointProfile
    │
    ├─ Harvestable Object
    │  └─ HarvestableObjectProfile
@@ -64,7 +64,7 @@ The numeric ID hierarchy does not need to mirror the runtime or semantic hierarc
 33xxx   Collectible Object Profiles
 34xxx   Harvestable Object Profiles
 35xxx   Obstacle Profiles
-36xxx   Scene Transition Point Profiles
+36xxx   Map Transition Point Profiles
 
 37xxx   Reserved
 37xxx   Reserved
@@ -82,7 +82,7 @@ Examples:
 33000-33999   Collectible Object Profiles
 34000-34999   Harvestable Object Profiles
 35000-35999   Obstacle Profiles
-36000-36999   Scene Transition Point Profiles
+36000-36999   Map Transition Point Profiles
 ```
 
 This allows a Profile type to scale beyond 100 authored objects without requiring an unnecessary additional Profile sub-layer.
