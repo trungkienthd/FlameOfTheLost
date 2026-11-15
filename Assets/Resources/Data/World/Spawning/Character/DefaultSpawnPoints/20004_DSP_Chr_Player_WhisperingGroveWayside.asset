@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 20004_DSP_Chr_Player_WhisperingGroveWayside
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerDefaultSpawnPointProfile
   _id: 20004
-  _key: WHISPERING GROVE WAYSIDE
+  _key: WHISPERING_GROVE_WAYSIDE
   _displayName: Whispering Grove Wayside
   _description: 
   _icon: {fileID: -1678536130, guid: ed26a618e3ead734889f0fdcd174e4a9, type: 3}

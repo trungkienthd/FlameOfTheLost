@@ -46,7 +46,7 @@ namespace FlameOfTheLost
 
             if (this.ItemContainers == null || this.ItemContainers.Count == 0)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(ItemContainerGroupRefreshController)}] No {nameof(ItemContainerController)} references are configured.", this);
+                //Debug.LogWarning($"[{this.gameObject.name}.{nameof(ItemContainerGroupRefreshController)}] No {nameof(ItemContainerController)} references are configured.", this);
                 return;
             }
 
