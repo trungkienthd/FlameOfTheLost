@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +24,15 @@ namespace FlameOfTheLost
         [Header("Blocking Colliders")]
         [SerializeField] private List<Collider2D> _blockingColliders = new();
         public IReadOnlyList<Collider2D> BlockingColliders => _blockingColliders;
+
+        //  3. Gate Area
+        [Header("Gate Area")]
+        [SerializeField] private BoxCollider2D _gateAreaCollider;
+        private BoxCollider2D GateAreaCollider => _gateAreaCollider;
+
+        public EnvironmentDoorGateDirection GateDirection => this.Profile != null
+            ? this.Profile.GateDirection
+            : EnvironmentDoorGateDirection.LeftToRight;
 
         // --- Runtime ---
         private bool _isOpen;
@@ -58,6 +66,48 @@ namespace FlameOfTheLost
             if (this.IsOpen == isOpen) return;
 
             this.SetOpenInternal(isOpen, true);
+        }
+
+        //  2. Gate Position
+        public bool TryGetGatePositionState(GameObject character, out EnvironmentDoorGatePositionState state)
+        {
+            state = default;
+
+            if (character == null) return false;
+
+            if (this.GateAreaCollider == null) return false;
+            if (!this.GateAreaCollider.enabled) return false;
+            if (!this.GateAreaCollider.gameObject.activeInHierarchy) return false;
+
+            if (!this.GateAreaCollider.isTrigger) return false;
+
+            Collider2D characterCollider = this.GetCharacterBodyCollider(character);
+            if (characterCollider == null) return false;
+
+            // Check overlap before determining the side.
+            ColliderDistance2D distance = this.GateAreaCollider.Distance(characterCollider);
+            if (!distance.isValid) return false;
+            if (distance.isOverlapped || distance.distance <= 0f)
+            {
+                state = EnvironmentDoorGatePositionState.Inside;
+                return true;
+            }
+
+            // Determine which local axis separates the two sides.
+            Vector2 gateDirection = this.GetGateDirection();
+
+            Vector2 gateCenter = this.GateAreaCollider.bounds.center;
+            Vector2 characterCenter = characterCollider.bounds.center;
+
+            Vector2 displacement = characterCenter - gateCenter;
+
+            float signedDistance = Vector2.Dot(displacement, gateDirection);
+
+            state = signedDistance < 0f
+                ? EnvironmentDoorGatePositionState.Outside
+                : EnvironmentDoorGatePositionState.OppositeSide;
+
+            return true;
         }
 
         // --- Helpers ---
@@ -133,6 +183,43 @@ namespace FlameOfTheLost
             }
         }
 
+        //  4. Gate Position
+        private Vector2 GetGateDirection()
+        {
+            if (this.GateAreaCollider == null) return Vector2.zero;
+
+            Transform gateTransform = this.GateAreaCollider.transform;
+
+            Vector2 direction = this.GateDirection switch
+            {
+                EnvironmentDoorGateDirection.LeftToRight =>     gateTransform.right,
+                EnvironmentDoorGateDirection.RightToLeft =>    -gateTransform.right,
+                EnvironmentDoorGateDirection.BottomToTop =>     gateTransform.up,
+                EnvironmentDoorGateDirection.TopToBottom =>    -gateTransform.up,
+
+                _ => Vector2.zero
+            };
+
+            return direction.normalized;
+        }
+
+        private Collider2D GetCharacterBodyCollider(GameObject character)
+        {
+            Collider2D[] colliders = character.GetComponentsInChildren<Collider2D>();
+
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider == null) continue;
+                if (!collider.enabled) continue;
+                if (!collider.gameObject.activeInHierarchy) continue;
+                if (collider.isTrigger) continue;
+
+                return collider;
+            }
+
+            return null;
+        }
+
         // --- FOTLMonoBehaviour Overrides ---
         protected override void ValidateInternalReferences()
         {
@@ -158,6 +245,14 @@ namespace FlameOfTheLost
                     Debug.LogWarning($"[{this.name}] A blocking collider reference is missing.", this);
                 }
             }
+
+            if (this.GateAreaCollider == null)
+            {
+                Debug.LogError($"[{this.name}] Gate Area Collider is missing.", this);
+                return;
+            }
+            if (!this.GateAreaCollider.isTrigger)   Debug.LogError($"[{this.name}] Gate Area Collider must be a trigger.", this);
+            if (!this.GateAreaCollider.enabled)     Debug.LogError($"[{this.name}] Gate Area Collider must remain enabled.", this);
         }
         protected override void ValidateExternalReferences()
         {

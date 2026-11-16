@@ -16,5 +16,10 @@ namespace FlameOfTheLost
         [Header("Door Tiles")]
         [SerializeField] private List<EnvironmentDoorTileEntry> _tileEntries = new();
         public IReadOnlyList<EnvironmentDoorTileEntry> TileEntries => _tileEntries;
+
+        //  3. Gate Direction
+        [Header("Gate Direction")]
+        [SerializeField] private EnvironmentDoorGateDirection _gateDirection = EnvironmentDoorGateDirection.LeftToRight;
+        public EnvironmentDoorGateDirection GateDirection => _gateDirection;
     }
 }

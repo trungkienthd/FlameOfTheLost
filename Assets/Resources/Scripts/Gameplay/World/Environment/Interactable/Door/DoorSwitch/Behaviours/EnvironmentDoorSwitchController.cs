@@ -43,6 +43,10 @@ namespace FlameOfTheLost
 
             if (this.TargetDoorController.Profile == null) return false;
 
+            // Gate position safeguard.
+            if (!this.IsInteractorGatePositionAllowed(interactor)) return false;
+
+
             return true;
         }
         public bool TryInteract(GameObject interactor)
@@ -51,7 +55,7 @@ namespace FlameOfTheLost
 
             this.TargetDoorController.Toggle();
 
-            this.LogDebug($"Door switch activated by {this.GetObjectName(interactor)}.");
+            //this.LogDebug($"Door switch activated by {this.GetObjectName(interactor)}.");
 
             return true;
         }
@@ -78,6 +82,21 @@ namespace FlameOfTheLost
             _interactionEnabled = enabled;
 
             this.RequestPromptRefresh();
+        }
+
+        //  4. Gate Position
+        public bool IsInteractorGatePositionAllowed(GameObject interactor)
+        {
+            if (this.Profile == null) return false;
+            if (this.TargetDoorController == null) return false;
+            if (interactor == null) return false;
+
+            if (!this.TargetDoorController.TryGetGatePositionState(interactor, out EnvironmentDoorGatePositionState state))
+            {
+                return false;
+            }
+
+            return this.Profile.IsInteractionStateAllowed(state);
         }
 
         // --- Helpers ---

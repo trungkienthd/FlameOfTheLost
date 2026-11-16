@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -10,7 +11,14 @@ namespace FlameOfTheLost
         //  1. Interaction
         [Header("Interaction")]
         [SerializeField] private bool _initiallyInteractionEnabled = true;
+        [SerializeField] private List<EnvironmentDoorGatePositionState> _allowedInteractionStates = new()
+        {
+            EnvironmentDoorGatePositionState.Outside,
+            EnvironmentDoorGatePositionState.OppositeSide
+        };
+
         public bool InitiallyInteractionEnabled => _initiallyInteractionEnabled;
+        public IReadOnlyList<EnvironmentDoorGatePositionState> AllowedInteractionStates => _allowedInteractionStates;
 
         //  2. Interaction Prompt
         [Header("Interaction Prompt")]
@@ -31,6 +39,13 @@ namespace FlameOfTheLost
         public Sprite OpenSprite => _openSprite;
 
         // --- Public APIs ---
+        //  1. Interaction
+        public bool IsInteractionStateAllowed(EnvironmentDoorGatePositionState state)
+        {
+            return _allowedInteractionStates != null && _allowedInteractionStates.Contains(state);
+        }
+
+        //  2. Visual
         public Sprite GetSprite(bool isOpen)
         {
             return isOpen ? this.OpenSprite : this.ClosedSprite;
