@@ -35,5 +35,5 @@ MonoBehaviour:
     _canEnter: 1
     _applications: []
   - _targetTraversalType: 2
-    _canEnter: 0
+    _canEnter: 1
     _applications: []

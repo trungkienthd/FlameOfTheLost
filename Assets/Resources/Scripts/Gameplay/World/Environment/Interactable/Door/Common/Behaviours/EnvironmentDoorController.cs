@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 namespace FlameOfTheLost
 {
+    [RequireComponent(typeof(EnvironmentDoorCeilingVisibilityController))]
     public class EnvironmentDoorController : FOTLWorldObjectProfileBehaviour<EnvironmentDoorProfile>
     {
         // --- Data / Configs ---
@@ -33,6 +34,11 @@ namespace FlameOfTheLost
         public EnvironmentDoorGateDirection GateDirection => this.Profile != null
             ? this.Profile.GateDirection
             : EnvironmentDoorGateDirection.LeftToRight;
+
+        //  4. Sub-Behaviours
+        [Header("Sub-Behaviours")]
+        [SerializeField] private EnvironmentDoorCeilingVisibilityController _ceilingVisibilityController;
+        private EnvironmentDoorCeilingVisibilityController CeilingVisibilityController => _ceilingVisibilityController;
 
         // --- Runtime ---
         private bool _isOpen;
@@ -78,7 +84,6 @@ namespace FlameOfTheLost
             if (this.GateAreaCollider == null) return false;
             if (!this.GateAreaCollider.enabled) return false;
             if (!this.GateAreaCollider.gameObject.activeInHierarchy) return false;
-
             if (!this.GateAreaCollider.isTrigger) return false;
 
             Collider2D characterCollider = this.GetCharacterBodyCollider(character);
@@ -95,6 +100,7 @@ namespace FlameOfTheLost
 
             // Determine which local axis separates the two sides.
             Vector2 gateDirection = this.GetGateDirection();
+            if (gateDirection == Vector2.zero) return false;
 
             Vector2 gateCenter = this.GateAreaCollider.bounds.center;
             Vector2 characterCenter = characterCollider.bounds.center;
@@ -108,6 +114,17 @@ namespace FlameOfTheLost
                 : EnvironmentDoorGatePositionState.OppositeSide;
 
             return true;
+        }
+
+        //  3. Ceiling Visibility
+        public void SetCeilingVisibilityPlayer(GameObject player)
+        {
+            this.CeilingVisibilityController?.SetPlayer(player);
+        }
+
+        public void RefreshCeilingVisibility()
+        {
+            this.CeilingVisibilityController?.RefreshCeilingVisibility();
         }
 
         // --- Helpers ---
@@ -221,6 +238,12 @@ namespace FlameOfTheLost
         }
 
         // --- FOTLMonoBehaviour Overrides ---
+        protected override void CacheInternalReferences()
+        {
+            base.CacheInternalReferences();
+
+            if (_ceilingVisibilityController == null) _ceilingVisibilityController = this.GetComponent<EnvironmentDoorCeilingVisibilityController>();
+        }
         protected override void ValidateInternalReferences()
         {
             base.ValidateInternalReferences();
@@ -253,6 +276,17 @@ namespace FlameOfTheLost
             }
             if (!this.GateAreaCollider.isTrigger)   Debug.LogError($"[{this.name}] Gate Area Collider must be a trigger.", this);
             if (!this.GateAreaCollider.enabled)     Debug.LogError($"[{this.name}] Gate Area Collider must remain enabled.", this);
+
+            if (this.CeilingVisibilityController != null && this.CeilingVisibilityController.gameObject != this.gameObject)
+            {
+                Debug.LogError($"[{this.name}] Ceiling Visibility Sub-Behaviour must be attached to the Door GameObject.", this);
+            }
+        }
+        protected override void BindInternalReferences()
+        {
+            base.BindInternalReferences();
+
+            this.CeilingVisibilityController?.Bind(this);
         }
         protected override void ValidateExternalReferences()
         {
@@ -295,6 +329,12 @@ namespace FlameOfTheLost
             if (this.Profile == null) return;
 
             this.SetOpenInternal(this.Profile.InitiallyOpen, false);
+        }
+        protected override void UnbindInternalReferences()
+        {
+            this.CeilingVisibilityController?.Unbind(this);
+
+            base.UnbindInternalReferences();
         }
         protected override void CleanupStates()
         {
