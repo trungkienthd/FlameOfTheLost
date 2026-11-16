@@ -38,7 +38,7 @@ namespace FlameOfTheLost
         [SerializeField] private Transform _visualTransform;
         [SerializeField] private SpriteRenderer _visualSpriteRenderer;
         private Transform VisualTransform => _visualTransform;
-        private SpriteRenderer VisualSpriteRenderer => _visualSpriteRenderer;
+        protected SpriteRenderer VisualSpriteRenderer => _visualSpriteRenderer;
 
         // --- Helpers ---
         //  1. Configure Initial Transform(s)

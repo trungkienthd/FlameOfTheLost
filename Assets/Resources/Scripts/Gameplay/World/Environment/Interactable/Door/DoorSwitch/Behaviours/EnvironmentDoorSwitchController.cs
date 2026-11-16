@@ -15,9 +15,12 @@ namespace FlameOfTheLost
             : 0;
 
         // --- References ---
-        [Header("References")]
+        [Header("References (EnvironmentDoorSwitchController)")]
+        //  1. Door
         [SerializeField] private EnvironmentDoorController _targetDoorController;
         private EnvironmentDoorController TargetDoorController => _targetDoorController;
+
+        private SpriteRenderer SwitchSpriteRenderer => this.VisualSpriteRenderer;
 
         // --- Runtime ---
         private bool _interactionEnabled;
@@ -42,7 +45,6 @@ namespace FlameOfTheLost
 
             return true;
         }
-
         public bool TryInteract(GameObject interactor)
         {
             if (!this.CanInteract(interactor)) return false;
@@ -59,7 +61,6 @@ namespace FlameOfTheLost
         {
             return this.CanInteract(interactor);
         }
-
         public string GetInteractionPromptText(GameObject interactor)
         {
             if (!this.CanShowInteractionPrompt(interactor)) return string.Empty;
@@ -80,9 +81,20 @@ namespace FlameOfTheLost
         }
 
         // --- Helpers ---
-        //  1. Event Handling
+        //  1. Visual
+        private void RefreshSwitchVisual()
+        {
+            if (this.Profile == null) return;
+            if (this.SwitchSpriteRenderer == null) return;
+            if (this.TargetDoorController == null) return;
+
+            this.SwitchSpriteRenderer.sprite = this.Profile.GetSprite(this.TargetDoorController.IsOpen);
+        }
+
+        //  2. Event Handling
         private void HandleDoorStateChanged(bool isOpen)
         {
+            this.RefreshSwitchVisual();
             this.RequestPromptRefresh();
         }
 
@@ -98,6 +110,12 @@ namespace FlameOfTheLost
 
             _interactionEnabled = this.Profile != null && this.Profile.InitiallyInteractionEnabled;
         }
+        protected override void InitializePregameplayState()
+        {
+            base.InitializePregameplayState();
+
+            this.RefreshSwitchVisual();
+        }
         protected override void ValidateExternalReferences()
         {
             base.ValidateExternalReferences();
@@ -107,7 +125,6 @@ namespace FlameOfTheLost
                 Debug.LogError($"[{this.gameObject.name}.{nameof(EnvironmentDoorSwitchController)}] {nameof(EnvironmentDoorController)} reference is missing.", this);
             }
         }
-
         protected override void BindExternalReferences()
         {
             base.BindExternalReferences();

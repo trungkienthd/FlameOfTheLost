@@ -17,16 +17,17 @@ MonoBehaviour:
   _displayName: Forsaken Cells Switch
   _description: An ancient mechanism controlling the sealed entrance to the Forsaken
     Cells. Activating it opens or closes the prison door.
-  _icon: {fileID: -1224688514, guid: 843b411185eff4843b3ff2dd87870e86, type: 3}
+  _icon: {fileID: 1999149145, guid: 843b411185eff4843b3ff2dd87870e86, type: 3}
   _configureInitialTransformAtStart: 1
-  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialPosition: {x: 22, y: 11, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
   _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
   _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
   _initialVisualLocalScale: {x: 1, y: 1, z: 1}
-  _configureIconAtStart: 0
+  _configureIconAtStart: 1
   _initiallyInteractionEnabled: 1
-  _interactionPromptPriority: 0
+  _interactionPromptPriority: 30
   _openPromptText: Open Door
   _closePromptText: Close Door
+  _openSprite: {fileID: -1224688514, guid: 843b411185eff4843b3ff2dd87870e86, type: 3}

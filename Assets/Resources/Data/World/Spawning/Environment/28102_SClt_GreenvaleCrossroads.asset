@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62d0ef1f0fd81ef46982ccd99c3336e6, type: 3}
   m_Name: 28102_SClt_GreenvaleCrossroads
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CollectibleObjectGroupSpawnerProfile
-  _id: 28101
-  _key: SPAWNING_COLLECTIBLE_GREENVALE_BODER_PATH
+  _id: 28102
+  _key: SPAWNING_COLLECTIBLE_GREENVALE_CROSSROADS
   _displayName: 
   _description: 
   _icon: {fileID: 0}

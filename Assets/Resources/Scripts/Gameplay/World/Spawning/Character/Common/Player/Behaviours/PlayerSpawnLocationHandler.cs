@@ -174,7 +174,7 @@ namespace FlameOfTheLost
             }
             if (this.CheckpointCtrls == null || this.CheckpointCtrls.Count == 0)
             {
-                Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No Checkpoints found.", this);
+                //Debug.LogWarning($"[{this.gameObject.name}.{nameof(PlayerSpawnerController)}] No Checkpoints found.", this);
             }
         }
     }

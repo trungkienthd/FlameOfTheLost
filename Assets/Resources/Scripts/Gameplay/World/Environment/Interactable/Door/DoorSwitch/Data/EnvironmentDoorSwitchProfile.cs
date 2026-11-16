@@ -22,5 +22,18 @@ namespace FlameOfTheLost
 
         public string OpenPromptText => _openPromptText;
         public string ClosePromptText => _closePromptText;
+
+        //  3. Visual
+        [Header("Door Switch Visual")]
+        [SerializeField] private Sprite _openSprite;
+
+        public Sprite ClosedSprite => this.Icon;
+        public Sprite OpenSprite => _openSprite;
+
+        // --- Public APIs ---
+        public Sprite GetSprite(bool isOpen)
+        {
+            return isOpen ? this.OpenSprite : this.ClosedSprite;
+        }
     }
 }

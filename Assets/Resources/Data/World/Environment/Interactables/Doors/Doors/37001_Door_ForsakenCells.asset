@@ -27,6 +27,11 @@ MonoBehaviour:
   _configureIconAtStart: 0
   _initiallyOpen: 0
   _tileEntries:
+  - _cellPosition: {x: 23, y: 13, z: 0}
+    _closedTile: {fileID: 11400000, guid: d4751324b7a399a4da907582face4cab, type: 2}
+    _closedSorting: 1
+    _openTile: {fileID: 11400000, guid: bcd96eddcf980734182f1ae90a925625, type: 2}
+    _openSorting: 1
   - _cellPosition: {x: 23, y: 14, z: 0}
     _closedTile: {fileID: 11400000, guid: d4751324b7a399a4da907582face4cab, type: 2}
     _closedSorting: 1

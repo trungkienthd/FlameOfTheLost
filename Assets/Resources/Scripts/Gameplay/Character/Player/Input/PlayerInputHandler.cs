@@ -131,6 +131,7 @@ namespace FlameOfTheLost
         {
             if (this.IsDeathDisabled) return;
             if (!context.performed) return;
+            if (!context.ReadValueAsButton()) return;
             if (this.PlayerInteractionHandler == null) return;
 
             this.PlayerInteractionHandler.TryInteractNearest();
