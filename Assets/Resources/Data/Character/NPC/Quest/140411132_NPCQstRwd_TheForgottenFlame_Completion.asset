@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCRewardProfile
   _id: 140411132
   _key: 
-  _displayName: 'Completion - Seraphine''s Quest: The Forgotten Flame'
+  _displayName: 'Completion Reward - Seraphine''s Quest: The Forgotten Flame'
   _description: 
   _entries:
   - _rewardType: 0

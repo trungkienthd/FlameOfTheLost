@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6be908d18430e9428f02384baacbcde, type: 3}
+  m_Name: 1420111_NPCQst_AnOathUnbroken
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCQuestProfile
+  _id: 1420111
+  _key: NPC_QUEST_AN_OATH_UNBROKEN
+  _displayName: 'SirAldric''s Quest: An Oath Unbroken'
+  _description: Sir Aldric, a knight imprisoned within the Forsaken Cells after his
+    failed expedition against Gor'Vakh, has sworn to see the Orc chieftain defeated.
+    Free him from captivity and accept his offer to accompany you through the Forgotten
+    Sanctum. Together, confront Gor'Vakh and fulfill the knight's unfinished oath.
+  _acceptedCondition: 14201110
+  _completedCondition: 14201111
+  _availabilityRequirements:
+  - _conditionKey: 142011120
+    _requiredState: 1
+  _completionRequirements:
+  - _conditionKey: 140411121
+    _requiredState: 1
+  _acceptanceReward: {fileID: 0}
+  _completionReward: {fileID: 0}

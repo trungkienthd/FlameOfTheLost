@@ -26,7 +26,7 @@ MonoBehaviour:
   - _conditionKey: 14041111
     _requiredState: 1
   _completionRequirements:
-  - _conditionKey: 140411222
+  - _conditionKey: 140411221
     _requiredState: 1
   _acceptanceReward: {fileID: 0}
   _completionReward: {fileID: 11400000, guid: 69c97d484d2a00544b5204ed5fd8ef4a, type: 2}

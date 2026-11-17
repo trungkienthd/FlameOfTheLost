@@ -27,7 +27,7 @@ MonoBehaviour:
     _requirements:
     - _conditionKey: 14041120
       _requiredState: 1
-    - _conditionKey: 140411222
+    - _conditionKey: 140411221
       _requiredState: 1
     - _conditionKey: 14041121
       _requiredState: 0
@@ -36,7 +36,7 @@ MonoBehaviour:
     _requirements:
     - _conditionKey: 14041120
       _requiredState: 1
-    - _conditionKey: 140411222
+    - _conditionKey: 140411221
       _requiredState: 0
     - _conditionKey: 14041121
       _requiredState: 0

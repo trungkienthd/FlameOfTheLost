@@ -62,7 +62,6 @@ namespace FlameOfTheLost
 
         public void Toggle()
         {
-            Debug.Log("TOGGLED!");
             this.SetOpen(!this.IsOpen);
         }
 

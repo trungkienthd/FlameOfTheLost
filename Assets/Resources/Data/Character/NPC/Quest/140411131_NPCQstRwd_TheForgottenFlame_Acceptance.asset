@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCRewardProfile
   _id: 140411131
   _key: 
-  _displayName: 'Acceptance - Seraphine''s Quest: The Forgotten Flame'
+  _displayName: 'Acceptance Reward - Seraphine''s Quest: The Forgotten Flame'
   _description: 
   _entries:
   - _rewardType: 1
