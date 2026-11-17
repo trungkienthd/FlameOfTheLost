@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14201240_NPCDlgNode_GorVakhDefeated
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14201240
+  _key: DIALOGUE_NODE_SIR_ALDRIC_GORVAKH_DEFEATED
+  _displayName: Gor'Vakh Defeated
+  _description: 'It is over...
+
+    Gor''Vakh has fallen. After all these years,
+    the shadow that haunted this Sanctum is finally gone.
+
+    I thought I would
+    feel nothing but triumph when this day came. Instead, I find myself remembering
+    those who could not stand here with us.
+
+    You have done more than save my
+    life, friend. You have helped me fulfill an oath I feared would remain broken
+    forever.'
+  _speakerName: Sir Aldric
+  _dialogueText: 
+  _choices:
+  - _choiceText: We fulfilled it together.
+    _requirements: []
+    _actions:
+    - _actionType: 2
+      _conditionKey: 0
+      _conditionValue: 0
+      _quest: {fileID: 11400000, guid: d271713a84ecafe4883b69962bb4772b, type: 2}
+      _reward: {fileID: 0}
+    _nextNode: {fileID: 11400000, guid: 75064bd96459cea4c90b5712058f1ab0, type: 2}
+  - _choiceText: Your companions would be proud.
+    _requirements: []
+    _actions:
+    - _actionType: 2
+      _conditionKey: 0
+      _conditionValue: 0
+      _quest: {fileID: 11400000, guid: d271713a84ecafe4883b69962bb4772b, type: 2}
+      _reward: {fileID: 0}
+    _nextNode: {fileID: 11400000, guid: 75064bd96459cea4c90b5712058f1ab0, type: 2}

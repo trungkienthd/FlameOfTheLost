@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14201211_NPCDlgNode_RecruitmentOffer
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14201211
+  _key: DIALOGUE_NODE_SIR_ALDRIC_RECRUITMENT_OFFER
+  _displayName: Recruitment Offer
+  _description: Aldric offers to accompany the Player through Forgotten Sanctum in
+    pursuit of Gor'Vakh.
+  _speakerName: Sir Aldric
+  _dialogueText: 'I came to this Sanctum to end Gor''Vakh''s reign. I failed, and
+    good men paid the price.
+
+    But my oath remains unbroken. If you seek the Ashbound
+    Chief, allow me to accompany you.
+
+    My sword is yours, not merely for the
+    final battle, but for every danger between here and his throne. I know something
+    of these halls, their traps, and their secrets.
+
+    Will you grant me this chance
+    to make things right?'
+  _choices:
+  - _choiceText: Then let us finish what you started.
+    _requirements: []
+    _actions:
+    - _actionType: 1
+      _conditionKey: 0
+      _conditionValue: 0
+      _quest: {fileID: 11400000, guid: d271713a84ecafe4883b69962bb4772b, type: 2}
+      _reward: {fileID: 0}
+    _nextNode: {fileID: 11400000, guid: 9b42052a398809242bf987c1af7d3b29, type: 2}
+  - _choiceText: I need to prepare first.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 60ad0ad50e603cd47a7d319230836114, type: 2}
+  - _choiceText: Tell me about Gor'Vakh.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 4192fd3d9ec0ed6478b9e830c844dd64, type: 2}

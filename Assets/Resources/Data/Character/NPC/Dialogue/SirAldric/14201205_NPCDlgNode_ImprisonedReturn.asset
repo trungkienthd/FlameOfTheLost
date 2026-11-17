@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14201205_NPCDlgNode_ImprisonedReturn
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14201205
+  _key: DIALOGUE_NODE_SIR_ALDRIC_IMPRISONED_RETURN
+  _displayName: Imprisoned Return
+  _description: Aldric asks the Player to find a way to release him from captivity.
+  _speakerName: Sir Aldric
+  _dialogueText: 'The chains still hold, and my strength fades with every passing
+    day.
+
+    If you find a way to open these cells, perhaps my oath need not end
+    here.'
+  _choices:
+  - _choiceText: I'll see what I can do.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}
+  - _choiceText: Tell me about yourself again.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 89f2730e74c92744bbaadecc94983d96, type: 2}

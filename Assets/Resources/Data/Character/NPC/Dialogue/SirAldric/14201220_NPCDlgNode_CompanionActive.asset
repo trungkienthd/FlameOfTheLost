@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14201220_NPCDlgNode_CompanionActive
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14201220
+  _key: DIALOGUE_NODE_SIR_ALDRIC_COMPANION_ACTIVE
+  _displayName: Companion Active
+  _description: Main conversation with Aldric while he accompanies the Player through
+    Forgotten Sanctum.
+  _speakerName: Sir Aldric
+  _dialogueText: I am with you, friend. These halls are treacherous, but we need
+    not face them alone.
+  _choices:
+  - _choiceText: Tell me about your companions.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 0c87cca53f982024bae2b4589085fc33, type: 2}
+  - _choiceText: Any advice for the road ahead?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 5bf5924eaa46f844c98ceb577290a12c, type: 2}
+  - _choiceText: Let's continue.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

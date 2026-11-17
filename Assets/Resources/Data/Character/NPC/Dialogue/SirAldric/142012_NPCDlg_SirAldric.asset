@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754f0f7a05a98dd4f8fa668e9e0066ef, type: 3}
+  m_Name: 142012_NPCDlg_SirAldric
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueProfile
+  _id: 142012
+  _key: DIALOGUE_SIR_ALDRIC
+  _displayName: SirAldric's Dialogue
+  _description: Dialogue interactions with Sir Aldric, the imprisoned knight of the
+    Forsaken Cells, covering his failed expedition, liberation, recruitment, companionship,
+    quest completion and post-quest conversations.
+  _entries:
+  - _priority: 50
+    _startingNode: {fileID: 11400000, guid: af0c632a52911f84e95d028e865d58e8, type: 2}
+    _requirements:
+    - _conditionKey: 14201111
+      _requiredState: 1
+  - _priority: 40
+    _startingNode: {fileID: 11400000, guid: 7db2b8df606c18e4f8439953b9f73876, type: 2}
+    _requirements:
+    - _conditionKey: 14201110
+      _requiredState: 1
+    - _conditionKey: 140411121
+      _requiredState: 1
+    - _conditionKey: 14201111
+      _requiredState: 0
+  - _priority: 30
+    _startingNode: {fileID: 11400000, guid: 6bca4bc5b09b78e488b58274ecf5a7bd, type: 2}
+    _requirements:
+    - _conditionKey: 14201110
+      _requiredState: 1
+    - _conditionKey: 140411121
+      _requiredState: 0
+  - _priority: 20
+    _startingNode: {fileID: 11400000, guid: d495f53d92d327e47be945f7acd526e3, type: 2}
+    _requirements:
+    - _conditionKey: 142011120
+      _requiredState: 1
+    - _conditionKey: 14201110
+      _requiredState: 0
+  - _priority: 10
+    _startingNode: {fileID: 11400000, guid: 2898ff0c179ce934fada0972d359b96d, type: 2}
+    _requirements:
+    - _conditionKey: 142011120
+      _requiredState: 0
+  - _priority: 0
+    _startingNode: {fileID: 11400000, guid: 84efbdf28da996f468484b02a343f388, type: 2}
+    _requirements: []

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14201260_NPCDlgNode_PostQuest
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14201260
+  _key: DIALOGUE_NODE_SIR_ALDRIC_POST_QUEST
+  _displayName: Post Quest
+  _description: Main repeatable dialogue after An Oath Unbroken has been completed.
+  _speakerName: Sir Aldric
+  _dialogueText: 'Ah, my friend. It is good to see you again.
+
+    Strange, is it
+    not? I once thought these halls would be my tomb. Now I find a measure of peace
+    within them.
+
+    There is no need to rush. Stay a while, if you like.'
+  _choices:
+  - _choiceText: How have you been?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 3b25a6d9c8c0f2840af5ce47ac39b12a, type: 2}
+  - _choiceText: Perhaps another time.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

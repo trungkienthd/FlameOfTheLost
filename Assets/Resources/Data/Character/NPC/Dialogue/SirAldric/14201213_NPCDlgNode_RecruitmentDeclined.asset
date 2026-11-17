@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14201213_NPCDlgNode_RecruitmentDeclined
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14201213
+  _key: DIALOGUE_NODE_SIR_ALDRIC_RECRUITMENT_DECLINED
+  _displayName: Recruitment Declined
+  _description: Aldric accepts the Player's decision to postpone recruitment and
+    leaves his offer open.
+  _speakerName: Sir Aldric
+  _dialogueText: 'I understand. A journey into the unknown is no small undertaking.
+
+    I
+    shall remain nearby. If you change your mind, my offer still stands.'
+  _choices:
+  - _choiceText: I've changed my mind.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 71027c02592f59a4fb857cac3f18c578, type: 2}
+  - _choiceText: Farewell, Aldric.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

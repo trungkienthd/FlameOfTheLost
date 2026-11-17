@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14201201_NPCDlgNode_Imprisoned
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14201201
+  _key: DIALOGUE_NODE_SIR_ALDRIC_IMPRISONED
+  _displayName: Imprisoned
+  _description: Another wanderer? You would do well to turn back, stranger. These
+    halls have swallowed far greater warriors than you or I.
+  _speakerName: Sir Aldric
+  _dialogueText: There is much I have yet to understand about this place. But whatever
+    awaits us, we must not lose our resolve.
+  _choices:
+  - _choiceText: Who are you?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 89f2730e74c92744bbaadecc94983d96, type: 2}
+  - _choiceText: What happened to you?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 6c54af0a52ddb3444a1c7f42092d76a3, type: 2}
+  - _choiceText: I should go.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 14041_Chr_NPC_Seraphine
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCProfile
   _id: 14041
-  _key: SERAPHINE
+  _key: CHARACTER_NPC_SERAPHINE
   _displayName: Seraphine
   _description: 
   _icon: {fileID: -1048812495, guid: 7abab14565f22a648bfa7d494bd6d14c, type: 3}

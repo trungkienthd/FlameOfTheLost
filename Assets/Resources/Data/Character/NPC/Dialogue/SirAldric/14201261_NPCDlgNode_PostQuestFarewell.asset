@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14201261_NPCDlgNode_PostQuestFarewell
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14201261
+  _key: DIALOGUE_NODE_SIR_ALDRIC_POST_QUEST_FAREWELL
+  _displayName: Post Quest Farewell
+  _description: Aldric expresses his lasting gratitude and friendship toward the
+    Player.
+  _speakerName: Sir Aldric
+  _dialogueText: 'Better than I have been in many years, thanks to you.
+
+    Wherever
+    your journey leads, remember that you have a friend here.
+
+    May your flame
+    never fade.'
+  _choices:
+  - _choiceText: Farewell, Aldric.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

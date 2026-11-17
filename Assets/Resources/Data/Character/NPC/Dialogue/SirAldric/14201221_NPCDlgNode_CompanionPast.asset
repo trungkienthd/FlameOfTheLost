@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14201221_NPCDlgNode_CompanionPast
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14201221
+  _key: DIALOGUE_NODE_SIR_ALDRIC_COMPANION_PAST
+  _displayName: Companion Past
+  _description: Aldric reflects on his fallen companions and begins to overcome his
+    guilt.
+  _speakerName: Sir Aldric
+  _dialogueText: 'There were six of us when we entered this Sanctum. Each had sworn
+    the same oath.
+
+    I remember their faces. Their voices. The promises we made
+    before crossing these gates.
+
+    For a long while, I believed I had dishonored
+    them by surviving.
+
+    Perhaps now I can honor them by finishing what we began.'
+  _choices:
+  - _choiceText: They would want you to carry on.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 6bca4bc5b09b78e488b58274ecf5a7bd, type: 2}
+  - _choiceText: Let's continue.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}

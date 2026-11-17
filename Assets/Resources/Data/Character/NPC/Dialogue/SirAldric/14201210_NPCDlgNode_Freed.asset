@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80ee03b02974ee4688e6ee15b2b63ae, type: 3}
+  m_Name: 14201210_NPCDlgNode_Freed
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDialogueNodeData
+  _id: 14201210
+  _key: DIALOGUE_NODE_SIR_ALDRIC_FREED
+  _displayName: Freed
+  _description: Aldric expresses gratitude after being released and prepares to offer
+    his quest.
+  _speakerName: Sir Aldric
+  _dialogueText: 'By the light... I had nearly forgotten what it felt like to stand
+    without chains.
+
+    You have my gratitude, stranger. Yet there is something
+    I must ask of you.'
+  _choices:
+  - _choiceText: What is it?
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 11400000, guid: 71027c02592f59a4fb857cac3f18c578, type: 2}
+  - _choiceText: Not now.
+    _requirements: []
+    _actions: []
+    _nextNode: {fileID: 0}
