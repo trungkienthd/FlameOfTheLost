@@ -13,10 +13,9 @@ namespace FlameOfTheLost
         public float CombatDistanceTolerance => _combatDistanceTolerance;
 
         public float MinimumCombatDistance => Mathf.Max(0f, this.PreferredCombatDistance - this.CombatDistanceTolerance);
-
         public float MaximumCombatDistance => this.PreferredCombatDistance + this.CombatDistanceTolerance;
 
-        // --- Strafing ---
+        //   2. Strafing
         [Header("Strafing")]
         [SerializeField, Min(0f)] private float _minStrafeDuration = 0.5f;
         [SerializeField, Min(0f)] private float _maxStrafeDuration = 1.5f;
@@ -26,6 +25,15 @@ namespace FlameOfTheLost
         public float MaxStrafeDuration => _maxStrafeDuration;
         public float StrafeSpeedMultiplier => _strafeSpeedMultiplier;
         public float DirectionChangeChance => _directionChangeChance;
+
+        //  3. Tactical Movement Weights
+        [Header("Tactical Movement Weights")]
+        [SerializeField, Min(0f)] private float _strafeWeight = 1f;
+        [SerializeField, Min(0f)] private float _approachWeight = 1f;
+        [SerializeField, Min(0f)] private float _withdrawWeight = 1f;
+        public float StrafeWeight => _strafeWeight;
+        public float ApproachWeight => _approachWeight;
+        public float WithdrawWeight => _withdrawWeight;
 
         public float GetRandomStrafeDuration()
         {

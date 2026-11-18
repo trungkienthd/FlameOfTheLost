@@ -28,6 +28,13 @@ namespace FlameOfTheLost
         public float NormalAttackStateDuration => _normalAttackStateDuration;
         public float NormalAttackRecoveryDuration => _normalAttackRecoveryDuration;
 
+        //      3.1. AI Normal Attack Distance
+        [Header("Normal Attack AI Range")]
+        [SerializeField, Min(0f)] private float _normalAttackMinimumDistance = 0f;
+        [SerializeField, Min(0f)] private float _normalAttackMaximumDistance = 1.5f;
+        public float NormalAttackMinimumDistance => _normalAttackMinimumDistance;
+        public float NormalAttackMaximumDistance => _normalAttackMaximumDistance;
+
         //  4. Special Attack
         [Header("Special Attack")]
         [SerializeField, Min(0f)] private float _specialAttackStateDuration = 1f;
@@ -35,7 +42,34 @@ namespace FlameOfTheLost
         public float SpecialAttackStateDuration => _specialAttackStateDuration;
         public float SpecialAttackRecoveryDuration => _specialAttackRecoveryDuration;
 
+        //      4.1. AI Special Attack Distance
+        [Header("Special Attack AI Range")]
+        [SerializeField, Min(0f)] private float _specialAttackMinimumDistance = 0f;
+        [SerializeField, Min(0f)] private float _specialAttackMaximumDistance = 3f;
+        public float SpecialAttackMinimumDistance => _specialAttackMinimumDistance;
+        public float SpecialAttackMaximumDistance => _specialAttackMaximumDistance;
+
+        // --- Unity Callbacks ---
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            _normalAttackMaximumDistance    = Mathf.Max(this.NormalAttackMinimumDistance,   this.NormalAttackMaximumDistance);
+            _specialAttackMaximumDistance   = Mathf.Max(this.SpecialAttackMinimumDistance,  this.SpecialAttackMaximumDistance);
+        }
+#endif
+
         // --- Public APIs ---
+        //  1. AI Attack Range Validation
+        public bool IsNormalAttackInRange(float distance)
+        {
+            return distance >= this.NormalAttackMinimumDistance && distance <= this.NormalAttackMaximumDistance;
+        }
+        public bool IsSpecialAttackInRange(float distance)
+        {
+            return distance >= this.SpecialAttackMinimumDistance && distance <= this.SpecialAttackMaximumDistance;
+        }
+
+        //  2. Attack Decision Interval
         public float GetRandomAttackDecisionInterval()
         {
             return Random.Range(this.MinAttackDecisionInterval, Mathf.Max(this.MinAttackDecisionInterval, this.MaxAttackDecisionInterval));

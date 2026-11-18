@@ -15,7 +15,8 @@ MonoBehaviour:
   _id: 82101
   _key: QUICK_SHOT
   _displayName: Quick Shot
-  _description: 
+  _description: Fires a swift, powerful arrow that can temporarily hinder the target's
+    movement.
   _icon: {fileID: 21300000, guid: 5865721334e29f84ba57dcf3311acebd, type: 3}
   _defaultProvisionType: 1
   _attachableWeaponTypes: 03000000
@@ -39,7 +40,13 @@ MonoBehaviour:
     _costType: 1
     _blockedBySilence: 1
     _allowSelfKillWithHPCost: 0
-  _statusEffectApplications: []
+  _statusEffectApplications:
+  - _statusEffect: {fileID: 11400000, guid: f06f496a270ec19429d24aec67663063, type: 2}
+    _chance: 0.4
+    _potency: 1
+    _receiver: 0
+    _trigger: 1
+    _limit: 2
   _requiredProjectileType: 1
   _costProjectile: 1
   _defaultProjectile: {fileID: 11400000, guid: e3f2367d6724ced468c2cdf9e43748e3, type: 2}

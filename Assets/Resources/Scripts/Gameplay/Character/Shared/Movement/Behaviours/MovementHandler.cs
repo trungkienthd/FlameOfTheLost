@@ -20,6 +20,15 @@ namespace FlameOfTheLost
         private float Decel => this.MovementConfig.Decel;
 
         // --- Runtime ---
+        //  0. Death Disable State (Runtime)
+        [Header("Runtime - Death Disable")]
+        [SerializeField] private bool _isDeathDisabled;
+        public bool IsDeathDisabled
+        {
+            get => _isDeathDisabled;
+            private set => _isDeathDisabled = value;
+        }
+
         //  1. Status Effects states
         [Header("Runtime - Status Effects Flags")]
         [SerializeField] private bool _cannotMove = false;
@@ -64,14 +73,10 @@ namespace FlameOfTheLost
             set => _vel = value;
         }
 
-        //  3. Death Disable State (Runtime)
-        [Header("Runtime - Death Disable")]
-        [SerializeField] private bool _isDeathDisabled;
-        public bool IsDeathDisabled
-        {
-            get => _isDeathDisabled;
-            private set => _isDeathDisabled = value;
-        }
+        //  3. Optional AI Movement Speed Scale
+        [Header("Runtime - AI Movement")]
+        [SerializeField, Min(0f)] private float _aiMovementSpeedMultiplier = 1f;
+        public float AIMovementSpeedMultiplier => _aiMovementSpeedMultiplier;
 
         // --- Unity Callbacks --- 
         private void FixedUpdate()
@@ -89,7 +94,9 @@ namespace FlameOfTheLost
             }
 
             // IMPORTANT: Status Effects apply here via MovementSpeedScale (0 if blocked)
-            float finalMovementSpeed = this.MovementBlocked ? 0f : (this.MovementSpeed * this.MovementSpeedScale);
+            float finalMovementSpeed = this.MovementBlocked
+                ? 0f
+                : this.MovementSpeed * this.MovementSpeedScale * this.AIMovementSpeedMultiplier;
 
             this.DesiredMovement = Vector2.ClampMagnitude(this.RawMovementInput, 1f) * finalMovementSpeed;
 
@@ -118,6 +125,48 @@ namespace FlameOfTheLost
         }
 
         // --- Public APIs ---
+        //      0.1. ICharacterRefreshable implementation
+        public int RefreshmentConfigurePriority => 30;
+        public void RefreshCharacter(CharacterRefreshContext context)
+        {
+            this.IsDeathDisabled = false;
+
+            this.RawMovementInput = Vector2.zero;
+            this.DesiredMovement = Vector2.zero;
+            this.Velocity = Vector2.zero;
+
+            this.SetAIMovementSpeedMultiplier(1f);
+
+            if (this.Rigidbody2D != null)
+            {
+                this.Rigidbody2D.linearVelocity = Vector2.zero;
+                this.Rigidbody2D.angularVelocity = 0f;
+            }
+
+            this.VisualController?.FeedMovement(Vector2.zero);
+        }
+
+        //      0.2. ICharacterDeathDisableable implementation
+        public int DeathDisablePriority => 20;
+        public void DisableAfterCharacterDeath(CharacterDeathContext context)
+        {
+            this.IsDeathDisabled = true;
+
+            this.RawMovementInput = Vector2.zero;
+            this.DesiredMovement = Vector2.zero;
+            // this.Velocity = Vector2.zero;
+
+            this.SetAIMovementSpeedMultiplier(1f);
+
+            if (this.Rigidbody2D != null)
+            {
+                // this.Rigidbody2D.linearVelocity = Vector2.zero;
+                // this.Rigidbody2D.angularVelocity = 0f;
+            }
+
+            this.VisualController?.FeedMovement(Vector2.zero);
+        }
+
         //  1. Status Effect Flag consumption
         public void SetStatusEffectFlag(StatusEffectFlagTarget flagType, bool value)
         {
@@ -144,42 +193,10 @@ namespace FlameOfTheLost
             this.MovementSpeedScale = multiplier;
         }
 
-        //  3. ICharacterRefreshable implementation
-        public int RefreshmentConfigurePriority => 30;
-        public void RefreshCharacter(CharacterRefreshContext context)
+        //  3. AI Movement Speed Scale Setter
+        public void SetAIMovementSpeedMultiplier(float multiplier)
         {
-            this.IsDeathDisabled = false;
-
-            this.RawMovementInput = Vector2.zero;
-            this.DesiredMovement = Vector2.zero;
-            this.Velocity = Vector2.zero;
-
-            if (this.Rigidbody2D != null)
-            {
-                this.Rigidbody2D.linearVelocity = Vector2.zero;
-                this.Rigidbody2D.angularVelocity = 0f;
-            }
-
-            this.VisualController?.FeedMovement(Vector2.zero);
-        }
-
-        //  4. ICharacterDeathDisableable implementation
-        public int DeathDisablePriority => 20;
-        public void DisableAfterCharacterDeath(CharacterDeathContext context)
-        {
-            this.IsDeathDisabled = true;
-
-            this.RawMovementInput = Vector2.zero;
-            this.DesiredMovement = Vector2.zero;
-            // this.Velocity = Vector2.zero;
-
-            if (this.Rigidbody2D != null)
-            {
-                // this.Rigidbody2D.linearVelocity = Vector2.zero;
-                // this.Rigidbody2D.angularVelocity = 0f;
-            }
-
-            this.VisualController?.FeedMovement(Vector2.zero);
+            _aiMovementSpeedMultiplier = Mathf.Max(0f, multiplier);
         }
     }
 }

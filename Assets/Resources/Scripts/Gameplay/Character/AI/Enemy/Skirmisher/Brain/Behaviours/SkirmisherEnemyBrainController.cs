@@ -123,6 +123,9 @@ namespace FlameOfTheLost
         private HPController HPController => this.CharacterRootController != null
             ? this.CharacterRootController.HPController
             : null;
+        private MovementHandler MovementHandler => this.CharacterRootController != null
+            ? this.CharacterRootController.MovementHandler
+            : null;
         private CharacterAITargetDetectionHandler TargetHandler => this.EnemyRoot != null
             ? this.EnemyRoot.TargetDetectionHandler
             : null;
@@ -189,7 +192,7 @@ namespace FlameOfTheLost
             this.CurrentAIState = nextState;
             this.StateEnterTime = Time.time;
 
-            this.EnemyInputHandler?.ClearMoveInput();
+            this.StopMoving();
 
             switch (nextState)
             {
@@ -518,15 +521,15 @@ namespace FlameOfTheLost
 
             Vector2 tangentDirection = new Vector2(-radialDirection.y, radialDirection.x) * _strafeDirection;
 
-            Vector2 moveDirection = tangentDirection;
+            Vector2 moveDirection = tangentDirection * this.PositioningConfig.StrafeWeight; ;
 
             if (distance < this.PositioningConfig.MinimumCombatDistance)
             {
-                moveDirection -= radialDirection;
+                moveDirection -= radialDirection * this.PositioningConfig.WithdrawWeight;
             }
             else if (distance > this.PositioningConfig.PreferredCombatDistance)
             {
-                moveDirection += radialDirection;
+                moveDirection += radialDirection * this.PositioningConfig.ApproachWeight;
             }
 
             this.Move(moveDirection, this.PositioningConfig.StrafeSpeedMultiplier);
@@ -542,10 +545,10 @@ namespace FlameOfTheLost
         private void TryBeginAttack()
         {
             if (this.EngagedTarget == null) return;
-            if (this.CombatController == null) return;
-            if (this.CombatLoadoutController == null) return;
-            if (this.EnemyInputHandler == null) return;
 
+            if (this.CombatController == null || this.CombatLoadoutController == null) return;
+
+            if (this.EnemyInputHandler == null) return;
             if (this.EnemyInputHandler.IsDeathDisabled || this.EnemyInputHandler.IsHitSequenceInputBlocked) return;
 
             if (this.CharacterRootController.DodgeController != null && this.CharacterRootController.DodgeController.ShouldBlockOtherInputs) return;
@@ -555,15 +558,15 @@ namespace FlameOfTheLost
             RuntimeWeapon weapon = this.CombatLoadoutController.ActiveEquippedRuntimeWeapon;
             if (weapon == null || weapon.Profile == null) return;
 
-            bool canNormalAttack = weapon.NormalSkill != null && !this.CombatController.IsAttackLocked;
+            float distance = this.GetDirectionToEngagedTarget().magnitude;
 
-            bool canSpecialAttack = weapon.ActiveSpecialSkill != null && !this.CombatController.IsSpecialAttackLocked;
+            bool canNormalAttack    = weapon.NormalSkill        != null && !this.CombatController.IsAttackLocked        && this.CombatConfig.IsNormalAttackInRange(distance);
+            bool canSpecialAttack   = weapon.ActiveSpecialSkill != null && !this.CombatController.IsSpecialAttackLocked && this.CombatConfig.IsSpecialAttackInRange(distance);
 
-            int normalWeight = canNormalAttack ? this.CombatConfig.NormalAttackWeight : 0;
-            int specialWeight = canSpecialAttack ? this.CombatConfig.SpecialAttackWeight : 0;
+            int normalWeight    = canNormalAttack   ? this.CombatConfig.NormalAttackWeight  : 0;
+            int specialWeight   = canSpecialAttack  ? this.CombatConfig.SpecialAttackWeight : 0;
 
             int totalWeight = normalWeight + specialWeight;
-
             if (totalWeight <= 0) return;
 
             bool chooseSpecial = Random.Range(0, totalWeight) >= normalWeight;
@@ -571,28 +574,33 @@ namespace FlameOfTheLost
             this.StopMoving();
             this.FaceEngagedTarget();
 
-            bool attackStarted;
+            // CombatController remains authoritative over resource, projectile, animation, and status-effect requirements.
+            if (this.TryStartSelectedAttack(chooseSpecial)) return;
 
-            if (chooseSpecial)
+            // Try the other eligible attack once if the chosen one fails.
+            if (chooseSpecial && normalWeight > 0)
             {
-                attackStarted = this.CombatController.TryDoSpecialAttack(this.CombatConfig.NormalAttackSide);
-
-                if (!attackStarted) return;
-
-                _attackStateEndTime = Time.time + this.CombatConfig.SpecialAttackStateDuration;
-
-                this.SetAIState(SkirmisherEnemyState.SpecialAttacking);
+                this.TryStartSelectedAttack(false);
             }
-            else
+            else if (!chooseSpecial && specialWeight > 0)
             {
-                attackStarted = this.CombatController.TryDoNormalAttack(this.CombatConfig.NormalAttackSide);
-
-                if (!attackStarted) return;
-
-                _attackStateEndTime = Time.time + this.CombatConfig.NormalAttackStateDuration;
-
-                this.SetAIState(SkirmisherEnemyState.NormalAttacking);
+                this.TryStartSelectedAttack(true);
             }
+        }
+        private bool TryStartSelectedAttack(bool useSpecial)
+        {
+            bool started = useSpecial
+                ? this.CombatController.TryDoSpecialAttack(this.CombatConfig.NormalAttackSide)
+                : this.CombatController.TryDoNormalAttack(this.CombatConfig.NormalAttackSide);
+
+            if (!started) return false;
+
+            _attackStateEndTime = Time.time + (useSpecial ? this.CombatConfig.SpecialAttackStateDuration : this.CombatConfig.NormalAttackStateDuration);
+
+            SkirmisherEnemyState state = useSpecial ? SkirmisherEnemyState.SpecialAttacking : SkirmisherEnemyState.NormalAttacking;
+            this.SetAIState(state);
+
+            return true;
         }
         private void HandleAttackingState()
         {
@@ -646,7 +654,10 @@ namespace FlameOfTheLost
         {
             this.RetreatCount++;
 
-            _retreatEndTime = Time.time + Mathf.Max(this.RetreatConfig.MinimumRetreatDuration, this.RetreatConfig.MaximumRetreatDuration);
+            float minDuration = this.RetreatConfig.MinimumRetreatDuration;
+            float maxDuration = Mathf.Max(minDuration, this.RetreatConfig.MaximumRetreatDuration);
+
+            _retreatEndTime = Time.time + UnityEngine.Random.Range(minDuration, maxDuration);
         }
         private void HandleRetreatingState()
         {
@@ -741,15 +752,15 @@ namespace FlameOfTheLost
                 return;
             }
 
-            // MovementHandler clamps RawMovementInput to magnitude 1.
-            // Values > 1 require a separate movement-speed channel.
-            float inputScale = Mathf.Clamp01(speedMultiplier);
+            // Apply speed independently from movement input magnitude.
+            this.MovementHandler?.SetAIMovementSpeedMultiplier(speedMultiplier);
 
-            this.EnemyInputHandler?.SetMoveInput(direction.normalized * inputScale);
+            this.EnemyInputHandler?.SetMoveInput(direction.normalized);
         }
         private void StopMoving()
         {
             this.EnemyInputHandler?.ClearMoveInput();
+            this.MovementHandler?.SetAIMovementSpeedMultiplier(1f);
         }
         private void FaceEngagedTarget()
         {

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 066661c177f42b944b17c8871d1f7693, type: 3}
-  m_Name: 81201_SKM_HemorrhageSlash
+  m_Name: 81103_SKM_HemorrhageSlash
   m_EditorClassIdentifier: 
-  _id: 81201
+  _id: 81103
   _key: SKILL_MELEE_HEMORRHAGE_SLASH
   _displayName: Hemorrhage Slash
   _description: 
   _icon: {fileID: 21300000, guid: 9a2fd91a1a9668b4199707e6aa891db4, type: 3}
-  _defaultProvisionType: 2
+  _defaultProvisionType: 1
   _attachableWeaponTypes: 0000000002000000
   _requirements:
   - _attributeType: 2
