@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7287a1f981554f14f988778fed0a6c5c, type: 3}
+  m_Name: 71701_WP_Spear
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.WeaponProfile
+  _id: 71701
+  _key: WEAPON_SPEAR
+  _displayName: Spear
+  _description: A long wooden spear reinforced with an iron tip, providing greater
+    reach against approaching enemies.
+  _icon: {fileID: 0}
+  _isStackable: 0
+  _maxStackSize: 1
+  _type: 3
+  _normalSkill: {fileID: 11400000, guid: c21b4d1b67f4389488549ee39068aab1, type: 2}
+  _innateSpecialSkill: {fileID: 0}
+  _requirements:
+  - _attributeType: 2
+    _requiredValue: 4

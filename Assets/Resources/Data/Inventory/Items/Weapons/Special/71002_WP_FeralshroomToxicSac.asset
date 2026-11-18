@@ -19,7 +19,7 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _isStackable: 0
   _maxStackSize: 1
-  _type: 6
+  _type: 8
   _normalSkill: {fileID: 11400000, guid: f83ec08a9ac622448ac00cfd201b56bf, type: 2}
   _innateSpecialSkill: {fileID: 0}
   _requirements: []

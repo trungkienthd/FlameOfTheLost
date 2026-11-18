@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066661c177f42b944b17c8871d1f7693, type: 3}
+  m_Name: 81105_CrushingBlow
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.MeleeSkillProfile
+  _id: 81105
+  _key: SKILL_MELEE_CRUSHING_BLOW
+  _displayName: Crushing Blow
+  _description: Delivers a devastating mace strike that leaves enemies physically
+    impaired for a short time.
+  _icon: {fileID: 0}
+  _defaultProvisionType: 1
+  _attachableWeaponTypes: 04000000
+  _requirements:
+  - _attributeType: 0
+    _requiredValue: 5
+  - _attributeType: 2
+    _requiredValue: 3
+  _damageAmount: 25
+  _knockbackForce: 10
+  _harvestDamage:
+    _isEnabled: 1
+    _impactType: 4
+    _combatDamageMultiplier: 0
+    _flatHarvestDamage: 3
+    _minimumHarvestDamage: 1
+    _triggerSelfOnHitStatusEffects: 0
+  _resourceCost:
+    _hp: 0
+    _fp: 12
+    _stamina: 30
+    _hpPercentOfMax: 0
+    _fpPercentOfMax: 0
+    _staminaPercentOfMax: 0
+    _costType: 0
+    _blockedBySilence: 1
+    _allowSelfKillWithHPCost: 0
+  _statusEffectApplications:
+  - _statusEffect: {fileID: 11400000, guid: f863f655e261a8047bc7de4ae3a55ecc, type: 2}
+    _chance: 0.75
+    _potency: 1
+    _receiver: 0
+    _trigger: 1
+    _limit: 2
