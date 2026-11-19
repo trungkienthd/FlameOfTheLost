@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d03f4af0aaa9bf49885caedc59ab321, type: 3}
   m_Name: Variant_Chr_AI_Enemy_Skr_Goblin_Archer
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SkirmisherEnemyVariantProfile
-  _visualConfig: {fileID: 11400000, guid: 70e947256ccef2947a146d3dc3c54327, type: 2}
+  _visualConfig: {fileID: 11400000, guid: 7264d09ac0345524eaf03c69b0094f5a, type: 2}
   _initialInventoryEntries:
   - _runtimeId: 
     _item: {fileID: 11400000, guid: f14bc7cca332c78468593a8bbd652d25, type: 2}

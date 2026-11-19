@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d03f4af0aaa9bf49885caedc59ab321, type: 3}
   m_Name: Variant_Chr_AI_Enemy_Skr_Goblin_Spearman
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SkirmisherEnemyVariantProfile
-  _visualConfig: {fileID: 11400000, guid: 70e947256ccef2947a146d3dc3c54327, type: 2}
+  _visualConfig: {fileID: 11400000, guid: 8bf4ec7fbd91b5e4cbc2007177c4d1b4, type: 2}
   _initialInventoryEntries:
   - _runtimeId: 
     _item: {fileID: 11400000, guid: e54ed08d3edbd4f439b237ff40ed99a0, type: 2}
