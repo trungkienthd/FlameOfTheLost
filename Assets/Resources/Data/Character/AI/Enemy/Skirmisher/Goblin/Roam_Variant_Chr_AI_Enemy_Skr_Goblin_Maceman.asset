@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7b9a6ac947cc1b4fa7df67aaea6736b, type: 3}
-  m_Name: Roam_Variant_Chr_AI_Enemy_Skr_Goblin
+  m_Name: Roam_Variant_Chr_AI_Enemy_Skr_Goblin_Maceman
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SkirmisherEnemyRoamingConfig
-  _minRoamWalkDuration: 1.8
-  _maxRoamWalkDuration: 3.5
-  _minRoamIdleDuration: 1.2
-  _maxRoamIdleDuration: 2.5
+  _minRoamWalkDuration: 1.5
+  _maxRoamWalkDuration: 3
+  _minRoamIdleDuration: 2
+  _maxRoamIdleDuration: 3.5

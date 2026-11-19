@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d08f94218fc9d945a4b46f861c6bfae, type: 3}
-  m_Name: Ret_Variant_Chr_AI_Enemy_Skr_Goblin
+  m_Name: Ret_Variant_Chr_AI_Enemy_Skr_Goblin_Spearman
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SkirmisherEnemyRetreatConfig
-  _healthThreshold: 0.3
+  _healthThreshold: 0.25
   _maxRetreatsPerEngagement: 1
-  _retreatSpeedMultiplier: 1
-  _preferredSafeDistance: 3.5
+  _retreatSpeedMultiplier: 1.05
+  _preferredSafeDistance: 3.75
   _minimumRetreatDuration: 1
-  _maximumRetreatDuration: 2.5
+  _maximumRetreatDuration: 2.25

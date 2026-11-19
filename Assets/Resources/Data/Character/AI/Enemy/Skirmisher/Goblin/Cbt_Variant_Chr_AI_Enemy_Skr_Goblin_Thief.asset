@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83aa5d3e594331a4db48602aa9e2942d, type: 3}
-  m_Name: Cbt_Variant_Chr_AI_Enemy_Skr_Goblin
+  m_Name: Cbt_Variant_Chr_AI_Enemy_Skr_Goblin_Thief
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SkirmisherEnemyCombatConfig
   _minAttackDecisionInterval: 0.85
   _maxAttackDecisionInterval: 1.35
@@ -19,5 +19,9 @@ MonoBehaviour:
   _normalAttackSide: 0
   _normalAttackStateDuration: 0.55
   _normalAttackRecoveryDuration: 0.55
+  _normalAttackMinimumDistance: 0
+  _normalAttackMaximumDistance: 1.5
   _specialAttackStateDuration: 1
   _specialAttackRecoveryDuration: 1.1
+  _specialAttackMinimumDistance: 0
+  _specialAttackMaximumDistance: 1.8

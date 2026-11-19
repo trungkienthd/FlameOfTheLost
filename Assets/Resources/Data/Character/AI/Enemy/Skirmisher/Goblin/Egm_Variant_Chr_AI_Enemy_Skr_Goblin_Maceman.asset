@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d7fa543c5b06f846bef6fa00e0fb0df, type: 3}
-  m_Name: Egm_Variant_Chr_AI_Enemy_Skr_Goblin
+  m_Name: Egm_Variant_Chr_AI_Enemy_Skr_Goblin_Maceman
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SkirmisherEnemyEngagementConfig
-  _alertDuration: 0.45
-  _targetLostGraceDuration: 1.25
-  _maximumPursuitDistance: 5
-  _chaseSpeedMultiplier: 1
+  _alertDuration: 0.65
+  _targetLostGraceDuration: 2
+  _maximumPursuitDistance: 6
+  _chaseSpeedMultiplier: 0.9

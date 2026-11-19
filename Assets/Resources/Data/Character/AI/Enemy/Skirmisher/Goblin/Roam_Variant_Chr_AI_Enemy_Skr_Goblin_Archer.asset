@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b9a6ac947cc1b4fa7df67aaea6736b, type: 3}
+  m_Name: Roam_Variant_Chr_AI_Enemy_Skr_Goblin_Archer
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SkirmisherEnemyRoamingConfig
+  _minRoamWalkDuration: 2
+  _maxRoamWalkDuration: 4.5
+  _minRoamIdleDuration: 1.5
+  _maxRoamIdleDuration: 3
