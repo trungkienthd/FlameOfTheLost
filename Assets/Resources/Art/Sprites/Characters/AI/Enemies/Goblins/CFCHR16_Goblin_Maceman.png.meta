@@ -1,9 +1,17 @@
 fileFormatVersion: 2
 guid: cae0cfbd3d1bd894382e02fd3695ca73
+AssetOrigin:
+  serializedVersion: 1
+  productId: 302080
+  packageName: Cute Fantasy Characters - 16x16 top down pixel art asset pack
+  packageVersion: 1.0
+  assetPath: Assets/Kenmi/Cute Fantasy Characters - 16x16 top down pixel art asset
+    pack/Sprites/Goblins/Goblin_Maceman.png
+  uploadId: 707264
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +28,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,9 +72,10 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -75,9 +85,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -87,9 +98,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -99,13 +111,14 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Goblin_Maceman_0
+      name: CFCHR16_Goblin_Maceman_Idle_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,8 +126,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -126,7 +140,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_1
+      name: CFCHR16_Goblin_Maceman_Idle_Down_1
       rect:
         serializedVersion: 2
         x: 32
@@ -134,8 +148,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -147,7 +162,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_2
+      name: CFCHR16_Goblin_Maceman_Idle_Down_2
       rect:
         serializedVersion: 2
         x: 64
@@ -155,8 +170,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -168,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_3
+      name: CFCHR16_Goblin_Maceman_Idle_Down_3
       rect:
         serializedVersion: 2
         x: 96
@@ -176,8 +192,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -189,7 +206,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_4
+      name: CFCHR16_Goblin_Maceman_Idle_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -197,8 +214,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -210,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_5
+      name: CFCHR16_Goblin_Maceman_Idle_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -218,8 +236,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -231,7 +250,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_6
+      name: CFCHR16_Goblin_Maceman_Idle_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -239,8 +258,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -252,7 +272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_7
+      name: CFCHR16_Goblin_Maceman_Idle_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -260,8 +280,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -273,7 +294,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_8
+      name: CFCHR16_Goblin_Maceman_Idle_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -281,8 +302,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -294,7 +316,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_9
+      name: CFCHR16_Goblin_Maceman_Idle_Up_1
       rect:
         serializedVersion: 2
         x: 32
@@ -302,8 +324,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -315,7 +338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_10
+      name: CFCHR16_Goblin_Maceman_Idle_Up_2
       rect:
         serializedVersion: 2
         x: 64
@@ -323,8 +346,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -336,7 +360,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_11
+      name: CFCHR16_Goblin_Maceman_Idle_Up_3
       rect:
         serializedVersion: 2
         x: 96
@@ -344,8 +368,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -357,7 +382,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_12
+      name: CFCHR16_Goblin_Maceman_Walk_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -365,8 +390,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -378,7 +404,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_13
+      name: CFCHR16_Goblin_Maceman_Walk_Down_1
       rect:
         serializedVersion: 2
         x: 32
@@ -386,8 +412,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -399,7 +426,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_14
+      name: CFCHR16_Goblin_Maceman_Walk_Down_2
       rect:
         serializedVersion: 2
         x: 64
@@ -407,8 +434,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -420,7 +448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_15
+      name: CFCHR16_Goblin_Maceman_Walk_Down_3
       rect:
         serializedVersion: 2
         x: 96
@@ -428,8 +456,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -441,7 +470,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_16
+      name: CFCHR16_Goblin_Maceman_Walk_Down_4
       rect:
         serializedVersion: 2
         x: 128
@@ -449,8 +478,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -462,7 +492,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_17
+      name: CFCHR16_Goblin_Maceman_Walk_Down_5
       rect:
         serializedVersion: 2
         x: 160
@@ -470,8 +500,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -483,7 +514,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_18
+      name: CFCHR16_Goblin_Maceman_Walk_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -491,8 +522,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -504,7 +536,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_19
+      name: CFCHR16_Goblin_Maceman_Walk_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -512,8 +544,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -525,7 +558,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_20
+      name: CFCHR16_Goblin_Maceman_Walk_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -533,8 +566,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -546,7 +580,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_21
+      name: CFCHR16_Goblin_Maceman_Walk_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -554,8 +588,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -567,7 +602,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_22
+      name: CFCHR16_Goblin_Maceman_Walk_Side_4
       rect:
         serializedVersion: 2
         x: 128
@@ -575,8 +610,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -588,7 +624,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_23
+      name: CFCHR16_Goblin_Maceman_Walk_Side_5
       rect:
         serializedVersion: 2
         x: 160
@@ -596,8 +632,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -609,7 +646,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_24
+      name: CFCHR16_Goblin_Maceman_Walk_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -617,8 +654,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -630,7 +668,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_25
+      name: CFCHR16_Goblin_Maceman_Walk_Up_1
       rect:
         serializedVersion: 2
         x: 32
@@ -638,8 +676,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -651,7 +690,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_26
+      name: CFCHR16_Goblin_Maceman_Walk_Up_2
       rect:
         serializedVersion: 2
         x: 64
@@ -659,8 +698,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -672,7 +712,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_27
+      name: CFCHR16_Goblin_Maceman_Walk_Up_3
       rect:
         serializedVersion: 2
         x: 96
@@ -680,8 +720,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -693,7 +734,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_28
+      name: CFCHR16_Goblin_Maceman_Walk_Up_4
       rect:
         serializedVersion: 2
         x: 128
@@ -701,8 +742,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -714,7 +756,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_29
+      name: CFCHR16_Goblin_Maceman_Walk_Up_5
       rect:
         serializedVersion: 2
         x: 160
@@ -722,8 +764,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -735,7 +778,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_30
+      name: CFCHR16_Goblin_Maceman_Attack_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -743,8 +786,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -756,7 +800,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_31
+      name: CFCHR16_Goblin_Maceman_Attack_Down_1
       rect:
         serializedVersion: 2
         x: 32
@@ -764,8 +808,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -777,7 +822,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_32
+      name: CFCHR16_Goblin_Maceman_Attack_Down_2
       rect:
         serializedVersion: 2
         x: 64
@@ -785,8 +830,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -798,7 +844,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_33
+      name: CFCHR16_Goblin_Maceman_Attack_Down_3
       rect:
         serializedVersion: 2
         x: 96
@@ -806,8 +852,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -819,7 +866,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_34
+      name: CFCHR16_Goblin_Maceman_Attack_Down_4
       rect:
         serializedVersion: 2
         x: 128
@@ -827,8 +874,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -840,7 +888,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_35
+      name: CFCHR16_Goblin_Maceman_Attack_Down_5
       rect:
         serializedVersion: 2
         x: 160
@@ -848,8 +896,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -861,7 +910,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_36
+      name: CFCHR16_Goblin_Maceman_Attack_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -869,8 +918,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -882,7 +932,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_37
+      name: CFCHR16_Goblin_Maceman_Attack_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -890,8 +940,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -903,7 +954,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_38
+      name: CFCHR16_Goblin_Maceman_Attack_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -911,8 +962,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -924,7 +976,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_39
+      name: CFCHR16_Goblin_Maceman_Attack_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -932,8 +984,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -945,7 +998,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_40
+      name: CFCHR16_Goblin_Maceman_Attack_Side_4
       rect:
         serializedVersion: 2
         x: 128
@@ -953,8 +1006,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -966,7 +1020,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_41
+      name: CFCHR16_Goblin_Maceman_Attack_Side_5
       rect:
         serializedVersion: 2
         x: 160
@@ -974,8 +1028,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -987,7 +1042,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_42
+      name: CFCHR16_Goblin_Maceman_Attack_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -995,8 +1050,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1008,7 +1064,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_43
+      name: CFCHR16_Goblin_Maceman_Attack_Up_1
       rect:
         serializedVersion: 2
         x: 32
@@ -1016,8 +1072,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1029,7 +1086,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_44
+      name: CFCHR16_Goblin_Maceman_Attack_Up_2
       rect:
         serializedVersion: 2
         x: 64
@@ -1037,8 +1094,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1050,7 +1108,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_45
+      name: CFCHR16_Goblin_Maceman_Attack_Up_3
       rect:
         serializedVersion: 2
         x: 96
@@ -1058,8 +1116,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1071,7 +1130,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_46
+      name: CFCHR16_Goblin_Maceman_Attack_Up_4
       rect:
         serializedVersion: 2
         x: 128
@@ -1079,8 +1138,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1092,7 +1152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_47
+      name: CFCHR16_Goblin_Maceman_Attack_Up_5
       rect:
         serializedVersion: 2
         x: 160
@@ -1100,8 +1160,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1113,7 +1174,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_48
+      name: CFCHR16_Goblin_Maceman_Die_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1121,8 +1182,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1134,7 +1196,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_49
+      name: CFCHR16_Goblin_Maceman_Die_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -1142,8 +1204,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1155,7 +1218,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_50
+      name: CFCHR16_Goblin_Maceman_Die_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -1163,8 +1226,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1176,7 +1240,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_51
+      name: CFCHR16_Goblin_Maceman_Die_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -1184,8 +1248,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1197,7 +1262,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_52
+      name: CFCHR16_Goblin_Maceman_Hit_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1205,8 +1270,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1218,7 +1284,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_53
+      name: CFCHR16_Goblin_Maceman_Hit_Down_1
       rect:
         serializedVersion: 2
         x: 32
@@ -1226,8 +1292,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1239,7 +1306,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_54
+      name: CFCHR16_Goblin_Maceman_Hit_Down_2
       rect:
         serializedVersion: 2
         x: 64
@@ -1247,8 +1314,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1260,7 +1328,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_55
+      name: CFCHR16_Goblin_Maceman_Hit_Down_3
       rect:
         serializedVersion: 2
         x: 96
@@ -1268,8 +1336,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1281,7 +1350,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_56
+      name: CFCHR16_Goblin_Maceman_Hit_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1289,8 +1358,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1302,7 +1372,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_57
+      name: CFCHR16_Goblin_Maceman_Hit_Side_1
       rect:
         serializedVersion: 2
         x: 32
@@ -1310,8 +1380,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1323,7 +1394,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_58
+      name: CFCHR16_Goblin_Maceman_Hit_Side_2
       rect:
         serializedVersion: 2
         x: 64
@@ -1331,8 +1402,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1344,7 +1416,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_59
+      name: CFCHR16_Goblin_Maceman_Hit_Side_3
       rect:
         serializedVersion: 2
         x: 96
@@ -1352,8 +1424,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1365,7 +1438,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_60
+      name: CFCHR16_Goblin_Maceman_Hit_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1373,8 +1446,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1386,7 +1460,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_61
+      name: CFCHR16_Goblin_Maceman_Hit_Up_1
       rect:
         serializedVersion: 2
         x: 32
@@ -1394,8 +1468,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1407,7 +1482,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_62
+      name: CFCHR16_Goblin_Maceman_Hit_Up_2
       rect:
         serializedVersion: 2
         x: 64
@@ -1415,8 +1490,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1428,7 +1504,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Maceman_63
+      name: CFCHR16_Goblin_Maceman_Hit_Up_3
       rect:
         serializedVersion: 2
         x: 96
@@ -1436,8 +1512,9 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1449,6 +1526,7 @@ TextureImporter:
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -1458,82 +1536,75 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
-      Goblin_Maceman_0: 332443762
-      Goblin_Maceman_1: -913073522
-      Goblin_Maceman_10: 288672802
-      Goblin_Maceman_11: -804971233
-      Goblin_Maceman_12: 1869818552
-      Goblin_Maceman_13: 361818186
-      Goblin_Maceman_14: 778742048
-      Goblin_Maceman_15: -277190017
-      Goblin_Maceman_16: -1150104971
-      Goblin_Maceman_17: -444529462
-      Goblin_Maceman_18: 269659577
-      Goblin_Maceman_19: 743425428
-      Goblin_Maceman_2: 417364834
-      Goblin_Maceman_20: -310298576
-      Goblin_Maceman_21: -1159074402
-      Goblin_Maceman_22: -1249168081
-      Goblin_Maceman_23: -330580208
-      Goblin_Maceman_24: 1653258105
-      Goblin_Maceman_25: 852120395
-      Goblin_Maceman_26: -885122248
-      Goblin_Maceman_27: -713208939
-      Goblin_Maceman_28: 1465553740
-      Goblin_Maceman_29: -53136460
-      Goblin_Maceman_3: 1591162292
-      Goblin_Maceman_30: -1032466145
-      Goblin_Maceman_31: 388677070
-      Goblin_Maceman_32: 2071536751
-      Goblin_Maceman_33: -1656947072
-      Goblin_Maceman_34: -1281308514
-      Goblin_Maceman_35: 159922741
-      Goblin_Maceman_36: 662645938
-      Goblin_Maceman_37: -1576142810
-      Goblin_Maceman_38: -44964008
-      Goblin_Maceman_39: -861942153
-      Goblin_Maceman_4: 637660883
-      Goblin_Maceman_40: -392672167
-      Goblin_Maceman_41: 594684937
-      Goblin_Maceman_42: -1771283352
-      Goblin_Maceman_43: 795565930
-      Goblin_Maceman_44: -665158747
-      Goblin_Maceman_45: 1605107495
-      Goblin_Maceman_46: 798332507
-      Goblin_Maceman_47: -493198878
-      Goblin_Maceman_48: -923548463
-      Goblin_Maceman_49: -2085592236
-      Goblin_Maceman_5: 590195351
-      Goblin_Maceman_50: 1737685460
-      Goblin_Maceman_51: -987039225
-      Goblin_Maceman_52: 1523757265
-      Goblin_Maceman_53: -762118448
-      Goblin_Maceman_54: 1517382664
-      Goblin_Maceman_55: 234295059
-      Goblin_Maceman_56: -406409703
-      Goblin_Maceman_57: -373910168
-      Goblin_Maceman_58: 1684909107
-      Goblin_Maceman_59: 1889342650
-      Goblin_Maceman_6: 1232025245
-      Goblin_Maceman_60: -1515103357
-      Goblin_Maceman_61: 1509000899
-      Goblin_Maceman_62: -249780023
-      Goblin_Maceman_63: 2051369280
-      Goblin_Maceman_7: -1135168738
-      Goblin_Maceman_8: -1621552288
-      Goblin_Maceman_9: 1866550629
-  spritePackingTag: 
+      CFCHR16_Goblin_Maceman_Attack_Down_0: -1032466145
+      CFCHR16_Goblin_Maceman_Attack_Down_1: 388677070
+      CFCHR16_Goblin_Maceman_Attack_Down_2: 2071536751
+      CFCHR16_Goblin_Maceman_Attack_Down_3: -1656947072
+      CFCHR16_Goblin_Maceman_Attack_Down_4: -1281308514
+      CFCHR16_Goblin_Maceman_Attack_Down_5: 159922741
+      CFCHR16_Goblin_Maceman_Attack_Side_0: 662645938
+      CFCHR16_Goblin_Maceman_Attack_Side_1: -1576142810
+      CFCHR16_Goblin_Maceman_Attack_Side_2: -44964008
+      CFCHR16_Goblin_Maceman_Attack_Side_3: -861942153
+      CFCHR16_Goblin_Maceman_Attack_Side_4: -392672167
+      CFCHR16_Goblin_Maceman_Attack_Side_5: 594684937
+      CFCHR16_Goblin_Maceman_Attack_Up_0: -1771283352
+      CFCHR16_Goblin_Maceman_Attack_Up_1: 795565930
+      CFCHR16_Goblin_Maceman_Attack_Up_2: -665158747
+      CFCHR16_Goblin_Maceman_Attack_Up_3: 1605107495
+      CFCHR16_Goblin_Maceman_Attack_Up_4: 798332507
+      CFCHR16_Goblin_Maceman_Attack_Up_5: -493198878
+      CFCHR16_Goblin_Maceman_Die_Side_0: -923548463
+      CFCHR16_Goblin_Maceman_Die_Side_1: -2085592236
+      CFCHR16_Goblin_Maceman_Die_Side_2: 1737685460
+      CFCHR16_Goblin_Maceman_Die_Side_3: -987039225
+      CFCHR16_Goblin_Maceman_Hit_Down_0: 1523757265
+      CFCHR16_Goblin_Maceman_Hit_Down_1: -762118448
+      CFCHR16_Goblin_Maceman_Hit_Down_2: 1517382664
+      CFCHR16_Goblin_Maceman_Hit_Down_3: 234295059
+      CFCHR16_Goblin_Maceman_Hit_Side_0: -406409703
+      CFCHR16_Goblin_Maceman_Hit_Side_1: -373910168
+      CFCHR16_Goblin_Maceman_Hit_Side_2: 1684909107
+      CFCHR16_Goblin_Maceman_Hit_Side_3: 1889342650
+      CFCHR16_Goblin_Maceman_Hit_Up_0: -1515103357
+      CFCHR16_Goblin_Maceman_Hit_Up_1: 1509000899
+      CFCHR16_Goblin_Maceman_Hit_Up_2: -249780023
+      CFCHR16_Goblin_Maceman_Hit_Up_3: 2051369280
+      CFCHR16_Goblin_Maceman_Idle_Down_0: 332443762
+      CFCHR16_Goblin_Maceman_Idle_Down_1: -913073522
+      CFCHR16_Goblin_Maceman_Idle_Down_2: 417364834
+      CFCHR16_Goblin_Maceman_Idle_Down_3: 1591162292
+      CFCHR16_Goblin_Maceman_Idle_Side_0: 637660883
+      CFCHR16_Goblin_Maceman_Idle_Side_1: 590195351
+      CFCHR16_Goblin_Maceman_Idle_Side_2: 1232025245
+      CFCHR16_Goblin_Maceman_Idle_Side_3: -1135168738
+      CFCHR16_Goblin_Maceman_Idle_Up_0: -1621552288
+      CFCHR16_Goblin_Maceman_Idle_Up_1: 1866550629
+      CFCHR16_Goblin_Maceman_Idle_Up_2: 288672802
+      CFCHR16_Goblin_Maceman_Idle_Up_3: -804971233
+      CFCHR16_Goblin_Maceman_Walk_Down_0: 1869818552
+      CFCHR16_Goblin_Maceman_Walk_Down_1: 361818186
+      CFCHR16_Goblin_Maceman_Walk_Down_2: 778742048
+      CFCHR16_Goblin_Maceman_Walk_Down_3: -277190017
+      CFCHR16_Goblin_Maceman_Walk_Down_4: -1150104971
+      CFCHR16_Goblin_Maceman_Walk_Down_5: -444529462
+      CFCHR16_Goblin_Maceman_Walk_Side_0: 269659577
+      CFCHR16_Goblin_Maceman_Walk_Side_1: 743425428
+      CFCHR16_Goblin_Maceman_Walk_Side_2: -310298576
+      CFCHR16_Goblin_Maceman_Walk_Side_3: -1159074402
+      CFCHR16_Goblin_Maceman_Walk_Side_4: -1249168081
+      CFCHR16_Goblin_Maceman_Walk_Side_5: -330580208
+      CFCHR16_Goblin_Maceman_Walk_Up_0: 1653258105
+      CFCHR16_Goblin_Maceman_Walk_Up_1: 852120395
+      CFCHR16_Goblin_Maceman_Walk_Up_2: -885122248
+      CFCHR16_Goblin_Maceman_Walk_Up_3: -713208939
+      CFCHR16_Goblin_Maceman_Walk_Up_4: 1465553740
+      CFCHR16_Goblin_Maceman_Walk_Up_5: -53136460
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 302080
-  packageName: Cute Fantasy Characters - 16x16 top down pixel art asset pack
-  packageVersion: 1.0
-  assetPath: Assets/Kenmi/Cute Fantasy Characters - 16x16 top down pixel art asset
-    pack/Sprites/Goblins/Goblin_Maceman.png
-  uploadId: 707264

@@ -1,9 +1,17 @@
 fileFormatVersion: 2
 guid: 279636f0730f2884b80370680e85b61b
+AssetOrigin:
+  serializedVersion: 1
+  productId: 302080
+  packageName: Cute Fantasy Characters - 16x16 top down pixel art asset pack
+  packageVersion: 1.0
+  assetPath: Assets/Kenmi/Cute Fantasy Characters - 16x16 top down pixel art asset
+    pack/Sprites/Goblins/Goblin_Archer.png
+  uploadId: 707264
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +28,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,9 +72,10 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -75,9 +85,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -87,9 +98,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -99,13 +111,14 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Goblin_Archer_0
+      name: CFCHR16_Goblin_Archer_Idle_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,8 +126,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -126,7 +140,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_1
+      name: CFCHR16_Goblin_Archer_Idle_Down_1
       rect:
         serializedVersion: 2
         x: 48
@@ -134,8 +148,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -147,7 +162,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_2
+      name: CFCHR16_Goblin_Archer_Idle_Down_2
       rect:
         serializedVersion: 2
         x: 96
@@ -155,8 +170,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -168,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_3
+      name: CFCHR16_Goblin_Archer_Idle_Down_3
       rect:
         serializedVersion: 2
         x: 144
@@ -176,8 +192,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -189,7 +206,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_4
+      name: CFCHR16_Goblin_Archer_Idle_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -197,8 +214,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -210,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_5
+      name: CFCHR16_Goblin_Archer_Idle_Side_1
       rect:
         serializedVersion: 2
         x: 48
@@ -218,8 +236,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -231,7 +250,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_6
+      name: CFCHR16_Goblin_Archer_Idle_Side_2
       rect:
         serializedVersion: 2
         x: 96
@@ -239,8 +258,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -252,7 +272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_7
+      name: CFCHR16_Goblin_Archer_Idle_Side_3
       rect:
         serializedVersion: 2
         x: 144
@@ -260,8 +280,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -273,7 +294,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_8
+      name: CFCHR16_Goblin_Archer_Idle_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -281,8 +302,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -294,7 +316,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_9
+      name: CFCHR16_Goblin_Archer_Idle_Up_1
       rect:
         serializedVersion: 2
         x: 48
@@ -302,8 +324,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -315,7 +338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_10
+      name: CFCHR16_Goblin_Archer_Idle_Up_2
       rect:
         serializedVersion: 2
         x: 96
@@ -323,8 +346,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -336,7 +360,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_11
+      name: CFCHR16_Goblin_Archer_Idle_Up_3
       rect:
         serializedVersion: 2
         x: 144
@@ -344,8 +368,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -357,7 +382,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_12
+      name: CFCHR16_Goblin_Archer_Walk_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -365,8 +390,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -378,7 +404,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_13
+      name: CFCHR16_Goblin_Archer_Walk_Down_1
       rect:
         serializedVersion: 2
         x: 48
@@ -386,8 +412,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -399,7 +426,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_14
+      name: CFCHR16_Goblin_Archer_Walk_Down_2
       rect:
         serializedVersion: 2
         x: 96
@@ -407,8 +434,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -420,7 +448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_15
+      name: CFCHR16_Goblin_Archer_Walk_Down_3
       rect:
         serializedVersion: 2
         x: 144
@@ -428,8 +456,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -441,7 +470,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_16
+      name: CFCHR16_Goblin_Archer_Walk_Down_4
       rect:
         serializedVersion: 2
         x: 192
@@ -449,8 +478,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -462,7 +492,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_17
+      name: CFCHR16_Goblin_Archer_Walk_Down_5
       rect:
         serializedVersion: 2
         x: 240
@@ -470,8 +500,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -483,7 +514,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_18
+      name: CFCHR16_Goblin_Archer_Walk_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -491,8 +522,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -504,7 +536,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_19
+      name: CFCHR16_Goblin_Archer_Walk_Side_1
       rect:
         serializedVersion: 2
         x: 48
@@ -512,8 +544,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -525,7 +558,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_20
+      name: CFCHR16_Goblin_Archer_Walk_Side_2
       rect:
         serializedVersion: 2
         x: 96
@@ -533,8 +566,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -546,7 +580,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_21
+      name: CFCHR16_Goblin_Archer_Walk_Side_3
       rect:
         serializedVersion: 2
         x: 144
@@ -554,8 +588,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -567,7 +602,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_22
+      name: CFCHR16_Goblin_Archer_Walk_Side_4
       rect:
         serializedVersion: 2
         x: 192
@@ -575,8 +610,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -588,7 +624,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_23
+      name: CFCHR16_Goblin_Archer_Walk_Side_5
       rect:
         serializedVersion: 2
         x: 240
@@ -596,8 +632,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -609,7 +646,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_24
+      name: CFCHR16_Goblin_Archer_Walk_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -617,8 +654,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -630,7 +668,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_25
+      name: CFCHR16_Goblin_Archer_Walk_Up_1
       rect:
         serializedVersion: 2
         x: 48
@@ -638,8 +676,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -651,7 +690,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_26
+      name: CFCHR16_Goblin_Archer_Walk_Up_2
       rect:
         serializedVersion: 2
         x: 96
@@ -659,8 +698,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -672,7 +712,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_27
+      name: CFCHR16_Goblin_Archer_Walk_Up_3
       rect:
         serializedVersion: 2
         x: 144
@@ -680,8 +720,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -693,7 +734,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_28
+      name: CFCHR16_Goblin_Archer_Walk_Up_4
       rect:
         serializedVersion: 2
         x: 192
@@ -701,8 +742,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -714,7 +756,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_29
+      name: CFCHR16_Goblin_Archer_Walk_Up_5
       rect:
         serializedVersion: 2
         x: 240
@@ -722,8 +764,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -735,7 +778,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_30
+      name: CFCHR16_Goblin_Archer_Attack_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -743,8 +786,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -756,7 +800,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_31
+      name: CFCHR16_Goblin_Archer_Attack_Down_1
       rect:
         serializedVersion: 2
         x: 48
@@ -764,8 +808,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -777,7 +822,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_32
+      name: CFCHR16_Goblin_Archer_Attack_Down_2
       rect:
         serializedVersion: 2
         x: 96
@@ -785,8 +830,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -798,7 +844,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_33
+      name: CFCHR16_Goblin_Archer_Attack_Down_3
       rect:
         serializedVersion: 2
         x: 144
@@ -806,8 +852,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -819,7 +866,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_34
+      name: CFCHR16_Goblin_Archer_Attack_Down_4
       rect:
         serializedVersion: 2
         x: 192
@@ -827,8 +874,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -840,7 +888,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_35
+      name: CFCHR16_Goblin_Archer_Attack_Down_5
       rect:
         serializedVersion: 2
         x: 240
@@ -848,8 +896,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -861,7 +910,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_36
+      name: CFCHR16_Goblin_Archer_Attack_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -869,8 +918,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -882,7 +932,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_37
+      name: CFCHR16_Goblin_Archer_Attack_Side_1
       rect:
         serializedVersion: 2
         x: 48
@@ -890,8 +940,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -903,7 +954,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_38
+      name: CFCHR16_Goblin_Archer_Attack_Side_2
       rect:
         serializedVersion: 2
         x: 96
@@ -911,8 +962,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -924,7 +976,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_39
+      name: CFCHR16_Goblin_Archer_Attack_Side_3
       rect:
         serializedVersion: 2
         x: 144
@@ -932,8 +984,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -945,7 +998,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_40
+      name: CFCHR16_Goblin_Archer_Attack_Side_4
       rect:
         serializedVersion: 2
         x: 192
@@ -953,8 +1006,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -966,7 +1020,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_41
+      name: CFCHR16_Goblin_Archer_Attack_Side_5
       rect:
         serializedVersion: 2
         x: 240
@@ -974,8 +1028,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -987,7 +1042,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_42
+      name: CFCHR16_Goblin_Archer_Attack_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -995,8 +1050,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1008,7 +1064,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_43
+      name: CFCHR16_Goblin_Archer_Attack_Up_1
       rect:
         serializedVersion: 2
         x: 48
@@ -1016,8 +1072,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1029,7 +1086,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_44
+      name: CFCHR16_Goblin_Archer_Attack_Up_2
       rect:
         serializedVersion: 2
         x: 96
@@ -1037,8 +1094,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1050,7 +1108,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_45
+      name: CFCHR16_Goblin_Archer_Attack_Up_3
       rect:
         serializedVersion: 2
         x: 144
@@ -1058,8 +1116,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1071,7 +1130,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_46
+      name: CFCHR16_Goblin_Archer_Attack_Up_4
       rect:
         serializedVersion: 2
         x: 192
@@ -1079,8 +1138,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1092,7 +1152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_47
+      name: CFCHR16_Goblin_Archer_Attack_Up_5
       rect:
         serializedVersion: 2
         x: 240
@@ -1100,8 +1160,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1113,7 +1174,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_48
+      name: CFCHR16_Goblin_Archer_Die_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1121,8 +1182,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1134,7 +1196,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_49
+      name: CFCHR16_Goblin_Archer_Die_Side_1
       rect:
         serializedVersion: 2
         x: 48
@@ -1142,8 +1204,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1155,7 +1218,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_50
+      name: CFCHR16_Goblin_Archer_Die_Side_2
       rect:
         serializedVersion: 2
         x: 96
@@ -1163,8 +1226,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1176,7 +1240,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_51
+      name: CFCHR16_Goblin_Archer_Die_Side_3
       rect:
         serializedVersion: 2
         x: 144
@@ -1184,8 +1248,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1197,7 +1262,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_52
+      name: CFCHR16_Goblin_Archer_Hit_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1205,8 +1270,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1218,7 +1284,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_53
+      name: CFCHR16_Goblin_Archer_Hit_Down_1
       rect:
         serializedVersion: 2
         x: 48
@@ -1226,8 +1292,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1239,7 +1306,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_54
+      name: CFCHR16_Goblin_Archer_Hit_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1247,8 +1314,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1260,7 +1328,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_55
+      name: CFCHR16_Goblin_Archer_Hit_Side_1
       rect:
         serializedVersion: 2
         x: 48
@@ -1268,8 +1336,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1281,7 +1350,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_56
+      name: CFCHR16_Goblin_Archer_Hit_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1289,8 +1358,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1302,7 +1372,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Archer_57
+      name: CFCHR16_Goblin_Archer_Hit_Up_1
       rect:
         serializedVersion: 2
         x: 48
@@ -1310,8 +1380,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1323,6 +1394,7 @@ TextureImporter:
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -1332,76 +1404,69 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
-      Goblin_Archer_0: 1247521905
-      Goblin_Archer_1: 422377382
-      Goblin_Archer_10: 1743494383
-      Goblin_Archer_11: -1651715669
-      Goblin_Archer_12: 1757233938
-      Goblin_Archer_13: 574375672
-      Goblin_Archer_14: -8242480
-      Goblin_Archer_15: -261898546
-      Goblin_Archer_16: 1834274776
-      Goblin_Archer_17: -614722586
-      Goblin_Archer_18: -1163821702
-      Goblin_Archer_19: -1816518146
-      Goblin_Archer_2: 1192199463
-      Goblin_Archer_20: 1386367158
-      Goblin_Archer_21: -793459938
-      Goblin_Archer_22: -1911243983
-      Goblin_Archer_23: 1411363947
-      Goblin_Archer_24: 161722651
-      Goblin_Archer_25: 397029354
-      Goblin_Archer_26: 1873083980
-      Goblin_Archer_27: 1367183527
-      Goblin_Archer_28: -235121682
-      Goblin_Archer_29: -730935830
-      Goblin_Archer_3: 1373103294
-      Goblin_Archer_30: 1301704780
-      Goblin_Archer_31: 290791877
-      Goblin_Archer_32: 1922246190
-      Goblin_Archer_33: 1738507565
-      Goblin_Archer_34: -1213365598
-      Goblin_Archer_35: 2038442506
-      Goblin_Archer_36: -754248353
-      Goblin_Archer_37: 184946331
-      Goblin_Archer_38: 630340740
-      Goblin_Archer_39: 426867612
-      Goblin_Archer_4: -757037778
-      Goblin_Archer_40: 488553999
-      Goblin_Archer_41: 1567467231
-      Goblin_Archer_42: -5758653
-      Goblin_Archer_43: 1710400290
-      Goblin_Archer_44: -501462018
-      Goblin_Archer_45: -1062214115
-      Goblin_Archer_46: 337944404
-      Goblin_Archer_47: -1625082355
-      Goblin_Archer_48: -168660484
-      Goblin_Archer_49: 1098217916
-      Goblin_Archer_5: 538871449
-      Goblin_Archer_50: -913673935
-      Goblin_Archer_51: 80675202
-      Goblin_Archer_52: -802906813
-      Goblin_Archer_53: 119598874
-      Goblin_Archer_54: 915606156
-      Goblin_Archer_55: -935120229
-      Goblin_Archer_56: -255044214
-      Goblin_Archer_57: 1849954108
-      Goblin_Archer_6: 2117853932
-      Goblin_Archer_7: 729332127
-      Goblin_Archer_8: 355093375
-      Goblin_Archer_9: -592189313
-  spritePackingTag: 
+      CFCHR16_Goblin_Archer_Attack_Down_0: 1301704780
+      CFCHR16_Goblin_Archer_Attack_Down_1: 290791877
+      CFCHR16_Goblin_Archer_Attack_Down_2: 1922246190
+      CFCHR16_Goblin_Archer_Attack_Down_3: 1738507565
+      CFCHR16_Goblin_Archer_Attack_Down_4: -1213365598
+      CFCHR16_Goblin_Archer_Attack_Down_5: 2038442506
+      CFCHR16_Goblin_Archer_Attack_Side_0: -754248353
+      CFCHR16_Goblin_Archer_Attack_Side_1: 184946331
+      CFCHR16_Goblin_Archer_Attack_Side_2: 630340740
+      CFCHR16_Goblin_Archer_Attack_Side_3: 426867612
+      CFCHR16_Goblin_Archer_Attack_Side_4: 488553999
+      CFCHR16_Goblin_Archer_Attack_Side_5: 1567467231
+      CFCHR16_Goblin_Archer_Attack_Up_0: -5758653
+      CFCHR16_Goblin_Archer_Attack_Up_1: 1710400290
+      CFCHR16_Goblin_Archer_Attack_Up_2: -501462018
+      CFCHR16_Goblin_Archer_Attack_Up_3: -1062214115
+      CFCHR16_Goblin_Archer_Attack_Up_4: 337944404
+      CFCHR16_Goblin_Archer_Attack_Up_5: -1625082355
+      CFCHR16_Goblin_Archer_Die_Side_0: -168660484
+      CFCHR16_Goblin_Archer_Die_Side_1: 1098217916
+      CFCHR16_Goblin_Archer_Die_Side_2: -913673935
+      CFCHR16_Goblin_Archer_Die_Side_3: 80675202
+      CFCHR16_Goblin_Archer_Hit_Down_0: -802906813
+      CFCHR16_Goblin_Archer_Hit_Down_1: 119598874
+      CFCHR16_Goblin_Archer_Hit_Side_0: 915606156
+      CFCHR16_Goblin_Archer_Hit_Side_1: -935120229
+      CFCHR16_Goblin_Archer_Hit_Up_0: -255044214
+      CFCHR16_Goblin_Archer_Hit_Up_1: 1849954108
+      CFCHR16_Goblin_Archer_Idle_Down_0: 1247521905
+      CFCHR16_Goblin_Archer_Idle_Down_1: 422377382
+      CFCHR16_Goblin_Archer_Idle_Down_2: 1192199463
+      CFCHR16_Goblin_Archer_Idle_Down_3: 1373103294
+      CFCHR16_Goblin_Archer_Idle_Side_0: -757037778
+      CFCHR16_Goblin_Archer_Idle_Side_1: 538871449
+      CFCHR16_Goblin_Archer_Idle_Side_2: 2117853932
+      CFCHR16_Goblin_Archer_Idle_Side_3: 729332127
+      CFCHR16_Goblin_Archer_Idle_Up_0: 355093375
+      CFCHR16_Goblin_Archer_Idle_Up_1: -592189313
+      CFCHR16_Goblin_Archer_Idle_Up_2: 1743494383
+      CFCHR16_Goblin_Archer_Idle_Up_3: -1651715669
+      CFCHR16_Goblin_Archer_Walk_Down_0: 1757233938
+      CFCHR16_Goblin_Archer_Walk_Down_1: 574375672
+      CFCHR16_Goblin_Archer_Walk_Down_2: -8242480
+      CFCHR16_Goblin_Archer_Walk_Down_3: -261898546
+      CFCHR16_Goblin_Archer_Walk_Down_4: 1834274776
+      CFCHR16_Goblin_Archer_Walk_Down_5: -614722586
+      CFCHR16_Goblin_Archer_Walk_Side_0: -1163821702
+      CFCHR16_Goblin_Archer_Walk_Side_1: -1816518146
+      CFCHR16_Goblin_Archer_Walk_Side_2: 1386367158
+      CFCHR16_Goblin_Archer_Walk_Side_3: -793459938
+      CFCHR16_Goblin_Archer_Walk_Side_4: -1911243983
+      CFCHR16_Goblin_Archer_Walk_Side_5: 1411363947
+      CFCHR16_Goblin_Archer_Walk_Up_0: 161722651
+      CFCHR16_Goblin_Archer_Walk_Up_1: 397029354
+      CFCHR16_Goblin_Archer_Walk_Up_2: 1873083980
+      CFCHR16_Goblin_Archer_Walk_Up_3: 1367183527
+      CFCHR16_Goblin_Archer_Walk_Up_4: -235121682
+      CFCHR16_Goblin_Archer_Walk_Up_5: -730935830
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 302080
-  packageName: Cute Fantasy Characters - 16x16 top down pixel art asset pack
-  packageVersion: 1.0
-  assetPath: Assets/Kenmi/Cute Fantasy Characters - 16x16 top down pixel art asset
-    pack/Sprites/Goblins/Goblin_Archer.png
-  uploadId: 707264

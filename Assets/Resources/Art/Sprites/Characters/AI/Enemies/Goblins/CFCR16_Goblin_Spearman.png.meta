@@ -1,9 +1,17 @@
 fileFormatVersion: 2
 guid: c53e88e53cc245b41820069e4466c03d
+AssetOrigin:
+  serializedVersion: 1
+  productId: 302080
+  packageName: Cute Fantasy Characters - 16x16 top down pixel art asset pack
+  packageVersion: 1.0
+  assetPath: Assets/Kenmi/Cute Fantasy Characters - 16x16 top down pixel art asset
+    pack/Sprites/Goblins/Goblin_Spearman.png
+  uploadId: 707264
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +28,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,9 +72,10 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -75,9 +85,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -87,9 +98,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -99,13 +111,14 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Goblin_Spearman_0
+      name: CFCHR16_Goblin_Spearman_Idle_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,8 +126,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -126,7 +140,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_1
+      name: CFCHR16_Goblin_Spearman_Idle_Down_1
       rect:
         serializedVersion: 2
         x: 48
@@ -134,8 +148,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -147,7 +162,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_2
+      name: CFCHR16_Goblin_Spearman_Idle_Down_2
       rect:
         serializedVersion: 2
         x: 96
@@ -155,8 +170,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -168,7 +184,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_3
+      name: CFCHR16_Goblin_Spearman_Idle_Down_3
       rect:
         serializedVersion: 2
         x: 144
@@ -176,8 +192,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -189,7 +206,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_4
+      name: CFCHR16_Goblin_Spearman_Idle_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -197,8 +214,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -210,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_5
+      name: CFCHR16_Goblin_Spearman_Idle_Side_1
       rect:
         serializedVersion: 2
         x: 48
@@ -218,8 +236,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -231,7 +250,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_6
+      name: CFCHR16_Goblin_Spearman_Idle_Side_2
       rect:
         serializedVersion: 2
         x: 96
@@ -239,8 +258,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -252,7 +272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_7
+      name: CFCHR16_Goblin_Spearman_Idle_Side_3
       rect:
         serializedVersion: 2
         x: 144
@@ -260,8 +280,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -273,7 +294,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_8
+      name: CFCHR16_Goblin_Spearman_Idle_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -281,8 +302,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -294,7 +316,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_9
+      name: CFCHR16_Goblin_Spearman_Idle_Up_1
       rect:
         serializedVersion: 2
         x: 48
@@ -302,8 +324,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -315,7 +338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_10
+      name: CFCHR16_Goblin_Spearman_Idle_Up_2
       rect:
         serializedVersion: 2
         x: 96
@@ -323,8 +346,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -336,7 +360,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_11
+      name: CFCHR16_Goblin_Spearman_Idle_Up_3
       rect:
         serializedVersion: 2
         x: 144
@@ -344,8 +368,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -357,7 +382,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_12
+      name: CFCHR16_Goblin_Spearman_Walk_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -365,8 +390,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -378,7 +404,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_13
+      name: CFCHR16_Goblin_Spearman_Walk_Down_1
       rect:
         serializedVersion: 2
         x: 48
@@ -386,8 +412,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -399,7 +426,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_14
+      name: CFCHR16_Goblin_Spearman_Walk_Down_2
       rect:
         serializedVersion: 2
         x: 96
@@ -407,8 +434,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -420,7 +448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_15
+      name: CFCHR16_Goblin_Spearman_Walk_Down_3
       rect:
         serializedVersion: 2
         x: 144
@@ -428,8 +456,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -441,7 +470,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_16
+      name: CFCHR16_Goblin_Spearman_Walk_Down_4
       rect:
         serializedVersion: 2
         x: 192
@@ -449,8 +478,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -462,7 +492,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_17
+      name: CFCHR16_Goblin_Spearman_Walk_Down_5
       rect:
         serializedVersion: 2
         x: 240
@@ -470,8 +500,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -483,7 +514,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_18
+      name: CFCHR16_Goblin_Spearman_Walk_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -491,8 +522,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -504,7 +536,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_19
+      name: CFCHR16_Goblin_Spearman_Walk_Side_1
       rect:
         serializedVersion: 2
         x: 48
@@ -512,8 +544,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -525,7 +558,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_20
+      name: CFCHR16_Goblin_Spearman_Walk_Side_2
       rect:
         serializedVersion: 2
         x: 96
@@ -533,8 +566,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -546,7 +580,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_21
+      name: CFCHR16_Goblin_Spearman_Walk_Side_3
       rect:
         serializedVersion: 2
         x: 144
@@ -554,8 +588,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -567,7 +602,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_22
+      name: CFCHR16_Goblin_Spearman_Walk_Side_4
       rect:
         serializedVersion: 2
         x: 192
@@ -575,8 +610,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -588,7 +624,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_23
+      name: CFCHR16_Goblin_Spearman_Walk_Side_5
       rect:
         serializedVersion: 2
         x: 240
@@ -596,8 +632,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -609,7 +646,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_24
+      name: CFCHR16_Goblin_Spearman_Walk_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -617,8 +654,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -630,7 +668,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_25
+      name: CFCHR16_Goblin_Spearman_Walk_Up_1
       rect:
         serializedVersion: 2
         x: 48
@@ -638,8 +676,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -651,7 +690,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_26
+      name: CFCHR16_Goblin_Spearman_Walk_Up_2
       rect:
         serializedVersion: 2
         x: 96
@@ -659,8 +698,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -672,7 +712,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_27
+      name: CFCHR16_Goblin_Spearman_Walk_Up_3
       rect:
         serializedVersion: 2
         x: 144
@@ -680,8 +720,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -693,7 +734,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_28
+      name: CFCHR16_Goblin_Spearman_Walk_Up_4
       rect:
         serializedVersion: 2
         x: 192
@@ -701,8 +742,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -714,7 +756,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_29
+      name: CFCHR16_Goblin_Spearman_Walk_Up_5
       rect:
         serializedVersion: 2
         x: 240
@@ -722,8 +764,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -735,7 +778,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_30
+      name: CFCHR16_Goblin_Spearman_Attack_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -743,8 +786,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -756,7 +800,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_31
+      name: CFCHR16_Goblin_Spearman_Attack_Down_1
       rect:
         serializedVersion: 2
         x: 48
@@ -764,8 +808,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -777,7 +822,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_32
+      name: CFCHR16_Goblin_Spearman_Attack_Down_2
       rect:
         serializedVersion: 2
         x: 96
@@ -785,8 +830,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -798,7 +844,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_33
+      name: CFCHR16_Goblin_Spearman_Attack_Down_3
       rect:
         serializedVersion: 2
         x: 144
@@ -806,8 +852,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -819,7 +866,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_34
+      name: CFCHR16_Goblin_Spearman_Attack_Down_4
       rect:
         serializedVersion: 2
         x: 192
@@ -827,8 +874,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -840,7 +888,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_35
+      name: CFCHR16_Goblin_Spearman_Attack_Down_5
       rect:
         serializedVersion: 2
         x: 240
@@ -848,8 +896,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -861,7 +910,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_36
+      name: CFCHR16_Goblin_Spearman_Attack_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -869,8 +918,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -882,7 +932,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_37
+      name: CFCHR16_Goblin_Spearman_Attack_Side_1
       rect:
         serializedVersion: 2
         x: 48
@@ -890,8 +940,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -903,7 +954,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_38
+      name: CFCHR16_Goblin_Spearman_Attack_Side_2
       rect:
         serializedVersion: 2
         x: 96
@@ -911,8 +962,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -924,7 +976,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_39
+      name: CFCHR16_Goblin_Spearman_Attack_Side_3
       rect:
         serializedVersion: 2
         x: 144
@@ -932,8 +984,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -945,7 +998,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_40
+      name: CFCHR16_Goblin_Spearman_Attack_Side_4
       rect:
         serializedVersion: 2
         x: 192
@@ -953,8 +1006,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -966,7 +1020,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_41
+      name: CFCHR16_Goblin_Spearman_Attack_Side_5
       rect:
         serializedVersion: 2
         x: 240
@@ -974,8 +1028,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -987,16 +1042,17 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_42
+      name: CFCHR16_Goblin_Spearman_Attack_Up_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 192
+        y: 193
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1008,7 +1064,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_43
+      name: CFCHR16_Goblin_Spearman_Attack_Up_1
       rect:
         serializedVersion: 2
         x: 48
@@ -1016,8 +1072,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1029,7 +1086,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_44
+      name: CFCHR16_Goblin_Spearman_Attack_Up_2
       rect:
         serializedVersion: 2
         x: 96
@@ -1037,8 +1094,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1050,7 +1108,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_45
+      name: CFCHR16_Goblin_Spearman_Attack_Up_3
       rect:
         serializedVersion: 2
         x: 144
@@ -1058,8 +1116,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1071,7 +1130,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_46
+      name: CFCHR16_Goblin_Spearman_Attack_Up_4
       rect:
         serializedVersion: 2
         x: 192
@@ -1079,8 +1138,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1092,7 +1152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_47
+      name: CFCHR16_Goblin_Spearman_Attack_Up_5
       rect:
         serializedVersion: 2
         x: 240
@@ -1100,8 +1160,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1113,7 +1174,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_48
+      name: CFCHR16_Goblin_Spearman_Die_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1121,8 +1182,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1134,7 +1196,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_49
+      name: CFCHR16_Goblin_Spearman_Die_Side_1
       rect:
         serializedVersion: 2
         x: 48
@@ -1142,8 +1204,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1155,7 +1218,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_50
+      name: CFCHR16_Goblin_Spearman_Die_Side_2
       rect:
         serializedVersion: 2
         x: 96
@@ -1163,8 +1226,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1176,7 +1240,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_51
+      name: CFCHR16_Goblin_Spearman_Die_Side_3
       rect:
         serializedVersion: 2
         x: 144
@@ -1184,8 +1248,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1197,7 +1262,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_52
+      name: CFCHR16_Goblin_Spearman_Hit_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1205,8 +1270,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1218,7 +1284,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_53
+      name: CFCHR16_Goblin_Spearman_Hit_Down_1
       rect:
         serializedVersion: 2
         x: 48
@@ -1226,8 +1292,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1239,7 +1306,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_54
+      name: CFCHR16_Goblin_Spearman_Hit_Side_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1247,8 +1314,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1260,7 +1328,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_55
+      name: CFCHR16_Goblin_Spearman_Hit_Side_1
       rect:
         serializedVersion: 2
         x: 48
@@ -1268,8 +1336,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1281,7 +1350,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_56
+      name: CFCHR16_Goblin_Spearman_Hit_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1289,8 +1358,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1302,7 +1372,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Goblin_Spearman_57
+      name: CFCHR16_Goblin_Spearman_Hit_Up_1
       rect:
         serializedVersion: 2
         x: 48
@@ -1310,8 +1380,9 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1322,7 +1393,30 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: CFCR16_Goblin_Spearman_0
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 567
+        width: 247
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e8b7507a8b440040a6d9014e83442eb
+      internalID: -962106924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -1332,76 +1426,70 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
-      Goblin_Spearman_0: 1650516199
-      Goblin_Spearman_1: 1887054740
-      Goblin_Spearman_10: 677397451
-      Goblin_Spearman_11: -1725233316
-      Goblin_Spearman_12: -1565190229
-      Goblin_Spearman_13: 1484604837
-      Goblin_Spearman_14: -913622015
-      Goblin_Spearman_15: -1932997635
-      Goblin_Spearman_16: 342348372
-      Goblin_Spearman_17: -2025259323
-      Goblin_Spearman_18: -112637399
-      Goblin_Spearman_19: -680490515
-      Goblin_Spearman_2: -277229262
-      Goblin_Spearman_20: 1628823604
-      Goblin_Spearman_21: -1694314852
-      Goblin_Spearman_22: 1102381136
-      Goblin_Spearman_23: -51582086
-      Goblin_Spearman_24: -257166297
-      Goblin_Spearman_25: 102947679
-      Goblin_Spearman_26: -1869709926
-      Goblin_Spearman_27: -1768095451
-      Goblin_Spearman_28: -1592557199
-      Goblin_Spearman_29: 45657160
-      Goblin_Spearman_3: 935792395
-      Goblin_Spearman_30: -211651577
-      Goblin_Spearman_31: -2079506263
-      Goblin_Spearman_32: -200212644
-      Goblin_Spearman_33: 226862956
-      Goblin_Spearman_34: 87614086
-      Goblin_Spearman_35: 1425637104
-      Goblin_Spearman_36: -854775969
-      Goblin_Spearman_37: -1450170561
-      Goblin_Spearman_38: 1064519117
-      Goblin_Spearman_39: 1024111921
-      Goblin_Spearman_4: 328225788
-      Goblin_Spearman_40: 903760597
-      Goblin_Spearman_41: -2023703950
-      Goblin_Spearman_42: -650942774
-      Goblin_Spearman_43: -625324762
-      Goblin_Spearman_44: 1306366300
-      Goblin_Spearman_45: 474484306
-      Goblin_Spearman_46: -221708423
-      Goblin_Spearman_47: 1949693068
-      Goblin_Spearman_48: 1639898653
-      Goblin_Spearman_49: -1026907909
-      Goblin_Spearman_5: 633968279
-      Goblin_Spearman_50: -524191017
-      Goblin_Spearman_51: 245443274
-      Goblin_Spearman_52: 362201938
-      Goblin_Spearman_53: 290153056
-      Goblin_Spearman_54: 1953891892
-      Goblin_Spearman_55: -2131911965
-      Goblin_Spearman_56: -925660488
-      Goblin_Spearman_57: 306755193
-      Goblin_Spearman_6: 329254865
-      Goblin_Spearman_7: -435265198
-      Goblin_Spearman_8: -436589132
-      Goblin_Spearman_9: 421560485
-  spritePackingTag: 
+      CFCHR16_Goblin_Spearman_Attack_Down_0: -211651577
+      CFCHR16_Goblin_Spearman_Attack_Down_1: -2079506263
+      CFCHR16_Goblin_Spearman_Attack_Down_2: -200212644
+      CFCHR16_Goblin_Spearman_Attack_Down_3: 226862956
+      CFCHR16_Goblin_Spearman_Attack_Down_4: 87614086
+      CFCHR16_Goblin_Spearman_Attack_Down_5: 1425637104
+      CFCHR16_Goblin_Spearman_Attack_Side_0: -854775969
+      CFCHR16_Goblin_Spearman_Attack_Side_1: -1450170561
+      CFCHR16_Goblin_Spearman_Attack_Side_2: 1064519117
+      CFCHR16_Goblin_Spearman_Attack_Side_3: 1024111921
+      CFCHR16_Goblin_Spearman_Attack_Side_4: 903760597
+      CFCHR16_Goblin_Spearman_Attack_Side_5: -2023703950
+      CFCHR16_Goblin_Spearman_Attack_Up_0: -650942774
+      CFCHR16_Goblin_Spearman_Attack_Up_1: -625324762
+      CFCHR16_Goblin_Spearman_Attack_Up_2: 1306366300
+      CFCHR16_Goblin_Spearman_Attack_Up_3: 474484306
+      CFCHR16_Goblin_Spearman_Attack_Up_4: -221708423
+      CFCHR16_Goblin_Spearman_Attack_Up_5: 1949693068
+      CFCHR16_Goblin_Spearman_Die_Side_0: 1639898653
+      CFCHR16_Goblin_Spearman_Die_Side_1: -1026907909
+      CFCHR16_Goblin_Spearman_Die_Side_2: -524191017
+      CFCHR16_Goblin_Spearman_Die_Side_3: 245443274
+      CFCHR16_Goblin_Spearman_Hit_Down_0: 362201938
+      CFCHR16_Goblin_Spearman_Hit_Down_1: 290153056
+      CFCHR16_Goblin_Spearman_Hit_Side_0: 1953891892
+      CFCHR16_Goblin_Spearman_Hit_Side_1: -2131911965
+      CFCHR16_Goblin_Spearman_Hit_Up_0: -925660488
+      CFCHR16_Goblin_Spearman_Hit_Up_1: 306755193
+      CFCHR16_Goblin_Spearman_Idle_Down_0: 1650516199
+      CFCHR16_Goblin_Spearman_Idle_Down_1: 1887054740
+      CFCHR16_Goblin_Spearman_Idle_Down_2: -277229262
+      CFCHR16_Goblin_Spearman_Idle_Down_3: 935792395
+      CFCHR16_Goblin_Spearman_Idle_Side_0: 328225788
+      CFCHR16_Goblin_Spearman_Idle_Side_1: 633968279
+      CFCHR16_Goblin_Spearman_Idle_Side_2: 329254865
+      CFCHR16_Goblin_Spearman_Idle_Side_3: -435265198
+      CFCHR16_Goblin_Spearman_Idle_Up_0: -436589132
+      CFCHR16_Goblin_Spearman_Idle_Up_1: 421560485
+      CFCHR16_Goblin_Spearman_Idle_Up_2: 677397451
+      CFCHR16_Goblin_Spearman_Idle_Up_3: -1725233316
+      CFCHR16_Goblin_Spearman_Walk_Down_0: -1565190229
+      CFCHR16_Goblin_Spearman_Walk_Down_1: 1484604837
+      CFCHR16_Goblin_Spearman_Walk_Down_2: -913622015
+      CFCHR16_Goblin_Spearman_Walk_Down_3: -1932997635
+      CFCHR16_Goblin_Spearman_Walk_Down_4: 342348372
+      CFCHR16_Goblin_Spearman_Walk_Down_5: -2025259323
+      CFCHR16_Goblin_Spearman_Walk_Side_0: -112637399
+      CFCHR16_Goblin_Spearman_Walk_Side_1: -680490515
+      CFCHR16_Goblin_Spearman_Walk_Side_2: 1628823604
+      CFCHR16_Goblin_Spearman_Walk_Side_3: -1694314852
+      CFCHR16_Goblin_Spearman_Walk_Side_4: 1102381136
+      CFCHR16_Goblin_Spearman_Walk_Side_5: -51582086
+      CFCHR16_Goblin_Spearman_Walk_Up_0: -257166297
+      CFCHR16_Goblin_Spearman_Walk_Up_1: 102947679
+      CFCHR16_Goblin_Spearman_Walk_Up_2: -1869709926
+      CFCHR16_Goblin_Spearman_Walk_Up_3: -1768095451
+      CFCHR16_Goblin_Spearman_Walk_Up_4: -1592557199
+      CFCHR16_Goblin_Spearman_Walk_Up_5: 45657160
+      CFCR16_Goblin_Spearman_0: -962106924
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 302080
-  packageName: Cute Fantasy Characters - 16x16 top down pixel art asset pack
-  packageVersion: 1.0
-  assetPath: Assets/Kenmi/Cute Fantasy Characters - 16x16 top down pixel art asset
-    pack/Sprites/Goblins/Goblin_Spearman.png
-  uploadId: 707264
