@@ -12,6 +12,7 @@ namespace FlameOfTheLost
         Cow             = 13011,
         Sheep           = 13012,
 
-        Seraphine       = 14041
+        Seraphine       = 14041,
+        SirAldric       = 14201,
     }
 }

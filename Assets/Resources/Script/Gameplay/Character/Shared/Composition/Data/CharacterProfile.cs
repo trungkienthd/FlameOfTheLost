@@ -30,8 +30,8 @@ namespace FlameOfTheLost
 
         //  4. Visual 
         [Header("Visual")]
-        [SerializeField] private CharacterVisualConfig _visualConfig;
-        public CharacterVisualConfig DefaultVisualConfig => _visualConfig;
+        [SerializeField] private CharacterVisualConfig _defaultVisualConfig;
+        public CharacterVisualConfig DefaultVisualConfig => _defaultVisualConfig;
 
         //  5. Combat 
         [Header("Combat")]

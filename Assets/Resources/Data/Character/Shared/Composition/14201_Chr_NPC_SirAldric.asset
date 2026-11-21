@@ -18,12 +18,12 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: 0}
   _prefab: {fileID: 0}
-  _characterType: 0
+  _characterType: 14201
   _faction: 0
   _traversalType: 0
   _movementConfig: {fileID: 0}
   _dodgeConfig: {fileID: 0}
-  _visualConfig: {fileID: 0}
+  _defaultVisualConfig: {fileID: 0}
   _combatConfig: {fileID: 0}
   _statusEffectGuardConfig: {fileID: 11400000, guid: af619af4a1df1ff4b87877e5452c7a03, type: 2}
   _progressionConfig: {fileID: 0}
