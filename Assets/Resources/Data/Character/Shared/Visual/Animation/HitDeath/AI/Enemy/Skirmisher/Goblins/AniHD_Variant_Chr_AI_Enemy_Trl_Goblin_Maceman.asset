@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterHitDeathAnimationProfile
   _characterType: 12201
   _hitAnimationClipSet:
-    _down: {fileID: 7400000, guid: 3709408cb0d62eb48a8ac6485a04c2b6, type: 2}
-    _side: {fileID: 7400000, guid: 7e9c1d2c544d32b41a098210ee9bb633, type: 2}
-    _up: {fileID: 7400000, guid: 5fcba492f646bbe41b4d6e8ee90c4909, type: 2}
+    _down: {fileID: 7400000, guid: d17e6511349cd9a4a9fcfd09726fc299, type: 2}
+    _side: {fileID: 7400000, guid: 3ab47bc0d203e764a95ab43dfac44844, type: 2}
+    _up: {fileID: 7400000, guid: 94c8a8145e61e6c4e84020cbdf9c0efb, type: 2}
   _deathAnimationClipSet:
-    _down: {fileID: 7400000, guid: 07d19ed0b2c9a2340aa01df8e7c01d4a, type: 2}
-    _side: {fileID: 7400000, guid: 09309ecbec95341458f1372f5c52977b, type: 2}
-    _up: {fileID: 7400000, guid: 23938a192ed11114a95e9e55e807bd3a, type: 2}
+    _down: {fileID: 7400000, guid: fb51fb4d26583bb46b754ba2b6605332, type: 2}
+    _side: {fileID: 7400000, guid: 69f2e195e58f3984295bec84e7d3c125, type: 2}
+    _up: {fileID: 7400000, guid: b54d80bccaeec4441b4f0b4173250acf, type: 2}
