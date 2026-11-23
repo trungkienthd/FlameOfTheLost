@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AClip_Variant_Chr_AI_Enemy_Skr_Goblin_Thief_WP_BloodiedDagger_Sword_SKM_QuickSlash_Up
+  m_Name: AClip_Variant_Chr_AI_Enemy_Skr_Goblin_Archer_WP_Bow_SKR_Shot_Side
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,17 +21,17 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1029899206, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
+      value: {fileID: -754248353, guid: 279636f0730f2884b80370680e85b61b, type: 3}
     - time: 0.1
-      value: {fileID: 402052133, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
+      value: {fileID: 184946331, guid: 279636f0730f2884b80370680e85b61b, type: 3}
     - time: 0.2
-      value: {fileID: -1623243891, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
+      value: {fileID: 630340740, guid: 279636f0730f2884b80370680e85b61b, type: 3}
     - time: 0.3
-      value: {fileID: -293109336, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
+      value: {fileID: 426867612, guid: 279636f0730f2884b80370680e85b61b, type: 3}
     - time: 0.4
-      value: {fileID: 1383112584, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
+      value: {fileID: 488553999, guid: 279636f0730f2884b80370680e85b61b, type: 3}
     - time: 0.5
-      value: {fileID: -1358415411, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
+      value: {fileID: 1567467231, guid: 279636f0730f2884b80370680e85b61b, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -54,12 +54,12 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1029899206, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
-    - {fileID: 402052133, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
-    - {fileID: -1623243891, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
-    - {fileID: -293109336, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
-    - {fileID: 1383112584, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
-    - {fileID: -1358415411, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
+    - {fileID: -754248353, guid: 279636f0730f2884b80370680e85b61b, type: 3}
+    - {fileID: 184946331, guid: 279636f0730f2884b80370680e85b61b, type: 3}
+    - {fileID: 630340740, guid: 279636f0730f2884b80370680e85b61b, type: 3}
+    - {fileID: 426867612, guid: 279636f0730f2884b80370680e85b61b, type: 3}
+    - {fileID: 488553999, guid: 279636f0730f2884b80370680e85b61b, type: 3}
+    - {fileID: 1567467231, guid: 279636f0730f2884b80370680e85b61b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

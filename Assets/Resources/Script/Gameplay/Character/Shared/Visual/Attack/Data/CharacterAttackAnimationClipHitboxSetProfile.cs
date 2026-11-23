@@ -172,7 +172,7 @@ namespace FlameOfTheLost
         }
         private void ValidatePolygonShapePair(PolygonColliderShapeEntry leftShape, PolygonColliderShapeEntry rightShape, string label)
         {
-            if (!leftShape.IsValid && !rightShape.IsValid)
+            if (!leftShape.IsValid && !rightShape.IsValid && this.Skills[0] is MeleeSkillProfile)
             {
                 Debug.LogWarning($"[{this.name}.{nameof(CharacterAttackAnimationClipHitboxSetProfile)}] Both Left and Right '{label}' are null. At least one must be assigned.", this);
             }
