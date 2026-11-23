@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65163b05174bdc4694637d6b2cc914f, type: 3}
+  m_Name: AClipLcm_Variant_Chr_AI_Enemy_Sks_Goblin_Maceman_Default
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterLocomotionAnimationClipSetProfile
+  _locomotionMode: 2
+  _carryItemType: 0
+  _lightSourceType: 0
+  _idleClipSet:
+    _down: {fileID: 7400000, guid: a6a3b39e0e3590b4b8aa3a01bdba12d3, type: 2}
+    _side: {fileID: 7400000, guid: c0aa5a1e5645dbb45b70916f39aab72b, type: 2}
+    _up: {fileID: 7400000, guid: 1ea9f26b3478e2a41a5f4d5efc45b3d7, type: 2}
+  _walkClipSet:
+    _down: {fileID: 7400000, guid: a0a2c250229064a47a25eee0afd811e6, type: 2}
+    _side: {fileID: 7400000, guid: 580cdcb83cfb77043962956ee07b2c84, type: 2}
+    _up: {fileID: 7400000, guid: 368e9192e7b2289478bcf643a96b926f, type: 2}

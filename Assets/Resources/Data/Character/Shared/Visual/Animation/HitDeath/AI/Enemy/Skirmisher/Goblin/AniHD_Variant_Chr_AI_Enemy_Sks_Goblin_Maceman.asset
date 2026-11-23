@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af94ae79a7b556d4ba94ea40f2f70883, type: 3}
+  m_Name: AniHD_Variant_Chr_AI_Enemy_Sks_Goblin_Maceman
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterHitDeathAnimationProfile
+  _characterType: 12201
+  _hitAnimationClipSet:
+    _down: {fileID: 7400000, guid: d17e6511349cd9a4a9fcfd09726fc299, type: 2}
+    _side: {fileID: 7400000, guid: 3ab47bc0d203e764a95ab43dfac44844, type: 2}
+    _up: {fileID: 7400000, guid: 94c8a8145e61e6c4e84020cbdf9c0efb, type: 2}
+  _deathAnimationClipSet:
+    _down: {fileID: 7400000, guid: fb51fb4d26583bb46b754ba2b6605332, type: 2}
+    _side: {fileID: 7400000, guid: 69f2e195e58f3984295bec84e7d3c125, type: 2}
+    _up: {fileID: 7400000, guid: b54d80bccaeec4441b4f0b4173250acf, type: 2}

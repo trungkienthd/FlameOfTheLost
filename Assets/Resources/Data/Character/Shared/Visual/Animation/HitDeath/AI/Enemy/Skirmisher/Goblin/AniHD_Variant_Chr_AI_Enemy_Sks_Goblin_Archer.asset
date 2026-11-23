@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af94ae79a7b556d4ba94ea40f2f70883, type: 3}
+  m_Name: AniHD_Variant_Chr_AI_Enemy_Sks_Goblin_Archer
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterHitDeathAnimationProfile
+  _characterType: 12201
+  _hitAnimationClipSet:
+    _down: {fileID: 7400000, guid: b5c36f5b371af3d46a997ae893e98f03, type: 2}
+    _side: {fileID: 7400000, guid: 974894caeefd6974aa7076014dc65df7, type: 2}
+    _up: {fileID: 7400000, guid: 2ee1a4c921ecf6a46b81137dcec68170, type: 2}
+  _deathAnimationClipSet:
+    _down: {fileID: 7400000, guid: 64b318536c134cc47820765d3b649c77, type: 2}
+    _side: {fileID: 7400000, guid: 14c55ca161e4901459ea0cd5ea9e58c1, type: 2}
+    _up: {fileID: 7400000, guid: c813c74f88ad2a943accc2a5cc06780d, type: 2}

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7fa543c5b06f846bef6fa00e0fb0df, type: 3}
+  m_Name: Egm_Variant_Chr_AI_Enemy_Sks_Goblin_Thief
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SkirmisherEnemyEngagementConfig
+  _alertDuration: 0.45
+  _targetLostGraceDuration: 1.25
+  _maximumPursuitDistance: 5
+  _chaseSpeedMultiplier: 1
