@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterAttackAnimationProfile
   _characterType: 12201
   _elements:
-  - {fileID: 11400000, guid: 75f4f28df05ffa543bade1c0126ba2e7, type: 2}
-  - {fileID: 11400000, guid: c04a5f2ff3ae18041936eb31419296b9, type: 2}
+  - {fileID: 11400000, guid: 7689002c6ef4b7d4cb0be81595622034, type: 2}
+  - {fileID: 11400000, guid: 556856274a7dfac4a8526bbd8a522beb, type: 2}

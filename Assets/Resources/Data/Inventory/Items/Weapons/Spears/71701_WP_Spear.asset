@@ -22,7 +22,7 @@ MonoBehaviour:
   _maxStackSize: 1
   _type: 3
   _normalSkill: {fileID: 11400000, guid: c21b4d1b67f4389488549ee39068aab1, type: 2}
-  _innateSpecialSkill: {fileID: 0}
+  _innateSpecialSkill: {fileID: 11400000, guid: ee4cbf935e1fa5e448b949b1cf8fd5b4, type: 2}
   _requirements:
   - _attributeType: 2
     _requiredValue: 4
