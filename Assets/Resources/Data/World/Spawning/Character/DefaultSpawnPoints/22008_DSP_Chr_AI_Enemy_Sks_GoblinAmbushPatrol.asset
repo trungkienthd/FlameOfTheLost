@@ -18,7 +18,7 @@ MonoBehaviour:
   _description: 
   _icon: {fileID: 0}
   _configureInitialTransformAtStart: 1
-  _initialPosition: {x: -9, y: -15, z: 0}
+  _initialPosition: {x: -2, y: -2, z: 0}
   _initialEulerAngles: {x: 0, y: 0, z: 0}
   _initialLocalScale: {x: 1, y: 1, z: 1}
   _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
@@ -37,17 +37,17 @@ MonoBehaviour:
     _randomSpawnOffsetRadius: 0.5
     _enemyVariant: {fileID: 11400000, guid: 8b791437f912a5d40aa4ddd4c3623edf, type: 2}
     _homeAreaEntry:
-      _bottomLeftPosition: {x: -12, y: -16}
-      _topRightPosition: {x: -7, y: -12}
+      _bottomLeftPosition: {x: -10, y: -3.5}
+      _topRightPosition: {x: 5, y: 0}
       _returnReachDistance: 0.35
     _roamingConfigOverride: {fileID: 0}
   - _spawnCount: 1
     _spawnOnStart: 1
     _spawnWhenPlayerRespawns: 1
-    _randomSpawnOffsetRadius: 0.5
+    _randomSpawnOffsetRadius: 0.3
     _enemyVariant: {fileID: 11400000, guid: 316ea5d29b58a3d4a8ea89c35168e6ea, type: 2}
     _homeAreaEntry:
-      _bottomLeftPosition: {x: -12, y: -16}
-      _topRightPosition: {x: -7, y: -12}
-      _returnReachDistance: 0.35
+      _bottomLeftPosition: {x: -9, y: -3.5}
+      _topRightPosition: {x: 3, y: 0}
+      _returnReachDistance: 0.4
     _roamingConfigOverride: {fileID: 0}

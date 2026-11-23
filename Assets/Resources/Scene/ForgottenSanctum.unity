@@ -3372,7 +3372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 235947091}
   m_Layer: 0
-  m_Name: EnemyGroup
+  m_Name: EnemyGroups
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3392,6 +3392,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 306127952}
+  - {fileID: 604768742}
   m_Father: {fileID: 1686051228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &236262472
@@ -4703,7 +4704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 306127952}
   m_Layer: 0
-  m_Name: TerritorialEnemies
+  m_Name: TerritorialEnemyGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9399,6 +9400,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600641948}
   m_CullTransparentMesh: 1
+--- !u!1 &604768741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 604768742}
+  m_Layer: 0
+  m_Name: SkirmisherEnemyGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &604768742
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604768741}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 235947091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &606700199
 GameObject:
   m_ObjectHideFlags: 0
@@ -410061,7 +410093,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1407380049}
   m_Father: {fileID: 1583447762}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1137934309
@@ -410077,10 +410110,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SkirmisherEnemyGroupSpawnerController
   _enableDebugLogs: 0
-  _characterAIGroupRoot: {fileID: 0}
+  _characterAIGroupRoot: {fileID: 604768742}
   _isSpawnedCharactersOnStart: 1
   _spawnedCharacters: []
-  _enemyDefaultSpawnPointControllers: []
+  _enemyDefaultSpawnPointControllers:
+  - {fileID: 1407380051}
 --- !u!1 &1147774264
 GameObject:
   m_ObjectHideFlags: 0
@@ -461719,6 +461753,108 @@ MonoBehaviour:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8906236202126823752, guid: 17c9acc0de9c5704da7112e91e3567d3, type: 3}
   m_PrefabInstance: {fileID: 1402292066}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1407380048
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1137934308}
+    m_Modifications:
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      propertyPath: m_Name
+      value: GO_DSP_Chr_AI_Enemy_Sks_GoblinAmbushPatrol
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1407380051}
+  m_SourcePrefab: {fileID: 100100000, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+--- !u!4 &1407380049 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7590202456247389573, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+  m_PrefabInstance: {fileID: 1407380048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1407380050 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8318813901453419445, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+  m_PrefabInstance: {fileID: 1407380048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1407380051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407380050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15f2d036a7d95b4d8b1e9c434361b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SkirmisherEnemyDefaultSpawnPointController
+  _enableDebugLogs: 0
+  _profile: {fileID: 11400000, guid: 70244975125a7ec4a891c481cfe25463, type: 2}
+  _visualTransform: {fileID: 1407380052}
+  _visualSpriteRenderer: {fileID: 1407380053}
+  _spawnAnchor: {fileID: 1407380054}
+--- !u!4 &1407380052 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4638977974553220024, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+  m_PrefabInstance: {fileID: 1407380048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1407380053 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5165766568723357902, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+  m_PrefabInstance: {fileID: 1407380048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1407380054 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7340919082135302459, guid: 21dce27158d542b429b4c83276f53d29, type: 3}
+  m_PrefabInstance: {fileID: 1407380048}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1410286190
 GameObject:
