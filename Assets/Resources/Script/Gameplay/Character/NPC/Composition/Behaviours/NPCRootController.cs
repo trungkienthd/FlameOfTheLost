@@ -25,10 +25,10 @@ namespace FlameOfTheLost
         [Header("References - Common")]
         [SerializeField] private NPCDialogueHandler _dialogueHandler;
         [SerializeField] private NPCQuestHandler _questHandler;
-        [SerializeField] private NPCRewardHandler _rewardHandler;
+        [SerializeField] private NPCQuestRewardHandler _questRewardHandler;
         public NPCDialogueHandler DialogueHandler => _dialogueHandler;
         public NPCQuestHandler QuestHandler => _questHandler;
-        public NPCRewardHandler RewardHandler => _rewardHandler;
+        public NPCQuestRewardHandler QuestRewardHandler => _questRewardHandler;
 
         //  5. Optional
         [Header("References - Optional")]

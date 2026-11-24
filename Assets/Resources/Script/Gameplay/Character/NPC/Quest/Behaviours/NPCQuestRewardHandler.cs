@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-    public class NPCRewardHandler : NPCBehaviourControllerBase
+    public class NPCQuestRewardHandler : NPCBehaviourControllerBase
     {
         // --- References ---
         [Header("References - Reward Grant Service")]
@@ -36,7 +36,7 @@ namespace FlameOfTheLost
 
                 if (this.RewardGrantService == null)
                 {
-                    Debug.LogError($"[{this.gameObject.name}.{nameof(NPCRewardHandler)}] Reward grant service is missing.", this);
+                    Debug.LogError($"[{this.gameObject.name}.{nameof(NPCQuestRewardHandler)}] Reward grant service is missing.", this);
 
                     return false;
                 }
@@ -70,7 +70,7 @@ namespace FlameOfTheLost
 
             if (_rewardGrantServiceBehaviour != null && this.RewardGrantService == null)
             {
-                Debug.LogError($"[{this.gameObject.name}.{nameof(NPCRewardHandler)}] Assigned reward service does not implement {nameof(INPCRewardGrantService)}.", this);
+                Debug.LogError($"[{this.gameObject.name}.{nameof(NPCQuestRewardHandler)}] Assigned reward service does not implement {nameof(INPCRewardGrantService)}.", this);
             }
         }
     }

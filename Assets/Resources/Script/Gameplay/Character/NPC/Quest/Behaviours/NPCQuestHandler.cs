@@ -25,7 +25,7 @@ namespace FlameOfTheLost
             if (this.QuestProgressController == null) return false;
             if (!this.QuestProgressController.CanAcceptQuest(quest)) return false;
 
-            NPCRewardHandler rewardHandler = this.NPCRootController?.RewardHandler;
+            NPCQuestRewardHandler rewardHandler = this.NPCRootController?.QuestRewardHandler;
             if (rewardHandler == null) return false;
 
             // Deliver the acceptance reward before marking the quest as accepted.
@@ -41,7 +41,7 @@ namespace FlameOfTheLost
             if (this.QuestProgressController == null) return false;
             if (!this.QuestProgressController.CanCompleteQuest(quest)) return false;
 
-            NPCRewardHandler rewardHandler = this.NPCRootController?.RewardHandler;
+            NPCQuestRewardHandler rewardHandler = this.NPCRootController?.QuestRewardHandler;
             if (rewardHandler == null) return false;
 
             // Only resolve progression after the reward delivery has succeeded.

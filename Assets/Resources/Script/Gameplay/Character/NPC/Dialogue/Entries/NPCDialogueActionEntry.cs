@@ -44,7 +44,7 @@ namespace FlameOfTheLost
                     return npc.QuestHandler != null && npc.QuestHandler.TryCompleteQuest(_quest, player);
 
                 case NPCDialogueActionType.GrantReward:
-                    return npc.RewardHandler != null && npc.RewardHandler.TryGrantRewards(player, _reward);
+                    return npc.QuestRewardHandler != null && npc.QuestRewardHandler.TryGrantRewards(player, _reward);
             }
 
             return false;

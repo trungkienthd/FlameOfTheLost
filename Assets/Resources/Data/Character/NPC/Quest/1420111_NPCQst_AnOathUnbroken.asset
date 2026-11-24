@@ -28,4 +28,4 @@ MonoBehaviour:
   - _conditionKey: 140411121
     _requiredState: 1
   _acceptanceReward: {fileID: 0}
-  _completionReward: {fileID: 0}
+  _completionReward: {fileID: 11400000, guid: a807f1ca67daae54aa7bbe07294aee28, type: 2}

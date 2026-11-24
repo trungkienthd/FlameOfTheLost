@@ -1,6 +1,6 @@
 namespace FlameOfTheLost
 {
-    public enum NPCRewardType
+    public enum NPCQuestRewardType
     {
         LostEmbers = 0,
         Item = 1

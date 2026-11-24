@@ -2,8 +2,6 @@ using UnityEngine;
 
 namespace FlameOfTheLost
 {
-
-
     [CreateAssetMenu(fileName = "AClipLcm_Character_State", menuName = "Data/FlameOfTheLost/Character/Shared/Visual/Animation/Locomotion/AnimationClipSetProfile")]
     public class CharacterLocomotionAnimationClipSetProfile : ScriptableObject
     {
