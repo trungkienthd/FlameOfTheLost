@@ -45,8 +45,14 @@ namespace FlameOfTheLost
         //      1.1. World Progression
         QuestAnOathUnbrokenAldricFreed = 142011120,
         QuestAnOathUnbrokenWeaponRecovered = 142011121,
+        QuestAnOathUnbrokenPuzzleDiscovered = 142011122,
+        QuestAnOathUnbrokenPuzzleSolved = 142011123,
 
         //      1.2. Reward Claims
-        QuestAnOathUnbrokenCompletionRewardClaimed = 142011130
+        QuestAnOathUnbrokenCompletionRewardClaimed = 142011130,
+
+        //      1.3. NPC Status
+        SirAldricBetrayed = 14201901,
+
     }
 }

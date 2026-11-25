@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace FlameOfTheLost
@@ -7,11 +8,39 @@ namespace FlameOfTheLost
         // --- Data / Configs ---
         public NPCProfile NPCProfile => this.TypedProfile;
 
+        // --- Runtime ---
+        [Header("Runtime - Faction")]
+        [SerializeField] private CharacterFaction _runtimeFaction = CharacterFaction.None;
+        public override CharacterFaction Faction => _runtimeFaction;
+
+        // --- Events ---
+        public event Action<CharacterFaction, CharacterFaction> OnFactionChanged;
+
+        // --- Public APIs ---
+        public void SetRuntimeFaction(CharacterFaction faction)
+        {
+            if (this.Faction == faction) return;
+
+            CharacterFaction previousFaction = _runtimeFaction;
+
+            _runtimeFaction = faction;
+
+            this.OnFactionChanged?.Invoke(previousFaction, faction);
+        }
+        private void ResetRuntimeFaction()
+        {
+            _runtimeFaction = this.NPCProfile != null
+                ? this.NPCProfile.Faction
+                : CharacterFaction.None;
+        }
+
         // --- References ---
         //  1. NPC Brain
         [Header("References - Brain")]
         [SerializeField] private NPCBrainController _npcBrainController;
+        [SerializeField] private NPCAttackReactionHandler _attackReactionHandler;
         public NPCBrainController NPCBrainController => _npcBrainController;
+        public NPCAttackReactionHandler AttackReactionHandler => _attackReactionHandler;
 
         //  2. NPC Interaction
         [Header("References - Interaction")]
@@ -34,10 +63,8 @@ namespace FlameOfTheLost
         [Header("References - Optional")]
         [SerializeField] private NPCShopHandler _shopHandler;
         [SerializeField] private NPCSkillTrainingHandler _skillTrainingHandler;
-        [SerializeField] private NPCAttackReactionHandler _attackReactionHandler;
         public NPCShopHandler ShopHandler => _shopHandler;
         public NPCSkillTrainingHandler SkillTrainingHandler => _skillTrainingHandler;
-        public NPCAttackReactionHandler AttackReactionHandler => _attackReactionHandler;
 
         // --- FOTLMonoBehaviour Overrides ---
         protected override void CacheInternalReferences()
@@ -68,6 +95,12 @@ namespace FlameOfTheLost
             {
                 Debug.LogError($"[{this.gameObject.name}.{nameof(NPCRootController)}] NPC faction must be {CharacterFaction.None}.", this);
             }
+        }
+        protected override void InitializeInternalState()
+        {
+            base.InitializeInternalState();
+
+            this.ResetRuntimeFaction();
         }
     }
 }

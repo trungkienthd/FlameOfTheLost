@@ -5,10 +5,31 @@ namespace FlameOfTheLost
 {
     public class NPCInputHandler : CharacterInputHandler
     {
+        [Header("Runtime - AI Input")]
+        [SerializeField] private bool _allowAIInput;
+        public bool AllowAIInput => _allowAIInput;
+
         // --- Public APIs ---
         //  1. Movement Input
+        public void SetAIInputEnabled(bool enabled)
+        {
+            _allowAIInput = enabled;
+
+            if (!enabled)
+            {
+                base.ClearMoveInput();
+            }
+        }
+
         public override void SetMoveInput(Vector2 moveInput)
         {
+            if (!this.AllowAIInput)
+            {
+                base.SetMoveInput(Vector2.zero);
+                return;
+            }
+
+            base.SetMoveInput(moveInput);
         }
 
         //  2. Dodging Input

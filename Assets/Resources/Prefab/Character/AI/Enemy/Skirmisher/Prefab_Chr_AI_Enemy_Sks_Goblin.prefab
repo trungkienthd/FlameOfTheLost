@@ -360,7 +360,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1623243891, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
+  m_Sprite: {fileID: -1143616359, guid: 9d942db3a02f87d4b9082a49fede0e8e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1703,10 +1703,11 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _characterRootController: {fileID: 5013856377803996316}
   _config: {fileID: 0}
+  _isDeathDisabled: 0
   _cannotMove: 0
   _ignoreMovementLock: 0
   _movementSpeedScale: 1
-  _isDeathDisabled: 0
+  _aiMovementSpeedMultiplier: 1
 --- !u!114 &4017276766413093160
 MonoBehaviour:
   m_ObjectHideFlags: 0

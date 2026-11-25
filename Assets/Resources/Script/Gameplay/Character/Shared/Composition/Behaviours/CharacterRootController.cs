@@ -13,7 +13,7 @@ namespace FlameOfTheLost
         public Sprite Icon          => this.Profile != null ? this.Profile.Icon         : null;
 
         public CharacterType CharacterType          => this.Profile != null ? this.Profile.CharacterType    : CharacterType.Default;
-        public CharacterFaction Faction             => this.Profile != null ? this.Profile.Faction          : default;
+        public virtual CharacterFaction Faction     => this.Profile != null ? this.Profile.Faction          : default;
         public CharacterTraversalType TraversalType => this.Profile != null ? this.Profile.TraversalType    : default;
 
         public GameObject CharacterRoot => this.gameObject;
