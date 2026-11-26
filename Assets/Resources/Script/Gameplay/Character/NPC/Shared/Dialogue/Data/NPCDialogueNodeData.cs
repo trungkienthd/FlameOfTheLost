@@ -21,9 +21,9 @@ namespace FlameOfTheLost
         //  2. Content
         [Header("Content")]
         [SerializeField] private string _speakerName;
-        [SerializeField, TextArea(3, 10)] private string _dialogueText;
+        [SerializeField, TextArea(3, 10)] private List<string> _dialogueSegments = new();
         public string SpeakerName => _speakerName;
-        public string DialogueText => _dialogueText;
+        public IReadOnlyList<string> DialogueSegments => _dialogueSegments;
 
         //  3. Choices
         [Header("Choices")]

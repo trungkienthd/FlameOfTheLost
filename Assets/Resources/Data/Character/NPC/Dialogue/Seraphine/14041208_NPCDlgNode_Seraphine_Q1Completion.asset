@@ -17,6 +17,16 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - 'That warmth... I recognise it.
+
+    You truly defeated Gor''Vakh. And the relic
+    you carry... it is an Emberbound Sigil.'
+  - I thought the last of these had been lost when the sanctuaries fell.
+  - You have done more than defeat a corrupted chieftain, traveller. You have returned
+    a fragment of our forgotten legacy to the light.
+  - Please, accept these Lost Embers. You have earned my trust... and there is something
+    I must tell you.
   _dialogueText: 'That warmth... I recognise it.
 
     You truly defeated Gor''Vakh.

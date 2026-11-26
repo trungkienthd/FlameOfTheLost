@@ -17,6 +17,9 @@ MonoBehaviour:
   _displayName: Imprisoned Return
   _description: Aldric asks the Player to find a way to release him from captivity.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - The chains still hold, and my strength fades with every passing day.
+  - If you find a way to open these cells, perhaps my oath need not end here.
   _dialogueText: 'The chains still hold, and my strength fades with every passing
     day.
 

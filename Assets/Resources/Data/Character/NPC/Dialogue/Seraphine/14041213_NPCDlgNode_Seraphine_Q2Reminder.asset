@@ -17,6 +17,14 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - 'The Eastern Altar awaits you.
+
+    Restore its sacred lanterns, and Aurelian
+    will emerge from the darkness.'
+  - Remember, you need not face him alone. My promise still stands.
+  - I fear what we may find when we confront him... but I fear even more what will
+    happen if we do nothing.
   _dialogueText: 'The Eastern Altar awaits you.
 
     Restore its sacred lanterns,

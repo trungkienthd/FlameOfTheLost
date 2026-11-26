@@ -19,6 +19,12 @@ MonoBehaviour:
     and welcomes the Player to spend more time with him. Future entry point for skill
     training.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - I believe I shall remain here for a while.
+  - These halls have known suffering for far too long. Perhaps, in time, they may
+    become a place of peace once more.
+  - And you, my friend... you need not hurry away.
+  - Stay for a while, if you wish. There is still much we might learn from one another.
   _dialogueText: 'I believe I shall remain here for a while.
 
     These halls have

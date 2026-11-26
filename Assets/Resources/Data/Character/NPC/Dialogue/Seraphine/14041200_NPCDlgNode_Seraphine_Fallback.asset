@@ -17,6 +17,11 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - 'Even the faintest flame can guide those who have lost their way.
+
+    May the
+    light watch over your journey.'
   _dialogueText: 'Even the faintest flame can guide those who have lost their way.
 
     May

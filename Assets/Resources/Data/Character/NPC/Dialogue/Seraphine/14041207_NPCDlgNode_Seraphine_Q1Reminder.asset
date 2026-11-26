@@ -17,6 +17,11 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - You have returned. Has the Forgotten Sanctum yielded its secrets?
+  - Remember, the ancient lanterns must be ignited to reveal Gor'Vakh. Keep your
+    Torch close and watch the darkness around you.
+  - The relic he guards is of great importance. I must see it with my own eyes.
   _dialogueText: 'You have returned. Has the Forgotten Sanctum yielded its secrets?
 
     Remember,

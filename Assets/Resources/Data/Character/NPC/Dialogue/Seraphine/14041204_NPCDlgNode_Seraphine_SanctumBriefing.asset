@@ -17,6 +17,15 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - South of these crossroads, within the Whispering Grove, lies an entrance to the
+    Forgotten Sanctum.
+  - The ancients built sacred lanterns within such places. Their flames were more
+    than sources of light; together, they could awaken the power sealed within a
+    sanctuary.
+  - To summon its guardian, you must carry a Light Source and ignite enough of the
+    ancient lanterns. Once the required flames are burning, the seal will break.
+  - But beware. What answers your call may no longer be the guardian it once was.
   _dialogueText: 'South of these crossroads, within the Whispering Grove, lies an
     entrance to the Forgotten Sanctum.
 

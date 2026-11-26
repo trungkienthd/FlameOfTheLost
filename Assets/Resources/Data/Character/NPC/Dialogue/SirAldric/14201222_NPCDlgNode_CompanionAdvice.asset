@@ -18,6 +18,12 @@ MonoBehaviour:
   _description: Aldric provides practical advice about navigating the Sanctum, avoiding
     traps and cooperating during exploration.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - Keep your eyes upon the floor as well as the walls. Some of the Sanctum's traps
+    are older than the Orcs who now occupy it.
+  - If you find a mechanism you cannot reach or operate alone, call upon me. A second
+    pair of hands may yet prove useful.
+  - And when the fighting begins, do not hesitate. I shall stand beside you.
   _dialogueText: 'Keep your eyes upon the floor as well as the walls. Some of the
     Sanctum''s traps are older than the Orcs who now occupy it.
 

@@ -18,6 +18,9 @@ MonoBehaviour:
   _description: Aldric accepts the Player's decision to postpone recruitment and
     leaves his offer open.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - I understand. A journey into the unknown is no small undertaking.
+  - I shall remain nearby. If you change your mind, my offer still stands.
   _dialogueText: 'I understand. A journey into the unknown is no small undertaking.
 
     I

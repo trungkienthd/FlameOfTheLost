@@ -17,6 +17,17 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - That Sigil bears the mark of the First Flame's guardians.
+  - My order once entrusted such relics to the sanctuaries. They were symbols of
+    our duty, reminders that the Flame belonged to the world, not to any one guardian.
+  - 'I once believed that duty would endure forever.
+
+    But one among us tried
+    to preserve the Flame by his own strength... and paid a terrible price.'
+  - 'His name was Aurelian.
+
+    He was my brother.'
   _dialogueText: 'That Sigil bears the mark of the First Flame''s guardians.
 
     My

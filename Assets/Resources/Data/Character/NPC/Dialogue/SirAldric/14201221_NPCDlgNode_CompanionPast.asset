@@ -18,6 +18,12 @@ MonoBehaviour:
   _description: Aldric reflects on his fallen companions and begins to overcome his
     guilt.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - There were six of us when we entered this Sanctum. Each had sworn the same oath.
+  - I remember their faces. Their voices. The promises we made before crossing these
+    gates.
+  - For a long while, I believed I had dishonored them by surviving.
+  - Perhaps now I can honor them by finishing what we began.
   _dialogueText: 'There were six of us when we entered this Sanctum. Each had sworn
     the same oath.
 

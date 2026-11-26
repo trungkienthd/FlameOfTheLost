@@ -17,6 +17,19 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - The darkness surrounding the Eastern Altar... it has finally begun to fade.
+  - 'So it is done. Aurelian''s suffering has come to an end.
+
+    For so long, I
+    feared that facing him would mean abandoning the last hope of saving my brother.'
+  - Perhaps there was never a way to restore what he had lost.
+  - But you gave me the courage to face the truth, and for that I shall always be
+    grateful.
+  - 'There is something I wish to entrust to you. A weapon I have carried since the
+    days of our order.
+
+    May it serve you better than it served me.'
   _dialogueText: 'The darkness surrounding the Eastern Altar... it has finally begun
     to fade.
 

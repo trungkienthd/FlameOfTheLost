@@ -17,6 +17,10 @@ MonoBehaviour:
   _displayName: Identity
   _description: Aldric introduces himself and explains the oath he has sworn.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - Sir Aldric. Once a knight sworn to guard the ancient sanctuaries. Now, as you
+    can plainly see, a prisoner.
+  - My title means little within these walls. My oath, however, remains.
   _dialogueText: 'Sir Aldric. Once a knight sworn to guard the ancient sanctuaries.
     Now, as you can plainly see, a prisoner.
 

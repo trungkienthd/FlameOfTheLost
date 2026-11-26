@@ -17,6 +17,17 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - Then it is yours.
+  - 'The path ahead will not be easy. The corruption that consumed Aurelian is only
+    a fragment of a greater darkness.
+
+    But where I once saw only loss, I now
+    see the possibility of something new.'
+  - 'Go, traveller. Carry the light into the places where it has long been forgotten.
+
+    And
+    should our paths cross again, I hope it will be beneath a brighter sky.'
   _dialogueText: 'Then it is yours.
 
     The path ahead will not be easy. The corruption

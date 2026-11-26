@@ -17,6 +17,13 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - Long ago, the First Flame gave warmth and protection to these lands. Wherever
+    its light reached, life flourished.
+  - But the Flame began to fade. Darkness crept into the forests, the sanctuaries
+    fell silent, and creatures once peaceful became twisted by corruption.
+  - What remains of that ancient power is scattered throughout the world... fragments
+    we call Lost Embers.
   _dialogueText: 'Long ago, the First Flame gave warmth and protection to these lands.
     Wherever its light reached, life flourished.
 

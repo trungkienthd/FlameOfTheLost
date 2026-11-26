@@ -18,8 +18,11 @@ MonoBehaviour:
   _description: Another wanderer? You would do well to turn back, stranger. These
     halls have swallowed far greater warriors than you or I.
   _speakerName: Sir Aldric
-  _dialogueText: There is much I have yet to understand about this place. But whatever
-    awaits us, we must not lose our resolve.
+  _dialogueSegments:
+  - Another wanderer? You would do well to turn back, stranger. These halls have
+    swallowed far greater warriors than you or I.
+  _dialogueText: Another wanderer? You would do well to turn back, stranger. These
+    halls have swallowed far greater warriors than you or I.
   _choices:
   - _choiceText: Who are you?
     _requirements: []

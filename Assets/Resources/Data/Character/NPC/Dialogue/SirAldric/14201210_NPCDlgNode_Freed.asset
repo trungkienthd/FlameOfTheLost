@@ -18,6 +18,9 @@ MonoBehaviour:
   _description: Aldric expresses gratitude after being released and prepares to offer
     his quest.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - By the light... I had nearly forgotten what it felt like to stand without chains.
+  - You have my gratitude, stranger. Yet there is something I must ask of you.
   _dialogueText: 'By the light... I had nearly forgotten what it felt like to stand
     without chains.
 

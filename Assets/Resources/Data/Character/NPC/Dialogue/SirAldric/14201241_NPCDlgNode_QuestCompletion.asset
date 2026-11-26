@@ -18,6 +18,13 @@ MonoBehaviour:
   _description: Aldric thanks the Player and acknowledges the reward for completing
     An Oath Unbroken.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - 'Thank you. Truly.
+
+    Take these Lost Embers. They are little enough compared
+    to what you have done, but I would be honored if they served you on the road
+    ahead.'
+  - For the first time in many years, I am no longer bound by vengeance or regret.
   _dialogueText: 'Thank you. Truly.
 
     Take these Lost Embers. They are little

@@ -18,6 +18,12 @@ MonoBehaviour:
   _description: Aldric recounts the failed expedition against Gor'Vakh and the loss
     of his fellow knights.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - I came here with a company of knights. We sought to put an end to the Orc chief
+    who had seized this Sanctum.
+  - We fought our way to his chamber, believing our steel and courage would be enough.
+    We were wrong.
+  - My companions fell. I alone survived, condemned to remember the cost of my failure.
   _dialogueText: 'I came here with a company of knights. We sought to put an end
     to the Orc chief who had seized this Sanctum.
 

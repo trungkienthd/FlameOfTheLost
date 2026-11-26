@@ -17,6 +17,9 @@ MonoBehaviour:
   _displayName: Fallback
   _description: Default dialogue used when no more specific dialogue state is available.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - There is much I have yet to understand about this place. But whatever awaits
+    us, we must not lose our resolve.
   _dialogueText: There is much I have yet to understand about this place. But whatever
     awaits us, we must not lose our resolve.
   _choices:

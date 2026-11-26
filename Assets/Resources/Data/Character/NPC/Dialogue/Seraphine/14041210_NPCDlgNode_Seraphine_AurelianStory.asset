@@ -17,6 +17,21 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - Aurelian was the greatest among our guardians. Where others saw danger, he saw
+    only those who needed protection.
+  - 'When the First Flame began to fade, he refused to accept its loss.
+
+    He believed
+    that if he could bind its remaining power to himself, he might become an eternal
+    guardian... one who could hold back the darkness alone.'
+  - I begged him to abandon the ritual. He would not listen.
+  - 'The corruption he sought to contain consumed him instead.
+
+    His wings darkened.
+    His radiance vanished. And the brother I knew became something I could no longer
+    reach.'
+  - I fled the Eastern Altar that day. I have carried that shame ever since.
   _dialogueText: 'Aurelian was the greatest among our guardians. Where others saw
     danger, he saw only those who needed protection.
 

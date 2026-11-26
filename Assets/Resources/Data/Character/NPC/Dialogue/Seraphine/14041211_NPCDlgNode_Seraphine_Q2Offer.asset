@@ -17,6 +17,23 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - 'Aurelian remains bound to the Eastern Altar, beyond these crossroads.
+
+    The
+    sacred lanterns there still hold a fragment of the First Flame''s power. As in
+    the Forgotten Sanctum, igniting enough of them will break the seal and summon
+    the guardian within.'
+  - 'But Aurelian is no ordinary foe.
+
+    I have watched over these crossroads for
+    so long, waiting for someone capable of facing him. You have already proven your
+    strength in the Forgotten Sanctum.'
+  - If you choose to confront my brother, I will not ask you to face him alone.
+  - 'Call upon me when you stand before him, and I shall answer.
+
+    Will you help
+    me bring an end to his suffering?'
   _dialogueText: 'Aurelian remains bound to the Eastern Altar, beyond these crossroads.
 
     The

@@ -17,6 +17,11 @@ MonoBehaviour:
   _displayName: Post Quest
   _description: Main repeatable dialogue after An Oath Unbroken has been completed.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - Ah, my friend. It is good to see you again.
+  - Strange, is it not? I once thought these halls would be my tomb. Now I find a
+    measure of peace within them.
+  - There is no need to rush. Stay a while, if you like.
   _dialogueText: 'Ah, my friend. It is good to see you again.
 
     Strange, is it

@@ -18,6 +18,12 @@ MonoBehaviour:
   _description: Aldric expresses his lasting gratitude and friendship toward the
     Player.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - Better than I have been in many years, thanks to you.
+  - 'Wherever your journey leads, remember that you have a friend here.
+
+    May
+    your flame never fade.'
   _dialogueText: 'Better than I have been in many years, thanks to you.
 
     Wherever

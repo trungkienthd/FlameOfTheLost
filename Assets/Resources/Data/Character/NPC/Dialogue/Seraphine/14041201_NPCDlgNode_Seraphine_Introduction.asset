@@ -15,15 +15,13 @@ MonoBehaviour:
   _id: 14041201
   _key: DIALOGUE_SERAPHINE_NODE_INTRODUCTION
   _displayName: 
-  _description: 'A traveller... It has been some time since anyone ventured this
-    far.
-
-    These crossroads were once filled with life. Now, only the lost and
-    the desperate seem to find their way here.
-
-    Tell me, stranger... what brings
-    you to these lands?'
+  _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - A traveller... It has been some time since anyone ventured this far.
+  - These crossroads were once filled with life. Now, only the lost and the desperate
+    seem to find their way here.
+  - Tell me, stranger... what brings you to these lands?
   _dialogueText: 
   _choices:
   - _choiceText: What happened to this world?

@@ -17,6 +17,17 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - An Orc chieftain named Gor'Vakh has claimed the Forgotten Sanctum. The corruption
+    surrounding that place has changed him, and something precious remains trapped
+    within.
+  - I cannot abandon my post, but perhaps you can succeed where others have failed.
+  - Take this Torch. Its flame will allow you to ignite the ancient lanterns and
+    break the seal that conceals him.
+  - 'Defeat Gor''Vakh, recover the relic he guards, and bring it to me.
+
+    Will
+    you accept this task?'
   _dialogueText: 'An Orc chieftain named Gor''Vakh has claimed the Forgotten Sanctum.
     The corruption surrounding that place has changed him, and something precious
     remains trapped within.

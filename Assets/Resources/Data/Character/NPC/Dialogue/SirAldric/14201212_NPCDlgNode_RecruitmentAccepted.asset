@@ -18,6 +18,10 @@ MonoBehaviour:
   _description: Aldric formally joins the Player's expedition after his quest is
     accepted.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - Then you have my sword, and my gratitude.
+  - I shall watch your back as you watch mine. Together, we will reach Gor'Vakh.
+  - Come. We have lingered in this prison long enough.
   _dialogueText: 'Then you have my sword, and my gratitude.
 
     I shall watch your

@@ -18,6 +18,9 @@ MonoBehaviour:
   _description: Main conversation with Aldric while he accompanies the Player through
     Forgotten Sanctum.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - I am with you, friend. These halls are treacherous, but we need not face them
+    alone.
   _dialogueText: I am with you, friend. These halls are treacherous, but we need
     not face them alone.
   _choices:

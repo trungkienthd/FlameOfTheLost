@@ -17,6 +17,13 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - I am Seraphine, one of the few remaining guardians of the First Flame.
+  - Lost Embers are fragments of its lingering power. Though faint, they may strengthen
+    those capable of bearing them.
+  - My order once protected that power, keeping the sacred fires alive against the
+    gathering darkness.
+  - We failed. And now, the world bears the scars of our failure.
   _dialogueText: 'I am Seraphine, one of the few remaining guardians of the First
     Flame.
 

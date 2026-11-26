@@ -18,6 +18,12 @@ MonoBehaviour:
   _description: Aldric describes Gor'Vakh, the Ashbound Chief, and warns the Player
     about his power.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - Gor'Vakh. The Ashbound Chief.
+  - He is no ordinary Orc. Something ancient has taken hold of him, granting him
+    strength beyond that of any warrior I have faced.
+  - I struck him with all the strength I possessed. He scarcely faltered.
+  - If you intend to face him, do not make the same mistake I did.
   _dialogueText: 'Gor''Vakh. The Ashbound Chief.
 
     He is no ordinary Orc. Something

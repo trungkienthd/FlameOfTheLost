@@ -17,6 +17,14 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - Welcome back, traveller.
+  - The winds have grown gentler since the Eastern Altar was freed. For the first
+    time in many years, these crossroads feel almost peaceful.
+  - I cannot say what lies beyond our lands, nor whether the First Flame can ever
+    be restored.
+  - But I believe that wherever your journey leads, you will carry its light with
+    you.
   _dialogueText: 'Welcome back, traveller.
 
     The winds have grown gentler since

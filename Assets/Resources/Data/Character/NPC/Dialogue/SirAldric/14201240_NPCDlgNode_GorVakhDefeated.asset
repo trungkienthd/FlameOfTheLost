@@ -15,19 +15,16 @@ MonoBehaviour:
   _id: 14201240
   _key: DIALOGUE_NODE_SIR_ALDRIC_GORVAKH_DEFEATED
   _displayName: Gor'Vakh Defeated
-  _description: 'It is over...
-
-    Gor''Vakh has fallen. After all these years,
-    the shadow that haunted this Sanctum is finally gone.
-
-    I thought I would
-    feel nothing but triumph when this day came. Instead, I find myself remembering
-    those who could not stand here with us.
-
-    You have done more than save my
-    life, friend. You have helped me fulfill an oath I feared would remain broken
-    forever.'
+  _description: Aldric reflects on the defeat of Gor'Vakh and the fulfillment of
+    his unfinished oath.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - It is over... Gor'Vakh has fallen. After all these years, the shadow that haunted
+    this Sanctum is finally gone.
+  - I thought I would feel nothing but triumph when this day came. Instead, I find
+    myself remembering those who could not stand here with us.
+  - You have done more than save my life, friend. You have helped me fulfill an oath
+    I feared would remain broken forever.
   _dialogueText: 
   _choices:
   - _choiceText: We fulfilled it together.

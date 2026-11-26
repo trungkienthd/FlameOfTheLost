@@ -17,6 +17,14 @@ MonoBehaviour:
   _displayName: 
   _description: 
   _speakerName: Seraphine
+  _dialogueSegments:
+  - 'Then the Torch is yours.
+
+    Carry it to the Forgotten Sanctum and seek the
+    ancient lanterns. Their flames will reveal the path to Gor''Vakh.'
+  - Remember, defeating him is not your only purpose. Search for the relic he guards.
+  - Return to me when you have found it. And traveller... do not let your own flame
+    fade.
   _dialogueText: 'Then the Torch is yours.
 
     Carry it to the Forgotten Sanctum

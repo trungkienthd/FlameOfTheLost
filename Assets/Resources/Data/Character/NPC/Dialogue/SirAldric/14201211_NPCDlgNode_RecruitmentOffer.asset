@@ -18,6 +18,15 @@ MonoBehaviour:
   _description: Aldric offers to accompany the Player through Forgotten Sanctum in
     pursuit of Gor'Vakh.
   _speakerName: Sir Aldric
+  _dialogueSegments:
+  - I came to this Sanctum to end Gor'Vakh's reign. I failed, and good men paid the
+    price.
+  - But my oath remains unbroken. If you seek the Ashbound Chief, allow me to accompany
+    you.
+  - My sword is yours, not merely for the final battle, but for every danger between
+    here and his throne. I know something of these halls, their traps, and their
+    secrets.
+  - Will you grant me this chance to make things right?
   _dialogueText: 'I came to this Sanctum to end Gor''Vakh''s reign. I failed, and
     good men paid the price.
 
