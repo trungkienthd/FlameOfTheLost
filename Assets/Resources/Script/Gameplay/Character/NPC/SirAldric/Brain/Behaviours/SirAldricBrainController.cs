@@ -64,6 +64,11 @@ namespace FlameOfTheLost
             }
         }
 
+        public bool IsAvailableForCombat =>
+            !this.IsDeathDisabled &&
+            this.IsReleased &&
+            (this.IsFollowing || this.CurrentAIState == SirAldricAIState.Alert || this.CurrentAIState == SirAldricAIState.Chasing || this.CurrentAIState == SirAldricAIState.Positioning || this.CurrentAIState == SirAldricAIState.NormalAttacking || this.CurrentAIState == SirAldricAIState.SpecialAttacking || this.CurrentAIState == SirAldricAIState.Recovering || this.CurrentAIState == SirAldricAIState.Retreating);
+
         // --- Events ---
         public event Action<SirAldricStoryPhase> OnStoryPhaseChanged;
         public event Action<SirAldricAIState> OnAIStateChanged;
@@ -90,18 +95,31 @@ namespace FlameOfTheLost
 
             _player = UnityEngine.Object.FindFirstObjectByType<PlayerRootController>();
 
+            if (this.GameConditions == null)
+            {
+                _conditions = GameConditionController.Instance;
+            }
+
             this.StopMovement();
 
+            this.NPCInput?.SetAIInputEnabled(false);
+
             this.ResolveStoryFromConditions(true);
+
+            this.SynchronizeAIInput();
         }
 
         //      0.2. ICharacterDeathDisableable implementation
         public int DeathDisablePriority => 25;
         public void DisableAfterCharacterDeath(CharacterDeathContext context)
         {
+            if (this.IsDeathDisabled) return;
+
             _isDeathDisabled = true;
 
             this.StopMovement();
+
+            this.NPCInput?.SetAIInputEnabled(false);
 
             _currentAIState = SirAldricAIState.Dead;
 
@@ -115,10 +133,11 @@ namespace FlameOfTheLost
 
             if (this.CurrentAIState == nextState) return;
 
+            this.StopMovement();
+
             _currentAIState = nextState;
 
-            // Stop stale movement requests during transitions.
-            this.NPCInput?.ClearMoveInput();
+            this.SynchronizeAIInput();
 
             this.OnAIStateChanged?.Invoke(nextState);
         }
@@ -140,6 +159,30 @@ namespace FlameOfTheLost
             this.SetAIState(SirAldricAIState.Following);
 
             return true;
+        }
+
+        //  2. World Refresh
+        public void SynchronizeAfterWorldRestore()
+        {
+            if (this.IsDeathDisabled) return;
+
+            _conditions = GameConditionController.Instance;
+
+            _player = UnityEngine.Object .FindFirstObjectByType<PlayerRootController>();
+
+            if (this.GameConditions == null)
+            {
+                Debug.LogError($"[{this.CharacterName}.{nameof(SirAldricBrainController)}] Cannot synchronize after World Refresh: GameConditionController is missing.", this);
+                return;
+            }
+
+            this.StopMovement();
+
+            this.NPCInput?.SetAIInputEnabled(false);
+
+            this.ResolveStoryFromConditions(resetActivity: true);
+
+            this.SynchronizeAIInput();
         }
 
         // --- Helpers ---
@@ -182,9 +225,11 @@ namespace FlameOfTheLost
             else
                 nextFaction = CharacterFaction.None;
 
+            bool factionChanged = this.NPCRootController.Faction != nextFaction;
+
             this.NPCRootController.SetRuntimeFaction(nextFaction);
 
-            if (!phaseChanged && !resetActivity) return;
+            if (!phaseChanged && !factionChanged && !resetActivity) return;
 
             this.StopMovement();
 
@@ -226,6 +271,29 @@ namespace FlameOfTheLost
             }
         }
 
+        private bool ShouldEnableAIMovement(SirAldricAIState state)
+        {
+            return state switch
+            {
+                SirAldricAIState.Following => true,
+                SirAldricAIState.Regrouping => true,
+                SirAldricAIState.Chasing => true,
+                SirAldricAIState.Positioning => true,
+                SirAldricAIState.Retreating => true,
+
+                _ => false
+            };
+        }
+
+        private void SynchronizeAIInput()
+        {
+            if (this.NPCInput == null) return;
+
+            bool enableMovement = !this.IsDeathDisabled && this.ShouldEnableAIMovement(this.CurrentAIState);
+
+            this.NPCInput.SetAIInputEnabled(enableMovement);
+        }
+
         private void StopMovement()
         {
             this.NPCInput?.ClearMoveInput();
@@ -239,8 +307,11 @@ namespace FlameOfTheLost
             base.InitializeInternalState();
 
             _isDeathDisabled = false;
+
             _storyPhase = SirAldricStoryPhase.Imprisoned;
             _currentAIState = SirAldricAIState.Imprisoned;
+
+            this.NPCInput?.SetAIInputEnabled(false);
         }
         protected override void InitializeGameplay()
         {
@@ -255,6 +326,8 @@ namespace FlameOfTheLost
                 _conditions.ConditionStateChanged += this.HandleConditionChanged;
 
                 this.ResolveStoryFromConditions(true);
+
+                this.SynchronizeAIInput();
             }
             else
             {

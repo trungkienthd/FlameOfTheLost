@@ -16,7 +16,7 @@ MonoBehaviour:
   _key: CHARACTER_NPC_SIR_ALDRIC
   _displayName: Sir Aldric - The Oathbound
   _description: 
-  _icon: {fileID: 0}
+  _icon: {fileID: -321444532, guid: 73ef177bfbc89f84db87dc1ab2702285, type: 3}
   _prefab: {fileID: 0}
   _characterType: 14201
   _faction: 0

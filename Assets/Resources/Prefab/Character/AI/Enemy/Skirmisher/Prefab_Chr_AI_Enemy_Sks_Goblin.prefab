@@ -1530,7 +1530,7 @@ GameObject:
   - component: {fileID: 138990756075370264}
   m_Layer: 9
   m_Name: Prefab_Chr_AI_Enemy_Sks_Goblin
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

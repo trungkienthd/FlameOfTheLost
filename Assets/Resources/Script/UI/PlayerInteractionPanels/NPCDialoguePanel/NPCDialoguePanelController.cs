@@ -13,6 +13,10 @@ namespace FlameOfTheLost
         [SerializeField] private TMP_Text _dialogueText;
         [SerializeField] private Transform _choicesRoot;
         [SerializeField] private Button _choiceButtonPrefab;
+        private TMP_Text SpeakerNameText => _speakerNameText;
+        private TMP_Text DialogueText => _dialogueText;
+        private Transform ChoicesRoot => _choicesRoot;
+        private Button ChoiceButtonPrefab => _choiceButtonPrefab;
 
         // --- Runtime ---
         //  1. Current Interaction
@@ -23,6 +27,7 @@ namespace FlameOfTheLost
         private NPCDialogueHandler CurrentDialogueHandler => this.CurrentNPC?.DialogueHandler;
 
         private readonly List<Button> _spawnedChoiceButtons = new();
+        private IReadOnlyList<Button> SpawnedChoiceButtons => _spawnedChoiceButtons;
 
         // --- Public APIs ---
         //  1. Opening
@@ -108,9 +113,8 @@ namespace FlameOfTheLost
             NPCDialogueNodeData node = dialogueHandler.CurrentNode;
             if (node == null) return;
 
-            if (_speakerNameText != null) _speakerNameText.text = node.SpeakerName;
-
-            if (_dialogueText != null) _dialogueText.text = node.DialogueText;
+            if (this.SpeakerNameText != null) this.SpeakerNameText.text = node.SpeakerName;
+            if (this.DialogueText != null) this.DialogueText.text = node.DialogueText;
 
             List<NPCDialogueChoiceEntry> choices = dialogueHandler.GetAvailableChoices();
             if (choices.Count == 0)
@@ -126,12 +130,12 @@ namespace FlameOfTheLost
         }
         private void CreateChoiceButton(string text, int choiceIndex)
         {
-            if (_choiceButtonPrefab == null || _choicesRoot == null)
+            if (this.ChoiceButtonPrefab == null || this.ChoicesRoot == null)
             {
                 return;
             }
 
-            Button button = UnityEngine.Object.Instantiate(_choiceButtonPrefab, _choicesRoot);
+            Button button = UnityEngine.Object.Instantiate(this.ChoiceButtonPrefab, this.ChoicesRoot);
             button.gameObject.SetActive(true);
 
             TMP_Text label = button.GetComponentInChildren<TMP_Text>(true);
@@ -161,7 +165,7 @@ namespace FlameOfTheLost
         }
         private void ClearChoiceButtons()
         {
-            foreach (Button button in _spawnedChoiceButtons)
+            foreach (Button button in this.SpawnedChoiceButtons)
             {
                 if (button != null) UnityEngine.Object.Destroy(button.gameObject);
             }

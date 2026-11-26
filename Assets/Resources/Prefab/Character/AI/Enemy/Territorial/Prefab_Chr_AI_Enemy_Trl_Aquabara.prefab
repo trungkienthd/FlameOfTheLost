@@ -911,7 +911,7 @@ GameObject:
   - component: {fileID: 1071272051689670771}
   m_Layer: 9
   m_Name: Prefab_Chr_AI_Enemy_Trl_Aquabara
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1084,10 +1084,11 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _characterRootController: {fileID: 2842159701441206635}
   _config: {fileID: 11400000, guid: f9cdbf1c8b9c309498a5be3644112c80, type: 2}
+  _isDeathDisabled: 0
   _cannotMove: 0
   _ignoreMovementLock: 0
   _movementSpeedScale: 1
-  _isDeathDisabled: 0
+  _aiMovementSpeedMultiplier: 1
 --- !u!114 &3120615532956235598
 MonoBehaviour:
   m_ObjectHideFlags: 0

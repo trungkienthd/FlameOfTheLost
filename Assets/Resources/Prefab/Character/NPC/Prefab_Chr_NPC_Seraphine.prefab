@@ -607,7 +607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enableDebugLogs: 0
   _characterRootController: {fileID: 3675139727175367782}
-  _config: {fileID: 11400000, guid: aa344368b8f45f04b9a42f1d02e9ab60, type: 2}
+  _config: {fileID: 0}
   _spriteRenderer: {fileID: 6646443244966345854}
   _animator: {fileID: 8278648579741455383}
   _characterFlipGroup: {fileID: 479263313863340849}
@@ -1627,7 +1627,7 @@ GameObject:
   - component: {fileID: 5019923913596742356}
   m_Layer: 11
   m_Name: Prefab_Chr_NPC_Seraphine
-  m_TagString: Player
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1770,14 +1770,15 @@ MonoBehaviour:
   _rewardWalletController: {fileID: 5231853439043601407}
   _inventoryController: {fileID: 2664597396171426779}
   _profile: {fileID: 0}
+  _runtimeFaction: 0
   _npcBrainController: {fileID: 9196719249896336109}
+  _attackReactionHandler: {fileID: 9017283605160411845}
   _npcInteractionHandler: {fileID: 5019923913596742356}
   _dialogueHandler: {fileID: 8491447401025342060}
   _questHandler: {fileID: 8379015950375328281}
-  _rewardHandler: {fileID: 4549689769538956574}
+  _questRewardHandler: {fileID: 0}
   _shopHandler: {fileID: 2537175734199850547}
   _skillTrainingHandler: {fileID: 1658670210683102712}
-  _attackReactionHandler: {fileID: 9017283605160411845}
 --- !u!114 &8749400956016105324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1794,6 +1795,7 @@ MonoBehaviour:
   _characterRootController: {fileID: 3675139727175367782}
   _isHitSequenceInputBlocked: 0
   _isDeathDisabled: 0
+  _allowAIInput: 0
 --- !u!114 &8902683306124986309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1809,10 +1811,11 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _characterRootController: {fileID: 3675139727175367782}
   _config: {fileID: 11400000, guid: bd8c7be98123e494fa07cc7045d5240a, type: 2}
+  _isDeathDisabled: 0
   _cannotMove: 0
   _ignoreMovementLock: 0
   _movementSpeedScale: 1
-  _isDeathDisabled: 0
+  _aiMovementSpeedMultiplier: 1
 --- !u!114 &1285143472868033664
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1688,7 +1688,7 @@ GameObject:
   - component: {fileID: 7484457241846881892}
   m_Layer: 11
   m_Name: Prefab_Chr_Ntr_Animal_Sheep
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1861,10 +1861,11 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _characterRootController: {fileID: 4607058540974835824}
   _config: {fileID: 11400000, guid: fa1ff2a871c02d94d9dc78a3b7a501c5, type: 2}
+  _isDeathDisabled: 0
   _cannotMove: 0
   _ignoreMovementLock: 0
   _movementSpeedScale: 1
-  _isDeathDisabled: 0
+  _aiMovementSpeedMultiplier: 1
 --- !u!114 &1285143472868033664
 MonoBehaviour:
   m_ObjectHideFlags: 0

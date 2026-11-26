@@ -19,6 +19,12 @@ namespace FlameOfTheLost
         // --- Public APIs ---
         public void SetRuntimeFaction(CharacterFaction faction)
         {
+            if (faction != CharacterFaction.None && faction != CharacterFaction.Neutral && faction != CharacterFaction.Ally && faction != CharacterFaction.Enemy)
+            {
+                Debug.LogWarning($"[{this.gameObject.name}.{nameof(NPCRootController)}] Invalid NPC runtime faction: {faction}.", this);
+                return;
+            }
+
             if (this.Faction == faction) return;
 
             CharacterFaction previousFaction = _runtimeFaction;

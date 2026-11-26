@@ -13,12 +13,16 @@ namespace FlameOfTheLost
         //  1. Movement Input
         public void SetAIInputEnabled(bool enabled)
         {
+            if (this.AllowAIInput == enabled)
+            {
+                if (!enabled) base.ClearMoveInput();
+
+                return;
+            }
+
             _allowAIInput = enabled;
 
-            if (!enabled)
-            {
-                base.ClearMoveInput();
-            }
+            if (!enabled) base.ClearMoveInput();
         }
 
         public override void SetMoveInput(Vector2 moveInput)

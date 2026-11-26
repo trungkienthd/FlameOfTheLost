@@ -10510,6 +10510,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654473970}
   m_CullTransparentMesh: 1
+--- !u!1 &655696766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 655696767}
+  m_Layer: 0
+  m_Name: Character
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &655696767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655696766}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1973643763}
+  m_Father: {fileID: 2125880952}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &668082305
 GameObject:
   m_ObjectHideFlags: 0
@@ -474404,6 +474436,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1973643762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1973643763}
+  - component: {fileID: 1973643764}
+  m_Layer: 0
+  m_Name: NPC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1973643763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973643762}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 655696767}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1973643764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973643762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3308dab16c193d54b9cd93eeeaead917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SirAldricWorldRefreshHandler
+  _enableDebugLogs: 0
+  _sirAldricBrain: {fileID: 0}
 --- !u!1 &1981171113
 GameObject:
   m_ObjectHideFlags: 0
@@ -476587,6 +476665,7 @@ Transform:
   - {fileID: 1852686665}
   - {fileID: 1688732613}
   - {fileID: 2045308470}
+  - {fileID: 655696767}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2127362885
@@ -477580,7 +477659,7 @@ GameObject:
   - component: {fileID: 3524513763400320245}
   m_Layer: 9
   m_Name: Prefab_Chr_NPC_SirAldric
-  m_TagString: Player
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478433,7 +478512,6 @@ GameObject:
   - component: {fileID: 4116093615862592832}
   - component: {fileID: 8062869812132218143}
   - component: {fileID: 4939059829014665507}
-  - component: {fileID: 8792693604553328690}
   - component: {fileID: 8043639613928278066}
   - component: {fileID: 3779772607250625188}
   - component: {fileID: 4700691950225916583}
@@ -478667,7 +478745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enableDebugLogs: 0
   _characterRootController: {fileID: 8730407736382973859}
-  _config: {fileID: 11400000, guid: 70e947256ccef2947a146d3dc3c54327, type: 2}
+  _config: {fileID: 0}
   _spriteRenderer: {fileID: 7311007980803925491}
   _animator: {fileID: 3487960973402810379}
   _characterFlipGroup: {fileID: 5533209263226987205}
@@ -478919,7 +478997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.CharacterVisualLocomotionAnimationHandler
   _enableDebugLogs: 0
   _placeholderProfile: {fileID: 11400000, guid: 9bccfb3ed1c911b4884fa840bbc63355, type: 2}
-  _locomotionModeProviderBehaviour: {fileID: 8792693604553328690}
+  _locomotionModeProviderBehaviour: {fileID: 0}
   _manualLocomotionMode: 0
 --- !u!4 &5042452201059956936
 Transform:
@@ -480359,32 +480437,6 @@ MonoBehaviour:
   _questRewardHandler: {fileID: 694596116}
   _shopHandler: {fileID: 1225355889}
   _skillTrainingHandler: {fileID: 89718319}
---- !u!114 &8792693604553328690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3862951304271531048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec29eeda62e2b834885721ed2015b5b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SkirmisherLocomotionVisualModeProvider
-  _enableDebugLogs: 0
-  _characterRootController: {fileID: 8730407736382973859}
-  _idleMode: 0
-  _wanderingMode: 0
-  _alertMode: 2
-  _chasingMode: 2
-  _strafingMode: 2
-  _normalAttackingMode: 2
-  _specialAttackingMode: 2
-  _recoveringMode: 2
-  _retreatingMode: 2
-  _returningMode: 0
-  _deadMode: 0
-  _currentResolvedMode: 0
 --- !u!1 &8854895701725280685
 GameObject:
   m_ObjectHideFlags: 0
