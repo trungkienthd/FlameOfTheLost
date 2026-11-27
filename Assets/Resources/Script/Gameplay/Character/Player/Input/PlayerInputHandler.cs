@@ -129,6 +129,12 @@ namespace FlameOfTheLost
         //      1.5. Interaction
         public void OnInteract(InputAction.CallbackContext context)
         {
+            if (context.canceled)
+            {
+                this.PlayerInteractionHandler?.CancelHoldInteraction();
+                return;
+            }
+
             if (this.IsDeathDisabled) return;
             if (!context.performed) return;
             if (!context.ReadValueAsButton()) return;

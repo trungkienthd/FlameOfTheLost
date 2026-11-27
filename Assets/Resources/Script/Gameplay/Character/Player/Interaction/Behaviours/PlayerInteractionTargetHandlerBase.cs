@@ -66,7 +66,12 @@ namespace FlameOfTheLost
 
             _cleanupBuffer.Clear();
         }
+        public bool ContainsNearbyTarget(MonoBehaviour target)
+        {
+            if (!this.IsValidTarget(target)) return false;
 
+            return this.TargetDetectionCounts.TryGetValue(target, out int detectionCount) && detectionCount > 0;
+        }
         public void ClearNearbyTargets()
         {
             foreach (MonoBehaviour target in this.TargetDetectionCounts.Keys)

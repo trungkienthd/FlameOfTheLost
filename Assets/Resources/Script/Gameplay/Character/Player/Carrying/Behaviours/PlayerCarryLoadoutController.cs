@@ -86,6 +86,39 @@ namespace FlameOfTheLost
             return (carriableItem as LightSourceProfile).LightSourceType;
         }
 
+        //  1.3. Actively Carried Item Queries
+        public bool TryGetActivelyCarriedItemEntry(out InventoryItemEntry entry)
+        {
+            entry = null;
+
+            if (this.IsDeathDisabled) return false;
+            if (!this.IsCarryingCarriableItem) return false;
+
+            if (!this.IsCarriableItemEntryValid( this.EquippedCarriableItemEntry)) return false;
+
+            if (!this.EquippedCarriableItemEntry.Equipped) return false;
+
+            entry = this.EquippedCarriableItemEntry;
+
+            return true;
+        }
+        public bool TryGetActivelyCarriedItem(out CarriableItemProfile carriableItem)
+        {
+            carriableItem = null;
+
+            if (!this.TryGetActivelyCarriedItemEntry(out InventoryItemEntry entry)) return false;
+
+            return this.TryGetCarriableItemFromEntry(entry, out carriableItem);
+        }
+        public bool IsActivelyCarryingItem(CarriableItemProfile requiredItem)
+        {
+            if (requiredItem == null) return false;
+
+            if (!this.TryGetActivelyCarriedItem(out CarriableItemProfile carriedItem)) return false;
+
+            return carriedItem == requiredItem;
+        }
+
         //  2. Actions
         //      2.1. Replace Equipped Carriable Item
         public bool TryReplaceEquippedCarriableItemEntry(InventoryItemEntry newCarriableEntry, out InventoryItemEntry removedCarriableEntry)
@@ -167,6 +200,43 @@ namespace FlameOfTheLost
             return this.SetCarriableItemCarryingStateInternal(isCarrying);
         }
 
+        //  2.4. Consume Actively Carried Item
+        public bool TryConsumeActivelyCarriedItem(CarriableItemProfile requiredItem)
+        {
+            if (requiredItem == null) return false;
+            if (this.InventoryController == null) return false;
+
+            if (!this.TryGetActivelyCarriedItemEntry(out InventoryItemEntry consumedEntry)) return false;
+
+            if (consumedEntry.Item != requiredItem) return false;
+
+            // a. Clear the Carry Loadout before removing the entry. Inventory events should observe a consistent state.
+            this.SetEquippedCarriableItemEntry(null);
+
+            this.IsCarryingCarriableItem = false;
+
+            // b. Remove the exact Inventory Entry.
+            bool didRemove = this.InventoryController.TryRemoveFromEntry(consumedEntry, 1);
+            if (!didRemove)
+            {
+                // Restore the previous state if removal failed.
+                this.SetEquippedCarriableItemEntry(consumedEntry);
+
+                this.IsCarryingCarriableItem = true;
+
+                return false;
+            }
+
+            // c. Publish successful Carry Loadout changes.
+            this.OnCarriableItemCarryingStateChanged?.Invoke(false);
+
+            this.OnCarriableItemUnequipped?.Invoke(consumedEntry);
+
+            this.OnEquippedCarriableItemChanged?.Invoke(this.EquippedCarriableItemEntry);
+
+            return true;
+        }
+
         //  3. ICharacterRefreshable implementation
         public int RefreshmentConfigurePriority => 45;
         public void RefreshCharacter(CharacterRefreshContext context)
@@ -211,6 +281,8 @@ namespace FlameOfTheLost
         }
         public void RestoreSaveData(PlayerCarryLoadoutSaveData saveData)
         {
+            this.SetCarriableItemCarryingStateInternal(false);
+
             // Clear the previously equipped entry.
             this.SetEquippedCarriableItemEntry(null);
 

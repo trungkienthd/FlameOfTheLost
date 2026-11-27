@@ -724,6 +724,38 @@ MonoBehaviour:
   _cannotCastSpecialSkill: 0
   _ignoreAttackLock: 0
   _isDeathDisabled: 0
+--- !u!1 &47548430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 47548431}
+  m_Layer: 0
+  m_Name: SpawnPlacementResolvers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &47548431
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47548430}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1157537346}
+  m_Father: {fileID: 242383890}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &55980896
 GameObject:
   m_ObjectHideFlags: 0
@@ -2952,6 +2984,7 @@ GameObject:
   - component: {fileID: 190892506}
   - component: {fileID: 190892511}
   - component: {fileID: 190892510}
+  - component: {fileID: 190892514}
   m_Layer: 8
   m_Name: Interaction
   m_TagString: Untagged
@@ -2977,6 +3010,7 @@ MonoBehaviour:
   _promptSourceTargetHandler: {fileID: 190892508}
   _promptHandler: {fileID: 190892507}
   _promptBlockerHandler: {fileID: 190892506}
+  _holdHandler: {fileID: 190892514}
   _isDeathDisabled: 0
 --- !u!114 &190892506
 MonoBehaviour:
@@ -3113,6 +3147,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 344431553}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &190892514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190892504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45eea546ee140ed4198831c27732822c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerInteractionHoldHandler
+  _enableDebugLogs: 0
 --- !u!1 &196079072
 GameObject:
   m_ObjectHideFlags: 0
@@ -3744,6 +3791,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 47548431}
   - {fileID: 2110536738}
   m_Father: {fileID: 819904305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3762,6 +3810,7 @@ MonoBehaviour:
   _enableDebugLogs: 0
   _npcGroupRoot: {fileID: 545831345}
   _npcDefaultSpawnPointControllers: []
+  _spawnPlacementResolverBehaviours: []
   _isSpawnedNPCsOnStart: 1
   _spawnedNPCs: []
 --- !u!1 &252899610
@@ -411761,6 +411810,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152909254}
   m_CullTransparentMesh: 1
+--- !u!1 &1157537345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1157537346}
+  - component: {fileID: 1157537347}
+  m_Layer: 0
+  m_Name: SirAldric
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1157537346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157537345}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 47548431}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1157537347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157537345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796c6503581bcb947b49a6651468263f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SirAldricSpawnPlacementResolver
+  _enableDebugLogs: 0
+  _npcId: 14201
+  _playerSpawnOffset: {x: 1.5, y: -0.5}
+  _postBossSpawnAnchor: {fileID: 0}
 --- !u!1 &1165188135
 GameObject:
   m_ObjectHideFlags: 0
@@ -461184,6 +461281,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306550969}
   m_CullTransparentMesh: 1
+--- !u!1001 &1310155720
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1840872115}
+    m_Modifications:
+    - target: {fileID: 438042356008047694, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 438042356008047694, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 438042356008047694, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 438042356008047694, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 438042356008047694, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 438042356008047694, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 438042356008047694, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 438042356008047694, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 438042356008047694, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 438042356008047694, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389214061073505002, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: m_Name
+      value: GO_ItmCtn_WardenChest
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933743043678913655, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: _profile
+      value: 
+      objectReference: {fileID: 11400000, guid: 54901daa962ef6c4db48ea7498caba7a, type: 2}
+    - target: {fileID: 1933743043678913655, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+      propertyPath: _itemContainerPanelController
+      value: 
+      objectReference: {fileID: 1721165438}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+--- !u!4 &1310155721 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 438042356008047694, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+  m_PrefabInstance: {fileID: 1310155720}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1310155722 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1933743043678913655, guid: 7a21f42d8c0b9ae4faf0da810c64ca8e, type: 3}
+  m_PrefabInstance: {fileID: 1310155720}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d40cace0e810041965f5825fef5316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerController
 --- !u!1 &1310927367
 GameObject:
   m_ObjectHideFlags: 0
@@ -466747,7 +466925,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b839e78037b677d40be7894c0aed80dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.PlayerInteractionPromptPanelController
+  _enableDebugLogs: 0
   _promptText: {fileID: 199082791}
+  _holdProgressRoot: {fileID: 0}
+  _holdProgressFill: {fileID: 0}
 --- !u!114 &1615845371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468155,7 +468336,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerGroupRefreshController
   _enableDebugLogs: 0
-  _itemContainers: []
+  _itemContainers:
+  - {fileID: 1310155722}
 --- !u!1 &1690780385
 GameObject:
   m_ObjectHideFlags: 0
@@ -473274,7 +473456,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1310155721}
   m_Father: {fileID: 1181918903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1842934870
@@ -475751,7 +475934,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1973643763}
-  - component: {fileID: 1973643764}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -475774,22 +475956,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 655696767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1973643764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1973643762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3308dab16c193d54b9cd93eeeaead917, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.SirAldricWorldRefreshHandler
-  _enableDebugLogs: 0
-  _npcGroupSpawner: {fileID: 0}
-  _sirAldricBrain: {fileID: 0}
-  _isSynchronizationPending: 0
 --- !u!1 &1981171113
 GameObject:
   m_ObjectHideFlags: 0

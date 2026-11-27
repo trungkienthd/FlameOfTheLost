@@ -19,8 +19,13 @@ namespace FlameOfTheLost
         private List<NPCDefaultSpawnPointController> _npcDefaultSpawnPointControllers = new();
         protected IReadOnlyList<NPCDefaultSpawnPointController> NPCDefaultSpawnPointControllers => _npcDefaultSpawnPointControllers;
 
+        //  3. Contextual Spawn Placement
+        [Header("References - Spawn Placement Resolvers")]
+        [SerializeField] private List<MonoBehaviour> _spawnPlacementResolverBehaviours = new();
+        public IReadOnlyList<MonoBehaviour> SpawnPlacementResolverBehaviours => _spawnPlacementResolverBehaviours;
+
         // --- Configs ---
-        [Header("Settings")]
+        [Header("Configs")]
         [SerializeField] private bool _isSpawnedNPCsOnStart = true;
         private bool IsSpawnedNPCsOnStart => _isSpawnedNPCsOnStart;
 
@@ -52,7 +57,11 @@ namespace FlameOfTheLost
         {
             if (!context.IsPlayerRespawn && !context.IsSaveReload) return;
 
-            this.SpawnNPCs(spawnEntry => this.ShouldSpawnEntryAfterWorldRefresh(spawnEntry, context));
+            this.SpawnNPCs
+            (
+                predicate: spawnEntry => this.ShouldSpawnEntryAfterWorldRefresh(spawnEntry, context), 
+                refreshExisting: true
+            );
         }
 
         //  1. Spawning
@@ -185,7 +194,7 @@ namespace FlameOfTheLost
         }
 
         //  2. General Spawning
-        private void SpawnNPCs(Predicate<NPCSpawnEntry> predicate)
+        private void SpawnNPCs(Predicate<NPCSpawnEntry> predicate, bool refreshExisting = false)
         {
             if (_isClearingNPCs) return;
 
@@ -216,9 +225,41 @@ namespace FlameOfTheLost
 
                     if (predicate != null && !predicate(spawnEntry)) continue;
 
+                    if (refreshExisting && this.TryGetSpawnedNPC(spawnEntry.NPCProfile.Id, out NPCRootController existingNPC))
+                    {
+                        if (_initializedNPCIds.Contains(spawnEntry.NPCProfile.Id))
+                        {
+                            this.RefreshExistingNPC(existingNPC, spawnPoint, spawnEntry);
+                        }
+
+                        // A newly instantiated NPC still pending initialization will receive its Character Refresh in InitializeSpawnedNPC().
+                        continue;
+                    }
+
                     this.TrySpawnFromEntry(spawnPoint, spawnEntry, out _);
                 }
             }
+        }
+        private void RefreshExistingNPC(NPCRootController npc, NPCDefaultSpawnPointController spawnPoint, NPCSpawnEntry spawnEntry)
+        {
+            if (npc == null || spawnPoint == null || spawnEntry == null) return;
+
+            CharacterRefreshHandler refreshHandler = npc.RefreshHandler;
+
+            if (refreshHandler == null)
+            {
+                refreshHandler = npc.GetComponentInChildren<CharacterRefreshHandler>(true);
+            }
+
+            if (refreshHandler == null)
+            {
+                Debug.LogError($"[{npc.gameObject.name}] {nameof(CharacterRefreshHandler)} is missing.", npc);
+                return;
+            }
+
+            CharacterRefreshTarget target = this.ResolveNPCSpawnTarget(spawnPoint, spawnEntry);
+
+            refreshHandler.Refresh(target, CharacterRefreshOrigin.DefaultSpawnPoint);
         }
 
         //  3. Entry Spawning
@@ -281,10 +322,7 @@ namespace FlameOfTheLost
                 return false;
             }
 
-            // Ensure the SpawnAnchor is ready before reading it.
-            spawnPoint.EnsureSpawnAnchorInitialized();
-
-            CharacterRefreshTarget spawnResult = spawnEntry.ResolveSpawnResult(spawnPoint);
+            CharacterRefreshTarget spawnResult = this.ResolveNPCSpawnTarget(spawnPoint, spawnEntry);
 
             // Instantiate at the correct world-space transform.
             GameObject spawnedNPC = UnityEngine.Object.Instantiate
@@ -395,9 +433,7 @@ namespace FlameOfTheLost
                 yield break;
             }
 
-            spawnPoint.EnsureSpawnAnchorInitialized();
-
-            CharacterRefreshTarget spawnResult = spawnEntry.ResolveSpawnResult(spawnPoint);
+            CharacterRefreshTarget spawnResult = this.ResolveNPCSpawnTarget(spawnPoint, spawnEntry);
 
             refreshHandler.Refresh(spawnResult, CharacterRefreshOrigin.DefaultSpawnPoint);
 
@@ -409,7 +445,39 @@ namespace FlameOfTheLost
             this.NotifyNPCSpawned(spawnPoint, spawnEntry, npc);
         }
 
-        //  6. Spawn Notification
+        //  6. Spawn Target Resolving
+        private CharacterRefreshTarget ResolveNPCSpawnTarget(NPCDefaultSpawnPointController spawnPoint, NPCSpawnEntry spawnEntry)
+        {
+            spawnPoint.EnsureSpawnAnchorInitialized();
+
+            CharacterRefreshTarget defaultTarget = spawnEntry.ResolveSpawnResult(spawnPoint);
+
+            INPCSpawnPlacementResolver matchedResolver = null;
+
+            foreach (MonoBehaviour behaviour in _spawnPlacementResolverBehaviours)
+            {
+                if (behaviour == null) continue;
+                if (behaviour is not INPCSpawnPlacementResolver resolver) continue;
+
+                if (resolver.NPCId != spawnEntry.NPCProfile.Id) continue;
+
+                if (matchedResolver != null)
+                {
+                    Debug.LogError($"[{this.gameObject.name}.{nameof(NPCGroupSpawnerController)}] Multiple placement resolvers configured for NPC {spawnEntry.NPCProfile.Id}.", this);
+
+                    return defaultTarget;
+                }
+
+                matchedResolver = resolver;
+            }
+
+            if (matchedResolver == null) return defaultTarget;
+            if (matchedResolver.TryResolveSpawnTarget(spawnEntry, defaultTarget, out CharacterRefreshTarget resolvedTarget)) return resolvedTarget;
+
+            return defaultTarget;
+        }
+
+        //  7. Spawn Notification
         protected virtual void NotifyNPCSpawned(NPCDefaultSpawnPointController spawnPoint, NPCSpawnEntry spawnEntry, NPCRootController npc)
         {
             if (spawnPoint == null) return;
@@ -421,7 +489,7 @@ namespace FlameOfTheLost
             this.NPCSpawned?.Invoke(context);
         }
 
-        //  7. Runtime Registration
+        //  8. Runtime Registration
         private void RegisterSpawnedNPC(int npcId, GameObject spawnedNPC, NPCRootController npc)
         {
             if (spawnedNPC == null) return;
@@ -519,7 +587,7 @@ namespace FlameOfTheLost
             }
         }
 
-        //  8. World Refresh
+        //  9. World Refresh
         protected virtual bool ShouldSpawnEntryAfterWorldRefresh(NPCSpawnEntry spawnEntry, WorldRefreshContext context)
         {
             if (spawnEntry == null) return false;
@@ -532,7 +600,7 @@ namespace FlameOfTheLost
             return false;
         }
 
-        //  9. Validation Helper
+        //  10. Validation Helper
         private void ValidateUniqueNPCIds()
         {
             if (this.NPCDefaultSpawnPointControllers == null) return;

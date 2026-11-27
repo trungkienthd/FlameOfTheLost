@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a599b2e386c8c8c4b8c8146546145acc, type: 3}
+  m_Name: 32006_ItmCtn_WardenChest
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.ItemContainerProfile
+  _id: 32006
+  _key: ITM_CTN_WARDEN_CHEST
+  _displayName: Warden's Chest
+  _description: A reinforced chest used by the wardens of the Forgotten Sanctum to
+    safeguard artifacts associated with their prisoners.
+  _icon: {fileID: -1724803183, guid: b58241b40bcf43d42849b44c429f5fb0, type: 3}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 26, y: 20, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 1
+  _initialItems:
+  - _runtimeId: 
+    _item: {fileID: 11400000, guid: e2f1367684a40d94db0d4d0d99026758, type: 2}
+    _quantity: 1
+    _equipped: 0
+  _maximumEntryCount: 20

@@ -21,11 +21,13 @@ namespace FlameOfTheLost
 
             foreach (MonoBehaviour behaviour in this.TargetDetectionCounts.Keys)
             {
+                if (behaviour == null) continue;
+                if (!behaviour.isActiveAndEnabled) continue;
+
                 if (behaviour is not IPlayerInteractable interactable) continue;
                 if (!interactable.CanInteract(interactor)) continue;
 
                 float sqrDistance = (behaviour.transform.position - origin).sqrMagnitude;
-
                 if (sqrDistance >= nearestSqrDistance) continue;
 
                 nearestSqrDistance = sqrDistance;
@@ -33,6 +35,17 @@ namespace FlameOfTheLost
             }
 
             return nearestInteractable;
+        }
+
+        //  2. Nearby Interactable Validation
+        public bool IsInteractableNearby(IPlayerInteractable interactable)
+        {
+            if (interactable is not MonoBehaviour behaviour) return false;
+
+            if (behaviour == null) return false;
+            if (!behaviour.isActiveAndEnabled) return false;
+
+            return this.ContainsNearbyTarget(behaviour);
         }
 
         // --- Helpers ---

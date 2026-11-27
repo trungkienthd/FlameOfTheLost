@@ -32,6 +32,6 @@ MonoBehaviour:
   _initialSpawnAnchorLocalScale: {x: 1, y: 1, z: 1}
   _npcSpawnEntries:
   - _npcProfile: {fileID: 11400000, guid: 6297f128d2be71140a7bf18fb0f59a85, type: 2}
-    _spawnOnStart: 0
-    _spawnWhenPlayerRespawns: 0
-    _spawnWhenSaveReloads: 0
+    _spawnOnStart: 1
+    _spawnWhenPlayerRespawns: 1
+    _spawnWhenSaveReloads: 1
