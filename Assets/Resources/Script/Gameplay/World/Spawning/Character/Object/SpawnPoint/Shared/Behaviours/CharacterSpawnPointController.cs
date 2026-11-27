@@ -15,17 +15,45 @@ namespace FlameOfTheLost
         [Header("References")]
         [SerializeField] private Transform _spawnAnchor;
         protected Transform SpawnAnchor => _spawnAnchor;
-
         public Vector3 SpawnPosition => this.SpawnAnchor != null
             ? this.SpawnAnchor.position
             : this.transform.position;
-
         public Quaternion SpawnRotation => this.SpawnAnchor != null
             ? this.SpawnAnchor.rotation
             : this.transform.rotation;
 
+        // --- Runtime ---
+        [Header("Runtime - Spawn Anchor")]
+        [SerializeField] private bool _isSpawnAnchorInitialized;
+        public bool IsSpawnAnchorInitialized => _isSpawnAnchorInitialized;
+
+        // --- Public APIs ---
+        //  1. Spawn Anchor Initialization
+        public void EnsureSpawnAnchorInitialized()
+        {
+            if (this.IsSpawnAnchorInitialized) return;
+
+            this.ResolveSpawnAnchorReference();
+
+            if (this.Profile == null) return;
+
+            this.ConfigureSpawnAnchorTransform();
+
+            _isSpawnAnchorInitialized = true;
+        }
+
+
         // --- Helpers ---
-        //  1. Spawn Anchor Configuration
+        //  1. Spawn Anchor Reference
+        private void ResolveSpawnAnchorReference()
+        {
+            if (this.SpawnAnchor != null) return;
+
+            Transform spawnAnchor = this.transform.Find("SpawnAnchor");
+            if (spawnAnchor != null) _spawnAnchor = spawnAnchor;
+        }
+
+        //  2. Spawn Anchor Configuration
         private void ConfigureSpawnAnchorTransform()
         {
             if (this.Profile == null) return;
@@ -46,11 +74,7 @@ namespace FlameOfTheLost
         {
             base.CacheInternalReferences();
 
-            if (this.SpawnAnchor == null)
-            {
-                Transform spawnAnchor = this.transform.Find("SpawnAnchor");
-                if (spawnAnchor != null) _spawnAnchor = spawnAnchor;
-            }
+            this.ResolveSpawnAnchorReference();
         }
         protected override void ValidateInternalReferences()
         {
@@ -65,7 +89,7 @@ namespace FlameOfTheLost
         {
             base.InitializePregameplayState();
 
-            this.ConfigureSpawnAnchorTransform();
+            this.EnsureSpawnAnchorInitialized();
         }
     }
 }

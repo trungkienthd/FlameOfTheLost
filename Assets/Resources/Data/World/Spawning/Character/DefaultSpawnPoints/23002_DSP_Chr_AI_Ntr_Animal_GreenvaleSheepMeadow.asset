@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 23002_DSP_Chr_AI_Ntr_Animal_GreenvaleSheepMeadow
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalDefaultSpawnPointProfile
   _id: 23002
-  _key: GREENVALE_SHEEP_MEADOW
+  _key: DSP_GREENVALE_SHEEP_MEADOW
   _displayName: Greenvale Sheep Meadow
   _description: 
   _icon: {fileID: 0}

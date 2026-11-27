@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 23003_DSP_Chr_AI_Ntr_Animal_WhisperingGroveCowPasture
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalDefaultSpawnPointProfile
   _id: 23003
-  _key: WHISPERING_GROVE_COW_PASTURE
+  _key: DSP_WHISPERING_GROVE_COW_PASTURE
   _displayName: Whispering Grove Cow Pasture
   _description: 
   _icon: {fileID: 0}

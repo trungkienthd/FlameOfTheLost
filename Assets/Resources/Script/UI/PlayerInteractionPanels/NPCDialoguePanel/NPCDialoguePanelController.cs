@@ -22,10 +22,12 @@ namespace FlameOfTheLost
         [SerializeField] private TMP_Text _speakerNameText;
         [SerializeField] private TMP_Text _dialogueText;
         [SerializeField] private Button _choiceButtonPrefab;
+        [SerializeField] private Button _closeButton;
         private TMP_Text SpeakerNameText => _speakerNameText;
         private TMP_Text DialogueText => _dialogueText;
-        private Transform ChoicesRoot => this.LayoutHandler?.ChoiceList;
+        private Button CloseButton => _closeButton;
         private Button ChoiceButtonPrefab => _choiceButtonPrefab;
+        private Transform ChoicesRoot => this.LayoutHandler?.ChoiceList;
 
         // --- Runtime ---
         //  1. Current Interaction
@@ -338,6 +340,44 @@ namespace FlameOfTheLost
         }
 
         //  6. Event Binding
+        //  6.1. Close Button
+        private void BindCloseButtonEvent()
+        {
+            if (this.CloseButton == null) return;
+
+            // Prevent duplicate runtime listeners.
+            this.CloseButton.onClick.RemoveListener(this.Close);
+
+            // Preserve the Inspector-configured listener if present.
+            if (this.HasPersistentCloseButtonListener()) return;
+
+            this.CloseButton.onClick.AddListener(this.Close);
+        }
+        private void UnbindCloseButtonEvent()
+        {
+            if (this.CloseButton == null) return;
+
+            this.CloseButton.onClick.RemoveListener(this.Close);
+        }
+        private bool HasPersistentCloseButtonListener()
+        {
+            if (this.CloseButton == null) return false;
+
+            int listenerCount = this.CloseButton.onClick.GetPersistentEventCount();
+
+            for (int i = 0; i < listenerCount; i++)
+            {
+                if (this.CloseButton.onClick.GetPersistentTarget(i) != this) continue;
+                if (this.CloseButton.onClick.GetPersistentMethodName(i) != nameof(this.Close)) continue;
+                if (this.CloseButton.onClick.GetPersistentListenerState(i) == UnityEngine.Events.UnityEventCallState.Off) continue;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        //      6.2. Conversation Events
         private void BindConversationEvents()
         {
             NPCDialogueHandler dialogueHandler = this.CurrentDialogueHandler;
@@ -361,6 +401,7 @@ namespace FlameOfTheLost
             dialogueHandler.ConversationEnded -= this.HandleConversationEnded;
         }
 
+        //      6.3. Playback Events
         private void BindPlaybackEvents()
         {
             if (this.PlaybackHandler == null) return;
@@ -414,6 +455,7 @@ namespace FlameOfTheLost
                 this.SpeakerNameText != null &&
                 this.DialogueText != null &&
                 this.ChoicesRoot != null &&
+                this.CloseButton != null &&
                 this.ChoiceButtonPrefab != null &&
                 this.ChoiceButtonPrefab.GetComponentInChildren<TMP_Text>(true) != null;
         }
@@ -424,6 +466,13 @@ namespace FlameOfTheLost
             base.CacheInternalReferences();
 
             this.ResolveSubHandlerReferences();
+
+            if (this.CloseButton == null)
+            {
+                Transform closeButtonTransform = this.transform.Find("DialogueWindow/CloseButton");
+
+                if (closeButtonTransform != null) _closeButton = closeButtonTransform.GetComponent<Button>();
+            }
         }
         protected override void ValidateInternalReferences()
         {
@@ -440,9 +489,13 @@ namespace FlameOfTheLost
 
             this.PlaybackHandler?.Bind(this);
             this.LayoutHandler?.Bind(this);
+
+            this.BindCloseButtonEvent();
         }
         protected override void UnbindInternalReferences()
         {
+            this.UnbindCloseButtonEvent();
+
             this.UnbindConversationEvents();
             this.UnbindPlaybackEvents();
 

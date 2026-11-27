@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 23001_DSP_Chr_AI_Ntr_Animal_GreenvaleCowPasture
   m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.AnimalDefaultSpawnPointProfile
   _id: 23001
-  _key: GREENVALE COW PASTURE
+  _key: DSP_GREENVALE_COW_PASTURE
   _displayName: Greenvale Cow Pasture
   _description: 
   _icon: {fileID: 0}

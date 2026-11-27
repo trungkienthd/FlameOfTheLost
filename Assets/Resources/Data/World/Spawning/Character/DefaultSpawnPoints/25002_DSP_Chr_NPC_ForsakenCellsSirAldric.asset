@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fac6832b2e84864295020346dcb6523, type: 3}
+  m_Name: 25002_DSP_Chr_NPC_ForsakenCellsSirAldric
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.NPCDefaultSpawnPointProfile
+  _id: 25002
+  _key: DSP_FORSAKEN_CELLS_SIR_ALDRIC
+  _displayName: Forsaken Cells Sir Aldric
+  _description: 
+  _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 32, y: 14, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
+  _defaultFacing: 0
+  _configureSpawnAnchorTransformAtStart: 1
+  _initialSpawnAnchorLocalPosition: {x: 0, y: 0, z: 0}
+  _initialSpawnAnchorLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialSpawnAnchorLocalScale: {x: 1, y: 1, z: 1}
+  _npcSpawnEntries:
+  - _npcProfile: {fileID: 11400000, guid: 6297f128d2be71140a7bf18fb0f59a85, type: 2}
+    _spawnOnStart: 0
+    _spawnWhenPlayerRespawns: 0
+    _spawnWhenSaveReloads: 0

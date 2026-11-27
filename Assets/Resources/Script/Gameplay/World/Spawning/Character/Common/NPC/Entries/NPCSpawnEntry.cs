@@ -16,13 +16,14 @@ namespace FlameOfTheLost
         [Header("Configs - Spawn Settings")]
         [SerializeField] private bool _spawnOnStart = true;
         [SerializeField] private bool _spawnWhenPlayerRespawns = true;
-
+        [SerializeField] private bool _spawnWhenSaveReloads = true;
         public bool SpawnOnStart => _spawnOnStart;
         public bool SpawnWhenPlayerRespawns => _spawnWhenPlayerRespawns;
+        public bool SpawnWhenSaveReloads => _spawnWhenSaveReloads;
 
         // --- Public APIs ---
         //  1. Validation
-        public bool IsValid => this.NPCProfile != null && this.NPCProfile.Prefab != null;
+        public bool IsValid => this.NPCProfile != null && this.NPCProfile.Id > 0 && this.NPCProfile.Prefab != null;
 
         //  2. Spawn Result
         public CharacterRefreshTarget ResolveSpawnResult(CharacterDefaultSpawnPointController spawnPoint)
