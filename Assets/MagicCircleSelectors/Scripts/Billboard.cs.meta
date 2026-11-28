@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8188218f550560f4c8aea1cf45df6b25
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 303604
+  packageName: Functional Magic Selector Circle Pack
+  packageVersion: 1.0
+  assetPath: Assets/MagicCircleSelectors/Scripts/Billboard.cs
+  uploadId: 714858

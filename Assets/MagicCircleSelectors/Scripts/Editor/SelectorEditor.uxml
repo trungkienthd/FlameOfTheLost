@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Toggle label="Color all Sprites" tooltip="Enable to control all sprites in this selector at once. Disable to manually select each Sprite Renderer color." binding-path="colorAllSprites" />
+    <uie:ColorField label="Selector Color" value="#FFFFFFFF" tooltip="Color all the sprites of the selector." binding-path="selectorColor" />
+    <uie:PropertyField label="Scale Parent Override" binding-path="scaleParentOverride" name="ScaleParentOverride" />
+    <ui:Toggle label="Use Property Block" tooltip="If enabled, uses Material Property Block to reduce draw calls" binding-path="usePropertyBlock" />
+    <ui:Foldout text="Animation Properties">
+        <ui:FloatField label="Selected Rotation Speed" value="2" binding-path="selectedTime" tooltip="Rotation speed for &quot;selected&quot; animation" />
+        <ui:FloatField label="Unselected Intensity" value="1" tooltip="Intensity property for normal animation state (only applicable on some selector materials)" binding-path="unselectedIntensity" />
+        <ui:FloatField label="Selected Intensity" value="2" binding-path="selectedIntensity" tooltip="Instensity property for &quot;selected&quot; animation state (only applicable on some selector materials)" />
+    </ui:Foldout>
+</ui:UXML>

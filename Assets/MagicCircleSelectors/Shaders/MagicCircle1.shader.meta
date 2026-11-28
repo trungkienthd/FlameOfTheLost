@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e55eaa6a74ae2ab43b41a10c04617610
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 303604
+  packageName: Functional Magic Selector Circle Pack
+  packageVersion: 1.0
+  assetPath: Assets/MagicCircleSelectors/Shaders/MagicCircle1.shader
+  uploadId: 714858

@@ -1,5 +1,6 @@
-# Asset Naming Convention  
-**Project:** FlameOfTheLost  
+# Asset Naming Convention
+
+**Project:** FlameOfTheLost
 **Scope:** All assets moved into `Assets/Resources/`
 
 ---
@@ -26,9 +27,9 @@ All assets must use the following structure: {PREFIX}{Category}{SpecificName}_{V
 
 ### Definitions
 
-- **PREFIX** → Identifies the original asset source  
-- **Category** → Functional grouping (e.g., VFX, Icon, Tile, UI, Character)  
-- **SpecificName** → Descriptive name  
+- **PREFIX** → Identifies the original asset source
+- **Category** → Functional grouping (e.g., VFX, Icon, Tile, UI, Character)
+- **SpecificName** → Descriptive name
 - **Variant** → Optional modifier (color, level, type, version, etc.)
 
 ### Examples
@@ -42,63 +43,68 @@ SFUI_Panel_Dialogue.png
 
 ## 3. Approved Prefix Registry (Current Assets)
 
-### 3.1 118 Sprite Effects Bundle  
-**Publisher:** bestgamekits  
+### 3.1 118 Sprite Effects Bundle
 
-**Prefix:**  BGE118_
+**Publisher:** bestgamekits
+
+**Prefix:** `BGE118_`
 
 **Usage Scope:**
-- Slash effects  
-- Hit impacts  
-- Explosions  
-- Magic VFX  
-- Effect sprite sheets  
+- Slash effects
+- Hit impacts
+- Explosions
+- Magic VFX
+- Effect sprite sheets
 
 ---
 
-### 3.2 Cute Fantasy RPG – 16x16 Top Down  
-**Publisher:** kenmi  
+### 3.2 Cute Fantasy RPG – 16x16 Top Down
 
-**Prefix:**  CFRPG16_
+**Publisher:** kenmi
+
+**Prefix:** `CFRPG16_`
 
 **Usage Scope:**
-- Environment tiles  
-- Character sprites  
-- Props  
-- NPC sprites  
-- Tilesets  
+- Environment tiles
+- Character sprites
+- Props
+- NPC sprites
+- Tilesets
 
 ---
 
-### 3.3 Simple Free Pixel Art Styled UI Pack  
-**Publisher:** Jakub Varga  
+### 3.3 Simple Free Pixel Art Styled UI Pack
 
-**Prefix:**  SFUI_
+**Publisher:** Jakub Varga
+
+**Prefix:** `SFUI_`
 
 **Usage Scope:**
-- Buttons  
-- Panels  
-- HUD frames  
-- UI decorative elements  
+- Buttons
+- Panels
+- HUD frames
+- UI decorative elements
 
 ---
 
 ### 3.4 4416 RPG Icons Pixel Art
-**Publisher:** CraftPix  
 
-**Prefix:**  CPRIPA_
+**Publisher:** CraftPix
+
+**Prefix:** `CPRIPA_`
 
 **Usage Scope:**
-- Skill icons  
-- Ability icons  
-- Status icons  
+- Skill icons
+- Ability icons
+- Status icons
 
 ---
 
 ### 3.5 2D Pixel Quest Vol.3 - The UI/GUI
+
 **Publisher:** 7Soul
 
-**Prefix:**  BAPQ3UI_
+**Prefix:** `BAPQ3UI_`
 
 **Usage Scope:**
 - UI icons
@@ -111,9 +117,10 @@ SFUI_Panel_Dialogue.png
 ---
 
 ### 3.6 2D Pixel Art Platformer | Biome - American Forest
+
 **Publisher:** Superposition Principle
 
-**Prefix:**  SPPAF_
+**Prefix:** `SPPAF_`
 
 **Usage Scope:**
 - Forest environment tiles and tilesets
@@ -124,17 +131,18 @@ SFUI_Panel_Dialogue.png
 
 **Source:** https://assetstore.unity.com/packages/2d/environments/2d-pixel-art-platformer-biome-american-forest-255694
 
-**Example:**
-`SPPAF_Tile_ForestGround_01.png`
-`SPPAF_Environment_Tree_01.png`
-`SPPAF_Prop_Rock_01.png`
+**Examples:**
+- `SPPAF_Tile_ForestGround_01.png`
+- `SPPAF_Environment_Tree_01.png`
+- `SPPAF_Prop_Rock_01.png`
 
 ---
 
 ### 3.7 Cute Fantasy Characters - 16x16 Top Down Pixel Art Asset Pack
+
 **Publisher:** kenmi
 
-**Prefix:** `KCFC16_`
+**Prefix:** `CFCHR16_`
 
 **Usage Scope:**
 - Character sprite sheets
@@ -145,18 +153,19 @@ SFUI_Panel_Dialogue.png
 **Source:** https://assetstore.unity.com/packages/2d/characters/cute-fantasy-characters-16x16-top-down-pixel-art-asset-pack-302080
 
 **Examples:**
-- `KCFC16_Character_NPC_01.png`
-- `KCFC16_Character_Merchant_01.png`
-- `KCFC16_Animation_NPC_Idle.anim`
+- `CFCHR16_Character_NPC_01.png`
+- `CFCHR16_Character_Merchant_01.png`
+- `CFCHR16_Animation_NPC_Idle.anim`
 
 **Note:** Example names illustrate the naming format; use the actual character/animation names after inspecting the imported contents. Keep this pack distinct from `CFRPG16_`, even though both are published by kenmi.
 
 ---
 
 ### 3.8 Cute Fantasy Dungeon - 16x16 Top Down Asset Pack
+
 **Publisher:** kenmi
 
-**Prefix:** `KCFD16_`
+**Prefix:** `CFDGN16_`
 
 **Usage Scope:**
 - Dungeon tiles and tilesets
@@ -167,15 +176,16 @@ SFUI_Panel_Dialogue.png
 **Source:** https://assetstore.unity.com/packages/2d/environments/cute-fantasy-dungeon-16x16-top-down-asset-pack-301753
 
 **Examples:**
-- `KCFD16_Tile_DungeonFloor_01.png`
-- `KCFD16_Tile_DungeonWall_01.png`
-- `KCFD16_Prop_RuinPillar_01.png`
+- `CFDGN16_Tile_DungeonFloor_01.png`
+- `CFDGN16_Tile_DungeonWall_01.png`
+- `CFDGN16_Prop_RuinPillar_01.png`
 
 **Note:** Example names are illustrative and should be adapted to actual imported content. Do not reuse `CFRPG16_` for assets from this separate pack.
 
 ---
 
 ### 3.9 Pixel Art Top Down - Basic
+
 **Publisher:** Cainos
 
 **Prefix:** `CPTDB_`
@@ -198,18 +208,42 @@ SFUI_Panel_Dialogue.png
 - `CPTDB_Prop_RuinPillar_01.png`
 - `CPTDB_Shadow_Tree_01.png`
 
-**Note:** Example names illustrate the convention; adapt them to the actual imported files. Keep `CPTDB_` distinct from `KCFD16_` and other environment packs. This pack uses a 32x32 base sprite size, unlike the 16x16 Cute Fantasy packs. If importing the publisher's demo project, review its project settings and avoid overwriting FlameOfTheLost's existing settings.
+**Note:** Example names illustrate the convention; adapt them to the actual imported files. Keep `CPTDB_` distinct from `CFDGN16_` and other environment packs. This pack uses a 32x32 base sprite size, unlike the 16x16 Cute Fantasy packs. If importing the publisher's demo project, review its project settings and avoid overwriting FlameOfTheLost's existing settings.
+
+---
+
+### 3.10 Functional Magic Selector Circle Pack
+
+**Publisher:** Mike Braverman
+
+**Prefix:** `MBFMSC_`
+
+**Usage Scope:**
+- Magic-themed selection circles and targeting indicators
+- Default and selected-state selector animations
+- World-space interaction and magical seal indicators, when used
+- Selector-related prefabs and materials, when used
+
+**Source:** https://assetstore.unity.com/packages/2d/gui/icons/functional-magic-selector-circle-pack-303604
+
+**Examples:**
+- `MBFMSC_VFX_MagicCircle_01.png`
+- `MBFMSC_Animation_MagicCircle_Selected.anim`
+- `MBFMSC_Selector_MagicCircle_01.prefab`
+
+**Note:** The prefix combines Mike Braverman (MB) and Functional Magic Selector Circle (FMSC). Example names and extensions are illustrative; adapt them to the actual imported contents.
 
 ---
 
 ## 4. Custom Project Assets
 
-All internally created assets must use a dedicated project prefix: FTL_
+All internally created assets must use a dedicated project prefix: `FTL_`
 
-### Example
-FTL_Character_Base.prefab
-FTL_VFX_BleedTick.prefab
-FTL_UI_SkillSlot.prefab
+### Examples
+
+- `FTL_Character_Base.prefab`
+- `FTL_VFX_BleedTick.prefab`
+- `FTL_UI_SkillSlot.prefab`
 
 This ensures a clear separation between:
 - Third-party assets
@@ -221,11 +255,11 @@ This ensures a clear separation between:
 
 The following are not permitted:
 
-- Removing or altering source prefixes  
-- Mixing multiple source prefixes in one file  
-- Inconsistent abbreviation styles  
-- Renaming `.meta` files manually  
-- Using files inside `Resources/` without prefix  
+- Removing or altering source prefixes
+- Mixing multiple source prefixes in one file
+- Inconsistent abbreviation styles
+- Renaming `.meta` files manually
+- Using files inside `Resources/` without prefix
 
 ---
 
@@ -234,7 +268,7 @@ The following are not permitted:
 When importing new third-party assets:
 
 1. Assign a unique prefix.
-2. Base the prefix on publisher + pack identifier.
+2. Prefer a publisher + pack identifier, or a distinctive pack identifier where explicitly approved in the registry.
 3. Register it in this document before usage.
 4. Maintain consistency across the project.
 
@@ -249,4 +283,3 @@ When importing new third-party assets:
 ---
 
 **End of Document**
-

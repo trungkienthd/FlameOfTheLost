@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MagicCircle3
+  m_Controller: {fileID: 9100000, guid: ad75ea72d76b8ca4a8d80dacd68253a8, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: b88a8bbdb21adec40bd38ac0bce25af7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6d92ff9984b15a04ab8d68bd41b59c24, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 43cae65690e927b4687f5320672aa421, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 24b75aefd8c742d4c9d0d8bed8b7aba7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e3158be56a62f604085b8d195b108cee, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c8303d0911163a24d91e7fa2c77a3889, type: 2}

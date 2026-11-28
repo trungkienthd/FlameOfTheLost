@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: bbae4ddfaf97ddd42a4c5d903ad30e21
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - xmlAsset: {fileID: 9197481963319205126, guid: 40ca4d95c4d86cf45a7a84bf3415701b,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 303604
+  packageName: Functional Magic Selector Circle Pack
+  packageVersion: 1.0
+  assetPath: Assets/MagicCircleSelectors/Scripts/Editor/SelectorEditor.cs
+  uploadId: 714858

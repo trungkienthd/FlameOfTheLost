@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 84191751f302aa7408f0c5e4717ea6c6
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 303604
+  packageName: Functional Magic Selector Circle Pack
+  packageVersion: 1.0
+  assetPath: Assets/MagicCircleSelectors/Shaders/ElectricBall.shader
+  uploadId: 714858
