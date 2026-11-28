@@ -212,29 +212,6 @@ SFUI_Panel_Dialogue.png
 
 ---
 
-### 3.10 Functional Magic Selector Circle Pack
-
-**Publisher:** Mike Braverman
-
-**Prefix:** `MBFMSC_`
-
-**Usage Scope:**
-- Magic-themed selection circles and targeting indicators
-- Default and selected-state selector animations
-- World-space interaction and magical seal indicators, when used
-- Selector-related prefabs and materials, when used
-
-**Source:** https://assetstore.unity.com/packages/2d/gui/icons/functional-magic-selector-circle-pack-303604
-
-**Examples:**
-- `MBFMSC_VFX_MagicCircle_01.png`
-- `MBFMSC_Animation_MagicCircle_Selected.anim`
-- `MBFMSC_Selector_MagicCircle_01.prefab`
-
-**Note:** The prefix combines Mike Braverman (MB) and Functional Magic Selector Circle (FMSC). Example names and extensions are illustrative; adapt them to the actual imported contents.
-
----
-
 ## 4. Custom Project Assets
 
 All internally created assets must use a dedicated project prefix: `FTL_`
