@@ -135,6 +135,7 @@ namespace FlameOfTheLost
         }
 
         //  3. State Updates
+        //  3.1. Individual State Updates
         public void SetConditionState(GameConditionKey conditionKey, bool value)
         {
             this.StateHandler?.SetConditionState(conditionKey, value);
@@ -146,6 +147,20 @@ namespace FlameOfTheLost
         public void UnsatisfyCondition(GameConditionKey conditionKey)
         {
             this.SetConditionState(conditionKey, false);
+        }
+
+        //  3.2. Condition Operations
+        public bool CanApplyConditionOperations(IReadOnlyList<GameConditionOperationEntry> operations)
+        {
+            if (this.StateHandler == null) return false;
+
+            return this.StateHandler.CanApplyConditionOperations(operations);
+        }
+        public bool TryApplyConditionOperations(IReadOnlyList<GameConditionOperationEntry> operations)
+        {
+            if (this.StateHandler == null) return false;
+
+            return this.StateHandler.TryApplyConditionOperations(operations);
         }
 
         //  4. Reset

@@ -65,10 +65,9 @@ The numeric ID hierarchy does not need to mirror the runtime or semantic hierarc
 34xxx   Harvestable Object Profiles
 35xxx   Obstacle Profiles
 36xxx   Map Transition Point Profiles
+37xxx   Doors and Door Switches
+38xxx   Key Item Interactables
 
-37xxx   Reserved
-37xxx   Reserved
-38xxx   Reserved
 39xxx   Reserved
 ```
 

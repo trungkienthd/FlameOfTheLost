@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e27f6e0bee4fc419615d1bd6cf7cf1, type: 3}
+  m_Name: 38001_KeyItmItr_AldricBindingSeal
+  m_EditorClassIdentifier: Assembly-CSharp::FlameOfTheLost.KeyItemInteractableProfile
+  _id: 38001
+  _key: KEY_ITEM_INTERACTABLE_ALDRIC_BINDING_SEAL
+  _displayName: Aldric's Binding Seal
+  _description: An ancient magical seal that confines Sir Aldric within the Forsaken
+    Cells. Its intertwined runes respond only to the power contained within the Warden's
+    Sealstone.
+  _icon: {fileID: 0}
+  _configureInitialTransformAtStart: 1
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _initialEulerAngles: {x: 0, y: 0, z: 0}
+  _initialLocalScale: {x: 1, y: 1, z: 1}
+  _initialVisualLocalPosition: {x: 0, y: 0, z: 0}
+  _initialVisualLocalEulerAngles: {x: 0, y: 0, z: 0}
+  _initialVisualLocalScale: {x: 1, y: 1, z: 1}
+  _configureIconAtStart: 0
+  _requiredKeyItem: {fileID: 0}
+  _consumeRequiredKeyItem: 1
+  _interactionRequirementCombinationType: 0
+  _interactionRequirements: []
+  _interactionType: 1
+  _holdDuration: 3
+  _conditionOperations: []
+  _completionConditionCombinationType: 0
+  _completionConditions: []
+  _disableInteractionWhenCompleted: 1
+  _completionVisualType: 0
+  _completedSprite: {fileID: 0}
+  _interactionPromptPriority: 100
+  _interactionPromptText: Interact
+  _requirementsNotSatisfiedPromptText: Interaction unavailable
+  _completedPromptText: 
